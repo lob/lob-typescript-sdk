@@ -1,0 +1,30 @@
+name: Run Tests
+
+on: [pull_request]
+
+jobs:
+  node_tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['12', '14', '16', '17']
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Unit Tests with coverage
+        env:
+          LOB_API_KEY: ${{ secrets.LOB_API_KEY }}
+        run: npm run test
+
+      - name: Run Integration Tests
+        env:
+          LOB_API_KEY: ${{ secrets.LOB_API_KEY }}
+        run: npm run test:integration
