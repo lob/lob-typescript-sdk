@@ -13,6 +13,18 @@
  */
 
 
-export * from "./api";
-export * from "./configuration";
-export * from "./models";
+
+/**
+ * 
+ * @export
+ * @interface BankAccountVerify
+ */
+export interface BankAccountVerify {
+    /**
+     * In live mode, an array containing the two micro deposits (in cents) placed in the bank account. In test mode, no micro deposits will be placed, so any two integers between `1` and `100` will work.
+     * @type {Array<number>}
+     * @memberof BankAccountVerify
+     */
+    'amounts': Array<number>;
+}
+

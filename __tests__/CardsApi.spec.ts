@@ -4,9 +4,9 @@ import {
   Card,
   CardEditable,
   CardUpdatable,
-  CardsApi,
   CardEditableSizeEnum,
-} from "../api";
+} from "../models";
+import { CardsApi } from "../api";
 
 describe("CardsApi", () => {
   const config: Configuration = new Configuration({

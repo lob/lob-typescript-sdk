@@ -3,10 +3,10 @@ import { Configuration } from "../configuration";
 import {
   Postcard,
   PostcardEditable,
-  PostcardsApi,
   CountryExtended,
   MailType,
-} from "../api";
+} from "../models";
+import { PostcardsApi } from "../api";
 
 describe("postcardsApi", () => {
   const config: Configuration = new Configuration({
@@ -62,19 +62,17 @@ describe("postcardsApi", () => {
 
     it("creates, retrieves, and deletes a postcard", async () => {
       const postcard = await postcardsApi.postcardCreate(dummyPostcard);
-        expect(postcard?.id).toBeDefined();
-        if (postcard?.id) {
-          const retrievedPostcard = await postcardsApi.postcardRetrieve(
+      expect(postcard?.id).toBeDefined();
+      if (postcard?.id) {
+        const retrievedPostcard = await postcardsApi.postcardRetrieve(
             postcard.id
-          );
-          expect(retrievedPostcard).toBeDefined();
-          const deletedPostcard = await postcardsApi.postcardDelete(
-            postcard.id
-          );
-          expect(deletedPostcard?.deleted).toBeTruthy();
-        } else {
-            throw new Error("postcard ID should be defined upon creation");
-        }
+        );
+        expect(retrievedPostcard).toBeDefined();
+        const deletedPostcard = await postcardsApi.postcardDelete(postcard.id);
+        expect(deletedPostcard?.deleted).toBeTruthy();
+      } else {
+        throw new Error("postcard ID should be defined upon creation");
+      }
     });
   });
 

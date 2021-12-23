@@ -13,6 +13,13 @@
  */
 
 
-export * from "./api";
-export * from "./configuration";
-export * from "./models";
+import { MultipleComponents } from './multiple-components';
+import { SingleLineAddress } from './single-line-address';
+
+/**
+ * @type UsVerificationsWritable
+ * @export
+ */
+export type UsVerificationsWritable = MultipleComponents | SingleLineAddress;
+
+

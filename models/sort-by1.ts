@@ -13,6 +13,42 @@
  */
 
 
-export * from "./api";
-export * from "./configuration";
-export * from "./models";
+
+/**
+ * 
+ * @export
+ * @interface SortBy1
+ */
+export interface SortBy1 {
+    /**
+     * 
+     * @type {string}
+     * @memberof SortBy1
+     */
+    'date_created'?: SortBy1DateCreatedEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof SortBy1
+     */
+    'send_date'?: SortBy1SendDateEnum;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum SortBy1DateCreatedEnum {
+    Asc = 'asc',
+    Desc = 'desc'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum SortBy1SendDateEnum {
+    Asc = 'asc',
+    Desc = 'desc'
+}
+
+

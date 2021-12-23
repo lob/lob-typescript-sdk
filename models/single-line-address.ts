@@ -13,6 +13,18 @@
  */
 
 
-export * from "./api";
-export * from "./configuration";
-export * from "./models";
+
+/**
+ * 
+ * @export
+ * @interface SingleLineAddress
+ */
+export interface SingleLineAddress {
+    /**
+     * The entire address in one string (e.g., \"210 King Street 94107\"). _Does not support a recipient and will error when other payload parameters are provided._ 
+     * @type {string}
+     * @memberof SingleLineAddress
+     */
+    'address'?: string;
+}
+

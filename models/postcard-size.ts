@@ -13,6 +13,17 @@
  */
 
 
-export * from "./api";
-export * from "./configuration";
-export * from "./models";
+
+/**
+ * Specifies the size of the postcard. Only `4x6` postcards can be sent to international destinations. 
+ * @export
+ * @enum {string}
+ */
+
+export enum PostcardSize {
+    _4x6 = '4x6',
+    _6x9 = '6x9',
+    _6x11 = '6x11'
+}
+
+

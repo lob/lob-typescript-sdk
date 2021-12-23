@@ -13,6 +13,13 @@
  */
 
 
-export * from "./api";
-export * from "./configuration";
-export * from "./models";
+import { TrackingEventBase } from './tracking-event-base';
+import { TrackingEventNormalAllOf } from './tracking-event-normal-all-of';
+
+/**
+ * @type TrackingEventNormal
+ * @export
+ */
+export type TrackingEventNormal = TrackingEventBase & TrackingEventNormalAllOf;
+
+

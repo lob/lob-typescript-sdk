@@ -2,13 +2,13 @@ import { Configuration } from "../configuration";
 
 import {
   Card,
-  CardsApi,
   CardEditable,
   CardEditableSizeEnum,
-  CardOrder,
-  CardOrdersApi,
-} from "../api";
+  CardOrder
+} from "../models";
+import { CardsApi, CardOrdersApi } from "../api";
 import { CardOrderEditable } from "..";
+import {debugLog} from "./testUtilities";
 
 describe("CardOrdersApi", () => {
   const config: Configuration = new Configuration({
@@ -65,22 +65,22 @@ describe("CardOrdersApi", () => {
           dummyCard.id,
           dummyCardOrder
         );
-        console.log("RESULT OF FIRST DUMMY CARD ORDER: ", co1);
+        debugLog("RESULT OF FIRST DUMMY CARD ORDER: ", co1);
         const co2 = await cardOrdersApi.cardOrderCreate(
           dummyCard.id,
           dummyCardOrder2
         );
-        console.log("RESULT OF SECOND DUMMY CARD ORDER: ", co2);
+        debugLog("RESULT OF SECOND DUMMY CARD ORDER: ", co2);
         const co3 = await cardOrdersApi.cardOrderCreate(
           dummyCard.id,
           dummyCardOrder3
         );
-        console.log("RESULT OF THIRD DUMMY CARD ORDER: ", co3);
+        debugLog("RESULT OF THIRD DUMMY CARD ORDER: ", co3);
         const retrievedCardOrders = await cardOrdersApi.cardOrdersRetrieve(
           dummyCard.id
         );
         expect(retrievedCardOrders).toBeDefined();
-        console.log("RETRIEVED CARD ORDERS: ", retrievedCardOrders);
+        debugLog("RETRIEVED CARD ORDERS: ", retrievedCardOrders);
       } else {
         throw new Error("card ID should be defined upon creation");
       }

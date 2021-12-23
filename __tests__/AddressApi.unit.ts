@@ -1,16 +1,13 @@
 import { Configuration } from "../configuration";
 
 import {
-  Address,
   AddressEditable,
-  AddressesApi,
-  AddressesApiFp,
-  AddressList
-} from "../api";
+} from "../models";
+import { AddressesApi } from "../api/addresses-api";
 
 import axios from "axios";
 
-import { fail } from "./testUtilities";
+import {debugLog, fail} from "./testUtilities";
 
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
 
@@ -53,7 +50,7 @@ describe("AddressApi", () => {
 
       try {
         const result = await new AddressesApi(config).createAddress(addressCreate);
-        console.log(result);
+        debugLog(result);
         throw new Error('Test Fail');
       } catch (err: any) {
         expect(err.message).toEqual('Fail Case');

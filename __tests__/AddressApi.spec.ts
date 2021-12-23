@@ -3,13 +3,14 @@ import { Configuration } from "../configuration";
 import {
   Address,
   AddressEditable,
-  AddressesApi,
   AddressList
-} from "../api";
+} from "../models";
+import { AddressesApi } from "../api/addresses-api";
 
 import {
   TEN_MINUTES,
-  fail
+  fail,
+  debugLog
 } from "./testUtilities";
 
 describe("AddressApi", () => {
@@ -47,7 +48,7 @@ describe("AddressApi", () => {
 
       try {
         const address = await badAddressApi.createAddress(addressCreate);
-        console.log(address);
+        debugLog(address);
         fail('Prior operation should have thrown.');
       } catch (err: any) {
         expect(err.message).toEqual("Your API key is not valid. Please sign up on lob.com to get a valid api key.");
