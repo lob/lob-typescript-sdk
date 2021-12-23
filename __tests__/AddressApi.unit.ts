@@ -15,7 +15,7 @@ import { debugLog, fail } from "./testUtilities";
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
 
 jest.mock("axios", () => ({
-  request: jest.fn().mockImplementation(async (args) => ({ data: "blah" })),
+  request: jest.fn(),
 }));
 
 describe("AddressApi", () => {
