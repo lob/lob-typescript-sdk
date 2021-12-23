@@ -13,6 +13,30 @@
  */
 
 
-export * from "./api";
-export * from "./configuration";
-export * from "./models";
+
+/**
+ * 
+ * @export
+ * @interface CardUpdatable
+ */
+export interface CardUpdatable {
+    /**
+     * Description of the card.
+     * @type {string}
+     * @memberof CardUpdatable
+     */
+    'description'?: string | null;
+    /**
+     * Allows for auto reordering
+     * @type {boolean}
+     * @memberof CardUpdatable
+     */
+    'auto_reorder'?: boolean;
+    /**
+     * The quantity of items to be reordered (only required when auto_reorder is true).
+     * @type {number}
+     * @memberof CardUpdatable
+     */
+    'reorder_quantity'?: number;
+}
+

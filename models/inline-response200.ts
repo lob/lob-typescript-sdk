@@ -13,6 +13,19 @@
  */
 
 
-export * from "./api";
-export * from "./configuration";
-export * from "./models";
+import { CardOrder } from './card-order';
+
+/**
+ * 
+ * @export
+ * @interface InlineResponse200
+ */
+export interface InlineResponse200 {
+    /**
+     * List of card orders
+     * @type {Array<CardOrder>}
+     * @memberof InlineResponse200
+     */
+    'data'?: Array<CardOrder>;
+}
+

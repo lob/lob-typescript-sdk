@@ -13,6 +13,16 @@
  */
 
 
-export * from "./api";
-export * from "./configuration";
-export * from "./models";
+
+/**
+ * The type of entity that holds the account.
+ * @export
+ * @enum {string}
+ */
+
+export enum BankTypeEnum {
+    Company = 'company',
+    Individual = 'individual'
+}
+
+

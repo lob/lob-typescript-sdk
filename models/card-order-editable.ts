@@ -13,6 +13,18 @@
  */
 
 
-export * from "./api";
-export * from "./configuration";
-export * from "./models";
+
+/**
+ * 
+ * @export
+ * @interface CardOrderEditable
+ */
+export interface CardOrderEditable {
+    /**
+     * 
+     * @type {number}
+     * @memberof CardOrderEditable
+     */
+    'quantity'?: number;
+}
+

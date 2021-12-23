@@ -13,6 +13,14 @@
  */
 
 
-export * from "./api";
-export * from "./configuration";
-export * from "./models";
+import { AddressEditable } from './address-editable';
+import { CountryExtended } from './country-extended';
+
+/**
+ * @type ReturnAddress
+ * Specifies the address the return envelope will be sent back to. This is an optional argument that is available if an account is signed up for the return envelope tracking beta, and has `return_envelope`, and `perforated_page` fields populated in the API request.
+ * @export
+ */
+export type ReturnAddress = AddressEditable | string;
+
+
