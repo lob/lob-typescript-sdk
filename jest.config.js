@@ -17,13 +17,13 @@ module.exports = {
   ],
   coverageDirectory: "coverage",
   coverageReporters: ["clover", "html", "json", "lcov", "text"],
-  /* coverageThreshold: {
+  coverageThreshold: {
     global: {
-      branches: 90,
-      functions: 90,
-      lines: 90,
-      statements: -10
+      branches: 46.19,
+      functions: 41.07,
+      lines: 64.43,
+      statements: 62.51
     }
-  },*/
+  },
   verbose: true,
 };
