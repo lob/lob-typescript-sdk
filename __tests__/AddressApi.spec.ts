@@ -3,9 +3,9 @@ import { Configuration } from "../configuration";
 import {
   Address,
   AddressEditable,
-  AddressesApi,
   AddressList
-} from "../api";
+} from "../models";
+import { AddressesApi } from "../api/addresses-api";
 
 import {
   TEN_MINUTES,

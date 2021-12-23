@@ -2,12 +2,11 @@ import { Configuration } from "../configuration";
 
 import {
   Card,
-  CardsApi,
   CardEditable,
   CardEditableSizeEnum,
-  CardOrder,
-  CardOrdersApi,
-} from "../api";
+  CardOrder
+} from "../models";
+import { CardsApi, CardOrdersApi } from "../api";
 import { CardOrderEditable } from "..";
 
 describe("CardOrdersApi", () => {

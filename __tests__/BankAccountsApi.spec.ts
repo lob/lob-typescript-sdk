@@ -2,11 +2,11 @@ import { Configuration } from "../configuration";
 
 import {
   BankAccount,
-  BankAccountsApi,
   BankAccountWritable,
   BankAccountVerify,
-} from "../api";
-import { BankAccountWritableAccountTypeEnum } from "..";
+} from "../models";
+import { BankAccountsApi } from "../api";
+import { BankTypeEnum } from "../models/bank-type-enum";
 
 describe("BankAccountsApi", () => {
   const config: Configuration = new Configuration({
@@ -19,7 +19,7 @@ describe("BankAccountsApi", () => {
     routing_number: "322271627",
     account_number: "123456789",
     signatory: "Sinead Connor",
-    account_type: BankAccountWritableAccountTypeEnum.Individual,
+    account_type: BankTypeEnum.Individual,
   };
 
   it("Bank Accounts API can be instantiated", () => {
@@ -70,21 +70,21 @@ describe("BankAccountsApi", () => {
         routing_number: "322271627",
         account_number: "123456789",
         signatory: "Zsanett Farkas",
-        account_type: BankAccountWritableAccountTypeEnum.Individual,
+        account_type: BankTypeEnum.Individual,
       };
       const bank2: BankAccountWritable = {
         description: "Test Bank Account",
         routing_number: "322271627",
         account_number: "123456789",
         signatory: "Juanita Lupo",
-        account_type: BankAccountWritableAccountTypeEnum.Individual,
+        account_type: BankTypeEnum.Individual,
       };
       const bank3: BankAccountWritable = {
         description: "Test Bank Account",
         routing_number: "322271627",
         account_number: "123456789",
         signatory: "Jeanette Leloup",
-        account_type: BankAccountWritableAccountTypeEnum.Individual,
+        account_type: BankTypeEnum.Individual,
       };
       const c1 = await bankApi.bankAccountCreate(bank1);
       const c2 = await bankApi.bankAccountCreate(bank2);

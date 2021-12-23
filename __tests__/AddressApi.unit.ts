@@ -1,12 +1,9 @@
 import { Configuration } from "../configuration";
 
 import {
-  Address,
   AddressEditable,
-  AddressesApi,
-  AddressesApiFp,
-  AddressList
-} from "../api";
+} from "../models";
+import { AddressesApi } from "../api/addresses-api";
 
 import axios from "axios";
 

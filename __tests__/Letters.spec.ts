@@ -3,12 +3,12 @@ import { Configuration } from "../configuration";
 import {
   Letter,
   LetterEditable,
-  LettersApi,
   LetterEditableExtraServiceEnum,
   CountryExtended,
   LetterEditableAddressPlacementEnum,
   MailType,
-} from "../api";
+} from "../models";
+import { LettersApi } from "../api";
 
 describe("CardsApi", () => {
   const config: Configuration = new Configuration({

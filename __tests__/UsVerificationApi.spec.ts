@@ -1,6 +1,7 @@
 import { Configuration } from "../configuration";
 
-import { UsVerificationsWritable, USVerificationsApi } from "../api";
+import { UsVerificationsWritable } from "../models";
+import { USVerificationsApi } from "../api";
 
 describe("UsVerificationApi", () => {
   const config: Configuration = new Configuration({
