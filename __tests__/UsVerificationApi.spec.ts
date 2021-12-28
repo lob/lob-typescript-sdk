@@ -32,7 +32,6 @@ describe("UsVerificationApi", () => {
     it("verifies a single US address", async () => {
       const usvApi = new USVerificationsApi(config);
       const response = await usvApi.usVerification(verifySingle);
-      console.log(response);
     });
   });
 });
