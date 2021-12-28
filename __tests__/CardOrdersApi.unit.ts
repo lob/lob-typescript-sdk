@@ -85,7 +85,7 @@ describe("CardOrdersApi", () => {
 
       const cardOrders = await new CardOrdersApi(config).cardOrdersRetrieve("fake id");
       expect(cardOrders).toBeDefined();
-      expect(cardOrders.data.length).toEqual(1);
+      expect(cardOrders?.data?.length).toEqual(1);
     });
 
     it("includes custom headers while it gets card orders for a card id", async () => {
@@ -95,7 +95,36 @@ describe("CardOrdersApi", () => {
 
       const cardOrders = await new CardOrdersApi(configWithBaseOptions).cardOrdersRetrieve("fake id");
       expect(cardOrders).toBeDefined();
-      expect(cardOrders.data.length).toEqual(1);
+      expect(cardOrders?.data?.length).toEqual(1);
+    });
+
+    it("handles errors returned by the api", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw {
+          message: "error",
+          response: { data: { error: { message: "error reported by API" } }}
+        };
+      });
+
+      try {
+        await new CardOrdersApi(configWithBaseOptions).cardOrdersRetrieve("fake id");
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("error reported by API");
+      }
+    });
+
+    it("handles errors in making the request", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw new Error("Unknown Error");
+      });
+
+      try {
+        await new CardOrdersApi(configWithBaseOptions).cardOrdersRetrieve("fake id");
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("Unknown Error");
+      }
     });
   });
 });

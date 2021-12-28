@@ -77,13 +77,14 @@ describe("AddressApi", () => {
 
     it("handles errors in making the request", async () => {
       axiosRequest.mockImplementationOnce(async () => {
-        throw new Error("Fail Case");
+        throw new Error("Unknown Error");
       });
 
       try {
         await new AddressesApi(config).createAddress(addressCreate);
+        fail("Should throw");
       } catch (err: any) {
-        expect(err.message).toEqual("Fail Case");
+        expect(err.message).toEqual("Unknown Error");
       }
     });
 
@@ -143,7 +144,7 @@ describe("AddressApi", () => {
       axiosRequest.mockImplementationOnce(async () => {
         throw {
           message: "error",
-          response: { data: { error: { message: "error reported by API" } }}
+          response: { data: { error: { message: "error reported by Api" } }}
         };
       });
 
@@ -151,20 +152,20 @@ describe("AddressApi", () => {
         await new AddressesApi(config).getAddress("fake id");
         fail("Should throw");
       } catch (err: any) {
-        expect(err.message).toEqual("error reported by API");
+        expect(err.message).toEqual("error reported by Api");
       }
     });
 
     it("handles errors in making the request", async () => {
       axiosRequest.mockImplementationOnce(async () => {
-        throw new Error("Api Reported Error");
+        throw new Error("Unknown Error");
       });
 
       try {
         await new AddressesApi(config).getAddress("fake id");
         fail("Should throw");
       } catch (err: any) {
-        expect(err.message).toEqual("API Reported Error");
+        expect(err.message).toEqual("Unknown Error");
       }
     });
 
@@ -199,7 +200,7 @@ describe("AddressApi", () => {
       expect(response?.data?.length).toEqual(2);
     });
 
-    it("correctly handles errors", async () => {
+    it("handles errors returned by the api", async () => {
       axiosRequest.mockImplementationOnce(async () => {
         throw {
           message: "error",
@@ -215,16 +216,16 @@ describe("AddressApi", () => {
       }
     });
 
-    it("correctly handles errors", async () => {
+    it("handles errors in making the request", async () => {
       axiosRequest.mockImplementationOnce(async () => {
-        throw new Error("Api Reported Error");
+        throw new Error("Unknown Error");
       });
 
       try {
         await new AddressesApi(config).listAddresses();
         fail("Should throw");
       } catch (err: any) {
-        expect(err.message).toEqual("API Reported Error");
+        expect(err.message).toEqual("Unknown Error");
       }
     });
 
@@ -402,7 +403,7 @@ describe("AddressApi", () => {
       axiosRequest.mockImplementationOnce(async () => {
         throw {
           message: "error",
-          response: { data: { error: { message: "error reported by API" } }}
+          response: { data: { error: { message: "error reported by Api" } }}
         };
       });
 
@@ -410,20 +411,20 @@ describe("AddressApi", () => {
         await new AddressesApi(config).deleteAddress("fake id");
         fail("Should throw");
       } catch (err: any) {
-        expect(err.message).toEqual("error reported by API");
+        expect(err.message).toEqual("error reported by Api");
       }
     });
 
     it("handles errors in making the request", async () => {
       axiosRequest.mockImplementationOnce(async () => {
-        throw new Error("Api Reported Error");
+        throw new Error("Unknown Error");
       });
 
       try {
         await new AddressesApi(config).deleteAddress("fake id");
         fail("Should throw");
       } catch (err: any) {
-        expect(err.message).toEqual("API Reported Error");
+        expect(err.message).toEqual("Unknown Error");
       }
     });
   });
