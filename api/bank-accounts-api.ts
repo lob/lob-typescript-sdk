@@ -353,10 +353,10 @@ export class BankAccountsApi extends BaseAPI {
      */
     public bankAccountCreate(bankAccountWritable: BankAccountWritable, options?: AxiosRequestConfig) {
         return BankAccountsApiFp(this.configuration).bankAccountCreate(bankAccountWritable, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response) {
-              console.log(error.response.data);
-              return error;
+            if (error.response && error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
             }
+            throw error;
           });
     }
 
@@ -370,10 +370,10 @@ export class BankAccountsApi extends BaseAPI {
      */
     public bankAccountDelete(bankId: string, options?: AxiosRequestConfig) {
         return BankAccountsApiFp(this.configuration).bankAccountDelete(bankId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response) {
-              console.log(error.response.data);
-              return error;
+            if (error.response && error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
             }
+            throw error;
           });
     }
 
@@ -387,10 +387,10 @@ export class BankAccountsApi extends BaseAPI {
      */
     public bankAccountRetrieve(bankId: string, options?: AxiosRequestConfig) {
         return BankAccountsApiFp(this.configuration).bankAccountRetrieve(bankId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response) {
-              console.log(error.response.data);
-              return error;
+            if (error.response && error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
             }
+            throw error;
           });
     }
 
@@ -405,10 +405,10 @@ export class BankAccountsApi extends BaseAPI {
      */
     public bankAccountVerify(bankId: string, bankAccountVerify: BankAccountVerify, options?: AxiosRequestConfig) {
         return BankAccountsApiFp(this.configuration).bankAccountVerify(bankId, bankAccountVerify, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response) {
-              console.log(error.response.data);
-              return error;
+            if (error.response && error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
             }
+            throw error;
           });
     }
 
@@ -427,10 +427,10 @@ export class BankAccountsApi extends BaseAPI {
      */
     public bankAccountsList(limit?: number, before?: string, after?: string, include?: { [key: string]: string; }, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, options?: AxiosRequestConfig) {
         return BankAccountsApiFp(this.configuration).bankAccountsList(limit, before, after, include, dateCreated, metadata, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response) {
-              console.log(error.response.data);
-              return error;
+            if (error.response && error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
             }
+            throw error;
           });
     }
 }

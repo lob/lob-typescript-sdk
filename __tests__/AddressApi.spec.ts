@@ -41,8 +41,7 @@ describe("AddressApi", () => {
       expect(address?.id).toBeDefined();
     });
 
-    it.skip("correctly handles connections with invalid keys", async () => {
-      // ToDo: Errors need to be thrown, not returned
+    it("correctly handles connections with invalid keys", async () => {
       const badAddressApi = new AddressesApi(new Configuration({ username: 'not a real key' }));
       expect(badAddressApi).toBeDefined();
 
@@ -81,7 +80,7 @@ describe("AddressApi", () => {
         expect(address.object).toEqual('address');
       }
 
-      fail('The Rate should have been limited at some point');
+      fail("The Rate should have been limited at some point");
     });
   });
 

@@ -341,10 +341,10 @@ export class LettersApi extends BaseAPI {
      */
     public letterCancel(ltrId: string, options?: AxiosRequestConfig) {
         return LettersApiFp(this.configuration).letterCancel(ltrId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response) {
-              console.log(error.response.data);
-              return error;
+            if (error.response && error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
             }
+            throw error;
           });
     }
 
@@ -360,10 +360,10 @@ export class LettersApi extends BaseAPI {
      */
     public letterCreate(letterEditable: LetterEditable, idempotencyKey?: string, idempotencyKey2?: string, options?: AxiosRequestConfig) {
         return LettersApiFp(this.configuration).letterCreate(letterEditable, idempotencyKey, idempotencyKey2, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response) {
-              console.log(error.response.data);
-              return error;
+            if (error.response && error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
             }
+            throw error;
           });
     }
 
@@ -377,10 +377,10 @@ export class LettersApi extends BaseAPI {
      */
     public letterRetrieve(ltrId: string, options?: AxiosRequestConfig) {
         return LettersApiFp(this.configuration).letterRetrieve(ltrId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response) {
-              console.log(error.response.data);
-              return error;
+            if (error.response && error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
             }
+            throw error;
           });
     }
 
@@ -404,10 +404,10 @@ export class LettersApi extends BaseAPI {
      */
     public lettersList(limit?: number, before?: string, after?: string, include?: { [key: string]: string; }, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, color?: boolean, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options?: AxiosRequestConfig) {
         return LettersApiFp(this.configuration).lettersList(limit, before, after, include, dateCreated, metadata, color, scheduled, sendDate, mailType, sortBy, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response) {
-              console.log(error.response.data);
-              return error;
+            if (error.response && error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
             }
+            throw error;
           });
     }
 }
