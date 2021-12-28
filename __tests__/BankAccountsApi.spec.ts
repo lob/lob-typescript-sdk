@@ -1,12 +1,7 @@
 import { Configuration } from "../configuration";
 
-import {
-  BankAccount,
-  BankAccountWritable,
-  BankAccountVerify,
-} from "../models";
-import { BankAccountsApi } from "../api";
-import { BankTypeEnum } from "../models/bank-type-enum";
+import { BankAccount, BankAccountWritable, BankAccountVerify, BankTypeEnum } from "../models";
+import { BankAccountsApi } from "../api/bank-accounts-api";
 
 describe("BankAccountsApi", () => {
   const config: Configuration = new Configuration({

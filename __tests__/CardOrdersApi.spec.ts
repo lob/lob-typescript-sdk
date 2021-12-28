@@ -3,19 +3,15 @@ import { Configuration } from "../configuration";
 import {
   Card,
   CardEditable,
-  CardEditableSizeEnum,
-  CardOrder
+  CardEditableSizeEnum
 } from "../models";
 import { CardsApi, CardOrdersApi } from "../api";
 import { CardOrderEditable } from "..";
-import {debugLog} from "./testUtilities";
 
 describe("CardOrdersApi", () => {
   const config: Configuration = new Configuration({
     username: process.env.LOB_API_KEY,
   });
-
-  let cardOrdersApi: CardOrdersApi;
 
   const dummyCardOrder: CardOrderEditable = {
     quantity: 10000,
@@ -38,14 +34,40 @@ describe("CardOrdersApi", () => {
   };
 
   it("Card API can be instantiated", () => {
-    cardOrdersApi = new CardOrdersApi(config);
+    const cardOrdersApi = new CardOrdersApi(config);
     expect(cardOrdersApi).toBeDefined();
     expect(typeof cardOrdersApi).toEqual("object");
     expect(cardOrdersApi).toBeInstanceOf(CardOrdersApi);
   });
 
   describe("performs single-Card operations", () => {
+    let dummyCard: Card;
+
+    beforeAll(async () => {
+      const cardsApi = new CardsApi(config);
+      const cardOrdersApi = new CardOrdersApi(config);
+      dummyCard = await cardsApi.cardCreate(editableCard);
+
+      if (!dummyCard.id) {
+        throw new Error('Unable to create required data');
+      }
+
+      await cardOrdersApi.cardOrderCreate(
+          dummyCard.id,
+          dummyCardOrder
+      );
+      await cardOrdersApi.cardOrderCreate(
+          dummyCard.id,
+          dummyCardOrder2
+      );
+      await cardOrdersApi.cardOrderCreate(
+          dummyCard.id,
+          dummyCardOrder3
+      );
+    });
+
     it("all individual Card functions exists", () => {
+      const cardOrdersApi = new CardOrdersApi(config);
       expect(cardOrdersApi.cardOrderCreate).toBeDefined();
       expect(typeof cardOrdersApi.cardOrderCreate).toEqual("function");
 
@@ -53,37 +75,14 @@ describe("CardOrdersApi", () => {
       expect(typeof cardOrdersApi.cardOrdersRetrieve).toEqual("function");
     });
 
-    // TODO: put this into async
     it("creates and retrieves card orders associated with a card", async () => {
-      const config: Configuration = new Configuration({
-        username: process.env.LOB_API_KEY,
-      });
-      let cardsApi = new CardsApi(config);
-      const dummyCard = await cardsApi.cardCreate(editableCard);
-      if (dummyCard?.id) {
-        const co1 = await cardOrdersApi.cardOrderCreate(
-          dummyCard.id,
-          dummyCardOrder
-        );
-        debugLog("RESULT OF FIRST DUMMY CARD ORDER: ", co1);
-        const co2 = await cardOrdersApi.cardOrderCreate(
-          dummyCard.id,
-          dummyCardOrder2
-        );
-        debugLog("RESULT OF SECOND DUMMY CARD ORDER: ", co2);
-        const co3 = await cardOrdersApi.cardOrderCreate(
-          dummyCard.id,
-          dummyCardOrder3
-        );
-        debugLog("RESULT OF THIRD DUMMY CARD ORDER: ", co3);
-        const retrievedCardOrders = await cardOrdersApi.cardOrdersRetrieve(
-          dummyCard.id
-        );
-        expect(retrievedCardOrders).toBeDefined();
-        debugLog("RETRIEVED CARD ORDERS: ", retrievedCardOrders);
-      } else {
-        throw new Error("card ID should be defined upon creation");
-      }
+      const cardOrdersApi = new CardOrdersApi(config);
+      const dummyCardId = dummyCard.id || "nope";
+
+      const retrievedCardOrders = await cardOrdersApi.cardOrdersRetrieve(
+        dummyCardId
+      );
+      expect(retrievedCardOrders).toBeDefined();
     });
   });
 });
