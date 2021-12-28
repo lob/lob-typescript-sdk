@@ -165,7 +165,7 @@ describe("AddressApi", () => {
       expect(response?.data?.length).toEqual(2);
     });
 
-    it("includes custom headers while itlists addresses", async () => {
+    it("includes custom headers while it lists addresses", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
       }));
