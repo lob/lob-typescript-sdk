@@ -57,20 +57,36 @@ describe("BankAccountsApi", () => {
             expect(typeof bankAccountsApi.bankAccountCreate).toEqual("function");
         });
 
-        it.skip("handles errors in making the request", async () => {
-            // ToDo: A consumer should be able to identify when something has failed
+        it("handles errors returned by the api", async () => {
             axiosRequest.mockImplementationOnce(async () => {
-                throw new Error("Fail Case");
+                throw {
+                    message: "error",
+                    response: { data: { error: { message: "error reported by API" } }}
+                };
             });
 
             try {
-                const result = await new BankAccountsApi(config).bankAccountCreate(
+                await new BankAccountsApi(config).bankAccountCreate(
                     bankAccountCreate
                 );
-                debugLog(result);
-                throw new Error("Test Fail");
+                fail("Should throw");
             } catch (err: any) {
-                expect(err.message).toEqual("Fail Case");
+                expect(err.message).toEqual("error reported by API");
+            }
+        });
+
+        it("handles errors in making the request", async () => {
+            axiosRequest.mockImplementationOnce(async () => {
+                throw new Error("Unknown Error");
+            });
+
+            try {
+                await new BankAccountsApi(config).bankAccountCreate(
+                    bankAccountCreate
+                );
+                fail("Should throw");
+            } catch (err: any) {
+                expect(err.message).toEqual("Unknown Error");
             }
         });
 
@@ -131,6 +147,39 @@ describe("BankAccountsApi", () => {
             );
             expect(bankAccount?.deleted).toEqual(true);
         });
+
+        it("handles errors returned by the api", async () => {
+            axiosRequest.mockImplementationOnce(async () => {
+                throw {
+                    message: "error",
+                    response: { data: { error: { message: "error reported by API" } }}
+                };
+            });
+
+            try {
+                await new BankAccountsApi(config).bankAccountDelete(
+                    "fake id"
+                );
+                fail("Should throw");
+            } catch (err: any) {
+                expect(err.message).toEqual("error reported by API");
+            }
+        });
+
+        it("handles errors in making the request", async () => {
+            axiosRequest.mockImplementationOnce(async () => {
+                throw new Error("Unknown Error");
+            });
+
+            try {
+                await new BankAccountsApi(config).bankAccountDelete(
+                    "fake id"
+                );
+                fail("Should throw");
+            } catch (err: any) {
+                expect(err.message).toEqual("Unknown Error");
+            }
+        });
     });
 
     describe("bankAccountRetrieve", () => {
@@ -158,19 +207,36 @@ describe("BankAccountsApi", () => {
             expect(bankAccount?.id).toEqual('different fake id');
         });
 
-        it.skip("correctly handles errors", async () => {
-            // ToDo: Should throw
-            const AuthnViolationPayload = { error: 'this is an error message', code: 401 };
-
-            axiosRequest.mockImplementationOnce(async () => ({
-                data: AuthnViolationPayload
-            }));
+        it("handles errors returned by the api", async () => {
+            axiosRequest.mockImplementationOnce(async () => {
+                throw {
+                    message: "error",
+                    response: { data: { error: { message: "error reported by API" } }}
+                };
+            });
 
             try {
-                const bankAccount = await new BankAccountsApi(config).bankAccountRetrieve("fake id");
+                await new BankAccountsApi(config).bankAccountRetrieve(
+                    "fake id"
+                );
                 fail("Should throw");
             } catch (err: any) {
-                expect(err.message).toEqual("this is an error message");
+                expect(err.message).toEqual("error reported by API");
+            }
+        });
+
+        it("handles errors in making the request", async () => {
+            axiosRequest.mockImplementationOnce(async () => {
+                throw new Error("Unknown Error");
+            });
+
+            try {
+                await new BankAccountsApi(config).bankAccountRetrieve(
+                    "fake id"
+                );
+                fail("Should throw");
+            } catch (err: any) {
+                expect(err.message).toEqual("Unknown Error");
             }
         });
     });
@@ -207,6 +273,41 @@ describe("BankAccountsApi", () => {
             expect(bankAccount).toBeDefined();
             expect(bankAccount?.id).toEqual('fake id');
         });
+
+        it("handles errors returned by the api", async () => {
+            axiosRequest.mockImplementationOnce(async () => {
+                throw {
+                    message: "error",
+                    response: { data: { error: { message: "error reported by API" } }}
+                };
+            });
+
+            try {
+                const verify: BankAccountVerify = {
+                    amounts: [1, 2]
+                };
+                await new BankAccountsApi(config).bankAccountVerify("an id", verify);
+                fail("Should throw");
+            } catch (err: any) {
+                expect(err.message).toEqual("error reported by API");
+            }
+        });
+
+        it("handles errors in making the request", async () => {
+            axiosRequest.mockImplementationOnce(async () => {
+                throw new Error("Unknown Error");
+            });
+
+            try {
+                const verify: BankAccountVerify = {
+                    amounts: [1, 2]
+                };
+                await new BankAccountsApi(config).bankAccountVerify("an id", verify);
+                fail("Should throw");
+            } catch (err: any) {
+                expect(err.message).toEqual("Unknown Error");
+            }
+        });
     });
 
     describe("bankAccountsList", () => {
@@ -236,6 +337,35 @@ describe("BankAccountsApi", () => {
             expect(response).toBeDefined();
             expect(response?.data).toBeDefined();
             expect(response?.data?.length).toEqual(2);
+        });
+
+        it("handles errors returned by the api", async () => {
+            axiosRequest.mockImplementationOnce(async () => {
+                throw {
+                    message: "error",
+                    response: { data: { error: { message: "error reported by API" } }}
+                };
+            });
+
+            try {
+                await new BankAccountsApi(config).bankAccountsList();
+                fail("Should throw");
+            } catch (err: any) {
+                expect(err.message).toEqual("error reported by API");
+            }
+        });
+
+        it("handles errors in making the request", async () => {
+            axiosRequest.mockImplementationOnce(async () => {
+                throw new Error("Unknown Error");
+            });
+
+            try {
+                await new BankAccountsApi(config).bankAccountsList();
+                fail("Should throw");
+            } catch (err: any) {
+                expect(err.message).toEqual("Unknown Error");
+            }
         });
 
         it("lists bankAccounts with a limit parameter", async () => {

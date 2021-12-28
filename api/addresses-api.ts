@@ -295,10 +295,10 @@ export class AddressesApi extends BaseAPI {
      */
     public createAddress(addressEditable: AddressEditable, options?: AxiosRequestConfig) {
         return AddressesApiFp(this.configuration).createAddress(addressEditable, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response) {
-              console.log(error.response.data);
-              return error;
+            if (error.response && error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
             }
+            throw error;
           });
     }
 
@@ -312,10 +312,10 @@ export class AddressesApi extends BaseAPI {
      */
     public deleteAddress(adrId: string, options?: AxiosRequestConfig) {
         return AddressesApiFp(this.configuration).deleteAddress(adrId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response) {
-              console.log(error.response.data);
-              return error;
+            if (error.response && error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
             }
+            throw error;
           });
     }
 
@@ -329,10 +329,10 @@ export class AddressesApi extends BaseAPI {
      */
     public getAddress(adrId: string, options?: AxiosRequestConfig) {
         return AddressesApiFp(this.configuration).getAddress(adrId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response) {
-              console.log(error.response.data);
-              return error;
+            if (error.response && error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
             }
+            throw error;
           });
     }
 
@@ -351,10 +351,10 @@ export class AddressesApi extends BaseAPI {
      */
     public listAddresses(limit?: number, before?: string, after?: string, include?: { [key: string]: string; }, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, options?: AxiosRequestConfig) {
         return AddressesApiFp(this.configuration).listAddresses(limit, before, after, include, dateCreated, metadata, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response) {
-              console.log(error.response.data);
-              return error;
+            if (error.response && error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
             }
+            throw error;
           });
     }
 }

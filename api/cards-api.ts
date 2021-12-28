@@ -341,10 +341,10 @@ export class CardsApi extends BaseAPI {
      */
     public cardCreate(cardEditable: CardEditable, options?: AxiosRequestConfig) {
         return CardsApiFp(this.configuration).cardCreate(cardEditable, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response) {
-              console.log(error.response.data);
-              return error;
+            if (error.response && error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
             }
+            throw error;
           });
     }
 
@@ -358,10 +358,10 @@ export class CardsApi extends BaseAPI {
      */
     public cardDelete(cardId: string, options?: AxiosRequestConfig) {
         return CardsApiFp(this.configuration).cardDelete(cardId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response) {
-              console.log(error.response.data);
-              return error;
+            if (error.response && error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
             }
+            throw error;
           });
     }
 
@@ -375,10 +375,10 @@ export class CardsApi extends BaseAPI {
      */
     public cardRetrieve(cardId: string, options?: AxiosRequestConfig) {
         return CardsApiFp(this.configuration).cardRetrieve(cardId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response) {
-              console.log(error.response.data);
-              return error;
+            if (error.response && error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
             }
+            throw error;
           });
     }
 
@@ -393,10 +393,10 @@ export class CardsApi extends BaseAPI {
      */
     public cardUpdate(cardId: string, cardUpdatable: CardUpdatable, options?: AxiosRequestConfig) {
         return CardsApiFp(this.configuration).cardUpdate(cardId, cardUpdatable, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response) {
-              console.log(error.response.data);
-              return error;
+            if (error.response && error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
             }
+            throw error;
           });
     }
 
@@ -413,10 +413,10 @@ export class CardsApi extends BaseAPI {
      */
     public cardsList(limit?: number, before?: string, after?: string, sortBy?: object, options?: AxiosRequestConfig) {
         return CardsApiFp(this.configuration).cardsList(limit, before, after, sortBy, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response) {
-              console.log(error.response.data);
-              return error;
+            if (error.response && error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
             }
+            throw error;
           });
     }
 }

@@ -120,10 +120,10 @@ export class USVerificationsApi extends BaseAPI {
      */
     public usVerification(usVerificationsWritable: UsVerificationsWritable, _case?: 'upper' | 'proper', options?: AxiosRequestConfig) {
         return USVerificationsApiFp(this.configuration).usVerification(usVerificationsWritable, _case, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response) {
-              console.log(error.response.data);
-              return error;
+            if (error.response && error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
             }
+            throw error;
           });
     }
 }

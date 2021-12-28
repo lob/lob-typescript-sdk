@@ -60,20 +60,31 @@ describe("AddressApi", () => {
       expect(typeof addressApi.createAddress).toEqual("function");
     });
 
-    it.skip("handles errors in making the request", async () => {
-      // ToDo: A consumer should be able to identify when something has failed
+    it("handles errors returned by the api", async () => {
       axiosRequest.mockImplementationOnce(async () => {
-        throw new Error("Fail Case");
+        throw {
+          message: "error",
+          response: { data: { error: { message: "error reported by API" } }}
+        };
       });
 
       try {
-        const result = await new AddressesApi(config).createAddress(
-            addressCreate
-        );
-        debugLog(result);
-        throw new Error("Test Fail");
+        await new AddressesApi(config).createAddress(addressCreate);
       } catch (err: any) {
-        expect(err.message).toEqual("Fail Case");
+        expect(err.message).toEqual("error reported by API");
+      }
+    });
+
+    it("handles errors in making the request", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw new Error("Unknown Error");
+      });
+
+      try {
+        await new AddressesApi(config).createAddress(addressCreate);
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("Unknown Error");
       }
     });
 
@@ -129,19 +140,32 @@ describe("AddressApi", () => {
       expect(address?.id).toEqual('different fake id');
     });
 
-    it.skip("correctly handles errors", async () => {
-      // ToDo: Should throw
-      const AuthnViolationPayload = { error: 'this is an error message', code: 401 };
-
-      axiosRequest.mockImplementationOnce(async () => ({
-        data: AuthnViolationPayload
-      }));
+    it("handles errors returned by the api", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw {
+          message: "error",
+          response: { data: { error: { message: "error reported by Api" } }}
+        };
+      });
 
       try {
-        const address = await new AddressesApi(config).getAddress("fake id");
+        await new AddressesApi(config).getAddress("fake id");
         fail("Should throw");
       } catch (err: any) {
-        expect(err.message).toEqual("this is an error message");
+        expect(err.message).toEqual("error reported by Api");
+      }
+    });
+
+    it("handles errors in making the request", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw new Error("Unknown Error");
+      });
+
+      try {
+        await new AddressesApi(config).getAddress("fake id");
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("Unknown Error");
       }
     });
 
@@ -174,6 +198,35 @@ describe("AddressApi", () => {
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
       expect(response?.data?.length).toEqual(2);
+    });
+
+    it("handles errors returned by the api", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw {
+          message: "error",
+          response: { data: { error: { message: "error reported by API" } }}
+        };
+      });
+
+      try {
+        await new AddressesApi(config).listAddresses();
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("error reported by API");
+      }
+    });
+
+    it("handles errors in making the request", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw new Error("Unknown Error");
+      });
+
+      try {
+        await new AddressesApi(config).listAddresses();
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("Unknown Error");
+      }
     });
 
     it("lists addresses with a limit parameter", async () => {
@@ -344,6 +397,35 @@ describe("AddressApi", () => {
           "fake id"
       );
       expect(deletedAddress?.deleted).toEqual(true);
+    });
+
+    it("handles errors returned by the api", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw {
+          message: "error",
+          response: { data: { error: { message: "error reported by Api" } }}
+        };
+      });
+
+      try {
+        await new AddressesApi(config).deleteAddress("fake id");
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("error reported by Api");
+      }
+    });
+
+    it("handles errors in making the request", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw new Error("Unknown Error");
+      });
+
+      try {
+        await new AddressesApi(config).deleteAddress("fake id");
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("Unknown Error");
+      }
     });
   });
 });
