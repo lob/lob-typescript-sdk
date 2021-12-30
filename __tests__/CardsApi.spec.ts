@@ -13,63 +13,66 @@ describe("CardsApi", () => {
     username: process.env.LOB_API_KEY,
   });
 
-  let cardsApi: CardsApi;
-
-  const cardCreate: CardEditable = {
-    description: "Test card",
-    front:
-      "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/card_horizontal.pdf",
-    back: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/card_horizontal.pdf",
-    size: CardEditableSizeEnum._2125x3375,
-  };
-
   it("Card API can be instantiated", () => {
-    cardsApi = new CardsApi(config);
+    const cardsApi = new CardsApi(config);
     expect(cardsApi).toBeDefined();
     expect(typeof cardsApi).toEqual("object");
     expect(cardsApi).toBeInstanceOf(CardsApi);
   });
 
+  it("all individual Card functions exists", () => {
+    const cardsApi = new CardsApi(config);
+    expect(cardsApi.cardCreate).toBeDefined();
+    expect(typeof cardsApi.cardCreate).toEqual("function");
+
+    expect(cardsApi.cardRetrieve).toBeDefined();
+    expect(typeof cardsApi.cardRetrieve).toEqual("function");
+
+    expect(cardsApi.cardUpdate).toBeDefined();
+    expect(typeof cardsApi.cardUpdate).toEqual("function");
+
+    expect(cardsApi.cardDelete).toBeDefined();
+    expect(typeof cardsApi.cardDelete).toEqual("function");
+  });
+
   describe("performs single-Card operations", () => {
-    it("all individual Card functions exists", () => {
-      expect(cardsApi.cardCreate).toBeDefined();
-      expect(typeof cardsApi.cardCreate).toEqual("function");
+    const cardCreate: CardEditable = {
+      description: "Test card",
+      front:
+          "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/card_horizontal.pdf",
+      back: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/card_horizontal.pdf",
+      size: CardEditableSizeEnum._2125x3375,
+    };
 
-      expect(cardsApi.cardRetrieve).toBeDefined();
-      expect(typeof cardsApi.cardRetrieve).toEqual("function");
-
-      expect(cardsApi.cardUpdate).toBeDefined();
-      expect(typeof cardsApi.cardUpdate).toEqual("function");
-
-      expect(cardsApi.cardDelete).toBeDefined();
-      expect(typeof cardsApi.cardDelete).toEqual("function");
-    });
-
-    // TODO: put this into async
     it("creates, updates, retrieves, and deletes a card", async () => {
-      const card = await cardsApi.cardCreate(cardCreate);
-      expect(card?.id).toBeDefined();
-      if (card?.id) {
-        const retrievedCard = await cardsApi.cardRetrieve(card.id);
-        expect(retrievedCard).toBeDefined();
-        const updates: CardUpdatable = {
-          description: "updated card",
-        };
-        const updatedCard = await cardsApi.cardUpdate(card.id, updates);
-        expect(updatedCard).toBeDefined();
-        expect(updatedCard?.description).toEqual("updated card");
-        const deletedCard = await cardsApi.cardDelete(card.id);
-        expect(deletedCard?.deleted).toBeTruthy();
-      } else {
-        throw new Error("card ID should be defined upon creation");
-    }
+      const cardsApi = new CardsApi(config);
+      // Create
+      const createdCard = await new CardsApi(config).cardCreate(cardCreate);
+      expect(createdCard?.id).toBeDefined();
+      expect(createdCard?.description).toEqual(cardCreate.description);
+
+      // Get
+      const retrievedCard = await cardsApi.cardRetrieve(createdCard.id as string);
+      expect(retrievedCard).toBeDefined();
+      expect(retrievedCard?.id).toEqual(createdCard?.id);
+
+      // Update
+      const updates: CardUpdatable = {
+        description: "updated card",
+      };
+      const updatedCard = await cardsApi.cardUpdate(retrievedCard.id as string, updates);
+      expect(updatedCard).toBeDefined();
+      expect(updatedCard?.description).toEqual("updated card");
+
+      // Delete
+      const deletedCard = await cardsApi.cardDelete(updatedCard.id as string);
+      expect(deletedCard?.deleted).toBeTruthy();
     });
   });
 
   describe("list Cards", () => {
-    let nextUrl = "";
-    let previousUrl = "";
-    let cardList: Card[] = [];
+    let createdCards: Card[] = [];
+
     beforeAll(async () => {
       // ensure there are at least 3 cards present, to test pagination
       const card1: CardEditable = {
@@ -79,66 +82,74 @@ describe("CardsApi", () => {
         back: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/card_horizontal.pdf",
         size: CardEditableSizeEnum._2125x3375,
       };
-      const card2: CardEditable = {
-        description: "Card 2",
-        front:
-          "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/card_horizontal.pdf",
-        back: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/card_horizontal.pdf",
-        size: CardEditableSizeEnum._2125x3375,
-      };
-      const card3: CardEditable = {
-        description: "Card 2",
-        front:
-          "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/card_horizontal.pdf",
-        back: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/card_horizontal.pdf",
-        size: CardEditableSizeEnum._2125x3375,
-      };
-      const c1 = await cardsApi.cardCreate(card1);
-      const c2 = await cardsApi.cardCreate(card2);
-      const c3 = await cardsApi.cardCreate(card3);
+      const card2: CardEditable = Object.assign({}, card1, { description: "Card 2" });
+      const card3: CardEditable = Object.assign({}, card1, { description: "Card 3" });
 
-      const response = await cardsApi.cardsList();
-      if (response && response.next_url) {
-        nextUrl = response?.next_url.slice(
-          response?.next_url.lastIndexOf("after=") + 6
-        );
-        const responseAfter = await cardsApi.cardsList(10, undefined, nextUrl);
-        if (responseAfter && responseAfter.previous_url) {
-          previousUrl = responseAfter.previous_url.slice(
-            responseAfter.previous_url.lastIndexOf("before=") + 7
-          );
-        } else {
-          throw new Error("list should not be empty, and should contain a valid previous_url field")
+      const cardsApi = new CardsApi(config);
+      await Promise.all([
+          cardsApi.cardCreate(card1),
+          cardsApi.cardCreate(card2),
+          cardsApi.cardCreate(card3)
+        ]
+      ).then((creationResults) => {
+        if (creationResults.length !== 3) {
+          fail();
         }
-      } else {
-        throw new Error("list should not be empty, and should contain a valid next_url field")
+        createdCards = createdCards.concat(creationResults);
+      }).catch((err) => {
+        fail(err);
+      });
+    });
+
+    afterAll(async () => {
+      const cardsApi = new CardsApi(config);
+      const cardDeleteOperations: Promise<unknown>[] = [];
+      for (const card of createdCards) {
+        cardDeleteOperations.push(cardsApi.cardDelete(card.id as string))
       }
+      await Promise.all(cardDeleteOperations);
     });
 
     it("exists", () => {
+      const cardsApi = new CardsApi(config);
       expect(cardsApi.cardsList).toBeDefined();
       expect(typeof cardsApi.cardsList).toEqual("function");
     });
 
     it("lists cards", async () => {
-      const response = await cardsApi.cardsList();
+      const response = await new CardsApi(config).cardsList();
       expect(response?.data).toBeDefined();
-      cardList = response?.data || [];
+      const cardList = response?.data || [];
       expect(cardList.length).toBeGreaterThan(0);
     });
 
-    it("lists cards given an after param", async () => {
-      const responseAfter = await cardsApi.cardsList(10, undefined, nextUrl);
-      expect(responseAfter?.data).toBeDefined();
-      const cardList2: Card[] = responseAfter?.data || [];
-      expect(cardList2.length).toBeGreaterThan(0);
-    });
+    it("lists cards given before or after params", async () => {
+      // ToDo:
+      // list responses should map the before and after tokens for the consumer
+      const response = await new CardsApi(config).cardsList();
+      expect(response.next_url).toBeDefined();
+      const after: string = (response as { next_url: string }).next_url.slice(
+          (response as { next_url: string }).next_url.lastIndexOf("after=")
+      ).split("=")[1];
 
-    it("lists cards given a before param", async () => {
-      const responseBefore = await cardsApi.cardsList(10, previousUrl);
+      const responseAfter = await new CardsApi(config).cardsList(10, undefined, after);
+      expect(responseAfter?.data).toBeDefined();
+      expect(responseAfter.previous_url).toBeDefined();
+      expect(responseAfter.previous_url).not.toBeNull();
+
+      const firstPage: Card[] = responseAfter?.data || [];
+      expect(firstPage.length).toBeGreaterThan(0);
+
+      expect(responseAfter.previous_url).toBeDefined();
+      expect(responseAfter.previous_url).not.toBeNull();
+      const before: string = (responseAfter as { previous_url: string }).previous_url.slice(
+          (responseAfter as { previous_url: string }).previous_url.lastIndexOf("before=")
+      ).split("=")[1];
+
+      const responseBefore = await new CardsApi(config).cardsList(10, before);
       expect(responseBefore?.data).toBeDefined();
-      const cardList3: Card[] = responseBefore?.data || [];
-      expect(cardList3.length).toBeGreaterThan(0);
+      const previousPage: Card[] = responseBefore?.data || [];
+      expect(previousPage.length).toBeGreaterThan(0);
     });
   });
 });

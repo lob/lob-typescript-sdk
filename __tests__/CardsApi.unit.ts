@@ -4,7 +4,7 @@ import {
   CardEditable,
   CardEditableSizeEnum
 } from "../models";
-import { CardsApi } from "../api";
+import {AddressesApi, CardsApi} from "../api";
 
 import axios from "axios";
 
@@ -89,6 +89,38 @@ describe("CardsApi", () => {
       }
     });
 
+    it("handles errors returned by the api with missing response.data", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw {
+          message: "error",
+          response: {}
+        };
+      });
+
+      try {
+        await new CardsApi(configWithBaseOptions).cardCreate(cardEditableMock);
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("error");
+      }
+    });
+
+    it("handles errors returned by the api with missing response.data.error", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw {
+          message: "error",
+          response: { data: {}}
+        };
+      });
+
+      try {
+        await new CardsApi(configWithBaseOptions).cardCreate(cardEditableMock);
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("error");
+      }
+    });
+
     it("handles errors in making the request", async () => {
       axiosRequest.mockImplementationOnce(async () => {
         throw new Error("Unknown Error");
@@ -150,6 +182,38 @@ describe("CardsApi", () => {
       }
     });
 
+    it("handles errors returned by the api with missing response.data", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw {
+          message: "error",
+          response: {}
+        };
+      });
+
+      try {
+        await new CardsApi(config).cardRetrieve("fake id");
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("error");
+      }
+    });
+
+    it("handles errors returned by the api with missing response.data.error", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw {
+          message: "error",
+          response: { data: {}}
+        };
+      });
+
+      try {
+        await new CardsApi(config).cardRetrieve("fake id");
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("error");
+      }
+    });
+
     it("handles errors in making the request", async () => {
       axiosRequest.mockImplementationOnce(async () => {
         throw new Error("Unknown Error");
@@ -205,6 +269,38 @@ describe("CardsApi", () => {
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
+      }
+    });
+
+    it("handles errors returned by the api with missing response.data", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw {
+          message: "error",
+          response: {}
+        };
+      });
+
+      try {
+        await new CardsApi(config).cardDelete("fake id");
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("error");
+      }
+    });
+
+    it("handles errors returned by the api with missing response.data.error", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw {
+          message: "error",
+          response: { data: {}}
+        };
+      });
+
+      try {
+        await new CardsApi(config).cardDelete("fake id");
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("error");
       }
     });
 
@@ -269,6 +365,38 @@ describe("CardsApi", () => {
       }
     });
 
+    it("handles errors returned by the api with missing response.data", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw {
+          message: "error",
+          response: {}
+        };
+      });
+
+      try {
+        await new CardsApi(config).cardUpdate("fake id", cardUpdatable);
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("error");
+      }
+    });
+
+    it("handles errors returned by the api with missing response.data.error", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw {
+          message: "error",
+          response: { data: {}}
+        };
+      });
+
+      try {
+        await new CardsApi(config).cardUpdate("fake id", cardUpdatable);
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("error");
+      }
+    });
+
     it("handles errors in making the request", async () => {
       axiosRequest.mockImplementationOnce(async () => {
         throw new Error("Unknown Error");
@@ -283,7 +411,7 @@ describe("CardsApi", () => {
     });
   });
   
-    describe("cardUpdate", () => {
+  describe("cardUpdate", () => {
     const cardUpdatable = {
       description: "card updated"
     };
@@ -410,10 +538,42 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions). cardsList();
+        await new CardsApi(configWithBaseOptions).cardsList();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
+      }
+    });
+
+    it("handles errors returned by the api with missing response.data", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw {
+          message: "error",
+          response: {}
+        };
+      });
+
+      try {
+        await new CardsApi(configWithBaseOptions).cardsList();
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("error");
+      }
+    });
+
+    it("handles errors returned by the api with missing response.data.error", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw {
+          message: "error",
+          response: { data: {}}
+        };
+      });
+
+      try {
+        await new CardsApi(configWithBaseOptions).cardsList();
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("error");
       }
     });
 
