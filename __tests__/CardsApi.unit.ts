@@ -1,16 +1,14 @@
 import { Configuration } from "../configuration";
 
 import {
-  Card,
   CardEditable,
-  CardEditableSizeEnum,
-  CardOrder
+  CardEditableSizeEnum
 } from "../models";
-import { CardOrdersApi, CardsApi } from "../api";
+import { CardsApi } from "../api";
 
 import axios from "axios";
 
-import {debugLog, fail} from "./testUtilities";
+import { fail } from "./testUtilities";
 
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
 
@@ -67,9 +65,9 @@ describe("CardsApi", () => {
         data: { id: "fake card id" }
       }));
 
-      const cardOrder = await new CardsApi(configWithBaseOptions).cardCreate(cardEditableMock);
-      expect(cardOrder).toBeDefined();
-      expect(cardOrder?.id).toEqual("fake card id");
+      const cardsApi = await new CardsApi(configWithBaseOptions).cardCreate(cardEditableMock);
+      expect(cardsApi).toBeDefined();
+      expect(cardsApi?.id).toEqual("fake card id");
     });
 
     it("handles errors returned by the api", async () => {
@@ -355,52 +353,52 @@ describe("CardsApi", () => {
 
     it("gets all cards when no limit is provided", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [ { id: "fake card order id" }, { id: "another fake card id" } ] }
+        data: { data: [ { id: "fake card id" }, { id: "another fake card id" } ] }
       }));
 
-      const cardOrders = await new CardsApi(config).cardsList();
-      expect(cardOrders).toBeDefined();
-      expect(cardOrders?.data?.length).toEqual(2);
+      const cardsApi = await new CardsApi(config).cardsList();
+      expect(cardsApi).toBeDefined();
+      expect(cardsApi?.data?.length).toEqual(2);
     });
     
     it("should handle the limit", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [ { id: "fake card order id" } ] }
+        data: { data: [ { id: "fake card id" } ] }
       }));
 
-      const cardOrders = await new CardsApi(config).cardsList(1);
-      expect(cardOrders).toBeDefined();
-      expect(cardOrders?.data?.length).toEqual(1);
+      const cardsApi = await new CardsApi(config).cardsList(1);
+      expect(cardsApi).toBeDefined();
+      expect(cardsApi?.data?.length).toEqual(1);
     });
 
     it("should handle before pagination", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [ { id: "fake card order id" } ] }
+        data: { data: [ { id: "fake card id" } ] }
       }));
 
-      const cardOrders = await new CardsApi(config).cardsList(1, "fake");
-      expect(cardOrders).toBeDefined();
-      expect(cardOrders?.data?.length).toEqual(1);
+      const cardsApi = await new CardsApi(config).cardsList(1, "fake");
+      expect(cardsApi).toBeDefined();
+      expect(cardsApi?.data?.length).toEqual(1);
     });
 
     it("should handle the after pagination", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [ { id: "fake card order id" } ] }
+        data: { data: [ { id: "fake card id" } ] }
       }));
 
-      const cardOrders = await new CardsApi(config).cardsList(1, "fake", "id");
-      expect(cardOrders).toBeDefined();
-      expect(cardOrders?.data?.length).toEqual(1);
+      const cardsApi = await new CardsApi(config).cardsList(1, "fake", "id");
+      expect(cardsApi).toBeDefined();
+      expect(cardsApi?.data?.length).toEqual(1);
     });
 
     it("should handle the sortBy correctly", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [ { id: "fake card order id" } ] }
+        data: { data: [ { id: "fake card id" } ] }
       }));
 
-      const cardOrders = await new CardsApi(config).cardsList(1, "fake", "id", { id: "asc" } );
-      expect(cardOrders).toBeDefined();
-      expect(cardOrders?.data?.length).toEqual(1);
+      const cardsApi = await new CardsApi(config).cardsList(1, "fake", "id", { id: "asc" } );
+      expect(cardsApi).toBeDefined();
+      expect(cardsApi?.data?.length).toEqual(1);
     });
 
     it("handles errors returned by the api", async () => {
