@@ -3,7 +3,7 @@ node_modules
 typings
 dist
 coverage
-.idea/*
+/.idea
 
 # Test directory exception in all sdks
 /sdks/*
