@@ -345,7 +345,7 @@ export class PostcardsApi extends BaseAPI {
      */
     public postcardCreate(postcardEditable: PostcardEditable, idempotencyKey?: string, idempotencyKey2?: string, options?: AxiosRequestConfig) {
         return PostcardsApiFp(this.configuration).postcardCreate(postcardEditable, idempotencyKey, idempotencyKey2, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response && error.response?.data?.error?.message) {
+            if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
             }
             throw error;
@@ -362,7 +362,7 @@ export class PostcardsApi extends BaseAPI {
      */
     public postcardDelete(pscId: string, options?: AxiosRequestConfig) {
         return PostcardsApiFp(this.configuration).postcardDelete(pscId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response && error.response?.data?.error?.message) {
+            if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
             }
             throw error;
@@ -379,7 +379,7 @@ export class PostcardsApi extends BaseAPI {
      */
     public postcardRetrieve(pscId: string, options?: AxiosRequestConfig) {
         return PostcardsApiFp(this.configuration).postcardRetrieve(pscId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response && error.response?.data?.error?.message) {
+            if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
             }
             throw error;
@@ -406,7 +406,7 @@ export class PostcardsApi extends BaseAPI {
      */
     public postcardsList(limit?: number, before?: string, after?: string, include?: { [key: string]: string; }, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, size?: PostcardSize, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options?: AxiosRequestConfig) {
         return PostcardsApiFp(this.configuration).postcardsList(limit, before, after, include, dateCreated, metadata, size, scheduled, sendDate, mailType, sortBy, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response && error.response?.data?.error?.message) {
+            if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
             }
             throw error;
