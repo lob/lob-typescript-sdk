@@ -1,4 +1,3 @@
-.npmignore
 api.ts
 api/addresses-api.ts
 api/bank-accounts-api.ts
