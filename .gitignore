@@ -3,5 +3,20 @@ node_modules
 typings
 dist
 coverage
+.idea/*
 
-/.idea
+# Test directory exception in all sdks
+/sdks/*
+!/sdks/*
+/sdks/*/*
+!/sdks/*/__tests__
+
+# Typescript specific exceptions
+!/sdks/lob-sdk-ts/.openapi-generator-ignore
+!/sdks/lob-sdk-ts/jest.config.js
+!/sdks/lob-sdk-ts/jest.integrationConfig.js
+!/sdks/lob-sdk-ts/package.json
+!/sdks/lob-sdk-ts/tsconfig.json
+!/sdks/lob-sdk-ts/.npmignore
+
+LOCAL.env

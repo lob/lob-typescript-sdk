@@ -28,3 +28,8 @@ jest.integrationConfig.js
 
 .gitignore
 git_push.sh
+
+README.md
+tsconfig.json
+package.json
+.npmignore
