@@ -39,15 +39,15 @@ describe("CardOrdersApi", () => {
     expect(cardOrdersApi).toBeInstanceOf(CardOrdersApi);
   });
 
-  describe("cardOrderCreate", () => {
+  describe("create", () => {
     const cardForCreate: CardOrderEditable = {
       quantity: 200
     };
 
     it("exists", async () => {
       const cardOrdersApi = new CardOrdersApi(config);
-      expect(cardOrdersApi.cardOrderCreate).toBeDefined();
-      expect(typeof cardOrdersApi.cardOrderCreate).toEqual("function");
+      expect(cardOrdersApi.create).toBeDefined();
+      expect(typeof cardOrdersApi.create).toEqual("function");
     });
 
     it("creates a card order", async () => {
@@ -55,7 +55,7 @@ describe("CardOrdersApi", () => {
         data: { id: "fake order id" }
       }));
 
-      const cardOrder = await new CardOrdersApi(config).cardOrderCreate("fake id", cardForCreate);
+      const cardOrder = await new CardOrdersApi(config).create("fake id", cardForCreate);
       expect(cardOrder).toBeDefined();
       expect(cardOrder?.id).toEqual("fake order id");
     });
@@ -65,7 +65,7 @@ describe("CardOrdersApi", () => {
         data: { id: "fake order id" }
       }));
 
-      const cardOrder = await new CardOrdersApi(configWithBaseOptions).cardOrderCreate("fake id", cardForCreate);
+      const cardOrder = await new CardOrdersApi(configWithBaseOptions).create("fake id", cardForCreate);
       expect(cardOrder).toBeDefined();
       expect(cardOrder?.id).toEqual("fake order id");
     });
@@ -74,8 +74,8 @@ describe("CardOrdersApi", () => {
   describe("cardOrderRetrieve", () => {
     it("exists", async () => {
       const cardOrdersApi = new CardOrdersApi(config);
-      expect(cardOrdersApi.cardOrdersRetrieve).toBeDefined();
-      expect(typeof cardOrdersApi.cardOrdersRetrieve).toEqual("function");
+      expect(cardOrdersApi.get).toBeDefined();
+      expect(typeof cardOrdersApi.get).toEqual("function");
     });
 
     it("gets card orders for a card id", async () => {
@@ -83,7 +83,7 @@ describe("CardOrdersApi", () => {
         data: { data: [ { id: "fake card order id" } ] }
       }));
 
-      const cardOrders = await new CardOrdersApi(config).cardOrdersRetrieve("fake id");
+      const cardOrders = await new CardOrdersApi(config).get("fake id");
       expect(cardOrders).toBeDefined();
       expect(cardOrders?.data?.length).toEqual(1);
     });
@@ -93,7 +93,7 @@ describe("CardOrdersApi", () => {
         data: { data: [ { id: "fake card order id" } ] }
       }));
 
-      const cardOrders = await new CardOrdersApi(configWithBaseOptions).cardOrdersRetrieve("fake id");
+      const cardOrders = await new CardOrdersApi(configWithBaseOptions).get("fake id");
       expect(cardOrders).toBeDefined();
       expect(cardOrders?.data?.length).toEqual(1);
     });
@@ -107,7 +107,7 @@ describe("CardOrdersApi", () => {
       });
 
       try {
-        await new CardOrdersApi(configWithBaseOptions).cardOrdersRetrieve("fake id");
+        await new CardOrdersApi(configWithBaseOptions).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -120,7 +120,7 @@ describe("CardOrdersApi", () => {
       });
 
       try {
-        await new CardOrdersApi(configWithBaseOptions).cardOrdersRetrieve("fake id");
+        await new CardOrdersApi(configWithBaseOptions).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
