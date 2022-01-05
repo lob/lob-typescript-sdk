@@ -17,7 +17,7 @@ import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'ax
 import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, valueToString } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
@@ -40,7 +40,7 @@ export const CardsApiAxiosParamCreator = function (configuration?: Configuration
     return {
         /**
          * Creates a new card given information
-         * @summary Create
+         * @summary create
          * @param {CardEditable} cardEditable 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -80,7 +80,7 @@ export const CardsApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * Delete an existing card. You need only supply the unique identifier that was returned upon card creation.
-         * @summary Delete
+         * @summary delete
          * @param {string} cardId id of the card
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -118,7 +118,7 @@ export const CardsApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * Retrieves the details of an existing card. You need only supply the unique customer identifier that was returned upon card creation.
-         * @summary Retrieve
+         * @summary get
          * @param {string} cardId id of the card
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -156,7 +156,7 @@ export const CardsApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * Update the details of an existing card. You need only supply the unique identifier that was returned upon card creation.
-         * @summary Update
+         * @summary update
          * @param {string} cardId id of the card
          * @param {CardUpdatable} cardUpdatable 
          * @param {*} [options] Override http request option.
@@ -200,7 +200,7 @@ export const CardsApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * Returns a list of your cards. The cards are returned sorted by creation date, with the most recently created addresses appearing first.
-         * @summary List
+         * @summary list
          * @param {number} [limit] How many results to return.
          * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
          * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
@@ -238,7 +238,7 @@ export const CardsApiAxiosParamCreator = function (configuration?: Configuration
             }
 
             if (sortBy !== undefined) {
-                localVarQueryParameter['sort_by'] = sortBy;
+                localVarQueryParameter['sort_by'] = valueToString(sortBy);
             }
 
 
@@ -264,7 +264,7 @@ export const CardsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Creates a new card given information
-         * @summary Create
+         * @summary create
          * @param {CardEditable} cardEditable 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -275,7 +275,7 @@ export const CardsApiFp = function(configuration?: Configuration) {
         },
         /**
          * Delete an existing card. You need only supply the unique identifier that was returned upon card creation.
-         * @summary Delete
+         * @summary delete
          * @param {string} cardId id of the card
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -286,7 +286,7 @@ export const CardsApiFp = function(configuration?: Configuration) {
         },
         /**
          * Retrieves the details of an existing card. You need only supply the unique customer identifier that was returned upon card creation.
-         * @summary Retrieve
+         * @summary get
          * @param {string} cardId id of the card
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -297,7 +297,7 @@ export const CardsApiFp = function(configuration?: Configuration) {
         },
         /**
          * Update the details of an existing card. You need only supply the unique identifier that was returned upon card creation.
-         * @summary Update
+         * @summary update
          * @param {string} cardId id of the card
          * @param {CardUpdatable} cardUpdatable 
          * @param {*} [options] Override http request option.
@@ -309,7 +309,7 @@ export const CardsApiFp = function(configuration?: Configuration) {
         },
         /**
          * Returns a list of your cards. The cards are returned sorted by creation date, with the most recently created addresses appearing first.
-         * @summary List
+         * @summary list
          * @param {number} [limit] How many results to return.
          * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
          * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
@@ -333,13 +333,13 @@ export const CardsApiFp = function(configuration?: Configuration) {
 export class CardsApi extends BaseAPI {
     /**
      * Creates a new card given information
-     * @summary Create
+     * @summary create
      * @param {CardEditable} cardEditable 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CardsApi
      */
-    public cardCreate(cardEditable: CardEditable, options?: AxiosRequestConfig) {
+    public create(cardEditable: CardEditable, options?: AxiosRequestConfig) {
         return CardsApiFp(this.configuration).cardCreate(cardEditable, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
@@ -350,13 +350,13 @@ export class CardsApi extends BaseAPI {
 
     /**
      * Delete an existing card. You need only supply the unique identifier that was returned upon card creation.
-     * @summary Delete
+     * @summary delete
      * @param {string} cardId id of the card
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CardsApi
      */
-    public cardDelete(cardId: string, options?: AxiosRequestConfig) {
+    public delete(cardId: string, options?: AxiosRequestConfig) {
         return CardsApiFp(this.configuration).cardDelete(cardId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
@@ -367,13 +367,13 @@ export class CardsApi extends BaseAPI {
 
     /**
      * Retrieves the details of an existing card. You need only supply the unique customer identifier that was returned upon card creation.
-     * @summary Retrieve
+     * @summary get
      * @param {string} cardId id of the card
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CardsApi
      */
-    public cardRetrieve(cardId: string, options?: AxiosRequestConfig) {
+    public get(cardId: string, options?: AxiosRequestConfig) {
         return CardsApiFp(this.configuration).cardRetrieve(cardId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
@@ -384,14 +384,14 @@ export class CardsApi extends BaseAPI {
 
     /**
      * Update the details of an existing card. You need only supply the unique identifier that was returned upon card creation.
-     * @summary Update
+     * @summary update
      * @param {string} cardId id of the card
      * @param {CardUpdatable} cardUpdatable 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CardsApi
      */
-    public cardUpdate(cardId: string, cardUpdatable: CardUpdatable, options?: AxiosRequestConfig) {
+    public update(cardId: string, cardUpdatable: CardUpdatable, options?: AxiosRequestConfig) {
         return CardsApiFp(this.configuration).cardUpdate(cardId, cardUpdatable, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
@@ -402,7 +402,7 @@ export class CardsApi extends BaseAPI {
 
     /**
      * Returns a list of your cards. The cards are returned sorted by creation date, with the most recently created addresses appearing first.
-     * @summary List
+     * @summary list
      * @param {number} [limit] How many results to return.
      * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
      * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
@@ -411,7 +411,7 @@ export class CardsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CardsApi
      */
-    public cardsList(limit?: number, before?: string, after?: string, sortBy?: object, options?: AxiosRequestConfig) {
+    public list(limit?: number, before?: string, after?: string, sortBy?: object, options?: AxiosRequestConfig) {
         return CardsApiFp(this.configuration).cardsList(limit, before, after, sortBy, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;

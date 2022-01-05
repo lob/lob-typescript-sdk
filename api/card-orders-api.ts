@@ -17,7 +17,7 @@ import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'ax
 import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, valueToString } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
@@ -36,7 +36,7 @@ export const CardOrdersApiAxiosParamCreator = function (configuration?: Configur
     return {
         /**
          * Creates a new card order given information
-         * @summary Create
+         * @summary create
          * @param {string} cardId The ID of the card to which the card orders belong.
          * @param {CardOrderEditable} cardOrderEditable 
          * @param {*} [options] Override http request option.
@@ -80,7 +80,7 @@ export const CardOrdersApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * Retrieves the card orders associated with the given card id.
-         * @summary Retrieve
+         * @summary get
          * @param {string} cardId The ID of the card to which the card orders belong.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -128,7 +128,7 @@ export const CardOrdersApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Creates a new card order given information
-         * @summary Create
+         * @summary create
          * @param {string} cardId The ID of the card to which the card orders belong.
          * @param {CardOrderEditable} cardOrderEditable 
          * @param {*} [options] Override http request option.
@@ -140,7 +140,7 @@ export const CardOrdersApiFp = function(configuration?: Configuration) {
         },
         /**
          * Retrieves the card orders associated with the given card id.
-         * @summary Retrieve
+         * @summary get
          * @param {string} cardId The ID of the card to which the card orders belong.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -161,14 +161,14 @@ export const CardOrdersApiFp = function(configuration?: Configuration) {
 export class CardOrdersApi extends BaseAPI {
     /**
      * Creates a new card order given information
-     * @summary Create
+     * @summary create
      * @param {string} cardId The ID of the card to which the card orders belong.
      * @param {CardOrderEditable} cardOrderEditable 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CardOrdersApi
      */
-    public cardOrderCreate(cardId: string, cardOrderEditable: CardOrderEditable, options?: AxiosRequestConfig) {
+    public create(cardId: string, cardOrderEditable: CardOrderEditable, options?: AxiosRequestConfig) {
         return CardOrdersApiFp(this.configuration).cardOrderCreate(cardId, cardOrderEditable, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
@@ -179,13 +179,13 @@ export class CardOrdersApi extends BaseAPI {
 
     /**
      * Retrieves the card orders associated with the given card id.
-     * @summary Retrieve
+     * @summary get
      * @param {string} cardId The ID of the card to which the card orders belong.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CardOrdersApi
      */
-    public cardOrdersRetrieve(cardId: string, options?: AxiosRequestConfig) {
+    public get(cardId: string, options?: AxiosRequestConfig) {
         return CardOrdersApiFp(this.configuration).cardOrdersRetrieve(cardId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;

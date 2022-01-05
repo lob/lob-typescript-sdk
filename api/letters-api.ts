@@ -17,7 +17,7 @@ import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'ax
 import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, valueToString } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
@@ -42,7 +42,7 @@ export const LettersApiAxiosParamCreator = function (configuration?: Configurati
     return {
         /**
          * Completely removes a letter from production. This can only be done if the letter has a `send_date` and the `send_date` has not yet passed. If the letter is successfully canceled, you will not be charged for it. Read more on [cancellation windows](#section/Cancellation-Windows) and [scheduling](#section/Scheduled-Mailings). Scheduling and cancellation is a premium feature. Upgrade to the appropriate [Print & Mail Edition](https://dashboard.lob.com/#/settings/editions) to gain access.
-         * @summary Cancel
+         * @summary cancel
          * @param {string} ltrId id of the letter
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -80,7 +80,7 @@ export const LettersApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Creates a new letter given information
-         * @summary Create
+         * @summary create
          * @param {LetterEditable} letterEditable 
          * @param {string} [idempotencyKey] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
          * @param {string} [idempotencyKey2] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
@@ -130,7 +130,7 @@ export const LettersApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Retrieves the details of an existing letter. You need only supply the unique letter identifier that was returned upon letter creation.
-         * @summary Retrieve
+         * @summary get
          * @param {string} ltrId id of the letter
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -168,11 +168,11 @@ export const LettersApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Returns a list of your letters. The letters are returned sorted by creation date, with the most recently created letters appearing first.
-         * @summary List
+         * @summary list
          * @param {number} [limit] How many results to return.
          * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
          * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
-         * @param {{ [key: string]: string; }} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
+         * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
          * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
          * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
          * @param {boolean} [color] Set to &#x60;true&#x60; to return only color letters. Set to &#x60;false&#x60; to return only black &amp; white letters.
@@ -183,7 +183,7 @@ export const LettersApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        lettersList: async (limit?: number, before?: string, after?: string, include?: { [key: string]: string; }, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, color?: boolean, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        lettersList: async (limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, color?: boolean, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/letters`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -212,16 +212,16 @@ export const LettersApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['after'] = after;
             }
 
-            if (include !== undefined) {
-                localVarQueryParameter['include'] = include;
+            if (include) {
+                localVarQueryParameter['include'] = valueToString(include);
             }
 
             if (dateCreated !== undefined) {
-                localVarQueryParameter['date_created'] = dateCreated;
+                localVarQueryParameter['date_created'] = valueToString(dateCreated);
             }
 
             if (metadata !== undefined) {
-                localVarQueryParameter['metadata'] = metadata;
+                localVarQueryParameter['metadata'] = valueToString(metadata);
             }
 
             if (color !== undefined) {
@@ -233,15 +233,15 @@ export const LettersApiAxiosParamCreator = function (configuration?: Configurati
             }
 
             if (sendDate !== undefined) {
-                localVarQueryParameter['send_date'] = sendDate;
+                localVarQueryParameter['send_date'] = valueToString(sendDate);
             }
 
             if (mailType !== undefined) {
-                localVarQueryParameter['mail_type'] = mailType;
+                localVarQueryParameter['mail_type'] = valueToString(mailType);
             }
 
             if (sortBy !== undefined) {
-                localVarQueryParameter['sort_by'] = sortBy;
+                localVarQueryParameter['sort_by'] = valueToString(sortBy);
             }
 
 
@@ -267,7 +267,7 @@ export const LettersApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Completely removes a letter from production. This can only be done if the letter has a `send_date` and the `send_date` has not yet passed. If the letter is successfully canceled, you will not be charged for it. Read more on [cancellation windows](#section/Cancellation-Windows) and [scheduling](#section/Scheduled-Mailings). Scheduling and cancellation is a premium feature. Upgrade to the appropriate [Print & Mail Edition](https://dashboard.lob.com/#/settings/editions) to gain access.
-         * @summary Cancel
+         * @summary cancel
          * @param {string} ltrId id of the letter
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -278,7 +278,7 @@ export const LettersApiFp = function(configuration?: Configuration) {
         },
         /**
          * Creates a new letter given information
-         * @summary Create
+         * @summary create
          * @param {LetterEditable} letterEditable 
          * @param {string} [idempotencyKey] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
          * @param {string} [idempotencyKey2] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
@@ -291,7 +291,7 @@ export const LettersApiFp = function(configuration?: Configuration) {
         },
         /**
          * Retrieves the details of an existing letter. You need only supply the unique letter identifier that was returned upon letter creation.
-         * @summary Retrieve
+         * @summary get
          * @param {string} ltrId id of the letter
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -302,11 +302,11 @@ export const LettersApiFp = function(configuration?: Configuration) {
         },
         /**
          * Returns a list of your letters. The letters are returned sorted by creation date, with the most recently created letters appearing first.
-         * @summary List
+         * @summary list
          * @param {number} [limit] How many results to return.
          * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
          * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
-         * @param {{ [key: string]: string; }} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
+         * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
          * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
          * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
          * @param {boolean} [color] Set to &#x60;true&#x60; to return only color letters. Set to &#x60;false&#x60; to return only black &amp; white letters.
@@ -317,7 +317,7 @@ export const LettersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async lettersList(limit?: number, before?: string, after?: string, include?: { [key: string]: string; }, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, color?: boolean, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LetterList>> {
+        async lettersList(limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, color?: boolean, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LetterList>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.lettersList(limit, before, after, include, dateCreated, metadata, color, scheduled, sendDate, mailType, sortBy, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -333,13 +333,13 @@ export const LettersApiFp = function(configuration?: Configuration) {
 export class LettersApi extends BaseAPI {
     /**
      * Completely removes a letter from production. This can only be done if the letter has a `send_date` and the `send_date` has not yet passed. If the letter is successfully canceled, you will not be charged for it. Read more on [cancellation windows](#section/Cancellation-Windows) and [scheduling](#section/Scheduled-Mailings). Scheduling and cancellation is a premium feature. Upgrade to the appropriate [Print & Mail Edition](https://dashboard.lob.com/#/settings/editions) to gain access.
-     * @summary Cancel
+     * @summary cancel
      * @param {string} ltrId id of the letter
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof LettersApi
      */
-    public letterCancel(ltrId: string, options?: AxiosRequestConfig) {
+    public cancel(ltrId: string, options?: AxiosRequestConfig) {
         return LettersApiFp(this.configuration).letterCancel(ltrId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
@@ -350,7 +350,7 @@ export class LettersApi extends BaseAPI {
 
     /**
      * Creates a new letter given information
-     * @summary Create
+     * @summary create
      * @param {LetterEditable} letterEditable 
      * @param {string} [idempotencyKey] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
      * @param {string} [idempotencyKey2] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
@@ -358,7 +358,7 @@ export class LettersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof LettersApi
      */
-    public letterCreate(letterEditable: LetterEditable, idempotencyKey?: string, idempotencyKey2?: string, options?: AxiosRequestConfig) {
+    public create(letterEditable: LetterEditable, idempotencyKey?: string, idempotencyKey2?: string, options?: AxiosRequestConfig) {
         return LettersApiFp(this.configuration).letterCreate(letterEditable, idempotencyKey, idempotencyKey2, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
@@ -369,13 +369,13 @@ export class LettersApi extends BaseAPI {
 
     /**
      * Retrieves the details of an existing letter. You need only supply the unique letter identifier that was returned upon letter creation.
-     * @summary Retrieve
+     * @summary get
      * @param {string} ltrId id of the letter
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof LettersApi
      */
-    public letterRetrieve(ltrId: string, options?: AxiosRequestConfig) {
+    public get(ltrId: string, options?: AxiosRequestConfig) {
         return LettersApiFp(this.configuration).letterRetrieve(ltrId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
@@ -386,11 +386,11 @@ export class LettersApi extends BaseAPI {
 
     /**
      * Returns a list of your letters. The letters are returned sorted by creation date, with the most recently created letters appearing first.
-     * @summary List
+     * @summary list
      * @param {number} [limit] How many results to return.
      * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
      * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
-     * @param {{ [key: string]: string; }} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
+     * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
      * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
      * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
      * @param {boolean} [color] Set to &#x60;true&#x60; to return only color letters. Set to &#x60;false&#x60; to return only black &amp; white letters.
@@ -402,7 +402,7 @@ export class LettersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof LettersApi
      */
-    public lettersList(limit?: number, before?: string, after?: string, include?: { [key: string]: string; }, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, color?: boolean, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options?: AxiosRequestConfig) {
+    public list(limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, color?: boolean, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options?: AxiosRequestConfig) {
         return LettersApiFp(this.configuration).lettersList(limit, before, after, include, dateCreated, metadata, color, scheduled, sendDate, mailType, sortBy, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
