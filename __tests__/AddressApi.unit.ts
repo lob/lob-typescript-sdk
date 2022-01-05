@@ -45,7 +45,7 @@ describe("AddressApi", () => {
     expect(addressApi).toBeInstanceOf(AddressesApi);
   });
 
-  describe("createAddress", () => {
+  describe("create", () => {
     const addressCreate: AddressEditable = {
       name: "ADITI RAMASWAMY",
       address_line1: "360 BERRY ST",
@@ -56,8 +56,8 @@ describe("AddressApi", () => {
 
     it("exists", () => {
       const addressApi = new AddressesApi(config);
-      expect(addressApi.createAddress).toBeDefined();
-      expect(typeof addressApi.createAddress).toEqual("function");
+      expect(addressApi.create).toBeDefined();
+      expect(typeof addressApi.create).toEqual("function");
     });
 
     it("handles errors returned by the api", async () => {
@@ -69,7 +69,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).createAddress(addressCreate);
+        await new AddressesApi(config).create(addressCreate);
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
       }
@@ -84,7 +84,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).createAddress(addressCreate);
+        await new AddressesApi(config).create(addressCreate);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -100,7 +100,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).createAddress(addressCreate);
+        await new AddressesApi(config).create(addressCreate);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -113,7 +113,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).createAddress(addressCreate);
+        await new AddressesApi(config).create(addressCreate);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -125,7 +125,7 @@ describe("AddressApi", () => {
         data: { id: "fake id" },
       }));
 
-      const address = await new AddressesApi(config).createAddress(
+      const address = await new AddressesApi(config).create(
           addressCreate
       );
       expect(address).toBeDefined();
@@ -137,7 +137,7 @@ describe("AddressApi", () => {
         data: { id: "fake id" },
       }));
 
-      const address = await new AddressesApi(configWithBaseOptions).createAddress(
+      const address = await new AddressesApi(configWithBaseOptions).create(
           addressCreate
       );
       expect(address).toBeDefined();
@@ -146,12 +146,12 @@ describe("AddressApi", () => {
 
   });
 
-  describe("getAddress", () => {
+  describe("get", () => {
 
     it("exists", async () => {
       const addressApi = new AddressesApi(config);
-      expect(addressApi.getAddress).toBeDefined();
-      expect(typeof addressApi.getAddress).toEqual('function');
+      expect(addressApi.get).toBeDefined();
+      expect(typeof addressApi.get).toEqual('function');
     });
 
     it("retrieves an address", async () => {
@@ -159,7 +159,7 @@ describe("AddressApi", () => {
         data: { id: 'different fake id' }
       }));
 
-      const address = await new AddressesApi(config).getAddress("fake id");
+      const address = await new AddressesApi(config).get("fake id");
       expect(address?.id).toEqual('different fake id');
     });
 
@@ -168,7 +168,7 @@ describe("AddressApi", () => {
         data: { id: 'different fake id' }
       }));
 
-      const address = await new AddressesApi(configWithBaseOptions).getAddress("fake id");
+      const address = await new AddressesApi(configWithBaseOptions).get("fake id");
       expect(address?.id).toEqual('different fake id');
     });
 
@@ -181,7 +181,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).getAddress("fake id");
+        await new AddressesApi(config).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by Api");
@@ -197,7 +197,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).getAddress("fake id");
+        await new AddressesApi(config).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -213,7 +213,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).getAddress("fake id");
+        await new AddressesApi(config).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -226,7 +226,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).getAddress("fake id");
+        await new AddressesApi(config).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -235,11 +235,11 @@ describe("AddressApi", () => {
 
   });
 
-  describe("listAddresses", () => {
+  describe("list", () => {
     it("exists", () => {
       const addressApi = new AddressesApi(config);
-      expect(addressApi.listAddresses).toBeDefined();
-      expect(typeof addressApi.listAddresses).toEqual("function");
+      expect(addressApi.list).toBeDefined();
+      expect(typeof addressApi.list).toEqual("function");
     });
 
     it("lists addresses", async () => {
@@ -247,7 +247,7 @@ describe("AddressApi", () => {
         data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
       }));
 
-      const response = await new AddressesApi(config).listAddresses();
+      const response = await new AddressesApi(config).list();
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
       expect(response?.data?.length).toEqual(2);
@@ -258,7 +258,7 @@ describe("AddressApi", () => {
         data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
       }));
 
-      const response = await new AddressesApi(configWithBaseOptions).listAddresses();
+      const response = await new AddressesApi(configWithBaseOptions).list();
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
       expect(response?.data?.length).toEqual(2);
@@ -273,7 +273,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).listAddresses();
+        await new AddressesApi(config).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -289,7 +289,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).listAddresses();
+        await new AddressesApi(config).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -305,7 +305,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).listAddresses();
+        await new AddressesApi(config).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -318,7 +318,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).listAddresses();
+        await new AddressesApi(config).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -333,7 +333,7 @@ describe("AddressApi", () => {
         }
       });
 
-      const response = await new AddressesApi(config).listAddresses(
+      const response = await new AddressesApi(config).list(
           10
       );
       expect(response).toBeDefined();
@@ -349,7 +349,7 @@ describe("AddressApi", () => {
         }
       });
 
-      const response = await new AddressesApi(config).listAddresses(
+      const response = await new AddressesApi(config).list(
           undefined,
           "before"
       );
@@ -366,7 +366,7 @@ describe("AddressApi", () => {
         }
       });
 
-      const response = await new AddressesApi(config).listAddresses(
+      const response = await new AddressesApi(config).list(
           undefined,
           undefined,
           "after"
@@ -388,11 +388,11 @@ describe("AddressApi", () => {
         }
       });
 
-      const response = await new AddressesApi(config).listAddresses(
+      const response = await new AddressesApi(config).list(
           undefined,
           undefined,
           undefined,
-          { what: "this" }
+          ["this" ]
       );
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
@@ -408,7 +408,7 @@ describe("AddressApi", () => {
         }
       });
 
-      const response = await new AddressesApi(config).listAddresses(
+      const response = await new AddressesApi(config).list(
           undefined,
           undefined,
           undefined,
@@ -429,7 +429,7 @@ describe("AddressApi", () => {
         }
       });
 
-      const response = await new AddressesApi(config).listAddresses(
+      const response = await new AddressesApi(config).list(
           undefined,
           undefined,
           undefined,
@@ -450,7 +450,7 @@ describe("AddressApi", () => {
         }
       });
 
-      const response = await new AddressesApi(config).listAddresses(
+      const response = await new AddressesApi(config).list(
           10,
           undefined,
           "after"
@@ -462,11 +462,11 @@ describe("AddressApi", () => {
 
   });
 
-  describe("deleteAddress", () => {
+  describe("delete", () => {
     it("exists", () => {
       const addressApi = new AddressesApi(config);
-      expect(addressApi.deleteAddress).toBeDefined();
-      expect(typeof addressApi.deleteAddress).toEqual("function");
+      expect(addressApi.delete).toBeDefined();
+      expect(typeof addressApi.delete).toEqual("function");
     });
 
     it("deletes an address", async () => {
@@ -476,7 +476,7 @@ describe("AddressApi", () => {
           deleted: true,
         },
       }));
-      const deletedAddress = await new AddressesApi(config).deleteAddress(
+      const deletedAddress = await new AddressesApi(config).delete(
           "fake id"
       );
       expect(deletedAddress?.deleted).toEqual(true);
@@ -489,7 +489,7 @@ describe("AddressApi", () => {
           deleted: true,
         },
       }));
-      const deletedAddress = await new AddressesApi(configWithBaseOptions).deleteAddress(
+      const deletedAddress = await new AddressesApi(configWithBaseOptions).delete(
           "fake id"
       );
       expect(deletedAddress?.deleted).toEqual(true);
@@ -504,7 +504,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).deleteAddress("fake id");
+        await new AddressesApi(config).delete("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by Api");
@@ -520,7 +520,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).deleteAddress("fake id");
+        await new AddressesApi(config).delete("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -536,7 +536,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).deleteAddress("fake id");
+        await new AddressesApi(config).delete("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -549,7 +549,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).deleteAddress("fake id");
+        await new AddressesApi(config).delete("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");

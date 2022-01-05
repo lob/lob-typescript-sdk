@@ -22,16 +22,16 @@ describe("UsVerificationApi", () => {
     expect(usvApi).toBeInstanceOf(USVerificationsApi);
   });
 
-  describe("usVerifications", () => {
+  describe("verifySingle", () => {
     it("exists", () => {
       const usvApi = new USVerificationsApi(config);
-      expect(usvApi.usVerification).toBeDefined();
-      expect(typeof usvApi.usVerification).toEqual("function");
+      expect(usvApi.verifySingle).toBeDefined();
+      expect(typeof usvApi.verifySingle).toEqual("function");
     });
 
     it("verifies a single US address", async () => {
       const usvApi = new USVerificationsApi(config);
-      const response = await usvApi.usVerification(verifySingle);
+      const response = await usvApi.verifySingle(verifySingle);
     });
   });
 });

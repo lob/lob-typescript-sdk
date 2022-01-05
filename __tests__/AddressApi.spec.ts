@@ -34,9 +34,9 @@ describe("AddressApi", () => {
     expect(addressApi).toBeInstanceOf(AddressesApi);
   });
 
-  describe("createAddress", () => {
+  describe("create", () => {
     it("creates a new address", async () => {
-      const address = await new AddressesApi(config).createAddress(addressCreate);
+      const address = await new AddressesApi(config).create(addressCreate);
       expect(address).toBeDefined();
       expect(address?.id).toBeDefined();
     });
@@ -46,7 +46,7 @@ describe("AddressApi", () => {
       expect(badAddressApi).toBeDefined();
 
       try {
-        const address = await badAddressApi.createAddress(addressCreate);
+        const address = await badAddressApi.create(addressCreate);
         debugLog(address);
         fail('Prior operation should have thrown.');
       } catch (err: any) {
@@ -58,7 +58,7 @@ describe("AddressApi", () => {
       // ToDo: Rate limit needs to be thrown
       const addressApi = new AddressesApi(config);
 
-      const res = await Promise.all([...Array(100000)].fill(addressApi.createAddress(addressCreate)));
+      const res = await Promise.all([...Array(100000)].fill(addressApi.create(addressCreate)));
 
       for (const address of res as Address[]) {
         expect(address.id).toBeDefined();
@@ -84,7 +84,7 @@ describe("AddressApi", () => {
     });
   });
 
-  describe("listAddresses", () => {
+  describe("list", () => {
     let nextUrl = "";
     let previousUrl = "";
     let addressList: Address[] = [];
@@ -115,16 +115,16 @@ describe("AddressApi", () => {
         address_state: "VT",
         address_zip: "05401",
       };
-      const a1 = await addressApi.createAddress(address1);
-      const a2 = await addressApi.createAddress(address2);
-      const a3 = await addressApi.createAddress(address3);
+      const a1 = await addressApi.create(address1);
+      const a2 = await addressApi.create(address2);
+      const a3 = await addressApi.create(address3);
 
-      const response = await addressApi.listAddresses();
+      const response = await addressApi.list();
       if (response && response.next_url) {
         nextUrl = response.next_url.slice(
           response.next_url.lastIndexOf("after=") + 6
         );
-        const responseAfter = await addressApi.listAddresses(
+        const responseAfter = await addressApi.list(
           10,
           undefined,
           nextUrl,
@@ -143,12 +143,12 @@ describe("AddressApi", () => {
 
     it("exists", () => {
       const addressApi = new AddressesApi(config);
-      expect(addressApi.listAddresses).toBeDefined();
-      expect(typeof addressApi.listAddresses).toEqual("function");
+      expect(addressApi.list).toBeDefined();
+      expect(typeof addressApi.list).toEqual("function");
     });
 
     it("lists addresses", async () => {
-      const response = await new AddressesApi(config).listAddresses() as AddressList;
+      const response = await new AddressesApi(config).list() as AddressList;
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
       addressList = response?.data || [];
@@ -156,7 +156,7 @@ describe("AddressApi", () => {
     });
 
     it("lists addresses given an after param", async () => {
-      const responseAfter = await new AddressesApi(config).listAddresses(
+      const responseAfter = await new AddressesApi(config).list(
         10,
         undefined,
         nextUrl
@@ -167,7 +167,7 @@ describe("AddressApi", () => {
       expect(addressList2.length).toBeGreaterThan(0);
     });
     it("lists addresses given a before param", async () => {
-      const responseBefore = await new AddressesApi(config).listAddresses(10, previousUrl);
+      const responseBefore = await new AddressesApi(config).list(10, previousUrl);
       expect(responseBefore).toBeDefined();
       expect(responseBefore?.data).toBeDefined();
       const addressList3: Address[] = responseBefore?.data || [];
@@ -175,19 +175,19 @@ describe("AddressApi", () => {
     });
   });
 
-  describe("deleteAddress", () => {
+  describe("delete", () => {
     it("exists", () => {
       const addressApi = new AddressesApi(config);
-      expect(addressApi.deleteAddress).toBeDefined();
-      expect(typeof addressApi.deleteAddress).toEqual("function");
+      expect(addressApi.delete).toBeDefined();
+      expect(typeof addressApi.delete).toEqual("function");
     });
 
     it("deletes an address", async () => {
-      const address = await new AddressesApi(config).createAddress(addressCreate);
+      const address = await new AddressesApi(config).create(addressCreate);
       expect(address).toBeDefined();
       expect(address?.id).toBeDefined();
 
-      const deletedAddress = await new AddressesApi(config).deleteAddress(address?.id as string);
+      const deletedAddress = await new AddressesApi(config).delete(address?.id as string);
       expect(deletedAddress).toBeDefined();
       expect(deletedAddress?.id).toEqual(address?.id);
       expect(deletedAddress?.deleted).toEqual(true);

@@ -36,7 +36,7 @@ describe("CardsApi", () => {
     expect(cardsApi).toBeInstanceOf(CardsApi);
   });
 
-  describe("cardCreate", () => {
+  describe("create", () => {
     const cardEditableMock: CardEditable = {
       front: 'fake front',
       back: 'fake back',
@@ -46,8 +46,8 @@ describe("CardsApi", () => {
 
     it("exists", async () => {
       const cardsApi = new CardsApi(config);
-      expect(cardsApi.cardCreate).toBeDefined();
-      expect(typeof cardsApi.cardCreate).toEqual("function");
+      expect(cardsApi.create).toBeDefined();
+      expect(typeof cardsApi.create).toEqual("function");
     });
 
     it("creates a card", async () => {
@@ -55,7 +55,7 @@ describe("CardsApi", () => {
         data: { id: "fake card id" }
       }));
 
-      const card = await new CardsApi(config).cardCreate(cardEditableMock);
+      const card = await new CardsApi(config).create(cardEditableMock);
       expect(card).toBeDefined();
       expect(card.id).toEqual("fake card id");
     });
@@ -65,7 +65,7 @@ describe("CardsApi", () => {
         data: { id: "fake card id" }
       }));
 
-      const cardsApi = await new CardsApi(configWithBaseOptions).cardCreate(cardEditableMock);
+      const cardsApi = await new CardsApi(configWithBaseOptions).create(cardEditableMock);
       expect(cardsApi).toBeDefined();
       expect(cardsApi?.id).toEqual("fake card id");
     });
@@ -82,7 +82,7 @@ describe("CardsApi", () => {
       };
 
       try {
-        await new CardsApi(configWithBaseOptions).cardCreate(cardEditableMock);
+        await new CardsApi(configWithBaseOptions).create(cardEditableMock);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -98,7 +98,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).cardCreate(cardEditableMock);
+        await new CardsApi(configWithBaseOptions).create(cardEditableMock);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -114,7 +114,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).cardCreate(cardEditableMock);
+        await new CardsApi(configWithBaseOptions).create(cardEditableMock);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -130,7 +130,7 @@ describe("CardsApi", () => {
       };
 
       try {
-        await new CardsApi(configWithBaseOptions).cardCreate(cardEditableMock);
+        await new CardsApi(configWithBaseOptions).create(cardEditableMock);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -138,11 +138,11 @@ describe("CardsApi", () => {
     });
   });
 
-  describe("cardRetrieve", () => {
+  describe("get", () => {
     it("exists", async () => {
       const cardrsApi = new CardsApi(config);
-      expect(cardrsApi.cardRetrieve).toBeDefined();
-      expect(typeof cardrsApi.cardRetrieve).toEqual("function");
+      expect(cardrsApi.get).toBeDefined();
+      expect(typeof cardrsApi.get).toEqual("function");
     });
 
     it("gets cards for a card id", async () => {
@@ -150,7 +150,7 @@ describe("CardsApi", () => {
             data: { id: "fake card id" }
         }));
 
-        const cards = await new CardsApi(config).cardRetrieve("fake id");
+        const cards = await new CardsApi(config).get("fake id");
         expect(cards).toBeDefined();
         expect(cards?.id).toEqual("fake card id");
     });
@@ -161,7 +161,7 @@ describe("CardsApi", () => {
         }));
 
 
-        const cards = await new CardsApi(configWithBaseOptions).cardRetrieve("fake id");
+        const cards = await new CardsApi(configWithBaseOptions).get("fake id");
         expect(cards).toBeDefined();
         expect(cards?.id).toEqual("fake card id");
     });
@@ -175,7 +175,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).cardRetrieve("fake id");
+        await new CardsApi(configWithBaseOptions).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -191,7 +191,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(config).cardRetrieve("fake id");
+        await new CardsApi(config).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -207,7 +207,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(config).cardRetrieve("fake id");
+        await new CardsApi(config).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -220,7 +220,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).cardRetrieve("fake id");
+        await new CardsApi(configWithBaseOptions).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -228,11 +228,11 @@ describe("CardsApi", () => {
     });
   });
 
-  describe("cardDelete", () => {
+  describe("delete", () => {
     it("exists", async () => {
       const cardrsApi = new CardsApi(config);
-      expect(cardrsApi.cardDelete).toBeDefined();
-      expect(typeof cardrsApi.cardDelete).toEqual("function");
+      expect(cardrsApi.delete).toBeDefined();
+      expect(typeof cardrsApi.delete).toEqual("function");
     });
 
     it("deletes card for a card id", async () => {
@@ -240,7 +240,7 @@ describe("CardsApi", () => {
             data: { id: "fake card id" }
         }));
 
-        const cards = await new CardsApi(config).cardDelete("fake id");
+        const cards = await new CardsApi(config).delete("fake id");
         expect(cards).toBeDefined();
         expect(cards?.id).toEqual("fake card id");
     });
@@ -251,7 +251,7 @@ describe("CardsApi", () => {
         }));
 
 
-        const cards = await new CardsApi(configWithBaseOptions).cardDelete("fake id");
+        const cards = await new CardsApi(configWithBaseOptions).delete("fake id");
         expect(cards).toBeDefined();
         expect(cards?.id).toEqual("fake card id");
     });
@@ -265,7 +265,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).cardDelete("fake id");
+        await new CardsApi(configWithBaseOptions).delete("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -281,7 +281,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(config).cardDelete("fake id");
+        await new CardsApi(config).delete("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -297,7 +297,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(config).cardDelete("fake id");
+        await new CardsApi(config).delete("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -310,7 +310,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).cardDelete("fake id");
+        await new CardsApi(configWithBaseOptions).delete("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -318,15 +318,15 @@ describe("CardsApi", () => {
     });
   });
 
-  describe("cardUpdate", () => {
+  describe("update", () => {
     const cardUpdatable = {
       description: "card updated"
     };
 
     it("exists", async () => {
       const cardrsApi = new CardsApi(config);
-      expect(cardrsApi.cardUpdate).toBeDefined();
-      expect(typeof cardrsApi.cardUpdate).toEqual("function");
+      expect(cardrsApi.update).toBeDefined();
+      expect(typeof cardrsApi.update).toEqual("function");
     });
 
     it("updates card for a card id", async () => {
@@ -334,7 +334,7 @@ describe("CardsApi", () => {
             data: { id: "fake card id" }
         }));
 
-        const cards = await new CardsApi(config).cardUpdate("fake id", cardUpdatable);
+        const cards = await new CardsApi(config).update("fake id", cardUpdatable);
         expect(cards).toBeDefined();
         expect(cards?.id).toEqual("fake card id");
     });
@@ -344,7 +344,7 @@ describe("CardsApi", () => {
             data: { id: "fake card id" }
         }));
 
-        const cards = await new CardsApi(configWithBaseOptions).cardUpdate("fake id", cardUpdatable);
+        const cards = await new CardsApi(configWithBaseOptions).update("fake id", cardUpdatable);
         expect(cards).toBeDefined();
         expect(cards?.id).toEqual("fake card id");
     });
@@ -358,7 +358,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).cardUpdate("fake id", cardUpdatable);
+        await new CardsApi(configWithBaseOptions).update("fake id", cardUpdatable);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -374,7 +374,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(config).cardUpdate("fake id", cardUpdatable);
+        await new CardsApi(config).update("fake id", cardUpdatable);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -390,7 +390,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(config).cardUpdate("fake id", cardUpdatable);
+        await new CardsApi(config).update("fake id", cardUpdatable);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -403,7 +403,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).cardUpdate("fake id", cardUpdatable);
+        await new CardsApi(configWithBaseOptions).update("fake id", cardUpdatable);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -411,15 +411,15 @@ describe("CardsApi", () => {
     });
   });
   
-  describe("cardUpdate", () => {
+  describe("update", () => {
     const cardUpdatable = {
       description: "card updated"
     };
 
     it("exists", async () => {
       const cardrsApi = new CardsApi(config);
-      expect(cardrsApi.cardUpdate).toBeDefined();
-      expect(typeof cardrsApi.cardUpdate).toEqual("function");
+      expect(cardrsApi.update).toBeDefined();
+      expect(typeof cardrsApi.update).toEqual("function");
     });
 
     it("updates card for a card id", async () => {
@@ -427,7 +427,7 @@ describe("CardsApi", () => {
             data: { id: "fake card id" }
         }));
 
-        const cards = await new CardsApi(config).cardUpdate("fake id", cardUpdatable);
+        const cards = await new CardsApi(config).update("fake id", cardUpdatable);
         expect(cards).toBeDefined();
         expect(cards?.id).toEqual("fake card id");
     });
@@ -437,7 +437,7 @@ describe("CardsApi", () => {
             data: { id: "fake card id" }
         }));
 
-        const cards = await new CardsApi(configWithBaseOptions).cardUpdate("fake id", cardUpdatable);
+        const cards = await new CardsApi(configWithBaseOptions).update("fake id", cardUpdatable);
         expect(cards).toBeDefined();
         expect(cards?.id).toEqual("fake card id");
     });
@@ -451,7 +451,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).cardUpdate("fake id", cardUpdatable);
+        await new CardsApi(configWithBaseOptions).update("fake id", cardUpdatable);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -464,7 +464,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).cardUpdate("fake id", cardUpdatable);
+        await new CardsApi(configWithBaseOptions).update("fake id", cardUpdatable);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -472,11 +472,11 @@ describe("CardsApi", () => {
     });
   });
 
-  describe("cardsList", () => {
+  describe("list", () => {
     it("exists", async () => {
       const cardsApi = new CardsApi(config);
-      expect(cardsApi.cardsList).toBeDefined();
-      expect(typeof cardsApi.cardsList).toEqual("function");
+      expect(cardsApi.list).toBeDefined();
+      expect(typeof cardsApi.list).toEqual("function");
     });
 
     it("gets all cards when no limit is provided", async () => {
@@ -484,7 +484,7 @@ describe("CardsApi", () => {
         data: { data: [ { id: "fake card id" }, { id: "another fake card id" } ] }
       }));
 
-      const cardsApi = await new CardsApi(config).cardsList();
+      const cardsApi = await new CardsApi(config).list();
       expect(cardsApi).toBeDefined();
       expect(cardsApi?.data?.length).toEqual(2);
     });
@@ -494,7 +494,7 @@ describe("CardsApi", () => {
         data: { data: [ { id: "fake card id" } ] }
       }));
 
-      const cardsApi = await new CardsApi(config).cardsList(1);
+      const cardsApi = await new CardsApi(config).list(1);
       expect(cardsApi).toBeDefined();
       expect(cardsApi?.data?.length).toEqual(1);
     });
@@ -504,7 +504,7 @@ describe("CardsApi", () => {
         data: { data: [ { id: "fake card id" } ] }
       }));
 
-      const cardsApi = await new CardsApi(config).cardsList(1, "fake");
+      const cardsApi = await new CardsApi(config).list(1, "fake");
       expect(cardsApi).toBeDefined();
       expect(cardsApi?.data?.length).toEqual(1);
     });
@@ -514,7 +514,7 @@ describe("CardsApi", () => {
         data: { data: [ { id: "fake card id" } ] }
       }));
 
-      const cardsApi = await new CardsApi(config).cardsList(1, "fake", "id");
+      const cardsApi = await new CardsApi(config).list(1, "fake", "id");
       expect(cardsApi).toBeDefined();
       expect(cardsApi?.data?.length).toEqual(1);
     });
@@ -524,7 +524,7 @@ describe("CardsApi", () => {
         data: { data: [ { id: "fake card id" } ] }
       }));
 
-      const cardsApi = await new CardsApi(config).cardsList(1, "fake", "id", { id: "asc" } );
+      const cardsApi = await new CardsApi(config).list(1, "fake", "id", { id: "asc" } );
       expect(cardsApi).toBeDefined();
       expect(cardsApi?.data?.length).toEqual(1);
     });
@@ -538,7 +538,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).cardsList();
+        await new CardsApi(configWithBaseOptions).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -554,7 +554,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).cardsList();
+        await new CardsApi(configWithBaseOptions).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -570,7 +570,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).cardsList();
+        await new CardsApi(configWithBaseOptions).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -583,7 +583,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).cardsList();
+        await new CardsApi(configWithBaseOptions).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");

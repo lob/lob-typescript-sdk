@@ -22,25 +22,25 @@ describe("AddressApi Javascript Consumer", () => {
     expect(addressApi).toBeInstanceOf(AddressesApi);
   });
 
-  describe("createAddress", () => {
+  describe("create", () => {
     it("exists", () => {
-      expect(addressApi.createAddress).toBeDefined();
-      expect(typeof addressApi.createAddress).toEqual("function");
+      expect(addressApi.create).toBeDefined();
+      expect(typeof addressApi.create).toEqual("function");
     });
 
     it("creates a new address", async () => {
-      const response = await addressApi.createAddress(addressCreate);
+      const response = await addressApi.create(addressCreate);
     });
   });
 
-  describe("listAddresses", () => {
+  describe("list", () => {
     it("exists", () => {
-      expect(addressApi.listAddresses).toBeDefined();
-      expect(typeof addressApi.listAddresses).toEqual("function");
+      expect(addressApi.list).toBeDefined();
+      expect(typeof addressApi.list).toEqual("function");
     });
 
     it("lists addresses", async () => {
-      const response = await addressApi.listAddresses();
+      const response = await addressApi.list();
       expect(response.data).toBeDefined();
     });
   });

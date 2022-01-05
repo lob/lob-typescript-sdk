@@ -46,21 +46,21 @@ describe("CardOrdersApi", () => {
     beforeAll(async () => {
       const cardsApi = new CardsApi(config);
       const cardOrdersApi = new CardOrdersApi(config);
-      dummyCard = await cardsApi.cardCreate(editableCard);
+      dummyCard = await cardsApi.create(editableCard);
 
       if (!dummyCard.id) {
         throw new Error('Unable to create required data');
       }
 
-      await cardOrdersApi.cardOrderCreate(
+      await cardOrdersApi.create(
           dummyCard.id,
           dummyCardOrder
       );
-      await cardOrdersApi.cardOrderCreate(
+      await cardOrdersApi.create(
           dummyCard.id,
           dummyCardOrder2
       );
-      await cardOrdersApi.cardOrderCreate(
+      await cardOrdersApi.create(
           dummyCard.id,
           dummyCardOrder3
       );
@@ -68,18 +68,18 @@ describe("CardOrdersApi", () => {
 
     it("all individual Card functions exists", () => {
       const cardOrdersApi = new CardOrdersApi(config);
-      expect(cardOrdersApi.cardOrderCreate).toBeDefined();
-      expect(typeof cardOrdersApi.cardOrderCreate).toEqual("function");
+      expect(cardOrdersApi.create).toBeDefined();
+      expect(typeof cardOrdersApi.create).toEqual("function");
 
-      expect(cardOrdersApi.cardOrdersRetrieve).toBeDefined();
-      expect(typeof cardOrdersApi.cardOrdersRetrieve).toEqual("function");
+      expect(cardOrdersApi.get).toBeDefined();
+      expect(typeof cardOrdersApi.get).toEqual("function");
     });
 
     it("creates and retrieves card orders associated with a card", async () => {
       const cardOrdersApi = new CardOrdersApi(config);
       const dummyCardId = dummyCard.id || "nope";
 
-      const retrievedCardOrders = await cardOrdersApi.cardOrdersRetrieve(
+      const retrievedCardOrders = await cardOrdersApi.get(
         dummyCardId
       );
       expect(retrievedCardOrders).toBeDefined();

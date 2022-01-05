@@ -17,7 +17,7 @@ import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'ax
 import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, valueToString } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
@@ -44,7 +44,7 @@ export const PostcardsApiAxiosParamCreator = function (configuration?: Configura
     return {
         /**
          * Creates a new postcard given information
-         * @summary Create
+         * @summary create
          * @param {PostcardEditable} postcardEditable 
          * @param {string} [idempotencyKey] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
          * @param {string} [idempotencyKey2] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
@@ -94,7 +94,7 @@ export const PostcardsApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * Completely removes a postcard from production. This can only be done if the postcard has a `send_date` and the `send_date` has not yet passed. If the postcard is successfully canceled, you will not be charged for it. Read more on [cancellation windows](#section/Cancellation-Windows) and [scheduling](#section/Scheduled-Mailings). Scheduling and cancellation is a premium feature. Upgrade to the appropriate [Print & Mail Edition](https://dashboard.lob.com/#/settings/editions) to gain access.
-         * @summary Cancel
+         * @summary cancel
          * @param {string} pscId id of the postcard
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -132,7 +132,7 @@ export const PostcardsApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * Retrieves the details of an existing postcard. You need only supply the unique customer identifier that was returned upon postcard creation.
-         * @summary Retrieve
+         * @summary get
          * @param {string} pscId id of the postcard
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -170,11 +170,11 @@ export const PostcardsApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * Returns a list of your postcards. The addresses are returned sorted by creation date, with the most recently created addresses appearing first.
-         * @summary List
+         * @summary list
          * @param {number} [limit] How many results to return.
          * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
          * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
-         * @param {{ [key: string]: string; }} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
+         * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
          * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
          * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
          * @param {PostcardSize} [size] Specifies the size of the postcard. Only &#x60;4x6&#x60; postcards can be sent to international destinations.
@@ -185,7 +185,7 @@ export const PostcardsApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postcardsList: async (limit?: number, before?: string, after?: string, include?: { [key: string]: string; }, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, size?: PostcardSize, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postcardsList: async (limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, size?: PostcardSize, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/postcards`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -214,20 +214,20 @@ export const PostcardsApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['after'] = after;
             }
 
-            if (include !== undefined) {
-                localVarQueryParameter['include'] = include;
+            if (include) {
+                localVarQueryParameter['include'] = valueToString(include);
             }
 
             if (dateCreated !== undefined) {
-                localVarQueryParameter['date_created'] = dateCreated;
+                localVarQueryParameter['date_created'] = valueToString(dateCreated);
             }
 
             if (metadata !== undefined) {
-                localVarQueryParameter['metadata'] = metadata;
+                localVarQueryParameter['metadata'] = valueToString(metadata);
             }
 
             if (size !== undefined) {
-                localVarQueryParameter['size'] = size;
+                localVarQueryParameter['size'] = valueToString(size);
             }
 
             if (scheduled !== undefined) {
@@ -235,15 +235,15 @@ export const PostcardsApiAxiosParamCreator = function (configuration?: Configura
             }
 
             if (sendDate !== undefined) {
-                localVarQueryParameter['send_date'] = sendDate;
+                localVarQueryParameter['send_date'] = valueToString(sendDate);
             }
 
             if (mailType !== undefined) {
-                localVarQueryParameter['mail_type'] = mailType;
+                localVarQueryParameter['mail_type'] = valueToString(mailType);
             }
 
             if (sortBy !== undefined) {
-                localVarQueryParameter['sort_by'] = sortBy;
+                localVarQueryParameter['sort_by'] = valueToString(sortBy);
             }
 
 
@@ -269,7 +269,7 @@ export const PostcardsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Creates a new postcard given information
-         * @summary Create
+         * @summary create
          * @param {PostcardEditable} postcardEditable 
          * @param {string} [idempotencyKey] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
          * @param {string} [idempotencyKey2] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
@@ -282,7 +282,7 @@ export const PostcardsApiFp = function(configuration?: Configuration) {
         },
         /**
          * Completely removes a postcard from production. This can only be done if the postcard has a `send_date` and the `send_date` has not yet passed. If the postcard is successfully canceled, you will not be charged for it. Read more on [cancellation windows](#section/Cancellation-Windows) and [scheduling](#section/Scheduled-Mailings). Scheduling and cancellation is a premium feature. Upgrade to the appropriate [Print & Mail Edition](https://dashboard.lob.com/#/settings/editions) to gain access.
-         * @summary Cancel
+         * @summary cancel
          * @param {string} pscId id of the postcard
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -293,7 +293,7 @@ export const PostcardsApiFp = function(configuration?: Configuration) {
         },
         /**
          * Retrieves the details of an existing postcard. You need only supply the unique customer identifier that was returned upon postcard creation.
-         * @summary Retrieve
+         * @summary get
          * @param {string} pscId id of the postcard
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -304,11 +304,11 @@ export const PostcardsApiFp = function(configuration?: Configuration) {
         },
         /**
          * Returns a list of your postcards. The addresses are returned sorted by creation date, with the most recently created addresses appearing first.
-         * @summary List
+         * @summary list
          * @param {number} [limit] How many results to return.
          * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
          * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
-         * @param {{ [key: string]: string; }} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
+         * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
          * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
          * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
          * @param {PostcardSize} [size] Specifies the size of the postcard. Only &#x60;4x6&#x60; postcards can be sent to international destinations.
@@ -319,7 +319,7 @@ export const PostcardsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postcardsList(limit?: number, before?: string, after?: string, include?: { [key: string]: string; }, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, size?: PostcardSize, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PostcardList>> {
+        async postcardsList(limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, size?: PostcardSize, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PostcardList>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.postcardsList(limit, before, after, include, dateCreated, metadata, size, scheduled, sendDate, mailType, sortBy, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -335,7 +335,7 @@ export const PostcardsApiFp = function(configuration?: Configuration) {
 export class PostcardsApi extends BaseAPI {
     /**
      * Creates a new postcard given information
-     * @summary Create
+     * @summary create
      * @param {PostcardEditable} postcardEditable 
      * @param {string} [idempotencyKey] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
      * @param {string} [idempotencyKey2] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
@@ -343,7 +343,7 @@ export class PostcardsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PostcardsApi
      */
-    public postcardCreate(postcardEditable: PostcardEditable, idempotencyKey?: string, idempotencyKey2?: string, options?: AxiosRequestConfig) {
+    public create(postcardEditable: PostcardEditable, idempotencyKey?: string, idempotencyKey2?: string, options?: AxiosRequestConfig) {
         return PostcardsApiFp(this.configuration).postcardCreate(postcardEditable, idempotencyKey, idempotencyKey2, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
@@ -354,13 +354,13 @@ export class PostcardsApi extends BaseAPI {
 
     /**
      * Completely removes a postcard from production. This can only be done if the postcard has a `send_date` and the `send_date` has not yet passed. If the postcard is successfully canceled, you will not be charged for it. Read more on [cancellation windows](#section/Cancellation-Windows) and [scheduling](#section/Scheduled-Mailings). Scheduling and cancellation is a premium feature. Upgrade to the appropriate [Print & Mail Edition](https://dashboard.lob.com/#/settings/editions) to gain access.
-     * @summary Cancel
+     * @summary cancel
      * @param {string} pscId id of the postcard
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PostcardsApi
      */
-    public postcardDelete(pscId: string, options?: AxiosRequestConfig) {
+    public cancel(pscId: string, options?: AxiosRequestConfig) {
         return PostcardsApiFp(this.configuration).postcardDelete(pscId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
@@ -371,13 +371,13 @@ export class PostcardsApi extends BaseAPI {
 
     /**
      * Retrieves the details of an existing postcard. You need only supply the unique customer identifier that was returned upon postcard creation.
-     * @summary Retrieve
+     * @summary get
      * @param {string} pscId id of the postcard
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PostcardsApi
      */
-    public postcardRetrieve(pscId: string, options?: AxiosRequestConfig) {
+    public get(pscId: string, options?: AxiosRequestConfig) {
         return PostcardsApiFp(this.configuration).postcardRetrieve(pscId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
@@ -388,11 +388,11 @@ export class PostcardsApi extends BaseAPI {
 
     /**
      * Returns a list of your postcards. The addresses are returned sorted by creation date, with the most recently created addresses appearing first.
-     * @summary List
+     * @summary list
      * @param {number} [limit] How many results to return.
      * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
      * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
-     * @param {{ [key: string]: string; }} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
+     * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
      * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
      * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
      * @param {PostcardSize} [size] Specifies the size of the postcard. Only &#x60;4x6&#x60; postcards can be sent to international destinations.
@@ -404,7 +404,7 @@ export class PostcardsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PostcardsApi
      */
-    public postcardsList(limit?: number, before?: string, after?: string, include?: { [key: string]: string; }, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, size?: PostcardSize, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options?: AxiosRequestConfig) {
+    public list(limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, size?: PostcardSize, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options?: AxiosRequestConfig) {
         return PostcardsApiFp(this.configuration).postcardsList(limit, before, after, include, dateCreated, metadata, size, scheduled, sendDate, mailType, sortBy, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;

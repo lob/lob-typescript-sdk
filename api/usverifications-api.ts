@@ -17,7 +17,7 @@ import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'ax
 import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, valueToString } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
@@ -34,7 +34,7 @@ export const USVerificationsApiAxiosParamCreator = function (configuration?: Con
     return {
         /**
          * Verify a US or US territory address _with a live API key_. The address can be in components (e.g. `primary_line` is \"210 King Street\", `zip_code` is \"94107\") or as a single string (e.g. \"210 King Street 94107\"), but not as both. Requests using a test API key validate required fields but return empty values unless specific `primary_line` values are provided. See the [US Verifications Test Environment](#section/US-Verifications-Test-Env) for details.
-         * @summary Single Verify
+         * @summary verifySingle
          * @param {UsVerificationsWritable} usVerificationsWritable 
          * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively. Only affects &#x60;recipient&#x60;, &#x60;primary_line&#x60;, &#x60;secondary_line&#x60;, &#x60;urbanization&#x60;, and &#x60;last_line&#x60;. Default casing is &#x60;upper&#x60;.
          * @param {*} [options] Override http request option.
@@ -89,7 +89,7 @@ export const USVerificationsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Verify a US or US territory address _with a live API key_. The address can be in components (e.g. `primary_line` is \"210 King Street\", `zip_code` is \"94107\") or as a single string (e.g. \"210 King Street 94107\"), but not as both. Requests using a test API key validate required fields but return empty values unless specific `primary_line` values are provided. See the [US Verifications Test Environment](#section/US-Verifications-Test-Env) for details.
-         * @summary Single Verify
+         * @summary verifySingle
          * @param {UsVerificationsWritable} usVerificationsWritable 
          * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively. Only affects &#x60;recipient&#x60;, &#x60;primary_line&#x60;, &#x60;secondary_line&#x60;, &#x60;urbanization&#x60;, and &#x60;last_line&#x60;. Default casing is &#x60;upper&#x60;.
          * @param {*} [options] Override http request option.
@@ -111,14 +111,14 @@ export const USVerificationsApiFp = function(configuration?: Configuration) {
 export class USVerificationsApi extends BaseAPI {
     /**
      * Verify a US or US territory address _with a live API key_. The address can be in components (e.g. `primary_line` is \"210 King Street\", `zip_code` is \"94107\") or as a single string (e.g. \"210 King Street 94107\"), but not as both. Requests using a test API key validate required fields but return empty values unless specific `primary_line` values are provided. See the [US Verifications Test Environment](#section/US-Verifications-Test-Env) for details.
-     * @summary Single Verify
+     * @summary verifySingle
      * @param {UsVerificationsWritable} usVerificationsWritable 
      * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively. Only affects &#x60;recipient&#x60;, &#x60;primary_line&#x60;, &#x60;secondary_line&#x60;, &#x60;urbanization&#x60;, and &#x60;last_line&#x60;. Default casing is &#x60;upper&#x60;.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof USVerificationsApi
      */
-    public usVerification(usVerificationsWritable: UsVerificationsWritable, _case?: 'upper' | 'proper', options?: AxiosRequestConfig) {
+    public verifySingle(usVerificationsWritable: UsVerificationsWritable, _case?: 'upper' | 'proper', options?: AxiosRequestConfig) {
         return USVerificationsApiFp(this.configuration).usVerification(usVerificationsWritable, _case, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;

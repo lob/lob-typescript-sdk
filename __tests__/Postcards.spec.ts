@@ -47,28 +47,28 @@ describe("postcardsApi", () => {
 
   describe("performs single-Postcard operations", () => {
     it("all individual Postcard functions exists", () => {
-      expect(postcardsApi.postcardCreate).toBeDefined();
-      expect(typeof postcardsApi.postcardCreate).toEqual("function");
+      expect(postcardsApi.create).toBeDefined();
+      expect(typeof postcardsApi.create).toEqual("function");
 
-      expect(postcardsApi.postcardRetrieve).toBeDefined();
-      expect(typeof postcardsApi.postcardRetrieve).toEqual("function");
+      expect(postcardsApi.get).toBeDefined();
+      expect(typeof postcardsApi.get).toEqual("function");
 
-      expect(postcardsApi.postcardsList).toBeDefined();
-      expect(typeof postcardsApi.postcardsList).toEqual("function");
+      expect(postcardsApi.list).toBeDefined();
+      expect(typeof postcardsApi.list).toEqual("function");
 
-      expect(postcardsApi.postcardDelete).toBeDefined();
-      expect(typeof postcardsApi.postcardDelete).toEqual("function");
+      expect(postcardsApi.cancel).toBeDefined();
+      expect(typeof postcardsApi.cancel).toEqual("function");
     });
 
     it("creates, retrieves, and deletes a postcard", async () => {
-      const postcard = await postcardsApi.postcardCreate(dummyPostcard);
+      const postcard = await postcardsApi.create(dummyPostcard);
       expect(postcard?.id).toBeDefined();
       if (postcard?.id) {
-        const retrievedPostcard = await postcardsApi.postcardRetrieve(
+        const retrievedPostcard = await postcardsApi.get(
             postcard.id
         );
         expect(retrievedPostcard).toBeDefined();
-        const deletedPostcard = await postcardsApi.postcardDelete(postcard.id);
+        const deletedPostcard = await postcardsApi.cancel(postcard.id);
         expect(deletedPostcard?.deleted).toBeTruthy();
       } else {
         throw new Error("postcard ID should be defined upon creation");
@@ -148,16 +148,16 @@ describe("postcardsApi", () => {
             "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
           back: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
       };
-      const c1 = await postcardsApi.postcardCreate(postcard1);
-      const c2 = await postcardsApi.postcardCreate(postcard2);
-      const c3 = await postcardsApi.postcardCreate(postcard3);
+      const c1 = await postcardsApi.create(postcard1);
+      const c2 = await postcardsApi.create(postcard2);
+      const c3 = await postcardsApi.create(postcard3);
 
-      const response = await postcardsApi.postcardsList();
+      const response = await postcardsApi.list();
       if (response && response.next_url) {
         nextUrl = response.next_url.slice(
           response.next_url.lastIndexOf("after=") + 6
         );
-        const responseAfter = await postcardsApi.postcardsList(10, undefined, nextUrl);
+        const responseAfter = await postcardsApi.list(10, undefined, nextUrl);
         if (responseAfter && responseAfter.previous_url) {
           previousUrl = responseAfter.previous_url.slice(
             responseAfter.previous_url.lastIndexOf("before=") + 7
@@ -171,26 +171,26 @@ describe("postcardsApi", () => {
     });
 
     it("exists", () => {
-      expect(postcardsApi.postcardsList).toBeDefined();
-      expect(typeof postcardsApi.postcardsList).toEqual("function");
+      expect(postcardsApi.list).toBeDefined();
+      expect(typeof postcardsApi.list).toEqual("function");
     });
 
     it("lists postcards", async () => {
-      const response = await postcardsApi.postcardsList();
+      const response = await postcardsApi.list();
       expect(response?.data).toBeDefined();
       postcardList = response?.data || [];
       expect(postcardList.length).toBeGreaterThan(0);
     });
 
     it("lists cards given an after param", async () => {
-      const responseAfter = await postcardsApi.postcardsList(10, undefined, nextUrl);
+      const responseAfter = await postcardsApi.list(10, undefined, nextUrl);
       expect(responseAfter?.data).toBeDefined();
       const postcardList2: Postcard[] = responseAfter?.data || [];
       expect(postcardList2.length).toBeGreaterThan(0);
     });
 
     it("lists cards given a before param", async () => {
-      const responseBefore = await postcardsApi.postcardsList(10, previousUrl);
+      const responseBefore = await postcardsApi.list(10, previousUrl);
       expect(responseBefore?.data).toBeDefined();
       const postcardList3: Postcard[] = responseBefore?.data || [];
       expect(postcardList3.length).toBeGreaterThan(0);

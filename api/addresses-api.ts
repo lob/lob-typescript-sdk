@@ -17,7 +17,7 @@ import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'ax
 import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, valueToString } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
@@ -38,14 +38,14 @@ export const AddressesApiAxiosParamCreator = function (configuration?: Configura
     return {
         /**
          * Creates a new address given information
-         * @summary Create
+         * @summary create
          * @param {AddressEditable} addressEditable 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createAddress: async (addressEditable: AddressEditable, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        addressCreate: async (addressEditable: AddressEditable, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'addressEditable' is not null or undefined
-            assertParamExists('createAddress', 'addressEditable', addressEditable)
+            assertParamExists('addressCreate', 'addressEditable', addressEditable)
             const localVarPath = `/addresses`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -78,14 +78,14 @@ export const AddressesApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * Deletes the details of an existing address. You need only supply the unique identifier that was returned upon address creation.
-         * @summary Delete
+         * @summary delete
          * @param {string} adrId id of the address
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteAddress: async (adrId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        addressDelete: async (adrId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'adrId' is not null or undefined
-            assertParamExists('deleteAddress', 'adrId', adrId)
+            assertParamExists('addressDelete', 'adrId', adrId)
             const localVarPath = `/addresses/{adr_id}`
                 .replace(`{${"adr_id"}}`, encodeURIComponent(String(adrId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -116,14 +116,14 @@ export const AddressesApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * Retrieves the details of an existing address. You need only supply the unique identifier that was returned upon address creation.
-         * @summary Retrieve
+         * @summary get
          * @param {string} adrId id of the address
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAddress: async (adrId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        addressRetrieve: async (adrId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'adrId' is not null or undefined
-            assertParamExists('getAddress', 'adrId', adrId)
+            assertParamExists('addressRetrieve', 'adrId', adrId)
             const localVarPath = `/addresses/{adr_id}`
                 .replace(`{${"adr_id"}}`, encodeURIComponent(String(adrId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -154,17 +154,17 @@ export const AddressesApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * Returns a list of your addresses. The addresses are returned sorted by creation date, with the most recently created addresses appearing first.
-         * @summary List
+         * @summary list
          * @param {number} [limit] How many results to return.
          * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
          * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
-         * @param {{ [key: string]: string; }} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
+         * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
          * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
          * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listAddresses: async (limit?: number, before?: string, after?: string, include?: { [key: string]: string; }, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        addressesList: async (limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/addresses`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -193,16 +193,16 @@ export const AddressesApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['after'] = after;
             }
 
-            if (include !== undefined) {
-                localVarQueryParameter['include'] = include;
+            if (include) {
+                localVarQueryParameter['include'] = valueToString(include);
             }
 
             if (dateCreated !== undefined) {
-                localVarQueryParameter['date_created'] = dateCreated;
+                localVarQueryParameter['date_created'] = valueToString(dateCreated);
             }
 
             if (metadata !== undefined) {
-                localVarQueryParameter['metadata'] = metadata;
+                localVarQueryParameter['metadata'] = valueToString(metadata);
             }
 
 
@@ -228,51 +228,51 @@ export const AddressesApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Creates a new address given information
-         * @summary Create
+         * @summary create
          * @param {AddressEditable} addressEditable 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createAddress(addressEditable: AddressEditable, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Address>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createAddress(addressEditable, options);
+        async addressCreate(addressEditable: AddressEditable, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Address>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addressCreate(addressEditable, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Deletes the details of an existing address. You need only supply the unique identifier that was returned upon address creation.
-         * @summary Delete
+         * @summary delete
          * @param {string} adrId id of the address
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteAddress(adrId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AddressDeletion>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAddress(adrId, options);
+        async addressDelete(adrId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AddressDeletion>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addressDelete(adrId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Retrieves the details of an existing address. You need only supply the unique identifier that was returned upon address creation.
-         * @summary Retrieve
+         * @summary get
          * @param {string} adrId id of the address
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAddress(adrId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Address>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAddress(adrId, options);
+        async addressRetrieve(adrId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Address>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addressRetrieve(adrId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Returns a list of your addresses. The addresses are returned sorted by creation date, with the most recently created addresses appearing first.
-         * @summary List
+         * @summary list
          * @param {number} [limit] How many results to return.
          * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
          * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
-         * @param {{ [key: string]: string; }} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
+         * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
          * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
          * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listAddresses(limit?: number, before?: string, after?: string, include?: { [key: string]: string; }, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AddressList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listAddresses(limit, before, after, include, dateCreated, metadata, options);
+        async addressesList(limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AddressList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addressesList(limit, before, after, include, dateCreated, metadata, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -287,14 +287,14 @@ export const AddressesApiFp = function(configuration?: Configuration) {
 export class AddressesApi extends BaseAPI {
     /**
      * Creates a new address given information
-     * @summary Create
+     * @summary create
      * @param {AddressEditable} addressEditable 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AddressesApi
      */
-    public createAddress(addressEditable: AddressEditable, options?: AxiosRequestConfig) {
-        return AddressesApiFp(this.configuration).createAddress(addressEditable, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
+    public create(addressEditable: AddressEditable, options?: AxiosRequestConfig) {
+        return AddressesApiFp(this.configuration).addressCreate(addressEditable, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
             }
@@ -304,14 +304,14 @@ export class AddressesApi extends BaseAPI {
 
     /**
      * Deletes the details of an existing address. You need only supply the unique identifier that was returned upon address creation.
-     * @summary Delete
+     * @summary delete
      * @param {string} adrId id of the address
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AddressesApi
      */
-    public deleteAddress(adrId: string, options?: AxiosRequestConfig) {
-        return AddressesApiFp(this.configuration).deleteAddress(adrId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
+    public delete(adrId: string, options?: AxiosRequestConfig) {
+        return AddressesApiFp(this.configuration).addressDelete(adrId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
             }
@@ -321,14 +321,14 @@ export class AddressesApi extends BaseAPI {
 
     /**
      * Retrieves the details of an existing address. You need only supply the unique identifier that was returned upon address creation.
-     * @summary Retrieve
+     * @summary get
      * @param {string} adrId id of the address
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AddressesApi
      */
-    public getAddress(adrId: string, options?: AxiosRequestConfig) {
-        return AddressesApiFp(this.configuration).getAddress(adrId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
+    public get(adrId: string, options?: AxiosRequestConfig) {
+        return AddressesApiFp(this.configuration).addressRetrieve(adrId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
             }
@@ -338,19 +338,19 @@ export class AddressesApi extends BaseAPI {
 
     /**
      * Returns a list of your addresses. The addresses are returned sorted by creation date, with the most recently created addresses appearing first.
-     * @summary List
+     * @summary list
      * @param {number} [limit] How many results to return.
      * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
      * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
-     * @param {{ [key: string]: string; }} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
+     * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
      * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
      * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AddressesApi
      */
-    public listAddresses(limit?: number, before?: string, after?: string, include?: { [key: string]: string; }, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, options?: AxiosRequestConfig) {
-        return AddressesApiFp(this.configuration).listAddresses(limit, before, after, include, dateCreated, metadata, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
+    public list(limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, options?: AxiosRequestConfig) {
+        return AddressesApiFp(this.configuration).addressesList(limit, before, after, include, dateCreated, metadata, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
             }
