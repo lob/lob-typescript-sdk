@@ -177,7 +177,7 @@ describe("AddressApi", () => {
     });
 
     it("lists addresses given an include param", async () => {
-      const response = await new AddressesApi(config).listAddresses(
+      const response = await new AddressesApi(config).list(
           10,
           undefined,
           undefined,

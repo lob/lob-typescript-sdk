@@ -59,7 +59,7 @@ describe("BillingGroupsApi", () => {
     });
   });
 
-  describe("list billing groups", () => {
+  describe.skip("list billing groups", () => {
     let createdBillingGroups: BillingGroup[] = [];
 
     beforeAll(async () => {
