@@ -21,6 +21,7 @@ export * from './api/card-orders-api';
 export * from './api/cards-api';
 export * from './api/letters-api';
 export * from './api/postcards-api';
+export * from './api/usautocompletions-api';
 export * from './api/usverifications-api';
 
 
