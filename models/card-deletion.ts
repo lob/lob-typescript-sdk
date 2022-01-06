@@ -19,13 +19,20 @@
  * @export
  * @interface CardDeletion
  */
-export interface CardDeletion {
+export class CardDeletion {
     /**
      * Unique identifier prefixed with `card_`.
      * @type {string}
      * @memberof CardDeletion
      */
-    'id'?: string;
+    private '_id'?: string;
+    public get id() { return (this._id || undefined) as string; }
+    public set id(newValue: string) {
+        if(newValue && !/^card_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid id provided");
+        }
+        this._id = newValue;
+    }
     /**
      * Only returned if the resource has been successfully deleted.
      * @type {boolean}

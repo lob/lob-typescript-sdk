@@ -19,7 +19,7 @@
  * @export
  * @interface AddressDomestic
  */
-export interface AddressDomestic {
+export class AddressDomestic {
     /**
      * The building number, street name, street suffix, and any street directionals. For US addresses, the max length is 64 characters.
      * @type {string}
@@ -85,7 +85,14 @@ export interface AddressDomestic {
      * @type {string}
      * @memberof AddressDomestic
      */
-    'address_country'?: string;
+    private '_address_country'?: string;
+    public get address_country() { return (this._address_country || undefined) as string; }
+    public set address_country(newValue: string) {
+        if(newValue && !/US/.test(newValue)) {
+            throw new Error("Invalid address_country provided");
+        }
+        this._address_country = newValue;
+    }
     /**
      * Use metadata to store custom information for tagging and labeling back to your internal systems. Must be an object with up to 20 key-value pairs. Keys must be at most 40 characters and values must be at most 500 characters. Neither can contain the characters `\"` and `\\`. i.e. \'{\"customer_id\" : \"NEWYORK2015\"}\' Nested objects are not supported.  See [Metadata](#section/Metadata) for more information.
      * @type {{ [key: string]: string; }}

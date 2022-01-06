@@ -20,7 +20,7 @@ import { BankTypeEnum } from './bank-type-enum';
  * @export
  * @interface BankAccountWritable
  */
-export interface BankAccountWritable {
+export class BankAccountWritable {
     /**
      * An internal description that identifies this resource. Must be no longer than 255 characters. 
      * @type {string}

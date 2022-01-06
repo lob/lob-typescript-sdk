@@ -19,7 +19,7 @@
  * @export
  * @interface LobConfidenceScore
  */
-export interface LobConfidenceScore {
+export class LobConfidenceScore {
     /**
      * A numerical score between 0 and 100 that represents the percentage of mailpieces Lob has sent to this addresses that have been delivered successfully over the past 2 years. Will be `null` if no tracking data exists for this address. 
      * @type {number}

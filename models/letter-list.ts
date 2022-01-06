@@ -20,7 +20,7 @@ import { Letter } from './letter';
  * @export
  * @interface LetterList
  */
-export interface LetterList {
+export class LetterList {
     /**
      * list of letters
      * @type {Array<Letter>}

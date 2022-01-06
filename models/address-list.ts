@@ -20,7 +20,7 @@ import { Address } from './address';
  * @export
  * @interface AddressList
  */
-export interface AddressList {
+export class AddressList {
     /**
      * list of addresses
      * @type {Array<Address>}

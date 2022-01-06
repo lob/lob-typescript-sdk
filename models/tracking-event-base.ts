@@ -19,13 +19,20 @@
  * @export
  * @interface TrackingEventBase
  */
-export interface TrackingEventBase {
+export class TrackingEventBase {
     /**
      * Unique identifier prefixed with `evnt_`.
      * @type {string}
      * @memberof TrackingEventBase
      */
-    'id': string;
+    private '_id': string;
+    public get id() { return this._id || ""; }
+    public set id(newValue: string) {
+        if(newValue && !/^evnt_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid id provided");
+        }
+        this._id = newValue;
+    }
     /**
      * A timestamp in ISO 8601 format of the date USPS registered the event.
      * @type {string}

@@ -19,7 +19,7 @@
  * @export
  * @interface LetterCustomEnvelope
  */
-export interface LetterCustomEnvelope {
+export class LetterCustomEnvelope {
     /**
      * The unique identifier of the custom envelope used.
      * @type {string}

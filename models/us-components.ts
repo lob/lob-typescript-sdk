@@ -20,7 +20,7 @@ import { ZipCodeType } from './zip-code-type';
  * @export
  * @interface UsComponents
  */
-export interface UsComponents {
+export class UsComponents {
     /**
      * The numeric or alphanumeric part of an address preceding the street name. Often the house, building, or PO Box number.
      * @type {string}
@@ -104,13 +104,27 @@ export interface UsComponents {
      * @type {string}
      * @memberof UsComponents
      */
-    'zip_code'?: string;
+    private '_zip_code'?: string;
+    public get zip_code() { return (this._zip_code || undefined) as string; }
+    public set zip_code(newValue: string) {
+        if(newValue && !/^\d{5}$/.test(newValue)) {
+            throw new Error("Invalid zip_code provided");
+        }
+        this._zip_code = newValue;
+    }
     /**
      * 
      * @type {string}
      * @memberof UsComponents
      */
-    'zip_code_plus_4'?: string;
+    private '_zip_code_plus_4'?: string;
+    public get zip_code_plus_4() { return (this._zip_code_plus_4 || undefined) as string; }
+    public set zip_code_plus_4(newValue: string) {
+        if(newValue && !/^\d{4}$/.test(newValue)) {
+            throw new Error("Invalid zip_code_plus_4 provided");
+        }
+        this._zip_code_plus_4 = newValue;
+    }
     /**
      * 
      * @type {ZipCodeType}
@@ -152,7 +166,14 @@ export interface UsComponents {
      * @type {string}
      * @memberof UsComponents
      */
-    'county_fips'?: string;
+    private '_county_fips'?: string;
+    public get county_fips() { return (this._county_fips || undefined) as string; }
+    public set county_fips(newValue: string) {
+        if(newValue && !/\d{5}/.test(newValue)) {
+            throw new Error("Invalid county_fips provided");
+        }
+        this._county_fips = newValue;
+    }
     /**
      * A 4-character code assigned to a mail delivery route within a ZIP code. 
      * @type {string}

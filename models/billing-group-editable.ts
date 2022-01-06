@@ -19,7 +19,7 @@
  * @export
  * @interface BillingGroupEditable
  */
-export interface BillingGroupEditable {
+export class BillingGroupEditable {
     /**
      * Description of the billing group.
      * @type {string}

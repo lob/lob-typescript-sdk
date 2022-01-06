@@ -20,7 +20,7 @@ import { CountryExtended } from './country-extended';
  * @export
  * @interface AddressEditable
  */
-export interface AddressEditable {
+export class AddressEditable {
     /**
      * The building number, street name, street suffix, and any street directionals. For US addresses, the max length is 64 characters.
      * @type {string}

@@ -20,7 +20,7 @@ import { CardOrder } from './card-order';
  * @export
  * @interface InlineResponse200
  */
-export interface InlineResponse200 {
+export class InlineResponse200 {
     /**
      * List of card orders
      * @type {Array<CardOrder>}

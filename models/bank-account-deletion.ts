@@ -19,13 +19,20 @@
  * @export
  * @interface BankAccountDeletion
  */
-export interface BankAccountDeletion {
+export class BankAccountDeletion {
     /**
      * Unique identifier prefixed with `bank_`.
      * @type {string}
      * @memberof BankAccountDeletion
      */
-    'id'?: string;
+    private '_id'?: string;
+    public get id() { return (this._id || undefined) as string; }
+    public set id(newValue: string) {
+        if(newValue && !/^bank_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid id provided");
+        }
+        this._id = newValue;
+    }
     /**
      * Only returned if the resource has been successfully deleted.
      * @type {boolean}

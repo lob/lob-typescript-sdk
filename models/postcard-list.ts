@@ -20,7 +20,7 @@ import { Postcard } from './postcard';
  * @export
  * @interface PostcardList
  */
-export interface PostcardList {
+export class PostcardList {
     /**
      * list of postcards
      * @type {Array<Postcard>}

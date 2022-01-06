@@ -20,7 +20,7 @@ import { BankAccount } from './bank-account';
  * @export
  * @interface BankAccountList
  */
-export interface BankAccountList {
+export class BankAccountList {
     /**
      * list of addresses
      * @type {Array<BankAccount>}

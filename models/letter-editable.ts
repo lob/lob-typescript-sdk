@@ -22,7 +22,7 @@ import { MailType } from './mail-type';
  * @export
  * @interface LetterEditable
  */
-export interface LetterEditable {
+export class LetterEditable {
     /**
      * 
      * @type {MailType}

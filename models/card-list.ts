@@ -20,7 +20,7 @@ import { Card } from './card';
  * @export
  * @interface CardList
  */
-export interface CardList {
+export class CardList {
     /**
      * list of cards
      * @type {Array<Card>}

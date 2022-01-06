@@ -19,7 +19,7 @@
  * @export
  * @interface BillingGroup
  */
-export interface BillingGroup {
+export class BillingGroup {
     /**
      * Description of the billing group.
      * @type {string}
@@ -37,7 +37,14 @@ export interface BillingGroup {
      * @type {string}
      * @memberof BillingGroup
      */
-    'id'?: string;
+    private '_id'?: string;
+    public get id() { return (this._id || undefined) as string; }
+    public set id(newValue: string) {
+        if(newValue && !/^bg_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid id provided");
+        }
+        this._id = newValue;
+    }
     /**
      * A timestamp in ISO 8601 format of the date the resource was created.
      * @type {string}

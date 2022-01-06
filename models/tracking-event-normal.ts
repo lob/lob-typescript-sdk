@@ -19,7 +19,7 @@
  * @export
  * @interface TrackingEventNormal
  */
-export interface TrackingEventNormal {
+export class TrackingEventNormal {
     /**
      * non-Certified postcards, self mailers, letters, and checks
      * @type {string}
@@ -49,7 +49,14 @@ export interface TrackingEventNormal {
      * @type {string}
      * @memberof TrackingEventNormal
      */
-    'id'?: string;
+    private '_id'?: string;
+    public get id() { return (this._id || undefined) as string; }
+    public set id(newValue: string) {
+        if(newValue && !/^evnt_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid id provided");
+        }
+        this._id = newValue;
+    }
     /**
      * A timestamp in ISO 8601 format of the date USPS registered the event.
      * @type {string}

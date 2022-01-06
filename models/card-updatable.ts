@@ -19,7 +19,7 @@
  * @export
  * @interface CardUpdatable
  */
-export interface CardUpdatable {
+export class CardUpdatable {
     /**
      * Description of the card.
      * @type {string}
