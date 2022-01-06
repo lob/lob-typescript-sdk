@@ -1,18 +1,12 @@
 import { Configuration } from "../configuration";
 
-import {
-  Card,
-  CardEditable,
-  CardEditableSizeEnum,
-  CardOrder
-} from "../models";
 import { CardsApi, CardOrdersApi } from "../api";
 import { CardOrderEditable } from "..";
 
+import {fail} from "./testUtilities";
+
+// Axios Mock
 import axios from "axios";
-
-import {debugLog, fail} from "./testUtilities";
-
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
 
 jest.mock("axios", () => ({

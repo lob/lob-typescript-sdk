@@ -3,12 +3,11 @@ import {Configuration} from "../configuration";
 import {BankAccountVerify, BankAccountWritable, BankTypeEnum} from "../models";
 import {BankAccountsApi} from "../api/bank-accounts-api";
 
+import { fail} from "./testUtilities";
+
+// Axios Mock
 import axios from "axios";
-
-import {debugLog, fail} from "./testUtilities";
-
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
-
 jest.mock("axios", () => ({
     request: jest.fn(),
 }));
@@ -419,13 +418,9 @@ describe("BankAccountsApi", () => {
             expect(response?.data?.length).toEqual(2);
         });
 
-        it.skip("lists bankAccounts with an include parameter", async () => {
-            // ToDo: https://lobsters.atlassian.net/browse/DXP-607
-            //  currently is resulting in "'https://api.lob.com/v1/bankAccount?include=%5Bobject+Object%5D'"
-            // This is wrong
+        it("lists bankAccounts with an include parameter", async () => {
             axiosRequest.mockImplementationOnce(async (request) => {
-                console.log(request);
-                expect(request.url.split("?")[1]).toEqual("after=after");
+                expect(request.url.split("?")[1]).toEqual("include=%5B%22this%22%5D");
                 return {
                     data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
                 }
@@ -442,10 +437,11 @@ describe("BankAccountsApi", () => {
             expect(response?.data?.length).toEqual(2);
         });
 
-        it.skip("lists bankAccounts with a dateCreated parameter", async () => {
-            // ToDo: https://lobsters.atlassian.net/browse/DXP-607
+        it("lists bankAccounts with a dateCreated parameter", async () => {
             axiosRequest.mockImplementationOnce(async (request) => {
-                expect(request.url.split("?")[1]).toEqual("after=after");
+                expect(request.url.split("?")[1]).toEqual(
+                    "date_created=%7B%22gt%22%3A%222012-01-01%22%2C%22lt%22%3A%222012-01-31T12%3A34%3A56Z%22%7D"
+                );
                 return {
                     data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
                 }
@@ -456,17 +452,16 @@ describe("BankAccountsApi", () => {
                 undefined,
                 undefined,
                 undefined,
-                { what: 'this' }
+                { gt: '2012-01-01', lt: '2012-01-31T12:34:56Z' }
             );
             expect(response).toBeDefined();
             expect(response?.data).toBeDefined();
             expect(response?.data?.length).toEqual(2);
         });
 
-        it.skip("lists bankAccounts with a metadata parameter", async () => {
-            // ToDo: https://lobsters.atlassian.net/browse/DXP-607
+        it("lists bankAccounts with a metadata parameter", async () => {
             axiosRequest.mockImplementationOnce(async (request) => {
-                expect(request.url.split("?")[1]).toEqual("after=after");
+                expect(request.url.split("?")[1]).toEqual("metadata=%7B%22what%22%3A%22this%22%7D");
                 return {
                     data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
                 }
