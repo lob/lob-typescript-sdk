@@ -3,7 +3,7 @@ import { Configuration } from "../configuration";
 import {
   BillingGroupEditable
 } from "../models";
-import {AddressesApi, BillingGroupsApi} from "../api";
+import {BillingGroupsApi} from "../api";
 
 import axios from "axios";
 
@@ -316,67 +316,6 @@ describe("BillingGroupsApi", () => {
       }
     });
   });
-  
-  describe("update", () => {
-    const bgUpdatable = {
-      description: "billing group updated"
-    };
-
-    it("exists", async () => {
-      const billingGroupsApi = new BillingGroupsApi(config);
-      expect(billingGroupsApi.update).toBeDefined();
-      expect(typeof billingGroupsApi.update).toEqual("function");
-    });
-
-    it("updates billing group for a billing group id", async () => {
-        axiosRequest.mockImplementationOnce(async () => ({
-            data: { id: "fake billing group id" }
-        }));
-
-        const billing_groups = await new BillingGroupsApi(config).update("fake id", bgUpdatable);
-        expect(billing_groups).toBeDefined();
-        expect(billing_groups?.id).toEqual("fake billing group id");
-    });
-
-    it("includes custom headers while it updates a billing group for a billing group id", async () => {
-        axiosRequest.mockImplementationOnce(async () => ({
-            data: { id: "fake billing group id" }
-        }));
-
-        const billing_groups = await new BillingGroupsApi(configWithBaseOptions).update("fake id", bgUpdatable);
-        expect(billing_groups).toBeDefined();
-        expect(billing_groups?.id).toEqual("fake billing group id");
-    });
-
-    it("handles errors returned by the api", async () => {
-      axiosRequest.mockImplementationOnce(async () => {
-        throw {
-          message: "error",
-          response: { data: { error: { message: "error reported by API" } }}
-        };
-      });
-
-      try {
-        await new BillingGroupsApi(configWithBaseOptions).update("fake id", bgUpdatable);
-        fail("Should throw");
-      } catch (err: any) {
-        expect(err.message).toEqual("error reported by API");
-      }
-    });
-
-    it("handles errors in making the request", async () => {
-      axiosRequest.mockImplementationOnce(async () => {
-        throw new Error("Unknown Error");
-      });
-
-      try {
-        await new BillingGroupsApi(configWithBaseOptions).update("fake id", bgUpdatable);
-        fail("Should throw");
-      } catch (err: any) {
-        expect(err.message).toEqual("Unknown Error");
-      }
-    });
-  });
 
   describe("list", () => {
     it("exists", async () => {
@@ -405,32 +344,78 @@ describe("BillingGroupsApi", () => {
       expect(bgApi?.data?.length).toEqual(1);
     });
 
-    it("should handle before pagination", async () => {
-      axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [ { id: "fake billing group id" } ] }
-      }));
+    it("lists billing groups with an include parameter", async () => {
+      axiosRequest.mockImplementationOnce(async (request) => {
+        expect(request.url.split("?")[1]).toEqual("include=%5B%22this%22%5D");
+        return {
+          data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
+        }
+      });
 
-      const bgApi = await new BillingGroupsApi(config).list(1, 0, ["fake"]);
+      const response = await new BillingGroupsApi(config).list(
+          undefined,
+          undefined,
+          ["this" ]
+      );
+      expect(response).toBeDefined();
+      expect(response?.data).toBeDefined();
+      expect(response?.data?.length).toEqual(2);
+    });
+
+    it("should handle the offset correctly", async () => {
+      axiosRequest.mockImplementationOnce(async (request) => {
+        expect(request.url.split("?")[1]).toEqual("offset=1");
+        return {
+          data: {data: [{id: "fake billing group id"}]}
+        };
+      });
+
+      const bgApi = await new BillingGroupsApi(config).list(undefined, 1);
       expect(bgApi).toBeDefined();
       expect(bgApi?.data?.length).toEqual(1);
     });
 
-    it("should handle the after pagination", async () => {
-      axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [ { id: "fake billing group id" } ] }
-      }));
+    it("should handle the dateCreated correctly", async () => {
+      axiosRequest.mockImplementationOnce(async (request) => {
+        expect(request.url.split("?")[1]).toEqual(
+            "date_created=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
+        );
+        return {
+          data: {data: [{id: "fake billing group id"}]}
+        };
+      });
 
-      const bgApi = await new BillingGroupsApi(config).list(1, 0, ["fake"]);
+      const dateFilter = { gt: '2020-01-01', lt: '2020-01-31T12' };
+      const bgApi = await new BillingGroupsApi(config).list(undefined, undefined, undefined, dateFilter);
+      expect(bgApi).toBeDefined();
+      expect(bgApi?.data?.length).toEqual(1);
+    });
+
+    it("should handle the dateModified correctly", async () => {
+      axiosRequest.mockImplementationOnce(async (request) => {
+        expect(request.url.split("?")[1]).toEqual(
+            "date_modified=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
+        );
+        return {
+          data: {data: [{id: "fake billing group id"}]}
+        };
+      });
+
+      const dateFilter = { gt: '2020-01-01', lt: '2020-01-31T12' };
+      const bgApi = await new BillingGroupsApi(config).list(undefined, undefined, undefined, undefined, dateFilter);
       expect(bgApi).toBeDefined();
       expect(bgApi?.data?.length).toEqual(1);
     });
 
     it("should handle the sortBy correctly", async () => {
-      axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [ { id: "fake billing group id" } ] }
-      }));
+      axiosRequest.mockImplementationOnce(async (request) => {
+        expect(request.url.split("?")[1]).toEqual("sort_by=%7B%22id%22%3A%22asc%22%7D");
+        return {
+          data: {data: [{id: "fake billing group id"}]}
+        };
+      });
 
-      const bgApi = await new BillingGroupsApi(config).list(1, 0, ["fake"], { id: "asc" } );
+      const bgApi = await new BillingGroupsApi(config).list(undefined, undefined, undefined, undefined,  undefined, { id: "asc" });
       expect(bgApi).toBeDefined();
       expect(bgApi?.data?.length).toEqual(1);
     });

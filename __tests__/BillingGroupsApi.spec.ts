@@ -59,13 +59,14 @@ describe("BillingGroupsApi", () => {
     });
   });
 
-  describe.skip("list billing groups", () => {
+  describe("list billing groups", () => {
     let createdBillingGroups: BillingGroup[] = [];
 
     beforeAll(async () => {
       // ensure there are at least 3 billing groups present, to test pagination
       const bg1: BillingGroupEditable = {
-        description: "Billing Group 1"
+        description: "Billing Group 1",
+        name: "TestBillingGroup1"
       };
       const bg2: BillingGroupEditable = Object.assign({}, bg1, { description: "Billing Group 2", name: "TestBillingGroup2" });
       const bg3: BillingGroupEditable = Object.assign({}, bg1, { description: "Billing Group 3", name: "TestBillingGroup2" });
@@ -95,37 +96,6 @@ describe("BillingGroupsApi", () => {
       expect(response?.data).toBeDefined();
       const bgList = response?.data || [];
       expect(bgList.length).toBeGreaterThan(0);
-    });
-
-    it.skip("lists billing groups given before or after params", async () => {
-      // ToDo:
-      // list responses should map the before and after tokens for the consumer
-      const response = await new BillingGroupsApi(config).list();
-      expect(response.next_url).toBeDefined();
-      const after: string = (response as { next_url: string }).next_url.slice(
-          (response as { next_url: string }).next_url.lastIndexOf("after=")
-      ).split("=")[1];
-
-    //   const responseAfter = await new BillingGroupsApi(config).list(10, 0, undefined, after);
-    const responseAfter = await new BillingGroupsApi(config).list(10, 0, undefined, undefined);
-      expect(responseAfter?.data).toBeDefined();
-      expect(responseAfter.previous_url).toBeDefined();
-      expect(responseAfter.previous_url).not.toBeNull();
-
-      const firstPage: BillingGroup[] = responseAfter?.data || [];
-      expect(firstPage.length).toBeGreaterThan(0);
-
-      expect(responseAfter.previous_url).toBeDefined();
-      expect(responseAfter.previous_url).not.toBeNull();
-      const before: string = (responseAfter as { previous_url: string }).previous_url.slice(
-          (responseAfter as { previous_url: string }).previous_url.lastIndexOf("before=")
-      ).split("=")[1];
-
-      const responseBefore = await new BillingGroupsApi(config).list(10, 0, undefined);
-    //   const responseBefore = await new BillingGroupsApi(config).list(10, 0, before);
-      expect(responseBefore?.data).toBeDefined();
-      const previousPage: BillingGroup[] = responseBefore?.data || [];
-      expect(previousPage.length).toBeGreaterThan(0);
     });
   });
 });
