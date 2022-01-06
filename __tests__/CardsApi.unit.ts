@@ -4,14 +4,13 @@ import {
   CardEditable,
   CardEditableSizeEnum
 } from "../models";
-import {AddressesApi, CardsApi} from "../api";
-
-import axios from "axios";
+import {CardsApi} from "../api";
 
 import { fail } from "./testUtilities";
 
+// Axios Mock
+import axios from "axios";
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
-
 jest.mock("axios", () => ({
   request: jest.fn(),
 }));

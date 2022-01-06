@@ -11,7 +11,8 @@ import {
     setSearchParams,
     serializeDataIfNeeded,
     toPathString,
-    createRequestFunction
+    createRequestFunction,
+    valueToString
 } from "../common";
 
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
@@ -389,5 +390,32 @@ describe("createRequestFunction", () => {
         const result = await res() as { response: string };
         expect(axiosRequest).toHaveBeenCalledTimes(1);
         expect(result.response).toEqual("value");
+    });
+});
+
+describe("valueToString", () => {
+    it("exists", () => {
+        expect(valueToString).toBeDefined();
+        expect(typeof valueToString).toEqual('function');
+    });
+
+    it("converts a simple array", () => {
+        const result = valueToString(["test"]);
+        expect(result).toEqual("[\"test\"]");
+    });
+
+    it("converts a complex array", () => {
+        const result = valueToString([{ test: "value" }]);
+        expect(result).toEqual("[{\"test\":\"value\"}]");
+    });
+
+    it("converts an object", () => {
+        const result = valueToString({ test: "value" });
+        expect(result).toEqual("{\"test\":\"value\"}");
+    });
+
+    it("converts a function", () => {
+        const result = valueToString(()=> 1);
+        expect(result).toEqual("function () { return 1; }");
     });
 });

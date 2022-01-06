@@ -150,6 +150,7 @@ describe("AddressApi", () => {
     it("lists addresses", async () => {
       const response = await new AddressesApi(config).list() as AddressList;
       expect(response).toBeDefined();
+      expect(response.count).toBeDefined();
       expect(response?.data).toBeDefined();
       addressList = response?.data || [];
       expect(addressList.length).toBeGreaterThan(0);
@@ -166,12 +167,27 @@ describe("AddressApi", () => {
       const addressList2: Address[] = responseAfter?.data || [];
       expect(addressList2.length).toBeGreaterThan(0);
     });
+
     it("lists addresses given a before param", async () => {
       const responseBefore = await new AddressesApi(config).list(10, previousUrl);
       expect(responseBefore).toBeDefined();
       expect(responseBefore?.data).toBeDefined();
       const addressList3: Address[] = responseBefore?.data || [];
       expect(addressList3.length).toBeGreaterThan(0);
+    });
+
+    it("lists addresses given an include param", async () => {
+      const response = await new AddressesApi(config).listAddresses(
+          10,
+          undefined,
+          undefined,
+          ["total_es"]
+      );
+      expect(response).toBeDefined();
+      expect(response?.data).toBeDefined();
+      expect(response.count).toBeDefined();
+      const addressList2: Address[] = response?.data || [];
+      expect(addressList2.length).toBeGreaterThan(0);
     });
   });
 
