@@ -1,10 +1,9 @@
 import { Configuration } from "../configuration";
 
 import {
-  CardEditable,
-  CardEditableSizeEnum
+  BillingGroupEditable
 } from "../models";
-import {AddressesApi, CardsApi} from "../api";
+import {AddressesApi, BillingGroupsApi} from "../api";
 
 import axios from "axios";
 
@@ -16,7 +15,7 @@ jest.mock("axios", () => ({
   request: jest.fn(),
 }));
 
-describe("CardsApi", () => {
+describe("BillingGroupsApi", () => {
   const config: Configuration = new Configuration({
     username: "Totally Fake Key",
   });
@@ -29,45 +28,42 @@ describe("CardsApi", () => {
     }
   });
 
-  it("Card API can be instantiated", () => {
-    const cardsApi = new CardsApi(config);
-    expect(cardsApi).toBeDefined();
-    expect(typeof cardsApi).toEqual("object");
-    expect(cardsApi).toBeInstanceOf(CardsApi);
+  it("Billing Groups API can be instantiated", () => {
+    const bgApi = new BillingGroupsApi(config);
+    expect(bgApi).toBeDefined();
+    expect(typeof bgApi).toEqual("object");
+    expect(bgApi).toBeInstanceOf(BillingGroupsApi);
   });
 
   describe("create", () => {
-    const cardEditableMock: CardEditable = {
-      front: 'fake front',
-      back: 'fake back',
-      size: CardEditableSizeEnum._2125x3375,
-      description: 'fake description'
+    const bgEditableMock: BillingGroupEditable = {
+      description: 'fake billing group description'
     };
 
     it("exists", async () => {
-      const cardsApi = new CardsApi(config);
-      expect(cardsApi.create).toBeDefined();
-      expect(typeof cardsApi.create).toEqual("function");
+      const bgApi = new BillingGroupsApi(config);
+      expect(bgApi.create).toBeDefined();
+      expect(typeof bgApi.create).toEqual("function");
     });
 
-    it("creates a card", async () => {
+    it("creates a billing group", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake card id" }
+        data: { id: "fake billing group id" }
       }));
 
-      const card = await new CardsApi(config).create(cardEditableMock);
-      expect(card).toBeDefined();
-      expect(card.id).toEqual("fake card id");
+      const bg_product = await new BillingGroupsApi(config).create(bgEditableMock);
+      expect(bg_product).toBeDefined();
+      expect(bg_product.id).toEqual("fake billing group id");
     });
 
-    it("includes custom headers while it creates a card", async () => {
+    it("includes custom headers while it creates a billing group", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake card id" }
+        data: { id: "fake billing group id" }
       }));
 
-      const cardsApi = await new CardsApi(configWithBaseOptions).create(cardEditableMock);
-      expect(cardsApi).toBeDefined();
-      expect(cardsApi?.id).toEqual("fake card id");
+      const bgApi = await new BillingGroupsApi(configWithBaseOptions).create(bgEditableMock);
+      expect(bgApi).toBeDefined();
+      expect(bgApi?.id).toEqual("fake billing group id");
     });
 
     it("handles errors returned by the api", async () => {
@@ -77,12 +73,12 @@ describe("CardsApi", () => {
           response: { data: { error: { message: "error reported by API" } }}
         };
       });
-      const cardUpdatable = {
-        description: "card updated"
+      const bgUpdatable = {
+        description: "billing group updated"
       };
 
       try {
-        await new CardsApi(configWithBaseOptions).create(cardEditableMock);
+        await new BillingGroupsApi(configWithBaseOptions).create(bgEditableMock);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -98,7 +94,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).create(cardEditableMock);
+        await new BillingGroupsApi(configWithBaseOptions).create(bgEditableMock);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -114,7 +110,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).create(cardEditableMock);
+        await new BillingGroupsApi(configWithBaseOptions).create(bgEditableMock);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -125,12 +121,12 @@ describe("CardsApi", () => {
       axiosRequest.mockImplementationOnce(async () => {
         throw new Error("Unknown Error");
       });
-      const cardUpdatable = {
-        description: "card updated"
+      const bgUpdatable = {
+        description: "billing group updated"
       };
 
       try {
-        await new CardsApi(configWithBaseOptions).create(cardEditableMock);
+        await new BillingGroupsApi(configWithBaseOptions).create(bgEditableMock);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -140,30 +136,30 @@ describe("CardsApi", () => {
 
   describe("get", () => {
     it("exists", async () => {
-      const cardsApi = new CardsApi(config);
-      expect(cardsApi.get).toBeDefined();
-      expect(typeof cardsApi.get).toEqual("function");
+      const billingGroupsApi = new BillingGroupsApi(config);
+      expect(billingGroupsApi.get).toBeDefined();
+      expect(typeof billingGroupsApi.get).toEqual("function");
     });
 
-    it("gets cards for a card id", async () => {
+    it("gets billing groups for a billing group id", async () => {
         axiosRequest.mockImplementationOnce(async () => ({
-            data: { id: "fake card id" }
+            data: { id: "fake billing group id" }
         }));
 
-        const cards = await new CardsApi(config).get("fake id");
-        expect(cards).toBeDefined();
-        expect(cards?.id).toEqual("fake card id");
+        const billing_groups = await new BillingGroupsApi(config).get("fake id");
+        expect(billing_groups).toBeDefined();
+        expect(billing_groups?.id).toEqual("fake billing group id");
     });
 
-    it("includes custom headers while it gets a card for a card id", async () => {
+    it("includes custom headers while it gets a billing group for a billing group id", async () => {
         axiosRequest.mockImplementationOnce(async () => ({
-            data: { id: "fake card id" }
+            data: { id: "fake billing group id" }
         }));
 
 
-        const cards = await new CardsApi(configWithBaseOptions).get("fake id");
-        expect(cards).toBeDefined();
-        expect(cards?.id).toEqual("fake card id");
+        const billing_groups = await new BillingGroupsApi(configWithBaseOptions).get("fake id");
+        expect(billing_groups).toBeDefined();
+        expect(billing_groups?.id).toEqual("fake billing group id");
     });
 
     it("handles errors returned by the api", async () => {
@@ -175,7 +171,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).get("fake id");
+        await new BillingGroupsApi(configWithBaseOptions).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -191,7 +187,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(config).get("fake id");
+        await new BillingGroupsApi(config).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -207,7 +203,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(config).get("fake id");
+        await new BillingGroupsApi(config).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -220,97 +216,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).get("fake id");
-        fail("Should throw");
-      } catch (err: any) {
-        expect(err.message).toEqual("Unknown Error");
-      }
-    });
-  });
-
-  describe("delete", () => {
-    it("exists", async () => {
-      const cardsApi = new CardsApi(config);
-      expect(cardsApi.delete).toBeDefined();
-      expect(typeof cardsApi.delete).toEqual("function");
-    });
-
-    it("deletes card for a card id", async () => {
-        axiosRequest.mockImplementationOnce(async () => ({
-            data: { id: "fake card id" }
-        }));
-
-        const cards = await new CardsApi(config).delete("fake id");
-        expect(cards).toBeDefined();
-        expect(cards?.id).toEqual("fake card id");
-    });
-
-    it("includes custom headers while it deletes a card for a card id", async () => {
-        axiosRequest.mockImplementationOnce(async () => ({
-            data: { id: "fake card id" }
-        }));
-
-
-        const cards = await new CardsApi(configWithBaseOptions).delete("fake id");
-        expect(cards).toBeDefined();
-        expect(cards?.id).toEqual("fake card id");
-    });
-
-    it("handles errors returned by the api", async () => {
-      axiosRequest.mockImplementationOnce(async () => {
-        throw {
-          message: "error",
-          response: { data: { error: { message: "error reported by API" } }}
-        };
-      });
-
-      try {
-        await new CardsApi(configWithBaseOptions).delete("fake id");
-        fail("Should throw");
-      } catch (err: any) {
-        expect(err.message).toEqual("error reported by API");
-      }
-    });
-
-    it("handles errors returned by the api with missing response.data", async () => {
-      axiosRequest.mockImplementationOnce(async () => {
-        throw {
-          message: "error",
-          response: {}
-        };
-      });
-
-      try {
-        await new CardsApi(config).delete("fake id");
-        fail("Should throw");
-      } catch (err: any) {
-        expect(err.message).toEqual("error");
-      }
-    });
-
-    it("handles errors returned by the api with missing response.data.error", async () => {
-      axiosRequest.mockImplementationOnce(async () => {
-        throw {
-          message: "error",
-          response: { data: {}}
-        };
-      });
-
-      try {
-        await new CardsApi(config).delete("fake id");
-        fail("Should throw");
-      } catch (err: any) {
-        expect(err.message).toEqual("error");
-      }
-    });
-
-    it("handles errors in making the request", async () => {
-      axiosRequest.mockImplementationOnce(async () => {
-        throw new Error("Unknown Error");
-      });
-
-      try {
-        await new CardsApi(configWithBaseOptions).delete("fake id");
+        await new BillingGroupsApi(configWithBaseOptions).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -319,34 +225,34 @@ describe("CardsApi", () => {
   });
 
   describe("update", () => {
-    const cardUpdatable = {
-      description: "card updated"
+    const bgUpdatable = {
+      description: "billing group updated"
     };
 
     it("exists", async () => {
-      const cardsApi = new CardsApi(config);
-      expect(cardsApi.update).toBeDefined();
-      expect(typeof cardsApi.update).toEqual("function");
+      const billingGroupsApi = new BillingGroupsApi(config);
+      expect(billingGroupsApi.update).toBeDefined();
+      expect(typeof billingGroupsApi.update).toEqual("function");
     });
 
-    it("updates card for a card id", async () => {
+    it("updates billing group for a billing group id", async () => {
         axiosRequest.mockImplementationOnce(async () => ({
-            data: { id: "fake card id" }
+            data: { id: "fake billing group id" }
         }));
 
-        const cards = await new CardsApi(config).update("fake id", cardUpdatable);
-        expect(cards).toBeDefined();
-        expect(cards?.id).toEqual("fake card id");
+        const billing_groups = await new BillingGroupsApi(config).update("fake id", bgUpdatable);
+        expect(billing_groups).toBeDefined();
+        expect(billing_groups?.id).toEqual("fake billing group id");
     });
 
-    it("includes custom headers while it updates a card for a card id", async () => {
+    it("includes custom headers while it updates a billing group for a billing group id", async () => {
         axiosRequest.mockImplementationOnce(async () => ({
-            data: { id: "fake card id" }
+            data: { id: "fake billing group id" }
         }));
 
-        const cards = await new CardsApi(configWithBaseOptions).update("fake id", cardUpdatable);
-        expect(cards).toBeDefined();
-        expect(cards?.id).toEqual("fake card id");
+        const billing_groups = await new BillingGroupsApi(configWithBaseOptions).update("fake id", bgUpdatable);
+        expect(billing_groups).toBeDefined();
+        expect(billing_groups?.id).toEqual("fake billing group id");
     });
 
     it("handles errors returned by the api", async () => {
@@ -358,7 +264,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).update("fake id", cardUpdatable);
+        await new BillingGroupsApi(configWithBaseOptions).update("fake id", bgUpdatable);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -374,7 +280,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(config).update("fake id", cardUpdatable);
+        await new BillingGroupsApi(config).update("fake id", bgUpdatable);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -390,7 +296,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(config).update("fake id", cardUpdatable);
+        await new BillingGroupsApi(config).update("fake id", bgUpdatable);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -403,7 +309,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).update("fake id", cardUpdatable);
+        await new BillingGroupsApi(configWithBaseOptions).update("fake id", bgUpdatable);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -412,34 +318,34 @@ describe("CardsApi", () => {
   });
   
   describe("update", () => {
-    const cardUpdatable = {
-      description: "card updated"
+    const bgUpdatable = {
+      description: "billing group updated"
     };
 
     it("exists", async () => {
-      const cardsApi = new CardsApi(config);
-      expect(cardsApi.update).toBeDefined();
-      expect(typeof cardsApi.update).toEqual("function");
+      const billingGroupsApi = new BillingGroupsApi(config);
+      expect(billingGroupsApi.update).toBeDefined();
+      expect(typeof billingGroupsApi.update).toEqual("function");
     });
 
-    it("updates card for a card id", async () => {
+    it("updates billing group for a billing group id", async () => {
         axiosRequest.mockImplementationOnce(async () => ({
-            data: { id: "fake card id" }
+            data: { id: "fake billing group id" }
         }));
 
-        const cards = await new CardsApi(config).update("fake id", cardUpdatable);
-        expect(cards).toBeDefined();
-        expect(cards?.id).toEqual("fake card id");
+        const billing_groups = await new BillingGroupsApi(config).update("fake id", bgUpdatable);
+        expect(billing_groups).toBeDefined();
+        expect(billing_groups?.id).toEqual("fake billing group id");
     });
 
-    it("includes custom headers while it updates a card for a card id", async () => {
+    it("includes custom headers while it updates a billing group for a billing group id", async () => {
         axiosRequest.mockImplementationOnce(async () => ({
-            data: { id: "fake card id" }
+            data: { id: "fake billing group id" }
         }));
 
-        const cards = await new CardsApi(configWithBaseOptions).update("fake id", cardUpdatable);
-        expect(cards).toBeDefined();
-        expect(cards?.id).toEqual("fake card id");
+        const billing_groups = await new BillingGroupsApi(configWithBaseOptions).update("fake id", bgUpdatable);
+        expect(billing_groups).toBeDefined();
+        expect(billing_groups?.id).toEqual("fake billing group id");
     });
 
     it("handles errors returned by the api", async () => {
@@ -451,7 +357,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).update("fake id", cardUpdatable);
+        await new BillingGroupsApi(configWithBaseOptions).update("fake id", bgUpdatable);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -464,7 +370,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).update("fake id", cardUpdatable);
+        await new BillingGroupsApi(configWithBaseOptions).update("fake id", bgUpdatable);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -474,59 +380,59 @@ describe("CardsApi", () => {
 
   describe("list", () => {
     it("exists", async () => {
-      const cardsApi = new CardsApi(config);
-      expect(cardsApi.list).toBeDefined();
-      expect(typeof cardsApi.list).toEqual("function");
+      const bgApi = new BillingGroupsApi(config);
+      expect(bgApi.list).toBeDefined();
+      expect(typeof bgApi.list).toEqual("function");
     });
 
-    it("gets all cards when no limit is provided", async () => {
+    it("gets all billing groups when no limit is provided", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [ { id: "fake card id" }, { id: "another fake card id" } ] }
+        data: { data: [ { id: "fake billing group id" }, { id: "another fake billing group id" } ] }
       }));
 
-      const cardsApi = await new CardsApi(config).list();
-      expect(cardsApi).toBeDefined();
-      expect(cardsApi?.data?.length).toEqual(2);
+      const bgApi = await new BillingGroupsApi(config).list();
+      expect(bgApi).toBeDefined();
+      expect(bgApi?.data?.length).toEqual(2);
     });
     
     it("should handle the limit", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [ { id: "fake card id" } ] }
+        data: { data: [ { id: "fake billing group id" } ] }
       }));
 
-      const cardsApi = await new CardsApi(config).list(1);
-      expect(cardsApi).toBeDefined();
-      expect(cardsApi?.data?.length).toEqual(1);
+      const bgApi = await new BillingGroupsApi(config).list(1);
+      expect(bgApi).toBeDefined();
+      expect(bgApi?.data?.length).toEqual(1);
     });
 
     it("should handle before pagination", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [ { id: "fake card id" } ] }
+        data: { data: [ { id: "fake billing group id" } ] }
       }));
 
-      const cardsApi = await new CardsApi(config).list(1, "fake");
-      expect(cardsApi).toBeDefined();
-      expect(cardsApi?.data?.length).toEqual(1);
+      const bgApi = await new BillingGroupsApi(config).list(1, 0, ["fake"]);
+      expect(bgApi).toBeDefined();
+      expect(bgApi?.data?.length).toEqual(1);
     });
 
     it("should handle the after pagination", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [ { id: "fake card id" } ] }
+        data: { data: [ { id: "fake billing group id" } ] }
       }));
 
-      const cardsApi = await new CardsApi(config).list(1, "fake", "id");
-      expect(cardsApi).toBeDefined();
-      expect(cardsApi?.data?.length).toEqual(1);
+      const bgApi = await new BillingGroupsApi(config).list(1, 0, ["fake"]);
+      expect(bgApi).toBeDefined();
+      expect(bgApi?.data?.length).toEqual(1);
     });
 
     it("should handle the sortBy correctly", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [ { id: "fake card id" } ] }
+        data: { data: [ { id: "fake billing group id" } ] }
       }));
 
-      const cardsApi = await new CardsApi(config).list(1, "fake", "id", { id: "asc" } );
-      expect(cardsApi).toBeDefined();
-      expect(cardsApi?.data?.length).toEqual(1);
+      const bgApi = await new BillingGroupsApi(config).list(1, 0, ["fake"], { id: "asc" } );
+      expect(bgApi).toBeDefined();
+      expect(bgApi?.data?.length).toEqual(1);
     });
 
     it("handles errors returned by the api", async () => {
@@ -538,7 +444,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).list();
+        await new BillingGroupsApi(configWithBaseOptions).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -554,7 +460,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).list();
+        await new BillingGroupsApi(configWithBaseOptions).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -570,7 +476,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).list();
+        await new BillingGroupsApi(configWithBaseOptions).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -583,7 +489,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(configWithBaseOptions).list();
+        await new BillingGroupsApi(configWithBaseOptions).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");

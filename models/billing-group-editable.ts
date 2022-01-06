@@ -14,14 +14,25 @@
 
 
 
-export * from './api/addresses-api';
-export * from './api/bank-accounts-api';
-export * from './api/billing-groups-api';
-export * from './api/card-orders-api';
-export * from './api/cards-api';
-export * from './api/letters-api';
-export * from './api/postcards-api';
-export * from './api/usverifications-api';
+/**
+ * 
+ * @export
+ * @interface BillingGroupEditable
+ */
+export interface BillingGroupEditable {
+    /**
+     * Description of the billing group.
+     * @type {string}
+     * @memberof BillingGroupEditable
+     */
+    'description'?: string;
+    /**
+     * Name of the billing group.
+     * @type {string}
+     * @memberof BillingGroupEditable
+     */
+    'name'?: string;
+}
 
 
 /**

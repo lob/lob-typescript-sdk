@@ -14,14 +14,43 @@
 
 
 
-export * from './api/addresses-api';
-export * from './api/bank-accounts-api';
-export * from './api/billing-groups-api';
-export * from './api/card-orders-api';
-export * from './api/cards-api';
-export * from './api/letters-api';
-export * from './api/postcards-api';
-export * from './api/usverifications-api';
+/**
+ * 
+ * @export
+ * @interface SortBy3
+ */
+export interface SortBy3 {
+    /**
+     * 
+     * @type {string}
+     * @memberof SortBy3
+     */
+    'date_created'?: SortBy3DateCreatedEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof SortBy3
+     */
+    'send_date'?: SortBy3SendDateEnum;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum SortBy3DateCreatedEnum {
+    Asc = 'asc',
+    Desc = 'desc'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum SortBy3SendDateEnum {
+    Asc = 'asc',
+    Desc = 'desc'
+}
+
 
 
 /**

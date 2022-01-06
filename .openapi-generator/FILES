@@ -1,6 +1,7 @@
 api.ts
 api/addresses-api.ts
 api/bank-accounts-api.ts
+api/billing-groups-api.ts
 api/card-orders-api.ts
 api/cards-api.ts
 api/letters-api.ts
@@ -22,6 +23,9 @@ models/bank-account-verify.ts
 models/bank-account-writable.ts
 models/bank-account.ts
 models/bank-type-enum.ts
+models/billing-group-editable.ts
+models/billing-group-list.ts
+models/billing-group.ts
 models/card-deletion.ts
 models/card-editable.ts
 models/card-list.ts
@@ -55,9 +59,8 @@ models/single-line-address.ts
 models/sort-by.ts
 models/sort-by1.ts
 models/sort-by2.ts
+models/sort-by3.ts
 models/thumbnail.ts
-models/tracking-event-base.ts
-models/tracking-event-normal-all-of.ts
 models/tracking-event-normal.ts
 models/us-components.ts
 models/us-verification.ts

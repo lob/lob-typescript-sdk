@@ -88,7 +88,7 @@ export interface UsVerification {
      * @type {string}
      * @memberof UsVerification
      */
-    'object'?: string;
+    'object'?: UsVerificationObjectEnum;
 }
 
 /**
@@ -101,6 +101,13 @@ export enum UsVerificationDeliverabilityEnum {
     DeliverableIncorrectUnit = 'deliverable_incorrect_unit',
     DeliverableMissingUnit = 'deliverable_missing_unit',
     Undeliverable = 'undeliverable'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum UsVerificationObjectEnum {
+    UsVerification = 'us_verification'
 }
 
 
