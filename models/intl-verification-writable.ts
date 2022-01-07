@@ -13,26 +13,16 @@
  */
 
 
+import { CountryExtended } from './country-extended';
+import { MultipleComponentsIntl } from './multiple-components-intl';
+import { SingleLineAddressIntl } from './single-line-address-intl';
 
 /**
- * 
+ * @type IntlVerificationWritable
  * @export
- * @interface BillingGroupBase
  */
-export interface BillingGroupBase {
-    /**
-     * Description of the billing group.
-     * @type {string}
-     * @memberof BillingGroupBase
-     */
-    'description'?: string;
-    /**
-     * Name of the billing group.
-     * @type {string}
-     * @memberof BillingGroupBase
-     */
-    'name'?: string;
-}
+export type IntlVerificationWritable = MultipleComponentsIntl | SingleLineAddressIntl;
+
 
 
 /**

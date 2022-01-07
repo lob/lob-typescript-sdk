@@ -15,45 +15,42 @@
 
 
 /**
- * 
+ * A nested object containing a breakdown of each component of an address.
  * @export
- * @interface BillingGroupAllOf
+ * @interface IntlComponents
  */
-export interface BillingGroupAllOf {
+export interface IntlComponents {
     /**
-     * Unique identifier prefixed with `bg_`.
+     * The numeric or alphanumeric part of an address preceding the street name. Often the house, building, or PO Box number.
      * @type {string}
-     * @memberof BillingGroupAllOf
+     * @memberof IntlComponents
      */
-    'id'?: string;
+    'primary_number'?: string;
     /**
-     * A timestamp in ISO 8601 format of the date the resource was created.
+     * The name of the street.
      * @type {string}
-     * @memberof BillingGroupAllOf
+     * @memberof IntlComponents
      */
-    'date_created'?: string;
+    'street_name'?: string;
     /**
-     * A timestamp in ISO 8601 format of the date the resource was last modified.
+     * 
      * @type {string}
-     * @memberof BillingGroupAllOf
+     * @memberof IntlComponents
      */
-    'date_modified'?: string;
+    'city'?: string;
     /**
-     * Value is resource type.
+     * The [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) two letter code for the state. 
      * @type {string}
-     * @memberof BillingGroupAllOf
+     * @memberof IntlComponents
      */
-    'object'?: BillingGroupAllOfObjectEnum;
+    'state'?: string;
+    /**
+     * The postal code.
+     * @type {string}
+     * @memberof IntlComponents
+     */
+    'postal_code'?: string;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum BillingGroupAllOfObjectEnum {
-    BillingGroup = 'billing_group'
-}
-
 
 
 /**
