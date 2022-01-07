@@ -19,7 +19,7 @@
  * @export
  * @interface Suggestions
  */
-export interface Suggestions {
+export class Suggestions {
     /**
      * The primary delivery line (usually the street address) of the address. Combination of the following applicable `components` (primary number & secondary information may be missing or inaccurate): * `primary_number` * `street_predirection` * `street_name` * `street_suffix` * `street_postdirection` * `secondary_designator` * `secondary_number` * `pmb_designator` * `pmb_number` 
      * @type {string}
@@ -43,7 +43,14 @@ export interface Suggestions {
      * @type {string}
      * @memberof Suggestions
      */
-    'zip_code'?: string;
+    private '_zip_code'?: string;
+    public get zip_code() { return (this._zip_code || undefined) as string; }
+    public set zip_code(newValue: string) {
+        if(newValue && !/^\d{5}((-)?\d{4})?$/.test(newValue)) {
+            throw new Error("Invalid zip_code provided");
+        }
+        this._zip_code = newValue;
+    }
     /**
      * Value is resource type.
      * @type {string}

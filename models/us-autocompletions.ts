@@ -20,13 +20,20 @@ import { Suggestions } from './suggestions';
  * @export
  * @interface UsAutocompletions
  */
-export interface UsAutocompletions {
+export class UsAutocompletions {
     /**
      * Unique identifier prefixed with `us_auto_`.
      * @type {string}
      * @memberof UsAutocompletions
      */
-    'id'?: string;
+    private '_id'?: string;
+    public get id() { return (this._id || undefined) as string; }
+    public set id(newValue: string) {
+        if(newValue && !/^us_auto_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid id provided");
+        }
+        this._id = newValue;
+    }
     /**
      * An array of objects representing suggested addresses. 
      * @type {Array<Suggestions>}

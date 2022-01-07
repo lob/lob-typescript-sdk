@@ -32,8 +32,8 @@ export class Postcard {
      * @type {string}
      * @memberof Postcard
      */
-    private '_id': string;
-    public get id() { return (this._id); }
+    private '_id'?: string;
+    public get id() { return (this._id || undefined) as string; }
     public set id(newValue: string) {
         if(newValue && !/^psc_[a-zA-Z0-9]+$/.test(newValue)) {
             throw new Error("Invalid id provided");
@@ -99,8 +99,8 @@ export class Postcard {
      * @type {string}
      * @memberof Postcard
      */
-    private '_front_template_id': string | null;
-    public get front_template_id() { return (this._front_template_id || null); }
+    private '_front_template_id'?: string | null;
+    public get front_template_id() { return (this._front_template_id || null || undefined) as string; }
     public set front_template_id(newValue: string | null) {
         if(newValue && !/^tmpl_[a-zA-Z0-9]+$/.test(newValue)) {
             throw new Error("Invalid front_template_id provided");
@@ -112,8 +112,8 @@ export class Postcard {
      * @type {string}
      * @memberof Postcard
      */
-    private '_back_template_id': string | null;
-    public get back_template_id() { return (this._back_template_id || null); }
+    private '_back_template_id'?: string | null;
+    public get back_template_id() { return (this._back_template_id || null || undefined) as string; }
     public set back_template_id(newValue: string | null) {
         if(newValue && !/^tmpl_[a-zA-Z0-9]+$/.test(newValue)) {
             throw new Error("Invalid back_template_id provided");
@@ -125,8 +125,8 @@ export class Postcard {
      * @type {string}
      * @memberof Postcard
      */
-    private '_front_template_version_id': string | null;
-    public get front_template_version_id() { return (this._front_template_version_id || null); }
+    private '_front_template_version_id'?: string | null;
+    public get front_template_version_id() { return (this._front_template_version_id || null || undefined) as string; }
     public set front_template_version_id(newValue: string | null) {
         if(newValue && !/^vrsn_[a-zA-Z0-9]+$/.test(newValue)) {
             throw new Error("Invalid front_template_version_id provided");
@@ -138,8 +138,8 @@ export class Postcard {
      * @type {string}
      * @memberof Postcard
      */
-    private '_back_template_version_id': string | null;
-    public get back_template_version_id() { return (this._back_template_version_id || null); }
+    private '_back_template_version_id'?: string | null;
+    public get back_template_version_id() { return (this._back_template_version_id || null || undefined) as string; }
     public set back_template_version_id(newValue: string | null) {
         if(newValue && !/^vrsn_[a-zA-Z0-9]+$/.test(newValue)) {
             throw new Error("Invalid back_template_version_id provided");
@@ -163,8 +163,8 @@ export class Postcard {
      * @type {string}
      * @memberof Postcard
      */
-    private '_url': string;
-    public get url() { return (this._url); }
+    private '_url'?: string;
+    public get url() { return (this._url || undefined) as string; }
     public set url(newValue: string) {
         if(newValue && !/^https:\/\/lob-assets\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\.pdf|_thumb_[a-z]+_[0-9]+\.png)\?(version&#x3D;[a-z0-9-]*&amp;)?expires&#x3D;[0-9]{10}&amp;signature&#x3D;[a-zA-Z0-9-_]+$/.test(newValue)) {
             throw new Error("Invalid url provided");

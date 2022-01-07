@@ -19,7 +19,7 @@
  * @export
  * @interface UsAutocompletionsWritable
  */
-export interface UsAutocompletionsWritable {
+export class UsAutocompletionsWritable {
     /**
      * Only accepts numbers and street names in an alphanumeric format. 
      * @type {string}
