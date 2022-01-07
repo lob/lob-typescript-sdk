@@ -8,11 +8,18 @@ describe("UsVerificationApi", () => {
     username: process.env.LOB_API_KEY,
   });
 
-  const verifySingle: IntlVerificationWritable = {
+  const multiLine: IntlVerificationWritable = {
     primary_line: "370 WATER ST",
     postal_code: "94107",
     country: CountryExtended.Ca
   };
+
+  const singleLine: IntlVerificationWritable = {
+    address: "370 WATER ST C1N 1C4",
+    country: CountryExtended.Ca
+  };
+
+  // 370 Water St C1N 1C4
 
   it("US Verifications API can be instantiated", () => {
     const intlvApi = new IntlVerificationsApi(config);
@@ -30,7 +37,12 @@ describe("UsVerificationApi", () => {
 
     it("verifies a single international address", async () => {
       const intlvApi = new IntlVerificationsApi(config);
-      const response = await intlvApi.verifySingle(verifySingle);
+      const response = await intlvApi.verifySingle(multiLine);
+    });
+
+    it("verifies a single-line international address", async () => {
+      const intlvApi = new IntlVerificationsApi(config);
+      const response = await intlvApi.verifySingle(singleLine);
     });
   });
 });
