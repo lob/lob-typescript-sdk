@@ -3,7 +3,7 @@ import { Configuration } from "../configuration";
 import { UsAutocompletionsWritable } from "../models";
 import { USAutocompletionsApi } from "../api";
 
-describe("USAutocompletionsApi", () => {
+describe.skip("USAutocompletionsApi", () => {
   const config: Configuration = new Configuration({
     username: process.env.LOB_LIVE_API_KEY,
   });
