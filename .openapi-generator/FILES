@@ -6,6 +6,7 @@ api/card-orders-api.ts
 api/cards-api.ts
 api/letters-api.ts
 api/postcards-api.ts
+api/usautocompletions-api.ts
 api/usverifications-api.ts
 base.ts
 common.ts
@@ -45,7 +46,6 @@ models/letter-editable.ts
 models/letter-list.ts
 models/letter.ts
 models/lob-confidence-score.ts
-models/lob-error.ts
 models/mail-type.ts
 models/multiple-components.ts
 models/postcard-deletion.ts
@@ -60,8 +60,11 @@ models/sort-by.ts
 models/sort-by1.ts
 models/sort-by2.ts
 models/sort-by3.ts
+models/suggestions.ts
 models/thumbnail.ts
 models/tracking-event-normal.ts
+models/us-autocompletions-writable.ts
+models/us-autocompletions.ts
 models/us-components.ts
 models/us-verification.ts
 models/us-verifications-writable.ts

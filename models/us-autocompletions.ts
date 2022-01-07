@@ -13,20 +13,42 @@
  */
 
 
+import { Suggestions } from './suggestions';
 
 /**
  * 
  * @export
- * @interface BankAccountVerify
+ * @interface UsAutocompletions
  */
-export interface BankAccountVerify {
+export interface UsAutocompletions {
     /**
-     * In live mode, an array containing the two micro deposits (in cents) placed in the bank account. In test mode, no micro deposits will be placed, so any two integers between `1` and `100` will work.
-     * @type {Array<number>}
-     * @memberof BankAccountVerify
+     * Unique identifier prefixed with `us_auto_`.
+     * @type {string}
+     * @memberof UsAutocompletions
      */
-    'amounts'?: Array<number>;
+    'id'?: string;
+    /**
+     * An array of objects representing suggested addresses. 
+     * @type {Array<Suggestions>}
+     * @memberof UsAutocompletions
+     */
+    'suggestions'?: Array<Suggestions>;
+    /**
+     * Value is resource type.
+     * @type {string}
+     * @memberof UsAutocompletions
+     */
+    'object'?: UsAutocompletionsObjectEnum;
 }
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum UsAutocompletionsObjectEnum {
+    UsAutocompletion = 'us_autocompletion'
+}
+
 
 
 /**

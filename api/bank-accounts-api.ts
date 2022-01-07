@@ -30,8 +30,6 @@ import { BankAccountList } from '../models';
 import { BankAccountVerify } from '../models';
 // @ts-ignore
 import { BankAccountWritable } from '../models';
-// @ts-ignore
-import { LobError } from '../models';
 /**
  * BankAccountsApi - axios parameter creator
  * @export

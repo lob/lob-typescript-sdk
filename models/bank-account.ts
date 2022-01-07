@@ -61,7 +61,7 @@ export interface BankAccount {
      * @type {string}
      * @memberof BankAccount
      */
-    'id': string;
+    'id'?: string;
     /**
      * A signed link to the signature image. will be generated.
      * @type {string}

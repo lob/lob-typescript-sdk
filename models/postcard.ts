@@ -32,7 +32,7 @@ export interface Postcard {
      * @type {string}
      * @memberof Postcard
      */
-    'id': string;
+    'id'?: string;
     /**
      * 
      * @type {Address}
@@ -92,25 +92,25 @@ export interface Postcard {
      * @type {string}
      * @memberof Postcard
      */
-    'front_template_id': string | null;
+    'front_template_id'?: string | null;
     /**
      * The unique ID of the HTML template used for the back of the postcard.
      * @type {string}
      * @memberof Postcard
      */
-    'back_template_id': string | null;
+    'back_template_id'?: string | null;
     /**
      * The unique ID of the specific version of the HTML template used for the front of the postcard.
      * @type {string}
      * @memberof Postcard
      */
-    'front_template_version_id': string | null;
+    'front_template_version_id'?: string | null;
     /**
      * The unique ID of the specific version of the HTML template used for the back of the postcard.
      * @type {string}
      * @memberof Postcard
      */
-    'back_template_version_id': string | null;
+    'back_template_version_id'?: string | null;
     /**
      * An array of tracking_event objects ordered by ascending `time`. Will not be populated for postcards created in test mode.
      * @type {Array<TrackingEventNormal>}
@@ -128,7 +128,7 @@ export interface Postcard {
      * @type {string}
      * @memberof Postcard
      */
-    'url': string;
+    'url'?: string;
     /**
      * An internal description that identifies this resource. Must be no longer than 255 characters. 
      * @type {string}

@@ -29,8 +29,6 @@ import { LetterEditable } from '../models';
 // @ts-ignore
 import { LetterList } from '../models';
 // @ts-ignore
-import { LobError } from '../models';
-// @ts-ignore
 import { MailType } from '../models';
 // @ts-ignore
 import { SendDate } from '../models';
