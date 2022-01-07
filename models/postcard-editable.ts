@@ -30,7 +30,7 @@ export class PostcardEditable {
      * @type {string | AddressEditable}
      * @memberof PostcardEditable
      */
-    'to': string | AddressEditable;
+    'to'?: string | AddressEditable;
     /**
      * *Required* if `to` address is international. Must either be an address ID or an inline object with correct address parameters. Must either be an address ID or an inline object with correct address parameters. All addresses will be standardized into uppercase without being modified by verification.
      * @type {string | AddressDomestic}
@@ -78,13 +78,13 @@ export class PostcardEditable {
      * @type {string}
      * @memberof PostcardEditable
      */
-    'front': string;
+    'front'?: string;
     /**
      * The artwork to use as the back of your postcard.  Notes: - HTML merge variables should not include delimiting whitespace. - PDF, PNG, and JPGs must be sized at 4.25\"x6.25\", 6.25\"x9.25\", or 6.25\"x11.25\" at 300 DPI, while supplied HTML will be rendered to the specified `size`. - Be sure to leave room for address and postage information by following the templates provided here:   - [4x6 template](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/postcards/4x6_postcard.pdf)   - [6x9 template](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/postcards/6x9_postcard.pdf)   - [6x11 template](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/postcards/6x11_postcard.pdf)   See [here](#section/HTML-Examples) for HTML examples. 
      * @type {string}
      * @memberof PostcardEditable
      */
-    'back': string;
+    'back'?: string;
     /**
      * An optional string with the billing group ID to tag your usage with. Is used for billing purposes. Requires special activation to use. See [Billing Group API](https://lob.github.io/lob-openapi/#tag/Billing-Groups) for more information.
      * @type {string}

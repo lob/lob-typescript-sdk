@@ -28,8 +28,6 @@ import { AddressDeletion } from '../models';
 import { AddressEditable } from '../models';
 // @ts-ignore
 import { AddressList } from '../models';
-// @ts-ignore
-import { LobError } from '../models';
 /**
  * AddressesApi - axios parameter creator
  * @export

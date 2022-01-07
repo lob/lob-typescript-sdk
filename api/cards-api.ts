@@ -30,8 +30,6 @@ import { CardEditable } from '../models';
 import { CardList } from '../models';
 // @ts-ignore
 import { CardUpdatable } from '../models';
-// @ts-ignore
-import { LobError } from '../models';
 /**
  * CardsApi - axios parameter creator
  * @export

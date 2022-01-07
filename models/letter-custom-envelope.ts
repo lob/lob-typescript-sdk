@@ -25,19 +25,19 @@ export class LetterCustomEnvelope {
      * @type {string}
      * @memberof LetterCustomEnvelope
      */
-    'id': string;
+    'id'?: string;
     /**
      * The url of the envelope asset used.
      * @type {string}
      * @memberof LetterCustomEnvelope
      */
-    'url': string;
+    'url'?: string;
     /**
      * 
      * @type {string}
      * @memberof LetterCustomEnvelope
      */
-    'object': LetterCustomEnvelopeObjectEnum;
+    'object'?: LetterCustomEnvelopeObjectEnum;
 }
 
 /**
