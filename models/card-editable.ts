@@ -19,7 +19,7 @@
  * @export
  * @interface CardEditable
  */
-export interface CardEditable {
+export class CardEditable {
     /**
      * A PDF template for the front of the card
      * @type {string}

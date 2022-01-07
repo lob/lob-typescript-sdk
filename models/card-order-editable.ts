@@ -19,7 +19,7 @@
  * @export
  * @interface CardOrderEditable
  */
-export interface CardOrderEditable {
+export class CardOrderEditable {
     /**
      * 
      * @type {number}

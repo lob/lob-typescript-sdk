@@ -19,7 +19,7 @@
  * @export
  * @interface MultipleComponents
  */
-export interface MultipleComponents {
+export class MultipleComponents {
     /**
      * The intended recipient, typically a person\'s or firm\'s name.
      * @type {string}
@@ -61,7 +61,14 @@ export interface MultipleComponents {
      * @type {string}
      * @memberof MultipleComponents
      */
-    'zip_code'?: string;
+    private '_zip_code'?: string;
+    public get zip_code() { return (this._zip_code || undefined) as string; }
+    public set zip_code(newValue: string) {
+        if(newValue && !/^\d{5}((-)?\d{4})?$/.test(newValue)) {
+            throw new Error("Invalid zip_code provided");
+        }
+        this._zip_code = newValue;
+    }
 }
 
 

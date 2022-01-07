@@ -19,25 +19,46 @@
  * @export
  * @interface Thumbnail
  */
-export interface Thumbnail {
+export class Thumbnail {
     /**
      * A [signed link](#section/Asset-URLs) served over HTTPS. The link returned will expire in 30 days to prevent mis-sharing. Each time a GET request is initiated, a new signed URL will be generated.
      * @type {string}
      * @memberof Thumbnail
      */
-    'small'?: string;
+    private '_small'?: string;
+    public get small() { return (this._small || undefined) as string; }
+    public set small(newValue: string) {
+        if(newValue && !/^https:\/\/lob-assets\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\.pdf|_thumb_[a-z]+_[0-9]+\.png)\?(version&#x3D;[a-z0-9-]*&amp;)?expires&#x3D;[0-9]{10}&amp;signature&#x3D;[a-zA-Z0-9-_]+$/.test(newValue)) {
+            throw new Error("Invalid small provided");
+        }
+        this._small = newValue;
+    }
     /**
      * A [signed link](#section/Asset-URLs) served over HTTPS. The link returned will expire in 30 days to prevent mis-sharing. Each time a GET request is initiated, a new signed URL will be generated.
      * @type {string}
      * @memberof Thumbnail
      */
-    'medium'?: string;
+    private '_medium'?: string;
+    public get medium() { return (this._medium || undefined) as string; }
+    public set medium(newValue: string) {
+        if(newValue && !/^https:\/\/lob-assets\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\.pdf|_thumb_[a-z]+_[0-9]+\.png)\?(version&#x3D;[a-z0-9-]*&amp;)?expires&#x3D;[0-9]{10}&amp;signature&#x3D;[a-zA-Z0-9-_]+$/.test(newValue)) {
+            throw new Error("Invalid medium provided");
+        }
+        this._medium = newValue;
+    }
     /**
      * A [signed link](#section/Asset-URLs) served over HTTPS. The link returned will expire in 30 days to prevent mis-sharing. Each time a GET request is initiated, a new signed URL will be generated.
      * @type {string}
      * @memberof Thumbnail
      */
-    'large'?: string;
+    private '_large'?: string;
+    public get large() { return (this._large || undefined) as string; }
+    public set large(newValue: string) {
+        if(newValue && !/^https:\/\/lob-assets\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\.pdf|_thumb_[a-z]+_[0-9]+\.png)\?(version&#x3D;[a-z0-9-]*&amp;)?expires&#x3D;[0-9]{10}&amp;signature&#x3D;[a-zA-Z0-9-_]+$/.test(newValue)) {
+            throw new Error("Invalid large provided");
+        }
+        this._large = newValue;
+    }
 }
 
 

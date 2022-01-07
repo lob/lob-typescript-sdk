@@ -19,13 +19,20 @@
  * @export
  * @interface LetterDeletion
  */
-export interface LetterDeletion {
+export class LetterDeletion {
     /**
      * Unique identifier prefixed with `ltr_`.
      * @type {string}
      * @memberof LetterDeletion
      */
-    'id'?: string;
+    private '_id'?: string;
+    public get id() { return (this._id || undefined) as string; }
+    public set id(newValue: string) {
+        if(newValue && !/^ltr_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid id provided");
+        }
+        this._id = newValue;
+    }
     /**
      * Only returned if the resource has been successfully deleted.
      * @type {boolean}

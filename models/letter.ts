@@ -26,7 +26,7 @@ import { TrackingEventNormal } from './tracking-event-normal';
  * @export
  * @interface Letter
  */
-export interface Letter {
+export class Letter {
     /**
      * 
      * @type {Address}
@@ -80,19 +80,40 @@ export interface Letter {
      * @type {string}
      * @memberof Letter
      */
-    'id'?: string;
+    private '_id'?: string;
+    public get id() { return (this._id || undefined) as string; }
+    public set id(newValue: string) {
+        if(newValue && !/^ltr_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid id provided");
+        }
+        this._id = newValue;
+    }
     /**
      * Unique identifier prefixed with `tmpl_`. ID of a saved [HTML template](#section/HTML-Templates).
      * @type {string}
      * @memberof Letter
      */
-    'template_id'?: string;
+    private '_template_id'?: string;
+    public get template_id() { return (this._template_id || undefined) as string; }
+    public set template_id(newValue: string) {
+        if(newValue && !/^tmpl_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid template_id provided");
+        }
+        this._template_id = newValue;
+    }
     /**
      * Unique identifier prefixed with `vrsn_`.
      * @type {string}
      * @memberof Letter
      */
-    'template_version_id'?: string;
+    private '_template_version_id'?: string;
+    public get template_version_id() { return (this._template_version_id || undefined) as string; }
+    public set template_version_id(newValue: string) {
+        if(newValue && !/^vrsn_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid template_version_id provided");
+        }
+        this._template_version_id = newValue;
+    }
     /**
      * 
      * @type {string}

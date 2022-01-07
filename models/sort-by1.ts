@@ -19,7 +19,7 @@
  * @export
  * @interface SortBy1
  */
-export interface SortBy1 {
+export class SortBy1 {
     /**
      * 
      * @type {string}

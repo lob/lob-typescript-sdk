@@ -19,7 +19,7 @@
  * @export
  * @interface LobError
  */
-export interface LobError {
+export class LobError {
     /**
      * A human-readable message with more details about the error
      * @type {string}

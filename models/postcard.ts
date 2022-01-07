@@ -26,13 +26,20 @@ import { TrackingEventNormal } from './tracking-event-normal';
  * @export
  * @interface Postcard
  */
-export interface Postcard {
+export class Postcard {
     /**
      * Unique identifier prefixed with `psc_`.
      * @type {string}
      * @memberof Postcard
      */
-    'id'?: string;
+    private '_id': string;
+    public get id() { return (this._id); }
+    public set id(newValue: string) {
+        if(newValue && !/^psc_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid id provided");
+        }
+        this._id = newValue;
+    }
     /**
      * 
      * @type {Address}
@@ -92,25 +99,53 @@ export interface Postcard {
      * @type {string}
      * @memberof Postcard
      */
-    'front_template_id'?: string | null;
+    private '_front_template_id': string | null;
+    public get front_template_id() { return (this._front_template_id || null); }
+    public set front_template_id(newValue: string | null) {
+        if(newValue && !/^tmpl_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid front_template_id provided");
+        }
+        this._front_template_id = newValue;
+    }
     /**
      * The unique ID of the HTML template used for the back of the postcard.
      * @type {string}
      * @memberof Postcard
      */
-    'back_template_id'?: string | null;
+    private '_back_template_id': string | null;
+    public get back_template_id() { return (this._back_template_id || null); }
+    public set back_template_id(newValue: string | null) {
+        if(newValue && !/^tmpl_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid back_template_id provided");
+        }
+        this._back_template_id = newValue;
+    }
     /**
      * The unique ID of the specific version of the HTML template used for the front of the postcard.
      * @type {string}
      * @memberof Postcard
      */
-    'front_template_version_id'?: string | null;
+    private '_front_template_version_id': string | null;
+    public get front_template_version_id() { return (this._front_template_version_id || null); }
+    public set front_template_version_id(newValue: string | null) {
+        if(newValue && !/^vrsn_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid front_template_version_id provided");
+        }
+        this._front_template_version_id = newValue;
+    }
     /**
      * The unique ID of the specific version of the HTML template used for the back of the postcard.
      * @type {string}
      * @memberof Postcard
      */
-    'back_template_version_id'?: string | null;
+    private '_back_template_version_id': string | null;
+    public get back_template_version_id() { return (this._back_template_version_id || null); }
+    public set back_template_version_id(newValue: string | null) {
+        if(newValue && !/^vrsn_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid back_template_version_id provided");
+        }
+        this._back_template_version_id = newValue;
+    }
     /**
      * An array of tracking_event objects ordered by ascending `time`. Will not be populated for postcards created in test mode.
      * @type {Array<TrackingEventNormal>}
@@ -128,7 +163,14 @@ export interface Postcard {
      * @type {string}
      * @memberof Postcard
      */
-    'url'?: string;
+    private '_url': string;
+    public get url() { return (this._url); }
+    public set url(newValue: string) {
+        if(newValue && !/^https:\/\/lob-assets\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\.pdf|_thumb_[a-z]+_[0-9]+\.png)\?(version&#x3D;[a-z0-9-]*&amp;)?expires&#x3D;[0-9]{10}&amp;signature&#x3D;[a-zA-Z0-9-_]+$/.test(newValue)) {
+            throw new Error("Invalid url provided");
+        }
+        this._url = newValue;
+    }
     /**
      * An internal description that identifies this resource. Must be no longer than 255 characters. 
      * @type {string}

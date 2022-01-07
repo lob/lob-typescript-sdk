@@ -19,7 +19,7 @@
  * @export
  * @interface TrackingEventNormalAllOf
  */
-export interface TrackingEventNormalAllOf {
+export class TrackingEventNormalAllOf {
     /**
      * non-Certified postcards, self mailers, letters, and checks
      * @type {string}

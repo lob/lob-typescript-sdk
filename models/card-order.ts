@@ -19,19 +19,33 @@
  * @export
  * @interface CardOrder
  */
-export interface CardOrder {
+export class CardOrder {
     /**
      * Unique identifier prefixed with `co_`.
      * @type {string}
      * @memberof CardOrder
      */
-    'id'?: string;
+    private '_id'?: string;
+    public get id() { return (this._id || undefined) as string; }
+    public set id(newValue: string) {
+        if(newValue && !/^co_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid id provided");
+        }
+        this._id = newValue;
+    }
     /**
      * Unique identifier prefixed with `card_`.
      * @type {string}
      * @memberof CardOrder
      */
-    'card_id'?: string;
+    private '_card_id'?: string;
+    public get card_id() { return (this._card_id || undefined) as string; }
+    public set card_id(newValue: string) {
+        if(newValue && !/^card_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid card_id provided");
+        }
+        this._card_id = newValue;
+    }
     /**
      * The status of the card order.
      * @type {string}

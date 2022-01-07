@@ -19,7 +19,7 @@
  * @export
  * @interface SendDate
  */
-export interface SendDate {
+export class SendDate {
 }
 
 

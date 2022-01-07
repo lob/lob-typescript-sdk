@@ -19,7 +19,7 @@
  * @export
  * @interface BankAccount
  */
-export interface BankAccount {
+export class BankAccount {
     /**
      * An internal description that identifies this resource. Must be no longer than 255 characters. 
      * @type {string}
@@ -61,13 +61,27 @@ export interface BankAccount {
      * @type {string}
      * @memberof BankAccount
      */
-    'id'?: string;
+    private '_id': string;
+    public get id() { return (this._id); }
+    public set id(newValue: string) {
+        if(newValue && !/^bank_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid id provided");
+        }
+        this._id = newValue;
+    }
     /**
      * A signed link to the signature image. will be generated.
      * @type {string}
      * @memberof BankAccount
      */
-    'signature_url'?: string | null;
+    private '_signature_url'?: string | null;
+    public get signature_url() { return (this._signature_url || null || undefined) as string; }
+    public set signature_url(newValue: string | null) {
+        if(newValue && !/^https:\/\/lob-assets\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\.pdf|_thumb_[a-z]+_[0-9]+\.png)\?(version&#x3D;[a-z0-9-]*&amp;)?expires&#x3D;[0-9]{10}&amp;signature&#x3D;[a-zA-Z0-9-_]+$/.test(newValue)) {
+            throw new Error("Invalid signature_url provided");
+        }
+        this._signature_url = newValue;
+    }
     /**
      * The name of the bank based on the provided routing number, e.g. `JPMORGAN CHASE BANK`.
      * @type {string}

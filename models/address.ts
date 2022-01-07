@@ -20,13 +20,20 @@ import { CountryExtendedExpanded } from './country-extended-expanded';
  * @export
  * @interface Address
  */
-export interface Address {
+export class Address {
     /**
      * Unique identifier prefixed with `adr_`.
      * @type {string}
      * @memberof Address
      */
-    'id'?: string;
+    private '_id'?: string;
+    public get id() { return (this._id || undefined) as string; }
+    public set id(newValue: string) {
+        if(newValue && !/^adr_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid id provided");
+        }
+        this._id = newValue;
+    }
     /**
      * An internal description that identifies this resource. Must be no longer than 255 characters. 
      * @type {string}
@@ -86,13 +93,27 @@ export interface Address {
      * @type {string}
      * @memberof Address
      */
-    'address_state'?: string;
+    private '_address_state'?: string;
+    public get address_state() { return (this._address_state || undefined) as string; }
+    public set address_state(newValue: string) {
+        if(newValue && !/^[a-zA-Z]{2}$/.test(newValue)) {
+            throw new Error("Invalid address_state provided");
+        }
+        this._address_state = newValue;
+    }
     /**
      * Must follow the ZIP format of `12345` or ZIP+4 format of `12345-1234`. 
      * @type {string}
      * @memberof Address
      */
-    'address_zip'?: string;
+    private '_address_zip'?: string;
+    public get address_zip() { return (this._address_zip || undefined) as string; }
+    public set address_zip(newValue: string) {
+        if(newValue && !/^\d{5}(-\d{4})?$/.test(newValue)) {
+            throw new Error("Invalid address_zip provided");
+        }
+        this._address_zip = newValue;
+    }
     /**
      * 
      * @type {CountryExtendedExpanded}

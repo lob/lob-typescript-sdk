@@ -19,13 +19,20 @@
  * @export
  * @interface PostcardDeletion
  */
-export interface PostcardDeletion {
+export class PostcardDeletion {
     /**
      * Unique identifier prefixed with `psc_`.
      * @type {string}
      * @memberof PostcardDeletion
      */
-    'id'?: string;
+    private '_id'?: string;
+    public get id() { return (this._id || undefined) as string; }
+    public set id(newValue: string) {
+        if(newValue && !/^psc_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid id provided");
+        }
+        this._id = newValue;
+    }
     /**
      * Only returned if the resource has been successfully deleted.
      * @type {boolean}

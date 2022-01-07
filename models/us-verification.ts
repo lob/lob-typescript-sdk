@@ -22,13 +22,20 @@ import { UsComponents } from './us-components';
  * @export
  * @interface UsVerification
  */
-export interface UsVerification {
+export class UsVerification {
     /**
      * Unique identifier prefixed with `us_ver_`.
      * @type {string}
      * @memberof UsVerification
      */
-    'id'?: string;
+    private '_id'?: string;
+    public get id() { return (this._id || undefined) as string; }
+    public set id(newValue: string) {
+        if(newValue && !/^us_ver_[a-zA-Z0-9_]+$/.test(newValue)) {
+            throw new Error("Invalid id provided");
+        }
+        this._id = newValue;
+    }
     /**
      * The intended recipient, typically a person\'s or firm\'s name.
      * @type {string}

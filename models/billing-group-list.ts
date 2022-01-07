@@ -20,7 +20,7 @@ import { BillingGroup } from './billing-group';
  * @export
  * @interface BillingGroupList
  */
-export interface BillingGroupList {
+export class BillingGroupList {
     /**
      * list of billing groups
      * @type {Array<BillingGroup>}
