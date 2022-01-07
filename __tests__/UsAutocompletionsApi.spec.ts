@@ -15,7 +15,7 @@ describe("UsVerificationApi", () => {
     zip_code: "94107",
   };
 
-  it("US Verifications API can be instantiated", () => {
+  it("US Autocompletions API can be instantiated", () => {
     const autocompletionApi = new UsAutocompletions(config);
     expect(autocompletionApi).toBeDefined();
     expect(typeof autocompletionApi).toEqual("object");
