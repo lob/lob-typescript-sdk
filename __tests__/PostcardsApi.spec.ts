@@ -9,6 +9,8 @@ import {
 import { PostcardsApi } from "../api";
 
 describe("postcardsApi", () => {
+  jest.setTimeout(60000); // 60 seconds
+
   const config: Configuration = new Configuration({
     username: process.env.LOB_API_KEY,
   });
