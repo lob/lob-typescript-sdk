@@ -61,8 +61,8 @@ export class BankAccount {
      * @type {string}
      * @memberof BankAccount
      */
-    private '_id': string;
-    public get id() { return (this._id); }
+    private '_id'?: string;
+    public get id() { return (this._id || undefined) as string; }
     public set id(newValue: string) {
         if(newValue && !/^bank_[a-zA-Z0-9]+$/.test(newValue)) {
             throw new Error("Invalid id provided");
