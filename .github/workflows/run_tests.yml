@@ -20,11 +20,10 @@ jobs:
         run: npm install
 
       - name: Run Unit Tests with coverage
-        env:
-          LOB_API_KEY: ${{ secrets.LOB_API_KEY }}
         run: npm run test
 
       - name: Run Integration Tests
         env:
           LOB_API_KEY: ${{ secrets.LOB_API_KEY }}
+          LOB_LIVE_API_KEY: ${{ secrets.LOB_LIVE_API_KEY }}
         run: npm run test:integration
