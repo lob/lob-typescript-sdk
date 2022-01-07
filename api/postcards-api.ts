@@ -45,11 +45,10 @@ export const PostcardsApiAxiosParamCreator = function (configuration?: Configura
          * @summary create
          * @param {PostcardEditable} postcardEditable 
          * @param {string} [idempotencyKey] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
-         * @param {string} [idempotencyKey2] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postcardCreate: async (postcardEditable: PostcardEditable, idempotencyKey?: string, idempotencyKey2?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postcardCreate: async (postcardEditable: PostcardEditable, idempotencyKey?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'postcardEditable' is not null or undefined
             assertParamExists('postcardCreate', 'postcardEditable', postcardEditable)
             const localVarPath = `/postcards`;
@@ -67,10 +66,6 @@ export const PostcardsApiAxiosParamCreator = function (configuration?: Configura
             // authentication basicAuth required
             // http basic authentication required
             setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            if (idempotencyKey2 !== undefined) {
-                localVarQueryParameter['idempotency_key'] = idempotencyKey2;
-            }
 
             if (idempotencyKey !== undefined && idempotencyKey !== null) {
                 localVarHeaderParameter['Idempotency-Key'] = String(idempotencyKey);
@@ -270,12 +265,11 @@ export const PostcardsApiFp = function(configuration?: Configuration) {
          * @summary create
          * @param {PostcardEditable} postcardEditable 
          * @param {string} [idempotencyKey] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
-         * @param {string} [idempotencyKey2] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postcardCreate(postcardEditable: PostcardEditable, idempotencyKey?: string, idempotencyKey2?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Postcard>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postcardCreate(postcardEditable, idempotencyKey, idempotencyKey2, options);
+        async postcardCreate(postcardEditable: PostcardEditable, idempotencyKey?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Postcard>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postcardCreate(postcardEditable, idempotencyKey, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -336,13 +330,12 @@ export class PostcardsApi extends BaseAPI {
      * @summary create
      * @param {PostcardEditable} postcardEditable 
      * @param {string} [idempotencyKey] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
-     * @param {string} [idempotencyKey2] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PostcardsApi
      */
-    public create(postcardEditable: PostcardEditable, idempotencyKey?: string, idempotencyKey2?: string, options?: AxiosRequestConfig) {
-        return PostcardsApiFp(this.configuration).postcardCreate(postcardEditable, idempotencyKey, idempotencyKey2, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
+    public create(postcardEditable: PostcardEditable, idempotencyKey?: string, options?: AxiosRequestConfig) {
+        return PostcardsApiFp(this.configuration).postcardCreate(postcardEditable, idempotencyKey, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
             }
