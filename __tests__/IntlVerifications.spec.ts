@@ -19,8 +19,6 @@ describe("UsVerificationApi", () => {
     country: CountryExtended.Ca
   };
 
-  // 370 Water St C1N 1C4
-
   it("US Verifications API can be instantiated", () => {
     const intlvApi = new IntlVerificationsApi(config);
     expect(intlvApi).toBeDefined();
