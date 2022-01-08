@@ -4,6 +4,7 @@ api/bank-accounts-api.ts
 api/billing-groups-api.ts
 api/card-orders-api.ts
 api/cards-api.ts
+api/intl-verifications-api.ts
 api/letters-api.ts
 api/postcards-api.ts
 api/usautocompletions-api.ts
@@ -40,6 +41,9 @@ models/deliverability-analysis.ts
 models/dpv-footnote.ts
 models/index.ts
 models/inline-response200.ts
+models/intl-components.ts
+models/intl-verification-writable.ts
+models/intl-verification.ts
 models/letter-custom-envelope.ts
 models/letter-deletion.ts
 models/letter-editable.ts
@@ -47,6 +51,7 @@ models/letter-list.ts
 models/letter.ts
 models/lob-confidence-score.ts
 models/mail-type.ts
+models/multiple-components-intl.ts
 models/multiple-components.ts
 models/postcard-deletion.ts
 models/postcard-editable.ts
@@ -55,6 +60,7 @@ models/postcard-size.ts
 models/postcard.ts
 models/return-address.ts
 models/send-date.ts
+models/single-line-address-intl.ts
 models/single-line-address.ts
 models/sort-by.ts
 models/sort-by1.ts
