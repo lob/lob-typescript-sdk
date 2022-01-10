@@ -27,13 +27,13 @@ export class IntlVerifications {
      * @type {Array<IntlVerification | LobError>}
      * @memberof IntlVerifications
      */
-    'addresses': Array<IntlVerification | LobError>;
+    'addresses'?: Array<IntlVerification | LobError>;
     /**
      * Indicates whether any errors occurred during the verification process.
      * @type {boolean}
      * @memberof IntlVerifications
      */
-    'errors': boolean;
+    'errors'?: boolean;
 }
 
 

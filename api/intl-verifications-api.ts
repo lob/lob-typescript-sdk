@@ -35,7 +35,7 @@ import { IntlVerificationsPayload } from '../models';
 export const IntlVerificationsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Verify a list of international (except US or US territories) address _with a live API key_. Requests to this endpoint with a test API key will return a dummy response based on the primary line you input.
+         * Verify a list of international (except US or US territories) address with a live API key.
          * @summary verifyBulk
          * @param {IntlVerificationsPayload} intlVerificationsPayload 
          * @param {*} [options] Override http request option.
@@ -75,7 +75,7 @@ export const IntlVerificationsApiAxiosParamCreator = function (configuration?: C
             };
         },
         /**
-         * Verify an international (except US or US territories) address _with a live API key_. Requests to this endpoint with a test API key will return a dummy response based on the primary line you input.
+         * Verify an international (except US or US territories) address with a live API key.
          * @summary verifySingle
          * @param {IntlVerificationWritable} intlVerificationWritable 
          * @param {'native' | 'match'} [xLangOutput] * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English. 
@@ -130,7 +130,7 @@ export const IntlVerificationsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = IntlVerificationsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Verify a list of international (except US or US territories) address _with a live API key_. Requests to this endpoint with a test API key will return a dummy response based on the primary line you input.
+         * Verify a list of international (except US or US territories) address with a live API key.
          * @summary verifyBulk
          * @param {IntlVerificationsPayload} intlVerificationsPayload 
          * @param {*} [options] Override http request option.
@@ -141,7 +141,7 @@ export const IntlVerificationsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Verify an international (except US or US territories) address _with a live API key_. Requests to this endpoint with a test API key will return a dummy response based on the primary line you input.
+         * Verify an international (except US or US territories) address with a live API key.
          * @summary verifySingle
          * @param {IntlVerificationWritable} intlVerificationWritable 
          * @param {'native' | 'match'} [xLangOutput] * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English. 
@@ -163,7 +163,7 @@ export const IntlVerificationsApiFp = function(configuration?: Configuration) {
  */
 export class IntlVerificationsApi extends BaseAPI {
     /**
-     * Verify a list of international (except US or US territories) address _with a live API key_. Requests to this endpoint with a test API key will return a dummy response based on the primary line you input.
+     * Verify a list of international (except US or US territories) address with a live API key.
      * @summary verifyBulk
      * @param {IntlVerificationsPayload} intlVerificationsPayload 
      * @param {*} [options] Override http request option.
@@ -180,7 +180,7 @@ export class IntlVerificationsApi extends BaseAPI {
     }
 
     /**
-     * Verify an international (except US or US territories) address _with a live API key_. Requests to this endpoint with a test API key will return a dummy response based on the primary line you input.
+     * Verify an international (except US or US territories) address with a live API key.
      * @summary verifySingle
      * @param {IntlVerificationWritable} intlVerificationWritable 
      * @param {'native' | 'match'} [xLangOutput] * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English. 
