@@ -20,7 +20,7 @@ import { CountryExtended } from './country-extended';
  * @export
  * @interface MultipleComponentsIntl
  */
-export interface MultipleComponentsIntl {
+export class MultipleComponentsIntl {
     /**
      * The intended recipient, typically a person\'s or firm\'s name.
      * @type {string}

@@ -20,7 +20,7 @@ import { CountryExtended } from './country-extended';
  * @export
  * @interface SingleLineAddressIntl
  */
-export interface SingleLineAddressIntl {
+export class SingleLineAddressIntl {
     /**
      * The entire address in one string (e.g., \"370 Water St C1N 1C4\"). 
      * @type {string}
