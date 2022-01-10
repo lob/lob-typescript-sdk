@@ -13,26 +13,27 @@
  */
 
 
-import { CountryExtended } from './country-extended';
+import { LobError } from './lob-error';
+import { UsVerification } from './us-verification';
 
 /**
  * 
  * @export
- * @interface SingleLineAddressIntl
+ * @interface UsVerifications
  */
-export class SingleLineAddressIntl {
-    /**
-     * The entire address in one string (e.g., \"370 Water St C1N 1C4\"). 
-     * @type {string}
-     * @memberof SingleLineAddressIntl
-     */
-    'address'?: string;
+export class UsVerifications {
     /**
      * 
-     * @type {CountryExtended}
-     * @memberof SingleLineAddressIntl
+     * @type {Array<UsVerification | LobError>}
+     * @memberof UsVerifications
      */
-    'country'?: CountryExtended;
+    'addresses'?: Array<UsVerification | LobError>;
+    /**
+     * Indicates whether any errors occurred during the verification process.
+     * @type {boolean}
+     * @memberof UsVerifications
+     */
+    'errors'?: boolean;
 }
 
 
