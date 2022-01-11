@@ -7,6 +7,7 @@ api/cards-api.ts
 api/intl-verifications-api.ts
 api/letters-api.ts
 api/postcards-api.ts
+api/self-mailers-api.ts
 api/usautocompletions-api.ts
 api/usverifications-api.ts
 base.ts
@@ -39,6 +40,8 @@ models/country-extended-expanded.ts
 models/country-extended.ts
 models/deliverability-analysis.ts
 models/dpv-footnote.ts
+models/error-error.ts
+models/failure-status-code.ts
 models/index.ts
 models/inline-response200.ts
 models/intl-components.ts
@@ -54,6 +57,7 @@ models/letter.ts
 models/lob-confidence-score.ts
 models/lob-error.ts
 models/mail-type.ts
+models/model-error.ts
 models/multiple-components-intl.ts
 models/multiple-components-list.ts
 models/multiple-components.ts
@@ -63,6 +67,11 @@ models/postcard-list.ts
 models/postcard-size.ts
 models/postcard.ts
 models/return-address.ts
+models/self-mailer-deletion.ts
+models/self-mailer-editable.ts
+models/self-mailer-list.ts
+models/self-mailer-size.ts
+models/self-mailer.ts
 models/send-date.ts
 models/single-line-address-intl.ts
 models/single-line-address.ts
@@ -70,8 +79,11 @@ models/sort-by.ts
 models/sort-by1.ts
 models/sort-by2.ts
 models/sort-by3.ts
+models/sort-by4.ts
 models/suggestions.ts
 models/thumbnail.ts
+models/tracking-event-certified.ts
+models/tracking-event-details.ts
 models/tracking-event-normal.ts
 models/us-autocompletions-writable.ts
 models/us-autocompletions.ts

@@ -106,7 +106,7 @@ describe("CardsApi", () => {
         expect(cancelledLetter?.deleted).toBeTruthy();
       } else {
         throw new Error("letter ID should be defined upon creation");
-    }
+      }
     });
 
     it("creates, retrieves, and cancels a letter with NO EXTRA SERVICES", async () => {
@@ -132,15 +132,15 @@ describe("CardsApi", () => {
         file: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/us_letter_1pg.pdf",
       };
       const letter = await lettersApi.create(registeredLetter);
-        expect(letter?.id).toBeDefined();
-        expect(letter?.extra_service).toBeFalsy();
-        if (letter?.id) {
-          const retrievedLetter = await lettersApi.get(letter.id);
-          expect(retrievedLetter).toBeDefined();
-          const cancelledLetter = await lettersApi.cancel(letter.id);
-          expect(cancelledLetter?.deleted).toBeTruthy();
-        } else {
-          throw new Error("letter ID should be defined upon creation");
+      expect(letter?.id).toBeDefined();
+      expect(letter?.extra_service).toBeFalsy();
+      if (letter?.id) {
+        const retrievedLetter = await lettersApi.get(letter.id);
+        expect(retrievedLetter).toBeDefined();
+        const cancelledLetter = await lettersApi.cancel(letter.id);
+        expect(cancelledLetter?.deleted).toBeTruthy();
+      } else {
+        throw new Error("letter ID should be defined upon creation");
       }
     });
   });

@@ -1,6 +1,11 @@
 import { Configuration } from "../configuration";
 
-import { BankAccount, BankAccountWritable, BankAccountVerify, BankTypeEnum } from "../models";
+import {
+  BankAccount,
+  BankAccountWritable,
+  BankAccountVerify,
+  BankTypeEnum,
+} from "../models";
 import { BankAccountsApi } from "../api/bank-accounts-api";
 
 describe("BankAccountsApi", () => {
@@ -36,10 +41,7 @@ describe("BankAccountsApi", () => {
         amounts: [11, 35],
       };
       if (account?.id) {
-        const verification = await bankApi.verify(
-          account.id,
-          verify
-        );
+        const verification = await bankApi.verify(account.id, verify);
         expect(verification).toBeDefined();
         expect(verification?.verified).toBeTruthy();
 
@@ -96,10 +98,14 @@ describe("BankAccountsApi", () => {
             responseAfter.previous_url.lastIndexOf("before=") + 7
           );
         } else {
-          throw new Error("list should not be empty, and should contain a valid previous_url field")
+          throw new Error(
+            "list should not be empty, and should contain a valid previous_url field"
+          );
         }
       } else {
-        throw new Error("list should not be empty, and should contain a valid next_url field")
+        throw new Error(
+          "list should not be empty, and should contain a valid next_url field"
+        );
       }
     });
 

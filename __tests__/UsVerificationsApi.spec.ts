@@ -23,11 +23,11 @@ describe("UsVerificationApi", () => {
   };
 
   const addressList: MultipleComponentsList = {
-    addresses: [singleAddress, address2]
-  }
+    addresses: [singleAddress, address2],
+  };
 
   const singleLine: UsVerificationsWritable = {
-    address: "123 TEST ST SAN FRANCISCO CA 94107"
+    address: "123 TEST ST SAN FRANCISCO CA 94107",
   };
 
   it("US Verifications API can be instantiated", () => {

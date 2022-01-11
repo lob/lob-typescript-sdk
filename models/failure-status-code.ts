@@ -14,17 +14,22 @@
 
 
 
-export * from './api/addresses-api';
-export * from './api/bank-accounts-api';
-export * from './api/billing-groups-api';
-export * from './api/card-orders-api';
-export * from './api/cards-api';
-export * from './api/intl-verifications-api';
-export * from './api/letters-api';
-export * from './api/postcards-api';
-export * from './api/self-mailers-api';
-export * from './api/usautocompletions-api';
-export * from './api/usverifications-api';
+/**
+ * A conventional HTTP status code:   * `401` - Authorization error with your API key or account   * `403` - Forbidden error with your API key or account   * `404` - The requested item does not exist   * `413` - Payload too large   * `422` - The query or body parameters did not pass validation   * `429` - Too many requests have been sent with an API key in a given amount of time   * `500` - An internal server error occurred, please contact support@lob.com 
+ * @export
+ * @enum {string}
+ */
+
+export enum FailureStatusCode {
+    NUMBER_401 = 401,
+    NUMBER_403 = 403,
+    NUMBER_404 = 404,
+    NUMBER_413 = 413,
+    NUMBER_422 = 422,
+    NUMBER_429 = 429,
+    NUMBER_500 = 500
+}
+
 
 
 /**

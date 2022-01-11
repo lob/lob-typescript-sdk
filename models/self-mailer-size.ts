@@ -14,17 +14,18 @@
 
 
 
-export * from './api/addresses-api';
-export * from './api/bank-accounts-api';
-export * from './api/billing-groups-api';
-export * from './api/card-orders-api';
-export * from './api/cards-api';
-export * from './api/intl-verifications-api';
-export * from './api/letters-api';
-export * from './api/postcards-api';
-export * from './api/self-mailers-api';
-export * from './api/usautocompletions-api';
-export * from './api/usverifications-api';
+/**
+ * Specifies the size of the self mailer.
+ * @export
+ * @enum {string}
+ */
+
+export enum SelfMailerSize {
+    _6x18Bifold = '6x18_bifold',
+    _11x9Bifold = '11x9_bifold',
+    _12x9Bifold = '12x9_bifold'
+}
+
 
 
 /**

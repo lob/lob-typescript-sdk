@@ -39,7 +39,7 @@ describe("CardsApi", () => {
     const create: CardEditable = {
       description: "Test card",
       front:
-          "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/card_horizontal.pdf",
+        "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/card_horizontal.pdf",
       back: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/card_horizontal.pdf",
       size: CardEditableSizeEnum._2125x3375,
     };
@@ -60,7 +60,10 @@ describe("CardsApi", () => {
       const updates: CardUpdatable = {
         description: "updated card",
       };
-      const updatedCard = await cardsApi.update(retrievedCard.id as string, updates);
+      const updatedCard = await cardsApi.update(
+        retrievedCard.id as string,
+        updates
+      );
       expect(updatedCard).toBeDefined();
       expect(updatedCard?.description).toEqual("updated card");
 
@@ -82,30 +85,35 @@ describe("CardsApi", () => {
         back: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/card_horizontal.pdf",
         size: CardEditableSizeEnum._2125x3375,
       };
-      const card2: CardEditable = Object.assign({}, card1, { description: "Card 2" });
-      const card3: CardEditable = Object.assign({}, card1, { description: "Card 3" });
+      const card2: CardEditable = Object.assign({}, card1, {
+        description: "Card 2",
+      });
+      const card3: CardEditable = Object.assign({}, card1, {
+        description: "Card 3",
+      });
 
       const cardsApi = new CardsApi(config);
       await Promise.all([
-          cardsApi.create(card1),
-          cardsApi.create(card2),
-          cardsApi.create(card3)
-        ]
-      ).then((creationResults) => {
-        if (creationResults.length !== 3) {
-          fail();
-        }
-        createdCards = createdCards.concat(creationResults);
-      }).catch((err) => {
-        fail(err);
-      });
+        cardsApi.create(card1),
+        cardsApi.create(card2),
+        cardsApi.create(card3),
+      ])
+        .then((creationResults) => {
+          if (creationResults.length !== 3) {
+            fail();
+          }
+          createdCards = createdCards.concat(creationResults);
+        })
+        .catch((err) => {
+          fail(err);
+        });
     });
 
     afterAll(async () => {
       const cardsApi = new CardsApi(config);
       const deleteOperations: Promise<unknown>[] = [];
       for (const card of createdCards) {
-        deleteOperations.push(cardsApi.delete(card.id as string))
+        deleteOperations.push(cardsApi.delete(card.id as string));
       }
       await Promise.all(deleteOperations);
     });
@@ -128,11 +136,17 @@ describe("CardsApi", () => {
       // list responses should map the before and after tokens for the consumer
       const response = await new CardsApi(config).list();
       expect(response.next_url).toBeDefined();
-      const after: string = (response as { next_url: string }).next_url.slice(
+      const after: string = (response as { next_url: string }).next_url
+        .slice(
           (response as { next_url: string }).next_url.lastIndexOf("after=")
-      ).split("=")[1];
+        )
+        .split("=")[1];
 
-      const responseAfter = await new CardsApi(config).list(10, undefined, after);
+      const responseAfter = await new CardsApi(config).list(
+        10,
+        undefined,
+        after
+      );
       expect(responseAfter?.data).toBeDefined();
       expect(responseAfter.previous_url).toBeDefined();
       expect(responseAfter.previous_url).not.toBeNull();
@@ -142,9 +156,15 @@ describe("CardsApi", () => {
 
       expect(responseAfter.previous_url).toBeDefined();
       expect(responseAfter.previous_url).not.toBeNull();
-      const before: string = (responseAfter as { previous_url: string }).previous_url.slice(
-          (responseAfter as { previous_url: string }).previous_url.lastIndexOf("before=")
-      ).split("=")[1];
+      const before: string = (
+        responseAfter as { previous_url: string }
+      ).previous_url
+        .slice(
+          (responseAfter as { previous_url: string }).previous_url.lastIndexOf(
+            "before="
+          )
+        )
+        .split("=")[1];
 
       const responseBefore = await new CardsApi(config).list(10, before);
       expect(responseBefore?.data).toBeDefined();

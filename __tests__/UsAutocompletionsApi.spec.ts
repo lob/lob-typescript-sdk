@@ -13,7 +13,7 @@ describe("USAutocompletionsApi", () => {
     city: "San Francisco",
     state: "CA",
     zip_code: "94107",
-    geo_ip_sort: false
+    geo_ip_sort: false,
   };
 
   it("US Autocompletions API can be instantiated", () => {
@@ -32,7 +32,9 @@ describe("USAutocompletionsApi", () => {
 
     it("autocompletes given input", async () => {
       const autocompletionApi = new USAutocompletionsApi(config);
-      const response = await autocompletionApi.autocomplete(autocompletionInput);
+      const response = await autocompletionApi.autocomplete(
+        autocompletionInput
+      );
       expect(response.suggestions).toBeDefined();
       expect(response?.suggestions?.length).toBeGreaterThan(0);
     });

@@ -14,17 +14,43 @@
 
 
 
-export * from './api/addresses-api';
-export * from './api/bank-accounts-api';
-export * from './api/billing-groups-api';
-export * from './api/card-orders-api';
-export * from './api/cards-api';
-export * from './api/intl-verifications-api';
-export * from './api/letters-api';
-export * from './api/postcards-api';
-export * from './api/self-mailers-api';
-export * from './api/usautocompletions-api';
-export * from './api/usverifications-api';
+/**
+ * 
+ * @export
+ * @interface SortBy4
+ */
+export class SortBy4 {
+    /**
+     * 
+     * @type {string}
+     * @memberof SortBy4
+     */
+    'date_created'?: SortBy4DateCreatedEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof SortBy4
+     */
+    'send_date'?: SortBy4SendDateEnum;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum SortBy4DateCreatedEnum {
+    Asc = 'asc',
+    Desc = 'desc'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum SortBy4SendDateEnum {
+    Asc = 'asc',
+    Desc = 'desc'
+}
+
 
 
 /**

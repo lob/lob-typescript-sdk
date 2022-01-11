@@ -48,7 +48,7 @@ export class LetterEditable {
      */
     'address_placement'?: LetterEditableAddressPlacementEnum;
     /**
-     * Indicates if a return envelope is requested for the letter. The value corresponding to this field is by default a boolean. But if the account is signed up for custom return envelopes, the value is of type string and is `no_9_single_window` for a standard return envelope and a custom `return_envelope_id` for non-standard return envelopes.  To include a return envelope with your letter, set to `true` and specify the `perforated_page`. See [pricing](https://www.lob.com/pricing/print-mail#compare) for extra costs incurred.
+     * indicates if a return envelope is requested for the letter. The value corresponding to this field is by default a boolean. But if the account is signed up for custom return envelopes, the value is of type string and is `no_9_single_window` for a standard return envelope and a custom `return_envelope_id` for non-standard return envelopes.  To include a return envelope with your letter, set to `true` and specify the `perforated_page`. See [pricing](https://www.lob.com/pricing/print-mail#compare) for extra costs incurred.
      * @type {boolean | string}
      * @memberof LetterEditable
      */
@@ -66,25 +66,25 @@ export class LetterEditable {
      */
     'custom_envelope'?: LetterCustomEnvelope | null;
     /**
-     * Must either be an address ID or an inline object with correct address parameters. If an object is used, an address will be created, corrected, and standardized for free whenever possible using our US Address Verification engine (if it is a US address), and returned back with an ID. Depending on your [Print & Mail Edition](https://dashboard.lob.com/#/settings/editions), US addresses may also be run through [National Change of Address (NCOA)](https://lob.com/docs#ncoa). Non-US addresses will be standardized into uppercase only. If a US address used does not meet your account’s [US Mail strictness setting](https://dashboard.lob.com/#/settings/account), the request will fail. [Lob Guide: Verification of Mailing Addresses](https://www.lob.com/guides#mailing_addresses)
+     * Must either be an address ID or an inline object with correct address parameters.
      * @type {string | AddressEditable}
      * @memberof LetterEditable
      */
     'to'?: string | AddressEditable;
     /**
-     * Must either be an address ID or an inline object with correct address parameters. Must be a US address unless using a `custom_envelope`. All addresses will be standardized into uppercase without being modified by verification.
+     * Must either be an address ID or an inline object with correct address parameters.
      * @type {string | AddressEditable}
      * @memberof LetterEditable
      */
     'from'?: string | AddressEditable;
     /**
-     * Notes: - HTML merge variables should not include delimiting whitespace. - All pages of a supplied PDF file must be sized at 8.5\"x11\", while supplied HTML will be rendered and trimmed to as many 8.5\"x11\" pages as necessary. - For design specifications, please see our [PDF](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_template.pdf) and [HTML](#section/HTML-Examples) templates. - If a `custom_envelope` is used, follow [this template](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_custom_envelope.pdf). - For domestic destinations, the file limit is 60 pages single-sided or 120 pages double-sided. For international destinations, the file limit is 6 pages single-sided or 12 pages double-sided. PDFs that surpass the file limit will error, while HTML that renders more pages than the file limit will be trimmed. - Any letters over 6 pages single-sided or 12 pages double-sided will be placed in a [flat envelope](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_flat_template.pdf) instead of the standard double window envelope.  See [pricing](https://lob.com/pricing/print-mail#compare) for extra costs incurred.
+     * PDF file containing the letter\'s formatting.
      * @type {string}
      * @memberof LetterEditable
      */
     'file'?: string;
     /**
-     * Add an extra service to your letter. See [pricing](https://www.lob.com/pricing/print-mail#compare) for extra costs incurred.   * `certified` - track and confirm delivery for domestic destinations. An extra sheet (1 PDF page single-sided or 2 PDF pages double-sided) is added to the beginning of your letter for address and barcode information. See here for templates: [#10 envelope](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_certified_template.pdf) and [flat envelope](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_certified_flat_template.pdf) (used for letters over 6 pages single-sided or 12 pages double-sided). You will not be charged for this extra sheet.   * `certified_return_receipt` - request an electronic copy of the recipient\'s signature to prove delivery of your certified letter   * `registered` - provides tracking and confirmation for international addresses 
+     * Add an extra service to your letter:   * `certified` - track and confirm delivery for domestic destinations. An extra sheet (1 PDF page single-sided or 2 PDF pages double-sided) is added to the beginning of your letter for address and barcode information. See here for templates: [#10 envelope](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_certified_template.pdf) and [flat envelope](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_certified_flat_template.pdf) (used for letters over 6 pages single-sided or 12 pages double-sided). You will not be charged for this extra sheet.   * `certified_return_receipt` - request an electronic copy of the recipient\'s signature to prove delivery of your certified letter   * `registered` - provides tracking and confirmation for international addresses 
      * @type {string}
      * @memberof LetterEditable
      */
