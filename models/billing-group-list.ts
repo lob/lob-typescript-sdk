@@ -34,13 +34,13 @@ export class BillingGroupList {
      */
     'object'?: string;
     /**
-     * Url of next page of items in list.
+     * url of next page of items in list.
      * @type {string}
      * @memberof BillingGroupList
      */
     'next_url'?: string | null;
     /**
-     * Url of previous page of items in list.
+     * url of previous page of items in list.
      * @type {string}
      * @memberof BillingGroupList
      */

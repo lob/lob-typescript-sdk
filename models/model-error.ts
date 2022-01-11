@@ -13,18 +13,21 @@
  */
 
 
+import { ErrorError } from './error-error';
 
-export * from './api/addresses-api';
-export * from './api/bank-accounts-api';
-export * from './api/billing-groups-api';
-export * from './api/card-orders-api';
-export * from './api/cards-api';
-export * from './api/intl-verifications-api';
-export * from './api/letters-api';
-export * from './api/postcards-api';
-export * from './api/self-mailers-api';
-export * from './api/usautocompletions-api';
-export * from './api/usverifications-api';
+/**
+ * Lob uses RESTful HTTP response codes to indicate success or failure of an API request. In general, 2xx indicates success, 4xx indicate an input error, and 5xx indicates an error on Lob\'s end.
+ * @export
+ * @interface ModelError
+ */
+export class ModelError {
+    /**
+     * 
+     * @type {ErrorError}
+     * @memberof ModelError
+     */
+    'error': ErrorError;
+}
 
 
 /**

@@ -34,13 +34,13 @@ export class LetterList {
      */
     'object'?: string;
     /**
-     * Url of next page of items in list.
+     * url of next page of items in list.
      * @type {string}
      * @memberof LetterList
      */
     'next_url'?: string | null;
     /**
-     * Url of previous page of items in list.
+     * url of previous page of items in list.
      * @type {string}
      * @memberof LetterList
      */
@@ -52,7 +52,7 @@ export class LetterList {
      */
     'count'?: number;
     /**
-     * Indicates the total number of records. Provided when the request specifies an \"include\" query parameter
+     * indicates the total number of records. Provided when the request specifies an \"include\" query parameter
      * @type {number}
      * @memberof LetterList
      */

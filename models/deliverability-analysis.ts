@@ -28,19 +28,19 @@ export class DeliverabilityAnalysis {
      */
     'dpv_confirmation'?: DeliverabilityAnalysisDpvConfirmationEnum;
     /**
-     * Indicates whether or not the address is [CMRA-authorized](https://en.wikipedia.org/wiki/Commercial_mail_receiving_agency). Possible values are: * `Y` –– Address is CMRA-authorized. * `N` –– Address is not CMRA-authorized. * `\'\'` –– A DPV match is not made (`deliverability_analysis[dpv_confirmation]` is `N` or an empty string). 
+     * indicates whether or not the address is [CMRA-authorized](https://en.wikipedia.org/wiki/Commercial_mail_receiving_agency). Possible values are: * `Y` –– Address is CMRA-authorized. * `N` –– Address is not CMRA-authorized. * `\'\'` –– A DPV match is not made (`deliverability_analysis[dpv_confirmation]` is `N` or an empty string). 
      * @type {string}
      * @memberof DeliverabilityAnalysis
      */
     'dpv_cmra'?: DeliverabilityAnalysisDpvCmraEnum;
     /**
-     * Indicates that an address was once deliverable, but has become vacant and is no longer receiving deliveries. Possible values are: * `Y` –– Address is vacant. * `N` –– Address is not vacant. * `\'\'` –– A DPV match is not made (`deliverability_analysis[dpv_confirmation]` is `N` or an empty string). 
+     * indicates that an address was once deliverable, but has become vacant and is no longer receiving deliveries. Possible values are: * `Y` –– Address is vacant. * `N` –– Address is not vacant. * `\'\'` –– A DPV match is not made (`deliverability_analysis[dpv_confirmation]` is `N` or an empty string). 
      * @type {string}
      * @memberof DeliverabilityAnalysis
      */
     'dpv_vacant'?: DeliverabilityAnalysisDpvVacantEnum;
     /**
-     * Corresponds to the USPS field `dpv_no_stat`. Indicates that an address has been vacated in the recent past, and is no longer receiving deliveries. If it\'s been unoccupied for 90+ days, or temporarily vacant, this will be flagged. Possible values are: * `Y` –– Address is active. * `N` –– Address is not active. * `\'\'` –– A DPV match is not made (`deliverability_analysis[dpv_confirmation]` is `N` or an empty string). 
+     * Corresponds to the USPS field `dpv_no_stat`. indicates that an address has been vacated in the recent past, and is no longer receiving deliveries. If it\'s been unoccupied for 90+ days, or temporarily vacant, this will be flagged. Possible values are: * `Y` –– Address is active. * `N` –– Address is not active. * `\'\'` –– A DPV match is not made (`deliverability_analysis[dpv_confirmation]` is `N` or an empty string). 
      * @type {string}
      * @memberof DeliverabilityAnalysis
      */
@@ -52,13 +52,13 @@ export class DeliverabilityAnalysis {
      */
     'dpv_footnotes'?: Array<DpvFootnote>;
     /**
-     * Indicates whether or not an address has been flagged in the [Early Warning System](https://docs.informatica.com/data-engineering/data-engineering-quality/10-4-0/address-validator-port-reference/postal-carrier-certification-data-ports/early-warning-system-return-code.html), meaning the address is under development and not yet ready to receive mail. However, it should become available in a few months. 
+     * indicates whether or not an address has been flagged in the [Early Warning System](https://docs.informatica.com/data-engineering/data-engineering-quality/10-4-0/address-validator-port-reference/postal-carrier-certification-data-ports/early-warning-system-return-code.html), meaning the address is under development and not yet ready to receive mail. However, it should become available in a few months. 
      * @type {boolean}
      * @memberof DeliverabilityAnalysis
      */
     'ews_match'?: boolean;
     /**
-     * Indicates whether this address has been converted by [LACS<sup>Link</sup>](https://postalpro.usps.com/address-quality/lacslink). LACS<sup>Link</sup> corrects outdated addresses into their modern counterparts. Possible values are: * `Y` –– New address produced with a matching record in LACS<sup>Link</sup>. * `N` –– New address could not be produced with a matching record in LACS<sup>Link</sup>. * `\'\'` –– A DPV match is not made (`deliverability_analysis[dpv_confirmation]` is `N` or an empty string). 
+     * indicates whether this address has been converted by [LACS<sup>Link</sup>](https://postalpro.usps.com/address-quality/lacslink). LACS<sup>Link</sup> corrects outdated addresses into their modern counterparts. Possible values are: * `Y` –– New address produced with a matching record in LACS<sup>Link</sup>. * `N` –– New address could not be produced with a matching record in LACS<sup>Link</sup>. * `\'\'` –– A DPV match is not made (`deliverability_analysis[dpv_confirmation]` is `N` or an empty string). 
      * @type {string}
      * @memberof DeliverabilityAnalysis
      */

@@ -66,9 +66,7 @@ describe("postcardsApi", () => {
       const postcard = await postcardsApi.create(dummyPostcard);
       expect(postcard?.id).toBeDefined();
       if (postcard?.id) {
-        const retrievedPostcard = await postcardsApi.get(
-            postcard.id
-        );
+        const retrievedPostcard = await postcardsApi.get(postcard.id);
         expect(retrievedPostcard).toBeDefined();
         const deletedPostcard = await postcardsApi.cancel(postcard.id);
         expect(deletedPostcard?.deleted).toBeTruthy();
@@ -86,69 +84,69 @@ describe("postcardsApi", () => {
       // ensure there are at least 3 cards present, to test pagination
       const postcard1: PostcardEditable = {
         to: {
-            name: "LAURENS LOBSTER",
-            address_line1: "180 Berry St",
-            address_line2: "# 6100",
-            address_city: "San Francisco",
-            address_state: "CA",
-            address_zip: "94107",
-            address_country: CountryExtended.Us,
-          },
-          from: {
-            name: "LABHRAS LOBSTER",
-            address_line1: "210 King St",
-            address_city: "San Francisco",
-            address_state: "CA",
-            address_zip: "94107",
-            address_country: "US",
-          },
-          front:
-            "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
-          back: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
+          name: "LAURENS LOBSTER",
+          address_line1: "180 Berry St",
+          address_line2: "# 6100",
+          address_city: "San Francisco",
+          address_state: "CA",
+          address_zip: "94107",
+          address_country: CountryExtended.Us,
+        },
+        from: {
+          name: "LABHRAS LOBSTER",
+          address_line1: "210 King St",
+          address_city: "San Francisco",
+          address_state: "CA",
+          address_zip: "94107",
+          address_country: "US",
+        },
+        front:
+          "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
+        back: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
       };
       const postcard2: PostcardEditable = {
         to: {
-            name: "LAURENT LOBSTER",
-            address_line1: "210 King St",
-            address_line2: "# 6100",
-            address_city: "San Francisco",
-            address_state: "CA",
-            address_zip: "94107",
-            address_country: CountryExtended.Us,
-          },
-          from: {
-            name: "LAVRENTIOS LOBSTER",
-            address_line1: "210 King St",
-            address_city: "San Francisco",
-            address_state: "CA",
-            address_zip: "94107",
-            address_country: "US",
-          },
-          front:
-            "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
-          back: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
+          name: "LAURENT LOBSTER",
+          address_line1: "210 King St",
+          address_line2: "# 6100",
+          address_city: "San Francisco",
+          address_state: "CA",
+          address_zip: "94107",
+          address_country: CountryExtended.Us,
+        },
+        from: {
+          name: "LAVRENTIOS LOBSTER",
+          address_line1: "210 King St",
+          address_city: "San Francisco",
+          address_state: "CA",
+          address_zip: "94107",
+          address_country: "US",
+        },
+        front:
+          "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
+        back: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
       };
       const postcard3: PostcardEditable = {
         to: {
-            name: "LORENZO LOBSTER",
-            address_line1: "210 King St",
-            address_line2: "# 6100",
-            address_city: "San Francisco",
-            address_state: "CA",
-            address_zip: "94107",
-            address_country: CountryExtended.Us,
-          },
-          from: {
-            name: "VAVRINEC LOBSTER",
-            address_line1: "210 King St",
-            address_city: "San Francisco",
-            address_state: "CA",
-            address_zip: "94107",
-            address_country: "US",
-          },
-          front:
-            "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
-          back: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
+          name: "LORENZO LOBSTER",
+          address_line1: "210 King St",
+          address_line2: "# 6100",
+          address_city: "San Francisco",
+          address_state: "CA",
+          address_zip: "94107",
+          address_country: CountryExtended.Us,
+        },
+        from: {
+          name: "VAVRINEC LOBSTER",
+          address_line1: "210 King St",
+          address_city: "San Francisco",
+          address_state: "CA",
+          address_zip: "94107",
+          address_country: "US",
+        },
+        front:
+          "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
+        back: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
       };
       const c1 = await postcardsApi.create(postcard1);
       const c2 = await postcardsApi.create(postcard2);
@@ -165,10 +163,12 @@ describe("postcardsApi", () => {
             responseAfter.previous_url.lastIndexOf("before=") + 7
           );
         } else {
-            throw new Error("response must be defined and have a valid previous_url");
+          throw new Error(
+            "response must be defined and have a valid previous_url"
+          );
         }
       } else {
-            throw new Error("response must be defined and have a valid next_url");
+        throw new Error("response must be defined and have a valid next_url");
       }
     });
 
@@ -184,19 +184,18 @@ describe("postcardsApi", () => {
       expect(postcardList.length).toBeGreaterThan(0);
     });
 
-    it("lists cards given an after param", async () => {
+    it("lists postcards given an after param", async () => {
       const responseAfter = await postcardsApi.list(10, undefined, nextUrl);
       expect(responseAfter?.data).toBeDefined();
       const postcardList2: Postcard[] = responseAfter?.data || [];
       expect(postcardList2.length).toBeGreaterThan(0);
     });
 
-    it("lists cards given a before param", async () => {
+    it("lists postcards given a before param", async () => {
       const responseBefore = await postcardsApi.list(10, previousUrl);
       expect(responseBefore?.data).toBeDefined();
       const postcardList3: Postcard[] = responseBefore?.data || [];
       expect(postcardList3.length).toBeGreaterThan(0);
     });
   });
-
 });

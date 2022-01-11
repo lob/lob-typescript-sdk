@@ -1,9 +1,6 @@
 import { Configuration } from "../configuration";
 
-import {
-  BillingGroup,
-  BillingGroupEditable
-} from "../models";
+import { BillingGroup, BillingGroupEditable } from "../models";
 import { BillingGroupsApi } from "../api";
 
 describe("BillingGroupsApi", () => {
@@ -33,7 +30,7 @@ describe("BillingGroupsApi", () => {
   describe("performs single-BillingGroup operations", () => {
     const createBg: BillingGroupEditable = {
       description: "Test Billing Group Created",
-      name: "TestBillingGroup1"
+      name: "TestBillingGroup1",
     };
 
     it("creates, updates, and gets a billing group", async () => {
@@ -51,9 +48,12 @@ describe("BillingGroupsApi", () => {
       // Update
       const updates: BillingGroupEditable = {
         description: "updated billing group",
-        name: "UpdatedBGName"
+        name: "UpdatedBGName",
       };
-      const updatedBg = await billingGroupsApi.update(retrievedBg.id as string, updates);
+      const updatedBg = await billingGroupsApi.update(
+        retrievedBg.id as string,
+        updates
+      );
       expect(updatedBg).toBeDefined();
       expect(updatedBg?.description).toEqual("updated billing group");
     });
@@ -66,23 +66,30 @@ describe("BillingGroupsApi", () => {
       // ensure there are at least 3 billing groups present, to test pagination
       const bg1: BillingGroupEditable = {
         description: "Billing Group 1",
-        name: "TestBillingGroup1"
+        name: "TestBillingGroup1",
       };
-      const bg2: BillingGroupEditable = Object.assign({}, bg1, { description: "Billing Group 2", name: "TestBillingGroup2" });
-      const bg3: BillingGroupEditable = Object.assign({}, bg1, { description: "Billing Group 3", name: "TestBillingGroup2" });
+      const bg2: BillingGroupEditable = Object.assign({}, bg1, {
+        description: "Billing Group 2",
+        name: "TestBillingGroup2",
+      });
+      const bg3: BillingGroupEditable = Object.assign({}, bg1, {
+        description: "Billing Group 3",
+        name: "TestBillingGroup2",
+      });
 
       const billingGroupsApi = new BillingGroupsApi(config);
       await Promise.all([
-          billingGroupsApi.create(bg1),
-          billingGroupsApi.create(bg2),
-          billingGroupsApi.create(bg3)
-        ]
-      ).then((creationResults) => {
-        expect(creationResults.length).toEqual(3)
-        createdBillingGroups = createdBillingGroups.concat(creationResults);
-      }).catch((err) => {
-        throw(err);
-      });
+        billingGroupsApi.create(bg1),
+        billingGroupsApi.create(bg2),
+        billingGroupsApi.create(bg3),
+      ])
+        .then((creationResults) => {
+          expect(creationResults.length).toEqual(3);
+          createdBillingGroups = createdBillingGroups.concat(creationResults);
+        })
+        .catch((err) => {
+          throw err;
+        });
     });
 
     it("exists", () => {

@@ -3,7 +3,7 @@ import { Configuration } from "../configuration";
 import { CardsApi, CardOrdersApi } from "../api";
 import { CardOrderEditable } from "..";
 
-import {fail} from "./testUtilities";
+import { fail } from "./testUtilities";
 
 // Axios Mock
 import axios from "axios";
@@ -21,9 +21,9 @@ describe("CardOrdersApi", () => {
     username: "Totally Fake Key",
     baseOptions: {
       headers: {
-        'Content-Type': 'application/json'
-      }
-    }
+        "Content-Type": "application/json",
+      },
+    },
   });
 
   it("Card API can be instantiated", () => {
@@ -35,7 +35,7 @@ describe("CardOrdersApi", () => {
 
   describe("create", () => {
     const cardForCreate: CardOrderEditable = {
-      quantity: 200
+      quantity: 200,
     };
 
     it("exists", async () => {
@@ -46,20 +46,26 @@ describe("CardOrdersApi", () => {
 
     it("creates a card order", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake order id" }
+        data: { id: "fake order id" },
       }));
 
-      const cardOrder = await new CardOrdersApi(config).create("fake id", cardForCreate);
+      const cardOrder = await new CardOrdersApi(config).create(
+        "fake id",
+        cardForCreate
+      );
       expect(cardOrder).toBeDefined();
       expect(cardOrder?.id).toEqual("fake order id");
     });
 
     it("includes custom headers while it creates a card order", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake order id" }
+        data: { id: "fake order id" },
       }));
 
-      const cardOrder = await new CardOrdersApi(configWithBaseOptions).create("fake id", cardForCreate);
+      const cardOrder = await new CardOrdersApi(configWithBaseOptions).create(
+        "fake id",
+        cardForCreate
+      );
       expect(cardOrder).toBeDefined();
       expect(cardOrder?.id).toEqual("fake order id");
     });
@@ -74,7 +80,7 @@ describe("CardOrdersApi", () => {
 
     it("gets card orders for a card id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [ { id: "fake card order id" } ] }
+        data: { data: [{ id: "fake card order id" }] },
       }));
 
       const cardOrders = await new CardOrdersApi(config).get("fake id");
@@ -84,10 +90,12 @@ describe("CardOrdersApi", () => {
 
     it("includes custom headers while it gets card orders for a card id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [ { id: "fake card order id" } ] }
+        data: { data: [{ id: "fake card order id" }] },
       }));
 
-      const cardOrders = await new CardOrdersApi(configWithBaseOptions).get("fake id");
+      const cardOrders = await new CardOrdersApi(configWithBaseOptions).get(
+        "fake id"
+      );
       expect(cardOrders).toBeDefined();
       expect(cardOrders?.data?.length).toEqual(1);
     });
@@ -96,7 +104,7 @@ describe("CardOrdersApi", () => {
       axiosRequest.mockImplementationOnce(async () => {
         throw {
           message: "error",
-          response: { data: { error: { message: "error reported by API" } }}
+          response: { data: { error: { message: "error reported by API" } } },
         };
       });
 

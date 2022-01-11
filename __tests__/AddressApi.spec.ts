@@ -1,17 +1,9 @@
 import { Configuration } from "../configuration";
 
-import {
-  Address,
-  AddressEditable,
-  AddressList
-} from "../models";
+import { Address, AddressEditable, AddressList } from "../models";
 import { AddressesApi } from "../api/addresses-api";
 
-import {
-  TEN_MINUTES,
-  fail,
-  debugLog
-} from "./testUtilities";
+import { TEN_MINUTES, fail, debugLog } from "./testUtilities";
 
 describe("AddressApi", () => {
   jest.setTimeout(1000 * 60);
@@ -42,15 +34,19 @@ describe("AddressApi", () => {
     });
 
     it("correctly handles connections with invalid keys", async () => {
-      const badAddressApi = new AddressesApi(new Configuration({ username: 'not a real key' }));
+      const badAddressApi = new AddressesApi(
+        new Configuration({ username: "not a real key" })
+      );
       expect(badAddressApi).toBeDefined();
 
       try {
         const address = await badAddressApi.create(addressCreate);
         debugLog(address);
-        fail('Prior operation should have thrown.');
+        fail("Prior operation should have thrown.");
       } catch (err: any) {
-        expect(err.message).toEqual("Your API key is not valid. Please sign up on lob.com to get a valid api key.");
+        expect(err.message).toEqual(
+          "Your API key is not valid. Please sign up on lob.com to get a valid api key."
+        );
       }
     });
 
@@ -58,26 +54,28 @@ describe("AddressApi", () => {
       // ToDo: Rate limit needs to be thrown
       const addressApi = new AddressesApi(config);
 
-      const res = await Promise.all([...Array(100000)].fill(addressApi.create(addressCreate)));
+      const res = await Promise.all(
+        [...Array(100000)].fill(addressApi.create(addressCreate))
+      );
 
       for (const address of res as Address[]) {
         expect(address.id).toBeDefined();
         expect(address.description).toBeNull();
-        expect(address.name).toEqual('ADITI RAMASWAMY');
+        expect(address.name).toEqual("ADITI RAMASWAMY");
         expect(address.company).toBeNull();
         expect(address.phone).toBeNull();
         expect(address.email).toBeNull();
-        expect(address.address_line1).toEqual('360 BERRY ST');
+        expect(address.address_line1).toEqual("360 BERRY ST");
         expect(address.address_line2).toBeNull();
-        expect(address.address_city).toEqual('SAN FRANCISCO');
-        expect(address.address_state).toEqual('CA');
-        expect(address.address_zip).toEqual('94158-1611');
-        expect(address.address_country).toEqual('UNITED STATES');
+        expect(address.address_city).toEqual("SAN FRANCISCO");
+        expect(address.address_state).toEqual("CA");
+        expect(address.address_zip).toEqual("94158-1611");
+        expect(address.address_country).toEqual("UNITED STATES");
         expect(address.metadata).toBeDefined();
         expect(address.date_created).toBeDefined();
         expect(address.date_modified).toBeDefined();
         expect(address.recipient_moved).toBeNull();
-        expect(address.object).toEqual('address');
+        expect(address.object).toEqual("address");
       }
 
       fail("The Rate should have been limited at some point");
@@ -148,7 +146,7 @@ describe("AddressApi", () => {
     });
 
     it("lists addresses", async () => {
-      const response = await new AddressesApi(config).list() as AddressList;
+      const response = (await new AddressesApi(config).list()) as AddressList;
       expect(response).toBeDefined();
       expect(response.count).toBeDefined();
       expect(response?.data).toBeDefined();
@@ -169,7 +167,10 @@ describe("AddressApi", () => {
     });
 
     it("lists addresses given a before param", async () => {
-      const responseBefore = await new AddressesApi(config).list(10, previousUrl);
+      const responseBefore = await new AddressesApi(config).list(
+        10,
+        previousUrl
+      );
       expect(responseBefore).toBeDefined();
       expect(responseBefore?.data).toBeDefined();
       const addressList3: Address[] = responseBefore?.data || [];
@@ -178,10 +179,10 @@ describe("AddressApi", () => {
 
     it("lists addresses given an include param", async () => {
       const response = await new AddressesApi(config).list(
-          10,
-          undefined,
-          undefined,
-          ["total_es"]
+        10,
+        undefined,
+        undefined,
+        ["total_es"]
       );
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
@@ -203,11 +204,12 @@ describe("AddressApi", () => {
       expect(address).toBeDefined();
       expect(address?.id).toBeDefined();
 
-      const deletedAddress = await new AddressesApi(config).delete(address?.id as string);
+      const deletedAddress = await new AddressesApi(config).delete(
+        address?.id as string
+      );
       expect(deletedAddress).toBeDefined();
       expect(deletedAddress?.id).toEqual(address?.id);
       expect(deletedAddress?.deleted).toEqual(true);
     });
   });
-
 });

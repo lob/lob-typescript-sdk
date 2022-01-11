@@ -1,10 +1,6 @@
 import { Configuration } from "../configuration";
 
-import {
-  Card,
-  CardEditable,
-  CardEditableSizeEnum
-} from "../models";
+import { Card, CardEditable, CardEditableSizeEnum } from "../models";
 import { CardsApi, CardOrdersApi } from "../api";
 import { CardOrderEditable } from "..";
 
@@ -49,21 +45,12 @@ describe("CardOrdersApi", () => {
       dummyCard = await cardsApi.create(editableCard);
 
       if (!dummyCard.id) {
-        throw new Error('Unable to create required data');
+        throw new Error("Unable to create required data");
       }
 
-      await cardOrdersApi.create(
-          dummyCard.id,
-          dummyCardOrder
-      );
-      await cardOrdersApi.create(
-          dummyCard.id,
-          dummyCardOrder2
-      );
-      await cardOrdersApi.create(
-          dummyCard.id,
-          dummyCardOrder3
-      );
+      await cardOrdersApi.create(dummyCard.id, dummyCardOrder);
+      await cardOrdersApi.create(dummyCard.id, dummyCardOrder2);
+      await cardOrdersApi.create(dummyCard.id, dummyCardOrder3);
     });
 
     it("all individual Card functions exists", () => {
@@ -79,9 +66,7 @@ describe("CardOrdersApi", () => {
       const cardOrdersApi = new CardOrdersApi(config);
       const dummyCardId = dummyCard.id || "nope";
 
-      const retrievedCardOrders = await cardOrdersApi.get(
-        dummyCardId
-      );
+      const retrievedCardOrders = await cardOrdersApi.get(dummyCardId);
       expect(retrievedCardOrders).toBeDefined();
     });
   });

@@ -13,48 +13,48 @@
  */
 
 
-import { Postcard } from './postcard';
+import { SelfMailer } from './self-mailer';
 
 /**
  * 
  * @export
- * @interface PostcardList
+ * @interface SelfMailerList
  */
-export class PostcardList {
+export class SelfMailerList {
     /**
-     * list of postcards
-     * @type {Array<Postcard>}
-     * @memberof PostcardList
+     * list of self-mailers
+     * @type {Array<SelfMailer>}
+     * @memberof SelfMailerList
      */
-    'data'?: Array<Postcard>;
+    'data'?: Array<SelfMailer>;
     /**
      * Value is type of resource.
      * @type {string}
-     * @memberof PostcardList
+     * @memberof SelfMailerList
      */
     'object'?: string;
     /**
      * url of next page of items in list.
      * @type {string}
-     * @memberof PostcardList
+     * @memberof SelfMailerList
      */
     'next_url'?: string | null;
     /**
      * url of previous page of items in list.
      * @type {string}
-     * @memberof PostcardList
+     * @memberof SelfMailerList
      */
     'previous_url'?: string | null;
     /**
      * number of resources in a set
      * @type {number}
-     * @memberof PostcardList
+     * @memberof SelfMailerList
      */
     'count'?: number;
     /**
      * indicates the total number of records. Provided when the request specifies an \"include\" query parameter
      * @type {number}
-     * @memberof PostcardList
+     * @memberof SelfMailerList
      */
     'total_count'?: number;
 }
