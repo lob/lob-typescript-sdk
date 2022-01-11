@@ -13,26 +13,20 @@
  */
 
 
-import { CountryExtended } from './country-extended';
+import { MultipleComponentsIntl } from './multiple-components-intl';
 
 /**
  * 
  * @export
- * @interface SingleLineAddressIntl
+ * @interface IntlVerificationsPayload
  */
-export class SingleLineAddressIntl {
-    /**
-     * The entire address in one string (e.g., \"370 Water St C1N 1C4\"). 
-     * @type {string}
-     * @memberof SingleLineAddressIntl
-     */
-    'address'?: string;
+export class IntlVerificationsPayload {
     /**
      * 
-     * @type {CountryExtended}
-     * @memberof SingleLineAddressIntl
+     * @type {Array<MultipleComponentsIntl>}
+     * @memberof IntlVerificationsPayload
      */
-    'country'?: CountryExtended;
+    'addresses'?: Array<MultipleComponentsIntl>;
 }
 
 

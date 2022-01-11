@@ -51,6 +51,12 @@ export class AddressList {
      * @memberof AddressList
      */
     'count'?: number;
+    /**
+     * Indicates the total number of records. Provided when the request specifies an \"include\" query parameter
+     * @type {number}
+     * @memberof AddressList
+     */
+    'total_count'?: number;
 }
 
 

@@ -24,6 +24,10 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 import { IntlVerification } from '../models';
 // @ts-ignore
 import { IntlVerificationWritable } from '../models';
+// @ts-ignore
+import { IntlVerifications } from '../models';
+// @ts-ignore
+import { IntlVerificationsPayload } from '../models';
 /**
  * IntlVerificationsApi - axios parameter creator
  * @export
@@ -31,7 +35,47 @@ import { IntlVerificationWritable } from '../models';
 export const IntlVerificationsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Verify an international (except US or US territories) address _with a live API key_. Requests to this endpoint with a test API key will return a dummy response based on the primary line you input.
+         * Verify a list of international (except US or US territories) address with a live API key.
+         * @summary verifyBulk
+         * @param {IntlVerificationsPayload} intlVerificationsPayload 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bulkIntlVerifications: async (intlVerificationsPayload: IntlVerificationsPayload, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'intlVerificationsPayload' is not null or undefined
+            assertParamExists('bulkIntlVerifications', 'intlVerificationsPayload', intlVerificationsPayload)
+            const localVarPath = `/bulk/intl_verifications`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(intlVerificationsPayload, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Verify an international (except US or US territories) address with a live API key.
          * @summary verifySingle
          * @param {IntlVerificationWritable} intlVerificationWritable 
          * @param {'native' | 'match'} [xLangOutput] * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English. 
@@ -86,7 +130,18 @@ export const IntlVerificationsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = IntlVerificationsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Verify an international (except US or US territories) address _with a live API key_. Requests to this endpoint with a test API key will return a dummy response based on the primary line you input.
+         * Verify a list of international (except US or US territories) address with a live API key.
+         * @summary verifyBulk
+         * @param {IntlVerificationsPayload} intlVerificationsPayload 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bulkIntlVerifications(intlVerificationsPayload: IntlVerificationsPayload, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IntlVerifications>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bulkIntlVerifications(intlVerificationsPayload, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Verify an international (except US or US territories) address with a live API key.
          * @summary verifySingle
          * @param {IntlVerificationWritable} intlVerificationWritable 
          * @param {'native' | 'match'} [xLangOutput] * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English. 
@@ -108,7 +163,24 @@ export const IntlVerificationsApiFp = function(configuration?: Configuration) {
  */
 export class IntlVerificationsApi extends BaseAPI {
     /**
-     * Verify an international (except US or US territories) address _with a live API key_. Requests to this endpoint with a test API key will return a dummy response based on the primary line you input.
+     * Verify a list of international (except US or US territories) address with a live API key.
+     * @summary verifyBulk
+     * @param {IntlVerificationsPayload} intlVerificationsPayload 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IntlVerificationsApi
+     */
+    public verifyBulk(intlVerificationsPayload: IntlVerificationsPayload, options?: AxiosRequestConfig) {
+        return IntlVerificationsApiFp(this.configuration).bulkIntlVerifications(intlVerificationsPayload, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
+            if (error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
+            }
+            throw error;
+          });
+    }
+
+    /**
+     * Verify an international (except US or US territories) address with a live API key.
      * @summary verifySingle
      * @param {IntlVerificationWritable} intlVerificationWritable 
      * @param {'native' | 'match'} [xLangOutput] * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English. 

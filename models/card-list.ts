@@ -51,6 +51,12 @@ export class CardList {
      * @memberof CardList
      */
     'count'?: number;
+    /**
+     * Indicates the total number of records. Provided when the request specifies an \"include\" query parameter
+     * @type {number}
+     * @memberof CardList
+     */
+    'total_count'?: number;
 }
 
 

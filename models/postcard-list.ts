@@ -51,6 +51,12 @@ export class PostcardList {
      * @memberof PostcardList
      */
     'count'?: number;
+    /**
+     * Indicates the total number of records. Provided when the request specifies an \"include\" query parameter
+     * @type {number}
+     * @memberof PostcardList
+     */
+    'total_count'?: number;
 }
 
 

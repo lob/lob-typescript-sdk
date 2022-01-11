@@ -19,7 +19,7 @@
  * @export
  * @interface IntlComponents
  */
-export interface IntlComponents {
+export class IntlComponents {
     /**
      * The numeric or alphanumeric part of an address preceding the street name. Often the house, building, or PO Box number.
      * @type {string}

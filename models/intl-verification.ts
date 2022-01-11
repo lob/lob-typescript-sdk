@@ -20,13 +20,20 @@ import { IntlComponents } from './intl-components';
  * @export
  * @interface IntlVerification
  */
-export interface IntlVerification {
+export class IntlVerification {
     /**
      * Unique identifier prefixed with `intl_ver_`.
      * @type {string}
      * @memberof IntlVerification
      */
-    'id'?: string;
+    private '_id'?: string;
+    public get id() { return (this._id || undefined) as string; }
+    public set id(newValue: string) {
+        if(newValue && !/^intl_ver_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid id provided");
+        }
+        this._id = newValue;
+    }
     /**
      * The intended recipient, typically a person\'s or firm\'s name.
      * @type {string}

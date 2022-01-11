@@ -44,14 +44,18 @@ models/inline-response200.ts
 models/intl-components.ts
 models/intl-verification-writable.ts
 models/intl-verification.ts
+models/intl-verifications-payload.ts
+models/intl-verifications.ts
 models/letter-custom-envelope.ts
 models/letter-deletion.ts
 models/letter-editable.ts
 models/letter-list.ts
 models/letter.ts
 models/lob-confidence-score.ts
+models/lob-error.ts
 models/mail-type.ts
 models/multiple-components-intl.ts
+models/multiple-components-list.ts
 models/multiple-components.ts
 models/postcard-deletion.ts
 models/postcard-editable.ts
@@ -74,4 +78,5 @@ models/us-autocompletions.ts
 models/us-components.ts
 models/us-verification.ts
 models/us-verifications-writable.ts
+models/us-verifications.ts
 models/zip-code-type.ts

@@ -13,26 +13,27 @@
  */
 
 
-import { CountryExtended } from './country-extended';
+import { IntlVerification } from './intl-verification';
+import { LobError } from './lob-error';
 
 /**
  * 
  * @export
- * @interface SingleLineAddressIntl
+ * @interface IntlVerifications
  */
-export class SingleLineAddressIntl {
-    /**
-     * The entire address in one string (e.g., \"370 Water St C1N 1C4\"). 
-     * @type {string}
-     * @memberof SingleLineAddressIntl
-     */
-    'address'?: string;
+export class IntlVerifications {
     /**
      * 
-     * @type {CountryExtended}
-     * @memberof SingleLineAddressIntl
+     * @type {Array<IntlVerification | LobError>}
+     * @memberof IntlVerifications
      */
-    'country'?: CountryExtended;
+    'addresses'?: Array<IntlVerification | LobError>;
+    /**
+     * Indicates whether any errors occurred during the verification process.
+     * @type {boolean}
+     * @memberof IntlVerifications
+     */
+    'errors'?: boolean;
 }
 
 

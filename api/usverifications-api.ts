@@ -21,7 +21,11 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
+import { MultipleComponentsList } from '../models';
+// @ts-ignore
 import { UsVerification } from '../models';
+// @ts-ignore
+import { UsVerifications } from '../models';
 // @ts-ignore
 import { UsVerificationsWritable } from '../models';
 /**
@@ -31,10 +35,55 @@ import { UsVerificationsWritable } from '../models';
 export const USVerificationsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Verify a US or US territory address _with a live API key_. The address can be in components (e.g. `primary_line` is \"210 King Street\", `zip_code` is \"94107\") or as a single string (e.g. \"210 King Street 94107\"), but not as both. Requests using a test API key validate required fields but return empty values unless specific `primary_line` values are provided. See the [US Verifications Test Environment](#section/US-Verifications-Test-Env) for details.
+         * Verify a list of US or US territory addresses with a live API key.
+         * @summary verifyBulk
+         * @param {MultipleComponentsList} multipleComponentsList 
+         * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bulkUsVerifications: async (multipleComponentsList: MultipleComponentsList, _case?: 'upper' | 'proper', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'multipleComponentsList' is not null or undefined
+            assertParamExists('bulkUsVerifications', 'multipleComponentsList', multipleComponentsList)
+            const localVarPath = `/bulk/us_verifications`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (_case !== undefined) {
+                localVarQueryParameter['case'] = _case;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(multipleComponentsList, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Verify a US or US territory address with a live API key.
          * @summary verifySingle
          * @param {UsVerificationsWritable} usVerificationsWritable 
-         * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively. Only affects &#x60;recipient&#x60;, &#x60;primary_line&#x60;, &#x60;secondary_line&#x60;, &#x60;urbanization&#x60;, and &#x60;last_line&#x60;. Default casing is &#x60;upper&#x60;.
+         * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -86,10 +135,22 @@ export const USVerificationsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = USVerificationsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Verify a US or US territory address _with a live API key_. The address can be in components (e.g. `primary_line` is \"210 King Street\", `zip_code` is \"94107\") or as a single string (e.g. \"210 King Street 94107\"), but not as both. Requests using a test API key validate required fields but return empty values unless specific `primary_line` values are provided. See the [US Verifications Test Environment](#section/US-Verifications-Test-Env) for details.
+         * Verify a list of US or US territory addresses with a live API key.
+         * @summary verifyBulk
+         * @param {MultipleComponentsList} multipleComponentsList 
+         * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bulkUsVerifications(multipleComponentsList: MultipleComponentsList, _case?: 'upper' | 'proper', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsVerifications>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bulkUsVerifications(multipleComponentsList, _case, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Verify a US or US territory address with a live API key.
          * @summary verifySingle
          * @param {UsVerificationsWritable} usVerificationsWritable 
-         * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively. Only affects &#x60;recipient&#x60;, &#x60;primary_line&#x60;, &#x60;secondary_line&#x60;, &#x60;urbanization&#x60;, and &#x60;last_line&#x60;. Default casing is &#x60;upper&#x60;.
+         * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -108,10 +169,28 @@ export const USVerificationsApiFp = function(configuration?: Configuration) {
  */
 export class USVerificationsApi extends BaseAPI {
     /**
-     * Verify a US or US territory address _with a live API key_. The address can be in components (e.g. `primary_line` is \"210 King Street\", `zip_code` is \"94107\") or as a single string (e.g. \"210 King Street 94107\"), but not as both. Requests using a test API key validate required fields but return empty values unless specific `primary_line` values are provided. See the [US Verifications Test Environment](#section/US-Verifications-Test-Env) for details.
+     * Verify a list of US or US territory addresses with a live API key.
+     * @summary verifyBulk
+     * @param {MultipleComponentsList} multipleComponentsList 
+     * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof USVerificationsApi
+     */
+    public verifyBulk(multipleComponentsList: MultipleComponentsList, _case?: 'upper' | 'proper', options?: AxiosRequestConfig) {
+        return USVerificationsApiFp(this.configuration).bulkUsVerifications(multipleComponentsList, _case, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
+            if (error.response?.data?.error?.message) {
+                error.message = error.response.data.error.message;
+            }
+            throw error;
+          });
+    }
+
+    /**
+     * Verify a US or US territory address with a live API key.
      * @summary verifySingle
      * @param {UsVerificationsWritable} usVerificationsWritable 
-     * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively. Only affects &#x60;recipient&#x60;, &#x60;primary_line&#x60;, &#x60;secondary_line&#x60;, &#x60;urbanization&#x60;, and &#x60;last_line&#x60;. Default casing is &#x60;upper&#x60;.
+     * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof USVerificationsApi
