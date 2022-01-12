@@ -1,91 +1,109 @@
 import { Configuration } from "../configuration";
 
-import { BillingGroup, BillingGroupEditable } from "../models";
-import { BillingGroupsApi } from "../api";
+import { ChecksApi } from "../api/checks-api";
+import { CheckEditable } from "../models/check-editable";
+import { Check } from "../models/check";
 
 describe("BillingGroupsApi", () => {
   const config: Configuration = new Configuration({
     username: process.env.LOB_API_KEY,
   });
 
-  it("Billing Groups API can be instantiated", () => {
-    const billingGroupsApi = new BillingGroupsApi(config);
-    expect(billingGroupsApi).toBeDefined();
-    expect(typeof billingGroupsApi).toEqual("object");
-    expect(billingGroupsApi).toBeInstanceOf(BillingGroupsApi);
+  it("Checks API can be instantiated", () => {
+    const checksApi = new ChecksApi(config);
+    expect(checksApi).toBeDefined();
+    expect(typeof checksApi).toEqual("object");
+    expect(checksApi).toBeInstanceOf(ChecksApi);
   });
 
-  it("all individual BillingGroup functions exists", () => {
-    const billingGroupsApi = new BillingGroupsApi(config);
-    expect(billingGroupsApi.create).toBeDefined();
-    expect(typeof billingGroupsApi.create).toEqual("function");
+  it("all individual Check functions exists", () => {
+    const checksApi = new ChecksApi(config);
+    expect(checksApi.Cancel).toBeDefined();
+    expect(typeof checksApi.Cancel).toEqual("function");
 
-    expect(billingGroupsApi.get).toBeDefined();
-    expect(typeof billingGroupsApi.get).toEqual("function");
+    expect(checksApi.Create).toBeDefined();
+    expect(typeof checksApi.Create).toEqual("function");
 
-    expect(billingGroupsApi.update).toBeDefined();
-    expect(typeof billingGroupsApi.update).toEqual("function");
+    expect(checksApi.List).toBeDefined();
+    expect(typeof checksApi.List).toEqual("function");
+
+    expect(checksApi.Retrieve).toBeDefined();
+    expect(typeof checksApi.Retrieve).toEqual("function");
   });
 
-  describe("performs single-BillingGroup operations", () => {
-    const createBg: BillingGroupEditable = {
-      description: "Test Billing Group Created",
-      name: "TestBillingGroup1",
+  describe("performs single-Check operations", () => {
+    const createCheck: CheckEditable = {
+      description: "updated check",
+      from: "fake from",
+      bank_account: "fake account",
+      amount: 100,
     };
 
-    it("creates, updates, and gets a billing group", async () => {
-      const billingGroupsApi = new BillingGroupsApi(config);
+    it("creates, retrieves, cancels, and lists a check", async () => {
+      const checksApi = new ChecksApi(config);
       // Create
-      const createdBg = await new BillingGroupsApi(config).create(createBg);
-      expect(createdBg?.id).toBeDefined();
-      expect(createdBg?.description).toEqual(createBg.description);
+      const createdCheck = await new ChecksApi(config).Create(createCheck);
+      expect(createdCheck?.id).toBeDefined();
+      expect(createdCheck?.description).toEqual(createCheck.description);
 
-      // Get
-      const retrievedBg = await billingGroupsApi.get(createdBg.id as string);
-      expect(retrievedBg).toBeDefined();
-      expect(retrievedBg?.id).toEqual(createdBg?.id);
+      // Retrieve
+      const retrievedCheck = await checksApi.Retrieve(createdCheck.id as string);
+      expect(retrievedCheck).toBeDefined();
+      expect(retrievedCheck?.id).toEqual(createdCheck?.id);
 
-      // Update
-      const updates: BillingGroupEditable = {
-        description: "updated billing group",
-        name: "UpdatedBGName",
+      // Cancel
+      const cancelledCheck = await checksApi.Cancel(createdCheck.id as string);
+      expect(cancelledCheck).toBeDefined();
+      expect(cancelledCheck?.id).toEqual(createdCheck?.id);
+
+      // List
+      const updates: CheckEditable = {
+        description: "updated check",
+        from: "fake from",
+        bank_account: "fake account",
+        amount: 100,
       };
-      const updatedBg = await billingGroupsApi.update(
-        retrievedBg.id as string,
-        updates
+      const updatedCheck = await checksApi.List(
+        1
       );
-      expect(updatedBg).toBeDefined();
-      expect(updatedBg?.description).toEqual("updated billing group");
+      expect(updatedCheck).toBeDefined();
+      expect(updatedCheck?.description).toEqual("updated check");
     });
   });
 
-  describe("list billing groups", () => {
-    let createdBillingGroups: BillingGroup[] = [];
+  describe("list checks", () => {
+    let createdChecks: Check[] = [];
 
     beforeAll(async () => {
       // ensure there are at least 3 billing groups present, to test pagination
-      const bg1: BillingGroupEditable = {
-        description: "Billing Group 1",
-        name: "TestBillingGroup1",
+      const check1: CheckEditable = {
+        description: "check 1",
+        from: "fake from 1",
+        bank_account: "fake account 1",
+        amount: 100,
       };
-      const bg2: BillingGroupEditable = Object.assign({}, bg1, {
-        description: "Billing Group 2",
-        name: "TestBillingGroup2",
+      const check2: CheckEditable = Object.assign({}, check1, {
+        description: "Check 2",
+        from: "fake from 2",
+        bank_account: "fake account 2",
+        amount: 200,
       });
-      const bg3: BillingGroupEditable = Object.assign({}, bg1, {
-        description: "Billing Group 3",
-        name: "TestBillingGroup2",
+      const check3: CheckEditable = Object.assign({}, check1, {
+        description: "Check 3",
+        from: "fake from 3",
+        bank_account: "fake account 3",
+        amount: 300,
       });
 
-      const billingGroupsApi = new BillingGroupsApi(config);
+      const checksApi = new ChecksApi(config);
       await Promise.all([
-        billingGroupsApi.create(bg1),
-        billingGroupsApi.create(bg2),
-        billingGroupsApi.create(bg3),
+        checksApi.Create(check1),
+        checksApi.Create(check2),
+        checksApi.Create(check3),
       ])
         .then((creationResults) => {
           expect(creationResults.length).toEqual(3);
-          createdBillingGroups = createdBillingGroups.concat(creationResults);
+          createdChecks = createdChecks.concat(creationResults);
         })
         .catch((err) => {
           throw err;
@@ -93,13 +111,13 @@ describe("BillingGroupsApi", () => {
     });
 
     it("exists", () => {
-      const billingGroupsApi = new BillingGroupsApi(config);
-      expect(billingGroupsApi.list).toBeDefined();
-      expect(typeof billingGroupsApi.list).toEqual("function");
+      const checksApi = new ChecksApi(config);
+      expect(checksApi.List).toBeDefined();
+      expect(typeof checksApi.List).toEqual("function");
     });
 
-    it("lists billing groups", async () => {
-      const response = await new BillingGroupsApi(config).list();
+    it("lists checks", async () => {
+      const response = await new ChecksApi(config).List();
       expect(response?.data).toBeDefined();
       const bgList = response?.data || [];
       expect(bgList.length).toBeGreaterThan(0);
