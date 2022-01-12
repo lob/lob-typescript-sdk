@@ -109,8 +109,6 @@ export const ChecksApiAxiosParamCreator = function (configuration?: Configuratio
                 localVarHeaderParameter['Idempotency-Key'] = String(idempotencyKey);
             }
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
