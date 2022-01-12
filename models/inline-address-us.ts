@@ -13,20 +13,13 @@
  */
 
 
+import { AddressEditableUs } from './address-editable-us';
 
 /**
- * A description of the ZIP code type. For more detailed information about each ZIP code type, see [US Verification Details](#tag/US-Verification-Types). 
+ * @type InlineAddressUs
  * @export
- * @enum {string}
  */
-
-export enum ZipCodeType {
-    Standard = 'standard',
-    PoBox = 'po_box',
-    Unique = 'unique',
-    Military = 'military',
-    Empty = ''
-}
+export type InlineAddressUs = AddressEditableUs;
 
 
 

@@ -13,14 +13,21 @@
  */
 
 
-import { CheckEditableProps } from './check-editable-props';
+import { AddressUs } from './address-us';
 
 /**
- * @type CheckEditable
+ * 
  * @export
+ * @interface FromUs
  */
-export type CheckEditable = CheckEditableProps;
-
+export class FromUs {
+    /**
+     * 
+     * @type {AddressUs}
+     * @memberof FromUs
+     */
+    'from'?: AddressUs;
+}
 
 
 /**

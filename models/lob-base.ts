@@ -13,14 +13,38 @@
  */
 
 
-import { CheckEditableProps } from './check-editable-props';
 
 /**
- * @type CheckEditable
+ * 
  * @export
+ * @interface LobBase
  */
-export type CheckEditable = CheckEditableProps;
-
+export class LobBase {
+    /**
+     * A timestamp in ISO 8601 format of the date the resource was created.
+     * @type {string}
+     * @memberof LobBase
+     */
+    'date_created': string;
+    /**
+     * A timestamp in ISO 8601 format of the date the resource was last modified.
+     * @type {string}
+     * @memberof LobBase
+     */
+    'date_modified': string;
+    /**
+     * Only returned if the resource has been successfully deleted.
+     * @type {boolean}
+     * @memberof LobBase
+     */
+    'deleted'?: boolean;
+    /**
+     * Value is type of resource.
+     * @type {string}
+     * @memberof LobBase
+     */
+    'object': string;
+}
 
 
 /**

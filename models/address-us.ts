@@ -13,13 +13,14 @@
  */
 
 
-import { CheckEditableProps } from './check-editable-props';
+import { AddressUsAllOf } from './address-us-all-of';
+import { LobBase } from './lob-base';
 
 /**
- * @type CheckEditable
+ * @type AddressUs
  * @export
  */
-export type CheckEditable = CheckEditableProps;
+export type AddressUs = AddressUsAllOf & LobBase;
 
 
 
