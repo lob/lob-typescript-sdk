@@ -47,11 +47,10 @@ export const SelfMailersApiAxiosParamCreator = function (configuration?: Configu
          * @summary create
          * @param {SelfMailerEditable} selfMailerEditable 
          * @param {string} [idempotencyKey] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
-         * @param {string} [idempotencyKey2] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        selfMailerCreate: async (selfMailerEditable: SelfMailerEditable, idempotencyKey?: string, idempotencyKey2?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        selfMailerCreate: async (selfMailerEditable: SelfMailerEditable, idempotencyKey?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'selfMailerEditable' is not null or undefined
             assertParamExists('selfMailerCreate', 'selfMailerEditable', selfMailerEditable)
             const localVarPath = `/self_mailers`;
@@ -69,10 +68,6 @@ export const SelfMailersApiAxiosParamCreator = function (configuration?: Configu
             // authentication basicAuth required
             // http basic authentication required
             setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            if (idempotencyKey2 !== undefined) {
-                localVarQueryParameter['idempotency_key'] = idempotencyKey2;
-            }
 
             if (idempotencyKey !== undefined && idempotencyKey !== null) {
                 localVarHeaderParameter['Idempotency-Key'] = String(idempotencyKey);
@@ -272,12 +267,11 @@ export const SelfMailersApiFp = function(configuration?: Configuration) {
          * @summary create
          * @param {SelfMailerEditable} selfMailerEditable 
          * @param {string} [idempotencyKey] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
-         * @param {string} [idempotencyKey2] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async selfMailerCreate(selfMailerEditable: SelfMailerEditable, idempotencyKey?: string, idempotencyKey2?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SelfMailer>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.selfMailerCreate(selfMailerEditable, idempotencyKey, idempotencyKey2, options);
+        async selfMailerCreate(selfMailerEditable: SelfMailerEditable, idempotencyKey?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SelfMailer>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.selfMailerCreate(selfMailerEditable, idempotencyKey, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -338,13 +332,12 @@ export class SelfMailersApi extends BaseAPI {
      * @summary create
      * @param {SelfMailerEditable} selfMailerEditable 
      * @param {string} [idempotencyKey] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
-     * @param {string} [idempotencyKey2] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SelfMailersApi
      */
-    public create(selfMailerEditable: SelfMailerEditable, idempotencyKey?: string, idempotencyKey2?: string, options?: AxiosRequestConfig) {
-        return SelfMailersApiFp(this.configuration).selfMailerCreate(selfMailerEditable, idempotencyKey, idempotencyKey2, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
+    public create(selfMailerEditable: SelfMailerEditable, idempotencyKey?: string, options?: AxiosRequestConfig) {
+        return SelfMailersApiFp(this.configuration).selfMailerCreate(selfMailerEditable, idempotencyKey, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
             }
