@@ -6,6 +6,7 @@ import { BillingGroupsApi } from "../api";
 import axios from "axios";
 
 import { fail } from "./testUtilities";
+import {DATE_FILTER} from "./testFixtures";
 
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
 
@@ -412,12 +413,11 @@ describe("BillingGroupsApi", () => {
         };
       });
 
-      const dateFilter = { gt: "2020-01-01", lt: "2020-01-31T12" };
       const bgApi = await new BillingGroupsApi(config).list(
         undefined,
         undefined,
         undefined,
-        dateFilter
+          DATE_FILTER
       );
       expect(bgApi).toBeDefined();
       expect(bgApi?.data?.length).toEqual(1);
@@ -433,13 +433,12 @@ describe("BillingGroupsApi", () => {
         };
       });
 
-      const dateFilter = { gt: "2020-01-01", lt: "2020-01-31T12" };
       const bgApi = await new BillingGroupsApi(config).list(
         undefined,
         undefined,
         undefined,
         undefined,
-        dateFilter
+          DATE_FILTER
       );
       expect(bgApi).toBeDefined();
       expect(bgApi?.data?.length).toEqual(1);

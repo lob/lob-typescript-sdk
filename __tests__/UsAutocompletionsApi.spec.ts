@@ -31,12 +31,11 @@ describe("USAutocompletionsApi", () => {
     });
 
     it("autocompletes given input", async () => {
-      const autocompletionApi = new USAutocompletionsApi(config);
-      const response = await autocompletionApi.autocomplete(
+      const response = await new USAutocompletionsApi(config).autocomplete(
         autocompletionInput
       );
       expect(response.suggestions).toBeDefined();
-      expect(response?.suggestions?.length).toBeGreaterThan(0);
+      expect(response.suggestions?.length).toBeGreaterThan(0);
     });
   });
 });

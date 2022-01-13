@@ -1,12 +1,14 @@
-import { Configuration } from "../configuration";
+import {Configuration} from "../configuration";
 
-import { SelfMailerEditable, CountryExtended } from "../models";
-import { SelfMailersApi } from "../api";
+import {CountryExtended, MailType, SelfMailerEditable, SelfMailerSize} from "../models";
+import {SelfMailersApi} from "../api";
 
-import { fail } from "./testUtilities";
+import {fail} from "./testUtilities";
 
 // Axios Mock
 import axios from "axios";
+import {DATE_FILTER} from "./testFixtures";
+
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
 jest.mock("axios", () => ({
   request: jest.fn(),
@@ -27,6 +29,13 @@ describe("SelfMailersApi", () => {
 
   it("self-mailers API can be instantiated", () => {
     const selfMailersApi = new SelfMailersApi(config);
+    expect(selfMailersApi).toBeDefined();
+    expect(typeof selfMailersApi).toEqual("object");
+    expect(selfMailersApi).toBeInstanceOf(SelfMailersApi);
+  });
+
+  it("self-mailers API can be instantiated with base options", () => {
+    const selfMailersApi = new SelfMailersApi(configWithBaseOptions);
     expect(selfMailersApi).toBeDefined();
     expect(typeof selfMailersApi).toEqual("object");
     expect(selfMailersApi).toBeInstanceOf(SelfMailersApi);
@@ -83,6 +92,22 @@ describe("SelfMailersApi", () => {
       const selfMailersApi = await new SelfMailersApi(
         configWithBaseOptions
       ).create(sfmEditableMock);
+      expect(selfMailersApi).toBeDefined();
+      expect(selfMailersApi?.id).toEqual("fake self-mailer id");
+    });
+
+    it("creates a self-mailer with idempotency", async () => {
+      axiosRequest.mockImplementationOnce(async (reqParams) => {
+        expect(reqParams.headers["Idempotency-Key"]).toBeDefined();
+        expect(reqParams.headers["Idempotency-Key"]).toEqual("fake idempotency");
+        return {
+          data: {id: "fake self-mailer id"}
+        };
+      });
+
+      const selfMailersApi = await new SelfMailersApi(
+          configWithBaseOptions,
+      ).create(sfmEditableMock, "fake idempotency");
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.id).toEqual("fake self-mailer id");
     });
@@ -368,7 +393,7 @@ describe("SelfMailersApi", () => {
         data: { data: [{ id: "fake self-mailer id" }] },
       }));
 
-      const selfMailersApi = await new SelfMailersApi(config).list(1, "fake");
+      const selfMailersApi = await new SelfMailersApi(config).list(undefined, "fake");
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.data?.length).toEqual(1);
     });
@@ -379,9 +404,135 @@ describe("SelfMailersApi", () => {
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(
-        1,
-        "fake",
+        undefined,
+        undefined,
         "id"
+      );
+      expect(selfMailersApi).toBeDefined();
+      expect(selfMailersApi?.data?.length).toEqual(1);
+    });
+
+    it("should handle the include correctly", async () => {
+      axiosRequest.mockImplementationOnce(async () => ({
+        data: { data: [{ id: "fake self-mailer id" }] },
+      }));
+
+      const selfMailersApi = await new SelfMailersApi(config).list(
+        undefined,
+        undefined,
+        undefined,
+        ["include array"]
+      );
+      expect(selfMailersApi).toBeDefined();
+      expect(selfMailersApi?.data?.length).toEqual(1);
+    });
+
+    it("should handle the dateCreated correctly", async () => {
+      axiosRequest.mockImplementationOnce(async () => ({
+        data: { data: [{ id: "fake self-mailer id" }] },
+      }));
+
+      const selfMailersApi = await new SelfMailersApi(config).list(
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          DATE_FILTER
+      );
+      expect(selfMailersApi).toBeDefined();
+      expect(selfMailersApi?.data?.length).toEqual(1);
+    });
+
+    it("should handle the metadata correctly", async () => {
+      axiosRequest.mockImplementationOnce(async () => ({
+        data: { data: [{ id: "fake self-mailer id" }] },
+      }));
+
+      const selfMailersApi = await new SelfMailersApi(config).list(
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          { what: "this" }
+      );
+      expect(selfMailersApi).toBeDefined();
+      expect(selfMailersApi?.data?.length).toEqual(1);
+    });
+
+    it("should handle the size correctly", async () => {
+      axiosRequest.mockImplementationOnce(async () => ({
+        data: { data: [{ id: "fake self-mailer id" }] },
+      }));
+
+      const selfMailersApi = await new SelfMailersApi(config).list(
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          SelfMailerSize._6x18Bifold
+      );
+      expect(selfMailersApi).toBeDefined();
+      expect(selfMailersApi?.data?.length).toEqual(1);
+    });
+
+    it("should handle the scheduled correctly", async () => {
+      axiosRequest.mockImplementationOnce(async () => ({
+        data: { data: [{ id: "fake self-mailer id" }] },
+      }));
+
+      const selfMailersApi = await new SelfMailersApi(config).list(
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          true
+      );
+      expect(selfMailersApi).toBeDefined();
+      expect(selfMailersApi?.data?.length).toEqual(1);
+    });
+
+    it("should handle the sendDate correctly", async () => {
+      axiosRequest.mockImplementationOnce(async () => ({
+        data: { data: [{ id: "fake self-mailer id" }] },
+      }));
+
+      const selfMailersApi = await new SelfMailersApi(config).list(
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          DATE_FILTER
+      );
+      expect(selfMailersApi).toBeDefined();
+      expect(selfMailersApi?.data?.length).toEqual(1);
+    });
+
+    it("should handle the mailType correctly", async () => {
+      axiosRequest.mockImplementationOnce(async () => ({
+        data: { data: [{ id: "fake self-mailer id" }] },
+      }));
+
+      const selfMailersApi = await new SelfMailersApi(config).list(
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          MailType.FirstClass
       );
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.data?.length).toEqual(1);
@@ -393,10 +544,17 @@ describe("SelfMailersApi", () => {
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(
-        1,
-        "before",
-        "after",
-        ["include array"]
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          { date_created: "asc" }
       );
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.data?.length).toEqual(1);

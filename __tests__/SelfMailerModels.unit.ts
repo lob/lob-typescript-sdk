@@ -1,15 +1,19 @@
-import { BankAccount, BankAccountDeletion } from "../models";
+import {
+  SelfMailer,
+  SelfMailerDeletion
+} from "../models";
+
 import {URL_VALID_LIST} from "./testFixtures";
 
-describe("Bank Account Models", () => {
-  describe("BankAccount", () => {
+describe("SelfMailer Models", () => {
+  describe("SelfMailer", () => {
     it("can be created", () => {
-      const rec = new BankAccount();
+      const rec = new SelfMailer();
       expect(rec).toBeDefined();
     });
 
     it("rejects invalid values for id", () => {
-      const rec = new BankAccount();
+      const rec = new SelfMailer();
       expect(rec.id).not.toBeDefined();
 
       const invalidValues = ["Nope"];
@@ -24,10 +28,10 @@ describe("Bank Account Models", () => {
     });
 
     it("allows setting valid values for id", () => {
-      const rec = new BankAccount();
+      const rec = new SelfMailer();
       expect(rec.id).not.toBeDefined();
 
-      const validValues = ["bank_1234"];
+      const validValues = ["sfm_1234"];
       for (const val of validValues) {
         rec.id = val;
         expect(rec.id).toBeDefined();
@@ -35,42 +39,42 @@ describe("Bank Account Models", () => {
       }
     });
 
-    it("rejects invalid values for signature_url", () => {
-      const rec = new BankAccount();
-      expect(rec.signature_url).not.toBeDefined();
+    it("rejects invalid values for url", () => {
+      const rec = new SelfMailer();
+      expect(rec.url).not.toBeDefined();
 
       const invalidValues = ["Nope"];
       for (const val of invalidValues) {
         try {
-          rec.signature_url = val;
+          rec.url = val;
           throw new Error("Should Throw");
         } catch (err: any) {
-          expect(err.message).toEqual("Invalid signature_url provided");
+          expect(err.message).toEqual("Invalid url provided");
         }
       }
     });
 
-    it("allows setting valid values for signature_url", () => {
-      const rec = new BankAccount();
-      expect(rec.signature_url).not.toBeDefined();
+    it("allows setting valid values for url", () => {
+      const rec = new SelfMailer();
+      expect(rec.url).not.toBeDefined();
 
       const validValues = URL_VALID_LIST;
       for (const val of validValues) {
-        rec.signature_url = val;
-        expect(rec.signature_url).toBeDefined();
-        expect(rec.signature_url).toEqual(val);
+        rec.url = val;
+        expect(rec.url).toBeDefined();
+        expect(rec.url).toEqual(val);
       }
     });
   });
 
-  describe("BankAccountDeletion", () => {
+  describe("SelfMailerDeletion", () => {
     it("can be created", () => {
-      const rec = new BankAccountDeletion();
+      const rec = new SelfMailerDeletion();
       expect(rec).toBeDefined();
     });
 
     it("rejects invalid values for id", () => {
-      const rec = new BankAccountDeletion();
+      const rec = new SelfMailerDeletion();
       expect(rec.id).not.toBeDefined();
 
       const invalidValues = ["Nope"];
@@ -85,10 +89,10 @@ describe("Bank Account Models", () => {
     });
 
     it("allows setting valid values for id", () => {
-      const rec = new BankAccountDeletion();
+      const rec = new SelfMailerDeletion();
       expect(rec.id).not.toBeDefined();
 
-      const validValues = ["bank_1234"];
+      const validValues = ["sfm_1234"];
       for (const val of validValues) {
         rec.id = val;
         expect(rec.id).toBeDefined();
