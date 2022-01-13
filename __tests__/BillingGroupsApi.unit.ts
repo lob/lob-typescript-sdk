@@ -3,13 +3,12 @@ import { Configuration } from "../configuration";
 import { BillingGroupEditable } from "../models";
 import { BillingGroupsApi } from "../api";
 
-import axios from "axios";
-
 import { fail } from "./testUtilities";
 import {DATE_FILTER} from "./testFixtures";
 
+// Axios Mock
+import axios from "axios";
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
-
 jest.mock("axios", () => ({
   request: jest.fn(),
 }));

@@ -8,10 +8,10 @@ import {
 import { BankAccountsApi } from "../api/bank-accounts-api";
 
 import { fail } from "./testUtilities";
+import {DATE_FILTER} from "./testFixtures";
 
 // Axios Mock
 import axios from "axios";
-import {DATE_FILTER} from "./testFixtures";
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
 jest.mock("axios", () => ({
   request: jest.fn(),
