@@ -121,7 +121,7 @@ describe("AddressApi", () => {
 
       const address = await new AddressesApi(config).create(addressCreate);
       expect(address).toBeDefined();
-      expect(address?.id).toBeDefined();
+      expect(address.id).toBeDefined();
     });
 
     it("includes custom headers while it creates a new address", async () => {
