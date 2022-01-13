@@ -36,7 +36,7 @@ describe("CardOrdersApi", () => {
     expect(cardOrdersApi).toBeInstanceOf(CardOrdersApi);
   });
 
-  describe("performs single-Card operations", () => {
+  describe("performs card order operations", () => {
     let dummyCard: Card;
 
     beforeAll(async () => {
@@ -53,7 +53,7 @@ describe("CardOrdersApi", () => {
       await cardOrdersApi.create(dummyCard.id, dummyCardOrder3);
     });
 
-    it("all individual Card functions exists", () => {
+    it("all individual Card Orders functions exists", () => {
       const cardOrdersApi = new CardOrdersApi(config);
       expect(cardOrdersApi.create).toBeDefined();
       expect(typeof cardOrdersApi.create).toEqual("function");

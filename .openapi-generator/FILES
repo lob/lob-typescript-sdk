@@ -8,6 +8,8 @@ api/intl-verifications-api.ts
 api/letters-api.ts
 api/postcards-api.ts
 api/self-mailers-api.ts
+api/template-versions-api.ts
+api/templates-api.ts
 api/usautocompletions-api.ts
 api/usverifications-api.ts
 base.ts
@@ -40,6 +42,7 @@ models/country-extended-expanded.ts
 models/country-extended.ts
 models/deliverability-analysis.ts
 models/dpv-footnote.ts
+models/engine-html.ts
 models/error-error.ts
 models/failure-status-code.ts
 models/index.ts
@@ -81,6 +84,16 @@ models/sort-by2.ts
 models/sort-by3.ts
 models/sort-by4.ts
 models/suggestions.ts
+models/template-deletion.ts
+models/template-list.ts
+models/template-update.ts
+models/template-version-deletion.ts
+models/template-version-list.ts
+models/template-version-updatable.ts
+models/template-version-writable.ts
+models/template-version.ts
+models/template-writable.ts
+models/template.ts
 models/thumbnail.ts
 models/tracking-event-certified.ts
 models/tracking-event-details.ts

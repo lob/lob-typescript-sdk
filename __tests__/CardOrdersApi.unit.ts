@@ -71,7 +71,7 @@ describe("CardOrdersApi", () => {
     });
   });
 
-  describe("cardOrderRetrieve", () => {
+  describe("cardOrderGet", () => {
     it("exists", async () => {
       const cardOrdersApi = new CardOrdersApi(config);
       expect(cardOrdersApi.get).toBeDefined();
