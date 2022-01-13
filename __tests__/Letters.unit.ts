@@ -604,7 +604,7 @@ describe("LetterApi", () => {
       expect(letter?.id).toBeDefined();
     });
 
-    it("includes custom headers while it creates a letter", async () => {
+    it("creates a letter with idempotency", async () => {
         axiosRequest.mockImplementationOnce(async () => ({
           data: { id: "fake id" },
         }));
