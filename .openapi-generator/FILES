@@ -7,6 +7,7 @@ api/cards-api.ts
 api/intl-verifications-api.ts
 api/letters-api.ts
 api/postcards-api.ts
+api/reverse-geocode-lookups-api.ts
 api/self-mailers-api.ts
 api/template-versions-api.ts
 api/templates-api.ts
@@ -45,6 +46,8 @@ models/dpv-footnote.ts
 models/engine-html.ts
 models/error-error.ts
 models/failure-status-code.ts
+models/geocode-addresses.ts
+models/geocode-components.ts
 models/index.ts
 models/inline-response200.ts
 models/intl-components.ts
@@ -59,6 +62,8 @@ models/letter-list.ts
 models/letter.ts
 models/lob-confidence-score.ts
 models/lob-error.ts
+models/location-analysis.ts
+models/location.ts
 models/mail-type.ts
 models/model-error.ts
 models/multiple-components-intl.ts
@@ -70,6 +75,7 @@ models/postcard-list.ts
 models/postcard-size.ts
 models/postcard.ts
 models/return-address.ts
+models/reverse-geocode.ts
 models/self-mailer-deletion.ts
 models/self-mailer-editable.ts
 models/self-mailer-list.ts
