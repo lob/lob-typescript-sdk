@@ -13,21 +13,44 @@
  */
 
 
-import { AddressUs } from './address-us';
 
 /**
  * 
  * @export
- * @interface FromUs
+ * @interface SortBy5
  */
-export class FromUs {
+export class SortBy5 {
     /**
      * 
-     * @type {AddressUs}
-     * @memberof FromUs
+     * @type {string}
+     * @memberof SortBy5
      */
-    'from'?: AddressUs;
+    'date_created'?: SortBy5DateCreatedEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof SortBy5
+     */
+    'send_date'?: SortBy5SendDateEnum;
 }
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum SortBy5DateCreatedEnum {
+    Asc = 'asc',
+    Desc = 'desc'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum SortBy5SendDateEnum {
+    Asc = 'asc',
+    Desc = 'desc'
+}
+
 
 
 /**

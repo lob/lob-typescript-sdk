@@ -13,17 +13,60 @@
  */
 
 
-import { Zip5 } from './zip5';
-import { ZipAllOf } from './zip-all-of';
 import { ZipCodeType } from './zip-code-type';
 import { ZipLookupCity } from './zip-lookup-city';
 
 /**
- * @type Zip
+ * 
  * @export
+ * @interface Zip
  */
-export type Zip = Zip5 & ZipAllOf;
-
+export class Zip {
+    /**
+     * A 5-digit ZIP code.
+     * @type {string}
+     * @memberof Zip
+     */
+    private '_zip_code'?: string;
+    public get zip_code() { return (this._zip_code || undefined) as string; }
+    public set zip_code(newValue: string) {
+        if(newValue && !/^\d{5}$/.test(newValue)) {
+            throw new Error("Invalid zip_code provided");
+        }
+        this._zip_code = newValue;
+    }
+    /**
+     * Unique identifier prefixed with `us_zip_`.
+     * @type {string}
+     * @memberof Zip
+     */
+    private '_id'?: string;
+    public get id() { return (this._id || undefined) as string; }
+    public set id(newValue: string) {
+        if(newValue && !/^us_zip_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid id provided");
+        }
+        this._id = newValue;
+    }
+    /**
+     * An array of city objects containing valid cities for the `zip_code`. Multiple cities will be returned if more than one city is associated with the input ZIP code. 
+     * @type {Array<ZipLookupCity>}
+     * @memberof Zip
+     */
+    'cities'?: Array<ZipLookupCity>;
+    /**
+     * 
+     * @type {ZipCodeType}
+     * @memberof Zip
+     */
+    'zip_code_type'?: ZipCodeType;
+    /**
+     * 
+     * @type {string}
+     * @memberof Zip
+     */
+    'object'?: string;
+}
 
 
 /**

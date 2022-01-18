@@ -13,14 +13,17 @@
  */
 
 
-import { AddressUsAllOf } from './address-us-all-of';
-import { LobBase } from './lob-base';
 
 /**
- * @type AddressUs
+ * The engine used to combine HTML template with merge variables.   * `legacy` - Lob\'s original engine   * `handlebars` 
  * @export
+ * @enum {string}
  */
-export type AddressUs = AddressUsAllOf & LobBase;
+
+export enum EngineHtml {
+    Legacy = 'legacy',
+    Handlebars = 'handlebars'
+}
 
 
 

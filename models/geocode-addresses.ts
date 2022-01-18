@@ -13,15 +13,28 @@
  */
 
 
-import { AddressEditableUsAllOf } from './address-editable-us-all-of';
-import { AddressFieldsUs } from './address-fields-us';
+import { GeocodeComponents } from './geocode-components';
+import { LocationAnalysis } from './location-analysis';
 
 /**
- * @type AddressEditableUs
+ * 
  * @export
+ * @interface GeocodeAddresses
  */
-export type AddressEditableUs = AddressEditableUsAllOf & AddressFieldsUs;
-
+export class GeocodeAddresses {
+    /**
+     * 
+     * @type {GeocodeComponents}
+     * @memberof GeocodeAddresses
+     */
+    'components'?: GeocodeComponents;
+    /**
+     * 
+     * @type {LocationAnalysis}
+     * @memberof GeocodeAddresses
+     */
+    'location_analysis'?: LocationAnalysis;
+}
 
 
 /**

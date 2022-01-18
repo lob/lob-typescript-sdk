@@ -19,12 +19,17 @@ export * from './api/bank-accounts-api';
 export * from './api/billing-groups-api';
 export * from './api/card-orders-api';
 export * from './api/cards-api';
+export * from './api/checks-api';
 export * from './api/intl-verifications-api';
 export * from './api/letters-api';
 export * from './api/postcards-api';
+export * from './api/reverse-geocode-lookups-api';
 export * from './api/self-mailers-api';
+export * from './api/template-versions-api';
+export * from './api/templates-api';
 export * from './api/usautocompletions-api';
 export * from './api/usverifications-api';
+export * from './api/zip-lookups-api';
 
 
 /**

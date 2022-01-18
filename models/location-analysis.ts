@@ -15,35 +15,29 @@
 
 
 /**
- * 
+ * A nested object containing a breakdown of the analysis of a reverse geocoded location.
  * @export
- * @interface LobBase
+ * @interface LocationAnalysis
  */
-export class LobBase {
+export class LocationAnalysis {
     /**
-     * A timestamp in ISO 8601 format of the date the resource was created.
-     * @type {string}
-     * @memberof LobBase
+     * A positive or negative decimal indicating the geographic latitude of the address.
+     * @type {number}
+     * @memberof LocationAnalysis
      */
-    'date_created': string;
+    'latitude'?: number | null;
     /**
-     * A timestamp in ISO 8601 format of the date the resource was last modified.
-     * @type {string}
-     * @memberof LobBase
+     * A positive or negative decimal indicating the geographic longitude of the address.
+     * @type {number}
+     * @memberof LocationAnalysis
      */
-    'date_modified': string;
+    'longitude'?: number | null;
     /**
-     * Only returned if the resource has been successfully deleted.
-     * @type {boolean}
-     * @memberof LobBase
+     * The distance from the input location to this exact zip code in miles.
+     * @type {number}
+     * @memberof LocationAnalysis
      */
-    'deleted'?: boolean;
-    /**
-     * Value is type of resource.
-     * @type {string}
-     * @memberof LobBase
-     */
-    'object': string;
+    'distance'?: number;
 }
 
 
