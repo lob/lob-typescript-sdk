@@ -45,7 +45,7 @@ describe("LetterApi", () => {
       expect(typeof letterApi.get).toEqual("function");
     });
 
-    it("gets a record", async () => {
+    it("retrieves a record", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: { id: "ltr_fakeId", deleted: false },
       }));
@@ -56,7 +56,7 @@ describe("LetterApi", () => {
       expect(letter.deleted).toEqual(false);
     });
 
-    it("includes custom headers while it gets a letter", async () => {
+    it("includes custom headers while it retrieves a letter", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: { id: "ltr_fakeId2" },
       }));
@@ -145,7 +145,7 @@ describe("LetterApi", () => {
       expect(response?.data?.length).toEqual(2);
     });
 
-    it("includes custom headers while it lists addresses", async () => {
+    it("includes custom headers while it lists letters", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
       }));
@@ -487,7 +487,7 @@ describe("LetterApi", () => {
       expect(canceledLetter?.deleted).toEqual(true);
     });
 
-    it("includes custom headers while it deletes an address", async () => {
+    it("includes custom headers while it deletes a letter", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
           id: "ltr_fakeId",
