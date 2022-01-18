@@ -35,6 +35,7 @@ describe("ChecksApi", () => {
     const createCheck: CheckEditable = {
       description: "updated check",
       from: "fake from",
+      to: "fake to",
       bank_account: "fake account",
       amount: 100,
     };
