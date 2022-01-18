@@ -52,6 +52,8 @@ models/country-extended.ts
 models/deliverability-analysis.ts
 models/dpv-footnote.ts
 models/engine-html.ts
+models/error-error.ts
+models/failure-status-code.ts
 models/geocode-addresses.ts
 models/geocode-components.ts
 models/index.ts

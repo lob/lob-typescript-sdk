@@ -4,6 +4,7 @@ import { AddressEditable } from "../models";
 import { AddressesApi } from "../api/addresses-api";
 
 import { fail } from "./testUtilities";
+import {DATE_FILTER} from "./testFixtures";
 
 // Axios Mock
 import axios from "axios";
@@ -121,7 +122,7 @@ describe("AddressApi", () => {
 
       const address = await new AddressesApi(config).create(addressCreate);
       expect(address).toBeDefined();
-      expect(address?.id).toBeDefined();
+      expect(address.id).toBeDefined();
     });
 
     it("includes custom headers while it creates a new address", async () => {
@@ -384,7 +385,7 @@ describe("AddressApi", () => {
     it("lists addresses with a dateCreated parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual(
-          "date_created=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%3A34%3A56Z%22%7D"
+          "date_created=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
         );
         return {
           data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
@@ -396,7 +397,7 @@ describe("AddressApi", () => {
         undefined,
         undefined,
         undefined,
-        { gt: "2020-01-01", lt: "2020-01-31T12:34:56Z" }
+          DATE_FILTER
       );
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();

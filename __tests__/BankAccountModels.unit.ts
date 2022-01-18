@@ -1,4 +1,5 @@
 import { BankAccount, BankAccountDeletion } from "../models";
+import {URL_VALID_LIST} from "./testFixtures";
 
 describe("Bank Account Models", () => {
   describe("BankAccount", () => {
@@ -53,9 +54,7 @@ describe("Bank Account Models", () => {
       const rec = new BankAccount();
       expect(rec.signature_url).not.toBeDefined();
 
-      const validValues = [
-        "https://lob-assets.com/bank-accounts/asd_asdfghjkqwertyui.pdf?version&#x3D;123&amp;expires&#x3D;1234567890&amp;signature&#x3D;aksdf",
-      ];
+      const validValues = URL_VALID_LIST;
       for (const val of validValues) {
         rec.signature_url = val;
         expect(rec.signature_url).toBeDefined();

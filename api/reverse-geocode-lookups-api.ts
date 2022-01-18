@@ -25,6 +25,8 @@ import { LobError } from '../models';
 // @ts-ignore
 import { Location } from '../models';
 // @ts-ignore
+import { ModelError } from '../models';
+// @ts-ignore
 import { ReverseGeocode } from '../models';
 /**
  * ReverseGeocodeLookupsApi - axios parameter creator

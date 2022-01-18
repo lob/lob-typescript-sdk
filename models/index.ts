@@ -31,6 +31,8 @@ export * from './country-extended-expanded';
 export * from './deliverability-analysis';
 export * from './dpv-footnote';
 export * from './engine-html';
+export * from './error-error';
+export * from './failure-status-code';
 export * from './geocode-addresses';
 export * from './geocode-components';
 export * from './inline-response200';
