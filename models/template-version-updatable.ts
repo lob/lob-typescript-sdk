@@ -13,23 +13,27 @@
  */
 
 
+import { EngineHtml } from './engine-html';
 
 /**
- * A conventional HTTP status code:   * `401` - Authorization error with your API key or account   * `403` - Forbidden error with your API key or account   * `404` - The requested item does not exist   * `413` - Payload too large   * `422` - The query or body parameters did not pass validation   * `429` - Too many requests have been sent with an API key in a given amount of time   * `500` - An internal server error occurred, please contact support@lob.com 
+ * 
  * @export
- * @enum {string}
+ * @interface TemplateVersionUpdatable
  */
-
-export enum FailureStatusCode {
-    NUMBER_401 = 401,
-    NUMBER_403 = 403,
-    NUMBER_404 = 404,
-    NUMBER_413 = 413,
-    NUMBER_422 = 422,
-    NUMBER_429 = 429,
-    NUMBER_500 = 500
+export class TemplateVersionUpdatable {
+    /**
+     * An internal description that identifies this resource. Must be no longer than 255 characters. 
+     * @type {string}
+     * @memberof TemplateVersionUpdatable
+     */
+    'description'?: string | null;
+    /**
+     * 
+     * @type {EngineHtml}
+     * @memberof TemplateVersionUpdatable
+     */
+    'engine'?: EngineHtml | null;
 }
-
 
 
 /**

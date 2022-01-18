@@ -25,26 +25,26 @@ export class ZipLookupCity {
      * @type {string}
      * @memberof ZipLookupCity
      */
-    'city': string;
+    'city'?: string;
     /**
      * The [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) two letter code for the state. 
      * @type {string}
      * @memberof ZipLookupCity
      */
-    'state': string;
+    'state'?: string;
     /**
      * County name of the address city.
      * @type {string}
      * @memberof ZipLookupCity
      */
-    'county': string;
+    'county'?: string;
     /**
      * A 5-digit [FIPS county code](https://en.wikipedia.org/wiki/FIPS_county_code) which uniquely identifies `components[county]`. It consists of a 2-digit state code and a 3-digit county code. 
      * @type {string}
      * @memberof ZipLookupCity
      */
-    private '_county_fips': string;
-    public get county_fips() { return (this._county_fips); }
+    private '_county_fips'?: string;
+    public get county_fips() { return (this._county_fips || undefined) as string; }
     public set county_fips(newValue: string) {
         if(newValue && !/\d{5}/.test(newValue)) {
             throw new Error("Invalid county_fips provided");
@@ -56,7 +56,7 @@ export class ZipLookupCity {
      * @type {boolean}
      * @memberof ZipLookupCity
      */
-    'preferred': boolean;
+    'preferred'?: boolean;
 }
 
 

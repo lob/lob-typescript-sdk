@@ -13,47 +13,49 @@
  */
 
 
-import { ZipCodeType } from './zip-code-type';
-import { ZipLookupCity } from './zip-lookup-city';
+import { GeocodeAddresses } from './geocode-addresses';
 
 /**
  * 
  * @export
- * @interface ZipAllOf
+ * @interface ReverseGeocode
  */
-export class ZipAllOf {
+export class ReverseGeocode {
     /**
-     * Unique identifier prefixed with `us_zip_`.
+     * Unique identifier prefixed with `us_reverse_geocode_`.
      * @type {string}
-     * @memberof ZipAllOf
+     * @memberof ReverseGeocode
      */
-    private '_id': string;
-    public get id() { return (this._id); }
+    private '_id'?: string;
+    public get id() { return (this._id || undefined) as string; }
     public set id(newValue: string) {
-        if(newValue && !/^us_zip_[a-zA-Z0-9]+$/.test(newValue)) {
+        if(newValue && !/^us_reverse_geocode_[a-zA-Z0-9_]+$/.test(newValue)) {
             throw new Error("Invalid id provided");
         }
         this._id = newValue;
     }
     /**
-     * An array of city objects containing valid cities for the `zip_code`. Multiple cities will be returned if more than one city is associated with the input ZIP code. 
-     * @type {Array<ZipLookupCity>}
-     * @memberof ZipAllOf
+     * list of addresses 
+     * @type {Array<GeocodeAddresses>}
+     * @memberof ReverseGeocode
      */
-    'cities': Array<ZipLookupCity>;
+    'addresses'?: Array<GeocodeAddresses>;
     /**
-     * 
-     * @type {ZipCodeType}
-     * @memberof ZipAllOf
-     */
-    'zip_code_type': ZipCodeType;
-    /**
-     * 
+     * Value is resource type.
      * @type {string}
-     * @memberof ZipAllOf
+     * @memberof ReverseGeocode
      */
-    'object': string;
+    'object'?: ReverseGeocodeObjectEnum;
 }
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum ReverseGeocodeObjectEnum {
+    UsReverseGeocodeLookup = 'us_reverse_geocode_lookup'
+}
+
 
 
 /**

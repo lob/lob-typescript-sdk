@@ -13,20 +13,239 @@
  */
 
 
-import { AddressUs } from './address-us';
+import { AddressEditable } from './address-editable';
 import { BankAccount } from './bank-account';
-import { CheckAllOf } from './check-all-of';
-import { CheckBase } from './check-base';
-import { FromUs } from './from-us';
 import { SendDate } from './send-date';
 import { Thumbnail } from './thumbnail';
 import { TrackingEventNormal } from './tracking-event-normal';
 
 /**
- * @type Check
+ * 
  * @export
+ * @interface Check
  */
-export type Check = CheckAllOf & CheckBase & FromUs;
+export class Check {
+    /**
+     * Unique identifier prefixed with `chk_`.
+     * @type {string}
+     * @memberof Check
+     */
+    private '_id'?: string;
+    public get id() { return (this._id || undefined) as string; }
+    public set id(newValue: string) {
+        if(newValue && !/^chk_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid id provided");
+        }
+        this._id = newValue;
+    }
+    /**
+     * Must either be an address ID or an inline object with correct address parameters.
+     * @type {string | AddressEditable}
+     * @memberof Check
+     */
+    'to'?: string | AddressEditable;
+    /**
+     * Must either be an address ID or an inline object with correct address parameters.
+     * @type {string | AddressEditable}
+     * @memberof Check
+     */
+    'from'?: string | AddressEditable;
+    /**
+     * An internal description that identifies this resource. Must be no longer than 255 characters. 
+     * @type {string}
+     * @memberof Check
+     */
+    'description'?: string | null;
+    /**
+     * Use metadata to store custom information for tagging and labeling back to your internal systems. Must be an object with up to 20 key-value pairs. Keys must be at most 40 characters and values must be at most 500 characters. Neither can contain the characters `\"` and `\\`. i.e. \'{\"customer_id\" : \"NEWYORK2015\"}\' Nested objects are not supported.  See [Metadata](#section/Metadata) for more information.
+     * @type {{ [key: string]: string; }}
+     * @memberof Check
+     */
+    'metadata'?: { [key: string]: string; };
+    /**
+     * You can input a merge variable payload object to your template to render dynamic content. For example, if you have a template like: `{{variable_name}}`, pass in `{\"variable_name\": \"Harry\"}` to render `Harry`. `merge_variables` must be an object. Any type of value is accepted as long as the object is valid JSON; you can use `strings`, `numbers`, `booleans`, `arrays`, `objects`, or `null`. The max length of the object is 25,000 characters. If you call `JSON.stringify` on your object, it can be no longer than 25,000 characters. Your variable names cannot contain any whitespace or any of the following special characters: `!`, `\"`, `#`, `%`, `&`, `\'`, `(`, `)`, `*`, `+`, `,`, `/`, `;`, `<`, `=`, `>`, `@`, `[`, `\\`, `]`, `^`, `` ` ``, `{`, `|`, `}`, `~`. More instructions can be found in [our guide to using html and merge variables](https://lob.com/resources/guides/general/using-html-and-merge-variables). Depending on your [Merge Variable strictness](https://dashboard.lob.com/#/settings/account) setting, if you define variables in your HTML but do not pass them here, you will either receive an error or the variable will render as an empty string.
+     * @type {object}
+     * @memberof Check
+     */
+    'merge_variables'?: object | null;
+    /**
+     * 
+     * @type {SendDate}
+     * @memberof Check
+     */
+    'send_date'?: SendDate;
+    /**
+     * Checks must be sent `usps_first_class`
+     * @type {string}
+     * @memberof Check
+     */
+    'mail_type'?: CheckMailTypeEnum;
+    /**
+     * Text to include on the memo line of the check.
+     * @type {string}
+     * @memberof Check
+     */
+    'memo'?: string | null;
+    /**
+     * An integer that designates the check number. If `check_number` is not provided, checks created from a new `bank_account` will start at `10000` and increment with each check created with the `bank_account`. A provided `check_number` overrides the defaults. Subsequent checks created with the same `bank_account` will increment from the provided check number.
+     * @type {number}
+     * @memberof Check
+     */
+    'check_number'?: number;
+    /**
+     * Max of 400 characters to be included at the bottom of the check page.
+     * @type {string}
+     * @memberof Check
+     */
+    'message'?: string;
+    /**
+     * The payment amount to be sent in US dollars.
+     * @type {number}
+     * @memberof Check
+     */
+    'amount'?: number;
+    /**
+     * 
+     * @type {BankAccount}
+     * @memberof Check
+     */
+    'bank_account'?: BankAccount;
+    /**
+     * Unique identifier prefixed with `tmpl_`. ID of a saved [HTML template](#section/HTML-Templates).
+     * @type {string}
+     * @memberof Check
+     */
+    private '_check_bottom_template_id'?: string;
+    public get check_bottom_template_id() { return (this._check_bottom_template_id || undefined) as string; }
+    public set check_bottom_template_id(newValue: string) {
+        if(newValue && !/^tmpl_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid check_bottom_template_id provided");
+        }
+        this._check_bottom_template_id = newValue;
+    }
+    /**
+     * Unique identifier prefixed with `tmpl_`. ID of a saved [HTML template](#section/HTML-Templates).
+     * @type {string}
+     * @memberof Check
+     */
+    private '_attachment_template_id'?: string;
+    public get attachment_template_id() { return (this._attachment_template_id || undefined) as string; }
+    public set attachment_template_id(newValue: string) {
+        if(newValue && !/^tmpl_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid attachment_template_id provided");
+        }
+        this._attachment_template_id = newValue;
+    }
+    /**
+     * Unique identifier prefixed with `vrsn_`.
+     * @type {string}
+     * @memberof Check
+     */
+    private '_check_bottom_template_version_id'?: string;
+    public get check_bottom_template_version_id() { return (this._check_bottom_template_version_id || undefined) as string; }
+    public set check_bottom_template_version_id(newValue: string) {
+        if(newValue && !/^vrsn_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid check_bottom_template_version_id provided");
+        }
+        this._check_bottom_template_version_id = newValue;
+    }
+    /**
+     * Unique identifier prefixed with `vrsn_`.
+     * @type {string}
+     * @memberof Check
+     */
+    private '_attachment_template_version_id'?: string;
+    public get attachment_template_version_id() { return (this._attachment_template_version_id || undefined) as string; }
+    public set attachment_template_version_id(newValue: string) {
+        if(newValue && !/^vrsn_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid attachment_template_version_id provided");
+        }
+        this._attachment_template_version_id = newValue;
+    }
+    /**
+     * A [signed link](#section/Asset-URLs) served over HTTPS. The link returned will expire in 30 days to prevent mis-sharing. Each time a GET request is initiated, a new signed URL will be generated.
+     * @type {string}
+     * @memberof Check
+     */
+    private '_url'?: string;
+    public get url() { return (this._url || undefined) as string; }
+    public set url(newValue: string) {
+        if(newValue && !/^https:\/\/lob-assets\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\.pdf|_thumb_[a-z]+_[0-9]+\.png)\?(version&#x3D;[a-z0-9-]*&amp;)?expires&#x3D;[0-9]{10}&amp;signature&#x3D;[a-zA-Z0-9-_]+$/.test(newValue)) {
+            throw new Error("Invalid url provided");
+        }
+        this._url = newValue;
+    }
+    /**
+     * 
+     * @type {string}
+     * @memberof Check
+     */
+    'carrier'?: CheckCarrierEnum;
+    /**
+     * 
+     * @type {Array<Thumbnail>}
+     * @memberof Check
+     */
+    'thumbnails'?: Array<Thumbnail>;
+    /**
+     * A date in YYYY-MM-DD format of the mailpiece\'s expected delivery date based on its `send_date`.
+     * @type {string}
+     * @memberof Check
+     */
+    'expected_delivery_date'?: string;
+    /**
+     * An array of tracking_event objects ordered by ascending `time`. Will not be populated for checks created in test mode.
+     * @type {Array<TrackingEventNormal>}
+     * @memberof Check
+     */
+    'tracking_events'?: Array<TrackingEventNormal> | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Check
+     */
+    'object'?: CheckObjectEnum;
+    /**
+     * A timestamp in ISO 8601 format of the date the resource was created.
+     * @type {string}
+     * @memberof Check
+     */
+    'date_created'?: string;
+    /**
+     * A timestamp in ISO 8601 format of the date the resource was last modified.
+     * @type {string}
+     * @memberof Check
+     */
+    'date_modified'?: string;
+    /**
+     * Only returned if the resource has been successfully deleted.
+     * @type {boolean}
+     * @memberof Check
+     */
+    'deleted'?: boolean;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum CheckMailTypeEnum {
+    UspsFirstClass = 'usps_first_class'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum CheckCarrierEnum {
+    Usps = 'USPS'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum CheckObjectEnum {
+    Check = 'check'
+}
 
 
 

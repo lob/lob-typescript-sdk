@@ -21,24 +21,29 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { Zip } from '../models';
+import { LobError } from '../models';
+// @ts-ignore
+import { Location } from '../models';
+// @ts-ignore
+import { ReverseGeocode } from '../models';
 /**
- * ZipLookupsApi - axios parameter creator
+ * ReverseGeocodeLookupsApi - axios parameter creator
  * @export
  */
-export const ZipLookupsApiAxiosParamCreator = function (configuration?: Configuration) {
+export const ReverseGeocodeLookupsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Returns information about a ZIP code
-         * @summary Lookups
-         * @param {string} body 
+         * Reverse geocode a valid US location with a live API key.
+         * @summary lookup
+         * @param {Location} location 
+         * @param {number} [size] Determines the number of locations returned. Possible values are between 1 and 50 and any number higher will be rounded down to 50. Default size is a list of 5 reverse geocoded locations.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        zipLookup: async (body: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('zipLookup', 'body', body)
-            const localVarPath = `/us_zip_lookups`;
+        reverseGeocodeLookup: async (location: Location, size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'location' is not null or undefined
+            assertParamExists('reverseGeocodeLookup', 'location', location)
+            const localVarPath = `/us_reverse_geocode_lookups`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -54,6 +59,10 @@ export const ZipLookupsApiAxiosParamCreator = function (configuration?: Configur
             // http basic authentication required
             setBasicAuthToObject(localVarRequestOptions, configuration)
 
+            if (size !== undefined) {
+                localVarQueryParameter['size'] = size;
+            }
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -61,7 +70,7 @@ export const ZipLookupsApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(location, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -72,43 +81,45 @@ export const ZipLookupsApiAxiosParamCreator = function (configuration?: Configur
 };
 
 /**
- * ZipLookupsApi - functional programming interface
+ * ReverseGeocodeLookupsApi - functional programming interface
  * @export
  */
-export const ZipLookupsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = ZipLookupsApiAxiosParamCreator(configuration)
+export const ReverseGeocodeLookupsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ReverseGeocodeLookupsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns information about a ZIP code
-         * @summary Lookups
-         * @param {string} body 
+         * Reverse geocode a valid US location with a live API key.
+         * @summary lookup
+         * @param {Location} location 
+         * @param {number} [size] Determines the number of locations returned. Possible values are between 1 and 50 and any number higher will be rounded down to 50. Default size is a list of 5 reverse geocoded locations.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async zipLookup(body: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Zip>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.zipLookup(body, options);
+        async reverseGeocodeLookup(location: Location, size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ReverseGeocode>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.reverseGeocodeLookup(location, size, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
 };
 
 /**
- * ZipLookupsApi - object-oriented interface
+ * ReverseGeocodeLookupsApi - object-oriented interface
  * @export
- * @class ZipLookupsApi
+ * @class ReverseGeocodeLookupsApi
  * @extends {BaseAPI}
  */
-export class ZipLookupsApi extends BaseAPI {
+export class ReverseGeocodeLookupsApi extends BaseAPI {
     /**
-     * Returns information about a ZIP code
-     * @summary Lookups
-     * @param {string} body 
+     * Reverse geocode a valid US location with a live API key.
+     * @summary lookup
+     * @param {Location} location 
+     * @param {number} [size] Determines the number of locations returned. Possible values are between 1 and 50 and any number higher will be rounded down to 50. Default size is a list of 5 reverse geocoded locations.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ZipLookupsApi
+     * @memberof ReverseGeocodeLookupsApi
      */
-    public Lookups(body: string, options?: AxiosRequestConfig) {
-        return ZipLookupsApiFp(this.configuration).zipLookup(body, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
+    public lookup(location: Location, size?: number, options?: AxiosRequestConfig) {
+        return ReverseGeocodeLookupsApiFp(this.configuration).reverseGeocodeLookup(location, size, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;
             }

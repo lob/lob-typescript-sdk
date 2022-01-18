@@ -13,20 +13,32 @@
  */
 
 
-import { ErrorError } from './error-error';
 
 /**
- * Lob uses RESTful HTTP response codes to indicate success or failure of an API request. In general, 2xx indicates success, 4xx indicate an input error, and 5xx indicates an error on Lob\'s end.
+ * 
  * @export
- * @interface ModelError
+ * @interface TemplateUpdate
  */
-export class ModelError {
+export class TemplateUpdate {
     /**
-     * 
-     * @type {ErrorError}
-     * @memberof ModelError
+     * An internal description that identifies this resource. Must be no longer than 255 characters. 
+     * @type {string}
+     * @memberof TemplateUpdate
      */
-    'error': ErrorError;
+    'description'?: string | null;
+    /**
+     * Unique identifier prefixed with `vrsn_`.
+     * @type {string}
+     * @memberof TemplateUpdate
+     */
+    private '_published_version'?: string;
+    public get published_version() { return (this._published_version || undefined) as string; }
+    public set published_version(newValue: string) {
+        if(newValue && !/^vrsn_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid published_version provided");
+        }
+        this._published_version = newValue;
+    }
 }
 
 

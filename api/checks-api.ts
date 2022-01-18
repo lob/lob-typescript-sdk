@@ -27,11 +27,11 @@ import { CheckDeletion } from '../models';
 // @ts-ignore
 import { CheckEditable } from '../models';
 // @ts-ignore
-import { List } from '../models';
+import { CheckList } from '../models';
+// @ts-ignore
+import { LobError } from '../models';
 // @ts-ignore
 import { MailType } from '../models';
-// @ts-ignore
-import { ModelError } from '../models';
 // @ts-ignore
 import { SendDate } from '../models';
 /**
@@ -109,6 +109,8 @@ export const ChecksApiAxiosParamCreator = function (configuration?: Configuratio
                 localVarHeaderParameter['Idempotency-Key'] = String(idempotencyKey);
             }
 
+
+    
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -171,11 +173,11 @@ export const ChecksApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {boolean} [scheduled] * &#x60;true&#x60; - only return orders (past or future) where &#x60;send_date&#x60; is greater than &#x60;date_created&#x60; * &#x60;false&#x60; - only return orders where &#x60;send_date&#x60; is equal to &#x60;date_created&#x60; 
          * @param {SendDate} [sendDate] Filter by ISO-8601 date or datetime, e.g. &#x60;{ gt: \&#39;2012-01-01\&#39;, lt: \&#39;2012-01-31T12:34:56Z\&#39; }&#x60; where &#x60;gt&#x60; is &gt;, &#x60;lt&#x60; is &lt;, &#x60;gte&#x60; is ≥, and &#x60;lte&#x60; is ≤. 
          * @param {MailType} [mailType] A string designating the mail postage type: * &#x60;usps_first_class&#x60; - (default) * &#x60;usps_standard&#x60; - a [cheaper option](https://lob.com/pricing/print-mail#compare) which is less predictable and takes longer to deliver. &#x60;usps_standard&#x60; cannot be used with &#x60;4x6&#x60; postcards or for any postcards sent outside of the United States. 
-         * @param {string} [sortBy] Sorts items by ascending or descending dates. Use either &#x60;date_created&#x60; or &#x60;send_date&#x60;, not both. 
+         * @param {object} [sortBy] Sorts items by ascending or descending dates. Use either &#x60;date_created&#x60; or &#x60;send_date&#x60;, not both. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        checksList: async (limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        checksList: async (limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/checks`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -299,11 +301,11 @@ export const ChecksApiFp = function(configuration?: Configuration) {
          * @param {boolean} [scheduled] * &#x60;true&#x60; - only return orders (past or future) where &#x60;send_date&#x60; is greater than &#x60;date_created&#x60; * &#x60;false&#x60; - only return orders where &#x60;send_date&#x60; is equal to &#x60;date_created&#x60; 
          * @param {SendDate} [sendDate] Filter by ISO-8601 date or datetime, e.g. &#x60;{ gt: \&#39;2012-01-01\&#39;, lt: \&#39;2012-01-31T12:34:56Z\&#39; }&#x60; where &#x60;gt&#x60; is &gt;, &#x60;lt&#x60; is &lt;, &#x60;gte&#x60; is ≥, and &#x60;lte&#x60; is ≤. 
          * @param {MailType} [mailType] A string designating the mail postage type: * &#x60;usps_first_class&#x60; - (default) * &#x60;usps_standard&#x60; - a [cheaper option](https://lob.com/pricing/print-mail#compare) which is less predictable and takes longer to deliver. &#x60;usps_standard&#x60; cannot be used with &#x60;4x6&#x60; postcards or for any postcards sent outside of the United States. 
-         * @param {string} [sortBy] Sorts items by ascending or descending dates. Use either &#x60;date_created&#x60; or &#x60;send_date&#x60;, not both. 
+         * @param {object} [sortBy] Sorts items by ascending or descending dates. Use either &#x60;date_created&#x60; or &#x60;send_date&#x60;, not both. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async checksList(limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<List & string>> {
+        async checksList(limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CheckList>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.checksList(limit, before, after, include, dateCreated, metadata, scheduled, sendDate, mailType, sortBy, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -381,12 +383,12 @@ export class ChecksApi extends BaseAPI {
      * @param {boolean} [scheduled] * &#x60;true&#x60; - only return orders (past or future) where &#x60;send_date&#x60; is greater than &#x60;date_created&#x60; * &#x60;false&#x60; - only return orders where &#x60;send_date&#x60; is equal to &#x60;date_created&#x60; 
      * @param {SendDate} [sendDate] Filter by ISO-8601 date or datetime, e.g. &#x60;{ gt: \&#39;2012-01-01\&#39;, lt: \&#39;2012-01-31T12:34:56Z\&#39; }&#x60; where &#x60;gt&#x60; is &gt;, &#x60;lt&#x60; is &lt;, &#x60;gte&#x60; is ≥, and &#x60;lte&#x60; is ≤. 
      * @param {MailType} [mailType] A string designating the mail postage type: * &#x60;usps_first_class&#x60; - (default) * &#x60;usps_standard&#x60; - a [cheaper option](https://lob.com/pricing/print-mail#compare) which is less predictable and takes longer to deliver. &#x60;usps_standard&#x60; cannot be used with &#x60;4x6&#x60; postcards or for any postcards sent outside of the United States. 
-     * @param {string} [sortBy] Sorts items by ascending or descending dates. Use either &#x60;date_created&#x60; or &#x60;send_date&#x60;, not both. 
+     * @param {object} [sortBy] Sorts items by ascending or descending dates. Use either &#x60;date_created&#x60; or &#x60;send_date&#x60;, not both. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChecksApi
      */
-    public List(limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: string, options?: AxiosRequestConfig) {
+    public List(limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options?: AxiosRequestConfig) {
         return ChecksApiFp(this.configuration).checksList(limit, before, after, include, dateCreated, metadata, scheduled, sendDate, mailType, sortBy, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
             if (error.response?.data?.error?.message) {
                 error.message = error.response.data.error.message;

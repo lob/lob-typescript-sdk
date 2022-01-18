@@ -13,13 +13,16 @@
  */
 
 
+import { AddressDomestic } from './address-domestic';
+import { CheckBottom } from './check-bottom';
 import { CheckEditableProps } from './check-editable-props';
+import { SendDate } from './send-date';
 
 /**
  * @type CheckEditable
  * @export
  */
-export type CheckEditable = CheckEditableProps;
+export type CheckEditable = CheckEditableProps | any;
 
 
 
