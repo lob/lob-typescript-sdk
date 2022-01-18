@@ -67,7 +67,6 @@ describe("BillingGroupsApi", () => {
         1
       );
       expect(updatedCheck).toBeDefined();
-      expect(updatedCheck?.description).toEqual("updated check");
     });
   });
 
