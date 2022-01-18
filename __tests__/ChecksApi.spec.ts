@@ -4,7 +4,7 @@ import { ChecksApi } from "../api/checks-api";
 import { CheckEditable } from "../models/check-editable";
 import { Check } from "../models/check";
 
-describe("BillingGroupsApi", () => {
+describe("ChecksApi", () => {
   const config: Configuration = new Configuration({
     username: process.env.LOB_API_KEY,
   });
@@ -60,6 +60,7 @@ describe("BillingGroupsApi", () => {
       const updates: CheckEditable = {
         description: "updated check",
         from: "fake from",
+        to: "fake to",
         bank_account: "fake account",
         amount: 100,
       };
@@ -74,22 +75,25 @@ describe("BillingGroupsApi", () => {
     let createdChecks: Check[] = [];
 
     beforeAll(async () => {
-      // ensure there are at least 3 billing groups present, to test pagination
+      // ensure there are at least 3 checks present, to test pagination
       const check1: CheckEditable = {
         description: "check 1",
         from: "fake from 1",
+        to: "fake to 1",
         bank_account: "fake account 1",
         amount: 100,
       };
       const check2: CheckEditable = Object.assign({}, check1, {
         description: "Check 2",
         from: "fake from 2",
+        to: "fake to 2",
         bank_account: "fake account 2",
         amount: 200,
       });
       const check3: CheckEditable = Object.assign({}, check1, {
         description: "Check 3",
         from: "fake from 3",
+        to: "fake to 3",
         bank_account: "fake account 3",
         amount: 300,
       });
