@@ -1,4 +1,5 @@
 import { Postcard, PostcardDeletion } from "../models";
+import {URL_VALID_LIST} from "./testFixtures";
 
 describe("Postcard Models", () => {
   describe("Postcard", () => {
@@ -165,9 +166,7 @@ describe("Postcard Models", () => {
       const rec = new Postcard();
       expect(rec.url).not.toBeDefined();
 
-      const validValues = [
-        "https://lob-assets.com/bank-accounts/asd_asdfghjkqwertyui.pdf?version&#x3D;123&amp;expires&#x3D;1234567890&amp;signature&#x3D;aksdf",
-      ];
+      const validValues = URL_VALID_LIST;
       for (const val of validValues) {
         rec.url = val;
         expect(rec.url).toBeDefined();

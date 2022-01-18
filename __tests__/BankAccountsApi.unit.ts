@@ -8,6 +8,7 @@ import {
 import { BankAccountsApi } from "../api/bank-accounts-api";
 
 import { fail } from "./testUtilities";
+import {DATE_FILTER} from "./testFixtures";
 
 // Axios Mock
 import axios from "axios";
@@ -433,7 +434,7 @@ describe("BankAccountsApi", () => {
     it("lists bankAccounts with a dateCreated parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual(
-          "date_created=%7B%22gt%22%3A%222012-01-01%22%2C%22lt%22%3A%222012-01-31T12%3A34%3A56Z%22%7D"
+          "date_created=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
         );
         return {
           data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
@@ -445,7 +446,7 @@ describe("BankAccountsApi", () => {
         undefined,
         undefined,
         undefined,
-        { gt: "2012-01-01", lt: "2012-01-31T12:34:56Z" }
+          DATE_FILTER
       );
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();

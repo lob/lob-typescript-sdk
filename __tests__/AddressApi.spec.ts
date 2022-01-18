@@ -3,7 +3,7 @@ import { Configuration } from "../configuration";
 import { Address, AddressEditable, AddressList } from "../models";
 import { AddressesApi } from "../api/addresses-api";
 
-import { TEN_MINUTES, fail, debugLog } from "./testUtilities";
+import { fail, debugLog } from "./testUtilities";
 
 describe("AddressApi", () => {
   jest.setTimeout(1000 * 60);
