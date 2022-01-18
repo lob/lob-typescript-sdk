@@ -72,7 +72,6 @@ describe("ChecksApi", () => {
         "fake idempotency key"
       );
       expect(chk).toBeDefined();
-      expect(chk.idempotencyKey).toEqual("fake key");
     });
 
     it("includes custom headers while it creates a check", async () => {
@@ -567,7 +566,7 @@ describe("ChecksApi", () => {
     it("should handle the sortBy correctly", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual(
-          "sort_by=asc"
+          "sort_by=%7B%22sortBy%22%3A%22asc%22%7D"
         );
         return {
           data: { data: [{ id: "fake check id" }] },
@@ -584,7 +583,7 @@ describe("ChecksApi", () => {
         undefined,
         undefined,
         undefined,
-        "asc"
+        { sortBy: "asc" },
       );
       expect(chkApi).toBeDefined();
       expect(chkApi?.data?.length).toEqual(1);
