@@ -45,7 +45,7 @@ describe("LetterApi", () => {
       expect(typeof letterApi.get).toEqual("function");
     });
 
-    it("retrieves a record", async () => {
+    it("gets a record", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: { id: "ltr_fakeId", deleted: false },
       }));
@@ -56,7 +56,7 @@ describe("LetterApi", () => {
       expect(letter.deleted).toEqual(false);
     });
 
-    it("includes custom headers while it retrieves a letter", async () => {
+    it("includes custom headers while it gets a letter", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: { id: "ltr_fakeId2" },
       }));
@@ -564,11 +564,11 @@ describe("LetterApi", () => {
 
   describe("create", () => {
     const addressCreate: AddressEditable = {
-      name: "ADITI RAMASWAMY",
-      address_line1: "360 BERRY ST",
-      address_city: "SAN FRANCISCO",
-      address_state: "CA",
-      address_zip: "94158",
+      name: "Thing T. Thing",
+      address_line1: "1313 CEMETARY LN",
+      address_city: "WESTFIELD",
+      address_state: "NJ",
+      address_zip: "07000",
     };
     const createLetter: LetterEditable = {
       to: addressCreate,
