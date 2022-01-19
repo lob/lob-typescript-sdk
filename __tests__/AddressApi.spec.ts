@@ -193,10 +193,6 @@ describe("AddressApi", () => {
 
     it("lists addresses using nextPageToken", async () => {
       const listResponse = await new AddressesApi(config).list(10);
-
-      console.log('banana');
-      console.log(listResponse);
-      console.log(listResponse.nextPageToken);
       const responseAfter = await new AddressesApi(config).list(
           10,
           undefined,
