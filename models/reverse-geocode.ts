@@ -21,6 +21,18 @@ import { GeocodeAddresses } from './geocode-addresses';
  * @interface ReverseGeocode
  */
 export class ReverseGeocode {
+    constructor(input?: any) {
+        if (typeof input?.id !== "undefined") {
+            this.id = input.id;
+        }
+        if (typeof input?.addresses !== "undefined") {
+            this.addresses = input.addresses;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
+        }
+    }
+
     /**
      * Unique identifier prefixed with `us_reverse_geocode_`.
      * @type {string}
@@ -34,18 +46,21 @@ export class ReverseGeocode {
         }
         this._id = newValue;
     }
+    
     /**
      * list of addresses 
      * @type {Array<GeocodeAddresses>}
      * @memberof ReverseGeocode
      */
     'addresses'?: Array<GeocodeAddresses>;
+    
     /**
      * Value is resource type.
      * @type {string}
      * @memberof ReverseGeocode
      */
     'object'?: ReverseGeocodeObjectEnum;
+    
 }
 
 /**

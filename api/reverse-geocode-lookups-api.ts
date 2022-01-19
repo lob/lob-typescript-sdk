@@ -119,12 +119,15 @@ export class ReverseGeocodeLookupsApi extends BaseAPI {
      * @memberof ReverseGeocodeLookupsApi
      */
     public lookup(location: Location, size?: number, options?: AxiosRequestConfig) {
-        return ReverseGeocodeLookupsApiFp(this.configuration).reverseGeocodeLookup(location, size, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return ReverseGeocodeLookupsApiFp(this.configuration).reverseGeocodeLookup(location, size, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new ReverseGeocode(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 }
 

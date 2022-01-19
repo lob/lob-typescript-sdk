@@ -20,6 +20,18 @@
  * @interface SelfMailerDeletion
  */
 export class SelfMailerDeletion {
+    constructor(input?: any) {
+        if (typeof input?.id !== "undefined") {
+            this.id = input.id;
+        }
+        if (typeof input?.deleted !== "undefined") {
+            this.deleted = input.deleted;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
+        }
+    }
+
     /**
      * Unique identifier prefixed with `sfm_`.
      * @type {string}
@@ -33,18 +45,21 @@ export class SelfMailerDeletion {
         }
         this._id = newValue;
     }
+    
     /**
      * Only returned if the resource has been successfully deleted.
      * @type {boolean}
      * @memberof SelfMailerDeletion
      */
     'deleted'?: boolean;
+    
     /**
      * Value is type of resource.
      * @type {string}
      * @memberof SelfMailerDeletion
      */
     'object'?: SelfMailerDeletionObjectEnum;
+    
 }
 
 /**

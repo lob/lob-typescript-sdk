@@ -21,30 +21,64 @@ import { TrackingEventDetails } from './tracking-event-details';
  * @interface TrackingEventCertified
  */
 export class TrackingEventCertified {
+    constructor(input?: any) {
+        if (typeof input?.type !== "undefined") {
+            this.type = input.type;
+        }
+        if (typeof input?.name !== "undefined") {
+            this.name = input.name;
+        }
+        if (typeof input?.details !== "undefined") {
+            this.details = input.details;
+        }
+        if (typeof input?.location !== "undefined") {
+            this.location = input.location;
+        }
+        if (typeof input?.id !== "undefined") {
+            this.id = input.id;
+        }
+        if (typeof input?.time !== "undefined") {
+            this.time = input.time;
+        }
+        if (typeof input?.date_created !== "undefined") {
+            this.date_created = input.date_created;
+        }
+        if (typeof input?.date_modified !== "undefined") {
+            this.date_modified = input.date_modified;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
+        }
+    }
+
     /**
      * a Certified letter tracking event
      * @type {string}
      * @memberof TrackingEventCertified
      */
     'type'?: TrackingEventCertifiedTypeEnum;
+    
     /**
      * Name of tracking event for Certified letters. Letters sent with USPS Certified Mail are fully tracked by USPS, therefore their tracking events have an additional details object with more detailed information about the tracking event. Some certified tracking event names have multiple meanings, noted in the list here. See the description of the details object for the full set of combined certified tracking event name meanings.    * `Mailed` - Package has been accepted into the carrier network for delivery.    * `In Transit` - Maps to four distinct stages of transit.    * `In Local Area` - Package is at a location near the end destination.    * `Processed for Delivery` - Maps to two distinct stages of delivery.    * `Pickup Available` - Package is available for pickup at carrier location.    * `Delivered` - Package has been delivered.    * `Re-Routed` - Package has been forwarded.    * `Returned to Sender` - Package is to be returned to sender.    * `Issue` - Maps to (at least) 15 possible issues, some of which are actionable. 
      * @type {string}
      * @memberof TrackingEventCertified
      */
     'name'?: TrackingEventCertifiedNameEnum;
+    
     /**
      * 
      * @type {TrackingEventDetails}
      * @memberof TrackingEventCertified
      */
     'details'?: TrackingEventDetails;
+    
     /**
      * The zip code in which the event occurred if it exists, otherwise will be the name of a Regional Distribution Center if it exists, otherwise will be null. 
      * @type {string}
      * @memberof TrackingEventCertified
      */
     'location'?: string | null;
+    
     /**
      * Unique identifier prefixed with `evnt_`.
      * @type {string}
@@ -58,30 +92,35 @@ export class TrackingEventCertified {
         }
         this._id = newValue;
     }
+    
     /**
      * A timestamp in ISO 8601 format of the date USPS registered the event.
      * @type {string}
      * @memberof TrackingEventCertified
      */
     'time'?: string;
+    
     /**
      * A timestamp in ISO 8601 format of the date the resource was created.
      * @type {string}
      * @memberof TrackingEventCertified
      */
     'date_created'?: string;
+    
     /**
      * A timestamp in ISO 8601 format of the date the resource was last modified.
      * @type {string}
      * @memberof TrackingEventCertified
      */
     'date_modified'?: string;
+    
     /**
      * 
      * @type {string}
      * @memberof TrackingEventCertified
      */
     'object'?: TrackingEventCertifiedObjectEnum;
+    
 }
 
 /**

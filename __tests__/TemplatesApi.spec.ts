@@ -8,6 +8,8 @@ import {
 import { TemplatesApi } from "../api";
 
 describe("TemplatesApi", () => {
+  jest.setTimeout(1000 * 60);
+
   const config: Configuration = new Configuration({
     username: process.env.LOB_API_KEY,
   });

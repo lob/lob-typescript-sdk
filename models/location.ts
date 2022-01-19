@@ -20,18 +20,29 @@
  * @interface Location
  */
 export class Location {
+    constructor(input?: any) {
+        if (typeof input?.latitude !== "undefined") {
+            this.latitude = input.latitude;
+        }
+        if (typeof input?.longitude !== "undefined") {
+            this.longitude = input.longitude;
+        }
+    }
+
     /**
      * A positive or negative decimal indicating the geographic latitude of the address, specifying the north-to-south position of a location. This should be input with `longitude` to pinpoint locations on a map. 
      * @type {number}
      * @memberof Location
      */
     'latitude': number | null;
+    
     /**
      * A positive or negative decimal indicating the geographic longitude of the address, specifying the north-to-south position of a location. This should be input with `latitude` to pinpoint locations on a map. 
      * @type {number}
      * @memberof Location
      */
     'longitude': number | null;
+    
 }
 
 

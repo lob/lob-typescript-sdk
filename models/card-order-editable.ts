@@ -20,12 +20,19 @@
  * @interface CardOrderEditable
  */
 export class CardOrderEditable {
+    constructor(input?: any) {
+        if (typeof input?.quantity !== "undefined") {
+            this.quantity = input.quantity;
+        }
+    }
+
     /**
      * 
      * @type {number}
      * @memberof CardOrderEditable
      */
     'quantity'?: number;
+    
 }
 
 

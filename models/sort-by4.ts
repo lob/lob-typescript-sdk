@@ -20,18 +20,29 @@
  * @interface SortBy4
  */
 export class SortBy4 {
+    constructor(input?: any) {
+        if (typeof input?.date_created !== "undefined") {
+            this.date_created = input.date_created;
+        }
+        if (typeof input?.send_date !== "undefined") {
+            this.send_date = input.send_date;
+        }
+    }
+
     /**
      * 
      * @type {string}
      * @memberof SortBy4
      */
     'date_created'?: SortBy4DateCreatedEnum;
+    
     /**
      * 
      * @type {string}
      * @memberof SortBy4
      */
     'send_date'?: SortBy4SendDateEnum;
+    
 }
 
 /**

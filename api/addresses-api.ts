@@ -292,12 +292,15 @@ export class AddressesApi extends BaseAPI {
      * @memberof AddressesApi
      */
     public create(addressEditable: AddressEditable, options?: AxiosRequestConfig) {
-        return AddressesApiFp(this.configuration).addressCreate(addressEditable, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return AddressesApiFp(this.configuration).addressCreate(addressEditable, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new Address(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -309,12 +312,15 @@ export class AddressesApi extends BaseAPI {
      * @memberof AddressesApi
      */
     public delete(adrId: string, options?: AxiosRequestConfig) {
-        return AddressesApiFp(this.configuration).addressDelete(adrId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return AddressesApiFp(this.configuration).addressDelete(adrId, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new AddressDeletion(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -326,12 +332,15 @@ export class AddressesApi extends BaseAPI {
      * @memberof AddressesApi
      */
     public get(adrId: string, options?: AxiosRequestConfig) {
-        return AddressesApiFp(this.configuration).addressRetrieve(adrId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return AddressesApiFp(this.configuration).addressRetrieve(adrId, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new Address(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -348,12 +357,15 @@ export class AddressesApi extends BaseAPI {
      * @memberof AddressesApi
      */
     public list(limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, options?: AxiosRequestConfig) {
-        return AddressesApiFp(this.configuration).addressesList(limit, before, after, include, dateCreated, metadata, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return AddressesApiFp(this.configuration).addressesList(limit, before, after, include, dateCreated, metadata, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new AddressList(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 }
 

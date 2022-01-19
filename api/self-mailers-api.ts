@@ -337,12 +337,15 @@ export class SelfMailersApi extends BaseAPI {
      * @memberof SelfMailersApi
      */
     public create(selfMailerEditable: SelfMailerEditable, idempotencyKey?: string, options?: AxiosRequestConfig) {
-        return SelfMailersApiFp(this.configuration).selfMailerCreate(selfMailerEditable, idempotencyKey, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return SelfMailersApiFp(this.configuration).selfMailerCreate(selfMailerEditable, idempotencyKey, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new SelfMailer(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -354,12 +357,15 @@ export class SelfMailersApi extends BaseAPI {
      * @memberof SelfMailersApi
      */
     public delete(sfmId: string, options?: AxiosRequestConfig) {
-        return SelfMailersApiFp(this.configuration).selfMailerDelete(sfmId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return SelfMailersApiFp(this.configuration).selfMailerDelete(sfmId, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new SelfMailerDeletion(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -371,12 +377,15 @@ export class SelfMailersApi extends BaseAPI {
      * @memberof SelfMailersApi
      */
     public get(sfmId: string, options?: AxiosRequestConfig) {
-        return SelfMailersApiFp(this.configuration).selfMailerRetrieve(sfmId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return SelfMailersApiFp(this.configuration).selfMailerRetrieve(sfmId, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new SelfMailer(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -398,12 +407,15 @@ export class SelfMailersApi extends BaseAPI {
      * @memberof SelfMailersApi
      */
     public list(limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, size?: SelfMailerSize, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options?: AxiosRequestConfig) {
-        return SelfMailersApiFp(this.configuration).selfMailersList(limit, before, after, include, dateCreated, metadata, size, scheduled, sendDate, mailType, sortBy, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return SelfMailersApiFp(this.configuration).selfMailersList(limit, before, after, include, dateCreated, metadata, size, scheduled, sendDate, mailType, sortBy, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new SelfMailerList(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 }
 

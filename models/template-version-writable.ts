@@ -21,24 +21,39 @@ import { EngineHtml } from './engine-html';
  * @interface TemplateVersionWritable
  */
 export class TemplateVersionWritable {
+    constructor(input?: any) {
+        if (typeof input?.description !== "undefined") {
+            this.description = input.description;
+        }
+        if (typeof input?.html !== "undefined") {
+            this.html = input.html;
+        }
+        if (typeof input?.engine !== "undefined") {
+            this.engine = input.engine;
+        }
+    }
+
     /**
      * An internal description that identifies this resource. Must be no longer than 255 characters. 
      * @type {string}
      * @memberof TemplateVersionWritable
      */
     'description'?: string | null;
+    
     /**
      * An HTML string of less than 100,000 characters to be used as the `published_version` of this template. See [here](#section/HTML-Examples) for guidance on designing HTML templates. Please see endpoint specific documentation for any other product-specific HTML details: - [Postcards](#operation/postcard_create) - `front` and `back` - [Self Mailers](#operation/self_mailer_create) - `inside` and `outside` - [Letters](#operation/letter_create) - `file` - [Checks](#operation/check_create) - `check_bottom` and `attachment` - [Cards](#operation/card_create) - `front` and `back`  If there is a syntax error with your variable names within your HTML, then an error will be thrown, e.g. using a `{{#users}}` opening tag without the corresponding closing tag `{{/users}}`. 
      * @type {string}
      * @memberof TemplateVersionWritable
      */
     'html'?: string;
+    
     /**
      * 
      * @type {EngineHtml}
      * @memberof TemplateVersionWritable
      */
     'engine'?: EngineHtml | null;
+    
 }
 
 

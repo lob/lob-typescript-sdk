@@ -20,24 +20,39 @@
  * @interface LetterCustomEnvelope
  */
 export class LetterCustomEnvelope {
+    constructor(input?: any) {
+        if (typeof input?.id !== "undefined") {
+            this.id = input.id;
+        }
+        if (typeof input?.url !== "undefined") {
+            this.url = input.url;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
+        }
+    }
+
     /**
      * The unique identifier of the custom envelope used.
      * @type {string}
      * @memberof LetterCustomEnvelope
      */
     'id'?: string;
+    
     /**
      * The url of the envelope asset used.
      * @type {string}
      * @memberof LetterCustomEnvelope
      */
     'url'?: string;
+    
     /**
      * 
      * @type {string}
      * @memberof LetterCustomEnvelope
      */
     'object'?: LetterCustomEnvelopeObjectEnum;
+    
 }
 
 /**

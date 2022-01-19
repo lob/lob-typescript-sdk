@@ -370,12 +370,15 @@ export class TemplateVersionsApi extends BaseAPI {
      * @memberof TemplateVersionsApi
      */
     public create(tmplId: string, templateVersionWritable: TemplateVersionWritable, options?: AxiosRequestConfig) {
-        return TemplateVersionsApiFp(this.configuration).createTemplateVersion(tmplId, templateVersionWritable, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return TemplateVersionsApiFp(this.configuration).createTemplateVersion(tmplId, templateVersionWritable, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new TemplateVersion(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -388,12 +391,15 @@ export class TemplateVersionsApi extends BaseAPI {
      * @memberof TemplateVersionsApi
      */
     public delete(tmplId: string, vrsnId: string, options?: AxiosRequestConfig) {
-        return TemplateVersionsApiFp(this.configuration).templateVersionDelete(tmplId, vrsnId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return TemplateVersionsApiFp(this.configuration).templateVersionDelete(tmplId, vrsnId, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new TemplateVersionDeletion(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -406,12 +412,15 @@ export class TemplateVersionsApi extends BaseAPI {
      * @memberof TemplateVersionsApi
      */
     public get(tmplId: string, vrsnId: string, options?: AxiosRequestConfig) {
-        return TemplateVersionsApiFp(this.configuration).templateVersionRetrieve(tmplId, vrsnId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return TemplateVersionsApiFp(this.configuration).templateVersionRetrieve(tmplId, vrsnId, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new TemplateVersion(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -425,12 +434,15 @@ export class TemplateVersionsApi extends BaseAPI {
      * @memberof TemplateVersionsApi
      */
     public update(tmplId: string, vrsnId: string, templateVersionUpdatable: TemplateVersionUpdatable, options?: AxiosRequestConfig) {
-        return TemplateVersionsApiFp(this.configuration).templateVersionUpdate(tmplId, vrsnId, templateVersionUpdatable, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return TemplateVersionsApiFp(this.configuration).templateVersionUpdate(tmplId, vrsnId, templateVersionUpdatable, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new TemplateVersion(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -447,12 +459,15 @@ export class TemplateVersionsApi extends BaseAPI {
      * @memberof TemplateVersionsApi
      */
     public list(tmplId: string, limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, options?: AxiosRequestConfig) {
-        return TemplateVersionsApiFp(this.configuration).templateVersionsList(tmplId, limit, before, after, include, dateCreated, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return TemplateVersionsApiFp(this.configuration).templateVersionsList(tmplId, limit, before, after, include, dateCreated, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new TemplateVersionList(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 }
 

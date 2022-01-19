@@ -45,26 +45,26 @@ describe("ReverseGeocodeLookupsApi", () => {
 
     it("looks up a geocode", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake lookup id" },
+        data: { id: "us_reverse_geocode_fakeId" },
       }));
 
       const geocodeResult = await new ReverseGeocodeLookupsApi(config).lookup(
         mockLocation
       );
       expect(geocodeResult).toBeDefined();
-      expect(geocodeResult.id).toEqual("fake lookup id");
+      expect(geocodeResult.id).toEqual("us_reverse_geocode_fakeId");
     });
 
     it("includes custom headers while it looks up a geocode", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake lookup id" },
+        data: { id: "us_reverse_geocode_fakeId" },
       }));
 
       const reverseGeocodeApi = await new ReverseGeocodeLookupsApi(
         configWithBaseOptions
       ).lookup(mockLocation);
       expect(reverseGeocodeApi).toBeDefined();
-      expect(reverseGeocodeApi?.id).toEqual("fake lookup id");
+      expect(reverseGeocodeApi?.id).toEqual("us_reverse_geocode_fakeId");
     });
 
     it("handles errors returned by the api", async () => {

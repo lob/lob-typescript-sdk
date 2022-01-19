@@ -21,36 +21,75 @@ import { BillingGroup } from './billing-group';
  * @interface BillingGroupList
  */
 export class BillingGroupList {
+    constructor(input?: any) {
+        if (typeof input?.data !== "undefined") {
+            this.data = input.data;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
+        }
+        if (typeof input?.next_url !== "undefined") {
+            this.next_url = input.next_url;
+        }
+        if (typeof input?.previous_url !== "undefined") {
+            this.previous_url = input.previous_url;
+        }
+        if (typeof input?.count !== "undefined") {
+            this.count = input.count;
+        }
+    }
+
     /**
      * list of billing groups
      * @type {Array<BillingGroup>}
      * @memberof BillingGroupList
      */
     'data'?: Array<BillingGroup>;
+    
     /**
      * Value is type of resource.
      * @type {string}
      * @memberof BillingGroupList
      */
     'object'?: string;
+    
     /**
      * url of next page of items in list.
      * @type {string}
      * @memberof BillingGroupList
      */
     'next_url'?: string | null;
+    public get nextPageToken(): string | undefined {
+        if (!this.next_url) {
+            return undefined;
+        }
+        return this.next_url.split('?')[1]
+            .split('&')
+            .find((raw) => raw.includes('after='))
+            ?.split('=')[1];
+    }
     /**
      * url of previous page of items in list.
      * @type {string}
      * @memberof BillingGroupList
      */
     'previous_url'?: string | null;
+    public get previousPageToken(): string | undefined {
+        if (!this.previous_url) {
+            return undefined;
+        }
+        return this.previous_url.split('?')[1]
+            .split('&')
+            .find((raw) => raw.includes('before='))
+            ?.split('=')[1];
+    }
     /**
      * number of resources in a set
      * @type {number}
      * @memberof BillingGroupList
      */
     'count'?: number;
+    
 }
 
 

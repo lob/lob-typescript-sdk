@@ -332,12 +332,15 @@ export class LettersApi extends BaseAPI {
      * @memberof LettersApi
      */
     public cancel(ltrId: string, options?: AxiosRequestConfig) {
-        return LettersApiFp(this.configuration).letterCancel(ltrId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return LettersApiFp(this.configuration).letterCancel(ltrId, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new LetterDeletion(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -350,12 +353,15 @@ export class LettersApi extends BaseAPI {
      * @memberof LettersApi
      */
     public create(letterEditable: LetterEditable, idempotencyKey?: string, options?: AxiosRequestConfig) {
-        return LettersApiFp(this.configuration).letterCreate(letterEditable, idempotencyKey, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return LettersApiFp(this.configuration).letterCreate(letterEditable, idempotencyKey, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new Letter(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -367,12 +373,15 @@ export class LettersApi extends BaseAPI {
      * @memberof LettersApi
      */
     public get(ltrId: string, options?: AxiosRequestConfig) {
-        return LettersApiFp(this.configuration).letterRetrieve(ltrId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return LettersApiFp(this.configuration).letterRetrieve(ltrId, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new Letter(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -394,12 +403,15 @@ export class LettersApi extends BaseAPI {
      * @memberof LettersApi
      */
     public list(limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, color?: boolean, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options?: AxiosRequestConfig) {
-        return LettersApiFp(this.configuration).lettersList(limit, before, after, include, dateCreated, metadata, color, scheduled, sendDate, mailType, sortBy, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return LettersApiFp(this.configuration).lettersList(limit, before, after, include, dateCreated, metadata, color, scheduled, sendDate, mailType, sortBy, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new LetterList(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 }
 

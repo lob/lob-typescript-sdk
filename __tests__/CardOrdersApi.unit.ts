@@ -46,28 +46,28 @@ describe("CardOrdersApi", () => {
 
     it("creates a card order", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake order id" },
+        data: { id: "co_fakeId" },
       }));
 
       const cardOrder = await new CardOrdersApi(config).create(
-        "fake id",
+        "card_fakeId",
         cardForCreate
       );
       expect(cardOrder).toBeDefined();
-      expect(cardOrder?.id).toEqual("fake order id");
+      expect(cardOrder?.id).toEqual("co_fakeId");
     });
 
     it("includes custom headers while it creates a card order", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake order id" },
+        data: { id: "co_fakeId" },
       }));
 
       const cardOrder = await new CardOrdersApi(configWithBaseOptions).create(
-        "fake id",
+        "card_fakeId",
         cardForCreate
       );
       expect(cardOrder).toBeDefined();
-      expect(cardOrder?.id).toEqual("fake order id");
+      expect(cardOrder?.id).toEqual("co_fakeId");
     });
   });
 
@@ -80,21 +80,21 @@ describe("CardOrdersApi", () => {
 
     it("gets card orders for a card id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake card order id" }] },
+        data: { data: [{ id: "co_fakeId" }] },
       }));
 
-      const cardOrders = await new CardOrdersApi(config).get("fake id");
+      const cardOrders = await new CardOrdersApi(config).get("co_fakeId");
       expect(cardOrders).toBeDefined();
       expect(cardOrders?.data?.length).toEqual(1);
     });
 
     it("includes custom headers while it gets card orders for a card id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake card order id" }] },
+        data: { data: [{ id: "co_fakeId" }] },
       }));
 
       const cardOrders = await new CardOrdersApi(configWithBaseOptions).get(
-        "fake id"
+        "co_fakeId"
       );
       expect(cardOrders).toBeDefined();
       expect(cardOrders?.data?.length).toEqual(1);
@@ -109,7 +109,7 @@ describe("CardOrdersApi", () => {
       });
 
       try {
-        await new CardOrdersApi(configWithBaseOptions).get("fake id");
+        await new CardOrdersApi(configWithBaseOptions).get("co_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -122,7 +122,7 @@ describe("CardOrdersApi", () => {
       });
 
       try {
-        await new CardOrdersApi(configWithBaseOptions).get("fake id");
+        await new CardOrdersApi(configWithBaseOptions).get("co_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");

@@ -22,18 +22,29 @@ import { LobError } from './lob-error';
  * @interface IntlVerifications
  */
 export class IntlVerifications {
+    constructor(input?: any) {
+        if (typeof input?.addresses !== "undefined") {
+            this.addresses = input.addresses;
+        }
+        if (typeof input?.errors !== "undefined") {
+            this.errors = input.errors;
+        }
+    }
+
     /**
      * 
      * @type {Array<IntlVerification | LobError>}
      * @memberof IntlVerifications
      */
     'addresses'?: Array<IntlVerification | LobError>;
+    
     /**
      * Indicates whether any errors occurred during the verification process.
      * @type {boolean}
      * @memberof IntlVerifications
      */
     'errors'?: boolean;
+    
 }
 
 
