@@ -22,6 +22,21 @@ import { ZipLookupCity } from './zip-lookup-city';
  * @interface Zip
  */
 export class Zip {
+    constructor(input?: any) {
+        if (typeof input?.zip_code !== "undefined") {
+            this.zip_code = input.zip_code;
+        }
+        if (typeof input?.id !== "undefined") {
+            this.id = input.id;
+        }
+        if (typeof input?.cities !== "undefined") {
+            this.cities = input.cities;
+        }
+        if (typeof input?.zip_code_type !== "undefined") {
+            this.zip_code_type = input.zip_code_type;
+        }
+    }
+
     /**
      * A 5-digit ZIP code.
      * @type {string}
@@ -35,6 +50,7 @@ export class Zip {
         }
         this._zip_code = newValue;
     }
+    
     /**
      * Unique identifier prefixed with `us_zip_`.
      * @type {string}
@@ -48,24 +64,21 @@ export class Zip {
         }
         this._id = newValue;
     }
+    
     /**
      * An array of city objects containing valid cities for the `zip_code`. Multiple cities will be returned if more than one city is associated with the input ZIP code. 
      * @type {Array<ZipLookupCity>}
      * @memberof Zip
      */
     'cities'?: Array<ZipLookupCity>;
+    
     /**
      * 
      * @type {ZipCodeType}
      * @memberof Zip
      */
     'zip_code_type'?: ZipCodeType;
-    /**
-     * 
-     * @type {string}
-     * @memberof Zip
-     */
-    'object'?: string;
+    
 }
 
 

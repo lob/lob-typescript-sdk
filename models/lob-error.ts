@@ -15,7 +15,7 @@
 
 
 /**
- * Lob uses RESTful HTTP response codes to indicate success or failure of an API request. In general, 2xx indicates success, 4xx indicate an input error, and 5xx indicates an error on Lob\'s end.
+ * Lob uses RESTful HTTP response codes to indicate success or failure of an API request.
  * @export
  * @interface LobError
  */
@@ -40,14 +40,14 @@ export class LobError {
     'message'?: string;
     
     /**
-     * A conventional HTTP status code:   * `401` - Authorization error with your API key or account   * `403` - Forbidden error with your API key or account   * `404` - The requested item does not exist   * `413` - Payload too large   * `422` - The query or body parameters did not pass validation   * `429` - Too many requests have been sent with an API key in a given amount of time   * `500` - An internal server error occurred, please contact support@lob.com 
+     * A conventional HTTP status code.
      * @type {number}
      * @memberof LobError
      */
     'status_code'?: LobErrorStatusCodeEnum;
     
     /**
-     * A pre-defined string identifying an error. 
+     * A pre-defined string identifying an error.
      * @type {string}
      * @memberof LobError
      */

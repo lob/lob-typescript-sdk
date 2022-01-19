@@ -28,6 +28,8 @@ import { AddressDeletion } from '../models';
 import { AddressEditable } from '../models';
 // @ts-ignore
 import { AddressList } from '../models';
+// @ts-ignore
+import { LobError } from '../models';
 /**
  * AddressesApi - axios parameter creator
  * @export
@@ -75,7 +77,7 @@ export const AddressesApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Deletes the details of an existing address. You need only supply the unique identifier that was returned upon address creation.
+         * Deletes the details of an existing address.
          * @summary delete
          * @param {string} adrId id of the address
          * @param {*} [options] Override http request option.
@@ -113,7 +115,7 @@ export const AddressesApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Retrieves the details of an existing address. You need only supply the unique identifier that was returned upon address creation.
+         * Retrieves the details of an existing address.
          * @summary get
          * @param {string} adrId id of the address
          * @param {*} [options] Override http request option.
@@ -151,7 +153,7 @@ export const AddressesApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Returns a list of your addresses. The addresses are returned sorted by creation date, with the most recently created addresses appearing first.
+         * Returns a list of your addresses.
          * @summary list
          * @param {number} [limit] How many results to return.
          * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
@@ -236,7 +238,7 @@ export const AddressesApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Deletes the details of an existing address. You need only supply the unique identifier that was returned upon address creation.
+         * Deletes the details of an existing address.
          * @summary delete
          * @param {string} adrId id of the address
          * @param {*} [options] Override http request option.
@@ -247,7 +249,7 @@ export const AddressesApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Retrieves the details of an existing address. You need only supply the unique identifier that was returned upon address creation.
+         * Retrieves the details of an existing address.
          * @summary get
          * @param {string} adrId id of the address
          * @param {*} [options] Override http request option.
@@ -258,7 +260,7 @@ export const AddressesApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns a list of your addresses. The addresses are returned sorted by creation date, with the most recently created addresses appearing first.
+         * Returns a list of your addresses.
          * @summary list
          * @param {number} [limit] How many results to return.
          * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
@@ -304,7 +306,7 @@ export class AddressesApi extends BaseAPI {
     }
 
     /**
-     * Deletes the details of an existing address. You need only supply the unique identifier that was returned upon address creation.
+     * Deletes the details of an existing address.
      * @summary delete
      * @param {string} adrId id of the address
      * @param {*} [options] Override http request option.
@@ -324,7 +326,7 @@ export class AddressesApi extends BaseAPI {
     }
 
     /**
-     * Retrieves the details of an existing address. You need only supply the unique identifier that was returned upon address creation.
+     * Retrieves the details of an existing address.
      * @summary get
      * @param {string} adrId id of the address
      * @param {*} [options] Override http request option.
@@ -344,7 +346,7 @@ export class AddressesApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of your addresses. The addresses are returned sorted by creation date, with the most recently created addresses appearing first.
+     * Returns a list of your addresses.
      * @summary list
      * @param {number} [limit] How many results to return.
      * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 

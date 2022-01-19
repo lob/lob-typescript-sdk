@@ -26,6 +26,8 @@ import { CardOrder } from '../models';
 import { CardOrderEditable } from '../models';
 // @ts-ignore
 import { InlineResponse200 } from '../models';
+// @ts-ignore
+import { LobError } from '../models';
 /**
  * CardOrdersApi - axios parameter creator
  * @export

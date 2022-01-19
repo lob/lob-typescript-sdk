@@ -21,6 +21,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
+import { LobError } from '../models';
+// @ts-ignore
 import { Zip } from '../models';
 /**
  * ZipLookupsApi - axios parameter creator
@@ -108,12 +110,15 @@ export class ZipLookupsApi extends BaseAPI {
      * @memberof ZipLookupsApi
      */
     public Lookups(body: string, options?: AxiosRequestConfig) {
-        return ZipLookupsApiFp(this.configuration).zipLookup(body, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return ZipLookupsApiFp(this.configuration).zipLookup(body, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new Zip(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 }
 

@@ -328,12 +328,15 @@ export class ChecksApi extends BaseAPI {
      * @memberof ChecksApi
      */
     public Cancel(chkId: string, options?: AxiosRequestConfig) {
-        return ChecksApiFp(this.configuration).checkCancel(chkId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return ChecksApiFp(this.configuration).checkCancel(chkId, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new CheckDeletion(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -346,12 +349,15 @@ export class ChecksApi extends BaseAPI {
      * @memberof ChecksApi
      */
     public Create(checkEditable: CheckEditable, idempotencyKey?: string, options?: AxiosRequestConfig) {
-        return ChecksApiFp(this.configuration).checkCreate(checkEditable, idempotencyKey, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return ChecksApiFp(this.configuration).checkCreate(checkEditable, idempotencyKey, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new Check(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -363,12 +369,15 @@ export class ChecksApi extends BaseAPI {
      * @memberof ChecksApi
      */
     public Retrieve(chkId: string, options?: AxiosRequestConfig) {
-        return ChecksApiFp(this.configuration).checkRetrieve(chkId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return ChecksApiFp(this.configuration).checkRetrieve(chkId, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new Check(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -389,12 +398,15 @@ export class ChecksApi extends BaseAPI {
      * @memberof ChecksApi
      */
     public List(limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options?: AxiosRequestConfig) {
-        return ChecksApiFp(this.configuration).checksList(limit, before, after, include, dateCreated, metadata, scheduled, sendDate, mailType, sortBy, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return ChecksApiFp(this.configuration).checksList(limit, before, after, include, dateCreated, metadata, scheduled, sendDate, mailType, sortBy, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new CheckList(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 }
 

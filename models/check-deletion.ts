@@ -20,6 +20,18 @@
  * @interface CheckDeletion
  */
 export class CheckDeletion {
+    constructor(input?: any) {
+        if (typeof input?.id !== "undefined") {
+            this.id = input.id;
+        }
+        if (typeof input?.deleted !== "undefined") {
+            this.deleted = input.deleted;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
+        }
+    }
+
     /**
      * Unique identifier prefixed with `chk_`.
      * @type {string}
@@ -33,13 +45,31 @@ export class CheckDeletion {
         }
         this._id = newValue;
     }
+    
     /**
      * Only returned if the resource has been successfully deleted.
      * @type {boolean}
      * @memberof CheckDeletion
      */
     'deleted'?: boolean;
+    
+    /**
+     * Value is type of resource.
+     * @type {string}
+     * @memberof CheckDeletion
+     */
+    'object'?: CheckDeletionObjectEnum;
+    
 }
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum CheckDeletionObjectEnum {
+    CheckDeleted = 'check_deleted'
+}
+
 
 
 /**

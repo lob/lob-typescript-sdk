@@ -16,30 +16,14 @@
 import { AddressDomestic } from './address-domestic';
 import { CheckBottom } from './check-bottom';
 import { CheckEditableProps } from './check-editable-props';
-import { ErrorError } from './error-error';
 import { SendDate } from './send-date';
 
 /**
  * @type CheckEditable
  * @export
  */
-export type CheckEditable = CheckEditableProps | any;
+export type CheckEditable = CheckEditableProps;
 
-export class ModelError {
-    constructor(input?: any) {
-        if (typeof input?.error !== "undefined") {
-            this.error = input.error;
-        }
-    }
-
-    /**
-     * 
-     * @type {ErrorError}
-     * @memberof ModelError
-     */
-    'error': ErrorError;
-    
-}
 
 
 /**
