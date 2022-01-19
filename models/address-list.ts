@@ -78,7 +78,7 @@ export class AddressList {
      */
     'previous_url'?: string | null;
     public get previousPageToken(): string | undefined {
-        if (!this.next_url) {
+        if (!this.previous_url) {
             return undefined;
         }
         return this.previous_url.split('?')[1]
