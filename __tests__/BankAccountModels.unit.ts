@@ -1,7 +1,9 @@
 import {
   BankAccount,
-  BankAccountDeletion,
-  BankAccountList
+  BankAccountDeletion, BankAccountDeletionObjectEnum,
+  BankAccountList,
+  BankAccountVerify,
+  BankAccountWritable, BankTypeEnum
 } from "../models";
 import {URL_VALID_LIST} from "./testFixtures";
 
@@ -10,6 +12,34 @@ describe("Bank Account Models", () => {
     it("can be created", () => {
       const rec = new BankAccount();
       expect(rec).toBeDefined();
+    });
+
+    it.each([
+      ['id', 'bank_fakeId' ],
+      ['description', 'fake description'],
+      ['routing_number', 'fake routing'],
+      ['account_number', 'fake account'],
+      ['account_type', BankTypeEnum.Company ],
+      ['account_type', BankTypeEnum.Individual ],
+      ['signatory', 'fake signatory'],
+      ['metadata', {} ],
+      ['signature_url', URL_VALID_LIST ],
+      ['bank_name', 'Bank' ],
+      ['verified', false ],
+      ['verified', true ],
+      ['date_created', new Date().toISOString() ],
+      ['date_modified', new Date().toISOString() ],
+      ['deleted', false ],
+      ['deleted', true ],
+      ['object', 'Bank' ]
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new BankAccount(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
     });
 
     it("rejects invalid values for id", () => {
@@ -71,6 +101,20 @@ describe("Bank Account Models", () => {
     it("can be created", () => {
       const rec = new BankAccountDeletion();
       expect(rec).toBeDefined();
+    });
+
+    it.each([
+      ['id', 'bank_fakeId'],
+      ['deleted', true],
+      ['object', BankAccountDeletionObjectEnum],
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new BankAccountDeletion(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
     });
 
     it("rejects invalid values for id", () => {
@@ -155,5 +199,49 @@ describe("Bank Account Models", () => {
         expect(rec.previousPageToken).toBeUndefined();
       });
     });
+  });
+
+  describe("BankAccountVerify", () => {
+    it("can be created", () => {
+      const rec = new BankAccountVerify();
+      expect(rec).toBeDefined();
+    });
+
+    it.each([
+      ['amounts', [ 1, 2 ]]
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new BankAccountVerify(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
+    });
+  });
+
+  describe("BankAccountWritable", () => {
+    it("can be created", () => {
+      const rec = new BankAccountWritable();
+      expect(rec).toBeDefined();
+    });
+
+    it.each([
+      ['description', 'fake description'],
+      ['routing_number', 'fake routing'],
+      ['account_number', 'fake account'],
+      ['account_type', BankTypeEnum.Company ],
+      ['signatory', 'fake signatory'],
+      ['metadata', {} ]
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new BankAccountWritable(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
+    });
+
   });
 });
