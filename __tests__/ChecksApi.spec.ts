@@ -3,8 +3,30 @@ import { Configuration } from "../configuration";
 import { ChecksApi } from "../api/checks-api";
 import { CheckEditable } from "../models/check-editable";
 import { Check } from "../models/check";
+import { BankAccount, BankAccountsApi, BankAccountVerify, BankAccountWritable, BankTypeEnum, CountryExtended, MailType } from "..";
 
+let bankApi: BankAccountsApi;
+let account: BankAccount;
 describe("ChecksApi", () => {
+  beforeAll(async () => {
+    const dummyAccount: BankAccountWritable = {
+      description: "Test Bank Account",
+      routing_number: "322271627",
+      account_number: "123456789",
+      signatory: "Sinead Connor",
+      account_type: BankTypeEnum.Individual,
+    };
+    bankApi = new BankAccountsApi(config);
+    account = await bankApi.create(dummyAccount);
+    const verify: BankAccountVerify = {
+      amounts: [11, 35],
+    };
+    if (account?.id) {
+      const verification = await bankApi.verify(account.id, verify);
+      expect(verification).toBeDefined();
+      expect(verification?.verified).toBeTruthy();
+    }
+  });
   const config: Configuration = new Configuration({
     username: process.env.LOB_API_KEY,
   });
@@ -32,45 +54,74 @@ describe("ChecksApi", () => {
   });
 
   describe("performs single-Check operations", () => {
-    const createCheck: CheckEditable = {
-      description: "updated check",
-      from: "fake from",
-      to: "fake to",
-      bank_account: "fake account",
-      amount: 100,
-    };
+    describe("creates, retrieves, cancels, and lists a check", () => {
+      let createCheck: CheckEditable;
+      let checksApi: ChecksApi;
 
-    it("creates, retrieves, cancels, and lists a check", async () => {
-      const checksApi = new ChecksApi(config);
-      // Create
-      const createdCheck = await new ChecksApi(config).Create(createCheck);
-      expect(createdCheck?.id).toBeDefined();
-      expect(createdCheck?.description).toEqual(createCheck.description);
+      beforeAll(() => {
+        createCheck = {
+          description: "check 1",
+          to: {
+            company: "Lob (old)",
+            address_line1: "210 King St",
+            address_line2: "# 6100",
+            address_city: "San Francisco",
+            address_state: "CA",
+            address_zip: "94107",
+            address_country: CountryExtended.Us,
+          },
+          from: {
+            company: "Lob (new)",
+            address_line1: "210 King St",
+            address_city: "San Francisco",
+            address_state: "CA",
+            address_zip: "94107",
+            address_country: "US",
+          },
+          bank_account: account.id,
+          amount: 100,
+        };
 
-      // Retrieve
-      const retrievedCheck = await checksApi.Retrieve(createdCheck.id as string);
-      expect(retrievedCheck).toBeDefined();
-      expect(retrievedCheck?.id).toEqual(createdCheck?.id);
+        checksApi = new ChecksApi(config);
+      });
 
-      // Cancel
-      const cancelledCheck = await checksApi.Cancel(createdCheck.id as string);
-      expect(cancelledCheck).toBeDefined();
-      expect(cancelledCheck?.id).toEqual(createdCheck?.id);
+      it("creates a check", async () => {
+        // Create
+        const createdCheck = await new ChecksApi(config).Create(createCheck);
+        expect(createdCheck?.id).toBeDefined();
+        expect(createdCheck?.description).toEqual(createCheck.description);
+      });
 
-      // List
-      const updates: CheckEditable = {
-        description: "updated check",
-        from: "fake from",
-        to: "fake to",
-        bank_account: "fake account",
-        amount: 100,
-      };
-      const updatedCheck = await checksApi.List(
-        1
-      );
-      expect(updatedCheck).toBeDefined();
+      it("Retrieves a check", async () => {
+        // Retrieve
+        const createdCheck = await new ChecksApi(config).Create(createCheck);
+
+        const retrievedCheck = await checksApi.Retrieve(createdCheck.id as string);
+        expect(retrievedCheck).toBeDefined();
+        expect(retrievedCheck?.id).toEqual(createdCheck?.id);
+      });
+
+      it("Cancels a check", async () => {
+        // Cancel
+        const createdCheck = await new ChecksApi(config).Create(createCheck);
+  
+        const cancelledCheck = await checksApi.Cancel(createdCheck.id as string);
+        expect(cancelledCheck).toBeDefined();
+        expect(cancelledCheck?.id).toEqual(createdCheck?.id);
+      });
+
+      it("Lists a check", async () => {
+        // List
+        const createdCheck = await new ChecksApi(config).Create(createCheck);
+  
+        const updatedCheck = await checksApi.List(
+          1
+        );
+        expect(updatedCheck).toBeDefined();
+      });
     });
   });
+    
 
   describe("list checks", () => {
     let createdChecks: Check[] = [];
@@ -79,23 +130,32 @@ describe("ChecksApi", () => {
       // ensure there are at least 3 checks present, to test pagination
       const check1: CheckEditable = {
         description: "check 1",
-        from: "fake from 1",
-        to: "fake to 1",
-        bank_account: "fake account 1",
+        to: {
+          company: "Lob (old)",
+          address_line1: "210 King St",
+          address_line2: "# 6100",
+          address_city: "San Francisco",
+          address_state: "CA",
+          address_zip: "94107",
+          address_country: CountryExtended.Us,
+        },
+        from: {
+          company: "Lob (new)",
+          address_line1: "210 King St",
+          address_city: "San Francisco",
+          address_state: "CA",
+          address_zip: "94107",
+          address_country: "US",
+        },
+        bank_account: account.id,
         amount: 100,
       };
       const check2: CheckEditable = Object.assign({}, check1, {
         description: "Check 2",
-        from: "fake from 2",
-        to: "fake to 2",
-        bank_account: "fake account 2",
         amount: 200,
       });
       const check3: CheckEditable = Object.assign({}, check1, {
         description: "Check 3",
-        from: "fake from 3",
-        to: "fake to 3",
-        bank_account: "fake account 3",
         amount: 300,
       });
 
