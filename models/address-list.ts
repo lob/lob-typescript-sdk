@@ -81,7 +81,7 @@ export class AddressList {
         if (!this.next_url) {
             return undefined;
         }
-        return this.next_url.split('?')[1]
+        return this.previous_url.split('?')[1]
             .split('&')
             .find((raw) => raw.includes('before='))
             ?.split('=')[1];
