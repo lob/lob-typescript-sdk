@@ -196,7 +196,7 @@ export class SelfMailer {
     private '_url'?: string;
     public get url() { return (this._url || undefined) as string; }
     public set url(newValue: string) {
-        if(newValue && !/^https:\/\/lob-assets\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\.pdf|_thumb_[a-z]+_[0-9]+\.png)\?(version&#x3D;[a-z0-9-]*&amp;)?expires&#x3D;[0-9]{10}&amp;signature&#x3D;[a-zA-Z0-9-_]+$/.test(newValue)) {
+        if(newValue && !/^https:\/\/lob-assets\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\.pdf|_thumb_[a-z]+_[0-9]+\.png)\?(version=[a-z0-9-]*&)?expires=[0-9]{10}&signature=[a-zA-Z0-9-_]+$/.test(newValue)) {
             throw new Error("Invalid url provided");
         }
         this._url = newValue;
