@@ -17,7 +17,7 @@
 /**
  * A nested object containing a breakdown of each component of a reverse geocoded response.
  * @export
- * @interface GeocodeComponents
+ * @class GeocodeComponents
  */
 export class GeocodeComponents {
     constructor(input?: any) {

@@ -21,7 +21,7 @@ import { SendDate } from './send-date';
 /**
  * 
  * @export
- * @interface SelfMailerEditable
+ * @class SelfMailerEditable
  */
 export class SelfMailerEditable {
     constructor(input?: any) {

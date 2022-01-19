@@ -26,6 +26,8 @@ import { BillingGroup } from '../models';
 import { BillingGroupEditable } from '../models';
 // @ts-ignore
 import { BillingGroupList } from '../models';
+// @ts-ignore
+import { LobError } from '../models';
 /**
  * BillingGroupsApi - axios parameter creator
  * @export

@@ -19,7 +19,7 @@ import { LobError } from './lob-error';
 /**
  * 
  * @export
- * @interface IntlVerifications
+ * @class IntlVerifications
  */
 export class IntlVerifications {
     constructor(input?: any) {

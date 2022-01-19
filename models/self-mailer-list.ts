@@ -18,7 +18,7 @@ import { SelfMailer } from './self-mailer';
 /**
  * 
  * @export
- * @interface SelfMailerList
+ * @class SelfMailerList
  */
 export class SelfMailerList {
     constructor(input?: any) {

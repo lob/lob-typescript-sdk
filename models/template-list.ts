@@ -18,7 +18,7 @@ import { Template } from './template';
 /**
  * 
  * @export
- * @interface TemplateList
+ * @class TemplateList
  */
 export class TemplateList {
     constructor(input?: any) {

@@ -18,7 +18,7 @@ import { IntlComponents } from './intl-components';
 /**
  * 
  * @export
- * @interface IntlVerification
+ * @class IntlVerification
  */
 export class IntlVerification {
     constructor(input?: any) {

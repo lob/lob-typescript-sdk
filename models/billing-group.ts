@@ -17,7 +17,7 @@
 /**
  * 
  * @export
- * @interface BillingGroup
+ * @class BillingGroup
  */
 export class BillingGroup {
     constructor(input?: any) {

@@ -18,7 +18,7 @@ import { BillingGroup } from './billing-group';
 /**
  * 
  * @export
- * @interface BillingGroupList
+ * @class BillingGroupList
  */
 export class BillingGroupList {
     constructor(input?: any) {

@@ -18,7 +18,7 @@ import { Postcard } from './postcard';
 /**
  * 
  * @export
- * @interface PostcardList
+ * @class PostcardList
  */
 export class PostcardList {
     constructor(input?: any) {

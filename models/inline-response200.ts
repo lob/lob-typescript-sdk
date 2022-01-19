@@ -18,7 +18,7 @@ import { CardOrder } from './card-order';
 /**
  * 
  * @export
- * @interface InlineResponse200
+ * @class InlineResponse200
  */
 export class InlineResponse200 {
     constructor(input?: any) {

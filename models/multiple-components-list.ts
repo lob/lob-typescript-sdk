@@ -18,7 +18,7 @@ import { MultipleComponents } from './multiple-components';
 /**
  * 
  * @export
- * @interface MultipleComponentsList
+ * @class MultipleComponentsList
  */
 export class MultipleComponentsList {
     constructor(input?: any) {

@@ -17,7 +17,7 @@
 /**
  * A nested object containing a breakdown of the analysis of a reverse geocoded location.
  * @export
- * @interface LocationAnalysis
+ * @class LocationAnalysis
  */
 export class LocationAnalysis {
     constructor(input?: any) {

@@ -19,7 +19,7 @@ import { LocationAnalysis } from './location-analysis';
 /**
  * 
  * @export
- * @interface GeocodeAddresses
+ * @class GeocodeAddresses
  */
 export class GeocodeAddresses {
     constructor(input?: any) {

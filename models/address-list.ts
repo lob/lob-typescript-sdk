@@ -18,7 +18,7 @@ import { Address } from './address';
 /**
  * 
  * @export
- * @interface AddressList
+ * @class AddressList
  */
 export class AddressList {
     constructor(input?: any) {

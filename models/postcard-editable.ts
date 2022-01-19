@@ -22,7 +22,7 @@ import { SendDate } from './send-date';
 /**
  * 
  * @export
- * @interface PostcardEditable
+ * @class PostcardEditable
  */
 export class PostcardEditable {
     constructor(input?: any) {

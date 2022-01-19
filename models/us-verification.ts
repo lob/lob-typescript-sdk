@@ -20,7 +20,7 @@ import { UsComponents } from './us-components';
 /**
  * 
  * @export
- * @interface UsVerification
+ * @class UsVerification
  */
 export class UsVerification {
     constructor(input?: any) {

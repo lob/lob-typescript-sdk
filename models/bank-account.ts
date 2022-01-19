@@ -17,7 +17,7 @@
 /**
  * 
  * @export
- * @interface BankAccount
+ * @class BankAccount
  */
 export class BankAccount {
     constructor(input?: any) {

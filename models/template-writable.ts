@@ -18,7 +18,7 @@ import { EngineHtml } from './engine-html';
 /**
  * 
  * @export
- * @interface TemplateWritable
+ * @class TemplateWritable
  */
 export class TemplateWritable {
     constructor(input?: any) {

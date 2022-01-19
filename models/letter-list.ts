@@ -18,7 +18,7 @@ import { Letter } from './letter';
 /**
  * 
  * @export
- * @interface LetterList
+ * @class LetterList
  */
 export class LetterList {
     constructor(input?: any) {

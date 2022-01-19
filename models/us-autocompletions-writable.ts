@@ -17,7 +17,7 @@
 /**
  * 
  * @export
- * @interface UsAutocompletionsWritable
+ * @class UsAutocompletionsWritable
  */
 export class UsAutocompletionsWritable {
     constructor(input?: any) {

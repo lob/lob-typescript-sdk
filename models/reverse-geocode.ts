@@ -18,7 +18,7 @@ import { GeocodeAddresses } from './geocode-addresses';
 /**
  * 
  * @export
- * @interface ReverseGeocode
+ * @class ReverseGeocode
  */
 export class ReverseGeocode {
     constructor(input?: any) {
