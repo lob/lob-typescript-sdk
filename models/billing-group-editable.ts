@@ -20,18 +20,31 @@
  * @interface BillingGroupEditable
  */
 export class BillingGroupEditable {
+    constructor(input?: any) {
+        if (input) {
+            if (input.description) {
+                this.description = input.description;
+            }
+            if (input.name) {
+                this.name = input.name;
+            }
+        }
+    }
+
     /**
      * Description of the billing group.
      * @type {string}
      * @memberof BillingGroupEditable
      */
     'description'?: string;
+    
     /**
      * Name of the billing group.
      * @type {string}
      * @memberof BillingGroupEditable
      */
     'name'?: string;
+    
 }
 
 

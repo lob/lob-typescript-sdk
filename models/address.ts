@@ -21,6 +21,65 @@ import { CountryExtendedExpanded } from './country-extended-expanded';
  * @interface Address
  */
 export class Address {
+    constructor(input?: any) {
+        if (input) {
+            if (input.id) {
+                this.id = input.id;
+            }
+            if (input.description) {
+                this.description = input.description;
+            }
+            if (input.name) {
+                this.name = input.name;
+            }
+            if (input.company) {
+                this.company = input.company;
+            }
+            if (input.phone) {
+                this.phone = input.phone;
+            }
+            if (input.email) {
+                this.email = input.email;
+            }
+            if (input.metadata) {
+                this.metadata = input.metadata;
+            }
+            if (input.address_line1) {
+                this.address_line1 = input.address_line1;
+            }
+            if (input.address_line2) {
+                this.address_line2 = input.address_line2;
+            }
+            if (input.address_city) {
+                this.address_city = input.address_city;
+            }
+            if (input.address_state) {
+                this.address_state = input.address_state;
+            }
+            if (input.address_zip) {
+                this.address_zip = input.address_zip;
+            }
+            if (input.address_country) {
+                this.address_country = input.address_country;
+            }
+            if (input.object) {
+                this.object = input.object;
+            }
+            if (input.date_created) {
+                this.date_created = input.date_created;
+            }
+            if (input.date_modified) {
+                this.date_modified = input.date_modified;
+            }
+            if (input.deleted) {
+                this.deleted = input.deleted;
+            }
+            if (input.recipient_moved) {
+                this.recipient_moved = input.recipient_moved;
+            }
+        }
+    }
+
     /**
      * Unique identifier prefixed with `adr_`.
      * @type {string}
@@ -34,60 +93,70 @@ export class Address {
         }
         this._id = newValue;
     }
+    
     /**
      * An internal description that identifies this resource. Must be no longer than 255 characters. 
      * @type {string}
      * @memberof Address
      */
     'description'?: string | null;
+    
     /**
      * Either `name` or `company` is required, you may also add both. Must be no longer than 40 characters. If both `name` and `company` are provided, they will be printed on two separate lines above the rest of the address. 
      * @type {string}
      * @memberof Address
      */
     'name'?: string | null;
+    
     /**
      * Either `name` or `company` is required, you may also add both. Must be no longer than 40 characters. If both `name` and `company` are provided, they will be printed on two separate lines above the rest of the address. This field can be used for any secondary recipient information which is not part of the actual mailing address (Company Name, Department, Attention Line, etc). 
      * @type {string}
      * @memberof Address
      */
     'company'?: string | null;
+    
     /**
      * Must be no longer than 40 characters.
      * @type {string}
      * @memberof Address
      */
     'phone'?: string | null;
+    
     /**
      * Must be no longer than 100 characters.
      * @type {string}
      * @memberof Address
      */
     'email'?: string | null;
+    
     /**
      * Use metadata to store custom information for tagging and labeling back to your internal systems. Must be an object with up to 20 key-value pairs. Keys must be at most 40 characters and values must be at most 500 characters. Neither can contain the characters `\"` and `\\`. i.e. \'{\"customer_id\" : \"NEWYORK2015\"}\' Nested objects are not supported.  See [Metadata](#section/Metadata) for more information.
      * @type {{ [key: string]: string; }}
      * @memberof Address
      */
     'metadata'?: { [key: string]: string; };
+    
     /**
      * 
      * @type {string}
      * @memberof Address
      */
     'address_line1'?: string;
+    
     /**
      * 
      * @type {string}
      * @memberof Address
      */
     'address_line2'?: string | null;
+    
     /**
      * 
      * @type {string}
      * @memberof Address
      */
     'address_city'?: string;
+    
     /**
      * 2 letter state short-name code
      * @type {string}
@@ -101,6 +170,7 @@ export class Address {
         }
         this._address_state = newValue;
     }
+    
     /**
      * Must follow the ZIP format of `12345` or ZIP+4 format of `12345-1234`. 
      * @type {string}
@@ -114,42 +184,49 @@ export class Address {
         }
         this._address_zip = newValue;
     }
+    
     /**
      * 
      * @type {CountryExtendedExpanded}
      * @memberof Address
      */
     'address_country'?: CountryExtendedExpanded;
+    
     /**
      * 
      * @type {string}
      * @memberof Address
      */
     'object'?: AddressObjectEnum;
+    
     /**
      * A timestamp in ISO 8601 format of the date the resource was created.
      * @type {string}
      * @memberof Address
      */
     'date_created'?: string;
+    
     /**
      * A timestamp in ISO 8601 format of the date the resource was last modified.
      * @type {string}
      * @memberof Address
      */
     'date_modified'?: string;
+    
     /**
      * Only returned if the resource has been successfully deleted.
      * @type {boolean}
      * @memberof Address
      */
     'deleted'?: boolean;
+    
     /**
      * Only returned for accounts on certain <a href=\"https://dashboard.lob.com/#/settings/editions\">Print &amp; Mail Editions</a>. Value is `true` if the address was altered because the recipient filed for a <a href=\"#ncoa\">National Change of Address (NCOA)</a>, `false` if the NCOA check was run but no altered address was found, and `null` if the NCOA check was not run. The NCOA check does not happen for non-US addresses, for non-deliverable US addresses, or for addresses created before the NCOA feature was added to your account. 
      * @type {boolean}
      * @memberof Address
      */
     'recipient_moved'?: boolean | null;
+    
 }
 
 /**

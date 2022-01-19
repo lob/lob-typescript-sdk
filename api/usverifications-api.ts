@@ -178,12 +178,15 @@ export class USVerificationsApi extends BaseAPI {
      * @memberof USVerificationsApi
      */
     public verifyBulk(multipleComponentsList: MultipleComponentsList, _case?: 'upper' | 'proper', options?: AxiosRequestConfig) {
-        return USVerificationsApiFp(this.configuration).bulkUsVerifications(multipleComponentsList, _case, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return USVerificationsApiFp(this.configuration).bulkUsVerifications(multipleComponentsList, _case, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new UsVerifications(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -196,12 +199,15 @@ export class USVerificationsApi extends BaseAPI {
      * @memberof USVerificationsApi
      */
     public verifySingle(usVerificationsWritable: UsVerificationsWritable, _case?: 'upper' | 'proper', options?: AxiosRequestConfig) {
-        return USVerificationsApiFp(this.configuration).usVerification(usVerificationsWritable, _case, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return USVerificationsApiFp(this.configuration).usVerification(usVerificationsWritable, _case, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new UsVerification(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 }
 

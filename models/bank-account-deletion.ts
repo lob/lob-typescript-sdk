@@ -20,6 +20,20 @@
  * @interface BankAccountDeletion
  */
 export class BankAccountDeletion {
+    constructor(input?: any) {
+        if (input) {
+            if (input.id) {
+                this.id = input.id;
+            }
+            if (input.deleted) {
+                this.deleted = input.deleted;
+            }
+            if (input.object) {
+                this.object = input.object;
+            }
+        }
+    }
+
     /**
      * Unique identifier prefixed with `bank_`.
      * @type {string}
@@ -33,18 +47,21 @@ export class BankAccountDeletion {
         }
         this._id = newValue;
     }
+    
     /**
      * Only returned if the resource has been successfully deleted.
      * @type {boolean}
      * @memberof BankAccountDeletion
      */
     'deleted'?: boolean;
+    
     /**
      * Value is type of resource.
      * @type {string}
      * @memberof BankAccountDeletion
      */
     'object'?: BankAccountDeletionObjectEnum;
+    
 }
 
 /**

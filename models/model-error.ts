@@ -21,12 +21,21 @@ import { ErrorError } from './error-error';
  * @interface ModelError
  */
 export class ModelError {
+    constructor(input?: any) {
+        if (input) {
+            if (input.error) {
+                this.error = input.error;
+            }
+        }
+    }
+
     /**
      * 
      * @type {ErrorError}
      * @memberof ModelError
      */
     'error': ErrorError;
+    
 }
 
 

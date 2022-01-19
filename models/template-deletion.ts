@@ -20,6 +20,20 @@
  * @interface TemplateDeletion
  */
 export class TemplateDeletion {
+    constructor(input?: any) {
+        if (input) {
+            if (input.id) {
+                this.id = input.id;
+            }
+            if (input.deleted) {
+                this.deleted = input.deleted;
+            }
+            if (input.object) {
+                this.object = input.object;
+            }
+        }
+    }
+
     /**
      * Unique identifier prefixed with `tmpl_`. ID of a saved [HTML template](#section/HTML-Templates).
      * @type {string}
@@ -33,18 +47,21 @@ export class TemplateDeletion {
         }
         this._id = newValue;
     }
+    
     /**
      * Only returned if the resource has been successfully deleted.
      * @type {boolean}
      * @memberof TemplateDeletion
      */
     'deleted'?: boolean;
+    
     /**
      * Value is type of resource.
      * @type {string}
      * @memberof TemplateDeletion
      */
     'object'?: TemplateDeletionObjectEnum;
+    
 }
 
 /**

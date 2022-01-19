@@ -20,6 +20,50 @@
  * @interface CardOrder
  */
 export class CardOrder {
+    constructor(input?: any) {
+        if (input) {
+            if (input.id) {
+                this.id = input.id;
+            }
+            if (input.card_id) {
+                this.card_id = input.card_id;
+            }
+            if (input.status) {
+                this.status = input.status;
+            }
+            if (input.inventory) {
+                this.inventory = input.inventory;
+            }
+            if (input.quantity_ordered) {
+                this.quantity_ordered = input.quantity_ordered;
+            }
+            if (input.unit_price) {
+                this.unit_price = input.unit_price;
+            }
+            if (input.cancelled_reason) {
+                this.cancelled_reason = input.cancelled_reason;
+            }
+            if (input.availability_date) {
+                this.availability_date = input.availability_date;
+            }
+            if (input.expected_availability_date) {
+                this.expected_availability_date = input.expected_availability_date;
+            }
+            if (input.date_created) {
+                this.date_created = input.date_created;
+            }
+            if (input.date_modified) {
+                this.date_modified = input.date_modified;
+            }
+            if (input.deleted) {
+                this.deleted = input.deleted;
+            }
+            if (input.object) {
+                this.object = input.object;
+            }
+        }
+    }
+
     /**
      * Unique identifier prefixed with `co_`.
      * @type {string}
@@ -33,6 +77,7 @@ export class CardOrder {
         }
         this._id = newValue;
     }
+    
     /**
      * Unique identifier prefixed with `card_`.
      * @type {string}
@@ -46,72 +91,84 @@ export class CardOrder {
         }
         this._card_id = newValue;
     }
+    
     /**
      * The status of the card order.
      * @type {string}
      * @memberof CardOrder
      */
     'status'?: CardOrderStatusEnum;
+    
     /**
      * The inventory of the card order.
      * @type {number}
      * @memberof CardOrder
      */
     'inventory'?: number;
+    
     /**
      * The quantity of cards ordered
      * @type {number}
      * @memberof CardOrder
      */
     'quantity_ordered'?: number;
+    
     /**
      * The unit price for the card order.
      * @type {number}
      * @memberof CardOrder
      */
     'unit_price'?: number;
+    
     /**
      * The reason for cancellation.
      * @type {string}
      * @memberof CardOrder
      */
     'cancelled_reason'?: string;
+    
     /**
      * A timestamp in ISO 8601 format of the date the resource was created.
      * @type {string}
      * @memberof CardOrder
      */
     'availability_date'?: string;
+    
     /**
      * The fixed deadline for the cards to be printed.
      * @type {string}
      * @memberof CardOrder
      */
     'expected_availability_date'?: string;
+    
     /**
      * A timestamp in ISO 8601 format of the date the resource was created.
      * @type {string}
      * @memberof CardOrder
      */
     'date_created'?: string;
+    
     /**
      * A timestamp in ISO 8601 format of the date the resource was last modified.
      * @type {string}
      * @memberof CardOrder
      */
     'date_modified'?: string;
+    
     /**
      * Only returned if the resource has been successfully deleted.
      * @type {boolean}
      * @memberof CardOrder
      */
     'deleted'?: boolean;
+    
     /**
      * Value is type of resource.
      * @type {string}
      * @memberof CardOrder
      */
     'object'?: string;
+    
 }
 
 /**

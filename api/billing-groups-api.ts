@@ -297,12 +297,15 @@ export class BillingGroupsApi extends BaseAPI {
      * @memberof BillingGroupsApi
      */
     public create(billingGroupEditable: BillingGroupEditable, options?: AxiosRequestConfig) {
-        return BillingGroupsApiFp(this.configuration).billingGroupCreate(billingGroupEditable, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return BillingGroupsApiFp(this.configuration).billingGroupCreate(billingGroupEditable, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new BillingGroup(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -314,12 +317,15 @@ export class BillingGroupsApi extends BaseAPI {
      * @memberof BillingGroupsApi
      */
     public get(bgId: string, options?: AxiosRequestConfig) {
-        return BillingGroupsApiFp(this.configuration).billingGroupRetrieve(bgId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return BillingGroupsApiFp(this.configuration).billingGroupRetrieve(bgId, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new BillingGroup(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -332,12 +338,15 @@ export class BillingGroupsApi extends BaseAPI {
      * @memberof BillingGroupsApi
      */
     public update(bgId: string, billingGroupEditable: BillingGroupEditable, options?: AxiosRequestConfig) {
-        return BillingGroupsApiFp(this.configuration).billingGroupUpdate(bgId, billingGroupEditable, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return BillingGroupsApiFp(this.configuration).billingGroupUpdate(bgId, billingGroupEditable, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new BillingGroup(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -354,12 +363,15 @@ export class BillingGroupsApi extends BaseAPI {
      * @memberof BillingGroupsApi
      */
     public list(limit?: number, offset?: number, include?: Array<string>, dateCreated?: { [key: string]: string; }, dateModified?: { [key: string]: string; }, sortBy?: object, options?: AxiosRequestConfig) {
-        return BillingGroupsApiFp(this.configuration).billingGroupsList(limit, offset, include, dateCreated, dateModified, sortBy, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return BillingGroupsApiFp(this.configuration).billingGroupsList(limit, offset, include, dateCreated, dateModified, sortBy, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new BillingGroupList(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 }
 

@@ -21,42 +21,71 @@ import { Card } from './card';
  * @interface CardList
  */
 export class CardList {
+    constructor(input?: any) {
+        if (input) {
+            if (input.data) {
+                this.data = input.data;
+            }
+            if (input.object) {
+                this.object = input.object;
+            }
+            if (input.next_url) {
+                this.next_url = input.next_url;
+            }
+            if (input.previous_url) {
+                this.previous_url = input.previous_url;
+            }
+            if (input.count) {
+                this.count = input.count;
+            }
+            if (input.total_count) {
+                this.total_count = input.total_count;
+            }
+        }
+    }
+
     /**
      * list of cards
      * @type {Array<Card>}
      * @memberof CardList
      */
     'data'?: Array<Card>;
+    
     /**
      * Value is type of resource.
      * @type {string}
      * @memberof CardList
      */
     'object'?: string;
+    
     /**
      * url of next page of items in list.
      * @type {string}
      * @memberof CardList
      */
     'next_url'?: string | null;
+    
     /**
      * url of previous page of items in list.
      * @type {string}
      * @memberof CardList
      */
     'previous_url'?: string | null;
+    
     /**
      * number of resources in a set
      * @type {number}
      * @memberof CardList
      */
     'count'?: number;
+    
     /**
      * indicates the total number of records. Provided when the request specifies an \"include\" query parameter
      * @type {number}
      * @memberof CardList
      */
     'total_count'?: number;
+    
 }
 
 

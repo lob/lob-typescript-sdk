@@ -20,6 +20,20 @@
  * @interface PostcardDeletion
  */
 export class PostcardDeletion {
+    constructor(input?: any) {
+        if (input) {
+            if (input.id) {
+                this.id = input.id;
+            }
+            if (input.deleted) {
+                this.deleted = input.deleted;
+            }
+            if (input.object) {
+                this.object = input.object;
+            }
+        }
+    }
+
     /**
      * Unique identifier prefixed with `psc_`.
      * @type {string}
@@ -33,18 +47,21 @@ export class PostcardDeletion {
         }
         this._id = newValue;
     }
+    
     /**
      * Only returned if the resource has been successfully deleted.
      * @type {boolean}
      * @memberof PostcardDeletion
      */
     'deleted'?: boolean;
+    
     /**
      * Value is type of resource.
      * @type {string}
      * @memberof PostcardDeletion
      */
     'object'?: PostcardDeletionObjectEnum;
+    
 }
 
 /**

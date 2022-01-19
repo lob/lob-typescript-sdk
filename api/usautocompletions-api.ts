@@ -110,12 +110,15 @@ export class USAutocompletionsApi extends BaseAPI {
      * @memberof USAutocompletionsApi
      */
     public autocomplete(usAutocompletionsWritable: UsAutocompletionsWritable, options?: AxiosRequestConfig) {
-        return USAutocompletionsApiFp(this.configuration).autocompletion(usAutocompletionsWritable, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return USAutocompletionsApiFp(this.configuration).autocompletion(usAutocompletionsWritable, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new UsAutocompletions(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 }
 

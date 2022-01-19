@@ -171,12 +171,15 @@ export class IntlVerificationsApi extends BaseAPI {
      * @memberof IntlVerificationsApi
      */
     public verifyBulk(intlVerificationsPayload: IntlVerificationsPayload, options?: AxiosRequestConfig) {
-        return IntlVerificationsApiFp(this.configuration).bulkIntlVerifications(intlVerificationsPayload, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return IntlVerificationsApiFp(this.configuration).bulkIntlVerifications(intlVerificationsPayload, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new IntlVerifications(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -189,12 +192,15 @@ export class IntlVerificationsApi extends BaseAPI {
      * @memberof IntlVerificationsApi
      */
     public verifySingle(intlVerificationWritable: IntlVerificationWritable, xLangOutput?: 'native' | 'match', options?: AxiosRequestConfig) {
-        return IntlVerificationsApiFp(this.configuration).intlVerification(intlVerificationWritable, xLangOutput, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return IntlVerificationsApiFp(this.configuration).intlVerification(intlVerificationWritable, xLangOutput, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new IntlVerification(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 }
 

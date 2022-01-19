@@ -20,36 +20,61 @@
  * @interface UsAutocompletionsWritable
  */
 export class UsAutocompletionsWritable {
+    constructor(input?: any) {
+        if (input) {
+            if (input.address_prefix) {
+                this.address_prefix = input.address_prefix;
+            }
+            if (input.city) {
+                this.city = input.city;
+            }
+            if (input.state) {
+                this.state = input.state;
+            }
+            if (input.zip_code) {
+                this.zip_code = input.zip_code;
+            }
+            if (input.geo_ip_sort) {
+                this.geo_ip_sort = input.geo_ip_sort;
+            }
+        }
+    }
+
     /**
      * Only accepts numbers and street names in an alphanumeric format. 
      * @type {string}
      * @memberof UsAutocompletionsWritable
      */
     'address_prefix'?: string;
+    
     /**
      * An optional city input used to filter suggestions. Case insensitive and does not match partial abbreviations. 
      * @type {string}
      * @memberof UsAutocompletionsWritable
      */
     'city'?: string;
+    
     /**
      * An optional state input used to filter suggestions. Case insensitive and does not match partial abbreviations. 
      * @type {string}
      * @memberof UsAutocompletionsWritable
      */
     'state'?: string;
+    
     /**
      * An optional ZIP Code input used to filter suggestions. Matches partial entries. 
      * @type {string}
      * @memberof UsAutocompletionsWritable
      */
     'zip_code'?: string;
+    
     /**
      * If `true`, sort suggestions by proximity to the IP set in the `X-Forwarded-For` header. 
      * @type {boolean}
      * @memberof UsAutocompletionsWritable
      */
     'geo_ip_sort'?: boolean;
+    
 }
 
 

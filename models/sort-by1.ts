@@ -20,18 +20,31 @@
  * @interface SortBy1
  */
 export class SortBy1 {
+    constructor(input?: any) {
+        if (input) {
+            if (input.date_created) {
+                this.date_created = input.date_created;
+            }
+            if (input.send_date) {
+                this.send_date = input.send_date;
+            }
+        }
+    }
+
     /**
      * 
      * @type {string}
      * @memberof SortBy1
      */
     'date_created'?: SortBy1DateCreatedEnum;
+    
     /**
      * 
      * @type {string}
      * @memberof SortBy1
      */
     'send_date'?: SortBy1SendDateEnum;
+    
 }
 
 /**

@@ -20,6 +20,20 @@
  * @interface Thumbnail
  */
 export class Thumbnail {
+    constructor(input?: any) {
+        if (input) {
+            if (input.small) {
+                this.small = input.small;
+            }
+            if (input.medium) {
+                this.medium = input.medium;
+            }
+            if (input.large) {
+                this.large = input.large;
+            }
+        }
+    }
+
     /**
      * A [signed link](#section/Asset-URLs) served over HTTPS. The link returned will expire in 30 days to prevent mis-sharing. Each time a GET request is initiated, a new signed URL will be generated.
      * @type {string}
@@ -33,6 +47,7 @@ export class Thumbnail {
         }
         this._small = newValue;
     }
+    
     /**
      * A [signed link](#section/Asset-URLs) served over HTTPS. The link returned will expire in 30 days to prevent mis-sharing. Each time a GET request is initiated, a new signed URL will be generated.
      * @type {string}
@@ -46,6 +61,7 @@ export class Thumbnail {
         }
         this._medium = newValue;
     }
+    
     /**
      * A [signed link](#section/Asset-URLs) served over HTTPS. The link returned will expire in 30 days to prevent mis-sharing. Each time a GET request is initiated, a new signed URL will be generated.
      * @type {string}
@@ -59,6 +75,7 @@ export class Thumbnail {
         }
         this._large = newValue;
     }
+    
 }
 
 

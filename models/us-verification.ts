@@ -23,6 +23,44 @@ import { UsComponents } from './us-components';
  * @interface UsVerification
  */
 export class UsVerification {
+    constructor(input?: any) {
+        if (input) {
+            if (input.id) {
+                this.id = input.id;
+            }
+            if (input.recipient) {
+                this.recipient = input.recipient;
+            }
+            if (input.primary_line) {
+                this.primary_line = input.primary_line;
+            }
+            if (input.secondary_line) {
+                this.secondary_line = input.secondary_line;
+            }
+            if (input.urbanization) {
+                this.urbanization = input.urbanization;
+            }
+            if (input.last_line) {
+                this.last_line = input.last_line;
+            }
+            if (input.deliverability) {
+                this.deliverability = input.deliverability;
+            }
+            if (input.components) {
+                this.components = input.components;
+            }
+            if (input.deliverability_analysis) {
+                this.deliverability_analysis = input.deliverability_analysis;
+            }
+            if (input.lob_confidence_score) {
+                this.lob_confidence_score = input.lob_confidence_score;
+            }
+            if (input.object) {
+                this.object = input.object;
+            }
+        }
+    }
+
     /**
      * Unique identifier prefixed with `us_ver_`.
      * @type {string}
@@ -36,66 +74,77 @@ export class UsVerification {
         }
         this._id = newValue;
     }
+    
     /**
      * The intended recipient, typically a person\'s or firm\'s name.
      * @type {string}
      * @memberof UsVerification
      */
     'recipient'?: string | null;
+    
     /**
      * The primary delivery line (usually the street address) of the address. Combination of the following applicable `components`: * `primary_number` * `street_predirection` * `street_name` * `street_suffix` * `street_postdirection` * `secondary_designator` * `secondary_number` * `pmb_designator` * `pmb_number` 
      * @type {string}
      * @memberof UsVerification
      */
     'primary_line'?: string;
+    
     /**
      * The secondary delivery line of the address. This field is typically empty but may contain information if `primary_line` is too long. 
      * @type {string}
      * @memberof UsVerification
      */
     'secondary_line'?: string;
+    
     /**
      * Only present for addresses in Puerto Rico. An urbanization refers to an area, sector, or development within a city. See [USPS documentation](https://pe.usps.com/text/pub28/28api_008.htm#:~:text=I51.,-4%20Urbanizations&text=In%20Puerto%20Rico%2C%20identical%20street,placed%20before%20the%20urbanization%20name.) for clarification. 
      * @type {string}
      * @memberof UsVerification
      */
     'urbanization'?: string;
+    
     /**
      * Combination of the following applicable `components`: * City (`city`) * State (`state`) * ZIP code (`zip_code`) * ZIP+4 (`zip_code_plus_4`) 
      * @type {string}
      * @memberof UsVerification
      */
     'last_line'?: string;
+    
     /**
      * Summarizes the deliverability of the `us_verification` object. For full details, see the `deliverability_analysis` field. Possible values are: * `deliverable` – The address is deliverable by the USPS. * `deliverable_unnecessary_unit` – The address is deliverable, but the secondary unit information is unnecessary. * `deliverable_incorrect_unit` – The address is deliverable to the building\'s default address but the secondary unit provided may not exist. There is a chance the mail will not reach the intended recipient. * `deliverable_missing_unit` – The address is deliverable to the building\'s default address but is missing secondary unit information. There is a chance the mail will not reach the intended recipient. * `undeliverable` – The address is not deliverable according to the USPS. 
      * @type {string}
      * @memberof UsVerification
      */
     'deliverability'?: UsVerificationDeliverabilityEnum;
+    
     /**
      * 
      * @type {UsComponents}
      * @memberof UsVerification
      */
     'components'?: UsComponents;
+    
     /**
      * 
      * @type {DeliverabilityAnalysis}
      * @memberof UsVerification
      */
     'deliverability_analysis'?: DeliverabilityAnalysis;
+    
     /**
      * 
      * @type {LobConfidenceScore}
      * @memberof UsVerification
      */
     'lob_confidence_score'?: LobConfidenceScore;
+    
     /**
      * 
      * @type {string}
      * @memberof UsVerification
      */
     'object'?: UsVerificationObjectEnum;
+    
 }
 
 /**

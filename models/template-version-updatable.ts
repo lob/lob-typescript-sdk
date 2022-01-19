@@ -21,18 +21,31 @@ import { EngineHtml } from './engine-html';
  * @interface TemplateVersionUpdatable
  */
 export class TemplateVersionUpdatable {
+    constructor(input?: any) {
+        if (input) {
+            if (input.description) {
+                this.description = input.description;
+            }
+            if (input.engine) {
+                this.engine = input.engine;
+            }
+        }
+    }
+
     /**
      * An internal description that identifies this resource. Must be no longer than 255 characters. 
      * @type {string}
      * @memberof TemplateVersionUpdatable
      */
     'description'?: string | null;
+    
     /**
      * 
      * @type {EngineHtml}
      * @memberof TemplateVersionUpdatable
      */
     'engine'?: EngineHtml | null;
+    
 }
 
 

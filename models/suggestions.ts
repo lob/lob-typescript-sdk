@@ -20,24 +20,47 @@
  * @interface Suggestions
  */
 export class Suggestions {
+    constructor(input?: any) {
+        if (input) {
+            if (input.primary_line) {
+                this.primary_line = input.primary_line;
+            }
+            if (input.city) {
+                this.city = input.city;
+            }
+            if (input.state) {
+                this.state = input.state;
+            }
+            if (input.zip_code) {
+                this.zip_code = input.zip_code;
+            }
+            if (input.object) {
+                this.object = input.object;
+            }
+        }
+    }
+
     /**
      * The primary delivery line (usually the street address) of the address. Combination of the following applicable `components` (primary number & secondary information may be missing or inaccurate): * `primary_number` * `street_predirection` * `street_name` * `street_suffix` * `street_postdirection` * `secondary_designator` * `secondary_number` * `pmb_designator` * `pmb_number` 
      * @type {string}
      * @memberof Suggestions
      */
     'primary_line'?: string;
+    
     /**
      * 
      * @type {string}
      * @memberof Suggestions
      */
     'city'?: string;
+    
     /**
      * The [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) two letter code for the state. 
      * @type {string}
      * @memberof Suggestions
      */
     'state'?: string;
+    
     /**
      * Required if `city` and `state` are not passed in. If included, must be formatted as a US ZIP or ZIP+4 (e.g. `94107`, `941072282`, `94107-2282`).
      * @type {string}
@@ -51,12 +74,14 @@ export class Suggestions {
         }
         this._zip_code = newValue;
     }
+    
     /**
      * Value is resource type.
      * @type {string}
      * @memberof Suggestions
      */
     'object'?: SuggestionsObjectEnum;
+    
 }
 
 /**

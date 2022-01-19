@@ -21,6 +21,68 @@ import { Thumbnail } from './thumbnail';
  * @interface Card
  */
 export class Card {
+    constructor(input?: any) {
+        if (input) {
+            if (input.id) {
+                this.id = input.id;
+            }
+            if (input.url) {
+                this.url = input.url;
+            }
+            if (input.auto_reorder) {
+                this.auto_reorder = input.auto_reorder;
+            }
+            if (input.reorder_quantity) {
+                this.reorder_quantity = input.reorder_quantity;
+            }
+            if (input.raw_url) {
+                this.raw_url = input.raw_url;
+            }
+            if (input.front_original_url) {
+                this.front_original_url = input.front_original_url;
+            }
+            if (input.back_original_url) {
+                this.back_original_url = input.back_original_url;
+            }
+            if (input.thumbnails) {
+                this.thumbnails = input.thumbnails;
+            }
+            if (input.available_quantity) {
+                this.available_quantity = input.available_quantity;
+            }
+            if (input.pending_quantity) {
+                this.pending_quantity = input.pending_quantity;
+            }
+            if (input.status) {
+                this.status = input.status;
+            }
+            if (input.orientation) {
+                this.orientation = input.orientation;
+            }
+            if (input.threshold_amount) {
+                this.threshold_amount = input.threshold_amount;
+            }
+            if (input.date_created) {
+                this.date_created = input.date_created;
+            }
+            if (input.date_modified) {
+                this.date_modified = input.date_modified;
+            }
+            if (input.deleted) {
+                this.deleted = input.deleted;
+            }
+            if (input.object) {
+                this.object = input.object;
+            }
+            if (input.description) {
+                this.description = input.description;
+            }
+            if (input.size) {
+                this.size = input.size;
+            }
+        }
+    }
+
     /**
      * Unique identifier prefixed with `card_`.
      * @type {string}
@@ -34,114 +96,133 @@ export class Card {
         }
         this._id = newValue;
     }
+    
     /**
      * The signed link for the card.
      * @type {string}
      * @memberof Card
      */
     'url'?: string;
+    
     /**
      * True if the cards should be auto-reordered.
      * @type {boolean}
      * @memberof Card
      */
     'auto_reorder'?: boolean;
+    
     /**
      * The number of cards to be reordered.
      * @type {number}
      * @memberof Card
      */
     'reorder_quantity'?: number | null;
+    
     /**
      * The raw URL of the card.
      * @type {string}
      * @memberof Card
      */
     'raw_url'?: string;
+    
     /**
      * The original URL of the front template.
      * @type {string}
      * @memberof Card
      */
     'front_original_url'?: string;
+    
     /**
      * The original URL of the back template.
      * @type {string}
      * @memberof Card
      */
     'back_original_url'?: string;
+    
     /**
      * 
      * @type {Array<Thumbnail>}
      * @memberof Card
      */
     'thumbnails'?: Array<Thumbnail>;
+    
     /**
      * The available quantity of cards.
      * @type {number}
      * @memberof Card
      */
     'available_quantity'?: number;
+    
     /**
      * The pending quantity of cards.
      * @type {number}
      * @memberof Card
      */
     'pending_quantity'?: number;
+    
     /**
      * 
      * @type {string}
      * @memberof Card
      */
     'status'?: CardStatusEnum;
+    
     /**
      * The orientation of the card.
      * @type {string}
      * @memberof Card
      */
     'orientation'?: CardOrientationEnum;
+    
     /**
      * The threshold amount of the card
      * @type {number}
      * @memberof Card
      */
     'threshold_amount'?: number;
+    
     /**
      * A timestamp in ISO 8601 format of the date the resource was created.
      * @type {string}
      * @memberof Card
      */
     'date_created'?: string;
+    
     /**
      * A timestamp in ISO 8601 format of the date the resource was last modified.
      * @type {string}
      * @memberof Card
      */
     'date_modified'?: string;
+    
     /**
      * Only returned if the resource has been successfully deleted.
      * @type {boolean}
      * @memberof Card
      */
     'deleted'?: boolean;
+    
     /**
      * object
      * @type {string}
      * @memberof Card
      */
     'object'?: CardObjectEnum;
+    
     /**
      * Description of the card.
      * @type {string}
      * @memberof Card
      */
     'description'?: string | null;
+    
     /**
      * The size of the card
      * @type {string}
      * @memberof Card
      */
     'size'?: CardSizeEnum;
+    
 }
 
 /**

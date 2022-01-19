@@ -20,6 +20,20 @@
  * @interface CardDeletion
  */
 export class CardDeletion {
+    constructor(input?: any) {
+        if (input) {
+            if (input.id) {
+                this.id = input.id;
+            }
+            if (input.deleted) {
+                this.deleted = input.deleted;
+            }
+            if (input.object) {
+                this.object = input.object;
+            }
+        }
+    }
+
     /**
      * Unique identifier prefixed with `card_`.
      * @type {string}
@@ -33,18 +47,21 @@ export class CardDeletion {
         }
         this._id = newValue;
     }
+    
     /**
      * Only returned if the resource has been successfully deleted.
      * @type {boolean}
      * @memberof CardDeletion
      */
     'deleted'?: boolean;
+    
     /**
      * Value is type of resource.
      * @type {string}
      * @memberof CardDeletion
      */
     'object'?: CardDeletionObjectEnum;
+    
 }
 
 /**

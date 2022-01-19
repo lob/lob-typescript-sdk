@@ -20,12 +20,21 @@
  * @interface SingleLineAddress
  */
 export class SingleLineAddress {
+    constructor(input?: any) {
+        if (input) {
+            if (input.address) {
+                this.address = input.address;
+            }
+        }
+    }
+
     /**
      * The entire address in one string (e.g., \"210 King Street 94107\"). _Does not support a recipient and will error when other payload parameters are provided._ 
      * @type {string}
      * @memberof SingleLineAddress
      */
     'address'?: string;
+    
 }
 
 

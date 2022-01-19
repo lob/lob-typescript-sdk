@@ -21,12 +21,21 @@ import { MultipleComponents } from './multiple-components';
  * @interface MultipleComponentsList
  */
 export class MultipleComponentsList {
+    constructor(input?: any) {
+        if (input) {
+            if (input.addresses) {
+                this.addresses = input.addresses;
+            }
+        }
+    }
+
     /**
      * 
      * @type {Array<MultipleComponents>}
      * @memberof MultipleComponentsList
      */
     'addresses'?: Array<MultipleComponents>;
+    
 }
 
 

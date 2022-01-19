@@ -21,30 +21,51 @@ import { EngineHtml } from './engine-html';
  * @interface TemplateWritable
  */
 export class TemplateWritable {
+    constructor(input?: any) {
+        if (input) {
+            if (input.description) {
+                this.description = input.description;
+            }
+            if (input.html) {
+                this.html = input.html;
+            }
+            if (input.metadata) {
+                this.metadata = input.metadata;
+            }
+            if (input.engine) {
+                this.engine = input.engine;
+            }
+        }
+    }
+
     /**
      * An internal description that identifies this resource. Must be no longer than 255 characters. 
      * @type {string}
      * @memberof TemplateWritable
      */
     'description'?: string | null;
+    
     /**
      * An HTML string of less than 100,000 characters to be used as the `published_version` of this template. See [here](#section/HTML-Examples) for guidance on designing HTML templates. Please see endpoint specific documentation for any other product-specific HTML details: - [Postcards](#operation/postcard_create) - `front` and `back` - [Self Mailers](#operation/self_mailer_create) - `inside` and `outside` - [Letters](#operation/letter_create) - `file` - [Checks](#operation/check_create) - `check_bottom` and `attachment` - [Cards](#operation/card_create) - `front` and `back`  If there is a syntax error with your variable names within your HTML, then an error will be thrown, e.g. using a `{{#users}}` opening tag without the corresponding closing tag `{{/users}}`. 
      * @type {string}
      * @memberof TemplateWritable
      */
     'html'?: string;
+    
     /**
      * Use metadata to store custom information for tagging and labeling back to your internal systems. Must be an object with up to 20 key-value pairs. Keys must be at most 40 characters and values must be at most 500 characters. Neither can contain the characters `\"` and `\\`. i.e. \'{\"customer_id\" : \"NEWYORK2015\"}\' Nested objects are not supported.  See [Metadata](#section/Metadata) for more information.
      * @type {{ [key: string]: string; }}
      * @memberof TemplateWritable
      */
     'metadata'?: { [key: string]: string; };
+    
     /**
      * 
      * @type {EngineHtml}
      * @memberof TemplateWritable
      */
     'engine'?: EngineHtml | null;
+    
 }
 
 

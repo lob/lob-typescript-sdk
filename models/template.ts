@@ -21,12 +21,45 @@ import { TemplateVersion } from './template-version';
  * @interface Template
  */
 export class Template {
+    constructor(input?: any) {
+        if (input) {
+            if (input.description) {
+                this.description = input.description;
+            }
+            if (input.id) {
+                this.id = input.id;
+            }
+            if (input.versions) {
+                this.versions = input.versions;
+            }
+            if (input.published_version) {
+                this.published_version = input.published_version;
+            }
+            if (input.object) {
+                this.object = input.object;
+            }
+            if (input.metadata) {
+                this.metadata = input.metadata;
+            }
+            if (input.date_created) {
+                this.date_created = input.date_created;
+            }
+            if (input.date_modified) {
+                this.date_modified = input.date_modified;
+            }
+            if (input.deleted) {
+                this.deleted = input.deleted;
+            }
+        }
+    }
+
     /**
      * An internal description that identifies this resource. Must be no longer than 255 characters. 
      * @type {string}
      * @memberof Template
      */
     'description'?: string | null;
+    
     /**
      * Unique identifier prefixed with `tmpl_`. ID of a saved [HTML template](#section/HTML-Templates).
      * @type {string}
@@ -40,48 +73,56 @@ export class Template {
         }
         this._id = newValue;
     }
+    
     /**
      * An array of all non-deleted [version objects](#tag/Template-Versions) associated with the template.
      * @type {Array<TemplateVersion>}
      * @memberof Template
      */
     'versions'?: Array<TemplateVersion>;
+    
     /**
      * 
      * @type {TemplateVersion}
      * @memberof Template
      */
     'published_version'?: TemplateVersion;
+    
     /**
      * Value is resource type.
      * @type {string}
      * @memberof Template
      */
     'object'?: TemplateObjectEnum;
+    
     /**
      * Use metadata to store custom information for tagging and labeling back to your internal systems. Must be an object with up to 20 key-value pairs. Keys must be at most 40 characters and values must be at most 500 characters. Neither can contain the characters `\"` and `\\`. i.e. \'{\"customer_id\" : \"NEWYORK2015\"}\' Nested objects are not supported.  See [Metadata](#section/Metadata) for more information.
      * @type {{ [key: string]: string; }}
      * @memberof Template
      */
     'metadata'?: { [key: string]: string; };
+    
     /**
      * A timestamp in ISO 8601 format of the date the resource was created.
      * @type {string}
      * @memberof Template
      */
     'date_created'?: string;
+    
     /**
      * A timestamp in ISO 8601 format of the date the resource was last modified.
      * @type {string}
      * @memberof Template
      */
     'date_modified'?: string;
+    
     /**
      * Only returned if the resource has been successfully deleted.
      * @type {boolean}
      * @memberof Template
      */
     'deleted'?: boolean;
+    
 }
 
 /**

@@ -25,6 +25,59 @@ import { TrackingEventCertified } from './tracking-event-certified';
  * @interface SelfMailer
  */
 export class SelfMailer {
+    constructor(input?: any) {
+        if (input) {
+            if (input.id) {
+                this.id = input.id;
+            }
+            if (input.to) {
+                this.to = input.to;
+            }
+            if (input.from) {
+                this.from = input.from;
+            }
+            if (input.size) {
+                this.size = input.size;
+            }
+            if (input.description) {
+                this.description = input.description;
+            }
+            if (input.metadata) {
+                this.metadata = input.metadata;
+            }
+            if (input.mail_type) {
+                this.mail_type = input.mail_type;
+            }
+            if (input.merge_variables) {
+                this.merge_variables = input.merge_variables;
+            }
+            if (input.send_date) {
+                this.send_date = input.send_date;
+            }
+            if (input.outside_template_id) {
+                this.outside_template_id = input.outside_template_id;
+            }
+            if (input.inside_template_id) {
+                this.inside_template_id = input.inside_template_id;
+            }
+            if (input.outside_template_version_id) {
+                this.outside_template_version_id = input.outside_template_version_id;
+            }
+            if (input.inside_template_version_id) {
+                this.inside_template_version_id = input.inside_template_version_id;
+            }
+            if (input.object) {
+                this.object = input.object;
+            }
+            if (input.tracking_events) {
+                this.tracking_events = input.tracking_events;
+            }
+            if (input.url) {
+                this.url = input.url;
+            }
+        }
+    }
+
     /**
      * Unique identifier prefixed with `sfm_`.
      * @type {string}
@@ -38,90 +91,105 @@ export class SelfMailer {
         }
         this._id = newValue;
     }
+    
     /**
      * Must either be an address ID or an inline object with correct address parameters.
      * @type {string | AddressEditable}
      * @memberof SelfMailer
      */
     'to'?: string | AddressEditable;
+    
     /**
      * Must either be an address ID or an inline object with correct address parameters.
      * @type {string | AddressEditable}
      * @memberof SelfMailer
      */
     'from'?: string | AddressEditable;
+    
     /**
      * 
      * @type {SelfMailerSize}
      * @memberof SelfMailer
      */
     'size'?: SelfMailerSize;
+    
     /**
      * An internal description that identifies this resource. Must be no longer than 255 characters. 
      * @type {string}
      * @memberof SelfMailer
      */
     'description'?: string | null;
+    
     /**
      * Use metadata to store custom information for tagging and labeling back to your internal systems. Must be an object with up to 20 key-value pairs. Keys must be at most 40 characters and values must be at most 500 characters. Neither can contain the characters `\"` and `\\`. i.e. \'{\"customer_id\" : \"NEWYORK2015\"}\' Nested objects are not supported.  See [Metadata](#section/Metadata) for more information.
      * @type {{ [key: string]: string; }}
      * @memberof SelfMailer
      */
     'metadata'?: { [key: string]: string; };
+    
     /**
      * 
      * @type {MailType}
      * @memberof SelfMailer
      */
     'mail_type'?: MailType;
+    
     /**
      * You can input a merge variable payload object to your template to render dynamic content. For example, if you have a template like: `{{variable_name}}`, pass in `{\"variable_name\": \"Harry\"}` to render `Harry`. `merge_variables` must be an object. Any type of value is accepted as long as the object is valid JSON; you can use `strings`, `numbers`, `booleans`, `arrays`, `objects`, or `null`. The max length of the object is 25,000 characters. If you call `JSON.stringify` on your object, it can be no longer than 25,000 characters. Your variable names cannot contain any whitespace or any of the following special characters: `!`, `\"`, `#`, `%`, `&`, `\'`, `(`, `)`, `*`, `+`, `,`, `/`, `;`, `<`, `=`, `>`, `@`, `[`, `\\`, `]`, `^`, `` ` ``, `{`, `|`, `}`, `~`. More instructions can be found in [our guide to using html and merge variables](https://lob.com/resources/guides/general/using-html-and-merge-variables). Depending on your [Merge Variable strictness](https://dashboard.lob.com/#/settings/account) setting, if you define variables in your HTML but do not pass them here, you will either receive an error or the variable will render as an empty string.
      * @type {object}
      * @memberof SelfMailer
      */
     'merge_variables'?: object | null;
+    
     /**
      * 
      * @type {SendDate}
      * @memberof SelfMailer
      */
     'send_date'?: SendDate;
+    
     /**
      * The unique ID of the HTML template used for the outside of the self mailer.
      * @type {string}
      * @memberof SelfMailer
      */
     'outside_template_id'?: string;
+    
     /**
      * The unique ID of the HTML template used for the inside of the self mailer.
      * @type {string}
      * @memberof SelfMailer
      */
     'inside_template_id'?: string;
+    
     /**
      * The unique ID of the specific version of the HTML template used for the outside of the self mailer.
      * @type {string}
      * @memberof SelfMailer
      */
     'outside_template_version_id'?: string;
+    
     /**
      * The unique ID of the specific version of the HTML template used for the inside of the self mailer.
      * @type {string}
      * @memberof SelfMailer
      */
     'inside_template_version_id'?: string;
+    
     /**
      * Value is resource type.
      * @type {string}
      * @memberof SelfMailer
      */
     'object'?: SelfMailerObjectEnum;
+    
     /**
      * An array of certified tracking events ordered by ascending `time`. Not populated in test mode.
      * @type {Array<TrackingEventCertified>}
      * @memberof SelfMailer
      */
     'tracking_events'?: Array<TrackingEventCertified>;
+    
     /**
      * A [signed link](#section/Asset-URLs) served over HTTPS. The link returned will expire in 30 days to prevent mis-sharing. Each time a GET request is initiated, a new signed URL will be generated.
      * @type {string}
@@ -135,6 +203,7 @@ export class SelfMailer {
         }
         this._url = newValue;
     }
+    
 }
 
 /**

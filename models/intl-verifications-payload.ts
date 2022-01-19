@@ -21,12 +21,21 @@ import { MultipleComponentsIntl } from './multiple-components-intl';
  * @interface IntlVerificationsPayload
  */
 export class IntlVerificationsPayload {
+    constructor(input?: any) {
+        if (input) {
+            if (input.addresses) {
+                this.addresses = input.addresses;
+            }
+        }
+    }
+
     /**
      * 
      * @type {Array<MultipleComponentsIntl>}
      * @memberof IntlVerificationsPayload
      */
     'addresses'?: Array<MultipleComponentsIntl>;
+    
 }
 
 

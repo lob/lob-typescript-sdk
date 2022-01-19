@@ -22,18 +22,31 @@ import { LocationAnalysis } from './location-analysis';
  * @interface GeocodeAddresses
  */
 export class GeocodeAddresses {
+    constructor(input?: any) {
+        if (input) {
+            if (input.components) {
+                this.components = input.components;
+            }
+            if (input.location_analysis) {
+                this.location_analysis = input.location_analysis;
+            }
+        }
+    }
+
     /**
      * 
      * @type {GeocodeComponents}
      * @memberof GeocodeAddresses
      */
     'components'?: GeocodeComponents;
+    
     /**
      * 
      * @type {LocationAnalysis}
      * @memberof GeocodeAddresses
      */
     'location_analysis'?: LocationAnalysis;
+    
 }
 
 

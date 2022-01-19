@@ -21,42 +21,71 @@ import { BankAccount } from './bank-account';
  * @interface BankAccountList
  */
 export class BankAccountList {
+    constructor(input?: any) {
+        if (input) {
+            if (input.data) {
+                this.data = input.data;
+            }
+            if (input.object) {
+                this.object = input.object;
+            }
+            if (input.next_url) {
+                this.next_url = input.next_url;
+            }
+            if (input.previous_url) {
+                this.previous_url = input.previous_url;
+            }
+            if (input.count) {
+                this.count = input.count;
+            }
+            if (input.total_count) {
+                this.total_count = input.total_count;
+            }
+        }
+    }
+
     /**
      * list of addresses
      * @type {Array<BankAccount>}
      * @memberof BankAccountList
      */
     'data'?: Array<BankAccount>;
+    
     /**
      * Value is type of resource.
      * @type {string}
      * @memberof BankAccountList
      */
     'object'?: string;
+    
     /**
      * url of next page of items in list.
      * @type {string}
      * @memberof BankAccountList
      */
     'next_url'?: string | null;
+    
     /**
      * url of previous page of items in list.
      * @type {string}
      * @memberof BankAccountList
      */
     'previous_url'?: string | null;
+    
     /**
      * number of resources in a set
      * @type {number}
      * @memberof BankAccountList
      */
     'count'?: number;
+    
     /**
      * indicates the total number of records. Provided when the request specifies an \"include\" query parameter
      * @type {number}
      * @memberof BankAccountList
      */
     'total_count'?: number;
+    
 }
 
 

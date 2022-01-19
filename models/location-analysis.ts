@@ -20,24 +20,41 @@
  * @interface LocationAnalysis
  */
 export class LocationAnalysis {
+    constructor(input?: any) {
+        if (input) {
+            if (input.latitude) {
+                this.latitude = input.latitude;
+            }
+            if (input.longitude) {
+                this.longitude = input.longitude;
+            }
+            if (input.distance) {
+                this.distance = input.distance;
+            }
+        }
+    }
+
     /**
      * A positive or negative decimal indicating the geographic latitude of the address.
      * @type {number}
      * @memberof LocationAnalysis
      */
     'latitude'?: number | null;
+    
     /**
      * A positive or negative decimal indicating the geographic longitude of the address.
      * @type {number}
      * @memberof LocationAnalysis
      */
     'longitude'?: number | null;
+    
     /**
      * The distance from the input location to this exact zip code in miles.
      * @type {number}
      * @memberof LocationAnalysis
      */
     'distance'?: number;
+    
 }
 
 

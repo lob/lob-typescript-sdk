@@ -21,84 +21,180 @@ import { ZipCodeType } from './zip-code-type';
  * @interface UsComponents
  */
 export class UsComponents {
+    constructor(input?: any) {
+        if (input) {
+            if (input.primary_number) {
+                this.primary_number = input.primary_number;
+            }
+            if (input.street_predirection) {
+                this.street_predirection = input.street_predirection;
+            }
+            if (input.street_name) {
+                this.street_name = input.street_name;
+            }
+            if (input.street_suffix) {
+                this.street_suffix = input.street_suffix;
+            }
+            if (input.street_postdirection) {
+                this.street_postdirection = input.street_postdirection;
+            }
+            if (input.secondary_designator) {
+                this.secondary_designator = input.secondary_designator;
+            }
+            if (input.secondary_number) {
+                this.secondary_number = input.secondary_number;
+            }
+            if (input.pmb_designator) {
+                this.pmb_designator = input.pmb_designator;
+            }
+            if (input.pmb_number) {
+                this.pmb_number = input.pmb_number;
+            }
+            if (input.extra_secondary_designator) {
+                this.extra_secondary_designator = input.extra_secondary_designator;
+            }
+            if (input.extra_secondary_number) {
+                this.extra_secondary_number = input.extra_secondary_number;
+            }
+            if (input.city) {
+                this.city = input.city;
+            }
+            if (input.state) {
+                this.state = input.state;
+            }
+            if (input.zip_code) {
+                this.zip_code = input.zip_code;
+            }
+            if (input.zip_code_plus_4) {
+                this.zip_code_plus_4 = input.zip_code_plus_4;
+            }
+            if (input.zip_code_type) {
+                this.zip_code_type = input.zip_code_type;
+            }
+            if (input.delivery_point_barcode) {
+                this.delivery_point_barcode = input.delivery_point_barcode;
+            }
+            if (input.address_type) {
+                this.address_type = input.address_type;
+            }
+            if (input.record_type) {
+                this.record_type = input.record_type;
+            }
+            if (input.default_building_address) {
+                this.default_building_address = input.default_building_address;
+            }
+            if (input.county) {
+                this.county = input.county;
+            }
+            if (input.county_fips) {
+                this.county_fips = input.county_fips;
+            }
+            if (input.carrier_route) {
+                this.carrier_route = input.carrier_route;
+            }
+            if (input.carrier_route_type) {
+                this.carrier_route_type = input.carrier_route_type;
+            }
+            if (input.latitude) {
+                this.latitude = input.latitude;
+            }
+            if (input.longitude) {
+                this.longitude = input.longitude;
+            }
+        }
+    }
+
     /**
      * The numeric or alphanumeric part of an address preceding the street name. Often the house, building, or PO Box number.
      * @type {string}
      * @memberof UsComponents
      */
     'primary_number'?: string;
+    
     /**
      * Geographic direction preceding a street name (`N`, `S`, `E`, `W`, `NE`, `SW`, `SE`, `NW`). 
      * @type {string}
      * @memberof UsComponents
      */
     'street_predirection'?: UsComponentsStreetPredirectionEnum;
+    
     /**
      * The name of the street.
      * @type {string}
      * @memberof UsComponents
      */
     'street_name'?: string;
+    
     /**
      * The standard USPS abbreviation for the street suffix (`ST`, `AVE`, `BLVD`, etc). 
      * @type {string}
      * @memberof UsComponents
      */
     'street_suffix'?: string;
+    
     /**
      * Geographic direction following a street name (`N`, `S`, `E`, `W`, `NE`, `SW`, `SE`, `NW`). 
      * @type {string}
      * @memberof UsComponents
      */
     'street_postdirection'?: UsComponentsStreetPostdirectionEnum;
+    
     /**
      * The standard USPS abbreviation describing the `components[secondary_number]` (`STE`, `APT`, `BLDG`, etc). 
      * @type {string}
      * @memberof UsComponents
      */
     'secondary_designator'?: string;
+    
     /**
      * Number of the apartment/unit/etc. 
      * @type {string}
      * @memberof UsComponents
      */
     'secondary_number'?: string;
+    
     /**
      * Designator of a [CMRA-authorized](https://en.wikipedia.org/wiki/Commercial_mail_receiving_agency) private mailbox. 
      * @type {string}
      * @memberof UsComponents
      */
     'pmb_designator'?: string;
+    
     /**
      * Number of a [CMRA-authorized](https://en.wikipedia.org/wiki/Commercial_mail_receiving_agency) private mailbox. 
      * @type {string}
      * @memberof UsComponents
      */
     'pmb_number'?: string;
+    
     /**
      * An extra (often unnecessary) secondary designator provided with the input address. 
      * @type {string}
      * @memberof UsComponents
      */
     'extra_secondary_designator'?: string;
+    
     /**
      * An extra (often unnecessary) secondary number provided with the input address. 
      * @type {string}
      * @memberof UsComponents
      */
     'extra_secondary_number'?: string;
+    
     /**
      * 
      * @type {string}
      * @memberof UsComponents
      */
     'city'?: string;
+    
     /**
      * The [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) two letter code for the state. 
      * @type {string}
      * @memberof UsComponents
      */
     'state'?: string;
+    
     /**
      * The 5-digit ZIP code
      * @type {string}
@@ -112,6 +208,7 @@ export class UsComponents {
         }
         this._zip_code = newValue;
     }
+    
     /**
      * 
      * @type {string}
@@ -125,42 +222,49 @@ export class UsComponents {
         }
         this._zip_code_plus_4 = newValue;
     }
+    
     /**
      * 
      * @type {ZipCodeType}
      * @memberof UsComponents
      */
     'zip_code_type'?: ZipCodeType;
+    
     /**
      * A 12-digit identifier that uniquely identifies a delivery point (location where mail can be sent and received). It consists of the 5-digit ZIP code (`zip_code`), 4-digit ZIP+4 add-on (`zip_code_plus_4`), 2-digit delivery point, and 1-digit delivery point check digit. 
      * @type {string}
      * @memberof UsComponents
      */
     'delivery_point_barcode'?: string;
+    
     /**
      * Uses USPS\'s [Residential Delivery Indicator (RDI)](https://www.usps.com/nationalpremieraccounts/rdi.htm) to identify whether an address is classified as residential or business. Possible values are: * `residential` –– The address is residential or a PO Box. * `commercial` –– The address is commercial. * `\'\'` –– Not enough information provided to be determined. 
      * @type {string}
      * @memberof UsComponents
      */
     'address_type'?: UsComponentsAddressTypeEnum;
+    
     /**
      * A description of the type of address. Populated if a DPV match is made (`deliverability_analysis[dpv_confirmation]` is `Y`, `S`, or `D`). For more detailed information about each record type, see [US Verification Details](#tag/US-Verification-Types). 
      * @type {string}
      * @memberof UsComponents
      */
     'record_type'?: UsComponentsRecordTypeEnum;
+    
     /**
      * Designates whether or not the address is the default address for a building containing multiple delivery points. 
      * @type {boolean}
      * @memberof UsComponents
      */
     'default_building_address'?: boolean;
+    
     /**
      * County name of the address city.
      * @type {string}
      * @memberof UsComponents
      */
     'county'?: string;
+    
     /**
      * A 5-digit [FIPS county code](https://en.wikipedia.org/wiki/FIPS_county_code) which uniquely identifies `components[county]`. It consists of a 2-digit state code and a 3-digit county code. 
      * @type {string}
@@ -174,30 +278,35 @@ export class UsComponents {
         }
         this._county_fips = newValue;
     }
+    
     /**
      * A 4-character code assigned to a mail delivery route within a ZIP code. 
      * @type {string}
      * @memberof UsComponents
      */
     'carrier_route'?: string;
+    
     /**
      * The type of `components[carrier_route]`. For more detailed information about each carrier route type, see [US Verification Details](#tag/US-Verification-Types). 
      * @type {string}
      * @memberof UsComponents
      */
     'carrier_route_type'?: UsComponentsCarrierRouteTypeEnum;
+    
     /**
      * A positive or negative decimal indicating the geographic latitude of the address, specifying the north-to-south position of a location. This should be used with `longitude` to pinpoint locations on a map. Will not be returned for undeliverable addresses or military addresses (state is `AA`, `AE`, or `AP`). 
      * @type {number}
      * @memberof UsComponents
      */
     'latitude'?: number | null;
+    
     /**
      * A positive or negative decimal indicating the geographic longitude of the address, specifying the north-to-south position of a location. This should be used with `latitude` to pinpoint locations on a map. Will not be returned for undeliverable addresses or military addresses (state is `AA`, `AE`, or `AP`). 
      * @type {number}
      * @memberof UsComponents
      */
     'longitude'?: number | null;
+    
 }
 
 /**

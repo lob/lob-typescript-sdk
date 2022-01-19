@@ -20,24 +20,41 @@
  * @interface CardUpdatable
  */
 export class CardUpdatable {
+    constructor(input?: any) {
+        if (input) {
+            if (input.description) {
+                this.description = input.description;
+            }
+            if (input.auto_reorder) {
+                this.auto_reorder = input.auto_reorder;
+            }
+            if (input.reorder_quantity) {
+                this.reorder_quantity = input.reorder_quantity;
+            }
+        }
+    }
+
     /**
      * Description of the card.
      * @type {string}
      * @memberof CardUpdatable
      */
     'description'?: string | null;
+    
     /**
      * Allows for auto reordering
      * @type {boolean}
      * @memberof CardUpdatable
      */
     'auto_reorder'?: boolean;
+    
     /**
      * The quantity of items to be reordered (only required when auto_reorder is true).
      * @type {number}
      * @memberof CardUpdatable
      */
     'reorder_quantity'?: number;
+    
 }
 
 

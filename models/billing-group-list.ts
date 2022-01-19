@@ -21,36 +21,61 @@ import { BillingGroup } from './billing-group';
  * @interface BillingGroupList
  */
 export class BillingGroupList {
+    constructor(input?: any) {
+        if (input) {
+            if (input.data) {
+                this.data = input.data;
+            }
+            if (input.object) {
+                this.object = input.object;
+            }
+            if (input.next_url) {
+                this.next_url = input.next_url;
+            }
+            if (input.previous_url) {
+                this.previous_url = input.previous_url;
+            }
+            if (input.count) {
+                this.count = input.count;
+            }
+        }
+    }
+
     /**
      * list of billing groups
      * @type {Array<BillingGroup>}
      * @memberof BillingGroupList
      */
     'data'?: Array<BillingGroup>;
+    
     /**
      * Value is type of resource.
      * @type {string}
      * @memberof BillingGroupList
      */
     'object'?: string;
+    
     /**
      * url of next page of items in list.
      * @type {string}
      * @memberof BillingGroupList
      */
     'next_url'?: string | null;
+    
     /**
      * url of previous page of items in list.
      * @type {string}
      * @memberof BillingGroupList
      */
     'previous_url'?: string | null;
+    
     /**
      * number of resources in a set
      * @type {number}
      * @memberof BillingGroupList
      */
     'count'?: number;
+    
 }
 
 

@@ -22,18 +22,31 @@ import { UsVerification } from './us-verification';
  * @interface UsVerifications
  */
 export class UsVerifications {
+    constructor(input?: any) {
+        if (input) {
+            if (input.addresses) {
+                this.addresses = input.addresses;
+            }
+            if (input.errors) {
+                this.errors = input.errors;
+            }
+        }
+    }
+
     /**
      * 
      * @type {Array<UsVerification | LobError>}
      * @memberof UsVerifications
      */
     'addresses'?: Array<UsVerification | LobError>;
+    
     /**
      * Indicates whether any errors occurred during the verification process.
      * @type {boolean}
      * @memberof UsVerifications
      */
     'errors'?: boolean;
+    
 }
 
 

@@ -20,6 +20,20 @@
  * @interface LetterDeletion
  */
 export class LetterDeletion {
+    constructor(input?: any) {
+        if (input) {
+            if (input.id) {
+                this.id = input.id;
+            }
+            if (input.deleted) {
+                this.deleted = input.deleted;
+            }
+            if (input.object) {
+                this.object = input.object;
+            }
+        }
+    }
+
     /**
      * Unique identifier prefixed with `ltr_`.
      * @type {string}
@@ -33,18 +47,21 @@ export class LetterDeletion {
         }
         this._id = newValue;
     }
+    
     /**
      * Only returned if the resource has been successfully deleted.
      * @type {boolean}
      * @memberof LetterDeletion
      */
     'deleted'?: boolean;
+    
     /**
      * Value is type of resource.
      * @type {string}
      * @memberof LetterDeletion
      */
     'object'?: LetterDeletionObjectEnum;
+    
 }
 
 /**
