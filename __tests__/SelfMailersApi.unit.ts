@@ -73,26 +73,26 @@ describe("SelfMailersApi", () => {
 
     it("creates a self-mailer", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake self-mailer id" },
+        data: { id: "sfm_fakeId" },
       }));
 
       const self_mailer = await new SelfMailersApi(config).create(
         sfmEditableMock
       );
       expect(self_mailer).toBeDefined();
-      expect(self_mailer.id).toEqual("fake self-mailer id");
+      expect(self_mailer.id).toEqual("sfm_fakeId");
     });
 
     it("includes custom headers while it creates a self-mailer", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake self-mailer id" },
+        data: { id: "sfm_fakeId" },
       }));
 
       const selfMailersApi = await new SelfMailersApi(
         configWithBaseOptions
       ).create(sfmEditableMock);
       expect(selfMailersApi).toBeDefined();
-      expect(selfMailersApi?.id).toEqual("fake self-mailer id");
+      expect(selfMailersApi?.id).toEqual("sfm_fakeId");
     });
 
     it("creates a self-mailer with idempotency", async () => {
@@ -100,7 +100,7 @@ describe("SelfMailersApi", () => {
         expect(reqParams.headers["Idempotency-Key"]).toBeDefined();
         expect(reqParams.headers["Idempotency-Key"]).toEqual("fake idempotency");
         return {
-          data: {id: "fake self-mailer id"}
+          data: {id: "sfm_fakeId"}
         };
       });
 
@@ -108,7 +108,7 @@ describe("SelfMailersApi", () => {
           configWithBaseOptions,
       ).create(sfmEditableMock, "fake idempotency");
       expect(selfMailersApi).toBeDefined();
-      expect(selfMailersApi?.id).toEqual("fake self-mailer id");
+      expect(selfMailersApi?.id).toEqual("sfm_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -182,24 +182,24 @@ describe("SelfMailersApi", () => {
 
     it("gets self-mailers for a self-mailer id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake self-mailer id" },
+        data: { id: "sfm_fakeId" },
       }));
 
       const self_mailers = await new SelfMailersApi(config).get("fake id");
       expect(self_mailers).toBeDefined();
-      expect(self_mailers?.id).toEqual("fake self-mailer id");
+      expect(self_mailers?.id).toEqual("sfm_fakeId");
     });
 
     it("includes custom headers while it gets a self-mailer for a self-mailer id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake self-mailer id" },
+        data: { id: "sfm_fakeId" },
       }));
 
       const self_mailers = await new SelfMailersApi(configWithBaseOptions).get(
         "fake id"
       );
       expect(self_mailers).toBeDefined();
-      expect(self_mailers?.id).toEqual("fake self-mailer id");
+      expect(self_mailers?.id).toEqual("sfm_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -273,24 +273,24 @@ describe("SelfMailersApi", () => {
 
     it("deletes self-mailer for a self-mailer id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake self-mailer id" },
+        data: { id: "sfm_fakeId" },
       }));
 
       const self_mailers = await new SelfMailersApi(config).delete("fake id");
       expect(self_mailers).toBeDefined();
-      expect(self_mailers?.id).toEqual("fake self-mailer id");
+      expect(self_mailers?.id).toEqual("sfm_fakeId");
     });
 
     it("includes custom headers while it deletes a self-mailer for a self-mailer id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake self-mailer id" },
+        data: { id: "sfm_fakeId" },
       }));
 
       const self_mailers = await new SelfMailersApi(configWithBaseOptions).delete(
         "fake id"
       );
       expect(self_mailers).toBeDefined();
-      expect(self_mailers?.id).toEqual("fake self-mailer id");
+      expect(self_mailers?.id).toEqual("sfm_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -366,8 +366,8 @@ describe("SelfMailersApi", () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
           data: [
-            { id: "fake self-mailer id" },
-            { id: "another fake self-mailer id" },
+            { id: "sfm_fakeId" },
+            { id: "another sfm_fakeId" },
           ],
         },
       }));
@@ -379,7 +379,7 @@ describe("SelfMailersApi", () => {
 
     it("should handle the limit", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake self-mailer id" }] },
+        data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(1);
@@ -389,7 +389,7 @@ describe("SelfMailersApi", () => {
 
     it("should handle before pagination", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake self-mailer id" }] },
+        data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(undefined, "fake");
@@ -399,7 +399,7 @@ describe("SelfMailersApi", () => {
 
     it("should handle the after pagination", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake self-mailer id" }] },
+        data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(
@@ -413,7 +413,7 @@ describe("SelfMailersApi", () => {
 
     it("should handle the include correctly", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake self-mailer id" }] },
+        data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(
@@ -428,7 +428,7 @@ describe("SelfMailersApi", () => {
 
     it("should handle the dateCreated correctly", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake self-mailer id" }] },
+        data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(
@@ -444,7 +444,7 @@ describe("SelfMailersApi", () => {
 
     it("should handle the metadata correctly", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake self-mailer id" }] },
+        data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(
@@ -461,7 +461,7 @@ describe("SelfMailersApi", () => {
 
     it("should handle the size correctly", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake self-mailer id" }] },
+        data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(
@@ -479,7 +479,7 @@ describe("SelfMailersApi", () => {
 
     it("should handle the scheduled correctly", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake self-mailer id" }] },
+        data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(
@@ -498,7 +498,7 @@ describe("SelfMailersApi", () => {
 
     it("should handle the sendDate correctly", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake self-mailer id" }] },
+        data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(
@@ -518,7 +518,7 @@ describe("SelfMailersApi", () => {
 
     it("should handle the mailType correctly", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake self-mailer id" }] },
+        data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(
@@ -539,7 +539,7 @@ describe("SelfMailersApi", () => {
 
     it("should handle the sortBy correctly", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake self-mailer id" }] },
+        data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(

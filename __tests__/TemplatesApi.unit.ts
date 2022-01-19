@@ -46,24 +46,24 @@ describe("TemplatesApi", () => {
 
     it("creates a template", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake template id" },
+        data: { id: "tmpl_fakeId" },
       }));
 
       const template = await new TemplatesApi(config).create(templateWritableMock);
       expect(template).toBeDefined();
-      expect(template.id).toEqual("fake template id");
+      expect(template.id).toEqual("tmpl_fakeId");
     });
 
     it("includes custom headers while it creates a template", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake template id" },
+        data: { id: "tmpl_fakeId" },
       }));
 
       const templatesApi = await new TemplatesApi(configWithBaseOptions).create(
         templateWritableMock
       );
       expect(templatesApi).toBeDefined();
-      expect(templatesApi?.id).toEqual("fake template id");
+      expect(templatesApi?.id).toEqual("tmpl_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -145,22 +145,22 @@ describe("TemplatesApi", () => {
 
     it("gets templates for a template id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake template id" },
+        data: { id: "tmpl_fakeId" },
       }));
 
       const templates = await new TemplatesApi(config).get("fake id");
       expect(templates).toBeDefined();
-      expect(templates?.id).toEqual("fake template id");
+      expect(templates?.id).toEqual("tmpl_fakeId");
     });
 
     it("includes custom headers while it gets a template for a template id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake template id" },
+        data: { id: "tmpl_fakeId" },
       }));
 
       const templates = await new TemplatesApi(configWithBaseOptions).get("fake id");
       expect(templates).toBeDefined();
-      expect(templates?.id).toEqual("fake template id");
+      expect(templates?.id).toEqual("tmpl_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -234,22 +234,22 @@ describe("TemplatesApi", () => {
 
     it("deletes template for a template id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake template id" },
+        data: { id: "tmpl_fakeId" },
       }));
 
       const templates = await new TemplatesApi(config).delete("fake id");
       expect(templates).toBeDefined();
-      expect(templates?.id).toEqual("fake template id");
+      expect(templates?.id).toEqual("tmpl_fakeId");
     });
 
     it("includes custom headers while it deletes a template for a template id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake template id" },
+        data: { id: "tmpl_fakeId" },
       }));
 
       const templates = await new TemplatesApi(configWithBaseOptions).delete("fake id");
       expect(templates).toBeDefined();
-      expect(templates?.id).toEqual("fake template id");
+      expect(templates?.id).toEqual("tmpl_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -328,17 +328,17 @@ describe("TemplatesApi", () => {
 
     it("updates template for a template id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake template id" },
+        data: { id: "tmpl_fakeId" },
       }));
 
       const templates = await new TemplatesApi(config).update("fake id", templateUpdatable);
       expect(templates).toBeDefined();
-      expect(templates?.id).toEqual("fake template id");
+      expect(templates?.id).toEqual("tmpl_fakeId");
     });
 
     it("includes custom headers while it updates a template for a template id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake template id" },
+        data: { id: "tmpl_fakeId" },
       }));
 
       const templates = await new TemplatesApi(configWithBaseOptions).update(
@@ -346,7 +346,7 @@ describe("TemplatesApi", () => {
         templateUpdatable
       );
       expect(templates).toBeDefined();
-      expect(templates?.id).toEqual("fake template id");
+      expect(templates?.id).toEqual("tmpl_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -431,17 +431,17 @@ describe("TemplatesApi", () => {
 
     it("updates template for a template id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake template id" },
+        data: { id: "tmpl_fakeId" },
       }));
 
       const templates = await new TemplatesApi(config).update("fake id", templateUpdatable);
       expect(templates).toBeDefined();
-      expect(templates?.id).toEqual("fake template id");
+      expect(templates?.id).toEqual("tmpl_fakeId");
     });
 
     it("includes custom headers while it updates a template for a template id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake template id" },
+        data: { id: "tmpl_fakeId" },
       }));
 
       const templates = await new TemplatesApi(configWithBaseOptions).update(
@@ -449,7 +449,7 @@ describe("TemplatesApi", () => {
         templateUpdatable
       );
       expect(templates).toBeDefined();
-      expect(templates?.id).toEqual("fake template id");
+      expect(templates?.id).toEqual("tmpl_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -498,7 +498,7 @@ describe("TemplatesApi", () => {
     it("gets all templates when no limit is provided", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
-          data: [{ id: "fake template id" }, { id: "another fake template id" }],
+          data: [{ id: "tmpl_fakeId" }, { id: "another tmpl_fakeId" }],
         },
       }));
 
@@ -509,7 +509,7 @@ describe("TemplatesApi", () => {
 
     it("should handle the limit", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake template id" }] },
+        data: { data: [{ id: "tmpl_fakeId" }] },
       }));
 
       const templatesApi = await new TemplatesApi(config).list(1);
@@ -519,7 +519,7 @@ describe("TemplatesApi", () => {
 
     it("should handle before pagination", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake template id" }] },
+        data: { data: [{ id: "tmpl_fakeId" }] },
       }));
 
       const templatesApi = await new TemplatesApi(config).list(1, "fake");
@@ -529,7 +529,7 @@ describe("TemplatesApi", () => {
 
     it("should handle the after pagination", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake template id" }] },
+        data: { data: [{ id: "tmpl_fakeId" }] },
       }));
 
       const templatesApi = await new TemplatesApi(config).list(1, "fake", "id");
@@ -539,7 +539,7 @@ describe("TemplatesApi", () => {
 
     it("should handle the sortBy correctly", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake template id" }] },
+        data: { data: [{ id: "tmpl_fakeId" }] },
       }));
 
       const templatesApi = await new TemplatesApi(config).list(1, "before", "after", ["fake"]);

@@ -48,24 +48,24 @@ describe("CardsApi", () => {
 
     it("creates a card", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake card id" },
+        data: { id: "card_fakeId" },
       }));
 
       const card = await new CardsApi(config).create(cardEditableMock);
       expect(card).toBeDefined();
-      expect(card.id).toEqual("fake card id");
+      expect(card.id).toEqual("card_fakeId");
     });
 
     it("includes custom headers while it creates a card", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake card id" },
+        data: { id: "card_fakeId" },
       }));
 
       const cardsApi = await new CardsApi(configWithBaseOptions).create(
         cardEditableMock
       );
       expect(cardsApi).toBeDefined();
-      expect(cardsApi?.id).toEqual("fake card id");
+      expect(cardsApi?.id).toEqual("card_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -145,22 +145,22 @@ describe("CardsApi", () => {
 
     it("gets cards for a card id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake card id" },
+        data: { id: "card_fakeId" },
       }));
 
       const cards = await new CardsApi(config).get("fake id");
       expect(cards).toBeDefined();
-      expect(cards?.id).toEqual("fake card id");
+      expect(cards?.id).toEqual("card_fakeId");
     });
 
     it("includes custom headers while it gets a card for a card id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake card id" },
+        data: { id: "card_fakeId" },
       }));
 
       const cards = await new CardsApi(configWithBaseOptions).get("fake id");
       expect(cards).toBeDefined();
-      expect(cards?.id).toEqual("fake card id");
+      expect(cards?.id).toEqual("card_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -234,22 +234,22 @@ describe("CardsApi", () => {
 
     it("deletes card for a card id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake card id" },
+        data: { id: "card_fakeId" },
       }));
 
       const cards = await new CardsApi(config).delete("fake id");
       expect(cards).toBeDefined();
-      expect(cards?.id).toEqual("fake card id");
+      expect(cards?.id).toEqual("card_fakeId");
     });
 
     it("includes custom headers while it deletes a card for a card id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake card id" },
+        data: { id: "card_fakeId" },
       }));
 
       const cards = await new CardsApi(configWithBaseOptions).delete("fake id");
       expect(cards).toBeDefined();
-      expect(cards?.id).toEqual("fake card id");
+      expect(cards?.id).toEqual("card_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -327,17 +327,17 @@ describe("CardsApi", () => {
 
     it("updates card for a card id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake card id" },
+        data: { id: "card_fakeId" },
       }));
 
       const cards = await new CardsApi(config).update("fake id", cardUpdatable);
       expect(cards).toBeDefined();
-      expect(cards?.id).toEqual("fake card id");
+      expect(cards?.id).toEqual("card_fakeId");
     });
 
     it("includes custom headers while it updates a card for a card id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake card id" },
+        data: { id: "card_fakeId" },
       }));
 
       const cards = await new CardsApi(configWithBaseOptions).update(
@@ -345,7 +345,7 @@ describe("CardsApi", () => {
         cardUpdatable
       );
       expect(cards).toBeDefined();
-      expect(cards?.id).toEqual("fake card id");
+      expect(cards?.id).toEqual("card_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -429,17 +429,17 @@ describe("CardsApi", () => {
 
     it("updates card for a card id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake card id" },
+        data: { id: "card_fakeId" },
       }));
 
       const cards = await new CardsApi(config).update("fake id", cardUpdatable);
       expect(cards).toBeDefined();
-      expect(cards?.id).toEqual("fake card id");
+      expect(cards?.id).toEqual("card_fakeId");
     });
 
     it("includes custom headers while it updates a card for a card id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake card id" },
+        data: { id: "card_fakeId" },
       }));
 
       const cards = await new CardsApi(configWithBaseOptions).update(
@@ -447,7 +447,7 @@ describe("CardsApi", () => {
         cardUpdatable
       );
       expect(cards).toBeDefined();
-      expect(cards?.id).toEqual("fake card id");
+      expect(cards?.id).toEqual("card_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -496,7 +496,7 @@ describe("CardsApi", () => {
     it("gets all cards when no limit is provided", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
-          data: [{ id: "fake card id" }, { id: "another fake card id" }],
+          data: [{ id: "card_fakeId" }, { id: "another card_fakeId" }],
         },
       }));
 
@@ -507,7 +507,7 @@ describe("CardsApi", () => {
 
     it("should handle the limit", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake card id" }] },
+        data: { data: [{ id: "card_fakeId" }] },
       }));
 
       const cardsApi = await new CardsApi(config).list(1);
@@ -517,7 +517,7 @@ describe("CardsApi", () => {
 
     it("should handle before pagination", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake card id" }] },
+        data: { data: [{ id: "card_fakeId" }] },
       }));
 
       const cardsApi = await new CardsApi(config).list(1, "fake");
@@ -527,7 +527,7 @@ describe("CardsApi", () => {
 
     it("should handle the after pagination", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake card id" }] },
+        data: { data: [{ id: "card_fakeId" }] },
       }));
 
       const cardsApi = await new CardsApi(config).list(1, "fake", "id");
@@ -537,7 +537,7 @@ describe("CardsApi", () => {
 
     it("should handle the sortBy correctly", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake card id" }] },
+        data: { data: [{ id: "card_fakeId" }] },
       }));
 
       const cardsApi = await new CardsApi(config).list(1, "fake", "id", {

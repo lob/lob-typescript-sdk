@@ -53,9 +53,6 @@ describe("BankAccountsApi", () => {
     };
 
     it("exists", () => {
-      // ToDo: https://lobsters.atlassian.net/browse/DXP-608
-      // the function names are inconsistent between Apis
-
       const bankAccountsApi = new BankAccountsApi(config);
       expect(bankAccountsApi.create).toBeDefined();
       expect(typeof bankAccountsApi.create).toEqual("function");
@@ -92,7 +89,7 @@ describe("BankAccountsApi", () => {
 
     it("creates a new bank account", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake id" },
+        data: { id: "bank_fakeId" },
       }));
 
       const bankAccount = await new BankAccountsApi(config).create(create);
@@ -102,7 +99,7 @@ describe("BankAccountsApi", () => {
 
     it("includes custom headers while it creates a new bank account", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake id" },
+        data: { id: "bank_fakeId" },
       }));
 
       const bankAccount = await new BankAccountsApi(
@@ -123,24 +120,24 @@ describe("BankAccountsApi", () => {
     it("deletes a bank account", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
-          id: "fake id",
+          id: "bank_fakeId",
           deleted: true,
         },
       }));
-      const bankAccount = await new BankAccountsApi(config).delete("fake id");
+      const bankAccount = await new BankAccountsApi(config).delete("bank_fakeId");
       expect(bankAccount?.deleted).toEqual(true);
     });
 
     it("includes custom headers while it deletes a bank account", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
-          id: "fake id",
+          id: "bank_fakeId",
           deleted: true,
         },
       }));
       const bankAccount = await new BankAccountsApi(
         configWithBaseOptions
-      ).delete("fake id");
+      ).delete("bank_fakeId");
       expect(bankAccount?.deleted).toEqual(true);
     });
 
@@ -153,7 +150,7 @@ describe("BankAccountsApi", () => {
       });
 
       try {
-        await new BankAccountsApi(config).delete("fake id");
+        await new BankAccountsApi(config).delete("bank_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -166,7 +163,7 @@ describe("BankAccountsApi", () => {
       });
 
       try {
-        await new BankAccountsApi(config).delete("fake id");
+        await new BankAccountsApi(config).delete("bank_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -183,22 +180,22 @@ describe("BankAccountsApi", () => {
 
     it("retrieves a bank account", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "different fake id" },
+        data: { id: "bank_fakeId2" },
       }));
 
-      const bankAccount = await new BankAccountsApi(config).get("fake id");
-      expect(bankAccount?.id).toEqual("different fake id");
+      const bankAccount = await new BankAccountsApi(config).get("bank_fakeId");
+      expect(bankAccount?.id).toEqual("bank_fakeId2");
     });
 
-    it("includes custom headers while it retrieves an address", async () => {
+    it("includes custom headers while it retrieves a bank account", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "different fake id" },
+        data: { id: "bank_fakeId2" },
       }));
 
       const bankAccount = await new BankAccountsApi(configWithBaseOptions).get(
-        "fake id"
+        "bank_fakeId"
       );
-      expect(bankAccount?.id).toEqual("different fake id");
+      expect(bankAccount?.id).toEqual("bank_fakeId2");
     });
 
     it("handles errors returned by the api", async () => {
@@ -210,7 +207,7 @@ describe("BankAccountsApi", () => {
       });
 
       try {
-        await new BankAccountsApi(config).get("fake id");
+        await new BankAccountsApi(config).get("bank_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -223,7 +220,7 @@ describe("BankAccountsApi", () => {
       });
 
       try {
-        await new BankAccountsApi(config).get("fake id");
+        await new BankAccountsApi(config).get("bank_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -240,7 +237,7 @@ describe("BankAccountsApi", () => {
 
     it("verifies a bank account", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake id" },
+        data: { id: "bank_fakeId" },
       }));
 
       const verify: BankAccountVerify = {
@@ -251,12 +248,12 @@ describe("BankAccountsApi", () => {
         verify
       );
       expect(bankAccount).toBeDefined();
-      expect(bankAccount?.id).toEqual("fake id");
+      expect(bankAccount?.id).toEqual("bank_fakeId");
     });
 
     it("includes custom headers while verifies a bank account", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake id" },
+        data: { id: "bank_fakeId" },
       }));
 
       const verify: BankAccountVerify = {
@@ -266,7 +263,7 @@ describe("BankAccountsApi", () => {
         configWithBaseOptions
       ).verify("an id", verify);
       expect(bankAccount).toBeDefined();
-      expect(bankAccount?.id).toEqual("fake id");
+      expect(bankAccount?.id).toEqual("bank_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
