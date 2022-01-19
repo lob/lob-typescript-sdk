@@ -1,6 +1,10 @@
 name: Run Tests
 
-on: [pull_request]
+on:
+  pull_request:
+    types: [ opened, reopened, edited ]
+    branches:
+      - master
 
 jobs:
   node_tests:
@@ -27,3 +31,9 @@ jobs:
           LOB_API_KEY: ${{ secrets.LOB_API_KEY }}
           LOB_LIVE_API_KEY: ${{ secrets.LOB_LIVE_API_KEY }}
         run: npm run test:integration
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./coverage/lcov.info
