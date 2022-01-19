@@ -21,6 +21,7 @@ import { SendDate } from './send-date';
 /**
  * @type CheckEditable
  * @export
+ * @class ModelError
  */
 export type CheckEditable = CheckEditableProps;
 
