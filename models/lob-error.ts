@@ -20,24 +20,39 @@
  * @interface LobError
  */
 export class LobError {
+    constructor(input?: any) {
+        if (typeof input?.message !== "undefined") {
+            this.message = input.message;
+        }
+        if (typeof input?.status_code !== "undefined") {
+            this.status_code = input.status_code;
+        }
+        if (typeof input?.code !== "undefined") {
+            this.code = input.code;
+        }
+    }
+
     /**
      * A human-readable message with more details about the error
      * @type {string}
      * @memberof LobError
      */
     'message'?: string;
+    
     /**
      * A conventional HTTP status code:   * `401` - Authorization error with your API key or account   * `403` - Forbidden error with your API key or account   * `404` - The requested item does not exist   * `413` - Payload too large   * `422` - The query or body parameters did not pass validation   * `429` - Too many requests have been sent with an API key in a given amount of time   * `500` - An internal server error occurred, please contact support@lob.com 
      * @type {number}
      * @memberof LobError
      */
     'status_code'?: LobErrorStatusCodeEnum;
+    
     /**
      * A pre-defined string identifying an error. 
      * @type {string}
      * @memberof LobError
      */
     'code'?: LobErrorCodeEnum;
+    
 }
 
 /**

@@ -56,7 +56,7 @@ describe("USAutocompletionsApi", () => {
 
     it("autocompletes given input", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake id", suggestions: [], object: 'us_autocompletion' },
+        data: { id: "us_auto_fakeId", suggestions: [], object: 'us_autocompletion' },
       }));
 
       const response = await  new USAutocompletionsApi(configWithBaseOptions).autocomplete(
@@ -68,7 +68,7 @@ describe("USAutocompletionsApi", () => {
 
     it("includes custom headers while it autocompletes given input", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake id", suggestions: [], object: 'us_autocompletion' },
+        data: { id: "us_auto_fakeId", suggestions: [], object: 'us_autocompletion' },
       }));
 
       const response = await new USAutocompletionsApi(configWithBaseOptions).autocomplete(

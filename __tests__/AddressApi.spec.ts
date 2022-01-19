@@ -190,6 +190,19 @@ describe("AddressApi", () => {
       const addressList2: Address[] = response?.data || [];
       expect(addressList2.length).toBeGreaterThan(0);
     });
+
+    it("lists addresses using nextPageToken", async () => {
+      const listResponse = await new AddressesApi(config).list(10);
+      const responseAfter = await new AddressesApi(config).list(
+          10,
+          undefined,
+          listResponse.nextPageToken
+      );
+      expect(responseAfter).toBeDefined();
+      expect(responseAfter?.data).toBeDefined();
+      const addressList2: Address[] = responseAfter?.data || [];
+      expect(addressList2.length).toBeGreaterThan(0);
+    });
   });
 
   describe("delete", () => {

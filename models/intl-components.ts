@@ -20,36 +20,59 @@
  * @interface IntlComponents
  */
 export class IntlComponents {
+    constructor(input?: any) {
+        if (typeof input?.primary_number !== "undefined") {
+            this.primary_number = input.primary_number;
+        }
+        if (typeof input?.street_name !== "undefined") {
+            this.street_name = input.street_name;
+        }
+        if (typeof input?.city !== "undefined") {
+            this.city = input.city;
+        }
+        if (typeof input?.state !== "undefined") {
+            this.state = input.state;
+        }
+        if (typeof input?.postal_code !== "undefined") {
+            this.postal_code = input.postal_code;
+        }
+    }
+
     /**
      * The numeric or alphanumeric part of an address preceding the street name. Often the house, building, or PO Box number.
      * @type {string}
      * @memberof IntlComponents
      */
     'primary_number'?: string;
+    
     /**
      * The name of the street.
      * @type {string}
      * @memberof IntlComponents
      */
     'street_name'?: string;
+    
     /**
      * 
      * @type {string}
      * @memberof IntlComponents
      */
     'city'?: string;
+    
     /**
      * The [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) two letter code for the state. 
      * @type {string}
      * @memberof IntlComponents
      */
     'state'?: string;
+    
     /**
      * The postal code.
      * @type {string}
      * @memberof IntlComponents
      */
     'postal_code'?: string;
+    
 }
 
 

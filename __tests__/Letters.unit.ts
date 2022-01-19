@@ -47,23 +47,23 @@ describe("LetterApi", () => {
 
     it("gets a record", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "Fake ID", deleted: false },
+        data: { id: "ltr_fakeId", deleted: false },
       }));
 
-      const letter = await new LettersApi(config).get("ID");
+      const letter = await new LettersApi(config).get("ltr_fakeId");
       expect(letter).toBeDefined();
-      expect(letter.id).toEqual("Fake ID");
+      expect(letter.id).toEqual("ltr_fakeId");
       expect(letter.deleted).toEqual(false);
     });
 
     it("includes custom headers while it gets a letter", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "different fake id" },
+        data: { id: "ltr_fakeId2" },
       }));
 
-      const letter = await new LettersApi(configWithBaseOptions).get("ID");
+      const letter = await new LettersApi(configWithBaseOptions).get("ltr_fakeId");
       expect(letter).toBeDefined();
-      expect(letter?.id).toEqual("different fake id");
+      expect(letter?.id).toEqual("ltr_fakeId2");
     });
 
     it("handles errors returned by the api", async () => {
@@ -75,7 +75,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).get("fake id");
+        await new LettersApi(config).get("ltr_fakeId");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
       }
@@ -90,7 +90,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).get("fake id");
+        await new LettersApi(config).get("ltr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -106,7 +106,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).get("fake id");
+        await new LettersApi(config).get("ltr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -119,7 +119,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).get("fake id");
+        await new LettersApi(config).get("ltr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -429,7 +429,7 @@ describe("LetterApi", () => {
           "sort_by=%7B%22id%22%3A%22asc%22%7D"
         );
         return {
-          data: { data: [{ id: "fake id" }] },
+          data: { data: [{ id: "ltr_fakeId" }] },
         };
       });
 
@@ -479,23 +479,23 @@ describe("LetterApi", () => {
     it("cancels a letter", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
-          id: "fake id",
+          id: "ltr_fakeId",
           deleted: true,
         },
       }));
-      const canceledLetter = await new LettersApi(config).cancel("fake id");
+      const canceledLetter = await new LettersApi(config).cancel("ltr_fakeId");
       expect(canceledLetter?.deleted).toEqual(true);
     });
 
     it("includes custom headers while it deletes an address", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
-          id: "fake id",
+          id: "ltr_fakeId",
           deleted: true,
         },
       }));
       const canceledLetter = await new LettersApi(configWithBaseOptions).cancel(
-        "fake id"
+        "ltr_fakeId"
       );
       expect(canceledLetter?.deleted).toEqual(true);
     });
@@ -509,7 +509,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).cancel("fake id");
+        await new LettersApi(config).cancel("ltr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by Api");
@@ -525,7 +525,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).cancel("fake id");
+        await new LettersApi(config).cancel("ltr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -541,7 +541,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).cancel("fake id");
+        await new LettersApi(config).cancel("ltr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -554,7 +554,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).cancel("fake id");
+        await new LettersApi(config).cancel("ltr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -584,7 +584,7 @@ describe("LetterApi", () => {
 
     it("creates a letter", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake id" },
+        data: { id: "ltr_fakeId" },
       }));
 
       const letter = await new LettersApi(config).create(createLetter);
@@ -594,7 +594,7 @@ describe("LetterApi", () => {
 
     it("includes custom headers while it creates a letter", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake id" },
+        data: { id: "ltr_fakeId" },
       }));
 
       const letter = await new LettersApi(configWithBaseOptions).create(
@@ -606,7 +606,7 @@ describe("LetterApi", () => {
 
     it("creates a letter with idempotency", async () => {
         axiosRequest.mockImplementationOnce(async () => ({
-          data: { id: "fake id" },
+          data: { id: "ltr_fakeId" },
         }));
   
         const letter = await new LettersApi(config).create(

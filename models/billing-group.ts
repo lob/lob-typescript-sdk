@@ -20,18 +20,41 @@
  * @interface BillingGroup
  */
 export class BillingGroup {
+    constructor(input?: any) {
+        if (typeof input?.description !== "undefined") {
+            this.description = input.description;
+        }
+        if (typeof input?.name !== "undefined") {
+            this.name = input.name;
+        }
+        if (typeof input?.id !== "undefined") {
+            this.id = input.id;
+        }
+        if (typeof input?.date_created !== "undefined") {
+            this.date_created = input.date_created;
+        }
+        if (typeof input?.date_modified !== "undefined") {
+            this.date_modified = input.date_modified;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
+        }
+    }
+
     /**
      * Description of the billing group.
      * @type {string}
      * @memberof BillingGroup
      */
     'description'?: string;
+    
     /**
      * Name of the billing group.
      * @type {string}
      * @memberof BillingGroup
      */
     'name'?: string;
+    
     /**
      * Unique identifier prefixed with `bg_`.
      * @type {string}
@@ -45,24 +68,28 @@ export class BillingGroup {
         }
         this._id = newValue;
     }
+    
     /**
      * A timestamp in ISO 8601 format of the date the resource was created.
      * @type {string}
      * @memberof BillingGroup
      */
     'date_created'?: string;
+    
     /**
      * A timestamp in ISO 8601 format of the date the resource was last modified.
      * @type {string}
      * @memberof BillingGroup
      */
     'date_modified'?: string;
+    
     /**
      * Value is resource type.
      * @type {string}
      * @memberof BillingGroup
      */
     'object'?: BillingGroupObjectEnum;
+    
 }
 
 /**

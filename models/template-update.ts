@@ -20,12 +20,22 @@
  * @interface TemplateUpdate
  */
 export class TemplateUpdate {
+    constructor(input?: any) {
+        if (typeof input?.description !== "undefined") {
+            this.description = input.description;
+        }
+        if (typeof input?.published_version !== "undefined") {
+            this.published_version = input.published_version;
+        }
+    }
+
     /**
      * An internal description that identifies this resource. Must be no longer than 255 characters. 
      * @type {string}
      * @memberof TemplateUpdate
      */
     'description'?: string | null;
+    
     /**
      * Unique identifier prefixed with `vrsn_`.
      * @type {string}
@@ -39,6 +49,7 @@ export class TemplateUpdate {
         }
         this._published_version = newValue;
     }
+    
 }
 
 

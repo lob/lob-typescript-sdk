@@ -20,6 +20,15 @@
  * @interface GeocodeComponents
  */
 export class GeocodeComponents {
+    constructor(input?: any) {
+        if (typeof input?.zip_code !== "undefined") {
+            this.zip_code = input.zip_code;
+        }
+        if (typeof input?.zip_code_plus_4 !== "undefined") {
+            this.zip_code_plus_4 = input.zip_code_plus_4;
+        }
+    }
+
     /**
      * The 5-digit ZIP code
      * @type {string}
@@ -33,6 +42,7 @@ export class GeocodeComponents {
         }
         this._zip_code = newValue;
     }
+    
     /**
      * 
      * @type {string}
@@ -46,6 +56,7 @@ export class GeocodeComponents {
         }
         this._zip_code_plus_4 = newValue;
     }
+    
 }
 
 

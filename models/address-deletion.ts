@@ -20,6 +20,18 @@
  * @interface AddressDeletion
  */
 export class AddressDeletion {
+    constructor(input?: any) {
+        if (typeof input?.id !== "undefined") {
+            this.id = input.id;
+        }
+        if (typeof input?.deleted !== "undefined") {
+            this.deleted = input.deleted;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
+        }
+    }
+
     /**
      * Unique identifier prefixed with `adr_`.
      * @type {string}
@@ -33,18 +45,21 @@ export class AddressDeletion {
         }
         this._id = newValue;
     }
+    
     /**
      * Only returned if the resource has been successfully deleted.
      * @type {boolean}
      * @memberof AddressDeletion
      */
     'deleted'?: boolean;
+    
     /**
      * Value is type of resource.
      * @type {string}
      * @memberof AddressDeletion
      */
     'object'?: AddressDeletionObjectEnum;
+    
 }
 
 /**

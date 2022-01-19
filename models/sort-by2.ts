@@ -20,18 +20,29 @@
  * @interface SortBy2
  */
 export class SortBy2 {
+    constructor(input?: any) {
+        if (typeof input?.date_created !== "undefined") {
+            this.date_created = input.date_created;
+        }
+        if (typeof input?.send_date !== "undefined") {
+            this.send_date = input.send_date;
+        }
+    }
+
     /**
      * 
      * @type {string}
      * @memberof SortBy2
      */
     'date_created'?: SortBy2DateCreatedEnum;
+    
     /**
      * 
      * @type {string}
      * @memberof SortBy2
      */
     'send_date'?: SortBy2SendDateEnum;
+    
 }
 
 /**

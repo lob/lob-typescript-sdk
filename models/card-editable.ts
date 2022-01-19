@@ -20,30 +20,49 @@
  * @interface CardEditable
  */
 export class CardEditable {
+    constructor(input?: any) {
+        if (typeof input?.front !== "undefined") {
+            this.front = input.front;
+        }
+        if (typeof input?.back !== "undefined") {
+            this.back = input.back;
+        }
+        if (typeof input?.size !== "undefined") {
+            this.size = input.size;
+        }
+        if (typeof input?.description !== "undefined") {
+            this.description = input.description;
+        }
+    }
+
     /**
      * A PDF template for the front of the card
      * @type {string}
      * @memberof CardEditable
      */
     'front'?: string;
+    
     /**
      * A PDF template for the back of the card
      * @type {string}
      * @memberof CardEditable
      */
     'back'?: string;
+    
     /**
      * The size of the card
      * @type {string}
      * @memberof CardEditable
      */
     'size'?: CardEditableSizeEnum;
+    
     /**
      * Description of the card.
      * @type {string}
      * @memberof CardEditable
      */
     'description'?: string | null;
+    
 }
 
 /**

@@ -46,26 +46,26 @@ describe("BillingGroupsApi", () => {
 
     it("creates a billing group", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake billing group id" },
+        data: { id: "bg_fakeId" },
       }));
 
       const bg_product = await new BillingGroupsApi(config).create(
         bgEditableMock
       );
       expect(bg_product).toBeDefined();
-      expect(bg_product.id).toEqual("fake billing group id");
+      expect(bg_product.id).toEqual("bg_fakeId");
     });
 
     it("includes custom headers while it creates a billing group", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake billing group id" },
+        data: { id: "bg_fakeId" },
       }));
 
       const bgApi = await new BillingGroupsApi(configWithBaseOptions).create(
         bgEditableMock
       );
       expect(bgApi).toBeDefined();
-      expect(bgApi?.id).toEqual("fake billing group id");
+      expect(bgApi?.id).toEqual("bg_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -75,9 +75,6 @@ describe("BillingGroupsApi", () => {
           response: { data: { error: { message: "error reported by API" } } },
         };
       });
-      const bgUpdatable = {
-        description: "billing group updated",
-      };
 
       try {
         await new BillingGroupsApi(configWithBaseOptions).create(
@@ -153,24 +150,24 @@ describe("BillingGroupsApi", () => {
 
     it("gets billing groups for a billing group id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake billing group id" },
+        data: { id: "bg_fakeId" },
       }));
 
       const billing_groups = await new BillingGroupsApi(config).get("fake id");
       expect(billing_groups).toBeDefined();
-      expect(billing_groups?.id).toEqual("fake billing group id");
+      expect(billing_groups?.id).toEqual("bg_fakeId");
     });
 
     it("includes custom headers while it gets a billing group for a billing group id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake billing group id" },
+        data: { id: "bg_fakeId" },
       }));
 
       const billing_groups = await new BillingGroupsApi(
         configWithBaseOptions
       ).get("fake id");
       expect(billing_groups).toBeDefined();
-      expect(billing_groups?.id).toEqual("fake billing group id");
+      expect(billing_groups?.id).toEqual("bg_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -248,7 +245,7 @@ describe("BillingGroupsApi", () => {
 
     it("updates billing group for a billing group id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake billing group id" },
+        data: { id: "bg_fakeId" },
       }));
 
       const billing_groups = await new BillingGroupsApi(config).update(
@@ -256,19 +253,19 @@ describe("BillingGroupsApi", () => {
         bgUpdatable
       );
       expect(billing_groups).toBeDefined();
-      expect(billing_groups?.id).toEqual("fake billing group id");
+      expect(billing_groups?.id).toEqual("bg_fakeId");
     });
 
     it("includes custom headers while it updates a billing group for a billing group id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake billing group id" },
+        data: { id: "bg_fakeId" },
       }));
 
       const billing_groups = await new BillingGroupsApi(
         configWithBaseOptions
       ).update("fake id", bgUpdatable);
       expect(billing_groups).toBeDefined();
-      expect(billing_groups?.id).toEqual("fake billing group id");
+      expect(billing_groups?.id).toEqual("bg_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -350,8 +347,8 @@ describe("BillingGroupsApi", () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
           data: [
-            { id: "fake billing group id" },
-            { id: "another fake billing group id" },
+            { id: "bg_fakeId" },
+            { id: "another bg_fakeId" },
           ],
         },
       }));
@@ -363,7 +360,7 @@ describe("BillingGroupsApi", () => {
 
     it("should handle the limit", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake billing group id" }] },
+        data: { data: [{ id: "bg_fakeId" }] },
       }));
 
       const bgApi = await new BillingGroupsApi(config).list(1);
@@ -393,7 +390,7 @@ describe("BillingGroupsApi", () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual("offset=1");
         return {
-          data: { data: [{ id: "fake billing group id" }] },
+          data: { data: [{ id: "bg_fakeId" }] },
         };
       });
 
@@ -408,7 +405,7 @@ describe("BillingGroupsApi", () => {
           "date_created=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
         );
         return {
-          data: { data: [{ id: "fake billing group id" }] },
+          data: { data: [{ id: "bg_fakeId" }] },
         };
       });
 
@@ -428,7 +425,7 @@ describe("BillingGroupsApi", () => {
           "date_modified=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
         );
         return {
-          data: { data: [{ id: "fake billing group id" }] },
+          data: { data: [{ id: "bg_fakeId" }] },
         };
       });
 
@@ -449,7 +446,7 @@ describe("BillingGroupsApi", () => {
           "sort_by=%7B%22id%22%3A%22asc%22%7D"
         );
         return {
-          data: { data: [{ id: "fake billing group id" }] },
+          data: { data: [{ id: "bg_fakeId" }] },
         };
       });
 

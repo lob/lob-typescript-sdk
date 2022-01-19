@@ -167,12 +167,15 @@ export class CardOrdersApi extends BaseAPI {
      * @memberof CardOrdersApi
      */
     public create(cardId: string, cardOrderEditable: CardOrderEditable, options?: AxiosRequestConfig) {
-        return CardOrdersApiFp(this.configuration).cardOrderCreate(cardId, cardOrderEditable, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return CardOrdersApiFp(this.configuration).cardOrderCreate(cardId, cardOrderEditable, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new CardOrder(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 
     /**
@@ -184,12 +187,15 @@ export class CardOrdersApi extends BaseAPI {
      * @memberof CardOrdersApi
      */
     public get(cardId: string, options?: AxiosRequestConfig) {
-        return CardOrdersApiFp(this.configuration).cardOrdersRetrieve(cardId, options).then((request) => request(this.axios, this.basePath)).then(function (response) { return response.data }).catch(error => {
-            if (error.response?.data?.error?.message) {
-                error.message = error.response.data.error.message;
-            }
-            throw error;
-          });
+        return CardOrdersApiFp(this.configuration).cardOrdersRetrieve(cardId, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new InlineResponse200(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
     }
 }
 

@@ -117,7 +117,7 @@ describe("AddressApi", () => {
 
     it("creates a new address", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake id" },
+        data: { id: "adr_fakeId" },
       }));
 
       const address = await new AddressesApi(config).create(addressCreate);
@@ -127,7 +127,7 @@ describe("AddressApi", () => {
 
     it("includes custom headers while it creates a new address", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake id" },
+        data: { id: "adr_fakeId" },
       }));
 
       const address = await new AddressesApi(configWithBaseOptions).create(
@@ -147,22 +147,22 @@ describe("AddressApi", () => {
 
     it("retrieves an address", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "different fake id" },
+        data: { id: "adr_differentFakeId" },
       }));
 
-      const address = await new AddressesApi(config).get("fake id");
-      expect(address?.id).toEqual("different fake id");
+      const address = await new AddressesApi(config).get("adr_fakeId");
+      expect(address?.id).toEqual("adr_differentFakeId");
     });
 
     it("includes custom headers while it retrieves an address", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "different fake id" },
+        data: { id: "adr_differentFakeId" },
       }));
 
       const address = await new AddressesApi(configWithBaseOptions).get(
-        "fake id"
+        "adr_fakeId"
       );
-      expect(address?.id).toEqual("different fake id");
+      expect(address?.id).toEqual("adr_differentFakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -174,7 +174,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).get("fake id");
+        await new AddressesApi(config).get("adr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by Api");
@@ -190,7 +190,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).get("fake id");
+        await new AddressesApi(config).get("adr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -206,7 +206,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).get("fake id");
+        await new AddressesApi(config).get("adr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -219,7 +219,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).get("fake id");
+        await new AddressesApi(config).get("adr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -236,7 +236,7 @@ describe("AddressApi", () => {
 
     it("lists addresses", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
+        data: { data: [{ id: "adr_fakeId1" }, { id: "adr_fakeId2" }] },
       }));
 
       const response = await new AddressesApi(config).list();
@@ -247,7 +247,7 @@ describe("AddressApi", () => {
 
     it("includes custom headers while it lists addresses", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
+        data: { data: [{ id: "adr_fakeId1" }, { id: "adr_fakeId2" }] },
       }));
 
       const response = await new AddressesApi(configWithBaseOptions).list();
@@ -321,7 +321,7 @@ describe("AddressApi", () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual("limit=10");
         return {
-          data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
+          data: { data: [{ id: "adr_fakeId1" }, { id: "adr_fakeId2" }] },
         };
       });
 
@@ -335,7 +335,7 @@ describe("AddressApi", () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual("before=before");
         return {
-          data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
+          data: { data: [{ id: "adr_fakeId1" }, { id: "adr_fakeId2" }] },
         };
       });
 
@@ -349,7 +349,7 @@ describe("AddressApi", () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual("after=after");
         return {
-          data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
+          data: { data: [{ id: "adr_fakeId1" }, { id: "adr_fakeId2" }] },
         };
       });
 
@@ -367,7 +367,7 @@ describe("AddressApi", () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual("include=%5B%22this%22%5D");
         return {
-          data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
+          data: { data: [{ id: "adr_fakeId1" }, { id: "adr_fakeId2" }] },
         };
       });
 
@@ -388,7 +388,7 @@ describe("AddressApi", () => {
           "date_created=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
         );
         return {
-          data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
+          data: { data: [{ id: "adr_fakeId1" }, { id: "adr_fakeId2" }] },
         };
       });
 
@@ -410,7 +410,7 @@ describe("AddressApi", () => {
           "metadata=%7B%22what%22%3A%22this%22%7D"
         );
         return {
-          data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
+          data: { data: [{ id: "adr_fakeId1" }, { id: "adr_fakeId2" }] },
         };
       });
 
@@ -431,7 +431,7 @@ describe("AddressApi", () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual("limit=10&after=after");
         return {
-          data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
+          data: { data: [{ id: "adr_fakeId1" }, { id: "adr_fakeId2" }] },
         };
       });
 
@@ -456,24 +456,24 @@ describe("AddressApi", () => {
     it("deletes an address", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
-          id: "fake id",
+          id: "adr_fakeId",
           deleted: true,
         },
       }));
-      const deletedAddress = await new AddressesApi(config).delete("fake id");
+      const deletedAddress = await new AddressesApi(config).delete("adr_fakeId");
       expect(deletedAddress?.deleted).toEqual(true);
     });
 
     it("includes custom headers while it deletes an address", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
-          id: "fake id",
+          id: "adr_fakeId",
           deleted: true,
         },
       }));
       const deletedAddress = await new AddressesApi(
         configWithBaseOptions
-      ).delete("fake id");
+      ).delete("adr_fakeId");
       expect(deletedAddress?.deleted).toEqual(true);
     });
 
@@ -486,7 +486,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).delete("fake id");
+        await new AddressesApi(config).delete("adr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by Api");
@@ -502,7 +502,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).delete("fake id");
+        await new AddressesApi(config).delete("adr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -518,7 +518,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).delete("fake id");
+        await new AddressesApi(config).delete("adr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -531,7 +531,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(config).delete("fake id");
+        await new AddressesApi(config).delete("adr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");

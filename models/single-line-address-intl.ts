@@ -21,18 +21,29 @@ import { CountryExtended } from './country-extended';
  * @interface SingleLineAddressIntl
  */
 export class SingleLineAddressIntl {
+    constructor(input?: any) {
+        if (typeof input?.address !== "undefined") {
+            this.address = input.address;
+        }
+        if (typeof input?.country !== "undefined") {
+            this.country = input.country;
+        }
+    }
+
     /**
      * The entire address in one string (e.g., \"370 Water St C1N 1C4\"). 
      * @type {string}
      * @memberof SingleLineAddressIntl
      */
     'address'?: string;
+    
     /**
      * 
      * @type {CountryExtended}
      * @memberof SingleLineAddressIntl
      */
     'country'?: CountryExtended;
+    
 }
 
 

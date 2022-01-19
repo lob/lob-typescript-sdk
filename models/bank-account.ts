@@ -20,42 +20,93 @@
  * @interface BankAccount
  */
 export class BankAccount {
+    constructor(input?: any) {
+        if (typeof input?.description !== "undefined") {
+            this.description = input.description;
+        }
+        if (typeof input?.routing_number !== "undefined") {
+            this.routing_number = input.routing_number;
+        }
+        if (typeof input?.account_number !== "undefined") {
+            this.account_number = input.account_number;
+        }
+        if (typeof input?.account_type !== "undefined") {
+            this.account_type = input.account_type;
+        }
+        if (typeof input?.signatory !== "undefined") {
+            this.signatory = input.signatory;
+        }
+        if (typeof input?.metadata !== "undefined") {
+            this.metadata = input.metadata;
+        }
+        if (typeof input?.id !== "undefined") {
+            this.id = input.id;
+        }
+        if (typeof input?.signature_url !== "undefined") {
+            this.signature_url = input.signature_url;
+        }
+        if (typeof input?.bank_name !== "undefined") {
+            this.bank_name = input.bank_name;
+        }
+        if (typeof input?.verified !== "undefined") {
+            this.verified = input.verified;
+        }
+        if (typeof input?.date_created !== "undefined") {
+            this.date_created = input.date_created;
+        }
+        if (typeof input?.date_modified !== "undefined") {
+            this.date_modified = input.date_modified;
+        }
+        if (typeof input?.deleted !== "undefined") {
+            this.deleted = input.deleted;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
+        }
+    }
+
     /**
      * An internal description that identifies this resource. Must be no longer than 255 characters. 
      * @type {string}
      * @memberof BankAccount
      */
     'description'?: string | null;
+    
     /**
      * Must be a [valid US routing number](https://www.frbservices.org/index.html).
      * @type {string}
      * @memberof BankAccount
      */
     'routing_number'?: string;
+    
     /**
      * 
      * @type {string}
      * @memberof BankAccount
      */
     'account_number'?: string;
+    
     /**
      * The type of entity that holds the account.
      * @type {string}
      * @memberof BankAccount
      */
     'account_type'?: BankAccountAccountTypeEnum;
+    
     /**
      * The signatory associated with your account. This name will be printed on checks created with this bank account. If you prefer to use a custom signature image on your checks instead, please create your bank account from the [Dashboard](https://dashboard.lob.com/#/login).
      * @type {string}
      * @memberof BankAccount
      */
     'signatory'?: string;
+    
     /**
      * Use metadata to store custom information for tagging and labeling back to your internal systems. Must be an object with up to 20 key-value pairs. Keys must be at most 40 characters and values must be at most 500 characters. Neither can contain the characters `\"` and `\\`. i.e. \'{\"customer_id\" : \"NEWYORK2015\"}\' Nested objects are not supported.  See [Metadata](#section/Metadata) for more information.
      * @type {{ [key: string]: string; }}
      * @memberof BankAccount
      */
     'metadata'?: { [key: string]: string; };
+    
     /**
      * Unique identifier prefixed with `bank_`.
      * @type {string}
@@ -69,6 +120,7 @@ export class BankAccount {
         }
         this._id = newValue;
     }
+    
     /**
      * A signed link to the signature image. will be generated.
      * @type {string}
@@ -77,47 +129,54 @@ export class BankAccount {
     private '_signature_url'?: string | null;
     public get signature_url() { return (this._signature_url || null || undefined) as string; }
     public set signature_url(newValue: string | null) {
-        if(newValue && !/^https:\/\/lob-assets\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\.pdf|_thumb_[a-z]+_[0-9]+\.png)\?(version&#x3D;[a-z0-9-]*&amp;)?expires&#x3D;[0-9]{10}&amp;signature&#x3D;[a-zA-Z0-9-_]+$/.test(newValue)) {
+        if(newValue && !/^https:\/\/lob-assets\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\.pdf|_thumb_[a-z]+_[0-9]+\.png)\?(version=[a-z0-9-]*&)?expires=[0-9]{10}&signature=[a-zA-Z0-9-_]+$/.test(newValue)) {
             throw new Error("Invalid signature_url provided");
         }
         this._signature_url = newValue;
     }
+    
     /**
      * The name of the bank based on the provided routing number, e.g. `JPMORGAN CHASE BANK`.
      * @type {string}
      * @memberof BankAccount
      */
     'bank_name'?: string;
+    
     /**
      * A bank account must be verified before a check can be created.
      * @type {boolean}
      * @memberof BankAccount
      */
     'verified'?: boolean;
+    
     /**
      * A timestamp in ISO 8601 format of the date the resource was created.
      * @type {string}
      * @memberof BankAccount
      */
     'date_created'?: string;
+    
     /**
      * A timestamp in ISO 8601 format of the date the resource was last modified.
      * @type {string}
      * @memberof BankAccount
      */
     'date_modified'?: string;
+    
     /**
      * Only returned if the resource has been successfully deleted.
      * @type {boolean}
      * @memberof BankAccount
      */
     'deleted'?: boolean;
+    
     /**
      * 
      * @type {string}
      * @memberof BankAccount
      */
     'object'?: BankAccountObjectEnum;
+    
 }
 
 /**

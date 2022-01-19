@@ -21,12 +21,19 @@ import { CardOrder } from './card-order';
  * @interface InlineResponse200
  */
 export class InlineResponse200 {
+    constructor(input?: any) {
+        if (typeof input?.data !== "undefined") {
+            this.data = input.data;
+        }
+    }
+
     /**
      * List of card orders
      * @type {Array<CardOrder>}
      * @memberof InlineResponse200
      */
     'data'?: Array<CardOrder>;
+    
 }
 
 

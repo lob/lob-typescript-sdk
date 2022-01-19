@@ -20,6 +20,9 @@
  * @interface SendDate
  */
 export class SendDate {
+    constructor(input?: any) {
+    }
+
 }
 
 

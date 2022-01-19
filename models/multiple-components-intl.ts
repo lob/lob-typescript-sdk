@@ -21,48 +21,79 @@ import { CountryExtended } from './country-extended';
  * @interface MultipleComponentsIntl
  */
 export class MultipleComponentsIntl {
+    constructor(input?: any) {
+        if (typeof input?.recipient !== "undefined") {
+            this.recipient = input.recipient;
+        }
+        if (typeof input?.primary_line !== "undefined") {
+            this.primary_line = input.primary_line;
+        }
+        if (typeof input?.secondary_line !== "undefined") {
+            this.secondary_line = input.secondary_line;
+        }
+        if (typeof input?.city !== "undefined") {
+            this.city = input.city;
+        }
+        if (typeof input?.state !== "undefined") {
+            this.state = input.state;
+        }
+        if (typeof input?.postal_code !== "undefined") {
+            this.postal_code = input.postal_code;
+        }
+        if (typeof input?.country !== "undefined") {
+            this.country = input.country;
+        }
+    }
+
     /**
      * The intended recipient, typically a person\'s or firm\'s name.
      * @type {string}
      * @memberof MultipleComponentsIntl
      */
     'recipient'?: string | null;
+    
     /**
      * The primary delivery line (usually the street address) of the address. 
      * @type {string}
      * @memberof MultipleComponentsIntl
      */
     'primary_line'?: string;
+    
     /**
      * The secondary delivery line of the address. This field is typically empty but may contain information if `primary_line` is too long. 
      * @type {string}
      * @memberof MultipleComponentsIntl
      */
     'secondary_line'?: string;
+    
     /**
      * 
      * @type {string}
      * @memberof MultipleComponentsIntl
      */
     'city'?: string;
+    
     /**
      * The name of the state.
      * @type {string}
      * @memberof MultipleComponentsIntl
      */
     'state'?: string;
+    
     /**
      * The postal code.
      * @type {string}
      * @memberof MultipleComponentsIntl
      */
     'postal_code'?: string;
+    
     /**
      * 
      * @type {CountryExtended}
      * @memberof MultipleComponentsIntl
      */
     'country'?: CountryExtended;
+    
 }
 
 

@@ -21,6 +21,18 @@ import { Suggestions } from './suggestions';
  * @interface UsAutocompletions
  */
 export class UsAutocompletions {
+    constructor(input?: any) {
+        if (typeof input?.id !== "undefined") {
+            this.id = input.id;
+        }
+        if (typeof input?.suggestions !== "undefined") {
+            this.suggestions = input.suggestions;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
+        }
+    }
+
     /**
      * Unique identifier prefixed with `us_auto_`.
      * @type {string}
@@ -34,18 +46,21 @@ export class UsAutocompletions {
         }
         this._id = newValue;
     }
+    
     /**
      * An array of objects representing suggested addresses. 
      * @type {Array<Suggestions>}
      * @memberof UsAutocompletions
      */
     'suggestions'?: Array<Suggestions>;
+    
     /**
      * Value is resource type.
      * @type {string}
      * @memberof UsAutocompletions
      */
     'object'?: UsAutocompletionsObjectEnum;
+    
 }
 
 /**
