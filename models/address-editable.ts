@@ -22,43 +22,41 @@ import { CountryExtended } from './country-extended';
  */
 export class AddressEditable {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.address_line1 !== "undefined") {
-                this.address_line1 = input.address_line1;
-            }
-            if (typeof input.address_line2 !== "undefined") {
-                this.address_line2 = input.address_line2;
-            }
-            if (typeof input.address_city !== "undefined") {
-                this.address_city = input.address_city;
-            }
-            if (typeof input.address_state !== "undefined") {
-                this.address_state = input.address_state;
-            }
-            if (typeof input.address_zip !== "undefined") {
-                this.address_zip = input.address_zip;
-            }
-            if (typeof input.address_country !== "undefined") {
-                this.address_country = input.address_country;
-            }
-            if (typeof input.description !== "undefined") {
-                this.description = input.description;
-            }
-            if (typeof input.name !== "undefined") {
-                this.name = input.name;
-            }
-            if (typeof input.company !== "undefined") {
-                this.company = input.company;
-            }
-            if (typeof input.phone !== "undefined") {
-                this.phone = input.phone;
-            }
-            if (typeof input.email !== "undefined") {
-                this.email = input.email;
-            }
-            if (typeof input.metadata !== "undefined") {
-                this.metadata = input.metadata;
-            }
+        if (typeof input?.address_line1 !== "undefined") {
+            this.address_line1 = input.address_line1;
+        }
+        if (typeof input?.address_line2 !== "undefined") {
+            this.address_line2 = input.address_line2;
+        }
+        if (typeof input?.address_city !== "undefined") {
+            this.address_city = input.address_city;
+        }
+        if (typeof input?.address_state !== "undefined") {
+            this.address_state = input.address_state;
+        }
+        if (typeof input?.address_zip !== "undefined") {
+            this.address_zip = input.address_zip;
+        }
+        if (typeof input?.address_country !== "undefined") {
+            this.address_country = input.address_country;
+        }
+        if (typeof input?.description !== "undefined") {
+            this.description = input.description;
+        }
+        if (typeof input?.name !== "undefined") {
+            this.name = input.name;
+        }
+        if (typeof input?.company !== "undefined") {
+            this.company = input.company;
+        }
+        if (typeof input?.phone !== "undefined") {
+            this.phone = input.phone;
+        }
+        if (typeof input?.email !== "undefined") {
+            this.email = input.email;
+        }
+        if (typeof input?.metadata !== "undefined") {
+            this.metadata = input.metadata;
         }
     }
 

@@ -21,10 +21,8 @@
  */
 export class SingleLineAddress {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.address !== "undefined") {
-                this.address = input.address;
-            }
+        if (typeof input?.address !== "undefined") {
+            this.address = input.address;
         }
     }
 

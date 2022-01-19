@@ -21,16 +21,14 @@
  */
 export class LocationAnalysis {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.latitude !== "undefined") {
-                this.latitude = input.latitude;
-            }
-            if (typeof input.longitude !== "undefined") {
-                this.longitude = input.longitude;
-            }
-            if (typeof input.distance !== "undefined") {
-                this.distance = input.distance;
-            }
+        if (typeof input?.latitude !== "undefined") {
+            this.latitude = input.latitude;
+        }
+        if (typeof input?.longitude !== "undefined") {
+            this.longitude = input.longitude;
+        }
+        if (typeof input?.distance !== "undefined") {
+            this.distance = input.distance;
         }
     }
 

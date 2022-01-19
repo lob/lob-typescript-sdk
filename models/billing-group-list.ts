@@ -22,22 +22,20 @@ import { BillingGroup } from './billing-group';
  */
 export class BillingGroupList {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.data !== "undefined") {
-                this.data = input.data;
-            }
-            if (typeof input.object !== "undefined") {
-                this.object = input.object;
-            }
-            if (typeof input.next_url !== "undefined") {
-                this.next_url = input.next_url;
-            }
-            if (typeof input.previous_url !== "undefined") {
-                this.previous_url = input.previous_url;
-            }
-            if (typeof input.count !== "undefined") {
-                this.count = input.count;
-            }
+        if (typeof input?.data !== "undefined") {
+            this.data = input.data;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
+        }
+        if (typeof input?.next_url !== "undefined") {
+            this.next_url = input.next_url;
+        }
+        if (typeof input?.previous_url !== "undefined") {
+            this.previous_url = input.previous_url;
+        }
+        if (typeof input?.count !== "undefined") {
+            this.count = input.count;
         }
     }
 

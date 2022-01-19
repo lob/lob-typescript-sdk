@@ -23,13 +23,11 @@ import { LobError } from './lob-error';
  */
 export class IntlVerifications {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.addresses !== "undefined") {
-                this.addresses = input.addresses;
-            }
-            if (typeof input.errors !== "undefined") {
-                this.errors = input.errors;
-            }
+        if (typeof input?.addresses !== "undefined") {
+            this.addresses = input.addresses;
+        }
+        if (typeof input?.errors !== "undefined") {
+            this.errors = input.errors;
         }
     }
 

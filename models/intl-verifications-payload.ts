@@ -22,10 +22,8 @@ import { MultipleComponentsIntl } from './multiple-components-intl';
  */
 export class IntlVerificationsPayload {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.addresses !== "undefined") {
-                this.addresses = input.addresses;
-            }
+        if (typeof input?.addresses !== "undefined") {
+            this.addresses = input.addresses;
         }
     }
 

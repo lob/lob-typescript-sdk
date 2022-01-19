@@ -22,37 +22,35 @@ import { EngineHtml } from './engine-html';
  */
 export class TemplateVersion {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.id !== "undefined") {
-                this.id = input.id;
-            }
-            if (typeof input.description !== "undefined") {
-                this.description = input.description;
-            }
-            if (typeof input.html !== "undefined") {
-                this.html = input.html;
-            }
-            if (typeof input.engine !== "undefined") {
-                this.engine = input.engine;
-            }
-            if (typeof input.suggest_json_editor !== "undefined") {
-                this.suggest_json_editor = input.suggest_json_editor;
-            }
-            if (typeof input.merge_variables !== "undefined") {
-                this.merge_variables = input.merge_variables;
-            }
-            if (typeof input.date_created !== "undefined") {
-                this.date_created = input.date_created;
-            }
-            if (typeof input.date_modified !== "undefined") {
-                this.date_modified = input.date_modified;
-            }
-            if (typeof input.deleted !== "undefined") {
-                this.deleted = input.deleted;
-            }
-            if (typeof input.object !== "undefined") {
-                this.object = input.object;
-            }
+        if (typeof input?.id !== "undefined") {
+            this.id = input.id;
+        }
+        if (typeof input?.description !== "undefined") {
+            this.description = input.description;
+        }
+        if (typeof input?.html !== "undefined") {
+            this.html = input.html;
+        }
+        if (typeof input?.engine !== "undefined") {
+            this.engine = input.engine;
+        }
+        if (typeof input?.suggest_json_editor !== "undefined") {
+            this.suggest_json_editor = input.suggest_json_editor;
+        }
+        if (typeof input?.merge_variables !== "undefined") {
+            this.merge_variables = input.merge_variables;
+        }
+        if (typeof input?.date_created !== "undefined") {
+            this.date_created = input.date_created;
+        }
+        if (typeof input?.date_modified !== "undefined") {
+            this.date_modified = input.date_modified;
+        }
+        if (typeof input?.deleted !== "undefined") {
+            this.deleted = input.deleted;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
         }
     }
 

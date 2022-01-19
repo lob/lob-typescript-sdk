@@ -22,40 +22,38 @@ import { IntlComponents } from './intl-components';
  */
 export class IntlVerification {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.id !== "undefined") {
-                this.id = input.id;
-            }
-            if (typeof input.recipient !== "undefined") {
-                this.recipient = input.recipient;
-            }
-            if (typeof input.primary_line !== "undefined") {
-                this.primary_line = input.primary_line;
-            }
-            if (typeof input.secondary_line !== "undefined") {
-                this.secondary_line = input.secondary_line;
-            }
-            if (typeof input.last_line !== "undefined") {
-                this.last_line = input.last_line;
-            }
-            if (typeof input.country !== "undefined") {
-                this.country = input.country;
-            }
-            if (typeof input.coverage !== "undefined") {
-                this.coverage = input.coverage;
-            }
-            if (typeof input.deliverability !== "undefined") {
-                this.deliverability = input.deliverability;
-            }
-            if (typeof input.status !== "undefined") {
-                this.status = input.status;
-            }
-            if (typeof input.components !== "undefined") {
-                this.components = input.components;
-            }
-            if (typeof input.object !== "undefined") {
-                this.object = input.object;
-            }
+        if (typeof input?.id !== "undefined") {
+            this.id = input.id;
+        }
+        if (typeof input?.recipient !== "undefined") {
+            this.recipient = input.recipient;
+        }
+        if (typeof input?.primary_line !== "undefined") {
+            this.primary_line = input.primary_line;
+        }
+        if (typeof input?.secondary_line !== "undefined") {
+            this.secondary_line = input.secondary_line;
+        }
+        if (typeof input?.last_line !== "undefined") {
+            this.last_line = input.last_line;
+        }
+        if (typeof input?.country !== "undefined") {
+            this.country = input.country;
+        }
+        if (typeof input?.coverage !== "undefined") {
+            this.coverage = input.coverage;
+        }
+        if (typeof input?.deliverability !== "undefined") {
+            this.deliverability = input.deliverability;
+        }
+        if (typeof input?.status !== "undefined") {
+            this.status = input.status;
+        }
+        if (typeof input?.components !== "undefined") {
+            this.components = input.components;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
         }
     }
 

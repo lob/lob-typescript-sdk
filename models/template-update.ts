@@ -21,13 +21,11 @@
  */
 export class TemplateUpdate {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.description !== "undefined") {
-                this.description = input.description;
-            }
-            if (typeof input.published_version !== "undefined") {
-                this.published_version = input.published_version;
-            }
+        if (typeof input?.description !== "undefined") {
+            this.description = input.description;
+        }
+        if (typeof input?.published_version !== "undefined") {
+            this.published_version = input.published_version;
         }
     }
 

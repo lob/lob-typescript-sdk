@@ -23,13 +23,11 @@ import { UsVerification } from './us-verification';
  */
 export class UsVerifications {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.addresses !== "undefined") {
-                this.addresses = input.addresses;
-            }
-            if (typeof input.errors !== "undefined") {
-                this.errors = input.errors;
-            }
+        if (typeof input?.addresses !== "undefined") {
+            this.addresses = input.addresses;
+        }
+        if (typeof input?.errors !== "undefined") {
+            this.errors = input.errors;
         }
     }
 

@@ -21,16 +21,14 @@
  */
 export class AddressDeletion {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.id !== "undefined") {
-                this.id = input.id;
-            }
-            if (typeof input.deleted !== "undefined") {
-                this.deleted = input.deleted;
-            }
-            if (typeof input.object !== "undefined") {
-                this.object = input.object;
-            }
+        if (typeof input?.id !== "undefined") {
+            this.id = input.id;
+        }
+        if (typeof input?.deleted !== "undefined") {
+            this.deleted = input.deleted;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
         }
     }
 

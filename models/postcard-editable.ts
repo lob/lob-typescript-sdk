@@ -26,40 +26,38 @@ import { SendDate } from './send-date';
  */
 export class PostcardEditable {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.to !== "undefined") {
-                this.to = input.to;
-            }
-            if (typeof input.from !== "undefined") {
-                this.from = input.from;
-            }
-            if (typeof input.size !== "undefined") {
-                this.size = input.size;
-            }
-            if (typeof input.description !== "undefined") {
-                this.description = input.description;
-            }
-            if (typeof input.metadata !== "undefined") {
-                this.metadata = input.metadata;
-            }
-            if (typeof input.mail_type !== "undefined") {
-                this.mail_type = input.mail_type;
-            }
-            if (typeof input.merge_variables !== "undefined") {
-                this.merge_variables = input.merge_variables;
-            }
-            if (typeof input.send_date !== "undefined") {
-                this.send_date = input.send_date;
-            }
-            if (typeof input.front !== "undefined") {
-                this.front = input.front;
-            }
-            if (typeof input.back !== "undefined") {
-                this.back = input.back;
-            }
-            if (typeof input.billing_group_id !== "undefined") {
-                this.billing_group_id = input.billing_group_id;
-            }
+        if (typeof input?.to !== "undefined") {
+            this.to = input.to;
+        }
+        if (typeof input?.from !== "undefined") {
+            this.from = input.from;
+        }
+        if (typeof input?.size !== "undefined") {
+            this.size = input.size;
+        }
+        if (typeof input?.description !== "undefined") {
+            this.description = input.description;
+        }
+        if (typeof input?.metadata !== "undefined") {
+            this.metadata = input.metadata;
+        }
+        if (typeof input?.mail_type !== "undefined") {
+            this.mail_type = input.mail_type;
+        }
+        if (typeof input?.merge_variables !== "undefined") {
+            this.merge_variables = input.merge_variables;
+        }
+        if (typeof input?.send_date !== "undefined") {
+            this.send_date = input.send_date;
+        }
+        if (typeof input?.front !== "undefined") {
+            this.front = input.front;
+        }
+        if (typeof input?.back !== "undefined") {
+            this.back = input.back;
+        }
+        if (typeof input?.billing_group_id !== "undefined") {
+            this.billing_group_id = input.billing_group_id;
         }
     }
 

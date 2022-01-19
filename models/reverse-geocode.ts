@@ -22,16 +22,14 @@ import { GeocodeAddresses } from './geocode-addresses';
  */
 export class ReverseGeocode {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.id !== "undefined") {
-                this.id = input.id;
-            }
-            if (typeof input.addresses !== "undefined") {
-                this.addresses = input.addresses;
-            }
-            if (typeof input.object !== "undefined") {
-                this.object = input.object;
-            }
+        if (typeof input?.id !== "undefined") {
+            this.id = input.id;
+        }
+        if (typeof input?.addresses !== "undefined") {
+            this.addresses = input.addresses;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
         }
     }
 

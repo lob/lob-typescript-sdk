@@ -22,10 +22,8 @@ import { MultipleComponents } from './multiple-components';
  */
 export class MultipleComponentsList {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.addresses !== "undefined") {
-                this.addresses = input.addresses;
-            }
+        if (typeof input?.addresses !== "undefined") {
+            this.addresses = input.addresses;
         }
     }
 

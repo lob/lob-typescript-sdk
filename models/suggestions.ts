@@ -21,22 +21,20 @@
  */
 export class Suggestions {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.primary_line !== "undefined") {
-                this.primary_line = input.primary_line;
-            }
-            if (typeof input.city !== "undefined") {
-                this.city = input.city;
-            }
-            if (typeof input.state !== "undefined") {
-                this.state = input.state;
-            }
-            if (typeof input.zip_code !== "undefined") {
-                this.zip_code = input.zip_code;
-            }
-            if (typeof input.object !== "undefined") {
-                this.object = input.object;
-            }
+        if (typeof input?.primary_line !== "undefined") {
+            this.primary_line = input.primary_line;
+        }
+        if (typeof input?.city !== "undefined") {
+            this.city = input.city;
+        }
+        if (typeof input?.state !== "undefined") {
+            this.state = input.state;
+        }
+        if (typeof input?.zip_code !== "undefined") {
+            this.zip_code = input.zip_code;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
         }
     }
 

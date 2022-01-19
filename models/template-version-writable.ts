@@ -22,16 +22,14 @@ import { EngineHtml } from './engine-html';
  */
 export class TemplateVersionWritable {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.description !== "undefined") {
-                this.description = input.description;
-            }
-            if (typeof input.html !== "undefined") {
-                this.html = input.html;
-            }
-            if (typeof input.engine !== "undefined") {
-                this.engine = input.engine;
-            }
+        if (typeof input?.description !== "undefined") {
+            this.description = input.description;
+        }
+        if (typeof input?.html !== "undefined") {
+            this.html = input.html;
+        }
+        if (typeof input?.engine !== "undefined") {
+            this.engine = input.engine;
         }
     }
 

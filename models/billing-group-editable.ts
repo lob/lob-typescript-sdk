@@ -21,13 +21,11 @@
  */
 export class BillingGroupEditable {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.description !== "undefined") {
-                this.description = input.description;
-            }
-            if (typeof input.name !== "undefined") {
-                this.name = input.name;
-            }
+        if (typeof input?.description !== "undefined") {
+            this.description = input.description;
+        }
+        if (typeof input?.name !== "undefined") {
+            this.name = input.name;
         }
     }
 

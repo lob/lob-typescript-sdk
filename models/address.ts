@@ -22,61 +22,59 @@ import { CountryExtendedExpanded } from './country-extended-expanded';
  */
 export class Address {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.id !== "undefined") {
-                this.id = input.id;
-            }
-            if (typeof input.description !== "undefined") {
-                this.description = input.description;
-            }
-            if (typeof input.name !== "undefined") {
-                this.name = input.name;
-            }
-            if (typeof input.company !== "undefined") {
-                this.company = input.company;
-            }
-            if (typeof input.phone !== "undefined") {
-                this.phone = input.phone;
-            }
-            if (typeof input.email !== "undefined") {
-                this.email = input.email;
-            }
-            if (typeof input.metadata !== "undefined") {
-                this.metadata = input.metadata;
-            }
-            if (typeof input.address_line1 !== "undefined") {
-                this.address_line1 = input.address_line1;
-            }
-            if (typeof input.address_line2 !== "undefined") {
-                this.address_line2 = input.address_line2;
-            }
-            if (typeof input.address_city !== "undefined") {
-                this.address_city = input.address_city;
-            }
-            if (typeof input.address_state !== "undefined") {
-                this.address_state = input.address_state;
-            }
-            if (typeof input.address_zip !== "undefined") {
-                this.address_zip = input.address_zip;
-            }
-            if (typeof input.address_country !== "undefined") {
-                this.address_country = input.address_country;
-            }
-            if (typeof input.object !== "undefined") {
-                this.object = input.object;
-            }
-            if (typeof input.date_created !== "undefined") {
-                this.date_created = input.date_created;
-            }
-            if (typeof input.date_modified !== "undefined") {
-                this.date_modified = input.date_modified;
-            }
-            if (typeof input.deleted !== "undefined") {
-                this.deleted = input.deleted;
-            }
-            if (typeof input.recipient_moved !== "undefined") {
-                this.recipient_moved = input.recipient_moved;
-            }
+        if (typeof input?.id !== "undefined") {
+            this.id = input.id;
+        }
+        if (typeof input?.description !== "undefined") {
+            this.description = input.description;
+        }
+        if (typeof input?.name !== "undefined") {
+            this.name = input.name;
+        }
+        if (typeof input?.company !== "undefined") {
+            this.company = input.company;
+        }
+        if (typeof input?.phone !== "undefined") {
+            this.phone = input.phone;
+        }
+        if (typeof input?.email !== "undefined") {
+            this.email = input.email;
+        }
+        if (typeof input?.metadata !== "undefined") {
+            this.metadata = input.metadata;
+        }
+        if (typeof input?.address_line1 !== "undefined") {
+            this.address_line1 = input.address_line1;
+        }
+        if (typeof input?.address_line2 !== "undefined") {
+            this.address_line2 = input.address_line2;
+        }
+        if (typeof input?.address_city !== "undefined") {
+            this.address_city = input.address_city;
+        }
+        if (typeof input?.address_state !== "undefined") {
+            this.address_state = input.address_state;
+        }
+        if (typeof input?.address_zip !== "undefined") {
+            this.address_zip = input.address_zip;
+        }
+        if (typeof input?.address_country !== "undefined") {
+            this.address_country = input.address_country;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
+        }
+        if (typeof input?.date_created !== "undefined") {
+            this.date_created = input.date_created;
+        }
+        if (typeof input?.date_modified !== "undefined") {
+            this.date_modified = input.date_modified;
+        }
+        if (typeof input?.deleted !== "undefined") {
+            this.deleted = input.deleted;
+        }
+        if (typeof input?.recipient_moved !== "undefined") {
+            this.recipient_moved = input.recipient_moved;
         }
     }
 

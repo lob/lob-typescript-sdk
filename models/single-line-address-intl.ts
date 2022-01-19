@@ -22,13 +22,11 @@ import { CountryExtended } from './country-extended';
  */
 export class SingleLineAddressIntl {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.address !== "undefined") {
-                this.address = input.address;
-            }
-            if (typeof input.country !== "undefined") {
-                this.country = input.country;
-            }
+        if (typeof input?.address !== "undefined") {
+            this.address = input.address;
+        }
+        if (typeof input?.country !== "undefined") {
+            this.country = input.country;
         }
     }
 

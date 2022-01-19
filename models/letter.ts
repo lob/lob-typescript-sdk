@@ -28,88 +28,86 @@ import { TrackingEventNormal } from './tracking-event-normal';
  */
 export class Letter {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.to !== "undefined") {
-                this.to = input.to;
-            }
-            if (typeof input.from !== "undefined") {
-                this.from = input.from;
-            }
-            if (typeof input.carrier !== "undefined") {
-                this.carrier = input.carrier;
-            }
-            if (typeof input.thumbnails !== "undefined") {
-                this.thumbnails = input.thumbnails;
-            }
-            if (typeof input.expected_delivery_date !== "undefined") {
-                this.expected_delivery_date = input.expected_delivery_date;
-            }
-            if (typeof input.date_created !== "undefined") {
-                this.date_created = input.date_created;
-            }
-            if (typeof input.date_modified !== "undefined") {
-                this.date_modified = input.date_modified;
-            }
-            if (typeof input.deleted !== "undefined") {
-                this.deleted = input.deleted;
-            }
-            if (typeof input.id !== "undefined") {
-                this.id = input.id;
-            }
-            if (typeof input.template_id !== "undefined") {
-                this.template_id = input.template_id;
-            }
-            if (typeof input.template_version_id !== "undefined") {
-                this.template_version_id = input.template_version_id;
-            }
-            if (typeof input.object !== "undefined") {
-                this.object = input.object;
-            }
-            if (typeof input.description !== "undefined") {
-                this.description = input.description;
-            }
-            if (typeof input.metadata !== "undefined") {
-                this.metadata = input.metadata;
-            }
-            if (typeof input.merge_variables !== "undefined") {
-                this.merge_variables = input.merge_variables;
-            }
-            if (typeof input.send_date !== "undefined") {
-                this.send_date = input.send_date;
-            }
-            if (typeof input.extra_service !== "undefined") {
-                this.extra_service = input.extra_service;
-            }
-            if (typeof input.tracking_number !== "undefined") {
-                this.tracking_number = input.tracking_number;
-            }
-            if (typeof input.tracking_events !== "undefined") {
-                this.tracking_events = input.tracking_events;
-            }
-            if (typeof input.return_address !== "undefined") {
-                this.return_address = input.return_address;
-            }
-            if (typeof input.mail_type !== "undefined") {
-                this.mail_type = input.mail_type;
-            }
-            if (typeof input.color !== "undefined") {
-                this.color = input.color;
-            }
-            if (typeof input.double_sided !== "undefined") {
-                this.double_sided = input.double_sided;
-            }
-            if (typeof input.address_placement !== "undefined") {
-                this.address_placement = input.address_placement;
-            }
-            if (typeof input.return_envelope !== "undefined") {
-                this.return_envelope = input.return_envelope;
-            }
-            if (typeof input.perforated_page !== "undefined") {
-                this.perforated_page = input.perforated_page;
-            }
-            if (typeof input.custom_envelope !== "undefined") {
-                this.custom_envelope = input.custom_envelope;
-            }
+        if (typeof input?.to !== "undefined") {
+            this.to = input.to;
+        }
+        if (typeof input?.from !== "undefined") {
+            this.from = input.from;
+        }
+        if (typeof input?.carrier !== "undefined") {
+            this.carrier = input.carrier;
+        }
+        if (typeof input?.thumbnails !== "undefined") {
+            this.thumbnails = input.thumbnails;
+        }
+        if (typeof input?.expected_delivery_date !== "undefined") {
+            this.expected_delivery_date = input.expected_delivery_date;
+        }
+        if (typeof input?.date_created !== "undefined") {
+            this.date_created = input.date_created;
+        }
+        if (typeof input?.date_modified !== "undefined") {
+            this.date_modified = input.date_modified;
+        }
+        if (typeof input?.deleted !== "undefined") {
+            this.deleted = input.deleted;
+        }
+        if (typeof input?.id !== "undefined") {
+            this.id = input.id;
+        }
+        if (typeof input?.template_id !== "undefined") {
+            this.template_id = input.template_id;
+        }
+        if (typeof input?.template_version_id !== "undefined") {
+            this.template_version_id = input.template_version_id;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
+        }
+        if (typeof input?.description !== "undefined") {
+            this.description = input.description;
+        }
+        if (typeof input?.metadata !== "undefined") {
+            this.metadata = input.metadata;
+        }
+        if (typeof input?.merge_variables !== "undefined") {
+            this.merge_variables = input.merge_variables;
+        }
+        if (typeof input?.send_date !== "undefined") {
+            this.send_date = input.send_date;
+        }
+        if (typeof input?.extra_service !== "undefined") {
+            this.extra_service = input.extra_service;
+        }
+        if (typeof input?.tracking_number !== "undefined") {
+            this.tracking_number = input.tracking_number;
+        }
+        if (typeof input?.tracking_events !== "undefined") {
+            this.tracking_events = input.tracking_events;
+        }
+        if (typeof input?.return_address !== "undefined") {
+            this.return_address = input.return_address;
+        }
+        if (typeof input?.mail_type !== "undefined") {
+            this.mail_type = input.mail_type;
+        }
+        if (typeof input?.color !== "undefined") {
+            this.color = input.color;
+        }
+        if (typeof input?.double_sided !== "undefined") {
+            this.double_sided = input.double_sided;
+        }
+        if (typeof input?.address_placement !== "undefined") {
+            this.address_placement = input.address_placement;
+        }
+        if (typeof input?.return_envelope !== "undefined") {
+            this.return_envelope = input.return_envelope;
+        }
+        if (typeof input?.perforated_page !== "undefined") {
+            this.perforated_page = input.perforated_page;
+        }
+        if (typeof input?.custom_envelope !== "undefined") {
+            this.custom_envelope = input.custom_envelope;
         }
     }
 

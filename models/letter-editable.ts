@@ -24,46 +24,44 @@ import { MailType } from './mail-type';
  */
 export class LetterEditable {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.mail_type !== "undefined") {
-                this.mail_type = input.mail_type;
-            }
-            if (typeof input.color !== "undefined") {
-                this.color = input.color;
-            }
-            if (typeof input.double_sided !== "undefined") {
-                this.double_sided = input.double_sided;
-            }
-            if (typeof input.address_placement !== "undefined") {
-                this.address_placement = input.address_placement;
-            }
-            if (typeof input.return_envelope !== "undefined") {
-                this.return_envelope = input.return_envelope;
-            }
-            if (typeof input.perforated_page !== "undefined") {
-                this.perforated_page = input.perforated_page;
-            }
-            if (typeof input.custom_envelope !== "undefined") {
-                this.custom_envelope = input.custom_envelope;
-            }
-            if (typeof input.to !== "undefined") {
-                this.to = input.to;
-            }
-            if (typeof input.from !== "undefined") {
-                this.from = input.from;
-            }
-            if (typeof input.file !== "undefined") {
-                this.file = input.file;
-            }
-            if (typeof input.extra_service !== "undefined") {
-                this.extra_service = input.extra_service;
-            }
-            if (typeof input.cards !== "undefined") {
-                this.cards = input.cards;
-            }
-            if (typeof input.billing_group_id !== "undefined") {
-                this.billing_group_id = input.billing_group_id;
-            }
+        if (typeof input?.mail_type !== "undefined") {
+            this.mail_type = input.mail_type;
+        }
+        if (typeof input?.color !== "undefined") {
+            this.color = input.color;
+        }
+        if (typeof input?.double_sided !== "undefined") {
+            this.double_sided = input.double_sided;
+        }
+        if (typeof input?.address_placement !== "undefined") {
+            this.address_placement = input.address_placement;
+        }
+        if (typeof input?.return_envelope !== "undefined") {
+            this.return_envelope = input.return_envelope;
+        }
+        if (typeof input?.perforated_page !== "undefined") {
+            this.perforated_page = input.perforated_page;
+        }
+        if (typeof input?.custom_envelope !== "undefined") {
+            this.custom_envelope = input.custom_envelope;
+        }
+        if (typeof input?.to !== "undefined") {
+            this.to = input.to;
+        }
+        if (typeof input?.from !== "undefined") {
+            this.from = input.from;
+        }
+        if (typeof input?.file !== "undefined") {
+            this.file = input.file;
+        }
+        if (typeof input?.extra_service !== "undefined") {
+            this.extra_service = input.extra_service;
+        }
+        if (typeof input?.cards !== "undefined") {
+            this.cards = input.cards;
+        }
+        if (typeof input?.billing_group_id !== "undefined") {
+            this.billing_group_id = input.billing_group_id;
         }
     }
 

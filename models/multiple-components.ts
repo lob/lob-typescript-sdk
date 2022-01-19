@@ -21,28 +21,26 @@
  */
 export class MultipleComponents {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.recipient !== "undefined") {
-                this.recipient = input.recipient;
-            }
-            if (typeof input.primary_line !== "undefined") {
-                this.primary_line = input.primary_line;
-            }
-            if (typeof input.secondary_line !== "undefined") {
-                this.secondary_line = input.secondary_line;
-            }
-            if (typeof input.urbanization !== "undefined") {
-                this.urbanization = input.urbanization;
-            }
-            if (typeof input.city !== "undefined") {
-                this.city = input.city;
-            }
-            if (typeof input.state !== "undefined") {
-                this.state = input.state;
-            }
-            if (typeof input.zip_code !== "undefined") {
-                this.zip_code = input.zip_code;
-            }
+        if (typeof input?.recipient !== "undefined") {
+            this.recipient = input.recipient;
+        }
+        if (typeof input?.primary_line !== "undefined") {
+            this.primary_line = input.primary_line;
+        }
+        if (typeof input?.secondary_line !== "undefined") {
+            this.secondary_line = input.secondary_line;
+        }
+        if (typeof input?.urbanization !== "undefined") {
+            this.urbanization = input.urbanization;
+        }
+        if (typeof input?.city !== "undefined") {
+            this.city = input.city;
+        }
+        if (typeof input?.state !== "undefined") {
+            this.state = input.state;
+        }
+        if (typeof input?.zip_code !== "undefined") {
+            this.zip_code = input.zip_code;
         }
     }
 

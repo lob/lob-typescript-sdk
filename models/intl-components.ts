@@ -21,22 +21,20 @@
  */
 export class IntlComponents {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.primary_number !== "undefined") {
-                this.primary_number = input.primary_number;
-            }
-            if (typeof input.street_name !== "undefined") {
-                this.street_name = input.street_name;
-            }
-            if (typeof input.city !== "undefined") {
-                this.city = input.city;
-            }
-            if (typeof input.state !== "undefined") {
-                this.state = input.state;
-            }
-            if (typeof input.postal_code !== "undefined") {
-                this.postal_code = input.postal_code;
-            }
+        if (typeof input?.primary_number !== "undefined") {
+            this.primary_number = input.primary_number;
+        }
+        if (typeof input?.street_name !== "undefined") {
+            this.street_name = input.street_name;
+        }
+        if (typeof input?.city !== "undefined") {
+            this.city = input.city;
+        }
+        if (typeof input?.state !== "undefined") {
+            this.state = input.state;
+        }
+        if (typeof input?.postal_code !== "undefined") {
+            this.postal_code = input.postal_code;
         }
     }
 

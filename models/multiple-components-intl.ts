@@ -22,28 +22,26 @@ import { CountryExtended } from './country-extended';
  */
 export class MultipleComponentsIntl {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.recipient !== "undefined") {
-                this.recipient = input.recipient;
-            }
-            if (typeof input.primary_line !== "undefined") {
-                this.primary_line = input.primary_line;
-            }
-            if (typeof input.secondary_line !== "undefined") {
-                this.secondary_line = input.secondary_line;
-            }
-            if (typeof input.city !== "undefined") {
-                this.city = input.city;
-            }
-            if (typeof input.state !== "undefined") {
-                this.state = input.state;
-            }
-            if (typeof input.postal_code !== "undefined") {
-                this.postal_code = input.postal_code;
-            }
-            if (typeof input.country !== "undefined") {
-                this.country = input.country;
-            }
+        if (typeof input?.recipient !== "undefined") {
+            this.recipient = input.recipient;
+        }
+        if (typeof input?.primary_line !== "undefined") {
+            this.primary_line = input.primary_line;
+        }
+        if (typeof input?.secondary_line !== "undefined") {
+            this.secondary_line = input.secondary_line;
+        }
+        if (typeof input?.city !== "undefined") {
+            this.city = input.city;
+        }
+        if (typeof input?.state !== "undefined") {
+            this.state = input.state;
+        }
+        if (typeof input?.postal_code !== "undefined") {
+            this.postal_code = input.postal_code;
+        }
+        if (typeof input?.country !== "undefined") {
+            this.country = input.country;
         }
     }
 

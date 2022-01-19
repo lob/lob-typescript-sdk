@@ -21,10 +21,8 @@
  */
 export class CardOrderEditable {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.quantity !== "undefined") {
-                this.quantity = input.quantity;
-            }
+        if (typeof input?.quantity !== "undefined") {
+            this.quantity = input.quantity;
         }
     }
 

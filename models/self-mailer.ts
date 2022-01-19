@@ -26,55 +26,53 @@ import { TrackingEventCertified } from './tracking-event-certified';
  */
 export class SelfMailer {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.id !== "undefined") {
-                this.id = input.id;
-            }
-            if (typeof input.to !== "undefined") {
-                this.to = input.to;
-            }
-            if (typeof input.from !== "undefined") {
-                this.from = input.from;
-            }
-            if (typeof input.size !== "undefined") {
-                this.size = input.size;
-            }
-            if (typeof input.description !== "undefined") {
-                this.description = input.description;
-            }
-            if (typeof input.metadata !== "undefined") {
-                this.metadata = input.metadata;
-            }
-            if (typeof input.mail_type !== "undefined") {
-                this.mail_type = input.mail_type;
-            }
-            if (typeof input.merge_variables !== "undefined") {
-                this.merge_variables = input.merge_variables;
-            }
-            if (typeof input.send_date !== "undefined") {
-                this.send_date = input.send_date;
-            }
-            if (typeof input.outside_template_id !== "undefined") {
-                this.outside_template_id = input.outside_template_id;
-            }
-            if (typeof input.inside_template_id !== "undefined") {
-                this.inside_template_id = input.inside_template_id;
-            }
-            if (typeof input.outside_template_version_id !== "undefined") {
-                this.outside_template_version_id = input.outside_template_version_id;
-            }
-            if (typeof input.inside_template_version_id !== "undefined") {
-                this.inside_template_version_id = input.inside_template_version_id;
-            }
-            if (typeof input.object !== "undefined") {
-                this.object = input.object;
-            }
-            if (typeof input.tracking_events !== "undefined") {
-                this.tracking_events = input.tracking_events;
-            }
-            if (typeof input.url !== "undefined") {
-                this.url = input.url;
-            }
+        if (typeof input?.id !== "undefined") {
+            this.id = input.id;
+        }
+        if (typeof input?.to !== "undefined") {
+            this.to = input.to;
+        }
+        if (typeof input?.from !== "undefined") {
+            this.from = input.from;
+        }
+        if (typeof input?.size !== "undefined") {
+            this.size = input.size;
+        }
+        if (typeof input?.description !== "undefined") {
+            this.description = input.description;
+        }
+        if (typeof input?.metadata !== "undefined") {
+            this.metadata = input.metadata;
+        }
+        if (typeof input?.mail_type !== "undefined") {
+            this.mail_type = input.mail_type;
+        }
+        if (typeof input?.merge_variables !== "undefined") {
+            this.merge_variables = input.merge_variables;
+        }
+        if (typeof input?.send_date !== "undefined") {
+            this.send_date = input.send_date;
+        }
+        if (typeof input?.outside_template_id !== "undefined") {
+            this.outside_template_id = input.outside_template_id;
+        }
+        if (typeof input?.inside_template_id !== "undefined") {
+            this.inside_template_id = input.inside_template_id;
+        }
+        if (typeof input?.outside_template_version_id !== "undefined") {
+            this.outside_template_version_id = input.outside_template_version_id;
+        }
+        if (typeof input?.inside_template_version_id !== "undefined") {
+            this.inside_template_version_id = input.inside_template_version_id;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
+        }
+        if (typeof input?.tracking_events !== "undefined") {
+            this.tracking_events = input.tracking_events;
+        }
+        if (typeof input?.url !== "undefined") {
+            this.url = input.url;
         }
     }
 

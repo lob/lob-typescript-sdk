@@ -21,16 +21,14 @@
  */
 export class Thumbnail {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.small !== "undefined") {
-                this.small = input.small;
-            }
-            if (typeof input.medium !== "undefined") {
-                this.medium = input.medium;
-            }
-            if (typeof input.large !== "undefined") {
-                this.large = input.large;
-            }
+        if (typeof input?.small !== "undefined") {
+            this.small = input.small;
+        }
+        if (typeof input?.medium !== "undefined") {
+            this.medium = input.medium;
+        }
+        if (typeof input?.large !== "undefined") {
+            this.large = input.large;
         }
     }
 

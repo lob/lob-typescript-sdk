@@ -21,46 +21,44 @@
  */
 export class CardOrder {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.id !== "undefined") {
-                this.id = input.id;
-            }
-            if (typeof input.card_id !== "undefined") {
-                this.card_id = input.card_id;
-            }
-            if (typeof input.status !== "undefined") {
-                this.status = input.status;
-            }
-            if (typeof input.inventory !== "undefined") {
-                this.inventory = input.inventory;
-            }
-            if (typeof input.quantity_ordered !== "undefined") {
-                this.quantity_ordered = input.quantity_ordered;
-            }
-            if (typeof input.unit_price !== "undefined") {
-                this.unit_price = input.unit_price;
-            }
-            if (typeof input.cancelled_reason !== "undefined") {
-                this.cancelled_reason = input.cancelled_reason;
-            }
-            if (typeof input.availability_date !== "undefined") {
-                this.availability_date = input.availability_date;
-            }
-            if (typeof input.expected_availability_date !== "undefined") {
-                this.expected_availability_date = input.expected_availability_date;
-            }
-            if (typeof input.date_created !== "undefined") {
-                this.date_created = input.date_created;
-            }
-            if (typeof input.date_modified !== "undefined") {
-                this.date_modified = input.date_modified;
-            }
-            if (typeof input.deleted !== "undefined") {
-                this.deleted = input.deleted;
-            }
-            if (typeof input.object !== "undefined") {
-                this.object = input.object;
-            }
+        if (typeof input?.id !== "undefined") {
+            this.id = input.id;
+        }
+        if (typeof input?.card_id !== "undefined") {
+            this.card_id = input.card_id;
+        }
+        if (typeof input?.status !== "undefined") {
+            this.status = input.status;
+        }
+        if (typeof input?.inventory !== "undefined") {
+            this.inventory = input.inventory;
+        }
+        if (typeof input?.quantity_ordered !== "undefined") {
+            this.quantity_ordered = input.quantity_ordered;
+        }
+        if (typeof input?.unit_price !== "undefined") {
+            this.unit_price = input.unit_price;
+        }
+        if (typeof input?.cancelled_reason !== "undefined") {
+            this.cancelled_reason = input.cancelled_reason;
+        }
+        if (typeof input?.availability_date !== "undefined") {
+            this.availability_date = input.availability_date;
+        }
+        if (typeof input?.expected_availability_date !== "undefined") {
+            this.expected_availability_date = input.expected_availability_date;
+        }
+        if (typeof input?.date_created !== "undefined") {
+            this.date_created = input.date_created;
+        }
+        if (typeof input?.date_modified !== "undefined") {
+            this.date_modified = input.date_modified;
+        }
+        if (typeof input?.deleted !== "undefined") {
+            this.deleted = input.deleted;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
         }
     }
 

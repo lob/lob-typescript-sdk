@@ -21,8 +21,6 @@
  */
 export class SendDate {
     constructor(input?: any) {
-        if (input) {
-        }
     }
 
 }

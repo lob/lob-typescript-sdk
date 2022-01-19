@@ -21,22 +21,20 @@
  */
 export class UsAutocompletionsWritable {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.address_prefix !== "undefined") {
-                this.address_prefix = input.address_prefix;
-            }
-            if (typeof input.city !== "undefined") {
-                this.city = input.city;
-            }
-            if (typeof input.state !== "undefined") {
-                this.state = input.state;
-            }
-            if (typeof input.zip_code !== "undefined") {
-                this.zip_code = input.zip_code;
-            }
-            if (typeof input.geo_ip_sort !== "undefined") {
-                this.geo_ip_sort = input.geo_ip_sort;
-            }
+        if (typeof input?.address_prefix !== "undefined") {
+            this.address_prefix = input.address_prefix;
+        }
+        if (typeof input?.city !== "undefined") {
+            this.city = input.city;
+        }
+        if (typeof input?.state !== "undefined") {
+            this.state = input.state;
+        }
+        if (typeof input?.zip_code !== "undefined") {
+            this.zip_code = input.zip_code;
+        }
+        if (typeof input?.geo_ip_sort !== "undefined") {
+            this.geo_ip_sort = input.geo_ip_sort;
         }
     }
 

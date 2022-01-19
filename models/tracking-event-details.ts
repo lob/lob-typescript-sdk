@@ -21,19 +21,17 @@
  */
 export class TrackingEventDetails {
     constructor(input?: any) {
-        if (input) {
-            if (typeof input.event !== "undefined") {
-                this.event = input.event;
-            }
-            if (typeof input.description !== "undefined") {
-                this.description = input.description;
-            }
-            if (typeof input.notes !== "undefined") {
-                this.notes = input.notes;
-            }
-            if (typeof input.action_required !== "undefined") {
-                this.action_required = input.action_required;
-            }
+        if (typeof input?.event !== "undefined") {
+            this.event = input.event;
+        }
+        if (typeof input?.description !== "undefined") {
+            this.description = input.description;
+        }
+        if (typeof input?.notes !== "undefined") {
+            this.notes = input.notes;
+        }
+        if (typeof input?.action_required !== "undefined") {
+            this.action_required = input.action_required;
         }
     }
 
