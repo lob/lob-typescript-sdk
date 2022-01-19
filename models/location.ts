@@ -22,10 +22,10 @@
 export class Location {
     constructor(input?: any) {
         if (input) {
-            if (input.latitude) {
+            if (typeof input.latitude !== "undefined") {
                 this.latitude = input.latitude;
             }
-            if (input.longitude) {
+            if (typeof input.longitude !== "undefined") {
                 this.longitude = input.longitude;
             }
         }

@@ -22,40 +22,40 @@
 export class AddressDomesticExpanded {
     constructor(input?: any) {
         if (input) {
-            if (input.address_line1) {
+            if (typeof input.address_line1 !== "undefined") {
                 this.address_line1 = input.address_line1;
             }
-            if (input.address_line2) {
+            if (typeof input.address_line2 !== "undefined") {
                 this.address_line2 = input.address_line2;
             }
-            if (input.address_city) {
+            if (typeof input.address_city !== "undefined") {
                 this.address_city = input.address_city;
             }
-            if (input.address_state) {
+            if (typeof input.address_state !== "undefined") {
                 this.address_state = input.address_state;
             }
-            if (input.address_zip) {
+            if (typeof input.address_zip !== "undefined") {
                 this.address_zip = input.address_zip;
             }
-            if (input.description) {
+            if (typeof input.description !== "undefined") {
                 this.description = input.description;
             }
-            if (input.name) {
+            if (typeof input.name !== "undefined") {
                 this.name = input.name;
             }
-            if (input.company) {
+            if (typeof input.company !== "undefined") {
                 this.company = input.company;
             }
-            if (input.phone) {
+            if (typeof input.phone !== "undefined") {
                 this.phone = input.phone;
             }
-            if (input.email) {
+            if (typeof input.email !== "undefined") {
                 this.email = input.email;
             }
-            if (input.address_country) {
+            if (typeof input.address_country !== "undefined") {
                 this.address_country = input.address_country;
             }
-            if (input.metadata) {
+            if (typeof input.metadata !== "undefined") {
                 this.metadata = input.metadata;
             }
         }

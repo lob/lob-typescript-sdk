@@ -22,7 +22,7 @@
 export class SingleLineAddress {
     constructor(input?: any) {
         if (input) {
-            if (input.address) {
+            if (typeof input.address !== "undefined") {
                 this.address = input.address;
             }
         }

@@ -23,22 +23,22 @@ import { Address } from './address';
 export class AddressList {
     constructor(input?: any) {
         if (input) {
-            if (input.data) {
+            if (typeof input.data !== "undefined") {
                 this.data = input.data;
             }
-            if (input.object) {
+            if (typeof input.object !== "undefined") {
                 this.object = input.object;
             }
-            if (input.next_url) {
+            if (typeof input.next_url !== "undefined") {
                 this.next_url = input.next_url;
             }
-            if (input.previous_url) {
+            if (typeof input.previous_url !== "undefined") {
                 this.previous_url = input.previous_url;
             }
-            if (input.count) {
+            if (typeof input.count !== "undefined") {
                 this.count = input.count;
             }
-            if (input.total_count) {
+            if (typeof input.total_count !== "undefined") {
                 this.total_count = input.total_count;
             }
         }

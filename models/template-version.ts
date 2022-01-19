@@ -23,34 +23,34 @@ import { EngineHtml } from './engine-html';
 export class TemplateVersion {
     constructor(input?: any) {
         if (input) {
-            if (input.id) {
+            if (typeof input.id !== "undefined") {
                 this.id = input.id;
             }
-            if (input.description) {
+            if (typeof input.description !== "undefined") {
                 this.description = input.description;
             }
-            if (input.html) {
+            if (typeof input.html !== "undefined") {
                 this.html = input.html;
             }
-            if (input.engine) {
+            if (typeof input.engine !== "undefined") {
                 this.engine = input.engine;
             }
-            if (input.suggest_json_editor) {
+            if (typeof input.suggest_json_editor !== "undefined") {
                 this.suggest_json_editor = input.suggest_json_editor;
             }
-            if (input.merge_variables) {
+            if (typeof input.merge_variables !== "undefined") {
                 this.merge_variables = input.merge_variables;
             }
-            if (input.date_created) {
+            if (typeof input.date_created !== "undefined") {
                 this.date_created = input.date_created;
             }
-            if (input.date_modified) {
+            if (typeof input.date_modified !== "undefined") {
                 this.date_modified = input.date_modified;
             }
-            if (input.deleted) {
+            if (typeof input.deleted !== "undefined") {
                 this.deleted = input.deleted;
             }
-            if (input.object) {
+            if (typeof input.object !== "undefined") {
                 this.object = input.object;
             }
         }

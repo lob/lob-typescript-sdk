@@ -23,7 +23,7 @@ import { CardOrder } from './card-order';
 export class InlineResponse200 {
     constructor(input?: any) {
         if (input) {
-            if (input.data) {
+            if (typeof input.data !== "undefined") {
                 this.data = input.data;
             }
         }

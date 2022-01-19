@@ -22,13 +22,13 @@
 export class CardUpdatable {
     constructor(input?: any) {
         if (input) {
-            if (input.description) {
+            if (typeof input.description !== "undefined") {
                 this.description = input.description;
             }
-            if (input.auto_reorder) {
+            if (typeof input.auto_reorder !== "undefined") {
                 this.auto_reorder = input.auto_reorder;
             }
-            if (input.reorder_quantity) {
+            if (typeof input.reorder_quantity !== "undefined") {
                 this.reorder_quantity = input.reorder_quantity;
             }
         }

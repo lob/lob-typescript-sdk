@@ -22,10 +22,10 @@
 export class GeocodeComponents {
     constructor(input?: any) {
         if (input) {
-            if (input.zip_code) {
+            if (typeof input.zip_code !== "undefined") {
                 this.zip_code = input.zip_code;
             }
-            if (input.zip_code_plus_4) {
+            if (typeof input.zip_code_plus_4 !== "undefined") {
                 this.zip_code_plus_4 = input.zip_code_plus_4;
             }
         }

@@ -23,82 +23,82 @@ import { ZipCodeType } from './zip-code-type';
 export class UsComponents {
     constructor(input?: any) {
         if (input) {
-            if (input.primary_number) {
+            if (typeof input.primary_number !== "undefined") {
                 this.primary_number = input.primary_number;
             }
-            if (input.street_predirection) {
+            if (typeof input.street_predirection !== "undefined") {
                 this.street_predirection = input.street_predirection;
             }
-            if (input.street_name) {
+            if (typeof input.street_name !== "undefined") {
                 this.street_name = input.street_name;
             }
-            if (input.street_suffix) {
+            if (typeof input.street_suffix !== "undefined") {
                 this.street_suffix = input.street_suffix;
             }
-            if (input.street_postdirection) {
+            if (typeof input.street_postdirection !== "undefined") {
                 this.street_postdirection = input.street_postdirection;
             }
-            if (input.secondary_designator) {
+            if (typeof input.secondary_designator !== "undefined") {
                 this.secondary_designator = input.secondary_designator;
             }
-            if (input.secondary_number) {
+            if (typeof input.secondary_number !== "undefined") {
                 this.secondary_number = input.secondary_number;
             }
-            if (input.pmb_designator) {
+            if (typeof input.pmb_designator !== "undefined") {
                 this.pmb_designator = input.pmb_designator;
             }
-            if (input.pmb_number) {
+            if (typeof input.pmb_number !== "undefined") {
                 this.pmb_number = input.pmb_number;
             }
-            if (input.extra_secondary_designator) {
+            if (typeof input.extra_secondary_designator !== "undefined") {
                 this.extra_secondary_designator = input.extra_secondary_designator;
             }
-            if (input.extra_secondary_number) {
+            if (typeof input.extra_secondary_number !== "undefined") {
                 this.extra_secondary_number = input.extra_secondary_number;
             }
-            if (input.city) {
+            if (typeof input.city !== "undefined") {
                 this.city = input.city;
             }
-            if (input.state) {
+            if (typeof input.state !== "undefined") {
                 this.state = input.state;
             }
-            if (input.zip_code) {
+            if (typeof input.zip_code !== "undefined") {
                 this.zip_code = input.zip_code;
             }
-            if (input.zip_code_plus_4) {
+            if (typeof input.zip_code_plus_4 !== "undefined") {
                 this.zip_code_plus_4 = input.zip_code_plus_4;
             }
-            if (input.zip_code_type) {
+            if (typeof input.zip_code_type !== "undefined") {
                 this.zip_code_type = input.zip_code_type;
             }
-            if (input.delivery_point_barcode) {
+            if (typeof input.delivery_point_barcode !== "undefined") {
                 this.delivery_point_barcode = input.delivery_point_barcode;
             }
-            if (input.address_type) {
+            if (typeof input.address_type !== "undefined") {
                 this.address_type = input.address_type;
             }
-            if (input.record_type) {
+            if (typeof input.record_type !== "undefined") {
                 this.record_type = input.record_type;
             }
-            if (input.default_building_address) {
+            if (typeof input.default_building_address !== "undefined") {
                 this.default_building_address = input.default_building_address;
             }
-            if (input.county) {
+            if (typeof input.county !== "undefined") {
                 this.county = input.county;
             }
-            if (input.county_fips) {
+            if (typeof input.county_fips !== "undefined") {
                 this.county_fips = input.county_fips;
             }
-            if (input.carrier_route) {
+            if (typeof input.carrier_route !== "undefined") {
                 this.carrier_route = input.carrier_route;
             }
-            if (input.carrier_route_type) {
+            if (typeof input.carrier_route_type !== "undefined") {
                 this.carrier_route_type = input.carrier_route_type;
             }
-            if (input.latitude) {
+            if (typeof input.latitude !== "undefined") {
                 this.latitude = input.latitude;
             }
-            if (input.longitude) {
+            if (typeof input.longitude !== "undefined") {
                 this.longitude = input.longitude;
             }
         }

@@ -22,19 +22,19 @@
 export class Suggestions {
     constructor(input?: any) {
         if (input) {
-            if (input.primary_line) {
+            if (typeof input.primary_line !== "undefined") {
                 this.primary_line = input.primary_line;
             }
-            if (input.city) {
+            if (typeof input.city !== "undefined") {
                 this.city = input.city;
             }
-            if (input.state) {
+            if (typeof input.state !== "undefined") {
                 this.state = input.state;
             }
-            if (input.zip_code) {
+            if (typeof input.zip_code !== "undefined") {
                 this.zip_code = input.zip_code;
             }
-            if (input.object) {
+            if (typeof input.object !== "undefined") {
                 this.object = input.object;
             }
         }

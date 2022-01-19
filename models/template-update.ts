@@ -22,10 +22,10 @@
 export class TemplateUpdate {
     constructor(input?: any) {
         if (input) {
-            if (input.description) {
+            if (typeof input.description !== "undefined") {
                 this.description = input.description;
             }
-            if (input.published_version) {
+            if (typeof input.published_version !== "undefined") {
                 this.published_version = input.published_version;
             }
         }

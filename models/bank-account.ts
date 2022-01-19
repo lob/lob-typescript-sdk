@@ -22,46 +22,46 @@
 export class BankAccount {
     constructor(input?: any) {
         if (input) {
-            if (input.description) {
+            if (typeof input.description !== "undefined") {
                 this.description = input.description;
             }
-            if (input.routing_number) {
+            if (typeof input.routing_number !== "undefined") {
                 this.routing_number = input.routing_number;
             }
-            if (input.account_number) {
+            if (typeof input.account_number !== "undefined") {
                 this.account_number = input.account_number;
             }
-            if (input.account_type) {
+            if (typeof input.account_type !== "undefined") {
                 this.account_type = input.account_type;
             }
-            if (input.signatory) {
+            if (typeof input.signatory !== "undefined") {
                 this.signatory = input.signatory;
             }
-            if (input.metadata) {
+            if (typeof input.metadata !== "undefined") {
                 this.metadata = input.metadata;
             }
-            if (input.id) {
+            if (typeof input.id !== "undefined") {
                 this.id = input.id;
             }
-            if (input.signature_url) {
+            if (typeof input.signature_url !== "undefined") {
                 this.signature_url = input.signature_url;
             }
-            if (input.bank_name) {
+            if (typeof input.bank_name !== "undefined") {
                 this.bank_name = input.bank_name;
             }
-            if (input.verified) {
+            if (typeof input.verified !== "undefined") {
                 this.verified = input.verified;
             }
-            if (input.date_created) {
+            if (typeof input.date_created !== "undefined") {
                 this.date_created = input.date_created;
             }
-            if (input.date_modified) {
+            if (typeof input.date_modified !== "undefined") {
                 this.date_modified = input.date_modified;
             }
-            if (input.deleted) {
+            if (typeof input.deleted !== "undefined") {
                 this.deleted = input.deleted;
             }
-            if (input.object) {
+            if (typeof input.object !== "undefined") {
                 this.object = input.object;
             }
         }

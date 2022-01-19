@@ -24,10 +24,10 @@ import { LobError } from './lob-error';
 export class IntlVerifications {
     constructor(input?: any) {
         if (input) {
-            if (input.addresses) {
+            if (typeof input.addresses !== "undefined") {
                 this.addresses = input.addresses;
             }
-            if (input.errors) {
+            if (typeof input.errors !== "undefined") {
                 this.errors = input.errors;
             }
         }

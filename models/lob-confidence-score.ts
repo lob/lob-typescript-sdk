@@ -22,10 +22,10 @@
 export class LobConfidenceScore {
     constructor(input?: any) {
         if (input) {
-            if (input.score) {
+            if (typeof input.score !== "undefined") {
                 this.score = input.score;
             }
-            if (input.level) {
+            if (typeof input.level !== "undefined") {
                 this.level = input.level;
             }
         }

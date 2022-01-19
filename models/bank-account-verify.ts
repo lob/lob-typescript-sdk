@@ -22,7 +22,7 @@
 export class BankAccountVerify {
     constructor(input?: any) {
         if (input) {
-            if (input.amounts) {
+            if (typeof input.amounts !== "undefined") {
                 this.amounts = input.amounts;
             }
         }

@@ -23,22 +23,22 @@ import { BankTypeEnum } from './bank-type-enum';
 export class BankAccountWritable {
     constructor(input?: any) {
         if (input) {
-            if (input.description) {
+            if (typeof input.description !== "undefined") {
                 this.description = input.description;
             }
-            if (input.routing_number) {
+            if (typeof input.routing_number !== "undefined") {
                 this.routing_number = input.routing_number;
             }
-            if (input.account_number) {
+            if (typeof input.account_number !== "undefined") {
                 this.account_number = input.account_number;
             }
-            if (input.account_type) {
+            if (typeof input.account_type !== "undefined") {
                 this.account_type = input.account_type;
             }
-            if (input.signatory) {
+            if (typeof input.signatory !== "undefined") {
                 this.signatory = input.signatory;
             }
-            if (input.metadata) {
+            if (typeof input.metadata !== "undefined") {
                 this.metadata = input.metadata;
             }
         }

@@ -22,13 +22,13 @@
 export class LobError {
     constructor(input?: any) {
         if (input) {
-            if (input.message) {
+            if (typeof input.message !== "undefined") {
                 this.message = input.message;
             }
-            if (input.status_code) {
+            if (typeof input.status_code !== "undefined") {
                 this.status_code = input.status_code;
             }
-            if (input.code) {
+            if (typeof input.code !== "undefined") {
                 this.code = input.code;
             }
         }

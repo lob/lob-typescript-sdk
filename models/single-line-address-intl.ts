@@ -23,10 +23,10 @@ import { CountryExtended } from './country-extended';
 export class SingleLineAddressIntl {
     constructor(input?: any) {
         if (input) {
-            if (input.address) {
+            if (typeof input.address !== "undefined") {
                 this.address = input.address;
             }
-            if (input.country) {
+            if (typeof input.country !== "undefined") {
                 this.country = input.country;
             }
         }

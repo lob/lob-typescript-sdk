@@ -24,10 +24,10 @@ import { LocationAnalysis } from './location-analysis';
 export class GeocodeAddresses {
     constructor(input?: any) {
         if (input) {
-            if (input.components) {
+            if (typeof input.components !== "undefined") {
                 this.components = input.components;
             }
-            if (input.location_analysis) {
+            if (typeof input.location_analysis !== "undefined") {
                 this.location_analysis = input.location_analysis;
             }
         }

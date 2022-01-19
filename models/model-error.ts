@@ -23,7 +23,7 @@ import { ErrorError } from './error-error';
 export class ModelError {
     constructor(input?: any) {
         if (input) {
-            if (input.error) {
+            if (typeof input.error !== "undefined") {
                 this.error = input.error;
             }
         }

@@ -22,10 +22,10 @@
 export class BillingGroupEditable {
     constructor(input?: any) {
         if (input) {
-            if (input.description) {
+            if (typeof input.description !== "undefined") {
                 this.description = input.description;
             }
-            if (input.name) {
+            if (typeof input.name !== "undefined") {
                 this.name = input.name;
             }
         }

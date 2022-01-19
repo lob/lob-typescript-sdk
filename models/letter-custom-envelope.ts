@@ -22,13 +22,13 @@
 export class LetterCustomEnvelope {
     constructor(input?: any) {
         if (input) {
-            if (input.id) {
+            if (typeof input.id !== "undefined") {
                 this.id = input.id;
             }
-            if (input.url) {
+            if (typeof input.url !== "undefined") {
                 this.url = input.url;
             }
-            if (input.object) {
+            if (typeof input.object !== "undefined") {
                 this.object = input.object;
             }
         }

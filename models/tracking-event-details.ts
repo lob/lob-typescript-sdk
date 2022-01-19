@@ -22,16 +22,16 @@
 export class TrackingEventDetails {
     constructor(input?: any) {
         if (input) {
-            if (input.event) {
+            if (typeof input.event !== "undefined") {
                 this.event = input.event;
             }
-            if (input.description) {
+            if (typeof input.description !== "undefined") {
                 this.description = input.description;
             }
-            if (input.notes) {
+            if (typeof input.notes !== "undefined") {
                 this.notes = input.notes;
             }
-            if (input.action_required) {
+            if (typeof input.action_required !== "undefined") {
                 this.action_required = input.action_required;
             }
         }

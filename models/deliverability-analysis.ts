@@ -23,31 +23,31 @@ import { DpvFootnote } from './dpv-footnote';
 export class DeliverabilityAnalysis {
     constructor(input?: any) {
         if (input) {
-            if (input.dpv_confirmation) {
+            if (typeof input.dpv_confirmation !== "undefined") {
                 this.dpv_confirmation = input.dpv_confirmation;
             }
-            if (input.dpv_cmra) {
+            if (typeof input.dpv_cmra !== "undefined") {
                 this.dpv_cmra = input.dpv_cmra;
             }
-            if (input.dpv_vacant) {
+            if (typeof input.dpv_vacant !== "undefined") {
                 this.dpv_vacant = input.dpv_vacant;
             }
-            if (input.dpv_active) {
+            if (typeof input.dpv_active !== "undefined") {
                 this.dpv_active = input.dpv_active;
             }
-            if (input.dpv_footnotes) {
+            if (typeof input.dpv_footnotes !== "undefined") {
                 this.dpv_footnotes = input.dpv_footnotes;
             }
-            if (input.ews_match) {
+            if (typeof input.ews_match !== "undefined") {
                 this.ews_match = input.ews_match;
             }
-            if (input.lacs_indicator) {
+            if (typeof input.lacs_indicator !== "undefined") {
                 this.lacs_indicator = input.lacs_indicator;
             }
-            if (input.lacs_return_code) {
+            if (typeof input.lacs_return_code !== "undefined") {
                 this.lacs_return_code = input.lacs_return_code;
             }
-            if (input.suite_return_code) {
+            if (typeof input.suite_return_code !== "undefined") {
                 this.suite_return_code = input.suite_return_code;
             }
         }

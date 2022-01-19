@@ -22,13 +22,13 @@
 export class BankAccountDeletion {
     constructor(input?: any) {
         if (input) {
-            if (input.id) {
+            if (typeof input.id !== "undefined") {
                 this.id = input.id;
             }
-            if (input.deleted) {
+            if (typeof input.deleted !== "undefined") {
                 this.deleted = input.deleted;
             }
-            if (input.object) {
+            if (typeof input.object !== "undefined") {
                 this.object = input.object;
             }
         }

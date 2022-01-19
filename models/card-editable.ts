@@ -22,16 +22,16 @@
 export class CardEditable {
     constructor(input?: any) {
         if (input) {
-            if (input.front) {
+            if (typeof input.front !== "undefined") {
                 this.front = input.front;
             }
-            if (input.back) {
+            if (typeof input.back !== "undefined") {
                 this.back = input.back;
             }
-            if (input.size) {
+            if (typeof input.size !== "undefined") {
                 this.size = input.size;
             }
-            if (input.description) {
+            if (typeof input.description !== "undefined") {
                 this.description = input.description;
             }
         }

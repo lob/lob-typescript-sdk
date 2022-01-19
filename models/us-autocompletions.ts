@@ -23,13 +23,13 @@ import { Suggestions } from './suggestions';
 export class UsAutocompletions {
     constructor(input?: any) {
         if (input) {
-            if (input.id) {
+            if (typeof input.id !== "undefined") {
                 this.id = input.id;
             }
-            if (input.suggestions) {
+            if (typeof input.suggestions !== "undefined") {
                 this.suggestions = input.suggestions;
             }
-            if (input.object) {
+            if (typeof input.object !== "undefined") {
                 this.object = input.object;
             }
         }

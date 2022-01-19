@@ -23,31 +23,31 @@ import { TrackingEventDetails } from './tracking-event-details';
 export class TrackingEventCertified {
     constructor(input?: any) {
         if (input) {
-            if (input.type) {
+            if (typeof input.type !== "undefined") {
                 this.type = input.type;
             }
-            if (input.name) {
+            if (typeof input.name !== "undefined") {
                 this.name = input.name;
             }
-            if (input.details) {
+            if (typeof input.details !== "undefined") {
                 this.details = input.details;
             }
-            if (input.location) {
+            if (typeof input.location !== "undefined") {
                 this.location = input.location;
             }
-            if (input.id) {
+            if (typeof input.id !== "undefined") {
                 this.id = input.id;
             }
-            if (input.time) {
+            if (typeof input.time !== "undefined") {
                 this.time = input.time;
             }
-            if (input.date_created) {
+            if (typeof input.date_created !== "undefined") {
                 this.date_created = input.date_created;
             }
-            if (input.date_modified) {
+            if (typeof input.date_modified !== "undefined") {
                 this.date_modified = input.date_modified;
             }
-            if (input.object) {
+            if (typeof input.object !== "undefined") {
                 this.object = input.object;
             }
         }

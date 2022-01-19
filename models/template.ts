@@ -23,31 +23,31 @@ import { TemplateVersion } from './template-version';
 export class Template {
     constructor(input?: any) {
         if (input) {
-            if (input.description) {
+            if (typeof input.description !== "undefined") {
                 this.description = input.description;
             }
-            if (input.id) {
+            if (typeof input.id !== "undefined") {
                 this.id = input.id;
             }
-            if (input.versions) {
+            if (typeof input.versions !== "undefined") {
                 this.versions = input.versions;
             }
-            if (input.published_version) {
+            if (typeof input.published_version !== "undefined") {
                 this.published_version = input.published_version;
             }
-            if (input.object) {
+            if (typeof input.object !== "undefined") {
                 this.object = input.object;
             }
-            if (input.metadata) {
+            if (typeof input.metadata !== "undefined") {
                 this.metadata = input.metadata;
             }
-            if (input.date_created) {
+            if (typeof input.date_created !== "undefined") {
                 this.date_created = input.date_created;
             }
-            if (input.date_modified) {
+            if (typeof input.date_modified !== "undefined") {
                 this.date_modified = input.date_modified;
             }
-            if (input.deleted) {
+            if (typeof input.deleted !== "undefined") {
                 this.deleted = input.deleted;
             }
         }

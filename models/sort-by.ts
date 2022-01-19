@@ -22,10 +22,10 @@
 export class SortBy {
     constructor(input?: any) {
         if (input) {
-            if (input.date_created) {
+            if (typeof input.date_created !== "undefined") {
                 this.date_created = input.date_created;
             }
-            if (input.send_date) {
+            if (typeof input.send_date !== "undefined") {
                 this.send_date = input.send_date;
             }
         }

@@ -22,13 +22,13 @@
 export class Thumbnail {
     constructor(input?: any) {
         if (input) {
-            if (input.small) {
+            if (typeof input.small !== "undefined") {
                 this.small = input.small;
             }
-            if (input.medium) {
+            if (typeof input.medium !== "undefined") {
                 this.medium = input.medium;
             }
-            if (input.large) {
+            if (typeof input.large !== "undefined") {
                 this.large = input.large;
             }
         }

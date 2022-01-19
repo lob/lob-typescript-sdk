@@ -25,37 +25,37 @@ import { UsComponents } from './us-components';
 export class UsVerification {
     constructor(input?: any) {
         if (input) {
-            if (input.id) {
+            if (typeof input.id !== "undefined") {
                 this.id = input.id;
             }
-            if (input.recipient) {
+            if (typeof input.recipient !== "undefined") {
                 this.recipient = input.recipient;
             }
-            if (input.primary_line) {
+            if (typeof input.primary_line !== "undefined") {
                 this.primary_line = input.primary_line;
             }
-            if (input.secondary_line) {
+            if (typeof input.secondary_line !== "undefined") {
                 this.secondary_line = input.secondary_line;
             }
-            if (input.urbanization) {
+            if (typeof input.urbanization !== "undefined") {
                 this.urbanization = input.urbanization;
             }
-            if (input.last_line) {
+            if (typeof input.last_line !== "undefined") {
                 this.last_line = input.last_line;
             }
-            if (input.deliverability) {
+            if (typeof input.deliverability !== "undefined") {
                 this.deliverability = input.deliverability;
             }
-            if (input.components) {
+            if (typeof input.components !== "undefined") {
                 this.components = input.components;
             }
-            if (input.deliverability_analysis) {
+            if (typeof input.deliverability_analysis !== "undefined") {
                 this.deliverability_analysis = input.deliverability_analysis;
             }
-            if (input.lob_confidence_score) {
+            if (typeof input.lob_confidence_score !== "undefined") {
                 this.lob_confidence_score = input.lob_confidence_score;
             }
-            if (input.object) {
+            if (typeof input.object !== "undefined") {
                 this.object = input.object;
             }
         }
