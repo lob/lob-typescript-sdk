@@ -1,7 +1,7 @@
 import { Configuration } from "../configuration";
 
-import { LetterEditable, AddressEditable, MailType } from "../models";
-import { LettersApi } from "../api/letters-api";
+import { PostcardEditable, AddressEditable, MailType, PostcardSize } from "../models";
+import { PostcardsApi } from "../api/postcards-api";
 
 import { fail } from "./testUtilities";
 import {DATE_FILTER} from "./testFixtures";
@@ -12,7 +12,7 @@ jest.mock("axios", () => ({
     request: jest.fn(),
 }));
 
-describe("LetterApi", () => {
+describe("PostcardsApi", () => {
   const config: Configuration = new Configuration({
     username: "Totally Fake Key",
   });
@@ -25,46 +25,50 @@ describe("LetterApi", () => {
     },
   });
 
-  it("Letter API can be instantiated", () => {
-    const letterApi = new LettersApi(config);
-    expect(letterApi).toBeDefined();
-    expect(typeof letterApi).toEqual("object");
-    expect(letterApi).toBeInstanceOf(LettersApi);
+  it("Postcards API can be instantiated", () => {
+    const postcardApi = new PostcardsApi(config);
+    expect(postcardApi).toBeDefined();
+    expect(typeof postcardApi).toEqual("object");
+    expect(postcardApi).toBeInstanceOf(PostcardsApi);
   });
 
-  it("Letter API can be instantiated with base options", () => {
-    const letterApi = new LettersApi(configWithBaseOptions);
-    expect(letterApi).toBeDefined();
-    expect(typeof letterApi).toEqual("object");
-    expect(letterApi).toBeInstanceOf(LettersApi);
+  it("Postcards API can be instantiated with base options", () => {
+    const postcardApi = new PostcardsApi(configWithBaseOptions);
+    expect(postcardApi).toBeDefined();
+    expect(typeof postcardApi).toEqual("object");
+    expect(postcardApi).toBeInstanceOf(PostcardsApi);
   });
 
+  
   describe("get", () => {
     it("exists", () => {
-      const letterApi = new LettersApi(config);
-      expect(letterApi.get).toBeDefined();
-      expect(typeof letterApi.get).toEqual("function");
+      const postcardApi = new PostcardsApi
+      (config);
+      expect(postcardApi.get).toBeDefined();
+      expect(typeof postcardApi.get).toEqual("function");
     });
 
     it("gets a record", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "ltr_fakeId", deleted: false },
+        data: { id: "psc_fakeId", deleted: false },
       }));
 
-      const letter = await new LettersApi(config).get("ltr_fakeId");
-      expect(letter).toBeDefined();
-      expect(letter.id).toEqual("ltr_fakeId");
-      expect(letter.deleted).toEqual(false);
+      const postcard = await new PostcardsApi
+      (config).get("ID");
+      expect(postcard).toBeDefined();
+      expect(postcard.id).toEqual("psc_fakeId");
+      expect(postcard.deleted).toEqual(false);
     });
 
-    it("includes custom headers while it gets a letter", async () => {
+    it("includes custom headers while it gets a postcard", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "ltr_fakeId2" },
+        data: { id: "psc_differentFakeId" },
       }));
 
-      const letter = await new LettersApi(configWithBaseOptions).get("ltr_fakeId");
-      expect(letter).toBeDefined();
-      expect(letter?.id).toEqual("ltr_fakeId2");
+      const postcard = await new PostcardsApi
+      (configWithBaseOptions).get("psc_ID");
+      expect(postcard).toBeDefined();
+      expect(postcard?.id).toEqual("psc_differentFakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -76,7 +80,8 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).get("ltr_fakeId");
+        await new PostcardsApi
+        (config).get("fake id");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
       }
@@ -91,7 +96,8 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).get("ltr_fakeId");
+        await new PostcardsApi
+        (config).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -107,7 +113,8 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).get("ltr_fakeId");
+        await new PostcardsApi
+        (config).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -120,7 +127,8 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).get("ltr_fakeId");
+        await new PostcardsApi
+        (config).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -130,28 +138,28 @@ describe("LetterApi", () => {
 
   describe("list", () => {
     it("exists", () => {
-      const lettersApi = new LettersApi(config);
-      expect(lettersApi.list).toBeDefined();
-      expect(typeof lettersApi.list).toEqual("function");
+      const postcardApi = new PostcardsApi(config);
+      expect(postcardApi.list).toBeDefined();
+      expect(typeof postcardApi.list).toEqual("function");
     });
 
-    it("lists letters", async () => {
+    it("lists postcards", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
       }));
 
-      const response = await new LettersApi(config).list();
+      const response = await new PostcardsApi(config).list();
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
       expect(response?.data?.length).toEqual(2);
     });
 
-    it("includes custom headers while it lists letters", async () => {
+    it("includes custom headers while it lists postcards", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
       }));
 
-      const response = await new LettersApi(configWithBaseOptions).list();
+      const response = await new PostcardsApi(configWithBaseOptions).list();
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
       expect(response?.data?.length).toEqual(2);
@@ -166,7 +174,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).list();
+        await new PostcardsApi(config).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -182,7 +190,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).list();
+        await new PostcardsApi(config).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -198,7 +206,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).list();
+        await new PostcardsApi(config).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -211,14 +219,14 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).list();
+        await new PostcardsApi(config).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
       }
     });
 
-    it("lists letters with a limit parameter", async () => {
+    it("lists postcards with a limit parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual("limit=10");
         return {
@@ -226,13 +234,13 @@ describe("LetterApi", () => {
         };
       });
 
-      const response = await new LettersApi(config).list(10);
+      const response = await new PostcardsApi(config).list(10);
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
       expect(response?.data?.length).toEqual(2);
     });
 
-    it("lists letters with a before parameter", async () => {
+    it("lists postcards with a before parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual("before=before");
         return {
@@ -240,13 +248,13 @@ describe("LetterApi", () => {
         };
       });
 
-      const response = await new LettersApi(config).list(undefined, "before");
+      const response = await new PostcardsApi(config).list(undefined, "before");
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
       expect(response?.data?.length).toEqual(2);
     });
 
-    it("lists letters with an after parameter", async () => {
+    it("lists postcards with an after parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual("after=after");
         return {
@@ -254,7 +262,7 @@ describe("LetterApi", () => {
         };
       });
 
-      const response = await new LettersApi(config).list(
+      const response = await new PostcardsApi(config).list(
         undefined,
         undefined,
         "after"
@@ -264,7 +272,7 @@ describe("LetterApi", () => {
       expect(response?.data?.length).toEqual(2);
     });
 
-    it("lists letters with an include parameter", async () => {
+    it("lists postcards with an include parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual("include=%5B%22this%22%5D");
         return {
@@ -272,7 +280,7 @@ describe("LetterApi", () => {
         };
       });
 
-      const response = await new LettersApi(config).list(
+      const response = await new PostcardsApi(config).list(
         undefined,
         undefined,
         undefined,
@@ -283,29 +291,29 @@ describe("LetterApi", () => {
       expect(response?.data?.length).toEqual(2);
     });
 
-    it("lists letters with a dateCreated parameter", async () => {
+    it("lists postcards with a dateCreated parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual(
-          "date_created=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%3A34%3A56Z%22%7D"
+          "date_created=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
         );
         return {
           data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
         };
       });
 
-      const response = await new LettersApi(config).list(
+      const response = await new PostcardsApi(config).list(
         undefined,
         undefined,
         undefined,
         undefined,
-        { gt: "2020-01-01", lt: "2020-01-31T12:34:56Z" }
+          DATE_FILTER
       );
-      expect(response).toBeDefined();
+      expect(response).toBeDefined(); 
       expect(response?.data).toBeDefined();
       expect(response?.data?.length).toEqual(2);
     });
 
-    it("lists letters with a metadata parameter", async () => {
+    it("lists postcards with a metadata parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual(
           "metadata=%7B%22what%22%3A%22this%22%7D"
@@ -315,7 +323,7 @@ describe("LetterApi", () => {
         };
       });
 
-      const response = await new LettersApi(config).list(
+      const response = await new PostcardsApi(config).list(
         undefined,
         undefined,
         undefined,
@@ -328,29 +336,29 @@ describe("LetterApi", () => {
       expect(response?.data?.length).toEqual(2);
     });
 
-    it("lists letters with a color parameter", async () => {
+    it("lists postcards with a size parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual("color=true");
+        expect(request.url.split("?")[1]).toEqual("size=4x6");
         return {
           data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
         };
       });
 
-      const response = await new LettersApi(config).list(
+      const response = await new PostcardsApi(config).list(
         undefined,
         undefined,
         undefined,
         undefined,
         undefined,
         undefined,
-        true
+        PostcardSize._4x6
       );
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
       expect(response?.data?.length).toEqual(2);
     });
 
-    it("lists letters with a scheduled parameter", async () => {
+    it("lists postcards with a scheduled parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual("scheduled=true");
         return {
@@ -358,7 +366,7 @@ describe("LetterApi", () => {
         };
       });
 
-      const response = await new LettersApi(config).list(
+      const response = await new PostcardsApi(config).list(
         undefined,
         undefined,
         undefined,
@@ -373,33 +381,33 @@ describe("LetterApi", () => {
       expect(response?.data?.length).toEqual(2);
     });
 
-    it("lists letters with a sendDate parameter", async () => {
-        axiosRequest.mockImplementationOnce(async (request) => {
-          expect(request.url.split("?")[1]).toEqual(
-            "send_date=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
-          );
-          return {
-            data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
-          };
-        });
-  
-        const response = await new LettersApi(config).list(
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          DATE_FILTER
+    it("lists postcards with a sendDate parameter", async () => {
+      axiosRequest.mockImplementationOnce(async (request) => {
+        expect(request.url.split("?")[1]).toEqual(
+          "send_date=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
         );
-        expect(response).toBeDefined();
-        expect(response?.data).toBeDefined();
-        expect(response?.data?.length).toEqual(2);
+        return {
+          data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
+        };
       });
 
-    it("lists letters with a mailType parameter", async () => {
+      const response = await new PostcardsApi(config).list(
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        DATE_FILTER
+      );
+      expect(response).toBeDefined();
+      expect(response?.data).toBeDefined();
+      expect(response?.data?.length).toEqual(2);
+    });
+
+    it("lists postcards with a mailType parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual("mail_type=usps_first_class");
         return {
@@ -407,7 +415,7 @@ describe("LetterApi", () => {
         };
       });
 
-      const response = await new LettersApi(config).list(
+      const response = await new PostcardsApi(config).list(
         undefined,
         undefined,
         undefined,
@@ -430,11 +438,11 @@ describe("LetterApi", () => {
           "sort_by=%7B%22id%22%3A%22asc%22%7D"
         );
         return {
-          data: { data: [{ id: "ltr_fakeId" }] },
+          data: { data: [{ id: "fake id" }] },
         };
       });
 
-      const letter = await new LettersApi(config).list(
+      const postcard = await new PostcardsApi(config).list(
         undefined,
         undefined,
         undefined,
@@ -447,11 +455,11 @@ describe("LetterApi", () => {
         undefined,
         { id: "asc" }
       );
-      expect(letter).toBeDefined();
-      expect(letter?.data?.length).toEqual(1);
+      expect(postcard).toBeDefined();
+      expect(postcard?.data?.length).toEqual(1);
     });
 
-    it("lists letters with multiple parameters", async () => {
+    it("lists postcards with multiple parameters", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual("limit=10&after=after");
         return {
@@ -459,7 +467,7 @@ describe("LetterApi", () => {
         };
       });
 
-      const response = await new LettersApi(config).list(
+      const response = await new PostcardsApi(config).list(
         10,
         undefined,
         "after"
@@ -472,33 +480,33 @@ describe("LetterApi", () => {
 
   describe("cancel", () => {
     it("exists", () => {
-      const letterApi = new LettersApi(config);
-      expect(letterApi.create).toBeDefined();
-      expect(typeof letterApi.create).toEqual("function");
+      const postcardApi = new PostcardsApi(config);
+      expect(postcardApi.create).toBeDefined();
+      expect(typeof postcardApi.create).toEqual("function");
     });
 
-    it("cancels a letter", async () => {
+    it("cancels a postcard", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
-          id: "ltr_fakeId",
+          id: "psc_fakeId",
           deleted: true,
         },
       }));
-      const canceledLetter = await new LettersApi(config).cancel("ltr_fakeId");
-      expect(canceledLetter?.deleted).toEqual(true);
+      const canceledPostcard = await new PostcardsApi(config).cancel("psc_fakeId");
+      expect(canceledPostcard?.deleted).toEqual(true);
     });
 
-    it("includes custom headers while it deletes a letter", async () => {
+    it("includes custom headers while it deletes a postcard", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
-          id: "ltr_fakeId",
+          id: "psc_fakeId",
           deleted: true,
         },
       }));
-      const canceledLetter = await new LettersApi(configWithBaseOptions).cancel(
-        "ltr_fakeId"
+      const canceledPostcard = await new PostcardsApi(configWithBaseOptions).cancel(
+        "psc_fakeId"
       );
-      expect(canceledLetter?.deleted).toEqual(true);
+      expect(canceledPostcard?.deleted).toEqual(true);
     });
 
     it("handles errors returned by the api", async () => {
@@ -510,7 +518,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).cancel("ltr_fakeId");
+        await new PostcardsApi(config).cancel("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by Api");
@@ -526,7 +534,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).cancel("ltr_fakeId");
+        await new PostcardsApi(config).cancel("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -542,7 +550,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).cancel("ltr_fakeId");
+        await new PostcardsApi(config).cancel("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -555,7 +563,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).cancel("ltr_fakeId");
+        await new PostcardsApi(config).cancel("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -571,50 +579,47 @@ describe("LetterApi", () => {
       address_state: "NJ",
       address_zip: "07000",
     };
-    const createLetter: LetterEditable = {
+    const createPostcard: PostcardEditable = {
       to: addressCreate,
-      from: addressCreate,
-      file: "https://docs.google.com/document/d/1YE9GsoeWl5oPIXxsJ2SI0JweTURfOR8tW0UGK9_H_vo/edit?usp=sharing",
     };
-
     it("exists", () => {
-      const letterApi = new LettersApi(config);
-      expect(letterApi.create).toBeDefined();
-      expect(typeof letterApi.create).toEqual("function");
+      const postcardApi = new PostcardsApi(config);
+      expect(postcardApi.create).toBeDefined();
+      expect(typeof postcardApi.create).toEqual("function");
     });
 
-    it("creates a letter", async () => {
+    it("creates a postcard", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "ltr_fakeId" },
+        data: { id: "psc_fakeId" },
       }));
 
-      const letter = await new LettersApi(config).create(createLetter);
-      expect(letter).toBeDefined();
-      expect(letter?.id).toBeDefined();
+      const postcard = await new PostcardsApi(config).create(createPostcard);
+      expect(postcard).toBeDefined();
+      expect(postcard?.id).toBeDefined();
     });
 
-    it("includes custom headers while it creates a letter", async () => {
+    it("includes custom headers while it creates a postcard", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "ltr_fakeId" },
+        data: { id: "psc_fakeId" },
       }));
 
-      const letter = await new LettersApi(configWithBaseOptions).create(
-        createLetter
+      const postcard = await new PostcardsApi(configWithBaseOptions).create(
+        createPostcard
       );
-      expect(letter).toBeDefined();
-      expect(letter?.id).toBeDefined();
+      expect(postcard).toBeDefined();
+      expect(postcard?.id).toBeDefined();
     });
 
-    it("creates a letter with idempotency", async () => {
+    it("creates a postcard with idempotency", async () => {
         axiosRequest.mockImplementationOnce(async () => ({
-          data: { id: "ltr_fakeId" },
+          data: { id: "psc_fakeId" },
         }));
   
-        const letter = await new LettersApi(config).create(
-          createLetter, "fake key"
+        const postcard = await new PostcardsApi(config).create(
+          createPostcard, "fake key"
         );
-        expect(letter).toBeDefined();
-        expect(letter?.id).toBeDefined();
+        expect(postcard).toBeDefined();
+        expect(postcard?.id).toBeDefined();
       });
 
 
@@ -628,7 +633,7 @@ describe("LetterApi", () => {
 
       try {
         //
-        await new LettersApi(config).create(createLetter);
+        await new PostcardsApi(config).create(createPostcard);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -644,26 +649,27 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).create(createLetter);
+        await new PostcardsApi(config).create(createPostcard);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
       }
     });
+    
     it("handles errors in making the request", async () => {
       axiosRequest.mockImplementationOnce(async () => {
         throw new Error("Unknown Error");
       });
 
       try {
-        await new LettersApi(config).create(createLetter);
+        await new PostcardsApi(config).create(createPostcard);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
       }
     });
 
-    it("creates letters with an idempotency_key  ", async () => {
+    it("creates postcards with an idempotency_key  ", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual(
           "idempotencyKey=026e7634-24d7-486c-a0bb-4a17fd0eebc5"
@@ -674,9 +680,12 @@ describe("LetterApi", () => {
         };
       });
 
-      const letterApi = new LettersApi(config);
-      expect(letterApi.create).toBeDefined();
-      expect(typeof letterApi.create).toEqual("function");
+      const postcardApi = new PostcardsApi(config);
+      expect(postcardApi.create).toBeDefined();
+      expect(typeof postcardApi.create).toEqual("function");
     });
-  })
+  });
+
+
+
 });
