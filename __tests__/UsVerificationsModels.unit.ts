@@ -1,10 +1,46 @@
-import { UsVerification } from "../models";
+import {
+  UsVerification,
+  UsVerificationDeliverabilityEnum,
+  UsComponents,
+  DeliverabilityAnalysis,
+  LobConfidenceScore,
+  UsComponentsStreetPredirectionEnum,
+  UsComponentsStreetPostdirectionEnum,
+  ZipCodeType,
+  UsComponentsAddressTypeEnum, UsComponentsRecordTypeEnum, UsComponentsCarrierRouteTypeEnum, Address
+} from "../models";
 
 describe("Us Verifications Models", () => {
   describe("UsVerification", () => {
     it("can be created", () => {
       const rec = new UsVerification();
       expect(rec).toBeDefined();
+    });
+
+    it.each([
+      [ "id", "us_ver_fakeId" ],
+      [ "recipient", "fake recipient" ],
+      [ "primary_line", "fake primary" ],
+      [ "secondary_line", "fake secondary" ],
+      [ "urbanization", "fake urbanization" ],
+      [ "last_line", "fake last" ],
+      [ "deliverability", UsVerificationDeliverabilityEnum.Deliverable ],
+      [ "deliverability", UsVerificationDeliverabilityEnum.DeliverableIncorrectUnit ],
+      [ "deliverability", UsVerificationDeliverabilityEnum.DeliverableMissingUnit ],
+      [ "deliverability", UsVerificationDeliverabilityEnum.DeliverableUnnecessaryUnit ],
+      [ "deliverability", UsVerificationDeliverabilityEnum.Undeliverable ],
+      [ "components", new UsComponents() ],
+      [ "deliverability_analysis", new DeliverabilityAnalysis() ],
+      [ "lob_confidence_score", new LobConfidenceScore() ],
+      [ "object", "US Verification" ],
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new UsVerification(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
     });
 
     it("rejects invalid values for id", () => {
@@ -31,6 +67,166 @@ describe("Us Verifications Models", () => {
         rec.id = val;
         expect(rec.id).toBeDefined();
         expect(rec.id).toEqual(val);
+      }
+    });
+  });
+
+  describe("UsComponents", () => {
+    it("can be created", () => {
+      const rec = new UsComponents();
+      expect(rec).toBeDefined();
+    });
+
+    it.each([
+    [ "primary_number", "fake prmary number" ],
+    [ "street_predirection", UsComponentsStreetPredirectionEnum.N ],
+    [ "street_predirection", UsComponentsStreetPredirectionEnum.S ],
+    [ "street_predirection", UsComponentsStreetPredirectionEnum.E ],
+    [ "street_predirection", UsComponentsStreetPredirectionEnum.W ],
+    [ "street_predirection", UsComponentsStreetPredirectionEnum.Nw ],
+    [ "street_predirection", UsComponentsStreetPredirectionEnum.Ne ],
+    [ "street_predirection", UsComponentsStreetPredirectionEnum.Sw ],
+    [ "street_predirection", UsComponentsStreetPredirectionEnum.Se ],
+    [ "street_predirection", UsComponentsStreetPredirectionEnum.Empty ],
+    [ "street_name", "fake name" ],
+    [ "street_suffix", "fake suffix" ],
+    [ "street_postdirection", UsComponentsStreetPostdirectionEnum.N ],
+    [ "street_postdirection", UsComponentsStreetPostdirectionEnum.S ],
+    [ "street_postdirection", UsComponentsStreetPostdirectionEnum.E ],
+    [ "street_postdirection", UsComponentsStreetPostdirectionEnum.W ],
+    [ "street_postdirection", UsComponentsStreetPostdirectionEnum.Nw ],
+    [ "street_postdirection", UsComponentsStreetPostdirectionEnum.Ne ],
+    [ "street_postdirection", UsComponentsStreetPostdirectionEnum.Sw ],
+    [ "street_postdirection", UsComponentsStreetPostdirectionEnum.Se ],
+    [ "street_postdirection", UsComponentsStreetPostdirectionEnum.Empty ],
+    [ "secondary_designator", "fake designator" ],
+    [ "secondary_number", "fake secondary number" ],
+    [ "pmb_designator", "fake pmb designator" ],
+    [ "pmb_number", "fake pmb number" ],
+    [ "extra_secondary_designator", "fake extra designator" ],
+    [ "extra_secondary_number", "fake extra number" ],
+    [ "city", "fake city" ],
+    [ "state", "fake state" ],
+    [ "zip_code", "11111" ],
+    [ "zip_code_plus_4", "1111" ],
+    [ "zip_code_type", ZipCodeType.Empty ],
+    [ "zip_code_type", ZipCodeType.PoBox ],
+    [ "zip_code_type", ZipCodeType.Military ],
+    [ "zip_code_type", ZipCodeType.Unique ],
+    [ "zip_code_type", ZipCodeType.Standard ],
+    [ "delivery_point_barcode", "fake barcode" ],
+    [ "address_type", UsComponentsAddressTypeEnum.Empty ],
+    [ "address_type", UsComponentsAddressTypeEnum.Commercial ],
+    [ "address_type", UsComponentsAddressTypeEnum.Residential ],
+    [ "record_type", UsComponentsRecordTypeEnum.Empty ],
+    [ "record_type", UsComponentsRecordTypeEnum.PoBox ],
+    [ "record_type", UsComponentsRecordTypeEnum.Firm ],
+    [ "record_type", UsComponentsRecordTypeEnum.Highrise ],
+    [ "record_type", UsComponentsRecordTypeEnum.Street ],
+    [ "record_type", UsComponentsRecordTypeEnum.GeneralDelivery ],
+    [ "record_type", UsComponentsRecordTypeEnum.RuralRoute ],
+    [ "default_building_address", true ],
+    [ "default_building_address", false ],
+    [ "county", "fake country" ],
+    [ "county_fips", "11111" ],
+    [ "carrier_route", "fake route" ],
+    [ "carrier_route_type", UsComponentsCarrierRouteTypeEnum.RuralRoute ],
+    [ "carrier_route_type", UsComponentsCarrierRouteTypeEnum.GeneralDelivery ],
+    [ "carrier_route_type", UsComponentsCarrierRouteTypeEnum.PoBox ],
+    [ "carrier_route_type", UsComponentsCarrierRouteTypeEnum.CityDelivery ],
+    [ "carrier_route_type", UsComponentsCarrierRouteTypeEnum.HighwayContract ],
+    [ "latitude", 123 ],
+    [ "latitude", null ],
+    [ "longitude", 123 ],
+    [ "longitude", null ]
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new UsComponents(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
+    });
+
+    it("rejects invalid values for zip_code", () => {
+      const rec = new UsComponents();
+      expect(rec.zip_code).not.toBeDefined();
+
+      const invalidValues = ["Nope"];
+      for (const val of invalidValues) {
+        try {
+          rec.zip_code = val;
+          throw new Error("Should Throw");
+        } catch (err: any) {
+          expect(err.message).toEqual("Invalid zip_code provided");
+        }
+      }
+    });
+
+    it("allows setting valid values for zip_code", () => {
+      const rec = new UsComponents();
+      expect(rec.zip_code).not.toBeDefined();
+
+      const validValues = ["11111"];
+      for (const val of validValues) {
+        rec.zip_code = val;
+        expect(rec.zip_code).toBeDefined();
+        expect(rec.zip_code).toEqual(val);
+      }
+    });
+
+    it("rejects invalid values for zip_code_plus_4", () => {
+      const rec = new UsComponents();
+      expect(rec.zip_code_plus_4).not.toBeDefined();
+
+      const invalidValues = ["Nope"];
+      for (const val of invalidValues) {
+        try {
+          rec.zip_code_plus_4 = val;
+          throw new Error("Should Throw");
+        } catch (err: any) {
+          expect(err.message).toEqual("Invalid zip_code_plus_4 provided");
+        }
+      }
+    });
+
+    it("allows setting valid values for zip_code_plus_4", () => {
+      const rec = new UsComponents();
+      expect(rec.zip_code_plus_4).not.toBeDefined();
+
+      const validValues = ["1111"];
+      for (const val of validValues) {
+        rec.zip_code_plus_4 = val;
+        expect(rec.zip_code_plus_4).toBeDefined();
+        expect(rec.zip_code_plus_4).toEqual(val);
+      }
+    });
+
+    it("rejects invalid values for county_fips", () => {
+      const rec = new UsComponents();
+      expect(rec.county_fips).not.toBeDefined();
+
+      const invalidValues = ["Nope"];
+      for (const val of invalidValues) {
+        try {
+          rec.county_fips = val;
+          throw new Error("Should Throw");
+        } catch (err: any) {
+          expect(err.message).toEqual("Invalid county_fips provided");
+        }
+      }
+    });
+
+    it("allows setting valid values for county_fips", () => {
+      const rec = new UsComponents();
+      expect(rec.county_fips).not.toBeDefined();
+
+      const validValues = ["11111"];
+      for (const val of validValues) {
+        rec.county_fips = val;
+        expect(rec.county_fips).toBeDefined();
+        expect(rec.county_fips).toEqual(val);
       }
     });
   });
