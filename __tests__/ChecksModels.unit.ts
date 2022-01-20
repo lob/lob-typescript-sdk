@@ -2,8 +2,8 @@ import {
   Check,
   CheckDeletion,
   CheckList,
-  CheckEditableProps,
-  CheckEditablePropsMailTypeEnum,
+  CheckEditable,
+  CheckEditableMailTypeEnum,
   CheckMailTypeEnum
 } from "../models";
 import {URL_VALID_LIST} from "./testFixtures";
@@ -265,9 +265,9 @@ describe("Check Models", () => {
     });
   });
 
-  describe("CheckEditablePropsAllOf", () => {
+  describe("CheckEditable", () => {
     it("can be created", () => {
-      const rec = new CheckEditableProps();
+      const rec = new CheckEditable();
       expect(rec).toBeDefined();
     });
 
@@ -283,7 +283,7 @@ describe("Check Models", () => {
       [ "metadata", {} ],
       [ "merge_variables", {} ],
       [ "send_date", new Date().toISOString() ],
-      [ "mail_type", CheckEditablePropsMailTypeEnum.UspsFirstClass ],
+      [ "mail_type", CheckEditableMailTypeEnum.UspsFirstClass ],
       [ "memo", "fake memo" ],
       [ "check_number", 123456 ],
       [ "message", "fake message" ],
@@ -292,30 +292,10 @@ describe("Check Models", () => {
       const input = {};
       (input as any)[prop] = val;
 
-      const rec = new CheckEditableProps(input);
+      const rec = new CheckEditable(input);
 
       expect(rec).toBeDefined();
       expect((rec as any)[prop]).toEqual(val);
-    });
-
-    it("allows setting valid values for mail type", () => {
-      const rec = new CheckEditableProps();
-      expect(rec.amount).not.toBeDefined();
-
-      rec.amount = 1;
-      expect(rec.amount).toBeDefined();
-    });
-
-    it("allows setting valid values for memo", () => {
-      const rec = new CheckEditableProps();
-      expect(rec.from).not.toBeDefined();
-
-      const validValues = ["chk_1234"];
-      for (const val of validValues) {
-        rec.from = val;
-        expect(rec.from).toBeDefined();
-        expect(rec.from).toEqual(val);
-      }
     });
   });
 
