@@ -14,22 +14,13 @@
 
 
 
-export * from './api/addresses-api';
-export * from './api/bank-accounts-api';
-export * from './api/billing-groups-api';
-export * from './api/card-orders-api';
-export * from './api/cards-api';
-export * from './api/checks-api';
-export * from './api/intl-verifications-api';
-export * from './api/letters-api';
-export * from './api/postcards-api';
-export * from './api/reverse-geocode-lookups-api';
-export * from './api/self-mailers-api';
-export * from './api/template-versions-api';
-export * from './api/templates-api';
-export * from './api/usautocompletions-api';
-export * from './api/usverifications-api';
-export * from './api/zip-lookups-api';
+/**
+ * @type CheckBottom
+ * The artwork to use on the bottom of the check page.  Notes: - HTML merge variables should not include delimiting whitespace. - PDF, PNG, and JPGs must be sized at 8.5\"x11\" at 300 DPI, while supplied HTML will be rendered and trimmed to fit on a 8.5\"x11\" page. - The check bottom will always be printed in black & white. - Must conform to [this template](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/check_bottom_template.pdf).  Need more help? Consult our [HTML examples](#section/HTML-Examples).
+ * @export
+ */
+export type CheckBottom = string;
+
 
 
 /**

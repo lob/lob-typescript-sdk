@@ -4,6 +4,7 @@ api/bank-accounts-api.ts
 api/billing-groups-api.ts
 api/card-orders-api.ts
 api/cards-api.ts
+api/checks-api.ts
 api/intl-verifications-api.ts
 api/letters-api.ts
 api/postcards-api.ts
@@ -13,6 +14,7 @@ api/template-versions-api.ts
 api/templates-api.ts
 api/usautocompletions-api.ts
 api/usverifications-api.ts
+api/zip-lookups-api.ts
 base.ts
 common.ts
 configuration.ts
@@ -39,6 +41,12 @@ models/card-order-editable.ts
 models/card-order.ts
 models/card-updatable.ts
 models/card.ts
+models/check-bottom.ts
+models/check-deletion.ts
+models/check-editable-props.ts
+models/check-editable.ts
+models/check-list.ts
+models/check.ts
 models/country-extended-expanded.ts
 models/country-extended.ts
 models/deliverability-analysis.ts
@@ -86,6 +94,7 @@ models/sort-by1.ts
 models/sort-by2.ts
 models/sort-by3.ts
 models/sort-by4.ts
+models/sort-by5.ts
 models/suggestions.ts
 models/template-deletion.ts
 models/template-list.ts
@@ -108,3 +117,5 @@ models/us-verification.ts
 models/us-verifications-writable.ts
 models/us-verifications.ts
 models/zip-code-type.ts
+models/zip-lookup-city.ts
+models/zip.ts
