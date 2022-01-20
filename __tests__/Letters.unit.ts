@@ -4,6 +4,7 @@ import { LetterEditable, AddressEditable, MailType } from "../models";
 import { LettersApi } from "../api/letters-api";
 
 import { fail } from "./testUtilities";
+import {DATE_FILTER} from "./testFixtures";
 
 import axios from "axios";
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
@@ -373,30 +374,30 @@ describe("LetterApi", () => {
     });
 
     it("lists letters with a sendDate parameter", async () => {
-      axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "send_date=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%3A34%3A56Z%22%7D"
+        axiosRequest.mockImplementationOnce(async (request) => {
+          expect(request.url.split("?")[1]).toEqual(
+            "send_date=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
+          );
+          return {
+            data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
+          };
+        });
+  
+        const response = await new LettersApi(config).list(
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          DATE_FILTER
         );
-        return {
-          data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
-        };
+        expect(response).toBeDefined();
+        expect(response?.data).toBeDefined();
+        expect(response?.data?.length).toEqual(2);
       });
-
-      const response = await new LettersApi(config).list(
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        { gt: "2020-01-01", lt: "2020-01-31T12:34:56Z" }
-      );
-      expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
-    });
 
     it("lists letters with a mailType parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {

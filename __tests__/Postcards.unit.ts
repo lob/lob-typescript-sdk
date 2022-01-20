@@ -4,6 +4,7 @@ import { PostcardEditable, AddressEditable, MailType, PostcardSize } from "../mo
 import { PostcardsApi } from "../api/postcards-api";
 
 import { fail } from "./testUtilities";
+import {DATE_FILTER} from "./testFixtures";
 
 import axios from "axios";
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
@@ -49,25 +50,25 @@ describe("PostcardsApi", () => {
 
     it("gets a record", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "Fake ID", deleted: false },
+        data: { id: "psc_fakeId", deleted: false },
       }));
 
       const postcard = await new PostcardsApi
       (config).get("ID");
       expect(postcard).toBeDefined();
-      expect(postcard.id).toEqual("Fake ID");
+      expect(postcard.id).toEqual("psc_fakeId");
       expect(postcard.deleted).toEqual(false);
     });
 
     it("includes custom headers while it gets a postcard", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "different fake id" },
+        data: { id: "psc_differentFakeId" },
       }));
 
       const postcard = await new PostcardsApi
-      (configWithBaseOptions).get("ID");
+      (configWithBaseOptions).get("psc_ID");
       expect(postcard).toBeDefined();
-      expect(postcard?.id).toEqual("different fake id");
+      expect(postcard?.id).toEqual("psc_differentFakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -293,7 +294,7 @@ describe("PostcardsApi", () => {
     it("lists postcards with a dateCreated parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual(
-          "date_created=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%3A34%3A56Z%22%7D"
+          "date_created=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
         );
         return {
           data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
@@ -305,9 +306,9 @@ describe("PostcardsApi", () => {
         undefined,
         undefined,
         undefined,
-        { gt: "2020-01-01", lt: "2020-01-31T12:34:56Z" }
+          DATE_FILTER
       );
-      expect(response).toBeDefined();
+      expect(response).toBeDefined(); 
       expect(response?.data).toBeDefined();
       expect(response?.data?.length).toEqual(2);
     });
@@ -383,7 +384,7 @@ describe("PostcardsApi", () => {
     it("lists postcards with a sendDate parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
         expect(request.url.split("?")[1]).toEqual(
-          "send_date=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%3A34%3A56Z%22%7D"
+          "send_date=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
         );
         return {
           data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
@@ -399,7 +400,7 @@ describe("PostcardsApi", () => {
         undefined,
         undefined,
         undefined,
-        { gt: "2020-01-01", lt: "2020-01-31T12:34:56Z" }
+        DATE_FILTER
       );
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
@@ -487,23 +488,23 @@ describe("PostcardsApi", () => {
     it("cancels a postcard", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
-          id: "fake id",
+          id: "psc_fakeId",
           deleted: true,
         },
       }));
-      const canceledPostcard = await new PostcardsApi(config).cancel("fake id");
+      const canceledPostcard = await new PostcardsApi(config).cancel("psc_fakeId");
       expect(canceledPostcard?.deleted).toEqual(true);
     });
 
     it("includes custom headers while it deletes a postcard", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
-          id: "fake id",
+          id: "psc_fakeId",
           deleted: true,
         },
       }));
       const canceledPostcard = await new PostcardsApi(configWithBaseOptions).cancel(
-        "fake id"
+        "psc_fakeId"
       );
       expect(canceledPostcard?.deleted).toEqual(true);
     });
@@ -589,7 +590,7 @@ describe("PostcardsApi", () => {
 
     it("creates a postcard", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake id" },
+        data: { id: "psc_fakeId" },
       }));
 
       const postcard = await new PostcardsApi(config).create(createPostcard);
@@ -599,7 +600,7 @@ describe("PostcardsApi", () => {
 
     it("includes custom headers while it creates a postcard", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake id" },
+        data: { id: "psc_fakeId" },
       }));
 
       const postcard = await new PostcardsApi(configWithBaseOptions).create(
@@ -611,7 +612,7 @@ describe("PostcardsApi", () => {
 
     it("creates a postcard with idempotency", async () => {
         axiosRequest.mockImplementationOnce(async () => ({
-          data: { id: "fake id" },
+          data: { id: "psc_fakeId" },
         }));
   
         const postcard = await new PostcardsApi(config).create(
