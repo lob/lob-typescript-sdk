@@ -21,6 +21,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
+import { LobError } from '../models';
+// @ts-ignore
 import { MultipleComponentsList } from '../models';
 // @ts-ignore
 import { UsVerification } from '../models';

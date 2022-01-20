@@ -44,8 +44,6 @@ models/country-extended.ts
 models/deliverability-analysis.ts
 models/dpv-footnote.ts
 models/engine-html.ts
-models/error-error.ts
-models/failure-status-code.ts
 models/geocode-addresses.ts
 models/geocode-components.ts
 models/index.ts
@@ -65,7 +63,6 @@ models/lob-error.ts
 models/location-analysis.ts
 models/location.ts
 models/mail-type.ts
-models/model-error.ts
 models/multiple-components-intl.ts
 models/multiple-components-list.ts
 models/multiple-components.ts

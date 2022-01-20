@@ -18,7 +18,7 @@ import { TrackingEventDetails } from './tracking-event-details';
 /**
  * 
  * @export
- * @interface TrackingEventCertified
+ * @class TrackingEventCertified
  */
 export class TrackingEventCertified {
     constructor(input?: any) {

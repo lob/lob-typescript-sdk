@@ -17,7 +17,7 @@
 /**
  * 
  * @export
- * @interface TrackingEventDetails
+ * @class TrackingEventDetails
  */
 export class TrackingEventDetails {
     constructor(input?: any) {

@@ -28,6 +28,8 @@ import { IntlVerificationWritable } from '../models';
 import { IntlVerifications } from '../models';
 // @ts-ignore
 import { IntlVerificationsPayload } from '../models';
+// @ts-ignore
+import { LobError } from '../models';
 /**
  * IntlVerificationsApi - axios parameter creator
  * @export

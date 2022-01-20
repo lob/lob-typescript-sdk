@@ -18,7 +18,7 @@ import { DpvFootnote } from './dpv-footnote';
 /**
  * A nested object containing a breakdown of the deliverability of an address.
  * @export
- * @interface DeliverabilityAnalysis
+ * @class DeliverabilityAnalysis
  */
 export class DeliverabilityAnalysis {
     constructor(input?: any) {

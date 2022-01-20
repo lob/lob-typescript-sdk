@@ -18,7 +18,7 @@ import { Card } from './card';
 /**
  * 
  * @export
- * @interface CardList
+ * @class CardList
  */
 export class CardList {
     constructor(input?: any) {

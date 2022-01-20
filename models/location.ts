@@ -17,7 +17,7 @@
 /**
  * 
  * @export
- * @interface Location
+ * @class Location
  */
 export class Location {
     constructor(input?: any) {

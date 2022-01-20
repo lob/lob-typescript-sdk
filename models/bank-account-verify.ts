@@ -17,7 +17,7 @@
 /**
  * 
  * @export
- * @interface BankAccountVerify
+ * @class BankAccountVerify
  */
 export class BankAccountVerify {
     constructor(input?: any) {

@@ -18,7 +18,7 @@ import { CountryExtended } from './country-extended';
 /**
  * 
  * @export
- * @interface MultipleComponentsIntl
+ * @class MultipleComponentsIntl
  */
 export class MultipleComponentsIntl {
     constructor(input?: any) {

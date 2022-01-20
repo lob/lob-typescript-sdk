@@ -15,7 +15,7 @@
 
 
 /**
- * Must be a 2 letter country short-name code (ISO 3166). Does not accept `US`, `AS`, `PR`, `FM`, `GU`, `MH`, `MP`, `PW`, or `VI`. For these addresses, please use the US verification API. Also does not accept `PS`, which is not currently supported.
+ * Must be a 2 letter country short-name code (ISO 3166).
  * @export
  * @enum {string}
  */

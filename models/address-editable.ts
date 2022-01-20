@@ -18,7 +18,7 @@ import { CountryExtended } from './country-extended';
 /**
  * 
  * @export
- * @interface AddressEditable
+ * @class AddressEditable
  */
 export class AddressEditable {
     constructor(input?: any) {
@@ -110,14 +110,14 @@ export class AddressEditable {
     'description'?: string | null;
     
     /**
-     * Either `name` or `company` is required, you may also add both. Must be no longer than 40 characters. If both `name` and `company` are provided, they will be printed on two separate lines above the rest of the address. 
+     * name associated with address.
      * @type {string}
      * @memberof AddressEditable
      */
     'name'?: string | null;
     
     /**
-     * Either `name` or `company` is required, you may also add both. Must be no longer than 40 characters. If both `name` and `company` are provided, they will be printed on two separate lines above the rest of the address. This field can be used for any secondary recipient information which is not part of the actual mailing address (Company Name, Department, Attention Line, etc). 
+     * Either `name` or `company` is required, you may also add both.
      * @type {string}
      * @memberof AddressEditable
      */

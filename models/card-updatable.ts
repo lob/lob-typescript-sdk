@@ -17,7 +17,7 @@
 /**
  * 
  * @export
- * @interface CardUpdatable
+ * @class CardUpdatable
  */
 export class CardUpdatable {
     constructor(input?: any) {

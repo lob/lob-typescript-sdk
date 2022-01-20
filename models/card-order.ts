@@ -17,7 +17,7 @@
 /**
  * 
  * @export
- * @interface CardOrder
+ * @class CardOrder
  */
 export class CardOrder {
     constructor(input?: any) {

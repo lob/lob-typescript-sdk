@@ -17,7 +17,7 @@
 /**
  * 
  * @export
- * @interface BillingGroupEditable
+ * @class BillingGroupEditable
  */
 export class BillingGroupEditable {
     constructor(input?: any) {

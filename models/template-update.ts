@@ -17,7 +17,7 @@
 /**
  * 
  * @export
- * @interface TemplateUpdate
+ * @class TemplateUpdate
  */
 export class TemplateUpdate {
     constructor(input?: any) {

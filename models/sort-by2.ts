@@ -17,7 +17,7 @@
 /**
  * 
  * @export
- * @interface SortBy2
+ * @class SortBy2
  */
 export class SortBy2 {
     constructor(input?: any) {
