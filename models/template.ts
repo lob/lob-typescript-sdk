@@ -18,7 +18,7 @@ import { TemplateVersion } from './template-version';
 /**
  * 
  * @export
- * @interface Template
+ * @class Template
  */
 export class Template {
     constructor(input?: any) {

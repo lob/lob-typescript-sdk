@@ -18,7 +18,7 @@ import { MultipleComponentsIntl } from './multiple-components-intl';
 /**
  * 
  * @export
- * @interface IntlVerificationsPayload
+ * @class IntlVerificationsPayload
  */
 export class IntlVerificationsPayload {
     constructor(input?: any) {

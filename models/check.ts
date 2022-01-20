@@ -22,7 +22,7 @@ import { TrackingEventNormal } from './tracking-event-normal';
 /**
  * 
  * @export
- * @interface Check
+ * @class Check
  */
 export class Check {
     constructor(input?: any) {

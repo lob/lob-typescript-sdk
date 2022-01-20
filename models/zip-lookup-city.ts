@@ -17,7 +17,7 @@
 /**
  * 
  * @export
- * @interface ZipLookupCity
+ * @class ZipLookupCity
  */
 export class ZipLookupCity {
     constructor(input?: any) {

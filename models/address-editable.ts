@@ -18,7 +18,7 @@ import { CountryExtended } from './country-extended';
 /**
  * 
  * @export
- * @interface AddressEditable
+ * @class AddressEditable
  */
 export class AddressEditable {
     constructor(input?: any) {

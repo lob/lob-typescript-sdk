@@ -18,7 +18,7 @@ import { ZipCodeType } from './zip-code-type';
 /**
  * A nested object containing a breakdown of each component of an address.
  * @export
- * @interface UsComponents
+ * @class UsComponents
  */
 export class UsComponents {
     constructor(input?: any) {

@@ -18,7 +18,7 @@ import { Suggestions } from './suggestions';
 /**
  * 
  * @export
- * @interface UsAutocompletions
+ * @class UsAutocompletions
  */
 export class UsAutocompletions {
     constructor(input?: any) {

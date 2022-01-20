@@ -17,7 +17,7 @@
 /**
  * A nested object containing a breakdown of each component of an address.
  * @export
- * @interface IntlComponents
+ * @class IntlComponents
  */
 export class IntlComponents {
     constructor(input?: any) {

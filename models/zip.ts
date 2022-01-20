@@ -19,7 +19,7 @@ import { ZipLookupCity } from './zip-lookup-city';
 /**
  * 
  * @export
- * @interface Zip
+ * @class Zip
  */
 export class Zip {
     constructor(input?: any) {

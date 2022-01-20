@@ -17,7 +17,7 @@
 /**
  * 
  * @export
- * @interface MultipleComponents
+ * @class MultipleComponents
  */
 export class MultipleComponents {
     constructor(input?: any) {

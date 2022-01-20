@@ -17,7 +17,7 @@
 /**
  * 
  * @export
- * @interface SingleLineAddress
+ * @class SingleLineAddress
  */
 export class SingleLineAddress {
     constructor(input?: any) {

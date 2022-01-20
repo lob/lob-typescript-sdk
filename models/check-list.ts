@@ -18,7 +18,7 @@ import { Check } from './check';
 /**
  * 
  * @export
- * @interface CheckList
+ * @class CheckList
  */
 export class CheckList {
     constructor(input?: any) {

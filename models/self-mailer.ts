@@ -22,7 +22,7 @@ import { TrackingEventCertified } from './tracking-event-certified';
 /**
  * 
  * @export
- * @interface SelfMailer
+ * @class SelfMailer
  */
 export class SelfMailer {
     constructor(input?: any) {

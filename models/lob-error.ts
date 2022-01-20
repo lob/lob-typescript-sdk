@@ -17,7 +17,7 @@
 /**
  * Lob uses RESTful HTTP response codes to indicate success or failure of an API request.
  * @export
- * @interface LobError
+ * @class LobError
  */
 export class LobError {
     constructor(input?: any) {

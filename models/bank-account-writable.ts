@@ -18,7 +18,7 @@ import { BankTypeEnum } from './bank-type-enum';
 /**
  * 
  * @export
- * @interface BankAccountWritable
+ * @class BankAccountWritable
  */
 export class BankAccountWritable {
     constructor(input?: any) {

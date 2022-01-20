@@ -18,7 +18,7 @@ import { CountryExtended } from './country-extended';
 /**
  * 
  * @export
- * @interface SingleLineAddressIntl
+ * @class SingleLineAddressIntl
  */
 export class SingleLineAddressIntl {
     constructor(input?: any) {

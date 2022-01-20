@@ -19,7 +19,7 @@ import { UsVerification } from './us-verification';
 /**
  * 
  * @export
- * @interface UsVerifications
+ * @class UsVerifications
  */
 export class UsVerifications {
     constructor(input?: any) {

@@ -17,7 +17,7 @@
 /**
  * 
  * @export
- * @interface AddressDomestic
+ * @class AddressDomestic
  */
 export class AddressDomestic {
     constructor(input?: any) {

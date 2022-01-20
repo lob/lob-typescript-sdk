@@ -17,7 +17,7 @@
 /**
  * 
  * @export
- * @interface CardOrderEditable
+ * @class CardOrderEditable
  */
 export class CardOrderEditable {
     constructor(input?: any) {

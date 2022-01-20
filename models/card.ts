@@ -18,7 +18,7 @@ import { Thumbnail } from './thumbnail';
 /**
  * 
  * @export
- * @interface Card
+ * @class Card
  */
 export class Card {
     constructor(input?: any) {

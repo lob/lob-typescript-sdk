@@ -17,7 +17,7 @@
 /**
  * Lob uses RESTful HTTP response codes to indicate success or failure of an API request. In general, 2xx indicates success, 4xx indicate an input error, and 5xx indicates an error on Lob\'s end.
  * @export
- * @interface SelfMailerDeletion
+ * @class SelfMailerDeletion
  */
 export class SelfMailerDeletion {
     constructor(input?: any) {

@@ -17,7 +17,7 @@
 /**
  * 
  * @export
- * @interface Suggestions
+ * @class Suggestions
  */
 export class Suggestions {
     constructor(input?: any) {

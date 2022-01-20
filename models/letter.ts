@@ -24,7 +24,7 @@ import { TrackingEventNormal } from './tracking-event-normal';
 /**
  * 
  * @export
- * @interface Letter
+ * @class Letter
  */
 export class Letter {
     constructor(input?: any) {

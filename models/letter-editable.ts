@@ -20,7 +20,7 @@ import { MailType } from './mail-type';
 /**
  * 
  * @export
- * @interface LetterEditable
+ * @class LetterEditable
  */
 export class LetterEditable {
     constructor(input?: any) {

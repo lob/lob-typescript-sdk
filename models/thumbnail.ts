@@ -17,7 +17,7 @@
 /**
  * 
  * @export
- * @interface Thumbnail
+ * @class Thumbnail
  */
 export class Thumbnail {
     constructor(input?: any) {

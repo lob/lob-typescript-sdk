@@ -20,7 +20,7 @@ import { SendDate } from './send-date';
 /**
  * 
  * @export
- * @interface CheckEditableProps
+ * @class CheckEditableProps
  */
 export class CheckEditableProps {
     constructor(input?: any) {

@@ -17,7 +17,7 @@
 /**
  * Object returned upon deleting an address
  * @export
- * @interface AddressDeletion
+ * @class AddressDeletion
  */
 export class AddressDeletion {
     constructor(input?: any) {

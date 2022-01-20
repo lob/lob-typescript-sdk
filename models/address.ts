@@ -18,7 +18,7 @@ import { CountryExtendedExpanded } from './country-extended-expanded';
 /**
  * 
  * @export
- * @interface Address
+ * @class Address
  */
 export class Address {
     constructor(input?: any) {

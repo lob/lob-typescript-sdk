@@ -24,7 +24,7 @@ import { TrackingEventNormal } from './tracking-event-normal';
 /**
  * 
  * @export
- * @interface Postcard
+ * @class Postcard
  */
 export class Postcard {
     constructor(input?: any) {

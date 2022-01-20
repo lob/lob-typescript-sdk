@@ -18,7 +18,7 @@ import { BankAccount } from './bank-account';
 /**
  * 
  * @export
- * @interface BankAccountList
+ * @class BankAccountList
  */
 export class BankAccountList {
     constructor(input?: any) {
