@@ -1,4 +1,16 @@
-import {Postcard, PostcardDeletion, PostcardList} from "../models";
+import {
+  Address,
+  AddressDomesticExpanded,
+  MailType,
+  Postcard,
+  PostcardCarrierEnum,
+  PostcardDeletion,
+  PostcardEditable,
+  PostcardList,
+  PostcardSize,
+  Thumbnail,
+  TrackingEventNormal
+} from "../models";
 import {URL_VALID_LIST} from "./testFixtures";
 
 describe("Postcard Models", () => {
@@ -6,6 +18,43 @@ describe("Postcard Models", () => {
     it("can be created", () => {
       const rec = new Postcard();
       expect(rec).toBeDefined();
+    });
+
+    it.each([
+      [ "id", "psc_fakeId" ],
+      [ "to", new Address() ],
+      [ "from", new AddressDomesticExpanded() ],
+      [ "carrier", PostcardCarrierEnum.Usps ],
+      [ "thumbnails",[ new Thumbnail()] ],
+      [ "size", PostcardSize._6x9 ],
+      [ "size", PostcardSize._6x11 ],
+      [ "size", PostcardSize._4x6 ],
+      [ "expected_delivery_date", new Date().toISOString() ],
+      [ "date_created", new Date().toISOString() ],
+      [ "date_modified", new Date().toISOString() ],
+      [ "deleted", true ],
+      [ "deleted", false ],
+      [ "front_template_id", "tmpl_fakeId" ],
+      [ "back_template_id", "tmpl_fakeId" ],
+      [ "front_template_version_id", "vrsn_fakeId" ],
+      [ "back_template_version_id", "vrsn_fakeId" ],
+      [ "tracking_events", [new TrackingEventNormal()] ],
+      [ "object", "Postcard" ],
+      [ "url", URL_VALID_LIST ],
+      [ "description", "fake description" ],
+      [ "metadata", {} ],
+      [ "mail_type", MailType.Standard ],
+      [ "mail_type", MailType.FirstClass ],
+      [ "merge_variables", {} ],
+      [ "send_date", new Date().toISOString() ],
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new Postcard(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
     });
 
     it("rejects invalid values for id", () => {
@@ -181,6 +230,21 @@ describe("Postcard Models", () => {
       expect(rec).toBeDefined();
     });
 
+    it.each([
+      [ 'id', 'psc_fakeId' ],
+      [ 'deleted', true ],
+      [ 'deleted', false ],
+      [ 'object', "Check" ]
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new PostcardDeletion(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
+    });
+
     it("rejects invalid values for id", () => {
       const rec = new PostcardDeletion();
       expect(rec.id).not.toBeDefined();
@@ -206,6 +270,38 @@ describe("Postcard Models", () => {
         expect(rec.id).toBeDefined();
         expect(rec.id).toEqual(val);
       }
+    });
+  });
+
+  describe("PostcardEditable", () => {
+    it("can be created", () => {
+      const rec = new PostcardEditable();
+      expect(rec).toBeDefined();
+    });
+
+    it.each([
+      [ "to", new Address() ],
+      [ "from", new AddressDomesticExpanded() ],
+      [ "size", PostcardSize._6x9 ],
+      [ "size", PostcardSize._6x11 ],
+      [ "size", PostcardSize._4x6 ],
+      [ "description", "fake description" ],
+      [ "metadata", {} ],
+      [ "mail_type", MailType.Standard ],
+      [ "mail_type", MailType.FirstClass ],
+      [ "merge_variables", {} ],
+      [ "send_date", new Date().toISOString() ],
+      [ "front", "fake front" ],
+      [ "back", "fake back" ],
+      [ "billing_group_id", "fake billing group" ],
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new PostcardEditable(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
     });
   });
 
