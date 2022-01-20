@@ -35,6 +35,9 @@ export class Zip {
         if (typeof input?.zip_code_type !== "undefined") {
             this.zip_code_type = input.zip_code_type;
         }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
+        }
     }
 
     /**
@@ -79,7 +82,23 @@ export class Zip {
      */
     'zip_code_type'?: ZipCodeType;
     
+    /**
+     * 
+     * @type {string}
+     * @memberof Zip
+     */
+    'object'?: ZipObjectEnum;
+    
 }
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum ZipObjectEnum {
+    UsZipLookup = 'us_zip_lookup'
+}
+
 
 
 /**
