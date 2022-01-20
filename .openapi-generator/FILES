@@ -24,9 +24,11 @@ models/address-domestic-expanded.ts
 models/address-domestic.ts
 models/address-editable.ts
 models/address-list.ts
+models/address-types.ts
 models/address.ts
 models/bank-account-deletion.ts
 models/bank-account-list.ts
+models/bank-account-types.ts
 models/bank-account-verify.ts
 models/bank-account-writable.ts
 models/bank-account.ts
@@ -43,15 +45,17 @@ models/card-updatable.ts
 models/card.ts
 models/check-bottom.ts
 models/check-deletion.ts
-models/check-editable-props.ts
 models/check-editable.ts
 models/check-list.ts
+models/check-types.ts
 models/check.ts
 models/country-extended-expanded.ts
 models/country-extended.ts
 models/deliverability-analysis.ts
 models/dpv-footnote.ts
 models/engine-html.ts
+models/event-type.ts
+models/events.ts
 models/geocode-addresses.ts
 models/geocode-components.ts
 models/index.ts
@@ -65,6 +69,7 @@ models/letter-custom-envelope.ts
 models/letter-deletion.ts
 models/letter-editable.ts
 models/letter-list.ts
+models/letter-types.ts
 models/letter.ts
 models/lob-confidence-score.ts
 models/lob-error.ts
@@ -78,6 +83,7 @@ models/postcard-deletion.ts
 models/postcard-editable.ts
 models/postcard-list.ts
 models/postcard-size.ts
+models/postcard-types.ts
 models/postcard.ts
 models/return-address.ts
 models/reverse-geocode.ts
@@ -85,6 +91,7 @@ models/self-mailer-deletion.ts
 models/self-mailer-editable.ts
 models/self-mailer-list.ts
 models/self-mailer-size.ts
+models/self-mailer-types.ts
 models/self-mailer.ts
 models/send-date.ts
 models/single-line-address-intl.ts
