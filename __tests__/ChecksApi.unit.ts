@@ -51,14 +51,14 @@ describe("ChecksApi", () => {
 
     it("creates a check", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake check id" },
+        data: { id: "chk_fakeId" },
       }));
 
       const chk = await new ChecksApi(config).Create(
         chkEditableMock
       );
       expect(chk).toBeDefined();
-      expect(chk.id).toEqual("fake check id");
+      expect(chk.id).toEqual("chk_fakeId");
     });
 
 
@@ -69,21 +69,21 @@ describe("ChecksApi", () => {
 
       const chk = await new ChecksApi(config).Create(
         chkEditableMock,
-        "fake idempotency key"
+        "chk_fakeIdempotency key"
       );
       expect(chk).toBeDefined();
     });
 
     it("includes custom headers while it creates a check", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake check id" },
+        data: { id: "chk_fakeId" },
       }));
 
       const chkApi = await new ChecksApi(configWithBaseOptions).Create(
         chkEditableMock
       );
       expect(chkApi).toBeDefined();
-      expect(chkApi?.id).toEqual("fake check id");
+      expect(chkApi?.id).toEqual("chk_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -171,24 +171,24 @@ describe("ChecksApi", () => {
 
     it("Retrieve checks for a check id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake check id" },
+        data: { id: "chk_fakeId" },
       }));
 
-      const billing_groups = await new ChecksApi(config).Retrieve("fake id");
+      const billing_groups = await new ChecksApi(config).Retrieve("chk_fakeId");
       expect(billing_groups).toBeDefined();
-      expect(billing_groups?.id).toEqual("fake check id");
+      expect(billing_groups?.id).toEqual("chk_fakeId");
     });
 
     it("includes custom headers while it retrieves a check for a check id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake check id" },
+        data: { id: "chk_fakeId" },
       }));
 
       const checks = await new ChecksApi(
         configWithBaseOptions
-      ).Retrieve("fake id");
+      ).Retrieve("chk_fakeId");
       expect(checks).toBeDefined();
-      expect(checks?.id).toEqual("fake check id");
+      expect(checks?.id).toEqual("chk_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -200,7 +200,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(configWithBaseOptions).Retrieve("fake id");
+        await new ChecksApi(configWithBaseOptions).Retrieve("chk_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -216,7 +216,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(config).Retrieve("fake id");
+        await new ChecksApi(config).Retrieve("chk_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -232,7 +232,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(config).Retrieve("fake id");
+        await new ChecksApi(config).Retrieve("chk_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -245,7 +245,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(configWithBaseOptions).Retrieve("fake id");
+        await new ChecksApi(configWithBaseOptions).Retrieve("chk_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -266,26 +266,26 @@ describe("ChecksApi", () => {
 
     it("cancels a check for a check id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake check id" },
+        data: { id: "chk_fakeId" },
       }));
 
       const billing_groups = await new ChecksApi(config).Cancel(
-        "fake id"
+        "chk_fakeId"
       );
       expect(billing_groups).toBeDefined();
-      expect(billing_groups?.id).toEqual("fake check id");
+      expect(billing_groups?.id).toEqual("chk_fakeId");
     });
 
     it("includes custom headers while it cancels a check for a check id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "fake check id" },
+        data: { id: "chk_fakeId" },
       }));
 
       const billing_groups = await new ChecksApi(
         configWithBaseOptions
-      ).Cancel("fake id");
+      ).Cancel("chk_fakeId");
       expect(billing_groups).toBeDefined();
-      expect(billing_groups?.id).toEqual("fake check id");
+      expect(billing_groups?.id).toEqual("chk_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -298,7 +298,7 @@ describe("ChecksApi", () => {
 
       try {
         await new ChecksApi(configWithBaseOptions).Cancel(
-          "fake id"
+          "chk_fakeId"
         );
         fail("Should throw");
       } catch (err: any) {
@@ -315,7 +315,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(config).Cancel("fake id");
+        await new ChecksApi(config).Cancel("chk_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -331,7 +331,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(config).Cancel("fake id");
+        await new ChecksApi(config).Cancel("chk_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -345,7 +345,7 @@ describe("ChecksApi", () => {
 
       try {
         await new ChecksApi(configWithBaseOptions).Cancel(
-          "fake id"
+          "chk_fakeId"
         );
         fail("Should throw");
       } catch (err: any) {
@@ -365,7 +365,7 @@ describe("ChecksApi", () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
           data: [
-            { id: "fake check id" },
+            { id: "chk_fakeId" },
             { id: "another check id" },
           ],
         },
@@ -378,7 +378,7 @@ describe("ChecksApi", () => {
 
     it("should handle the limit", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "fake check id" }] },
+        data: { data: [{ id: "chk_fakeId" }] },
       }));
 
       const chkApi = await new ChecksApi(config).List(1);
@@ -411,7 +411,7 @@ describe("ChecksApi", () => {
           "after=2020-01-01"
         );
         return {
-          data: { data: [{ id: "fake check id" }] },
+          data: { data: [{ id: "chk_fakeId" }] },
         };
       });
 
@@ -431,7 +431,7 @@ describe("ChecksApi", () => {
           "date_created=%7B%22date%22%3A%222020-01-01%22%7D"
         );
         return {
-          data: { data: [{ id: "fake check id" }] },
+          data: { data: [{ id: "chk_fakeId" }] },
         };
       });
 
@@ -453,7 +453,7 @@ describe("ChecksApi", () => {
           "metadata=%7B%22fakeMetadata%22%3A%22fakemetadata%22%7D"
         );
         return {
-          data: { data: [{ id: "fake check id" }] },
+          data: { data: [{ id: "chk_fakeId" }] },
         };
       });
 
@@ -476,7 +476,7 @@ describe("ChecksApi", () => {
           "scheduled=true"
         );
         return {
-          data: { data: [{ id: "fake check id" }] },
+          data: { data: [{ id: "chk_fakeId" }] },
         };
       });
 
@@ -500,7 +500,7 @@ describe("ChecksApi", () => {
           "send_date=2020-01-01"
         );
         return {
-          data: { data: [{ id: "fake check id" }] },
+          data: { data: [{ id: "chk_fakeId" }] },
         };
       });
 
@@ -525,7 +525,7 @@ describe("ChecksApi", () => {
           "mail_type=usps_first_class"
         );
         return {
-          data: { data: [{ id: "fake check id" }] },
+          data: { data: [{ id: "chk_fakeId" }] },
         };
       });
 
@@ -569,7 +569,7 @@ describe("ChecksApi", () => {
           "sort_by=%7B%22sortBy%22%3A%22asc%22%7D"
         );
         return {
-          data: { data: [{ id: "fake check id" }] },
+          data: { data: [{ id: "chk_fakeId" }] },
         };
       });
 
