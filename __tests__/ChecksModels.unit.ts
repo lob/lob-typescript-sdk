@@ -1,3 +1,4 @@
+import { CheckEditableProps } from "..";
 import { CheckDeletion } from "../models/check-deletion";
 
 describe("Check Models", () => {
