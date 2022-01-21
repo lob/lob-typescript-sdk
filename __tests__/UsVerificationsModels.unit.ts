@@ -1,16 +1,85 @@
 import {
-  UsVerification,
-  UsVerificationDeliverabilityEnum,
-  UsComponents,
   DeliverabilityAnalysis,
+  DeliverabilityAnalysisDpvActiveEnum,
+  DeliverabilityAnalysisDpvCmraEnum,
+  DeliverabilityAnalysisDpvConfirmationEnum,
+  DeliverabilityAnalysisDpvVacantEnum,
+  DeliverabilityAnalysisLacsIndicatorEnum,
+  DeliverabilityAnalysisSuiteReturnCodeEnum,
+  DpvFootnote,
   LobConfidenceScore,
-  UsComponentsStreetPredirectionEnum,
+  UsComponents,
+  UsComponentsAddressTypeEnum,
+  UsComponentsCarrierRouteTypeEnum,
+  UsComponentsRecordTypeEnum,
   UsComponentsStreetPostdirectionEnum,
+  UsComponentsStreetPredirectionEnum,
+  UsVerification,
+  UsVerifications,
+  UsVerificationDeliverabilityEnum,
   ZipCodeType,
-  UsComponentsAddressTypeEnum, UsComponentsRecordTypeEnum, UsComponentsCarrierRouteTypeEnum, Address
+  LobError,
+  Suggestions,
+  LobConfidenceScoreLevelEnum
 } from "../models";
 
 describe("Us Verifications Models", () => {
+  describe("DeliverabilityAnalysis", () => {
+    it("can be created", () => {
+      const rec = new DeliverabilityAnalysis();
+      expect(rec).toBeDefined();
+    });
+
+    it.each([
+      [ "dpv_confirmation", DeliverabilityAnalysisDpvConfirmationEnum.N ],
+      [ "dpv_confirmation", DeliverabilityAnalysisDpvConfirmationEnum.S ],
+      [ "dpv_confirmation", DeliverabilityAnalysisDpvConfirmationEnum.Y ],
+      [ "dpv_confirmation", DeliverabilityAnalysisDpvConfirmationEnum.Empty ],
+      [ "dpv_confirmation", DeliverabilityAnalysisDpvConfirmationEnum.D ],
+      [ "dpv_cmra", DeliverabilityAnalysisDpvCmraEnum.Y ],
+      [ "dpv_cmra", DeliverabilityAnalysisDpvCmraEnum.N ],
+      [ "dpv_cmra", DeliverabilityAnalysisDpvCmraEnum.Empty ],
+      [ "dpv_vacant", DeliverabilityAnalysisDpvVacantEnum.Y ],
+      [ "dpv_vacant", DeliverabilityAnalysisDpvVacantEnum.N ],
+      [ "dpv_vacant", DeliverabilityAnalysisDpvVacantEnum.Empty ],
+      [ "dpv_active", DeliverabilityAnalysisDpvActiveEnum.Y ],
+      [ "dpv_active", DeliverabilityAnalysisDpvActiveEnum.N ],
+      [ "dpv_active", DeliverabilityAnalysisDpvActiveEnum.Empty ],
+      [ "dpv_footnotes", DpvFootnote.Aa ],
+      [ "dpv_footnotes", DpvFootnote.A1 ],
+      [ "dpv_footnotes", DpvFootnote.Bb ],
+      [ "dpv_footnotes", DpvFootnote.Cc ],
+      [ "dpv_footnotes", DpvFootnote.N1 ],
+      [ "dpv_footnotes", DpvFootnote.F1 ],
+      [ "dpv_footnotes", DpvFootnote.G1 ],
+      [ "dpv_footnotes", DpvFootnote.U1 ],
+      [ "dpv_footnotes", DpvFootnote.M1 ],
+      [ "dpv_footnotes", DpvFootnote.M3 ],
+      [ "dpv_footnotes", DpvFootnote.P1 ],
+      [ "dpv_footnotes", DpvFootnote.P3 ],
+      [ "dpv_footnotes", DpvFootnote.R1 ],
+      [ "dpv_footnotes", DpvFootnote.R7 ],
+      [ "dpv_footnotes", DpvFootnote.Rr ],
+      [ "ews_match", true ],
+      [ "ews_match", false ],
+      [ "lacs_indicator", DeliverabilityAnalysisLacsIndicatorEnum.Y ],
+      [ "lacs_indicator", DeliverabilityAnalysisLacsIndicatorEnum.N ],
+      [ "lacs_indicator", DeliverabilityAnalysisLacsIndicatorEnum.Empty ],
+      [ "lacs_return_code", "fake return code" ],
+      [ "suite_return_code", DeliverabilityAnalysisSuiteReturnCodeEnum.Empty ],
+      [ "suite_return_code", DeliverabilityAnalysisSuiteReturnCodeEnum.A ],
+      [ "suite_return_code", DeliverabilityAnalysisSuiteReturnCodeEnum._00 ]
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new DeliverabilityAnalysis(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
+    });
+  });
+
   describe("UsVerification", () => {
     it("can be created", () => {
       const rec = new UsVerification();
@@ -38,6 +107,55 @@ describe("Us Verifications Models", () => {
       (input as any)[prop] = val;
 
       const rec = new UsVerification(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
+    });
+
+    it("rejects invalid values for id", () => {
+      const rec = new UsVerification();
+      expect(rec.id).not.toBeDefined();
+
+      const invalidValues = ["Nope"];
+      for (const val of invalidValues) {
+        try {
+          rec.id = val;
+          throw new Error("Should Throw");
+        } catch (err: any) {
+          expect(err.message).toEqual("Invalid id provided");
+        }
+      }
+    });
+
+    it("allows setting valid values for id", () => {
+      const rec = new UsVerification();
+      expect(rec.id).not.toBeDefined();
+
+      const validValues = ["us_ver_1234"];
+      for (const val of validValues) {
+        rec.id = val;
+        expect(rec.id).toBeDefined();
+        expect(rec.id).toEqual(val);
+      }
+    });
+  });
+
+  describe("UsVerifications", () => {
+    it("can be created", () => {
+      const rec = new UsVerifications();
+      expect(rec).toBeDefined();
+    });
+
+    it.each([
+      [ "addresses", [new UsVerification()] ],
+      [ "addresses", [new LobError()] ],
+      [ "errors", true ],
+      [ "errors", false ],
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new UsVerifications(input);
 
       expect(rec).toBeDefined();
       expect((rec as any)[prop]).toEqual(val);
@@ -228,6 +346,79 @@ describe("Us Verifications Models", () => {
         expect(rec.county_fips).toBeDefined();
         expect(rec.county_fips).toEqual(val);
       }
+    });
+  });
+
+  describe("Suggestions", () => {
+    it("can be created", () => {
+      const rec = new Suggestions();
+      expect(rec).toBeDefined();
+    });
+
+    it.each([
+      [ "primary_line", "" ],
+      [ "city", "" ],
+      [ "state", "" ],
+      [ "zip_code", 11111 ],
+      [ "object", "us_autocompletion" ]
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new Suggestions(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
+    });
+
+    it("rejects invalid values for zip_code", () => {
+      const rec = new Suggestions();
+      expect(rec.zip_code).not.toBeDefined();
+
+      const invalidValues = ["Nope"];
+      for (const val of invalidValues) {
+        try {
+          rec.zip_code = val;
+          throw new Error("Should Throw");
+        } catch (err: any) {
+          expect(err.message).toEqual("Invalid zip_code provided");
+        }
+      }
+    });
+
+    it("allows setting valid values for zip_code", () => {
+      const rec = new Suggestions();
+      expect(rec.zip_code).not.toBeDefined();
+
+      const validValues = ["11111"];
+      for (const val of validValues) {
+        rec.zip_code = val;
+        expect(rec.zip_code).toBeDefined();
+        expect(rec.zip_code).toEqual(val);
+      }
+    });
+  });
+
+  describe("LobConfidenceScore", () => {
+    it("can be created", () => {
+      const rec = new LobConfidenceScore();
+      expect(rec).toBeDefined();
+    });
+
+    it.each([
+      [ "score", 12 ],
+      [ "level", LobConfidenceScoreLevelEnum.Low ],
+      [ "level", LobConfidenceScoreLevelEnum.Empty ],
+      [ "level", LobConfidenceScoreLevelEnum.High ],
+      [ "level", LobConfidenceScoreLevelEnum.Medium ]
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new LobConfidenceScore(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
     });
   });
 });

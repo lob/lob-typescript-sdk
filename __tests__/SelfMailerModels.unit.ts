@@ -1,7 +1,10 @@
 import {
+  AddressEditable,
+  MailType,
   SelfMailer,
-  SelfMailerDeletion,
-  SelfMailerList
+  SelfMailerDeletion, SelfMailerEditable,
+  SelfMailerList,
+  SelfMailerSize
 } from "../models";
 
 import {URL_VALID_LIST} from "./testFixtures";
@@ -11,6 +14,36 @@ describe("SelfMailer Models", () => {
     it("can be created", () => {
       const rec = new SelfMailer();
       expect(rec).toBeDefined();
+    });
+
+    it.each([
+      [ "id", "sfm_fakeId" ],
+      [ "to", new AddressEditable() ],
+      [ "from", new AddressEditable() ],
+      [ "size", SelfMailerSize._11x9Bifold ],
+      [ "size", SelfMailerSize._12x9Bifold ],
+      [ "size", SelfMailerSize._6x18Bifold ],
+      [ "description", "fake description" ],
+      [ "metadata", {} ],
+      [ "mail_type", MailType.Standard ],
+      [ "mail_type", MailType.FirstClass ],
+      [ "merge_variables", {} ],
+      [ "send_date", new Date().toISOString() ],
+      [ "outside_template_id", "fake outside_template_id" ],
+      [ "inside_template_id", "fake inside_template_id" ],
+      [ "outside_template_version_id", "fake outside_template_version_id" ],
+      [ "inside_template_version_id", "fake inside_template_version_id" ],
+      [ "object", "self_mailer" ],
+      [ "tracking_events", [] ],
+      [ "url", URL_VALID_LIST ]
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new SelfMailer(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
     });
 
     it("rejects invalid values for id", () => {
@@ -68,10 +101,57 @@ describe("SelfMailer Models", () => {
     });
   });
 
+  describe("SelfMailerEditable", () => {
+    it("can be created", () => {
+      const rec = new SelfMailerEditable();
+      expect(rec).toBeDefined();
+    });
+
+    it.each([
+      [ "to", new AddressEditable() ],
+      [ "from", new AddressEditable() ],
+      [ "size", SelfMailerSize._11x9Bifold ],
+      [ "size", SelfMailerSize._12x9Bifold ],
+      [ "size", SelfMailerSize._6x18Bifold ],
+      [ "description", "fake description" ],
+      [ "metadata", {} ],
+      [ "mail_type", MailType.Standard ],
+      [ "mail_type", MailType.FirstClass ],
+      [ "merge_variables", {} ],
+      [ "send_date", new Date().toISOString() ],
+      [ "inside", "fake inside" ],
+      [ "outside", "fake outside" ],
+      [ "billing_group_id", "fake billing_group_id" ],
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new SelfMailerEditable(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
+    });
+  });
+
   describe("SelfMailerDeletion", () => {
     it("can be created", () => {
       const rec = new SelfMailerDeletion();
       expect(rec).toBeDefined();
+    });
+
+    it.each([
+      [ "id", "sfm_fakeId" ],
+      [ "deleted", true ],
+      [ "deleted", false ],
+      [ "object", "tracking_event" ]
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new SelfMailerDeletion(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
     });
 
     it("rejects invalid values for id", () => {

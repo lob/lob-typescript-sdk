@@ -8,7 +8,9 @@ import {
   Thumbnail,
   MailType,
   LetterAddressPlacementEnum,
-  LetterCustomEnvelope, LetterEditable
+  LetterCustomEnvelope,
+  LetterEditable,
+  LetterCustomEnvelopeObjectEnum
 } from "../models";
 
 describe("Letter Models", () => {
@@ -286,6 +288,27 @@ describe("Letter Models", () => {
         });
         expect(rec.previousPageToken).toBeUndefined();
       });
+    });
+  });
+
+  describe("LetterCustomEnvelope", () => {
+    it("can be created", () => {
+      const rec = new LetterCustomEnvelope();
+      expect(rec).toBeDefined();
+    });
+
+    it.each([
+      [ "id", "fake id" ],
+      [ "url", "fake url" ],
+      [ "object", LetterCustomEnvelopeObjectEnum ],
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new LetterCustomEnvelope(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
     });
   });
 });
