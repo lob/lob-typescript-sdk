@@ -1,6 +1,6 @@
 {
-  "name": "ts-consumer",
-  "version": "1.0.0",
+  "name": "lob-sdk-ts",
+  "version": "0.0.1",
   "scripts": {
     "test": "jest",
     "test:integration": "jest -c jest.integrationConfig.js",
