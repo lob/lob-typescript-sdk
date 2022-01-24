@@ -43,20 +43,20 @@ describe("SelfMailersApi", () => {
   describe("create", () => {
     const sfmEditableMock: SelfMailerEditable = {
       to: {
-        company: "Lob (old)",
-        address_line1: "210 King St",
-        address_line2: "# 6100",
-        address_city: "San Francisco",
-        address_state: "CA",
-        address_zip: "94107",
+        company: "Gothic Home (old)",
+        address_line1: "001 CEMETERY LN",
+        address_line2: "# 000",
+        address_city: "WESTFIELD",
+        address_state: "NJ",
+        address_zip: "07000",
         address_country: CountryExtended.Us,
       },
       from: {
-        company: "Lob (new)",
-        address_line1: "210 King St",
-        address_city: "San Francisco",
-        address_state: "CA",
-        address_zip: "94107",
+        company: "Gothic Home (new)",
+        address_line1: "1313 CEMETERY LN",
+        address_city: "WESTFIELD",
+        address_state: "NJ",
+        address_zip: "07000",
         address_country: CountryExtended.Us,
       },
       inside:

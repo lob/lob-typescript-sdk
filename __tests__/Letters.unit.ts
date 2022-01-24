@@ -566,7 +566,7 @@ describe("LetterApi", () => {
   describe("create", () => {
     const addressCreate: AddressEditable = {
       name: "Thing T. Thing",
-      address_line1: "1313 CEMETARY LN",
+      address_line1: "1313 CEMETERY LN",
       address_city: "WESTFIELD",
       address_state: "NJ",
       address_zip: "07000",

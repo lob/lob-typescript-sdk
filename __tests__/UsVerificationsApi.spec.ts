@@ -9,17 +9,17 @@ describe("UsVerificationApi", () => {
   });
 
   const singleAddress: UsVerificationsWritable = {
-    primary_line: "180 BERRY ST",
-    city: "SAN FRANCISCO",
-    state: "CA",
-    zip_code: "94107",
+    primary_line: "001 CEMETERY LANE",
+    city: "WESTFIELD",
+    state: "NJ",
+    zip_code: "07000",
   };
 
   const address2: UsVerificationsWritable = {
-    primary_line: "123 TEST ST",
-    city: "SAN FRANCISCO",
-    state: "CA",
-    zip_code: "94107",
+    primary_line: "1515 CEMETERY LN",
+    city: "WESTFIELD",
+    state: "NJ",
+    zip_code: "07000",
   };
 
   const addressList: MultipleComponentsList = {
@@ -27,7 +27,7 @@ describe("UsVerificationApi", () => {
   };
 
   const singleLine: UsVerificationsWritable = {
-    address: "123 TEST ST SAN FRANCISCO CA 94107",
+    address: "1515 CEMETERY LN WESTFIELD NJ 07000",
   };
 
   it("US Verifications API can be instantiated", () => {

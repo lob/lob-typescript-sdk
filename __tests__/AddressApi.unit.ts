@@ -42,11 +42,11 @@ describe("AddressApi", () => {
 
   describe("create", () => {
     const addressCreate: AddressEditable = {
-      name: "ADITI RAMASWAMY",
-      address_line1: "360 BERRY ST",
-      address_city: "SAN FRANCISCO",
-      address_state: "CA",
-      address_zip: "94158",
+      name: "Thing T. Thing",
+      address_line1: "1313 CEMETERY LN",
+      address_city: "WESTFIELD",
+      address_state: "NJ",
+      address_zip: "07000",
     };
 
     it("exists", () => {
