@@ -12,11 +12,11 @@ describe("AddressApi", () => {
   });
 
   const addressCreate: AddressEditable = {
-    name: "ADITI RAMASWAMY",
-    address_line1: "360 BERRY ST",
-    address_city: "SAN FRANCISCO",
-    address_state: "CA",
-    address_zip: "94158",
+    name: "Thing T. Thing",
+    address_line1: "1313 CEMETERY LN",
+    address_city: "WESTFIELD",
+    address_state: "NJ",
+    address_zip: "07000",
   };
 
   it("Address API can be instantiated", () => {
@@ -61,15 +61,15 @@ describe("AddressApi", () => {
       for (const address of res as Address[]) {
         expect(address.id).toBeDefined();
         expect(address.description).toBeNull();
-        expect(address.name).toEqual("ADITI RAMASWAMY");
+        expect(address.name).toEqual("Thing T. Thing");
         expect(address.company).toBeNull();
         expect(address.phone).toBeNull();
         expect(address.email).toBeNull();
-        expect(address.address_line1).toEqual("360 BERRY ST");
+        expect(address.address_line1).toEqual("1313 CEMETERY STREET");
         expect(address.address_line2).toBeNull();
-        expect(address.address_city).toEqual("SAN FRANCISCO");
-        expect(address.address_state).toEqual("CA");
-        expect(address.address_zip).toEqual("94158-1611");
+        expect(address.address_city).toEqual("WESTFIELD");
+        expect(address.address_state).toEqual("NJ");
+        expect(address.address_zip).toEqual("07000");
         expect(address.address_country).toEqual("UNITED STATES");
         expect(address.metadata).toBeDefined();
         expect(address.date_created).toBeDefined();
@@ -91,27 +91,27 @@ describe("AddressApi", () => {
       const addressApi = new AddressesApi(config);
       // ensure there are at least 3 addresses present, to test pagination
       const address1: AddressEditable = {
-        name: "HARRY ZHANG",
-        address_line1: "180 BERRY ST",
-        address_line2: "SUITE 6100",
-        address_city: "SAN FRANCISCO",
-        address_state: "CA",
-        address_zip: "94107",
+        name: "FESTER",
+        address_line1: "001 CEMETERY LN",
+        address_line2: "SUITE 666",
+        address_city: "WESTFIELD ",
+        address_state: "NJ",
+        address_zip: "07000",
       };
       const address2: AddressEditable = {
-        name: "HOUSE",
-        address_line1: "21888 SHATTUCK DRIVE",
-        address_city: "CUPERTINO",
-        address_state: "CA",
-        address_zip: "95014",
+        name: "MORTICIA ADDAMS",
+        address_line1: "1212 CEMETERY LANE",
+        address_city: "WESTFIELD",
+        address_state: "NJ",
+        address_zip: "07000",
       };
       const address3: AddressEditable = {
-        name: "OFFICE",
-        address_line1: "1 CHURCH ST",
-        address_line2: "FLOOR 3",
-        address_city: "BURLINGTON",
-        address_state: "VT",
-        address_zip: "05401",
+        name: "COUSIN ITT",
+        address_line1: "1515 CEMETERY LN",
+        address_line2: "FLOOR 0",
+        address_city: "WESTFIELD",
+        address_state: "NJ",
+        address_zip: "07000",
       };
       const a1 = await addressApi.create(address1);
       const a2 = await addressApi.create(address2);

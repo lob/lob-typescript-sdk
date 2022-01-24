@@ -9,10 +9,10 @@ describe("USAutocompletionsApi", () => {
   });
 
   const autocompletionInput: UsAutocompletionsWritable = {
-    address_prefix: "185 B",
-    city: "San Francisco",
-    state: "CA",
-    zip_code: "94107",
+    address_prefix: "1313",
+    city: "WESTFIELD",
+    state: "NJ",
+    zip_code: "07000",
     geo_ip_sort: false,
   };
 
