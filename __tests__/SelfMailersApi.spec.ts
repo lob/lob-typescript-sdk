@@ -114,7 +114,7 @@ describe("smApi", () => {
           address_line2: "# 000",
           address_city: "WESTFIELD",
           address_state: "NJ",
-          address_zip: "07OOO",
+          address_zip: "07000",
           address_country: CountryExtended.Us,
         },
         from: {
