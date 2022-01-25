@@ -42,7 +42,7 @@ export const ChecksApiAxiosParamCreator = function (configuration?: Configuratio
     return {
         /**
          * Completely removes a check from production. This can only be done if the check has a `send_date` and the `send_date` has not yet passed. If the check is successfully canceled, you will not be charged for it. Read more on [cancellation windows](#section/Cancellation-Windows) and [scheduling](#section/Scheduled-Mailings). Scheduling and cancellation is a premium feature. Upgrade to the appropriate [Print & Mail Edition](https://dashboard.lob.com/#/settings/editions) to gain access.
-         * @summary Cancel
+         * @summary cancel
          * @param {string} chkId id of the check
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -80,7 +80,7 @@ export const ChecksApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * Creates a new check with the provided properties.
-         * @summary Create
+         * @summary create
          * @param {CheckEditable} checkEditable 
          * @param {string} [idempotencyKey] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
          * @param {*} [options] Override http request option.
@@ -125,7 +125,7 @@ export const ChecksApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * Retrieves the details of an existing check. You need only supply the unique check identifier that was returned upon check creation.
-         * @summary Retrieve
+         * @summary get
          * @param {string} chkId id of the check
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -163,7 +163,7 @@ export const ChecksApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * Returns a list of your checks. The checks are returned sorted by creation date, with the most recently created checks appearing first.
-         * @summary List
+         * @summary list
          * @param {number} [limit] How many results to return.
          * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
          * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
@@ -257,7 +257,7 @@ export const ChecksApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Completely removes a check from production. This can only be done if the check has a `send_date` and the `send_date` has not yet passed. If the check is successfully canceled, you will not be charged for it. Read more on [cancellation windows](#section/Cancellation-Windows) and [scheduling](#section/Scheduled-Mailings). Scheduling and cancellation is a premium feature. Upgrade to the appropriate [Print & Mail Edition](https://dashboard.lob.com/#/settings/editions) to gain access.
-         * @summary Cancel
+         * @summary cancel
          * @param {string} chkId id of the check
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -268,7 +268,7 @@ export const ChecksApiFp = function(configuration?: Configuration) {
         },
         /**
          * Creates a new check with the provided properties.
-         * @summary Create
+         * @summary create
          * @param {CheckEditable} checkEditable 
          * @param {string} [idempotencyKey] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
          * @param {*} [options] Override http request option.
@@ -280,7 +280,7 @@ export const ChecksApiFp = function(configuration?: Configuration) {
         },
         /**
          * Retrieves the details of an existing check. You need only supply the unique check identifier that was returned upon check creation.
-         * @summary Retrieve
+         * @summary get
          * @param {string} chkId id of the check
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -291,7 +291,7 @@ export const ChecksApiFp = function(configuration?: Configuration) {
         },
         /**
          * Returns a list of your checks. The checks are returned sorted by creation date, with the most recently created checks appearing first.
-         * @summary List
+         * @summary list
          * @param {number} [limit] How many results to return.
          * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
          * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
@@ -321,13 +321,13 @@ export const ChecksApiFp = function(configuration?: Configuration) {
 export class ChecksApi extends BaseAPI {
     /**
      * Completely removes a check from production. This can only be done if the check has a `send_date` and the `send_date` has not yet passed. If the check is successfully canceled, you will not be charged for it. Read more on [cancellation windows](#section/Cancellation-Windows) and [scheduling](#section/Scheduled-Mailings). Scheduling and cancellation is a premium feature. Upgrade to the appropriate [Print & Mail Edition](https://dashboard.lob.com/#/settings/editions) to gain access.
-     * @summary Cancel
+     * @summary cancel
      * @param {string} chkId id of the check
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChecksApi
      */
-    public Cancel(chkId: string, options?: AxiosRequestConfig) {
+    public cancel(chkId: string, options?: AxiosRequestConfig) {
         return ChecksApiFp(this.configuration).checkCancel(chkId, options).then((request) => request(this.axios, this.basePath))
             .then(function (response) {
                 return new CheckDeletion(response.data);
@@ -341,14 +341,14 @@ export class ChecksApi extends BaseAPI {
 
     /**
      * Creates a new check with the provided properties.
-     * @summary Create
+     * @summary create
      * @param {CheckEditable} checkEditable 
      * @param {string} [idempotencyKey] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request). 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChecksApi
      */
-    public Create(checkEditable: CheckEditable, idempotencyKey?: string, options?: AxiosRequestConfig) {
+    public create(checkEditable: CheckEditable, idempotencyKey?: string, options?: AxiosRequestConfig) {
         return ChecksApiFp(this.configuration).checkCreate(checkEditable, idempotencyKey, options).then((request) => request(this.axios, this.basePath))
             .then(function (response) {
                 return new Check(response.data);
@@ -362,13 +362,13 @@ export class ChecksApi extends BaseAPI {
 
     /**
      * Retrieves the details of an existing check. You need only supply the unique check identifier that was returned upon check creation.
-     * @summary Retrieve
+     * @summary get
      * @param {string} chkId id of the check
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChecksApi
      */
-    public Retrieve(chkId: string, options?: AxiosRequestConfig) {
+    public get(chkId: string, options?: AxiosRequestConfig) {
         return ChecksApiFp(this.configuration).checkRetrieve(chkId, options).then((request) => request(this.axios, this.basePath))
             .then(function (response) {
                 return new Check(response.data);
@@ -382,7 +382,7 @@ export class ChecksApi extends BaseAPI {
 
     /**
      * Returns a list of your checks. The checks are returned sorted by creation date, with the most recently created checks appearing first.
-     * @summary List
+     * @summary list
      * @param {number} [limit] How many results to return.
      * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
      * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
@@ -397,7 +397,7 @@ export class ChecksApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ChecksApi
      */
-    public List(limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options?: AxiosRequestConfig) {
+    public list(limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, scheduled?: boolean, sendDate?: SendDate, mailType?: MailType, sortBy?: object, options?: AxiosRequestConfig) {
         return ChecksApiFp(this.configuration).checksList(limit, before, after, include, dateCreated, metadata, scheduled, sendDate, mailType, sortBy, options).then((request) => request(this.axios, this.basePath))
             .then(function (response) {
                 return new CheckList(response.data);

@@ -40,17 +40,17 @@ describe("ChecksApi", () => {
 
   it("all individual Check functions exists", () => {
     const checksApi = new ChecksApi(config);
-    expect(checksApi.Cancel).toBeDefined();
-    expect(typeof checksApi.Cancel).toEqual("function");
+    expect(checksApi.cancel).toBeDefined();
+    expect(typeof checksApi.cancel).toEqual("function");
 
-    expect(checksApi.Create).toBeDefined();
-    expect(typeof checksApi.Create).toEqual("function");
+    expect(checksApi.create).toBeDefined();
+    expect(typeof checksApi.create).toEqual("function");
 
-    expect(checksApi.List).toBeDefined();
-    expect(typeof checksApi.List).toEqual("function");
+    expect(checksApi.list).toBeDefined();
+    expect(typeof checksApi.list).toEqual("function");
 
-    expect(checksApi.Retrieve).toBeDefined();
-    expect(typeof checksApi.Retrieve).toEqual("function");
+    expect(checksApi.get).toBeDefined();
+    expect(typeof checksApi.get).toEqual("function");
   });
 
   describe("performs single-Check operations", () => {
@@ -86,35 +86,35 @@ describe("ChecksApi", () => {
       });
 
       it("creates a check", async () => {
-        // Create
-        const createdCheck = await new ChecksApi(config).Create(createCheck);
+        // create
+        const createdCheck = await new ChecksApi(config).create(createCheck);
         expect(createdCheck?.id).toBeDefined();
         expect(createdCheck?.description).toEqual(createCheck.description);
       });
 
       it("Retrieves a check", async () => {
         // Retrieve
-        const createdCheck = await new ChecksApi(config).Create(createCheck);
+        const createdCheck = await new ChecksApi(config).create(createCheck);
 
-        const retrievedCheck = await checksApi.Retrieve(createdCheck.id as string);
+        const retrievedCheck = await checksApi.get(createdCheck.id as string);
         expect(retrievedCheck).toBeDefined();
         expect(retrievedCheck?.id).toEqual(createdCheck?.id);
       });
 
-      it("Cancels a check", async () => {
-        // Cancel
-        const createdCheck = await new ChecksApi(config).Create(createCheck);
+      it("cancels a check", async () => {
+        // cancel
+        const createdCheck = await new ChecksApi(config).create(createCheck);
   
-        const cancelledCheck = await checksApi.Cancel(createdCheck.id as string);
+        const cancelledCheck = await checksApi.cancel(createdCheck.id as string);
         expect(cancelledCheck).toBeDefined();
         expect(cancelledCheck?.id).toEqual(createdCheck?.id);
       });
 
       it("Lists a check", async () => {
         // List
-        const createdCheck = await new ChecksApi(config).Create(createCheck);
+        const createdCheck = await new ChecksApi(config).create(createCheck);
   
-        const updatedCheck = await checksApi.List(
+        const updatedCheck = await checksApi.list(
           1
         );
         expect(updatedCheck).toBeDefined();
@@ -161,9 +161,9 @@ describe("ChecksApi", () => {
 
       const checksApi = new ChecksApi(config);
       await Promise.all([
-        checksApi.Create(check1),
-        checksApi.Create(check2),
-        checksApi.Create(check3),
+        checksApi.create(check1),
+        checksApi.create(check2),
+        checksApi.create(check3),
       ])
         .then((creationResults) => {
           expect(creationResults.length).toEqual(3);
@@ -176,12 +176,12 @@ describe("ChecksApi", () => {
 
     it("exists", () => {
       const checksApi = new ChecksApi(config);
-      expect(checksApi.List).toBeDefined();
-      expect(typeof checksApi.List).toEqual("function");
+      expect(checksApi.list).toBeDefined();
+      expect(typeof checksApi.list).toEqual("function");
     });
 
     it("lists checks", async () => {
-      const response = await new ChecksApi(config).List();
+      const response = await new ChecksApi(config).list();
       expect(response?.data).toBeDefined();
       const bgList = response?.data || [];
       expect(bgList.length).toBeGreaterThan(0);
