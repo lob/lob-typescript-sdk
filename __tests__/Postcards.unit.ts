@@ -1,15 +1,20 @@
 import { Configuration } from "../configuration";
 
-import { PostcardEditable, AddressEditable, MailType, PostcardSize } from "../models";
+import {
+  PostcardEditable,
+  AddressEditable,
+  MailType,
+  PostcardSize,
+} from "../models";
 import { PostcardsApi } from "../api/postcards-api";
 
 import { fail } from "./testUtilities";
-import {DATE_FILTER} from "./testFixtures";
+import { DATE_FILTER } from "./testFixtures";
 
 import axios from "axios";
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
 jest.mock("axios", () => ({
-    request: jest.fn(),
+  request: jest.fn(),
 }));
 
 describe("PostcardsApi", () => {
@@ -39,11 +44,9 @@ describe("PostcardsApi", () => {
     expect(postcardApi).toBeInstanceOf(PostcardsApi);
   });
 
-  
   describe("get", () => {
     it("exists", () => {
-      const postcardApi = new PostcardsApi
-      (config);
+      const postcardApi = new PostcardsApi(config);
       expect(postcardApi.get).toBeDefined();
       expect(typeof postcardApi.get).toEqual("function");
     });
@@ -53,8 +56,7 @@ describe("PostcardsApi", () => {
         data: { id: "psc_fakeId", deleted: false },
       }));
 
-      const postcard = await new PostcardsApi
-      (config).get("ID");
+      const postcard = await new PostcardsApi(config).get("ID");
       expect(postcard).toBeDefined();
       expect(postcard.id).toEqual("psc_fakeId");
       expect(postcard.deleted).toEqual(false);
@@ -65,8 +67,9 @@ describe("PostcardsApi", () => {
         data: { id: "psc_differentFakeId" },
       }));
 
-      const postcard = await new PostcardsApi
-      (configWithBaseOptions).get("psc_ID");
+      const postcard = await new PostcardsApi(configWithBaseOptions).get(
+        "psc_ID"
+      );
       expect(postcard).toBeDefined();
       expect(postcard?.id).toEqual("psc_differentFakeId");
     });
@@ -80,8 +83,7 @@ describe("PostcardsApi", () => {
       });
 
       try {
-        await new PostcardsApi
-        (config).get("fake id");
+        await new PostcardsApi(config).get("fake id");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
       }
@@ -96,8 +98,7 @@ describe("PostcardsApi", () => {
       });
 
       try {
-        await new PostcardsApi
-        (config).get("fake id");
+        await new PostcardsApi(config).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -113,8 +114,7 @@ describe("PostcardsApi", () => {
       });
 
       try {
-        await new PostcardsApi
-        (config).get("fake id");
+        await new PostcardsApi(config).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -127,8 +127,7 @@ describe("PostcardsApi", () => {
       });
 
       try {
-        await new PostcardsApi
-        (config).get("fake id");
+        await new PostcardsApi(config).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -306,9 +305,9 @@ describe("PostcardsApi", () => {
         undefined,
         undefined,
         undefined,
-          DATE_FILTER
+        DATE_FILTER
       );
-      expect(response).toBeDefined(); 
+      expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
       expect(response?.data?.length).toEqual(2);
     });
@@ -492,7 +491,9 @@ describe("PostcardsApi", () => {
           deleted: true,
         },
       }));
-      const canceledPostcard = await new PostcardsApi(config).cancel("psc_fakeId");
+      const canceledPostcard = await new PostcardsApi(config).cancel(
+        "psc_fakeId"
+      );
       expect(canceledPostcard?.deleted).toEqual(true);
     });
 
@@ -503,9 +504,9 @@ describe("PostcardsApi", () => {
           deleted: true,
         },
       }));
-      const canceledPostcard = await new PostcardsApi(configWithBaseOptions).cancel(
-        "psc_fakeId"
-      );
+      const canceledPostcard = await new PostcardsApi(
+        configWithBaseOptions
+      ).cancel("psc_fakeId");
       expect(canceledPostcard?.deleted).toEqual(true);
     });
 
@@ -611,17 +612,17 @@ describe("PostcardsApi", () => {
     });
 
     it("creates a postcard with idempotency", async () => {
-        axiosRequest.mockImplementationOnce(async () => ({
-          data: { id: "psc_fakeId" },
-        }));
-  
-        const postcard = await new PostcardsApi(config).create(
-          createPostcard, "fake key"
-        );
-        expect(postcard).toBeDefined();
-        expect(postcard?.id).toBeDefined();
-      });
+      axiosRequest.mockImplementationOnce(async () => ({
+        data: { id: "psc_fakeId" },
+      }));
 
+      const postcard = await new PostcardsApi(config).create(
+        createPostcard,
+        "fake key"
+      );
+      expect(postcard).toBeDefined();
+      expect(postcard?.id).toBeDefined();
+    });
 
     it("handles errors returned by the api", async () => {
       axiosRequest.mockImplementationOnce(async () => {
@@ -655,7 +656,7 @@ describe("PostcardsApi", () => {
         expect(err.message).toEqual("error");
       }
     });
-    
+
     it("handles errors in making the request", async () => {
       axiosRequest.mockImplementationOnce(async () => {
         throw new Error("Unknown Error");
@@ -685,7 +686,4 @@ describe("PostcardsApi", () => {
       expect(typeof postcardApi.create).toEqual("function");
     });
   });
-
-
-
 });

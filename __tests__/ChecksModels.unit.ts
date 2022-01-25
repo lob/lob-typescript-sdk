@@ -4,9 +4,9 @@ import {
   CheckList,
   CheckEditable,
   CheckEditableMailTypeEnum,
-  CheckMailTypeEnum
+  CheckMailTypeEnum,
 } from "../models";
-import {URL_VALID_LIST} from "./testFixtures";
+import { URL_VALID_LIST } from "./testFixtures";
 
 describe("Check Models", () => {
   describe("", () => {
@@ -16,33 +16,33 @@ describe("Check Models", () => {
     });
 
     it.each([
-      [ "id", "chk_fakeId" ],
-      [ "to", "fake to" ],
-      [ "from", "fake from" ],
-      [ "description", "fake description" ],
-      [ "metadata", {} ],
-      [ "merge_variables", {} ],
-      [ "send_date", new Date().toISOString() ],
-      [ "mail_type", CheckMailTypeEnum.UspsFirstClass ],
-      [ "memo", "fame memo" ],
-      [ "check_number", "fake check number" ],
-      [ "message", "fake message" ],
-      [ "amount", 71 ],
-      [ "bank_account", "123456" ],
-      [ "check_bottom_template_id", "tmpl_fakeId" ],
-      [ "attachment_template_id", "tmpl_fakeId" ],
-      [ "check_bottom_template_version_id", "vrsn_fakeId" ],
-      [ "attachment_template_version_id", "vrsn_fakeId" ],
-      [ "url", URL_VALID_LIST ],
-      [ "carrier", "" ],
-      [ "thumbnails", "" ],
-      [ "expected_delivery_date", "" ],
-      [ "tracking_events", "" ],
-      [ "object", "" ],
-      [ "date_created", new Date().toISOString() ],
-      [ "date_modified", new Date().toISOString() ],
-      [ "deleted", true ],
-      [ "deleted", false ]
+      ["id", "chk_fakeId"],
+      ["to", "fake to"],
+      ["from", "fake from"],
+      ["description", "fake description"],
+      ["metadata", {}],
+      ["merge_variables", {}],
+      ["send_date", new Date().toISOString()],
+      ["mail_type", CheckMailTypeEnum.UspsFirstClass],
+      ["memo", "fame memo"],
+      ["check_number", "fake check number"],
+      ["message", "fake message"],
+      ["amount", 71],
+      ["bank_account", "123456"],
+      ["check_bottom_template_id", "tmpl_fakeId"],
+      ["attachment_template_id", "tmpl_fakeId"],
+      ["check_bottom_template_version_id", "vrsn_fakeId"],
+      ["attachment_template_version_id", "vrsn_fakeId"],
+      ["url", URL_VALID_LIST],
+      ["carrier", ""],
+      ["thumbnails", ""],
+      ["expected_delivery_date", ""],
+      ["tracking_events", ""],
+      ["object", ""],
+      ["date_created", new Date().toISOString()],
+      ["date_modified", new Date().toISOString()],
+      ["deleted", true],
+      ["deleted", false],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -90,7 +90,9 @@ describe("Check Models", () => {
           rec.check_bottom_template_id = val;
           throw new Error("Should Throw");
         } catch (err: any) {
-          expect(err.message).toEqual("Invalid check_bottom_template_id provided");
+          expect(err.message).toEqual(
+            "Invalid check_bottom_template_id provided"
+          );
         }
       }
     });
@@ -117,7 +119,9 @@ describe("Check Models", () => {
           rec.attachment_template_id = val;
           throw new Error("Should Throw");
         } catch (err: any) {
-          expect(err.message).toEqual("Invalid attachment_template_id provided");
+          expect(err.message).toEqual(
+            "Invalid attachment_template_id provided"
+          );
         }
       }
     });
@@ -144,7 +148,9 @@ describe("Check Models", () => {
           rec.check_bottom_template_version_id = val;
           throw new Error("Should Throw");
         } catch (err: any) {
-          expect(err.message).toEqual("Invalid check_bottom_template_version_id provided");
+          expect(err.message).toEqual(
+            "Invalid check_bottom_template_version_id provided"
+          );
         }
       }
     });
@@ -171,7 +177,9 @@ describe("Check Models", () => {
           rec.attachment_template_version_id = val;
           throw new Error("Should Throw");
         } catch (err: any) {
-          expect(err.message).toEqual("Invalid attachment_template_version_id provided");
+          expect(err.message).toEqual(
+            "Invalid attachment_template_version_id provided"
+          );
         }
       }
     });
@@ -223,10 +231,10 @@ describe("Check Models", () => {
     });
 
     it.each([
-      [ 'id', 'chk_fakeId' ],
-      [ 'deleted', true ],
-      [ 'deleted', false ],
-      [ 'object', "Check" ]
+      ["id", "chk_fakeId"],
+      ["deleted", true],
+      ["deleted", false],
+      ["object", "Check"],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -272,22 +280,22 @@ describe("Check Models", () => {
     });
 
     it.each([
-      [ "from", "fake from" ],
-      [ "to", "fake to" ],
-      [ "bank_account", "fake account" ],
-      [ "amount", 111 ],
-      [ "logo", "fake logo" ],
-      [ "check_bottom", "fake bottom" ],
-      [ "attachment", "fake attachment" ],
-      [ "description", "fake description" ],
-      [ "metadata", {} ],
-      [ "merge_variables", {} ],
-      [ "send_date", new Date().toISOString() ],
-      [ "mail_type", CheckEditableMailTypeEnum.UspsFirstClass ],
-      [ "memo", "fake memo" ],
-      [ "check_number", 123456 ],
-      [ "message", "fake message" ],
-      [ "billing_group_id", "fake billing group" ]
+      ["from", "fake from"],
+      ["to", "fake to"],
+      ["bank_account", "fake account"],
+      ["amount", 111],
+      ["logo", "fake logo"],
+      ["check_bottom", "fake bottom"],
+      ["attachment", "fake attachment"],
+      ["description", "fake description"],
+      ["metadata", {}],
+      ["merge_variables", {}],
+      ["send_date", new Date().toISOString()],
+      ["mail_type", CheckEditableMailTypeEnum.UspsFirstClass],
+      ["memo", "fake memo"],
+      ["check_number", 123456],
+      ["message", "fake message"],
+      ["billing_group_id", "fake billing group"],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -306,12 +314,12 @@ describe("Check Models", () => {
     });
 
     it.each([
-      [ 'object', 'Address' ],
-      [ 'data', [] ],
-      [ 'next_url', 'some url' ],
-      [ 'previous_url', 'some url' ],
-      [ 'count', 1 ],
-      [ 'total_count', 100 ]
+      ["object", "Address"],
+      ["data", []],
+      ["next_url", "some url"],
+      ["previous_url", "some url"],
+      ["count", 1],
+      ["total_count", 100],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -322,33 +330,33 @@ describe("Check Models", () => {
       expect((rec as any)[prop]).toEqual(val);
     });
 
-    describe('nextPageToken getter', () => {
-      it('extracts and returns the token from the next_url value', () => {
+    describe("nextPageToken getter", () => {
+      it("extracts and returns the token from the next_url value", () => {
         const rec = new CheckList({
-          next_url: 'https://fake.com?param1=example&after=token'
+          next_url: "https://fake.com?param1=example&after=token",
         });
-        expect(rec.nextPageToken).toEqual('token');
+        expect(rec.nextPageToken).toEqual("token");
       });
 
-      it('handles when the next_url value is missing', () => {
+      it("handles when the next_url value is missing", () => {
         const rec = new CheckList({
-          next_url: null
+          next_url: null,
         });
         expect(rec.nextPageToken).toBeUndefined();
       });
     });
 
-    describe('previousPageToken getter', () => {
-      it('extracts and returns the token from the next_url value', () => {
+    describe("previousPageToken getter", () => {
+      it("extracts and returns the token from the next_url value", () => {
         const rec = new CheckList({
-          previous_url: 'https://fake.com?param1=example&before=token'
+          previous_url: "https://fake.com?param1=example&before=token",
         });
-        expect(rec.previousPageToken).toEqual('token');
+        expect(rec.previousPageToken).toEqual("token");
       });
 
-      it('handles when the next_url value is missing', () => {
+      it("handles when the next_url value is missing", () => {
         const rec = new CheckList({
-          previous_url: null
+          previous_url: null,
         });
         expect(rec.previousPageToken).toBeUndefined();
       });

@@ -1,7 +1,7 @@
 import {
   UsAutocompletions,
   UsAutocompletionsWritable,
-  Suggestions
+  Suggestions,
 } from "../models";
 
 describe("UsAutocompletions Models", () => {
@@ -12,9 +12,9 @@ describe("UsAutocompletions Models", () => {
     });
 
     it.each([
-      [ "id", "us_auto_fakeId" ],
-      [ "suggestions", [ new Suggestions() ] ],
-      [ "object", "US Auto Completion" ]
+      ["id", "us_auto_fakeId"],
+      ["suggestions", [new Suggestions()]],
+      ["object", "US Auto Completion"],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -60,12 +60,12 @@ describe("UsAutocompletions Models", () => {
     });
 
     it.each([
-      [ "address_prefix", "fake prefix" ],
-      [ "city", "fake city" ],
-      [ "state", "fake state" ],
-      [ "zip_code", "fake zip" ],
-      [ "geo_ip_sort", true ],
-      [ "geo_ip_sort", false ]
+      ["address_prefix", "fake prefix"],
+      ["city", "fake city"],
+      ["state", "fake state"],
+      ["zip_code", "fake zip"],
+      ["geo_ip_sort", true],
+      ["geo_ip_sort", false],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;

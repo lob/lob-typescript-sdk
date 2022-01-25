@@ -1,11 +1,13 @@
 import {
   BankAccount,
-  BankAccountDeletion, BankAccountDeletionObjectEnum,
+  BankAccountDeletion,
+  BankAccountDeletionObjectEnum,
   BankAccountList,
   BankAccountVerify,
-  BankAccountWritable, BankTypeEnum
+  BankAccountWritable,
+  BankTypeEnum,
 } from "../models";
-import {URL_VALID_LIST} from "./testFixtures";
+import { URL_VALID_LIST } from "./testFixtures";
 
 describe("Bank Account Models", () => {
   describe("BankAccount", () => {
@@ -15,23 +17,23 @@ describe("Bank Account Models", () => {
     });
 
     it.each([
-      ['id', 'bank_fakeId' ],
-      ['description', 'fake description'],
-      ['routing_number', 'fake routing'],
-      ['account_number', 'fake account'],
-      ['account_type', BankTypeEnum.Company ],
-      ['account_type', BankTypeEnum.Individual ],
-      ['signatory', 'fake signatory'],
-      ['metadata', {} ],
-      ['signature_url', URL_VALID_LIST ],
-      ['bank_name', 'Bank' ],
-      ['verified', false ],
-      ['verified', true ],
-      ['date_created', new Date().toISOString() ],
-      ['date_modified', new Date().toISOString() ],
-      ['deleted', false ],
-      ['deleted', true ],
-      ['object', 'Bank' ]
+      ["id", "bank_fakeId"],
+      ["description", "fake description"],
+      ["routing_number", "fake routing"],
+      ["account_number", "fake account"],
+      ["account_type", BankTypeEnum.Company],
+      ["account_type", BankTypeEnum.Individual],
+      ["signatory", "fake signatory"],
+      ["metadata", {}],
+      ["signature_url", URL_VALID_LIST],
+      ["bank_name", "Bank"],
+      ["verified", false],
+      ["verified", true],
+      ["date_created", new Date().toISOString()],
+      ["date_modified", new Date().toISOString()],
+      ["deleted", false],
+      ["deleted", true],
+      ["object", "Bank"],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -104,9 +106,9 @@ describe("Bank Account Models", () => {
     });
 
     it.each([
-      ['id', 'bank_fakeId'],
-      ['deleted', true],
-      ['object', BankAccountDeletionObjectEnum],
+      ["id", "bank_fakeId"],
+      ["deleted", true],
+      ["object", BankAccountDeletionObjectEnum],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -152,12 +154,12 @@ describe("Bank Account Models", () => {
     });
 
     it.each([
-      [ 'object', 'Address' ],
-      [ 'data', [] ],
-      [ 'next_url', 'some url' ],
-      [ 'previous_url', 'some url' ],
-      [ 'count', 1 ],
-      [ 'total_count', 100 ]
+      ["object", "Address"],
+      ["data", []],
+      ["next_url", "some url"],
+      ["previous_url", "some url"],
+      ["count", 1],
+      ["total_count", 100],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -168,33 +170,33 @@ describe("Bank Account Models", () => {
       expect((rec as any)[prop]).toEqual(val);
     });
 
-    describe('nextPageToken getter', () => {
-      it('extracts and returns the token from the next_url value', () => {
+    describe("nextPageToken getter", () => {
+      it("extracts and returns the token from the next_url value", () => {
         const rec = new BankAccountList({
-          next_url: 'https://fake.com?param1=example&after=token'
+          next_url: "https://fake.com?param1=example&after=token",
         });
-        expect(rec.nextPageToken).toEqual('token');
+        expect(rec.nextPageToken).toEqual("token");
       });
 
-      it('handles when the next_url value is missing', () => {
+      it("handles when the next_url value is missing", () => {
         const rec = new BankAccountList({
-          next_url: null
+          next_url: null,
         });
         expect(rec.nextPageToken).toBeUndefined();
       });
     });
 
-    describe('previousPageToken getter', () => {
-      it('extracts and returns the token from the next_url value', () => {
+    describe("previousPageToken getter", () => {
+      it("extracts and returns the token from the next_url value", () => {
         const rec = new BankAccountList({
-          previous_url: 'https://fake.com?param1=example&before=token'
+          previous_url: "https://fake.com?param1=example&before=token",
         });
-        expect(rec.previousPageToken).toEqual('token');
+        expect(rec.previousPageToken).toEqual("token");
       });
 
-      it('handles when the next_url value is missing', () => {
+      it("handles when the next_url value is missing", () => {
         const rec = new BankAccountList({
-          previous_url: null
+          previous_url: null,
         });
         expect(rec.previousPageToken).toBeUndefined();
       });
@@ -207,17 +209,18 @@ describe("Bank Account Models", () => {
       expect(rec).toBeDefined();
     });
 
-    it.each([
-      ['amounts', [ 1, 2 ]]
-    ])("can be created with a provided %s value", (prop, val) => {
-      const input = {};
-      (input as any)[prop] = val;
+    it.each([["amounts", [1, 2]]])(
+      "can be created with a provided %s value",
+      (prop, val) => {
+        const input = {};
+        (input as any)[prop] = val;
 
-      const rec = new BankAccountVerify(input);
+        const rec = new BankAccountVerify(input);
 
-      expect(rec).toBeDefined();
-      expect((rec as any)[prop]).toEqual(val);
-    });
+        expect(rec).toBeDefined();
+        expect((rec as any)[prop]).toEqual(val);
+      }
+    );
   });
 
   describe("BankAccountWritable", () => {
@@ -227,12 +230,12 @@ describe("Bank Account Models", () => {
     });
 
     it.each([
-      ['description', 'fake description'],
-      ['routing_number', 'fake routing'],
-      ['account_number', 'fake account'],
-      ['account_type', BankTypeEnum.Company ],
-      ['signatory', 'fake signatory'],
-      ['metadata', {} ]
+      ["description", "fake description"],
+      ["routing_number", "fake routing"],
+      ["account_number", "fake account"],
+      ["account_type", BankTypeEnum.Company],
+      ["signatory", "fake signatory"],
+      ["metadata", {}],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -242,6 +245,5 @@ describe("Bank Account Models", () => {
       expect(rec).toBeDefined();
       expect((rec as any)[prop]).toEqual(val);
     });
-
   });
 });

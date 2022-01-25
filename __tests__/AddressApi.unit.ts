@@ -4,7 +4,7 @@ import { AddressEditable } from "../models";
 import { AddressesApi } from "../api/addresses-api";
 
 import { fail } from "./testUtilities";
-import {DATE_FILTER} from "./testFixtures";
+import { DATE_FILTER } from "./testFixtures";
 
 // Axios Mock
 import axios from "axios";
@@ -397,7 +397,7 @@ describe("AddressApi", () => {
         undefined,
         undefined,
         undefined,
-          DATE_FILTER
+        DATE_FILTER
       );
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
@@ -460,7 +460,9 @@ describe("AddressApi", () => {
           deleted: true,
         },
       }));
-      const deletedAddress = await new AddressesApi(config).delete("adr_fakeId");
+      const deletedAddress = await new AddressesApi(config).delete(
+        "adr_fakeId"
+      );
       expect(deletedAddress?.deleted).toEqual(true);
     });
 

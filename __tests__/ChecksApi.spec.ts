@@ -3,7 +3,15 @@ import { Configuration } from "../configuration";
 import { ChecksApi } from "../api/checks-api";
 import { CheckEditable } from "../models/check-editable";
 import { Check } from "../models/check";
-import { BankAccount, BankAccountsApi, BankAccountVerify, BankAccountWritable, BankTypeEnum, CountryExtended, MailType } from "..";
+import {
+  BankAccount,
+  BankAccountsApi,
+  BankAccountVerify,
+  BankAccountWritable,
+  BankTypeEnum,
+  CountryExtended,
+  MailType,
+} from "..";
 
 let bankApi: BankAccountsApi;
 let account: BankAccount;
@@ -104,8 +112,10 @@ describe("ChecksApi", () => {
       it("cancels a check", async () => {
         // cancel
         const createdCheck = await new ChecksApi(config).create(createCheck);
-  
-        const cancelledCheck = await checksApi.cancel(createdCheck.id as string);
+
+        const cancelledCheck = await checksApi.cancel(
+          createdCheck.id as string
+        );
         expect(cancelledCheck).toBeDefined();
         expect(cancelledCheck?.id).toEqual(createdCheck?.id);
       });
@@ -113,15 +123,12 @@ describe("ChecksApi", () => {
       it("Lists a check", async () => {
         // List
         const createdCheck = await new ChecksApi(config).create(createCheck);
-  
-        const updatedCheck = await checksApi.list(
-          1
-        );
+
+        const updatedCheck = await checksApi.list(1);
         expect(updatedCheck).toBeDefined();
       });
     });
   });
-    
 
   describe("list checks", () => {
     let createdChecks: Check[] = [];

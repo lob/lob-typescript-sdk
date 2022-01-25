@@ -4,7 +4,7 @@ import { BillingGroupEditable } from "../models";
 import { BillingGroupsApi } from "../api";
 
 import { fail } from "./testUtilities";
-import {DATE_FILTER} from "./testFixtures";
+import { DATE_FILTER } from "./testFixtures";
 
 // Axios Mock
 import axios from "axios";
@@ -346,10 +346,7 @@ describe("BillingGroupsApi", () => {
     it("gets all billing groups when no limit is provided", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
-          data: [
-            { id: "bg_fakeId" },
-            { id: "another bg_fakeId" },
-          ],
+          data: [{ id: "bg_fakeId" }, { id: "another bg_fakeId" }],
         },
       }));
 
@@ -413,7 +410,7 @@ describe("BillingGroupsApi", () => {
         undefined,
         undefined,
         undefined,
-          DATE_FILTER
+        DATE_FILTER
       );
       expect(bgApi).toBeDefined();
       expect(bgApi?.data?.length).toEqual(1);
@@ -434,7 +431,7 @@ describe("BillingGroupsApi", () => {
         undefined,
         undefined,
         undefined,
-          DATE_FILTER
+        DATE_FILTER
       );
       expect(bgApi).toBeDefined();
       expect(bgApi?.data?.length).toEqual(1);

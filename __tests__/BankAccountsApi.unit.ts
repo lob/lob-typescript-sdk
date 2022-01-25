@@ -8,7 +8,7 @@ import {
 import { BankAccountsApi } from "../api/bank-accounts-api";
 
 import { fail } from "./testUtilities";
-import {DATE_FILTER} from "./testFixtures";
+import { DATE_FILTER } from "./testFixtures";
 
 // Axios Mock
 import axios from "axios";
@@ -124,7 +124,9 @@ describe("BankAccountsApi", () => {
           deleted: true,
         },
       }));
-      const bankAccount = await new BankAccountsApi(config).delete("bank_fakeId");
+      const bankAccount = await new BankAccountsApi(config).delete(
+        "bank_fakeId"
+      );
       expect(bankAccount?.deleted).toEqual(true);
     });
 
@@ -443,7 +445,7 @@ describe("BankAccountsApi", () => {
         undefined,
         undefined,
         undefined,
-          DATE_FILTER
+        DATE_FILTER
       );
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();

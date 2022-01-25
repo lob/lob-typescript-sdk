@@ -5,7 +5,7 @@ import {
   TemplateList,
   TemplateUpdate,
   TemplateVersion,
-  TemplateWritable
+  TemplateWritable,
 } from "../models";
 
 describe("Template Models", () => {
@@ -16,16 +16,16 @@ describe("Template Models", () => {
     });
 
     it.each([
-      [ "id", "tmpl_fakeId" ],
-      [ "description", "fake description" ],
-      [ "versions", [new TemplateVersion()] ],
-      [ "published_version", new TemplateVersion() ],
-      [ "object", "template" ],
-      [ "metadata", {} ],
-      [ "date_created", new Date().toISOString() ],
-      [ "date_modified", new Date().toISOString() ],
-      [ "deleted", true ],
-      [ "deleted", false ]
+      ["id", "tmpl_fakeId"],
+      ["description", "fake description"],
+      ["versions", [new TemplateVersion()]],
+      ["published_version", new TemplateVersion()],
+      ["object", "template"],
+      ["metadata", {}],
+      ["date_created", new Date().toISOString()],
+      ["date_modified", new Date().toISOString()],
+      ["deleted", true],
+      ["deleted", false],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -71,10 +71,10 @@ describe("Template Models", () => {
     });
 
     it.each([
-      [ 'id', [ 'tmpl_fakeId'] ],
-      [ 'object', 'Address' ],
-      [ 'deleted', true ],
-      [ 'deleted', false ]
+      ["id", ["tmpl_fakeId"]],
+      ["object", "Address"],
+      ["deleted", true],
+      ["deleted", false],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -120,12 +120,12 @@ describe("Template Models", () => {
     });
 
     it.each([
-      [ 'object', 'Address' ],
-      [ 'data', [] ],
-      [ 'next_url', 'some url' ],
-      [ 'previous_url', 'some url' ],
-      [ 'count', 1 ],
-      [ 'total_count', 100 ]
+      ["object", "Address"],
+      ["data", []],
+      ["next_url", "some url"],
+      ["previous_url", "some url"],
+      ["count", 1],
+      ["total_count", 100],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -136,33 +136,33 @@ describe("Template Models", () => {
       expect((rec as any)[prop]).toEqual(val);
     });
 
-    describe('nextPageToken getter', () => {
-      it('extracts and returns the token from the next_url value', () => {
+    describe("nextPageToken getter", () => {
+      it("extracts and returns the token from the next_url value", () => {
         const rec = new TemplateList({
-          next_url: 'https://fake.com?param1=example&after=token'
+          next_url: "https://fake.com?param1=example&after=token",
         });
-        expect(rec.nextPageToken).toEqual('token');
+        expect(rec.nextPageToken).toEqual("token");
       });
 
-      it('handles when the next_url value is missing', () => {
+      it("handles when the next_url value is missing", () => {
         const rec = new TemplateList({
-          next_url: null
+          next_url: null,
         });
         expect(rec.nextPageToken).toBeUndefined();
       });
     });
 
-    describe('previousPageToken getter', () => {
-      it('extracts and returns the token from the next_url value', () => {
+    describe("previousPageToken getter", () => {
+      it("extracts and returns the token from the next_url value", () => {
         const rec = new TemplateList({
-          previous_url: 'https://fake.com?param1=example&before=token'
+          previous_url: "https://fake.com?param1=example&before=token",
         });
-        expect(rec.previousPageToken).toEqual('token');
+        expect(rec.previousPageToken).toEqual("token");
       });
 
-      it('handles when the next_url value is missing', () => {
+      it("handles when the next_url value is missing", () => {
         const rec = new TemplateList({
-          previous_url: null
+          previous_url: null,
         });
         expect(rec.previousPageToken).toBeUndefined();
       });
@@ -176,8 +176,8 @@ describe("Template Models", () => {
     });
 
     it.each([
-      [ 'description', "fake description" ],
-      [ 'published_version', 'vrsn_fakeId' ]
+      ["description", "fake description"],
+      ["published_version", "vrsn_fakeId"],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -189,7 +189,7 @@ describe("Template Models", () => {
     });
 
     it("rejects invalid values for published_version", () => {
-      const rec = new TemplateUpdate;
+      const rec = new TemplateUpdate();
       expect(rec.published_version).not.toBeDefined();
 
       const invalidValues = ["Nope"];
@@ -223,12 +223,12 @@ describe("Template Models", () => {
     });
 
     it.each([
-      [ 'description', "fake description" ],
-      [ 'html', 'fake html' ],
-      [ 'metadata', {} ],
-      [ 'engine', EngineHtml.Legacy ],
-      [ 'engine', EngineHtml.Handlebars ],
-      [ 'engine', null ]
+      ["description", "fake description"],
+      ["html", "fake html"],
+      ["metadata", {}],
+      ["engine", EngineHtml.Legacy],
+      ["engine", EngineHtml.Handlebars],
+      ["engine", null],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -240,7 +240,7 @@ describe("Template Models", () => {
     });
 
     it("rejects invalid values for published_version", () => {
-      const rec = new TemplateUpdate;
+      const rec = new TemplateUpdate();
       expect(rec.published_version).not.toBeDefined();
 
       const invalidValues = ["Nope"];

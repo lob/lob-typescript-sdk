@@ -33,9 +33,8 @@ describe("ReverseGeocodeLookupsApi", () => {
   });
 
   describe("lookup", () => {
-    const mockLocation = new Location;
-    mockLocation.latitude = 10.0518,
-    mockLocation.longitude = 77.5677
+    const mockLocation = new Location();
+    (mockLocation.latitude = 10.0518), (mockLocation.longitude = 77.5677);
 
     it("exists", async () => {
       const reverseGeocodeApi = new ReverseGeocodeLookupsApi(config);
@@ -76,7 +75,9 @@ describe("ReverseGeocodeLookupsApi", () => {
       });
 
       try {
-        await new ReverseGeocodeLookupsApi(configWithBaseOptions).lookup(mockLocation);
+        await new ReverseGeocodeLookupsApi(configWithBaseOptions).lookup(
+          mockLocation
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -92,7 +93,9 @@ describe("ReverseGeocodeLookupsApi", () => {
       });
 
       try {
-        await new ReverseGeocodeLookupsApi(configWithBaseOptions).lookup(mockLocation);
+        await new ReverseGeocodeLookupsApi(configWithBaseOptions).lookup(
+          mockLocation
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -108,7 +111,9 @@ describe("ReverseGeocodeLookupsApi", () => {
       });
 
       try {
-        await new ReverseGeocodeLookupsApi(configWithBaseOptions).lookup(mockLocation);
+        await new ReverseGeocodeLookupsApi(configWithBaseOptions).lookup(
+          mockLocation
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -121,7 +126,9 @@ describe("ReverseGeocodeLookupsApi", () => {
       });
 
       try {
-        await new ReverseGeocodeLookupsApi(configWithBaseOptions).lookup(mockLocation);
+        await new ReverseGeocodeLookupsApi(configWithBaseOptions).lookup(
+          mockLocation
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");

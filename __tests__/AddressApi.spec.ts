@@ -194,9 +194,9 @@ describe("AddressApi", () => {
     it("lists addresses using nextPageToken", async () => {
       const listResponse = await new AddressesApi(config).list(10);
       const responseAfter = await new AddressesApi(config).list(
-          10,
-          undefined,
-          listResponse.nextPageToken
+        10,
+        undefined,
+        listResponse.nextPageToken
       );
       expect(responseAfter).toBeDefined();
       expect(responseAfter?.data).toBeDefined();

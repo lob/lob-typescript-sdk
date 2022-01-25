@@ -13,7 +13,7 @@ module.exports = {
     "!**/node_modules/**",
     "!**/*.config.{js,ts}",
     "!**/__tests__/**",
-    "!jest.integrationConfig.js"
+    "!jest.integrationConfig.js",
   ],
   coverageDirectory: "coverage",
   coverageReporters: ["clover", "html", "json", "lcov", "text"],
@@ -22,8 +22,8 @@ module.exports = {
       branches: 50,
       functions: 50,
       lines: 50,
-      statements: 50
-    }
+      statements: 50,
+    },
   },
   verbose: true,
 };

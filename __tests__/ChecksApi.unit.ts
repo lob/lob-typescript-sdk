@@ -24,7 +24,7 @@ describe("ChecksApi", () => {
     baseOptions: {
       headers: {
         "Content-Type": "application/json",
-        "Idempotency-Key": "fake Idempotency-Key"
+        "Idempotency-Key": "fake Idempotency-Key",
       },
     },
   });
@@ -40,7 +40,7 @@ describe("ChecksApi", () => {
     const chkEditableMock: CheckEditable = {
       from: "fake from",
       bank_account: "fake bank account",
-      amount: 100
+      amount: 100,
     };
 
     it("exists", async () => {
@@ -54,13 +54,10 @@ describe("ChecksApi", () => {
         data: { id: "chk_fakeId" },
       }));
 
-      const chk = await new ChecksApi(config).create(
-        chkEditableMock
-      );
+      const chk = await new ChecksApi(config).create(chkEditableMock);
       expect(chk).toBeDefined();
       expect(chk.id).toEqual("chk_fakeId");
     });
-
 
     it("creates an idempotency key", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
@@ -98,9 +95,7 @@ describe("ChecksApi", () => {
       };
 
       try {
-        await new ChecksApi(configWithBaseOptions).create(
-          chkEditableMock
-        );
+        await new ChecksApi(configWithBaseOptions).create(chkEditableMock);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -116,9 +111,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(configWithBaseOptions).create(
-          chkEditableMock
-        );
+        await new ChecksApi(configWithBaseOptions).create(chkEditableMock);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -134,9 +127,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(configWithBaseOptions).create(
-          chkEditableMock
-        );
+        await new ChecksApi(configWithBaseOptions).create(chkEditableMock);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -152,9 +143,7 @@ describe("ChecksApi", () => {
       };
 
       try {
-        await new ChecksApi(configWithBaseOptions).create(
-          chkEditableMock
-        );
+        await new ChecksApi(configWithBaseOptions).create(chkEditableMock);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -184,9 +173,9 @@ describe("ChecksApi", () => {
         data: { id: "chk_fakeId" },
       }));
 
-      const checks = await new ChecksApi(
-        configWithBaseOptions
-      ).get("chk_fakeId");
+      const checks = await new ChecksApi(configWithBaseOptions).get(
+        "chk_fakeId"
+      );
       expect(checks).toBeDefined();
       expect(checks?.id).toEqual("chk_fakeId");
     });
@@ -269,9 +258,7 @@ describe("ChecksApi", () => {
         data: { id: "chk_fakeId" },
       }));
 
-      const billing_groups = await new ChecksApi(config).cancel(
-        "chk_fakeId"
-      );
+      const billing_groups = await new ChecksApi(config).cancel("chk_fakeId");
       expect(billing_groups).toBeDefined();
       expect(billing_groups?.id).toEqual("chk_fakeId");
     });
@@ -281,9 +268,9 @@ describe("ChecksApi", () => {
         data: { id: "chk_fakeId" },
       }));
 
-      const billing_groups = await new ChecksApi(
-        configWithBaseOptions
-      ).cancel("chk_fakeId");
+      const billing_groups = await new ChecksApi(configWithBaseOptions).cancel(
+        "chk_fakeId"
+      );
       expect(billing_groups).toBeDefined();
       expect(billing_groups?.id).toEqual("chk_fakeId");
     });
@@ -297,9 +284,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(configWithBaseOptions).cancel(
-          "chk_fakeId"
-        );
+        await new ChecksApi(configWithBaseOptions).cancel("chk_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -344,9 +329,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(configWithBaseOptions).cancel(
-          "chk_fakeId"
-        );
+        await new ChecksApi(configWithBaseOptions).cancel("chk_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -364,10 +347,7 @@ describe("ChecksApi", () => {
     it("retrieves all check when no limit is provided", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
-          data: [
-            { id: "chk_fakeId" },
-            { id: "another check id" },
-          ],
+          data: [{ id: "chk_fakeId" }, { id: "another check id" }],
         },
       }));
 
@@ -407,9 +387,7 @@ describe("ChecksApi", () => {
 
     it("should handle the after date correctly", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "after=2020-01-01"
-        );
+        expect(request.url.split("?")[1]).toEqual("after=2020-01-01");
         return {
           data: { data: [{ id: "chk_fakeId" }] },
         };
@@ -472,9 +450,7 @@ describe("ChecksApi", () => {
 
     it("should handle the scheduled correctly", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "scheduled=true"
-        );
+        expect(request.url.split("?")[1]).toEqual("scheduled=true");
         return {
           data: { data: [{ id: "chk_fakeId" }] },
         };
@@ -496,9 +472,7 @@ describe("ChecksApi", () => {
 
     it("should handle the send date correctly", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "send_date=2020-01-01"
-        );
+        expect(request.url.split("?")[1]).toEqual("send_date=2020-01-01");
         return {
           data: { data: [{ id: "chk_fakeId" }] },
         };
@@ -518,12 +492,10 @@ describe("ChecksApi", () => {
       expect(chkApi).toBeDefined();
       expect(chkApi?.data?.length).toEqual(1);
     });
-    
+
     it("should handle the mail type correctly", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "mail_type=usps_first_class"
-        );
+        expect(request.url.split("?")[1]).toEqual("mail_type=usps_first_class");
         return {
           data: { data: [{ id: "chk_fakeId" }] },
         };
@@ -546,19 +518,14 @@ describe("ChecksApi", () => {
 
     it("should handle the before date correctly", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "before=2020-01-31T12"
-        );
+        expect(request.url.split("?")[1]).toEqual("before=2020-01-31T12");
         return {
           data: { data: [{ id: "fake billing group id" }] },
         };
       });
 
       const dateFilter = { gt: "2020-01-01", lt: "2020-01-31T12" };
-      const chkApi = await new ChecksApi(config).list(
-        undefined,
-        dateFilter.lt
-      );
+      const chkApi = await new ChecksApi(config).list(undefined, dateFilter.lt);
       expect(chkApi).toBeDefined();
       expect(chkApi?.data?.length).toEqual(1);
     });
@@ -583,7 +550,7 @@ describe("ChecksApi", () => {
         undefined,
         undefined,
         undefined,
-        { sortBy: "asc" },
+        { sortBy: "asc" }
       );
       expect(chkApi).toBeDefined();
       expect(chkApi?.data?.length).toEqual(1);

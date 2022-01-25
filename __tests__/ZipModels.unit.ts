@@ -1,8 +1,4 @@
-import {
-  Zip,
-  ZipCodeType,
-  ZipLookupCity
-} from "../models";
+import { Zip, ZipCodeType, ZipLookupCity } from "../models";
 
 describe("Zip Models", () => {
   describe("Zip", () => {
@@ -12,15 +8,15 @@ describe("Zip Models", () => {
     });
 
     it.each([
-      [ "id", "us_zip_fakeId" ],
-      [ "zip_code", 11111 ],
-      [ "cities", "fake city" ],
-      [ "zip_code_type", ZipCodeType.Unique ],
-      [ "zip_code_type", ZipCodeType.PoBox ],
-      [ "zip_code_type", ZipCodeType.Standard ],
-      [ "zip_code_type", ZipCodeType.Empty ],
-      [ "zip_code_type", ZipCodeType.Military ],
-      [ "object", "us_zip_lookup" ]
+      ["id", "us_zip_fakeId"],
+      ["zip_code", 11111],
+      ["cities", "fake city"],
+      ["zip_code_type", ZipCodeType.Unique],
+      ["zip_code_type", ZipCodeType.PoBox],
+      ["zip_code_type", ZipCodeType.Standard],
+      ["zip_code_type", ZipCodeType.Empty],
+      ["zip_code_type", ZipCodeType.Military],
+      ["object", "us_zip_lookup"],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -93,12 +89,12 @@ describe("Zip Models", () => {
     });
 
     it.each([
-      [ "city", "fake city" ],
-      [ "state", "fake state" ],
-      [ "county", "fake country" ],
-      [ "county_fips", "11111" ],
-      [ "preferred", true ],
-      [ "preferred", false ]
+      ["city", "fake city"],
+      ["state", "fake state"],
+      ["county", "fake country"],
+      ["county_fips", "11111"],
+      ["preferred", true],
+      ["preferred", false],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
