@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Lob
- * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)?
+ * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)? 
  *
  * The version of the OpenAPI document: 1.3.0
  * Contact: lob-openapi@lob.com
@@ -12,146 +12,88 @@
  * Do not edit the class manually.
  */
 
-import globalAxios, {
-  AxiosPromise,
-  AxiosInstance,
-  AxiosRequestConfig,
-} from "axios";
-import { Configuration } from "../configuration";
+
+import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import {
-  DUMMY_BASE_URL,
-  assertParamExists,
-  setApiKeyToObject,
-  setBasicAuthToObject,
-  setBearerAuthToObject,
-  setOAuthToObject,
-  setSearchParams,
-  serializeDataIfNeeded,
-  toPathString,
-  createRequestFunction,
-  valueToString,
-} from "../common";
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, valueToString } from '../common';
 // @ts-ignore
-import {
-  BASE_PATH,
-  COLLECTION_FORMATS,
-  RequestArgs,
-  BaseAPI,
-  RequiredError,
-} from "../base";
+import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { LobError } from "../models";
+import { LobError } from '../models';
 // @ts-ignore
-import { UsAutocompletions } from "../models";
+import { UsAutocompletions } from '../models';
 // @ts-ignore
-import { UsAutocompletionsWritable } from "../models";
+import { UsAutocompletionsWritable } from '../models';
 /**
  * USAutocompletionsApi - axios parameter creator
  * @export
  */
-export const USAutocompletionsApiAxiosParamCreator = function (
-  configuration?: Configuration
-) {
-  return {
-    /**
-     * Given an address prefix consisting of a partial primary line, as well as optional input of city, state, and zip code, this functionality returns up to 10 full US address suggestions. Not all of them will turn out to be valid addresses; they\'ll need to be [verified](#operation/verification_us).
-     * @summary autocomplete
-     * @param {UsAutocompletionsWritable} usAutocompletionsWritable
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    autocompletion: async (
-      usAutocompletionsWritable: UsAutocompletionsWritable,
-      options: AxiosRequestConfig = {}
-    ): Promise<RequestArgs> => {
-      // verify required parameter 'usAutocompletionsWritable' is not null or undefined
-      assertParamExists(
-        "autocompletion",
-        "usAutocompletionsWritable",
-        usAutocompletionsWritable
-      );
-      const localVarPath = `/us_autocompletions`;
-      // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-      let baseOptions;
-      if (configuration) {
-        baseOptions = configuration.baseOptions;
-      }
+export const USAutocompletionsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Given an address prefix consisting of a partial primary line, as well as optional input of city, state, and zip code, this functionality returns up to 10 full US address suggestions. Not all of them will turn out to be valid addresses; they\'ll need to be [verified](#operation/verification_us).
+         * @summary autocomplete
+         * @param {UsAutocompletionsWritable} usAutocompletionsWritable 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        autocompletion: async (usAutocompletionsWritable: UsAutocompletionsWritable, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'usAutocompletionsWritable' is not null or undefined
+            assertParamExists('autocompletion', 'usAutocompletionsWritable', usAutocompletionsWritable)
+            const localVarPath = `/us_autocompletions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
 
-      const localVarRequestOptions = {
-        method: "POST",
-        ...baseOptions,
-        ...options,
-      };
-      const localVarHeaderParameter = {} as any;
-      const localVarQueryParameter = {} as any;
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
-      // authentication basicAuth required
-      // http basic authentication required
-      setBasicAuthToObject(localVarRequestOptions, configuration);
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
 
-      setSearchParams(localVarUrlObj, localVarQueryParameter);
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
-      localVarRequestOptions.data = serializeDataIfNeeded(
-        usAutocompletionsWritable,
-        localVarRequestOptions,
-        configuration
-      );
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
 
-      return {
-        url: toPathString(localVarUrlObj),
-        options: localVarRequestOptions,
-      };
-    },
-  };
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(usAutocompletionsWritable, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
 };
 
 /**
  * USAutocompletionsApi - functional programming interface
  * @export
  */
-export const USAutocompletionsApiFp = function (configuration?: Configuration) {
-  const localVarAxiosParamCreator =
-    USAutocompletionsApiAxiosParamCreator(configuration);
-  return {
-    /**
-     * Given an address prefix consisting of a partial primary line, as well as optional input of city, state, and zip code, this functionality returns up to 10 full US address suggestions. Not all of them will turn out to be valid addresses; they\'ll need to be [verified](#operation/verification_us).
-     * @summary autocomplete
-     * @param {UsAutocompletionsWritable} usAutocompletionsWritable
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    async autocompletion(
-      usAutocompletionsWritable: UsAutocompletionsWritable,
-      options?: AxiosRequestConfig
-    ): Promise<
-      (
-        axios?: AxiosInstance,
-        basePath?: string
-      ) => AxiosPromise<UsAutocompletions>
-    > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.autocompletion(
-        usAutocompletionsWritable,
-        options
-      );
-      return createRequestFunction(
-        localVarAxiosArgs,
-        globalAxios,
-        BASE_PATH,
-        configuration
-      );
-    },
-  };
+export const USAutocompletionsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = USAutocompletionsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Given an address prefix consisting of a partial primary line, as well as optional input of city, state, and zip code, this functionality returns up to 10 full US address suggestions. Not all of them will turn out to be valid addresses; they\'ll need to be [verified](#operation/verification_us).
+         * @summary autocomplete
+         * @param {UsAutocompletionsWritable} usAutocompletionsWritable 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async autocompletion(usAutocompletionsWritable: UsAutocompletionsWritable, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsAutocompletions>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.autocompletion(usAutocompletionsWritable, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
 };
 
 /**
@@ -161,31 +103,25 @@ export const USAutocompletionsApiFp = function (configuration?: Configuration) {
  * @extends {BaseAPI}
  */
 export class USAutocompletionsApi extends BaseAPI {
-  /**
-   * Given an address prefix consisting of a partial primary line, as well as optional input of city, state, and zip code, this functionality returns up to 10 full US address suggestions. Not all of them will turn out to be valid addresses; they\'ll need to be [verified](#operation/verification_us).
-   * @summary autocomplete
-   * @param {UsAutocompletionsWritable} usAutocompletionsWritable
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof USAutocompletionsApi
-   */
-  public autocomplete(
-    usAutocompletionsWritable: UsAutocompletionsWritable,
-    options?: AxiosRequestConfig
-  ) {
-    return USAutocompletionsApiFp(this.configuration)
-      .autocompletion(usAutocompletionsWritable, options)
-      .then((request) => request(this.axios, this.basePath))
-      .then(function (response) {
-        return new UsAutocompletions(response.data);
-      })
-      .catch((error) => {
-        if (error.response?.data?.error?.message) {
-          error.message = error.response.data.error.message;
-        }
-        throw error;
-      });
-  }
+    /**
+     * Given an address prefix consisting of a partial primary line, as well as optional input of city, state, and zip code, this functionality returns up to 10 full US address suggestions. Not all of them will turn out to be valid addresses; they\'ll need to be [verified](#operation/verification_us).
+     * @summary autocomplete
+     * @param {UsAutocompletionsWritable} usAutocompletionsWritable 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof USAutocompletionsApi
+     */
+    public autocomplete(usAutocompletionsWritable: UsAutocompletionsWritable, options?: AxiosRequestConfig) {
+        return USAutocompletionsApiFp(this.configuration).autocompletion(usAutocompletionsWritable, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new UsAutocompletions(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
+    }
 }
 
 /**
@@ -193,3 +129,4 @@ export class USAutocompletionsApi extends BaseAPI {
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+
