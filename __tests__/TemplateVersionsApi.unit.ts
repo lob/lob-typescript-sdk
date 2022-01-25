@@ -1,6 +1,6 @@
 import { Configuration } from "../configuration";
 
-import { TemplateVersionsApi} from "../api";
+import { TemplateVersionsApi } from "../api";
 import { TemplateVersionWritable } from "..";
 
 import { fail } from "./testUtilities";
@@ -79,7 +79,10 @@ describe("TemplateVersionsApi", () => {
       });
 
       try {
-        await new TemplateVersionsApi(configWithBaseOptions).create("fake id", templateForCreate);
+        await new TemplateVersionsApi(configWithBaseOptions).create(
+          "fake id",
+          templateForCreate
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -95,7 +98,10 @@ describe("TemplateVersionsApi", () => {
       });
 
       try {
-        await new TemplateVersionsApi(configWithBaseOptions).create("fake id",templateForCreate);
+        await new TemplateVersionsApi(configWithBaseOptions).create(
+          "fake id",
+          templateForCreate
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -111,7 +117,10 @@ describe("TemplateVersionsApi", () => {
       });
 
       try {
-        await new TemplateVersionsApi(configWithBaseOptions).create("fake id", templateForCreate);
+        await new TemplateVersionsApi(configWithBaseOptions).create(
+          "fake id",
+          templateForCreate
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -122,9 +131,12 @@ describe("TemplateVersionsApi", () => {
       axiosRequest.mockImplementationOnce(async () => {
         throw new Error("Unknown Error");
       });
-      
+
       try {
-        await new TemplateVersionsApi(configWithBaseOptions).create("fake id", templateForCreate);
+        await new TemplateVersionsApi(configWithBaseOptions).create(
+          "fake id",
+          templateForCreate
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -210,7 +222,10 @@ describe("TemplateVersionsApi", () => {
         data: { id: "vrsn_fakeId" },
       }));
 
-      const templates = await new TemplateVersionsApi(config).delete("fake id", "fake vrsn id");
+      const templates = await new TemplateVersionsApi(config).delete(
+        "fake id",
+        "fake vrsn id"
+      );
       expect(templates).toBeDefined();
       expect(templates?.id).toEqual("vrsn_fakeId");
     });
@@ -220,7 +235,9 @@ describe("TemplateVersionsApi", () => {
         data: { id: "vrsn_tmplFakeId" },
       }));
 
-      const templates = await new TemplateVersionsApi(configWithBaseOptions).delete("fake id", "fake vrsn id");
+      const templates = await new TemplateVersionsApi(
+        configWithBaseOptions
+      ).delete("fake id", "fake vrsn id");
       expect(templates).toBeDefined();
       expect(templates?.id).toEqual("vrsn_tmplFakeId");
     });
@@ -234,7 +251,10 @@ describe("TemplateVersionsApi", () => {
       });
 
       try {
-        await new TemplateVersionsApi(configWithBaseOptions).delete("fake id" , "fake vrsn id");
+        await new TemplateVersionsApi(configWithBaseOptions).delete(
+          "fake id",
+          "fake vrsn id"
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -250,7 +270,7 @@ describe("TemplateVersionsApi", () => {
       });
 
       try {
-        await new TemplateVersionsApi(config).delete("fake id" ,  "fake vrsn id");
+        await new TemplateVersionsApi(config).delete("fake id", "fake vrsn id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -266,7 +286,7 @@ describe("TemplateVersionsApi", () => {
       });
 
       try {
-        await new TemplateVersionsApi(config).delete("fake id" , "fake vrsn id");
+        await new TemplateVersionsApi(config).delete("fake id", "fake vrsn id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -279,7 +299,10 @@ describe("TemplateVersionsApi", () => {
       });
 
       try {
-        await new TemplateVersionsApi(configWithBaseOptions).delete("fake id" , "fake vrsn id");
+        await new TemplateVersionsApi(configWithBaseOptions).delete(
+          "fake id",
+          "fake vrsn id"
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -290,7 +313,7 @@ describe("TemplateVersionsApi", () => {
   describe("update", () => {
     const templateVersionUpdatable = {
       description: "template version updated",
-      published_version: "fake version"
+      published_version: "fake version",
     };
 
     it("exists", async () => {
@@ -304,7 +327,11 @@ describe("TemplateVersionsApi", () => {
         data: { id: "vrsn_tmplFakeId" },
       }));
 
-      const templates = await new TemplateVersionsApi(config).update("fake id", "fake vrsn id" , templateVersionUpdatable);
+      const templates = await new TemplateVersionsApi(config).update(
+        "fake id",
+        "fake vrsn id",
+        templateVersionUpdatable
+      );
       expect(templates).toBeDefined();
       expect(templates?.id).toEqual("vrsn_tmplFakeId");
     });
@@ -314,10 +341,9 @@ describe("TemplateVersionsApi", () => {
         data: { id: "vrsn_tmplFakeId" },
       }));
 
-      const templates = await new TemplateVersionsApi(configWithBaseOptions).update(
-        "fake id", "fake vrsn id",
-        templateVersionUpdatable
-      );
+      const templates = await new TemplateVersionsApi(
+        configWithBaseOptions
+      ).update("fake id", "fake vrsn id", templateVersionUpdatable);
       expect(templates).toBeDefined();
       expect(templates?.id).toEqual("vrsn_tmplFakeId");
     });
@@ -332,7 +358,8 @@ describe("TemplateVersionsApi", () => {
 
       try {
         await new TemplateVersionsApi(configWithBaseOptions).update(
-          "fake id", "fake vrsn id",
+          "fake id",
+          "fake vrsn id",
           templateVersionUpdatable
         );
         fail("Should throw");
@@ -350,7 +377,11 @@ describe("TemplateVersionsApi", () => {
       });
 
       try {
-        await new TemplateVersionsApi(config).update("fake id", "fake vrsn id", templateVersionUpdatable);
+        await new TemplateVersionsApi(config).update(
+          "fake id",
+          "fake vrsn id",
+          templateVersionUpdatable
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -366,7 +397,11 @@ describe("TemplateVersionsApi", () => {
       });
 
       try {
-        await new TemplateVersionsApi(config).update("fake id",  "fake vrsn id", templateVersionUpdatable);
+        await new TemplateVersionsApi(config).update(
+          "fake id",
+          "fake vrsn id",
+          templateVersionUpdatable
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -380,7 +415,8 @@ describe("TemplateVersionsApi", () => {
 
       try {
         await new TemplateVersionsApi(configWithBaseOptions).update(
-          "fake id", "fake vrsn id",
+          "fake id",
+          "fake vrsn id",
           templateVersionUpdatable
         );
         fail("Should throw");
@@ -393,7 +429,7 @@ describe("TemplateVersionsApi", () => {
   describe("update", () => {
     const templateVersionUpdatable = {
       description: "template  version updated",
-      published_version: "fake version"
+      published_version: "fake version",
     };
 
     it("exists", async () => {
@@ -407,7 +443,11 @@ describe("TemplateVersionsApi", () => {
         data: { id: "vrsn_tmplFakeId" },
       }));
 
-      const templates = await new TemplateVersionsApi(config).update("fake id", "fake vrsn id", templateVersionUpdatable);
+      const templates = await new TemplateVersionsApi(config).update(
+        "fake id",
+        "fake vrsn id",
+        templateVersionUpdatable
+      );
       expect(templates).toBeDefined();
       expect(templates?.id).toEqual("vrsn_tmplFakeId");
     });
@@ -417,10 +457,9 @@ describe("TemplateVersionsApi", () => {
         data: { id: "vrsn_tmplFakeId" },
       }));
 
-      const templates = await new TemplateVersionsApi(configWithBaseOptions).update(
-        "fake id", "fake vrsn id",
-        templateVersionUpdatable
-      );
+      const templates = await new TemplateVersionsApi(
+        configWithBaseOptions
+      ).update("fake id", "fake vrsn id", templateVersionUpdatable);
       expect(templates).toBeDefined();
       expect(templates?.id).toEqual("vrsn_tmplFakeId");
     });
@@ -435,7 +474,8 @@ describe("TemplateVersionsApi", () => {
 
       try {
         await new TemplateVersionsApi(configWithBaseOptions).update(
-          "fake id", "fake vrsn id",
+          "fake id",
+          "fake vrsn id",
           templateVersionUpdatable
         );
         fail("Should throw");
@@ -451,7 +491,8 @@ describe("TemplateVersionsApi", () => {
 
       try {
         await new TemplateVersionsApi(configWithBaseOptions).update(
-          "fake id", "fake vrsn id",
+          "fake id",
+          "fake vrsn id",
           templateVersionUpdatable
         );
         fail("Should throw");
@@ -471,11 +512,16 @@ describe("TemplateVersionsApi", () => {
     it("gets all templates when no limit is provided", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
-          data: [{ id: "vrsn_tmpl_fakeId" }, { id: "vrsn_another tmpl_fakeId" }],
+          data: [
+            { id: "vrsn_tmpl_fakeId" },
+            { id: "vrsn_another tmpl_fakeId" },
+          ],
         },
       }));
 
-      const templateVersionsApi = await new TemplateVersionsApi(config).list("fake id");
+      const templateVersionsApi = await new TemplateVersionsApi(config).list(
+        "fake id"
+      );
       expect(templateVersionsApi).toBeDefined();
       expect(templateVersionsApi?.data?.length).toEqual(2);
     });
@@ -485,7 +531,10 @@ describe("TemplateVersionsApi", () => {
         data: { data: [{ id: "tmpl_fakeId" }] },
       }));
 
-      const templateVersionsApi = await new TemplateVersionsApi(config).list("fake id", 1);
+      const templateVersionsApi = await new TemplateVersionsApi(config).list(
+        "fake id",
+        1
+      );
       expect(templateVersionsApi).toBeDefined();
       expect(templateVersionsApi?.data?.length).toEqual(1);
     });
@@ -495,7 +544,11 @@ describe("TemplateVersionsApi", () => {
         data: { data: [{ id: "tmpl_fakeId" }] },
       }));
 
-      const templateVersionsApi = await new TemplateVersionsApi(config).list("fake id" , 1, "fake");
+      const templateVersionsApi = await new TemplateVersionsApi(config).list(
+        "fake id",
+        1,
+        "fake"
+      );
       expect(templateVersionsApi).toBeDefined();
       expect(templateVersionsApi?.data?.length).toEqual(1);
     });
@@ -505,7 +558,11 @@ describe("TemplateVersionsApi", () => {
         data: { data: [{ id: "vrsn_tmpl_fakeId" }] },
       }));
 
-      const templateVersionsApi = await new TemplateVersionsApi(config).list("fake id", 1, "fake");
+      const templateVersionsApi = await new TemplateVersionsApi(config).list(
+        "fake id",
+        1,
+        "fake"
+      );
       expect(templateVersionsApi).toBeDefined();
       expect(templateVersionsApi?.data?.length).toEqual(1);
     });
@@ -515,7 +572,14 @@ describe("TemplateVersionsApi", () => {
         data: { data: [{ id: "vrsn_tmpl_fakeId" }] },
       }));
 
-      const templateVersionsApi = await new TemplateVersionsApi(config).list("fake id", 1, "before", "after", ["fake"], {date: "jan 24, 2022"});
+      const templateVersionsApi = await new TemplateVersionsApi(config).list(
+        "fake id",
+        1,
+        "before",
+        "after",
+        ["fake"],
+        { date: "jan 24, 2022" }
+      );
       expect(templateVersionsApi).toBeDefined();
       expect(templateVersionsApi?.data?.length).toEqual(1);
     });
