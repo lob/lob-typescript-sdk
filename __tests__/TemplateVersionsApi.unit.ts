@@ -78,10 +78,6 @@ describe("TemplateVersionsApi", () => {
           response: { data: { error: { message: "error reported by API" } } },
         };
       });
-      // const templateVersionUpdatable = {
-      //   description: "template version updated",
-      //   published_version: "fake version"
-      // };
 
       try {
         await new TemplateVersionsApi(configWithBaseOptions).create("fake id", templateForCreate);
@@ -127,11 +123,7 @@ describe("TemplateVersionsApi", () => {
       axiosRequest.mockImplementationOnce(async () => {
         throw new Error("Unknown Error");
       });
-      const templateVersionUpdatable = {
-        description: "template  version updated",
-        published_version: "fake version"
-      };
-
+      
       try {
         await new TemplateVersionsApi(configWithBaseOptions).create("fake id", templateForCreate);
         fail("Should throw");
@@ -140,8 +132,6 @@ describe("TemplateVersionsApi", () => {
       }
     });
   });
-
-  //});
 
   describe("templateVersionGet", () => {
     it("exists", async () => {
@@ -581,9 +571,4 @@ describe("TemplateVersionsApi", () => {
       }
     });
   });
-
-
-
-
-
 });
