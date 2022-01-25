@@ -55,7 +55,7 @@ export const ZipLookupsApiAxiosParamCreator = function (
   return {
     /**
      * Returns information about a ZIP code
-     * @summary Lookups
+     * @summary lookups
      * @param {string} body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -120,7 +120,7 @@ export const ZipLookupsApiFp = function (configuration?: Configuration) {
   return {
     /**
      * Returns information about a ZIP code
-     * @summary Lookups
+     * @summary lookups
      * @param {string} body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -154,13 +154,13 @@ export const ZipLookupsApiFp = function (configuration?: Configuration) {
 export class ZipLookupsApi extends BaseAPI {
   /**
    * Returns information about a ZIP code
-   * @summary Lookups
+   * @summary lookups
    * @param {string} body
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof ZipLookupsApi
    */
-  public Lookups(body: string, options?: AxiosRequestConfig) {
+  public lookups(body: string, options?: AxiosRequestConfig) {
     return ZipLookupsApiFp(this.configuration)
       .zipLookup(body, options)
       .then((request) => request(this.axios, this.basePath))
