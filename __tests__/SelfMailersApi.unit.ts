@@ -1,10 +1,15 @@
-import {Configuration} from "../configuration";
+import { Configuration } from "../configuration";
 
-import {CountryExtended, MailType, SelfMailerEditable, SelfMailerSize} from "../models";
-import {SelfMailersApi} from "../api";
+import {
+  CountryExtended,
+  MailType,
+  SelfMailerEditable,
+  SelfMailerSize,
+} from "../models";
+import { SelfMailersApi } from "../api";
 
-import {fail} from "./testUtilities";
-import {DATE_FILTER} from "./testFixtures";
+import { fail } from "./testUtilities";
+import { DATE_FILTER } from "./testFixtures";
 
 // Axios Mock
 import axios from "axios";
@@ -98,14 +103,16 @@ describe("SelfMailersApi", () => {
     it("creates a self-mailer with idempotency", async () => {
       axiosRequest.mockImplementationOnce(async (reqParams) => {
         expect(reqParams.headers["Idempotency-Key"]).toBeDefined();
-        expect(reqParams.headers["Idempotency-Key"]).toEqual("fake idempotency");
+        expect(reqParams.headers["Idempotency-Key"]).toEqual(
+          "fake idempotency"
+        );
         return {
-          data: {id: "sfm_fakeId"}
+          data: { id: "sfm_fakeId" },
         };
       });
 
       const selfMailersApi = await new SelfMailersApi(
-          configWithBaseOptions,
+        configWithBaseOptions
       ).create(sfmEditableMock, "fake idempotency");
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.id).toEqual("sfm_fakeId");
@@ -286,9 +293,9 @@ describe("SelfMailersApi", () => {
         data: { id: "sfm_fakeId" },
       }));
 
-      const self_mailers = await new SelfMailersApi(configWithBaseOptions).delete(
-        "fake id"
-      );
+      const self_mailers = await new SelfMailersApi(
+        configWithBaseOptions
+      ).delete("fake id");
       expect(self_mailers).toBeDefined();
       expect(self_mailers?.id).toEqual("sfm_fakeId");
     });
@@ -365,10 +372,7 @@ describe("SelfMailersApi", () => {
     it("gets all self_mailers when no limit is provided", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
-          data: [
-            { id: "sfm_fakeId" },
-            { id: "another sfm_fakeId" },
-          ],
+          data: [{ id: "sfm_fakeId" }, { id: "another sfm_fakeId" }],
         },
       }));
 
@@ -392,7 +396,10 @@ describe("SelfMailersApi", () => {
         data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
-      const selfMailersApi = await new SelfMailersApi(config).list(undefined, "fake");
+      const selfMailersApi = await new SelfMailersApi(config).list(
+        undefined,
+        "fake"
+      );
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.data?.length).toEqual(1);
     });
@@ -432,11 +439,11 @@ describe("SelfMailersApi", () => {
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          DATE_FILTER
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        DATE_FILTER
       );
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.data?.length).toEqual(1);
@@ -448,12 +455,12 @@ describe("SelfMailersApi", () => {
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          { what: "this" }
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        { what: "this" }
       );
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.data?.length).toEqual(1);
@@ -465,13 +472,13 @@ describe("SelfMailersApi", () => {
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          SelfMailerSize._6x18Bifold
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        SelfMailerSize._6x18Bifold
       );
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.data?.length).toEqual(1);
@@ -483,14 +490,14 @@ describe("SelfMailersApi", () => {
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          true
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        true
       );
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.data?.length).toEqual(1);
@@ -502,15 +509,15 @@ describe("SelfMailersApi", () => {
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          DATE_FILTER
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        DATE_FILTER
       );
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.data?.length).toEqual(1);
@@ -522,16 +529,16 @@ describe("SelfMailersApi", () => {
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          MailType.FirstClass
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        MailType.FirstClass
       );
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.data?.length).toEqual(1);
@@ -543,17 +550,17 @@ describe("SelfMailersApi", () => {
       }));
 
       const selfMailersApi = await new SelfMailersApi(config).list(
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          { date_created: "asc" }
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        { date_created: "asc" }
       );
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.data?.length).toEqual(1);

@@ -4,7 +4,7 @@ import {
   TemplateVersionDeletion,
   TemplateVersionList,
   TemplateVersionUpdatable,
-  TemplateVersionWritable
+  TemplateVersionWritable,
 } from "../models";
 
 describe("TemplateVersion Models", () => {
@@ -15,21 +15,21 @@ describe("TemplateVersion Models", () => {
     });
 
     it.each([
-      [ "id", "vrsn_fakeId" ],
-      [ "description", "fake description" ],
-      [ "html", "fake html" ],
-      [ "engine", EngineHtml.Legacy ],
-      [ "engine", EngineHtml.Handlebars ],
-      [ "engine", null ],
-      [ "suggest_json_editor", true ],
-      [ "suggest_json_editor", false ],
-      [ "merge_variables", {} ],
-      [ "date_created", new Date().toISOString() ],
-      [ "date_modified", new Date().toISOString() ],
-      [ "deleted", true ],
-      [ "deleted", false ],
-      [ "object", "template_version" ]
-  ])("can be created with a provided %s value", (prop, val) => {
+      ["id", "vrsn_fakeId"],
+      ["description", "fake description"],
+      ["html", "fake html"],
+      ["engine", EngineHtml.Legacy],
+      ["engine", EngineHtml.Handlebars],
+      ["engine", null],
+      ["suggest_json_editor", true],
+      ["suggest_json_editor", false],
+      ["merge_variables", {}],
+      ["date_created", new Date().toISOString()],
+      ["date_modified", new Date().toISOString()],
+      ["deleted", true],
+      ["deleted", false],
+      ["object", "template_version"],
+    ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
 
@@ -74,10 +74,10 @@ describe("TemplateVersion Models", () => {
     });
 
     it.each([
-      [ 'id', [ 'vrsn_fakeId'] ],
-      [ 'object', 'Address' ],
-      [ 'deleted', true ],
-      [ 'deleted', false ]
+      ["id", ["vrsn_fakeId"]],
+      ["object", "Address"],
+      ["deleted", true],
+      ["deleted", false],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -123,12 +123,12 @@ describe("TemplateVersion Models", () => {
     });
 
     it.each([
-      [ 'object', 'Address' ],
-      [ 'data', [] ],
-      [ 'next_url', 'some url' ],
-      [ 'previous_url', 'some url' ],
-      [ 'count', 1 ],
-      [ 'total_count', 100 ]
+      ["object", "Address"],
+      ["data", []],
+      ["next_url", "some url"],
+      ["previous_url", "some url"],
+      ["count", 1],
+      ["total_count", 100],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -139,33 +139,33 @@ describe("TemplateVersion Models", () => {
       expect((rec as any)[prop]).toEqual(val);
     });
 
-    describe('nextPageToken getter', () => {
-      it('extracts and returns the token from the next_url value', () => {
+    describe("nextPageToken getter", () => {
+      it("extracts and returns the token from the next_url value", () => {
         const rec = new TemplateVersionList({
-          next_url: 'https://fake.com?param1=example&after=token'
+          next_url: "https://fake.com?param1=example&after=token",
         });
-        expect(rec.nextPageToken).toEqual('token');
+        expect(rec.nextPageToken).toEqual("token");
       });
 
-      it('handles when the next_url value is missing', () => {
+      it("handles when the next_url value is missing", () => {
         const rec = new TemplateVersionList({
-          next_url: null
+          next_url: null,
         });
         expect(rec.nextPageToken).toBeUndefined();
       });
     });
 
-    describe('previousPageToken getter', () => {
-      it('extracts and returns the token from the next_url value', () => {
+    describe("previousPageToken getter", () => {
+      it("extracts and returns the token from the next_url value", () => {
         const rec = new TemplateVersionList({
-          previous_url: 'https://fake.com?param1=example&before=token'
+          previous_url: "https://fake.com?param1=example&before=token",
         });
-        expect(rec.previousPageToken).toEqual('token');
+        expect(rec.previousPageToken).toEqual("token");
       });
 
-      it('handles when the next_url value is missing', () => {
+      it("handles when the next_url value is missing", () => {
         const rec = new TemplateVersionList({
-          previous_url: null
+          previous_url: null,
         });
         expect(rec.previousPageToken).toBeUndefined();
       });
@@ -179,10 +179,10 @@ describe("TemplateVersion Models", () => {
     });
 
     it.each([
-      [ 'description', "fake description" ],
-      [ 'engine', EngineHtml.Legacy ],
-      [ 'engine', EngineHtml.Handlebars ],
-      [ 'engine', null ]
+      ["description", "fake description"],
+      ["engine", EngineHtml.Legacy],
+      ["engine", EngineHtml.Handlebars],
+      ["engine", null],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -201,11 +201,11 @@ describe("TemplateVersion Models", () => {
     });
 
     it.each([
-      [ 'description', "fake description" ],
-      [ 'html', 'fake html' ],
-      [ 'engine', EngineHtml.Legacy ],
-      [ 'engine', EngineHtml.Handlebars ],
-      [ 'engine', null ]
+      ["description", "fake description"],
+      ["html", "fake html"],
+      ["engine", EngineHtml.Legacy],
+      ["engine", EngineHtml.Handlebars],
+      ["engine", null],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;

@@ -34,8 +34,8 @@ describe("TemplatesApi", () => {
 
   describe("create", () => {
     const templateWritableMock: TemplateWritable = {
-        description: "Newer Template",
-        html: "<html>Updated HTML for {{name}}</html>"
+      description: "Newer Template",
+      html: "<html>Updated HTML for {{name}}</html>",
     };
 
     it("exists", async () => {
@@ -49,7 +49,9 @@ describe("TemplatesApi", () => {
         data: { id: "tmpl_fakeId" },
       }));
 
-      const template = await new TemplatesApi(config).create(templateWritableMock);
+      const template = await new TemplatesApi(config).create(
+        templateWritableMock
+      );
       expect(template).toBeDefined();
       expect(template.id).toEqual("tmpl_fakeId");
     });
@@ -75,11 +77,13 @@ describe("TemplatesApi", () => {
       });
       const templateUpdatable = {
         description: "template updated",
-        published_version: "fake version"
+        published_version: "fake version",
       };
 
       try {
-        await new TemplatesApi(configWithBaseOptions).create(templateWritableMock);
+        await new TemplatesApi(configWithBaseOptions).create(
+          templateWritableMock
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -95,7 +99,9 @@ describe("TemplatesApi", () => {
       });
 
       try {
-        await new TemplatesApi(configWithBaseOptions).create(templateWritableMock);
+        await new TemplatesApi(configWithBaseOptions).create(
+          templateWritableMock
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -111,7 +117,9 @@ describe("TemplatesApi", () => {
       });
 
       try {
-        await new TemplatesApi(configWithBaseOptions).create(templateWritableMock);
+        await new TemplatesApi(configWithBaseOptions).create(
+          templateWritableMock
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -124,11 +132,13 @@ describe("TemplatesApi", () => {
       });
       const templateUpdatable = {
         description: "template updated",
-        published_version: "fake version"
+        published_version: "fake version",
       };
 
       try {
-        await new TemplatesApi(configWithBaseOptions).create(templateWritableMock);
+        await new TemplatesApi(configWithBaseOptions).create(
+          templateWritableMock
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -158,7 +168,9 @@ describe("TemplatesApi", () => {
         data: { id: "tmpl_fakeId" },
       }));
 
-      const templates = await new TemplatesApi(configWithBaseOptions).get("fake id");
+      const templates = await new TemplatesApi(configWithBaseOptions).get(
+        "fake id"
+      );
       expect(templates).toBeDefined();
       expect(templates?.id).toEqual("tmpl_fakeId");
     });
@@ -247,7 +259,9 @@ describe("TemplatesApi", () => {
         data: { id: "tmpl_fakeId" },
       }));
 
-      const templates = await new TemplatesApi(configWithBaseOptions).delete("fake id");
+      const templates = await new TemplatesApi(configWithBaseOptions).delete(
+        "fake id"
+      );
       expect(templates).toBeDefined();
       expect(templates?.id).toEqual("tmpl_fakeId");
     });
@@ -317,7 +331,7 @@ describe("TemplatesApi", () => {
   describe("update", () => {
     const templateUpdatable = {
       description: "template updated",
-      published_version: "fake version"
+      published_version: "fake version",
     };
 
     it("exists", async () => {
@@ -331,7 +345,10 @@ describe("TemplatesApi", () => {
         data: { id: "tmpl_fakeId" },
       }));
 
-      const templates = await new TemplatesApi(config).update("fake id", templateUpdatable);
+      const templates = await new TemplatesApi(config).update(
+        "fake id",
+        templateUpdatable
+      );
       expect(templates).toBeDefined();
       expect(templates?.id).toEqual("tmpl_fakeId");
     });
@@ -420,7 +437,7 @@ describe("TemplatesApi", () => {
   describe("update", () => {
     const templateUpdatable = {
       description: "template updated",
-      published_version: "fake version"
+      published_version: "fake version",
     };
 
     it("exists", async () => {
@@ -434,7 +451,10 @@ describe("TemplatesApi", () => {
         data: { id: "tmpl_fakeId" },
       }));
 
-      const templates = await new TemplatesApi(config).update("fake id", templateUpdatable);
+      const templates = await new TemplatesApi(config).update(
+        "fake id",
+        templateUpdatable
+      );
       expect(templates).toBeDefined();
       expect(templates?.id).toEqual("tmpl_fakeId");
     });
@@ -542,7 +562,12 @@ describe("TemplatesApi", () => {
         data: { data: [{ id: "tmpl_fakeId" }] },
       }));
 
-      const templatesApi = await new TemplatesApi(config).list(1, "before", "after", ["fake"]);
+      const templatesApi = await new TemplatesApi(config).list(
+        1,
+        "before",
+        "after",
+        ["fake"]
+      );
       expect(templatesApi).toBeDefined();
       expect(templatesApi?.data?.length).toEqual(1);
     });

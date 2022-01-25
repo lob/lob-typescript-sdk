@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Lob
- * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)? 
+ * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)?
  *
  * The version of the OpenAPI document: 1.3.0
  * Contact: lob-openapi@lob.com
@@ -12,328 +12,512 @@
  * Do not edit the class manually.
  */
 
-
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
+import globalAxios, {
+  AxiosPromise,
+  AxiosInstance,
+  AxiosRequestConfig,
+} from "axios";
+import { Configuration } from "../configuration";
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, valueToString } from '../common';
+import {
+  DUMMY_BASE_URL,
+  assertParamExists,
+  setApiKeyToObject,
+  setBasicAuthToObject,
+  setBearerAuthToObject,
+  setOAuthToObject,
+  setSearchParams,
+  serializeDataIfNeeded,
+  toPathString,
+  createRequestFunction,
+  valueToString,
+} from "../common";
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import {
+  BASE_PATH,
+  COLLECTION_FORMATS,
+  RequestArgs,
+  BaseAPI,
+  RequiredError,
+} from "../base";
 // @ts-ignore
-import { BankAccount } from '../models';
+import { BankAccount } from "../models";
 // @ts-ignore
-import { BankAccountDeletion } from '../models';
+import { BankAccountDeletion } from "../models";
 // @ts-ignore
-import { BankAccountList } from '../models';
+import { BankAccountList } from "../models";
 // @ts-ignore
-import { BankAccountVerify } from '../models';
+import { BankAccountVerify } from "../models";
 // @ts-ignore
-import { BankAccountWritable } from '../models';
+import { BankAccountWritable } from "../models";
 // @ts-ignore
-import { LobError } from '../models';
+import { LobError } from "../models";
 /**
  * BankAccountsApi - axios parameter creator
  * @export
  */
-export const BankAccountsApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * Creates a new bank account with the provided properties. Bank accounts created in live mode will need to be verified via micro deposits before being able to send live checks. The deposits will appear in the bank account in 2-3 business days and have the description \"VERIFICATION\".
-         * @summary create
-         * @param {BankAccountWritable} bankAccountWritable 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankAccountCreate: async (bankAccountWritable: BankAccountWritable, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'bankAccountWritable' is not null or undefined
-            assertParamExists('bankAccountCreate', 'bankAccountWritable', bankAccountWritable)
-            const localVarPath = `/bank_accounts`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
+export const BankAccountsApiAxiosParamCreator = function (
+  configuration?: Configuration
+) {
+  return {
+    /**
+     * Creates a new bank account with the provided properties. Bank accounts created in live mode will need to be verified via micro deposits before being able to send live checks. The deposits will appear in the bank account in 2-3 business days and have the description \"VERIFICATION\".
+     * @summary create
+     * @param {BankAccountWritable} bankAccountWritable
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountCreate: async (
+      bankAccountWritable: BankAccountWritable,
+      options: AxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'bankAccountWritable' is not null or undefined
+      assertParamExists(
+        "bankAccountCreate",
+        "bankAccountWritable",
+        bankAccountWritable
+      );
+      const localVarPath = `/bank_accounts`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
+      const localVarRequestOptions = {
+        method: "POST",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
+      // authentication basicAuth required
+      // http basic authentication required
+      setBasicAuthToObject(localVarRequestOptions, configuration);
 
+      localVarHeaderParameter["Content-Type"] = "application/json";
 
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        bankAccountWritable,
+        localVarRequestOptions,
+        configuration
+      );
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(bankAccountWritable, localVarRequestOptions, configuration)
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Permanently deletes a bank account. It cannot be undone.
+     * @summary delete
+     * @param {string} bankId id of the bank account
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountDelete: async (
+      bankId: string,
+      options: AxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'bankId' is not null or undefined
+      assertParamExists("bankAccountDelete", "bankId", bankId);
+      const localVarPath = `/bank_accounts/{bank_id}`.replace(
+        `{${"bank_id"}}`,
+        encodeURIComponent(String(bankId))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
 
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Permanently deletes a bank account. It cannot be undone.
-         * @summary delete
-         * @param {string} bankId id of the bank account
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankAccountDelete: async (bankId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'bankId' is not null or undefined
-            assertParamExists('bankAccountDelete', 'bankId', bankId)
-            const localVarPath = `/bank_accounts/{bank_id}`
-                .replace(`{${"bank_id"}}`, encodeURIComponent(String(bankId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
+      const localVarRequestOptions = {
+        method: "DELETE",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
+      // authentication basicAuth required
+      // http basic authentication required
+      setBasicAuthToObject(localVarRequestOptions, configuration);
 
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
 
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Retrieves the details of an existing bank account. You need only supply the unique bank account identifier that was returned upon bank account creation.
+     * @summary get
+     * @param {string} bankId id of the bank account
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountRetrieve: async (
+      bankId: string,
+      options: AxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'bankId' is not null or undefined
+      assertParamExists("bankAccountRetrieve", "bankId", bankId);
+      const localVarPath = `/bank_accounts/{bank_id}`.replace(
+        `{${"bank_id"}}`,
+        encodeURIComponent(String(bankId))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
 
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Retrieves the details of an existing bank account. You need only supply the unique bank account identifier that was returned upon bank account creation.
-         * @summary get
-         * @param {string} bankId id of the bank account
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankAccountRetrieve: async (bankId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'bankId' is not null or undefined
-            assertParamExists('bankAccountRetrieve', 'bankId', bankId)
-            const localVarPath = `/bank_accounts/{bank_id}`
-                .replace(`{${"bank_id"}}`, encodeURIComponent(String(bankId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
+      // authentication basicAuth required
+      // http basic authentication required
+      setBasicAuthToObject(localVarRequestOptions, configuration);
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
 
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Verify a bank account in order to create a check.
+     * @summary verify
+     * @param {string} bankId id of the bank account to be verified
+     * @param {BankAccountVerify} bankAccountVerify
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountVerify: async (
+      bankId: string,
+      bankAccountVerify: BankAccountVerify,
+      options: AxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'bankId' is not null or undefined
+      assertParamExists("bankAccountVerify", "bankId", bankId);
+      // verify required parameter 'bankAccountVerify' is not null or undefined
+      assertParamExists(
+        "bankAccountVerify",
+        "bankAccountVerify",
+        bankAccountVerify
+      );
+      const localVarPath = `/bank_accounts/{bank_id}/verify`.replace(
+        `{${"bank_id"}}`,
+        encodeURIComponent(String(bankId))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
 
+      const localVarRequestOptions = {
+        method: "POST",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+      // authentication basicAuth required
+      // http basic authentication required
+      setBasicAuthToObject(localVarRequestOptions, configuration);
 
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Verify a bank account in order to create a check.
-         * @summary verify
-         * @param {string} bankId id of the bank account to be verified
-         * @param {BankAccountVerify} bankAccountVerify 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankAccountVerify: async (bankId: string, bankAccountVerify: BankAccountVerify, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'bankId' is not null or undefined
-            assertParamExists('bankAccountVerify', 'bankId', bankId)
-            // verify required parameter 'bankAccountVerify' is not null or undefined
-            assertParamExists('bankAccountVerify', 'bankAccountVerify', bankAccountVerify)
-            const localVarPath = `/bank_accounts/{bank_id}/verify`
-                .replace(`{${"bank_id"}}`, encodeURIComponent(String(bankId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
+      localVarHeaderParameter["Content-Type"] = "application/json";
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        bankAccountVerify,
+        localVarRequestOptions,
+        configuration
+      );
 
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Returns a list of your bank accounts. The bank accounts are returned sorted by creation date, with the most recently created bank accounts appearing first.
+     * @summary list
+     * @param {number} [limit] How many results to return.
+     * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response.
+     * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response.
+     * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
+     * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
+     * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsList: async (
+      limit?: number,
+      before?: string,
+      after?: string,
+      include?: Array<string>,
+      dateCreated?: { [key: string]: string },
+      metadata?: { [key: string]: string },
+      options: AxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/bank_accounts`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
 
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
+      // authentication basicAuth required
+      // http basic authentication required
+      setBasicAuthToObject(localVarRequestOptions, configuration);
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(bankAccountVerify, localVarRequestOptions, configuration)
+      if (limit !== undefined) {
+        localVarQueryParameter["limit"] = limit;
+      }
 
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns a list of your bank accounts. The bank accounts are returned sorted by creation date, with the most recently created bank accounts appearing first.
-         * @summary list
-         * @param {number} [limit] How many results to return.
-         * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
-         * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
-         * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
-         * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
-         * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankAccountsList: async (limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/bank_accounts`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
+      if (before !== undefined) {
+        localVarQueryParameter["before"] = before;
+      }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
+      if (after !== undefined) {
+        localVarQueryParameter["after"] = after;
+      }
 
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
+      if (include) {
+        localVarQueryParameter["include"] = valueToString(include);
+      }
 
-            if (limit !== undefined) {
-                localVarQueryParameter['limit'] = limit;
-            }
+      if (dateCreated !== undefined) {
+        localVarQueryParameter["date_created"] = valueToString(dateCreated);
+      }
 
-            if (before !== undefined) {
-                localVarQueryParameter['before'] = before;
-            }
+      if (metadata !== undefined) {
+        localVarQueryParameter["metadata"] = valueToString(metadata);
+      }
 
-            if (after !== undefined) {
-                localVarQueryParameter['after'] = after;
-            }
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
 
-            if (include) {
-                localVarQueryParameter['include'] = valueToString(include);
-            }
-
-            if (dateCreated !== undefined) {
-                localVarQueryParameter['date_created'] = valueToString(dateCreated);
-            }
-
-            if (metadata !== undefined) {
-                localVarQueryParameter['metadata'] = valueToString(metadata);
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
 };
 
 /**
  * BankAccountsApi - functional programming interface
  * @export
  */
-export const BankAccountsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = BankAccountsApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * Creates a new bank account with the provided properties. Bank accounts created in live mode will need to be verified via micro deposits before being able to send live checks. The deposits will appear in the bank account in 2-3 business days and have the description \"VERIFICATION\".
-         * @summary create
-         * @param {BankAccountWritable} bankAccountWritable 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankAccountCreate(bankAccountWritable: BankAccountWritable, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountCreate(bankAccountWritable, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Permanently deletes a bank account. It cannot be undone.
-         * @summary delete
-         * @param {string} bankId id of the bank account
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankAccountDelete(bankId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountDeletion>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountDelete(bankId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Retrieves the details of an existing bank account. You need only supply the unique bank account identifier that was returned upon bank account creation.
-         * @summary get
-         * @param {string} bankId id of the bank account
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankAccountRetrieve(bankId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountRetrieve(bankId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Verify a bank account in order to create a check.
-         * @summary verify
-         * @param {string} bankId id of the bank account to be verified
-         * @param {BankAccountVerify} bankAccountVerify 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankAccountVerify(bankId: string, bankAccountVerify: BankAccountVerify, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountVerify(bankId, bankAccountVerify, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Returns a list of your bank accounts. The bank accounts are returned sorted by creation date, with the most recently created bank accounts appearing first.
-         * @summary list
-         * @param {number} [limit] How many results to return.
-         * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
-         * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
-         * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
-         * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
-         * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankAccountsList(limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountsList(limit, before, after, include, dateCreated, metadata, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
+export const BankAccountsApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator =
+    BankAccountsApiAxiosParamCreator(configuration);
+  return {
+    /**
+     * Creates a new bank account with the provided properties. Bank accounts created in live mode will need to be verified via micro deposits before being able to send live checks. The deposits will appear in the bank account in 2-3 business days and have the description \"VERIFICATION\".
+     * @summary create
+     * @param {BankAccountWritable} bankAccountWritable
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async bankAccountCreate(
+      bankAccountWritable: BankAccountWritable,
+      options?: AxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccount>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.bankAccountCreate(
+          bankAccountWritable,
+          options
+        );
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+    /**
+     * Permanently deletes a bank account. It cannot be undone.
+     * @summary delete
+     * @param {string} bankId id of the bank account
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async bankAccountDelete(
+      bankId: string,
+      options?: AxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<BankAccountDeletion>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.bankAccountDelete(bankId, options);
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+    /**
+     * Retrieves the details of an existing bank account. You need only supply the unique bank account identifier that was returned upon bank account creation.
+     * @summary get
+     * @param {string} bankId id of the bank account
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async bankAccountRetrieve(
+      bankId: string,
+      options?: AxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccount>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.bankAccountRetrieve(bankId, options);
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+    /**
+     * Verify a bank account in order to create a check.
+     * @summary verify
+     * @param {string} bankId id of the bank account to be verified
+     * @param {BankAccountVerify} bankAccountVerify
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async bankAccountVerify(
+      bankId: string,
+      bankAccountVerify: BankAccountVerify,
+      options?: AxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccount>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.bankAccountVerify(
+          bankId,
+          bankAccountVerify,
+          options
+        );
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+    /**
+     * Returns a list of your bank accounts. The bank accounts are returned sorted by creation date, with the most recently created bank accounts appearing first.
+     * @summary list
+     * @param {number} [limit] How many results to return.
+     * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response.
+     * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response.
+     * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
+     * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
+     * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async bankAccountsList(
+      limit?: number,
+      before?: string,
+      after?: string,
+      include?: Array<string>,
+      dateCreated?: { [key: string]: string },
+      metadata?: { [key: string]: string },
+      options?: AxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<BankAccountList>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.bankAccountsList(
+          limit,
+          before,
+          after,
+          include,
+          dateCreated,
+          metadata,
+          options
+        );
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+  };
 };
 
 /**
@@ -343,111 +527,149 @@ export const BankAccountsApiFp = function(configuration?: Configuration) {
  * @extends {BaseAPI}
  */
 export class BankAccountsApi extends BaseAPI {
-    /**
-     * Creates a new bank account with the provided properties. Bank accounts created in live mode will need to be verified via micro deposits before being able to send live checks. The deposits will appear in the bank account in 2-3 business days and have the description \"VERIFICATION\".
-     * @summary create
-     * @param {BankAccountWritable} bankAccountWritable 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankAccountsApi
-     */
-    public create(bankAccountWritable: BankAccountWritable, options?: AxiosRequestConfig) {
-        return BankAccountsApiFp(this.configuration).bankAccountCreate(bankAccountWritable, options).then((request) => request(this.axios, this.basePath))
-            .then(function (response) {
-                return new BankAccount(response.data);
-            }).catch(error => {
-                if (error.response?.data?.error?.message) {
-                    error.message = error.response.data.error.message;
-                }
-                throw error;
-              });
-    }
+  /**
+   * Creates a new bank account with the provided properties. Bank accounts created in live mode will need to be verified via micro deposits before being able to send live checks. The deposits will appear in the bank account in 2-3 business days and have the description \"VERIFICATION\".
+   * @summary create
+   * @param {BankAccountWritable} bankAccountWritable
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof BankAccountsApi
+   */
+  public create(
+    bankAccountWritable: BankAccountWritable,
+    options?: AxiosRequestConfig
+  ) {
+    return BankAccountsApiFp(this.configuration)
+      .bankAccountCreate(bankAccountWritable, options)
+      .then((request) => request(this.axios, this.basePath))
+      .then(function (response) {
+        return new BankAccount(response.data);
+      })
+      .catch((error) => {
+        if (error.response?.data?.error?.message) {
+          error.message = error.response.data.error.message;
+        }
+        throw error;
+      });
+  }
 
-    /**
-     * Permanently deletes a bank account. It cannot be undone.
-     * @summary delete
-     * @param {string} bankId id of the bank account
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankAccountsApi
-     */
-    public delete(bankId: string, options?: AxiosRequestConfig) {
-        return BankAccountsApiFp(this.configuration).bankAccountDelete(bankId, options).then((request) => request(this.axios, this.basePath))
-            .then(function (response) {
-                return new BankAccountDeletion(response.data);
-            }).catch(error => {
-                if (error.response?.data?.error?.message) {
-                    error.message = error.response.data.error.message;
-                }
-                throw error;
-              });
-    }
+  /**
+   * Permanently deletes a bank account. It cannot be undone.
+   * @summary delete
+   * @param {string} bankId id of the bank account
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof BankAccountsApi
+   */
+  public delete(bankId: string, options?: AxiosRequestConfig) {
+    return BankAccountsApiFp(this.configuration)
+      .bankAccountDelete(bankId, options)
+      .then((request) => request(this.axios, this.basePath))
+      .then(function (response) {
+        return new BankAccountDeletion(response.data);
+      })
+      .catch((error) => {
+        if (error.response?.data?.error?.message) {
+          error.message = error.response.data.error.message;
+        }
+        throw error;
+      });
+  }
 
-    /**
-     * Retrieves the details of an existing bank account. You need only supply the unique bank account identifier that was returned upon bank account creation.
-     * @summary get
-     * @param {string} bankId id of the bank account
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankAccountsApi
-     */
-    public get(bankId: string, options?: AxiosRequestConfig) {
-        return BankAccountsApiFp(this.configuration).bankAccountRetrieve(bankId, options).then((request) => request(this.axios, this.basePath))
-            .then(function (response) {
-                return new BankAccount(response.data);
-            }).catch(error => {
-                if (error.response?.data?.error?.message) {
-                    error.message = error.response.data.error.message;
-                }
-                throw error;
-              });
-    }
+  /**
+   * Retrieves the details of an existing bank account. You need only supply the unique bank account identifier that was returned upon bank account creation.
+   * @summary get
+   * @param {string} bankId id of the bank account
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof BankAccountsApi
+   */
+  public get(bankId: string, options?: AxiosRequestConfig) {
+    return BankAccountsApiFp(this.configuration)
+      .bankAccountRetrieve(bankId, options)
+      .then((request) => request(this.axios, this.basePath))
+      .then(function (response) {
+        return new BankAccount(response.data);
+      })
+      .catch((error) => {
+        if (error.response?.data?.error?.message) {
+          error.message = error.response.data.error.message;
+        }
+        throw error;
+      });
+  }
 
-    /**
-     * Verify a bank account in order to create a check.
-     * @summary verify
-     * @param {string} bankId id of the bank account to be verified
-     * @param {BankAccountVerify} bankAccountVerify 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankAccountsApi
-     */
-    public verify(bankId: string, bankAccountVerify: BankAccountVerify, options?: AxiosRequestConfig) {
-        return BankAccountsApiFp(this.configuration).bankAccountVerify(bankId, bankAccountVerify, options).then((request) => request(this.axios, this.basePath))
-            .then(function (response) {
-                return new BankAccount(response.data);
-            }).catch(error => {
-                if (error.response?.data?.error?.message) {
-                    error.message = error.response.data.error.message;
-                }
-                throw error;
-              });
-    }
+  /**
+   * Verify a bank account in order to create a check.
+   * @summary verify
+   * @param {string} bankId id of the bank account to be verified
+   * @param {BankAccountVerify} bankAccountVerify
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof BankAccountsApi
+   */
+  public verify(
+    bankId: string,
+    bankAccountVerify: BankAccountVerify,
+    options?: AxiosRequestConfig
+  ) {
+    return BankAccountsApiFp(this.configuration)
+      .bankAccountVerify(bankId, bankAccountVerify, options)
+      .then((request) => request(this.axios, this.basePath))
+      .then(function (response) {
+        return new BankAccount(response.data);
+      })
+      .catch((error) => {
+        if (error.response?.data?.error?.message) {
+          error.message = error.response.data.error.message;
+        }
+        throw error;
+      });
+  }
 
-    /**
-     * Returns a list of your bank accounts. The bank accounts are returned sorted by creation date, with the most recently created bank accounts appearing first.
-     * @summary list
-     * @param {number} [limit] How many results to return.
-     * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
-     * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
-     * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
-     * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
-     * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankAccountsApi
-     */
-    public list(limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, metadata?: { [key: string]: string; }, options?: AxiosRequestConfig) {
-        return BankAccountsApiFp(this.configuration).bankAccountsList(limit, before, after, include, dateCreated, metadata, options).then((request) => request(this.axios, this.basePath))
-            .then(function (response) {
-                return new BankAccountList(response.data);
-            }).catch(error => {
-                if (error.response?.data?.error?.message) {
-                    error.message = error.response.data.error.message;
-                }
-                throw error;
-              });
-    }
+  /**
+   * Returns a list of your bank accounts. The bank accounts are returned sorted by creation date, with the most recently created bank accounts appearing first.
+   * @summary list
+   * @param {number} [limit] How many results to return.
+   * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response.
+   * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response.
+   * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
+   * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
+   * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof BankAccountsApi
+   */
+  public list(
+    limit?: number,
+    before?: string,
+    after?: string,
+    include?: Array<string>,
+    dateCreated?: { [key: string]: string },
+    metadata?: { [key: string]: string },
+    options?: AxiosRequestConfig
+  ) {
+    return BankAccountsApiFp(this.configuration)
+      .bankAccountsList(
+        limit,
+        before,
+        after,
+        include,
+        dateCreated,
+        metadata,
+        options
+      )
+      .then((request) => request(this.axios, this.basePath))
+      .then(function (response) {
+        return new BankAccountList(response.data);
+      })
+      .catch((error) => {
+        if (error.response?.data?.error?.message) {
+          error.message = error.response.data.error.message;
+        }
+        throw error;
+      });
+  }
 }
 
 /**
@@ -455,4 +677,3 @@ export class BankAccountsApi extends BaseAPI {
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-

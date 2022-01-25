@@ -53,10 +53,7 @@ describe("CardOrdersApi", () => {
       });
 
       try {
-        await new CardOrdersApi(config).create(
-          "card_fakeId",
-          cardForCreate
-        );
+        await new CardOrdersApi(config).create("card_fakeId", cardForCreate);
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
       }
@@ -71,10 +68,7 @@ describe("CardOrdersApi", () => {
       });
 
       try {
-        await new CardOrdersApi(config).create(
-            "card_fakeId",
-            cardForCreate
-        );
+        await new CardOrdersApi(config).create("card_fakeId", cardForCreate);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -90,10 +84,7 @@ describe("CardOrdersApi", () => {
       });
 
       try {
-        await new CardOrdersApi(config).create(
-            "card_fakeId",
-            cardForCreate
-        );
+        await new CardOrdersApi(config).create("card_fakeId", cardForCreate);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -106,10 +97,7 @@ describe("CardOrdersApi", () => {
       });
 
       try {
-        await new CardOrdersApi(config).create(
-            "card_fakeId",
-            cardForCreate
-        );
+        await new CardOrdersApi(config).create("card_fakeId", cardForCreate);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");

@@ -9,9 +9,9 @@ import {
   CardEditable,
   CardOrderEditable,
   CardOrderStatusEnum,
-  CardUpdatable
+  CardUpdatable,
 } from "../models";
-import {URL_VALID_LIST} from "./testFixtures";
+import { URL_VALID_LIST } from "./testFixtures";
 
 describe("Card Models", () => {
   describe("Card", () => {
@@ -21,31 +21,31 @@ describe("Card Models", () => {
     });
 
     it.each([
-      [ 'id', 'card_fakeId' ],
-      [ 'url', URL_VALID_LIST ],
-      [ 'auto_reorder', true ],
-      [ 'auto_reorder', false ],
-      [ 'reorder_quantity', 1000 ],
-      [ 'raw_url', 'some url' ],
-      [ 'front_original_url', 'some url' ],
-      [ 'back_original_url', 'some url' ],
-      [ 'back_original_url', 'some url' ],
-      [ 'thumbnails', 'fake thumbnail' ],
-      [ 'available_quantity', 1 ],
-      [ 'pending_quantity', 20 ],
-      [ 'status', CardStatusEnum.Rendered ],
-      [ 'status', CardStatusEnum.Processed ],
-      [ 'orientation', CardOrientationEnum.Vertical ],
-      [ 'orientation', CardOrientationEnum.Horizontal ],
-      [ 'threshold_amount', 1 ],
-      [ 'date_created', new Date().toISOString() ],
-      [ 'date_modified', new Date().toISOString() ],
-      [ 'deleted', true ],
-      [ 'deleted', false ],
-      [ 'object', 'Card' ],
-      [ 'description', 'fake description' ],
-      [ 'size', CardSizeEnum._3375x2125 ],
-      [ 'size', CardSizeEnum._2125x3375 ]
+      ["id", "card_fakeId"],
+      ["url", URL_VALID_LIST],
+      ["auto_reorder", true],
+      ["auto_reorder", false],
+      ["reorder_quantity", 1000],
+      ["raw_url", "some url"],
+      ["front_original_url", "some url"],
+      ["back_original_url", "some url"],
+      ["back_original_url", "some url"],
+      ["thumbnails", "fake thumbnail"],
+      ["available_quantity", 1],
+      ["pending_quantity", 20],
+      ["status", CardStatusEnum.Rendered],
+      ["status", CardStatusEnum.Processed],
+      ["orientation", CardOrientationEnum.Vertical],
+      ["orientation", CardOrientationEnum.Horizontal],
+      ["threshold_amount", 1],
+      ["date_created", new Date().toISOString()],
+      ["date_modified", new Date().toISOString()],
+      ["deleted", true],
+      ["deleted", false],
+      ["object", "Card"],
+      ["description", "fake description"],
+      ["size", CardSizeEnum._3375x2125],
+      ["size", CardSizeEnum._2125x3375],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -91,10 +91,10 @@ describe("Card Models", () => {
     });
 
     it.each([
-      [ 'id', [ 'card_fakeId'] ],
-      [ 'object', 'Address' ],
-      [ 'deleted', true ],
-      [ 'deleted', false ]
+      ["id", ["card_fakeId"]],
+      ["object", "Address"],
+      ["deleted", true],
+      ["deleted", false],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -140,11 +140,11 @@ describe("Card Models", () => {
     });
 
     it.each([
-      [ 'front', 'fake front' ],
-      [ 'back', 'fake back' ],
-      [ 'description', 'fake description' ],
-      [ 'size', CardSizeEnum._3375x2125 ],
-      [ 'size', CardSizeEnum._2125x3375 ]
+      ["front", "fake front"],
+      ["back", "fake back"],
+      ["description", "fake description"],
+      ["size", CardSizeEnum._3375x2125],
+      ["size", CardSizeEnum._2125x3375],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -163,9 +163,9 @@ describe("Card Models", () => {
     });
 
     it.each([
-      [ 'description', 'fake description' ],
-      [ 'auto_reorder', 10 ],
-      [ 'reorder_quantity', 1000 ]
+      ["description", "fake description"],
+      ["auto_reorder", 10],
+      ["reorder_quantity", 1000],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -184,12 +184,12 @@ describe("Card Models", () => {
     });
 
     it.each([
-      [ 'object', 'Address' ],
-      [ 'data', [] ],
-      [ 'next_url', 'some url' ],
-      [ 'previous_url', 'some url' ],
-      [ 'count', 1 ],
-      [ 'total_count', 100 ]
+      ["object", "Address"],
+      ["data", []],
+      ["next_url", "some url"],
+      ["previous_url", "some url"],
+      ["count", 1],
+      ["total_count", 100],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -200,33 +200,33 @@ describe("Card Models", () => {
       expect((rec as any)[prop]).toEqual(val);
     });
 
-    describe('nextPageToken getter', () => {
-      it('extracts and returns the token from the next_url value', () => {
+    describe("nextPageToken getter", () => {
+      it("extracts and returns the token from the next_url value", () => {
         const rec = new CardList({
-          next_url: 'https://fake.com?param1=example&after=token'
+          next_url: "https://fake.com?param1=example&after=token",
         });
-        expect(rec.nextPageToken).toEqual('token');
+        expect(rec.nextPageToken).toEqual("token");
       });
 
-      it('handles when the next_url value is missing', () => {
+      it("handles when the next_url value is missing", () => {
         const rec = new CardList({
-          next_url: null
+          next_url: null,
         });
         expect(rec.nextPageToken).toBeUndefined();
       });
     });
 
-    describe('previousPageToken getter', () => {
-      it('extracts and returns the token from the next_url value', () => {
+    describe("previousPageToken getter", () => {
+      it("extracts and returns the token from the next_url value", () => {
         const rec = new CardList({
-          previous_url: 'https://fake.com?param1=example&before=token'
+          previous_url: "https://fake.com?param1=example&before=token",
         });
-        expect(rec.previousPageToken).toEqual('token');
+        expect(rec.previousPageToken).toEqual("token");
       });
 
-      it('handles when the next_url value is missing', () => {
+      it("handles when the next_url value is missing", () => {
         const rec = new CardList({
-          previous_url: null
+          previous_url: null,
         });
         expect(rec.previousPageToken).toBeUndefined();
       });
@@ -240,24 +240,24 @@ describe("Card Models", () => {
     });
 
     it.each([
-      [ 'id', 'co_fakeId' ],
-      [ 'card_id', 'card_fakeId' ],
-      [ 'status', CardOrderStatusEnum.Cancelled ],
-      [ 'status', CardOrderStatusEnum.Depleted ],
-      [ 'status', CardOrderStatusEnum.Pending ],
-      [ 'status', CardOrderStatusEnum.Available ],
-      [ 'status', CardOrderStatusEnum.Printing ],
-      [ 'inventory', 17 ],
-      [ 'quantity_ordered', 42 ],
-      [ 'unit_price', 100 ],
-      [ 'cancelled_reason', 'fake reason' ],
-      [ 'availability_date', new Date().toISOString() ],
-      [ 'expected_availability_date', new Date().toISOString() ],
-      [ 'date_created', new Date().toISOString() ],
-      [ 'date_modified', new Date().toISOString() ],
-      [ 'deleted', true ],
-      [ 'deleted', false ],
-      [ 'object', 'CardOrder' ]
+      ["id", "co_fakeId"],
+      ["card_id", "card_fakeId"],
+      ["status", CardOrderStatusEnum.Cancelled],
+      ["status", CardOrderStatusEnum.Depleted],
+      ["status", CardOrderStatusEnum.Pending],
+      ["status", CardOrderStatusEnum.Available],
+      ["status", CardOrderStatusEnum.Printing],
+      ["inventory", 17],
+      ["quantity_ordered", 42],
+      ["unit_price", 100],
+      ["cancelled_reason", "fake reason"],
+      ["availability_date", new Date().toISOString()],
+      ["expected_availability_date", new Date().toISOString()],
+      ["date_created", new Date().toISOString()],
+      ["date_modified", new Date().toISOString()],
+      ["deleted", true],
+      ["deleted", false],
+      ["object", "CardOrder"],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -329,16 +329,17 @@ describe("Card Models", () => {
       expect(rec).toBeDefined();
     });
 
-    it.each([
-      [ 'quantity', 10 ]
-    ])("can be created with a provided %s value", (prop, val) => {
-      const input = {};
-      (input as any)[prop] = val;
+    it.each([["quantity", 10]])(
+      "can be created with a provided %s value",
+      (prop, val) => {
+        const input = {};
+        (input as any)[prop] = val;
 
-      const rec = new CardOrderEditable(input);
+        const rec = new CardOrderEditable(input);
 
-      expect(rec).toBeDefined();
-      expect((rec as any)[prop]).toEqual(val);
-    });
+        expect(rec).toBeDefined();
+        expect((rec as any)[prop]).toEqual(val);
+      }
+    );
   });
 });

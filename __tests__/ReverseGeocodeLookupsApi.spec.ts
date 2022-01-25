@@ -10,7 +10,7 @@ describe("ReverseGeocodeLookupsApi", () => {
 
   const testCoordinates: Location = {
     latitude: 37.777456,
-    longitude: -122.393039
+    longitude: -122.393039,
   };
 
   it("US Reverse Geocode Lookup API can be instantiated", () => {
@@ -29,9 +29,7 @@ describe("ReverseGeocodeLookupsApi", () => {
 
     it("looks up given input", async () => {
       const geocodeApi = new ReverseGeocodeLookupsApi(config);
-      const response = await geocodeApi.lookup(
-        testCoordinates
-      );
+      const response = await geocodeApi.lookup(testCoordinates);
       expect(response.addresses).toBeDefined();
       expect(response?.addresses?.length).toBeGreaterThan(0);
     });

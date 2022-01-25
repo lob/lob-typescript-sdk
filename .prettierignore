@@ -1,0 +1,12 @@
+coverage
+node_modules
+
+.github/ISSUE_TEMPLATE
+.github/pull_request_template.md
+
+
+# File exists to prevent prettier from re-initializing
+# prettier and introducing lint-staged. We don't want
+# lint-staged because it introduces a metric ton of
+# dependencies and generally takes over the universe.
+.prettierrc

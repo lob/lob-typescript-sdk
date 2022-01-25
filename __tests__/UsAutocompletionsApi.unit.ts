@@ -1,7 +1,7 @@
 import { Configuration } from "../configuration";
 
 import { UsAutocompletionsWritable } from "../models";
-import {USAutocompletionsApi} from "../api";
+import { USAutocompletionsApi } from "../api";
 
 import { fail } from "./testUtilities";
 
@@ -56,24 +56,32 @@ describe("USAutocompletionsApi", () => {
 
     it("autocompletes given input", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "us_auto_fakeId", suggestions: [], object: 'us_autocompletion' },
+        data: {
+          id: "us_auto_fakeId",
+          suggestions: [],
+          object: "us_autocompletion",
+        },
       }));
 
-      const response = await  new USAutocompletionsApi(configWithBaseOptions).autocomplete(
-        autocompletionInput
-      );
+      const response = await new USAutocompletionsApi(
+        configWithBaseOptions
+      ).autocomplete(autocompletionInput);
       expect(response.suggestions).toBeDefined();
       expect(response.suggestions?.length).toEqual(0);
     });
 
     it("includes custom headers while it autocompletes given input", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "us_auto_fakeId", suggestions: [], object: 'us_autocompletion' },
+        data: {
+          id: "us_auto_fakeId",
+          suggestions: [],
+          object: "us_autocompletion",
+        },
       }));
 
-      const response = await new USAutocompletionsApi(configWithBaseOptions).autocomplete(
-          autocompletionInput
-      );
+      const response = await new USAutocompletionsApi(
+        configWithBaseOptions
+      ).autocomplete(autocompletionInput);
       expect(response.suggestions).toBeDefined();
       expect(response.suggestions?.length).toEqual(0);
     });
@@ -87,7 +95,9 @@ describe("USAutocompletionsApi", () => {
       });
 
       try {
-        await new USAutocompletionsApi(config).autocomplete(autocompletionInput);
+        await new USAutocompletionsApi(config).autocomplete(
+          autocompletionInput
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by Api");
@@ -103,7 +113,9 @@ describe("USAutocompletionsApi", () => {
       });
 
       try {
-        await new USAutocompletionsApi(config).autocomplete(autocompletionInput);
+        await new USAutocompletionsApi(config).autocomplete(
+          autocompletionInput
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -119,7 +131,9 @@ describe("USAutocompletionsApi", () => {
       });
 
       try {
-        await new USAutocompletionsApi(config).autocomplete(autocompletionInput);
+        await new USAutocompletionsApi(config).autocomplete(
+          autocompletionInput
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -132,7 +146,9 @@ describe("USAutocompletionsApi", () => {
       });
 
       try {
-        await new USAutocompletionsApi(config).autocomplete(autocompletionInput);
+        await new USAutocompletionsApi(config).autocomplete(
+          autocompletionInput
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");

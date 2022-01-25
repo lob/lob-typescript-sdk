@@ -1,10 +1,6 @@
 import { Configuration } from "../configuration";
 
-import {
-  Template,
-  TemplateWritable,
-  TemplateUpdate
-} from "../models";
+import { Template, TemplateWritable, TemplateUpdate } from "../models";
 import { TemplatesApi } from "../api";
 
 describe("TemplatesApi", () => {
@@ -45,12 +41,16 @@ describe("TemplatesApi", () => {
     it("creates, updates, retrieves, and deletes a template", async () => {
       const templatesApi = new TemplatesApi(config);
       // Create
-      const createdTemplate = await new TemplatesApi(config).create(templateWrite);
+      const createdTemplate = await new TemplatesApi(config).create(
+        templateWrite
+      );
       expect(createdTemplate?.id).toBeDefined();
       expect(createdTemplate?.description).toEqual(templateWrite.description);
 
       // Get
-      const retrievedTemplate = await templatesApi.get(createdTemplate.id as string);
+      const retrievedTemplate = await templatesApi.get(
+        createdTemplate.id as string
+      );
       expect(retrievedTemplate).toBeDefined();
       expect(retrievedTemplate?.id).toEqual(createdTemplate?.id);
 
@@ -67,7 +67,9 @@ describe("TemplatesApi", () => {
       expect(updatedTemplate?.description).toEqual("updated template");
 
       // Delete
-      const deletedTemplate = await templatesApi.delete(updatedTemplate.id as string);
+      const deletedTemplate = await templatesApi.delete(
+        updatedTemplate.id as string
+      );
       expect(deletedTemplate?.deleted).toBeTruthy();
     });
   });
@@ -79,15 +81,15 @@ describe("TemplatesApi", () => {
       // ensure there are at least 3 templates present, to test pagination
       const template1: TemplateWritable = {
         description: "Newer Template",
-        html: "<html>Updated HTML for Template 1/html>"
+        html: "<html>Updated HTML for Template 1/html>",
       };
       const template2: TemplateWritable = Object.assign({}, template1, {
         description: "Newer Template",
-        html: "<html>Updated HTML for Template 2</html>"
+        html: "<html>Updated HTML for Template 2</html>",
       });
       const template3: TemplateWritable = Object.assign({}, template1, {
         description: "Newer Template",
-        html: "<html>Updated HTML for Template 3</html>"
+        html: "<html>Updated HTML for Template 3</html>",
       });
 
       const templatesApi = new TemplatesApi(config);

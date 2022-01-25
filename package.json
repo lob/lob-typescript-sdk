@@ -2,6 +2,8 @@
   "name": "lob-sdk-ts",
   "version": "0.0.1",
   "scripts": {
+    "pretty": "prettier --write .",
+    "pretty:check": "prettier --check .",
     "test": "jest",
     "test:integration": "jest -c jest.integrationConfig.js",
     "test:all": "npm run test && npm run test:integration"
@@ -14,6 +16,7 @@
     "@types/jest": "^27.0.2",
     "@types/node": "^16.11.6",
     "jest": "^27.3.1",
+    "prettier": "^2.5.1",
     "ts-jest": "^27.0.7",
     "ts-node": "^10.4.0",
     "typescript": "^4.4.4"

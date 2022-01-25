@@ -113,12 +113,12 @@ describe("CardsApi", () => {
       const registeredLetter: LetterEditable = {
         to: {
           company: "Gothic Home (old)",
-            address_line1: "001 CEMETERY LN",
-            address_line2: "# 000",
-            address_city: "WESTFIELD",
-            address_state: "NJ",
-            address_zip: "07000",
-            address_country: CountryExtended.Us,
+          address_line1: "001 CEMETERY LN",
+          address_line2: "# 000",
+          address_city: "WESTFIELD",
+          address_state: "NJ",
+          address_zip: "07000",
+          address_country: CountryExtended.Us,
         },
         from: {
           company: "Gothic Home (new)",

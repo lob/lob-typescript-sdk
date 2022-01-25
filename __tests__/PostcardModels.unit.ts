@@ -9,9 +9,9 @@ import {
   PostcardList,
   PostcardSize,
   Thumbnail,
-  TrackingEventNormal
+  TrackingEventNormal,
 } from "../models";
-import {URL_VALID_LIST} from "./testFixtures";
+import { URL_VALID_LIST } from "./testFixtures";
 
 describe("Postcard Models", () => {
   describe("Postcard", () => {
@@ -21,32 +21,32 @@ describe("Postcard Models", () => {
     });
 
     it.each([
-      [ "id", "psc_fakeId" ],
-      [ "to", new Address() ],
-      [ "from", new AddressDomesticExpanded() ],
-      [ "carrier", PostcardCarrierEnum.Usps ],
-      [ "thumbnails",[ new Thumbnail()] ],
-      [ "size", PostcardSize._6x9 ],
-      [ "size", PostcardSize._6x11 ],
-      [ "size", PostcardSize._4x6 ],
-      [ "expected_delivery_date", new Date().toISOString() ],
-      [ "date_created", new Date().toISOString() ],
-      [ "date_modified", new Date().toISOString() ],
-      [ "deleted", true ],
-      [ "deleted", false ],
-      [ "front_template_id", "tmpl_fakeId" ],
-      [ "back_template_id", "tmpl_fakeId" ],
-      [ "front_template_version_id", "vrsn_fakeId" ],
-      [ "back_template_version_id", "vrsn_fakeId" ],
-      [ "tracking_events", [new TrackingEventNormal()] ],
-      [ "object", "Postcard" ],
-      [ "url", URL_VALID_LIST ],
-      [ "description", "fake description" ],
-      [ "metadata", {} ],
-      [ "mail_type", MailType.Standard ],
-      [ "mail_type", MailType.FirstClass ],
-      [ "merge_variables", {} ],
-      [ "send_date", new Date().toISOString() ],
+      ["id", "psc_fakeId"],
+      ["to", new Address()],
+      ["from", new AddressDomesticExpanded()],
+      ["carrier", PostcardCarrierEnum.Usps],
+      ["thumbnails", [new Thumbnail()]],
+      ["size", PostcardSize._6x9],
+      ["size", PostcardSize._6x11],
+      ["size", PostcardSize._4x6],
+      ["expected_delivery_date", new Date().toISOString()],
+      ["date_created", new Date().toISOString()],
+      ["date_modified", new Date().toISOString()],
+      ["deleted", true],
+      ["deleted", false],
+      ["front_template_id", "tmpl_fakeId"],
+      ["back_template_id", "tmpl_fakeId"],
+      ["front_template_version_id", "vrsn_fakeId"],
+      ["back_template_version_id", "vrsn_fakeId"],
+      ["tracking_events", [new TrackingEventNormal()]],
+      ["object", "Postcard"],
+      ["url", URL_VALID_LIST],
+      ["description", "fake description"],
+      ["metadata", {}],
+      ["mail_type", MailType.Standard],
+      ["mail_type", MailType.FirstClass],
+      ["merge_variables", {}],
+      ["send_date", new Date().toISOString()],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -231,10 +231,10 @@ describe("Postcard Models", () => {
     });
 
     it.each([
-      [ 'id', 'psc_fakeId' ],
-      [ 'deleted', true ],
-      [ 'deleted', false ],
-      [ 'object', "Check" ]
+      ["id", "psc_fakeId"],
+      ["deleted", true],
+      ["deleted", false],
+      ["object", "Check"],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -280,20 +280,20 @@ describe("Postcard Models", () => {
     });
 
     it.each([
-      [ "to", new Address() ],
-      [ "from", new AddressDomesticExpanded() ],
-      [ "size", PostcardSize._6x9 ],
-      [ "size", PostcardSize._6x11 ],
-      [ "size", PostcardSize._4x6 ],
-      [ "description", "fake description" ],
-      [ "metadata", {} ],
-      [ "mail_type", MailType.Standard ],
-      [ "mail_type", MailType.FirstClass ],
-      [ "merge_variables", {} ],
-      [ "send_date", new Date().toISOString() ],
-      [ "front", "fake front" ],
-      [ "back", "fake back" ],
-      [ "billing_group_id", "fake billing group" ],
+      ["to", new Address()],
+      ["from", new AddressDomesticExpanded()],
+      ["size", PostcardSize._6x9],
+      ["size", PostcardSize._6x11],
+      ["size", PostcardSize._4x6],
+      ["description", "fake description"],
+      ["metadata", {}],
+      ["mail_type", MailType.Standard],
+      ["mail_type", MailType.FirstClass],
+      ["merge_variables", {}],
+      ["send_date", new Date().toISOString()],
+      ["front", "fake front"],
+      ["back", "fake back"],
+      ["billing_group_id", "fake billing group"],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -312,12 +312,12 @@ describe("Postcard Models", () => {
     });
 
     it.each([
-      [ 'object', 'Address' ],
-      [ 'data', [] ],
-      [ 'next_url', 'some url' ],
-      [ 'previous_url', 'some url' ],
-      [ 'count', 1 ],
-      [ 'total_count', 100 ]
+      ["object", "Address"],
+      ["data", []],
+      ["next_url", "some url"],
+      ["previous_url", "some url"],
+      ["count", 1],
+      ["total_count", 100],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -328,33 +328,33 @@ describe("Postcard Models", () => {
       expect((rec as any)[prop]).toEqual(val);
     });
 
-    describe('nextPageToken getter', () => {
-      it('extracts and returns the token from the next_url value', () => {
+    describe("nextPageToken getter", () => {
+      it("extracts and returns the token from the next_url value", () => {
         const rec = new PostcardList({
-          next_url: 'https://fake.com?param1=example&after=token'
+          next_url: "https://fake.com?param1=example&after=token",
         });
-        expect(rec.nextPageToken).toEqual('token');
+        expect(rec.nextPageToken).toEqual("token");
       });
 
-      it('handles when the next_url value is missing', () => {
+      it("handles when the next_url value is missing", () => {
         const rec = new PostcardList({
-          next_url: null
+          next_url: null,
         });
         expect(rec.nextPageToken).toBeUndefined();
       });
     });
 
-    describe('previousPageToken getter', () => {
-      it('extracts and returns the token from the next_url value', () => {
+    describe("previousPageToken getter", () => {
+      it("extracts and returns the token from the next_url value", () => {
         const rec = new PostcardList({
-          previous_url: 'https://fake.com?param1=example&before=token'
+          previous_url: "https://fake.com?param1=example&before=token",
         });
-        expect(rec.previousPageToken).toEqual('token');
+        expect(rec.previousPageToken).toEqual("token");
       });
 
-      it('handles when the next_url value is missing', () => {
+      it("handles when the next_url value is missing", () => {
         const rec = new PostcardList({
-          previous_url: null
+          previous_url: null,
         });
         expect(rec.previousPageToken).toBeUndefined();
       });

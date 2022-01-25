@@ -2,12 +2,13 @@ import {
   AddressEditable,
   MailType,
   SelfMailer,
-  SelfMailerDeletion, SelfMailerEditable,
+  SelfMailerDeletion,
+  SelfMailerEditable,
   SelfMailerList,
-  SelfMailerSize
+  SelfMailerSize,
 } from "../models";
 
-import {URL_VALID_LIST} from "./testFixtures";
+import { URL_VALID_LIST } from "./testFixtures";
 
 describe("SelfMailer Models", () => {
   describe("SelfMailer", () => {
@@ -17,25 +18,25 @@ describe("SelfMailer Models", () => {
     });
 
     it.each([
-      [ "id", "sfm_fakeId" ],
-      [ "to", new AddressEditable() ],
-      [ "from", new AddressEditable() ],
-      [ "size", SelfMailerSize._11x9Bifold ],
-      [ "size", SelfMailerSize._12x9Bifold ],
-      [ "size", SelfMailerSize._6x18Bifold ],
-      [ "description", "fake description" ],
-      [ "metadata", {} ],
-      [ "mail_type", MailType.Standard ],
-      [ "mail_type", MailType.FirstClass ],
-      [ "merge_variables", {} ],
-      [ "send_date", new Date().toISOString() ],
-      [ "outside_template_id", "fake outside_template_id" ],
-      [ "inside_template_id", "fake inside_template_id" ],
-      [ "outside_template_version_id", "fake outside_template_version_id" ],
-      [ "inside_template_version_id", "fake inside_template_version_id" ],
-      [ "object", "self_mailer" ],
-      [ "tracking_events", [] ],
-      [ "url", URL_VALID_LIST ]
+      ["id", "sfm_fakeId"],
+      ["to", new AddressEditable()],
+      ["from", new AddressEditable()],
+      ["size", SelfMailerSize._11x9Bifold],
+      ["size", SelfMailerSize._12x9Bifold],
+      ["size", SelfMailerSize._6x18Bifold],
+      ["description", "fake description"],
+      ["metadata", {}],
+      ["mail_type", MailType.Standard],
+      ["mail_type", MailType.FirstClass],
+      ["merge_variables", {}],
+      ["send_date", new Date().toISOString()],
+      ["outside_template_id", "fake outside_template_id"],
+      ["inside_template_id", "fake inside_template_id"],
+      ["outside_template_version_id", "fake outside_template_version_id"],
+      ["inside_template_version_id", "fake inside_template_version_id"],
+      ["object", "self_mailer"],
+      ["tracking_events", []],
+      ["url", URL_VALID_LIST],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -108,20 +109,20 @@ describe("SelfMailer Models", () => {
     });
 
     it.each([
-      [ "to", new AddressEditable() ],
-      [ "from", new AddressEditable() ],
-      [ "size", SelfMailerSize._11x9Bifold ],
-      [ "size", SelfMailerSize._12x9Bifold ],
-      [ "size", SelfMailerSize._6x18Bifold ],
-      [ "description", "fake description" ],
-      [ "metadata", {} ],
-      [ "mail_type", MailType.Standard ],
-      [ "mail_type", MailType.FirstClass ],
-      [ "merge_variables", {} ],
-      [ "send_date", new Date().toISOString() ],
-      [ "inside", "fake inside" ],
-      [ "outside", "fake outside" ],
-      [ "billing_group_id", "fake billing_group_id" ],
+      ["to", new AddressEditable()],
+      ["from", new AddressEditable()],
+      ["size", SelfMailerSize._11x9Bifold],
+      ["size", SelfMailerSize._12x9Bifold],
+      ["size", SelfMailerSize._6x18Bifold],
+      ["description", "fake description"],
+      ["metadata", {}],
+      ["mail_type", MailType.Standard],
+      ["mail_type", MailType.FirstClass],
+      ["merge_variables", {}],
+      ["send_date", new Date().toISOString()],
+      ["inside", "fake inside"],
+      ["outside", "fake outside"],
+      ["billing_group_id", "fake billing_group_id"],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -140,10 +141,10 @@ describe("SelfMailer Models", () => {
     });
 
     it.each([
-      [ "id", "sfm_fakeId" ],
-      [ "deleted", true ],
-      [ "deleted", false ],
-      [ "object", "tracking_event" ]
+      ["id", "sfm_fakeId"],
+      ["deleted", true],
+      ["deleted", false],
+      ["object", "tracking_event"],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -189,12 +190,12 @@ describe("SelfMailer Models", () => {
     });
 
     it.each([
-      [ 'object', 'Address' ],
-      [ 'data', [] ],
-      [ 'next_url', 'some url' ],
-      [ 'previous_url', 'some url' ],
-      [ 'count', 1 ],
-      [ 'total_count', 100 ]
+      ["object", "Address"],
+      ["data", []],
+      ["next_url", "some url"],
+      ["previous_url", "some url"],
+      ["count", 1],
+      ["total_count", 100],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -205,33 +206,33 @@ describe("SelfMailer Models", () => {
       expect((rec as any)[prop]).toEqual(val);
     });
 
-    describe('nextPageToken getter', () => {
-      it('extracts and returns the token from the next_url value', () => {
+    describe("nextPageToken getter", () => {
+      it("extracts and returns the token from the next_url value", () => {
         const rec = new SelfMailerList({
-          next_url: 'https://fake.com?param1=example&after=token'
+          next_url: "https://fake.com?param1=example&after=token",
         });
-        expect(rec.nextPageToken).toEqual('token');
+        expect(rec.nextPageToken).toEqual("token");
       });
 
-      it('handles when the next_url value is missing', () => {
+      it("handles when the next_url value is missing", () => {
         const rec = new SelfMailerList({
-          next_url: null
+          next_url: null,
         });
         expect(rec.nextPageToken).toBeUndefined();
       });
     });
 
-    describe('previousPageToken getter', () => {
-      it('extracts and returns the token from the next_url value', () => {
+    describe("previousPageToken getter", () => {
+      it("extracts and returns the token from the next_url value", () => {
         const rec = new SelfMailerList({
-          previous_url: 'https://fake.com?param1=example&before=token'
+          previous_url: "https://fake.com?param1=example&before=token",
         });
-        expect(rec.previousPageToken).toEqual('token');
+        expect(rec.previousPageToken).toEqual("token");
       });
 
-      it('handles when the next_url value is missing', () => {
+      it("handles when the next_url value is missing", () => {
         const rec = new SelfMailerList({
-          previous_url: null
+          previous_url: null,
         });
         expect(rec.previousPageToken).toBeUndefined();
       });
