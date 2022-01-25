@@ -12,7 +12,7 @@ describe("USAutocompletionsApi", () => {
     address_prefix: "1313",
     city: "WESTFIELD",
     state: "NJ",
-    zip_code: "07000",
+    zip_code: "07090",
     geo_ip_sort: false,
   };
 
