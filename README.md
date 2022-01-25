@@ -33,7 +33,7 @@ const addressCreate: AddressEditable = {
     address_line1: "1313 CEMETERY LN",
     address_city: "WESTFIELD",
     address_state: "NJ",
-    address_zip: "07000",
+    address_zip: "07090",
 };
 try {
     const myAddress = await new AddressesApi(config).create(addressCreate);
