@@ -45,8 +45,8 @@ describe("ChecksApi", () => {
 
     it("exists", async () => {
       const chkApi = new ChecksApi(config);
-      expect(chkApi.Create).toBeDefined();
-      expect(typeof chkApi.Create).toEqual("function");
+      expect(chkApi.create).toBeDefined();
+      expect(typeof chkApi.create).toEqual("function");
     });
 
     it("creates a check", async () => {
@@ -54,7 +54,7 @@ describe("ChecksApi", () => {
         data: { id: "chk_fakeId" },
       }));
 
-      const chk = await new ChecksApi(config).Create(
+      const chk = await new ChecksApi(config).create(
         chkEditableMock
       );
       expect(chk).toBeDefined();
@@ -67,7 +67,7 @@ describe("ChecksApi", () => {
         data: { idempotencyKey: "fake key" },
       }));
 
-      const chk = await new ChecksApi(config).Create(
+      const chk = await new ChecksApi(config).create(
         chkEditableMock,
         "chk_fakeIdempotency key"
       );
@@ -79,7 +79,7 @@ describe("ChecksApi", () => {
         data: { id: "chk_fakeId" },
       }));
 
-      const chkApi = await new ChecksApi(configWithBaseOptions).Create(
+      const chkApi = await new ChecksApi(configWithBaseOptions).create(
         chkEditableMock
       );
       expect(chkApi).toBeDefined();
@@ -98,7 +98,7 @@ describe("ChecksApi", () => {
       };
 
       try {
-        await new ChecksApi(configWithBaseOptions).Create(
+        await new ChecksApi(configWithBaseOptions).create(
           chkEditableMock
         );
         fail("Should throw");
@@ -116,7 +116,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(configWithBaseOptions).Create(
+        await new ChecksApi(configWithBaseOptions).create(
           chkEditableMock
         );
         fail("Should throw");
@@ -134,7 +134,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(configWithBaseOptions).Create(
+        await new ChecksApi(configWithBaseOptions).create(
           chkEditableMock
         );
         fail("Should throw");
@@ -152,7 +152,7 @@ describe("ChecksApi", () => {
       };
 
       try {
-        await new ChecksApi(configWithBaseOptions).Create(
+        await new ChecksApi(configWithBaseOptions).create(
           chkEditableMock
         );
         fail("Should throw");
@@ -162,19 +162,19 @@ describe("ChecksApi", () => {
     });
   });
 
-  describe("Retrieve", () => {
+  describe("get", () => {
     it("exists", async () => {
       const checksApi = new ChecksApi(config);
-      expect(checksApi.Retrieve).toBeDefined();
-      expect(typeof checksApi.Retrieve).toEqual("function");
+      expect(checksApi.get).toBeDefined();
+      expect(typeof checksApi.get).toEqual("function");
     });
 
-    it("Retrieve checks for a check id", async () => {
+    it("get checks for a check id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: { id: "chk_fakeId" },
       }));
 
-      const billing_groups = await new ChecksApi(config).Retrieve("chk_fakeId");
+      const billing_groups = await new ChecksApi(config).get("chk_fakeId");
       expect(billing_groups).toBeDefined();
       expect(billing_groups?.id).toEqual("chk_fakeId");
     });
@@ -186,7 +186,7 @@ describe("ChecksApi", () => {
 
       const checks = await new ChecksApi(
         configWithBaseOptions
-      ).Retrieve("chk_fakeId");
+      ).get("chk_fakeId");
       expect(checks).toBeDefined();
       expect(checks?.id).toEqual("chk_fakeId");
     });
@@ -200,7 +200,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(configWithBaseOptions).Retrieve("chk_fakeId");
+        await new ChecksApi(configWithBaseOptions).get("chk_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -216,7 +216,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(config).Retrieve("chk_fakeId");
+        await new ChecksApi(config).get("chk_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -232,7 +232,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(config).Retrieve("chk_fakeId");
+        await new ChecksApi(config).get("chk_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -245,7 +245,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(configWithBaseOptions).Retrieve("chk_fakeId");
+        await new ChecksApi(configWithBaseOptions).get("chk_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -253,15 +253,15 @@ describe("ChecksApi", () => {
     });
   });
 
-  describe("Cancel", () => {
-    const chkCancelled = {
+  describe("cancel", () => {
+    const chkcancelled = {
       description: "check cancelled",
     };
 
     it("exists", async () => {
       const checksApi = new ChecksApi(config);
-      expect(checksApi.Cancel).toBeDefined();
-      expect(typeof checksApi.Cancel).toEqual("function");
+      expect(checksApi.cancel).toBeDefined();
+      expect(typeof checksApi.cancel).toEqual("function");
     });
 
     it("cancels a check for a check id", async () => {
@@ -269,7 +269,7 @@ describe("ChecksApi", () => {
         data: { id: "chk_fakeId" },
       }));
 
-      const billing_groups = await new ChecksApi(config).Cancel(
+      const billing_groups = await new ChecksApi(config).cancel(
         "chk_fakeId"
       );
       expect(billing_groups).toBeDefined();
@@ -283,7 +283,7 @@ describe("ChecksApi", () => {
 
       const billing_groups = await new ChecksApi(
         configWithBaseOptions
-      ).Cancel("chk_fakeId");
+      ).cancel("chk_fakeId");
       expect(billing_groups).toBeDefined();
       expect(billing_groups?.id).toEqual("chk_fakeId");
     });
@@ -297,7 +297,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(configWithBaseOptions).Cancel(
+        await new ChecksApi(configWithBaseOptions).cancel(
           "chk_fakeId"
         );
         fail("Should throw");
@@ -315,7 +315,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(config).Cancel("chk_fakeId");
+        await new ChecksApi(config).cancel("chk_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -331,7 +331,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(config).Cancel("chk_fakeId");
+        await new ChecksApi(config).cancel("chk_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -344,7 +344,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(configWithBaseOptions).Cancel(
+        await new ChecksApi(configWithBaseOptions).cancel(
           "chk_fakeId"
         );
         fail("Should throw");
@@ -357,8 +357,8 @@ describe("ChecksApi", () => {
   describe("list", () => {
     it("exists", async () => {
       const chkApi = new ChecksApi(config);
-      expect(chkApi.List).toBeDefined();
-      expect(typeof chkApi.List).toEqual("function");
+      expect(chkApi.list).toBeDefined();
+      expect(typeof chkApi.list).toEqual("function");
     });
 
     it("retrieves all check when no limit is provided", async () => {
@@ -371,7 +371,7 @@ describe("ChecksApi", () => {
         },
       }));
 
-      const chkApi = await new ChecksApi(config).List();
+      const chkApi = await new ChecksApi(config).list();
       expect(chkApi).toBeDefined();
       expect(chkApi?.data?.length).toEqual(2);
     });
@@ -381,7 +381,7 @@ describe("ChecksApi", () => {
         data: { data: [{ id: "chk_fakeId" }] },
       }));
 
-      const chkApi = await new ChecksApi(config).List(1);
+      const chkApi = await new ChecksApi(config).list(1);
       expect(chkApi).toBeDefined();
       expect(chkApi?.data?.length).toEqual(1);
     });
@@ -394,7 +394,7 @@ describe("ChecksApi", () => {
         };
       });
 
-      const response = await new ChecksApi(config).List(
+      const response = await new ChecksApi(config).list(
         undefined,
         undefined,
         undefined,
@@ -416,7 +416,7 @@ describe("ChecksApi", () => {
       });
 
       const dateFilter = { gt: "2020-01-01", lt: "2020-01-31T12" };
-      const chkApi = await new ChecksApi(config).List(
+      const chkApi = await new ChecksApi(config).list(
         undefined,
         undefined,
         dateFilter.gt
@@ -436,7 +436,7 @@ describe("ChecksApi", () => {
       });
 
       const dateFilter = { gt: "2020-01-01", lt: "2020-01-31T12" };
-      const chkApi = await new ChecksApi(config).List(
+      const chkApi = await new ChecksApi(config).list(
         undefined,
         undefined,
         undefined,
@@ -458,7 +458,7 @@ describe("ChecksApi", () => {
       });
 
       const fakeMetadata = { metadata: "fakemetadata" };
-      const chkApi = await new ChecksApi(config).List(
+      const chkApi = await new ChecksApi(config).list(
         undefined,
         undefined,
         undefined,
@@ -481,7 +481,7 @@ describe("ChecksApi", () => {
       });
 
       const fakeMetadata = { metadata: "fakemetadata" };
-      const chkApi = await new ChecksApi(config).List(
+      const chkApi = await new ChecksApi(config).list(
         undefined,
         undefined,
         undefined,
@@ -505,7 +505,7 @@ describe("ChecksApi", () => {
       });
 
       const dateFilter = { gt: "2020-01-01", lt: "2020-01-31T12" };
-      const chkApi = await new ChecksApi(config).List(
+      const chkApi = await new ChecksApi(config).list(
         undefined,
         undefined,
         undefined,
@@ -529,7 +529,7 @@ describe("ChecksApi", () => {
         };
       });
 
-      const chkApi = await new ChecksApi(config).List(
+      const chkApi = await new ChecksApi(config).list(
         undefined,
         undefined,
         undefined,
@@ -555,7 +555,7 @@ describe("ChecksApi", () => {
       });
 
       const dateFilter = { gt: "2020-01-01", lt: "2020-01-31T12" };
-      const chkApi = await new ChecksApi(config).List(
+      const chkApi = await new ChecksApi(config).list(
         undefined,
         dateFilter.lt
       );
@@ -573,7 +573,7 @@ describe("ChecksApi", () => {
         };
       });
 
-      const chkApi = await new ChecksApi(config).List(
+      const chkApi = await new ChecksApi(config).list(
         undefined,
         undefined,
         undefined,
@@ -598,7 +598,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(configWithBaseOptions).List();
+        await new ChecksApi(configWithBaseOptions).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -614,7 +614,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(configWithBaseOptions).List();
+        await new ChecksApi(configWithBaseOptions).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -630,7 +630,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(configWithBaseOptions).List();
+        await new ChecksApi(configWithBaseOptions).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -643,7 +643,7 @@ describe("ChecksApi", () => {
       });
 
       try {
-        await new ChecksApi(configWithBaseOptions).List();
+        await new ChecksApi(configWithBaseOptions).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
