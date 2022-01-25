@@ -128,53 +128,51 @@ describe("CardOrdersApi", () => {
       );
       expect(cardOrder).toBeDefined();
       expect(cardOrder?.id).toEqual("co_fakeId");
-
     });
 
-      it("handles errors returned by the api", async () => {
-        axiosRequest.mockImplementationOnce(async () => {
-          throw {
-            message: "error",
-            response: { data: { error: { message: "error reported by API" } } },
-          };
-        });
-  
-        try {
-          
-          await new CardOrdersApi(config).create("co_fakeId", cardForCreate);
-          fail("Should throw");
-        } catch (err: any) {
-          expect(err.message).toEqual("error reported by API");
-        }
+    it("handles errors returned by the api", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw {
+          message: "error",
+          response: { data: { error: { message: "error reported by API" } } },
+        };
       });
-  
-      it("handles errors returned by the api with missing response.data", async () => {
-        axiosRequest.mockImplementationOnce(async () => {
-          throw {
-            message: "error",
-            response: {},
-          };
-        });
-  
-        try {
-          await new CardOrdersApi(config).create("co_fakeId", cardForCreate);
-          fail("Should throw");
-        } catch (err: any) {
-          expect(err.message).toEqual("error");
-        }
+
+      try {
+        await new CardOrdersApi(config).create("co_fakeId", cardForCreate);
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("error reported by API");
+      }
+    });
+
+    it("handles errors returned by the api with missing response.data", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw {
+          message: "error",
+          response: {},
+        };
       });
-      it("handles errors in making the request", async () => {
-        axiosRequest.mockImplementationOnce(async () => {
-          throw new Error("Unknown Error");
-        });
-  
-        try {
-          await new CardOrdersApi(config).create("co_fakeId", cardForCreate);
-          fail("Should throw");
-        } catch (err: any) {
-          expect(err.message).toEqual("Unknown Error");
-        }
+
+      try {
+        await new CardOrdersApi(config).create("co_fakeId", cardForCreate);
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("error");
+      }
+    });
+    it("handles errors in making the request", async () => {
+      axiosRequest.mockImplementationOnce(async () => {
+        throw new Error("Unknown Error");
       });
+
+      try {
+        await new CardOrdersApi(config).create("co_fakeId", cardForCreate);
+        fail("Should throw");
+      } catch (err: any) {
+        expect(err.message).toEqual("Unknown Error");
+      }
+    });
   });
 
   describe("cardOrderGet", () => {
