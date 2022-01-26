@@ -47,13 +47,13 @@ describe("UsVerificationApi", () => {
     it("verifies a single multi-line US address", async () => {
       const usvApi = new USVerificationsApi(config);
       const response = await usvApi.verifySingle(singleAddress);
-      expect(response?.deliverability).toBeDefined();
+      expect(response.deliverability).toBeDefined();
     });
 
     it("verifies a single one-line US address", async () => {
       const usvApi = new USVerificationsApi(config);
       const response = await usvApi.verifySingle(singleLine);
-      expect(response?.deliverability).toBeDefined();
+      expect(response.deliverability).toBeDefined();
     });
   });
 
@@ -68,7 +68,7 @@ describe("UsVerificationApi", () => {
       const usvApi = new USVerificationsApi(config);
       const response = await usvApi.verifyBulk(addressList);
       expect(response).toBeDefined();
-      expect(response?.addresses?.length).toEqual(2);
+      expect(response.addresses?.length).toEqual(2);
     });
   });
 });
