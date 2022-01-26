@@ -572,6 +572,39 @@ describe("TemplatesApi", () => {
       expect(templatesApi?.data?.length).toEqual(1);
     });
 
+    it("should handle date_created parameter", async () => {
+      axiosRequest.mockImplementationOnce(async () => ({
+        data: { data: [{ id: "tmpl_fakeId" }] },
+      }));
+
+      const templatesApi = await new TemplatesApi(config).list(
+        1,
+        "before",
+        "after",
+        ["fake"],
+        { date: "Jan. 26, 2022" }
+      );
+      expect(templatesApi).toBeDefined();
+      expect(templatesApi?.data?.length).toEqual(1);
+    });
+
+    it("should handle metadata parameter", async () => {
+      axiosRequest.mockImplementationOnce(async () => ({
+        data: { data: [{ id: "tmpl_fakeId" }] },
+      }));
+
+      const templatesApi = await new TemplatesApi(config).list(
+        1,
+        "before",
+        "after",
+        ["fake"],
+        { date: "Jan. 26, 2022" },
+        {}
+      );
+      expect(templatesApi).toBeDefined();
+      expect(templatesApi?.data?.length).toEqual(1);
+    });
+
     it("handles errors returned by the api", async () => {
       axiosRequest.mockImplementationOnce(async () => {
         throw {
