@@ -60,12 +60,12 @@ describe("ReverseGeocodeLookupsApi", () => {
       }));
 
       const geocodeResult = await new ReverseGeocodeLookupsApi(config).lookup(
-        mockLocation, 2
+        mockLocation,
+        2
       );
       expect(geocodeResult).toBeDefined();
       expect(geocodeResult.id).toEqual("us_reverse_geocode_fakeId");
     });
-
 
     it("includes custom headers while it looks up a geocode", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
