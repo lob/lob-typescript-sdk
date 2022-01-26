@@ -34,6 +34,9 @@ export class BillingGroup {
     if (typeof input?.date_modified !== "undefined") {
       this.date_modified = input.date_modified;
     }
+    if (typeof input?.fake_date !== "undefined") {
+      this.fake_date = input.fake_date;
+    }
     if (typeof input?.object !== "undefined") {
       this.object = input.object;
     }
@@ -82,6 +85,13 @@ export class BillingGroup {
    * @memberof BillingGroup
    */
   "date_modified"?: string;
+
+  /**
+   * A timestamp in ISO 8601 format of the date the resource was created.
+   * @type {string}
+   * @memberof BillingGroup
+   */
+  "fake_date"?: string;
 
   /**
    * Value is resource type.
