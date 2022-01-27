@@ -48,15 +48,17 @@ describe("IntlVerificationsApi", () => {
     });
 
     it("verifies a single international address", async () => {
-      const intlvApi = new IntlVerificationsApi(config);
-      const response = await intlvApi.verifySingle(multiLine);
-      expect(response?.status).toBeDefined();
+      const response = await new IntlVerificationsApi(config).verifySingle(
+        multiLine
+      );
+      expect(response.status).toBeDefined();
     });
 
     it("verifies a single-line international address", async () => {
-      const intlvApi = new IntlVerificationsApi(config);
-      const response = await intlvApi.verifySingle(singleLine);
-      expect(response?.status).toBeDefined();
+      const response = await new IntlVerificationsApi(config).verifySingle(
+        singleLine
+      );
+      expect(response.status).toBeDefined();
     });
   });
 
@@ -68,10 +70,11 @@ describe("IntlVerificationsApi", () => {
     });
 
     it("verifies a list of international addresses", async () => {
-      const intlvApi = new IntlVerificationsApi(config);
-      const response = await intlvApi.verifyBulk(addressList);
+      const response = await new IntlVerificationsApi(config).verifyBulk(
+        addressList
+      );
       expect(response).toBeDefined();
-      expect(response?.addresses?.length).toEqual(2);
+      expect(response.addresses?.length).toEqual(2);
     });
   });
 });
