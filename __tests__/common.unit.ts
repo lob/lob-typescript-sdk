@@ -411,6 +411,16 @@ describe("createRequestFunction", () => {
     expect(axiosRequest).toHaveBeenCalledTimes(1);
     expect(result.response).toEqual("value");
   });
+
+  it("includes the correct package name and version", () => {
+    const config = new Configuration();
+    const packageName = process.env.npm_package_name;
+    const packageVersion = process.env.npm_package_version;
+    expect(config.packageName).toBeDefined();
+    expect(config.packageName).toEqual(packageName)
+    expect(config.packageVersion).toBeDefined();
+    expect(config.packageVersion).toEqual(packageVersion);
+  });
 });
 
 describe("valueToString", () => {
