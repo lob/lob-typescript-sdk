@@ -1,21 +1,9 @@
-import { Configuration } from "../configuration";
-
-import {
-  SelfMailer,
-  SelfMailerEditable,
-  CountryExtended,
-  MailType,
-} from "../models";
+import { SelfMailer, SelfMailerEditable, CountryExtended } from "../models";
 import { SelfMailersApi } from "../api";
+import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
 
 describe("smApi", () => {
   jest.setTimeout(60000); // 60 seconds
-
-  const config: Configuration = new Configuration({
-    username: process.env.LOB_API_KEY,
-  });
-
-  let smApi: SelfMailersApi;
 
   const dummySelfMailer: SelfMailerEditable = {
     to: {
@@ -43,7 +31,7 @@ describe("smApi", () => {
   };
 
   it("SelfMailer API can be instantiated", () => {
-    smApi = new SelfMailersApi(config);
+    const smApi = new SelfMailersApi(CONFIG_FOR_INTEGRATION);
     expect(smApi).toBeDefined();
     expect(typeof smApi).toEqual("object");
     expect(smApi).toBeInstanceOf(SelfMailersApi);
@@ -51,6 +39,7 @@ describe("smApi", () => {
 
   describe("performs single-SelfMailer operations", () => {
     it("all individual SelfMailer functions exists", () => {
+      const smApi = new SelfMailersApi(CONFIG_FOR_INTEGRATION);
       expect(smApi.create).toBeDefined();
       expect(typeof smApi.create).toEqual("function");
 
@@ -65,12 +54,18 @@ describe("smApi", () => {
     });
 
     it("creates, retrieves, and deletes a selfMailer", async () => {
-      const selfMailer = await smApi.create(dummySelfMailer);
+      const selfMailer = await new SelfMailersApi(
+        CONFIG_FOR_INTEGRATION
+      ).create(dummySelfMailer);
       expect(selfMailer?.id).toBeDefined();
       if (selfMailer?.id) {
-        const retrievedSelfMailer = await smApi.get(selfMailer.id);
+        const retrievedSelfMailer = await new SelfMailersApi(
+          CONFIG_FOR_INTEGRATION
+        ).get(selfMailer.id);
         expect(retrievedSelfMailer).toBeDefined();
-        const deletedSelfMailer = await smApi.delete(selfMailer.id);
+        const deletedSelfMailer = await new SelfMailersApi(
+          CONFIG_FOR_INTEGRATION
+        ).delete(selfMailer.id);
         expect(deletedSelfMailer?.deleted).toBeTruthy();
       } else {
         throw new Error("self-mailer ID should be defined upon creation");
@@ -83,6 +78,7 @@ describe("smApi", () => {
     let previousUrl = "";
     let selfMailerList: SelfMailer[] = [];
     beforeAll(async () => {
+      const smApi = new SelfMailersApi(CONFIG_FOR_INTEGRATION);
       // ensure there are at least 3 cards present, to test pagination
       const sfm1: SelfMailerEditable = {
         to: {
@@ -178,26 +174,32 @@ describe("smApi", () => {
     });
 
     it("exists", () => {
-      expect(smApi.list).toBeDefined();
-      expect(typeof smApi.list).toEqual("function");
+      expect(new SelfMailersApi(CONFIG_FOR_INTEGRATION).list).toBeDefined();
+      expect(typeof new SelfMailersApi(CONFIG_FOR_INTEGRATION).list).toEqual(
+        "function"
+      );
     });
 
     it("lists self-mailers", async () => {
-      const response = await smApi.list();
+      const response = await new SelfMailersApi(CONFIG_FOR_INTEGRATION).list();
       expect(response?.data).toBeDefined();
       selfMailerList = response?.data || [];
       expect(selfMailerList.length).toBeGreaterThan(0);
     });
 
     it("lists self-mailers given an after param", async () => {
-      const responseAfter = await smApi.list(10, undefined, nextUrl);
+      const responseAfter = await new SelfMailersApi(
+        CONFIG_FOR_INTEGRATION
+      ).list(10, undefined, nextUrl);
       expect(responseAfter?.data).toBeDefined();
       const selfMailerList2: SelfMailer[] = responseAfter?.data || [];
       expect(selfMailerList2.length).toBeGreaterThan(0);
     });
 
     it("lists self-mailers given a before param", async () => {
-      const responseBefore = await smApi.list(10, previousUrl);
+      const responseBefore = await new SelfMailersApi(
+        CONFIG_FOR_INTEGRATION
+      ).list(10, previousUrl);
       expect(responseBefore?.data).toBeDefined();
       const selfMailerList3: SelfMailer[] = responseBefore?.data || [];
       expect(selfMailerList3.length).toBeGreaterThan(0);

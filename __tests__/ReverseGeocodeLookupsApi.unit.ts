@@ -1,5 +1,3 @@
-import { Configuration } from "../configuration";
-
 import { Location } from "../models";
 import { ReverseGeocodeLookupsApi } from "../api";
 
@@ -7,26 +5,18 @@ import { fail } from "./testUtilities";
 
 // Axios Mock
 import axios from "axios";
+import {
+  CONFIG_FOR_UNIT,
+  CONFIG_WITH_BASE_OPTIONS_FOR_UNIT,
+} from "./testFixtures";
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
 jest.mock("axios", () => ({
   request: jest.fn(),
 }));
 
 describe("ReverseGeocodeLookupsApi", () => {
-  const config: Configuration = new Configuration({
-    username: "Totally Fake Key",
-  });
-  const configWithBaseOptions = new Configuration({
-    username: "Totally Fake Key",
-    baseOptions: {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-  });
-
   it("reverse geocode lookup API can be instantiated", () => {
-    const reverseGeocodeApi = new ReverseGeocodeLookupsApi(config);
+    const reverseGeocodeApi = new ReverseGeocodeLookupsApi(CONFIG_FOR_UNIT);
     expect(reverseGeocodeApi).toBeDefined();
     expect(typeof reverseGeocodeApi).toEqual("object");
     expect(reverseGeocodeApi).toBeInstanceOf(ReverseGeocodeLookupsApi);
@@ -37,7 +27,7 @@ describe("ReverseGeocodeLookupsApi", () => {
     (mockLocation.latitude = 10.0518), (mockLocation.longitude = 77.5677);
 
     it("exists", async () => {
-      const reverseGeocodeApi = new ReverseGeocodeLookupsApi(config);
+      const reverseGeocodeApi = new ReverseGeocodeLookupsApi(CONFIG_FOR_UNIT);
       expect(reverseGeocodeApi.lookup).toBeDefined();
       expect(typeof reverseGeocodeApi.lookup).toEqual("function");
     });
@@ -47,9 +37,9 @@ describe("ReverseGeocodeLookupsApi", () => {
         data: { id: "us_reverse_geocode_fakeId" },
       }));
 
-      const geocodeResult = await new ReverseGeocodeLookupsApi(config).lookup(
-        mockLocation
-      );
+      const geocodeResult = await new ReverseGeocodeLookupsApi(
+        CONFIG_FOR_UNIT
+      ).lookup(mockLocation);
       expect(geocodeResult).toBeDefined();
       expect(geocodeResult.id).toEqual("us_reverse_geocode_fakeId");
     });
@@ -59,10 +49,9 @@ describe("ReverseGeocodeLookupsApi", () => {
         data: { id: "us_reverse_geocode_fakeId" },
       }));
 
-      const geocodeResult = await new ReverseGeocodeLookupsApi(config).lookup(
-        mockLocation,
-        2
-      );
+      const geocodeResult = await new ReverseGeocodeLookupsApi(
+        CONFIG_FOR_UNIT
+      ).lookup(mockLocation, 2);
       expect(geocodeResult).toBeDefined();
       expect(geocodeResult.id).toEqual("us_reverse_geocode_fakeId");
     });
@@ -73,7 +62,7 @@ describe("ReverseGeocodeLookupsApi", () => {
       }));
 
       const reverseGeocodeApi = await new ReverseGeocodeLookupsApi(
-        configWithBaseOptions
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).lookup(mockLocation);
       expect(reverseGeocodeApi).toBeDefined();
       expect(reverseGeocodeApi?.id).toEqual("us_reverse_geocode_fakeId");
@@ -88,9 +77,9 @@ describe("ReverseGeocodeLookupsApi", () => {
       });
 
       try {
-        await new ReverseGeocodeLookupsApi(configWithBaseOptions).lookup(
-          mockLocation
-        );
+        await new ReverseGeocodeLookupsApi(
+          CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+        ).lookup(mockLocation);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -106,9 +95,9 @@ describe("ReverseGeocodeLookupsApi", () => {
       });
 
       try {
-        await new ReverseGeocodeLookupsApi(configWithBaseOptions).lookup(
-          mockLocation
-        );
+        await new ReverseGeocodeLookupsApi(
+          CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+        ).lookup(mockLocation);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -124,9 +113,9 @@ describe("ReverseGeocodeLookupsApi", () => {
       });
 
       try {
-        await new ReverseGeocodeLookupsApi(configWithBaseOptions).lookup(
-          mockLocation
-        );
+        await new ReverseGeocodeLookupsApi(
+          CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+        ).lookup(mockLocation);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -139,9 +128,9 @@ describe("ReverseGeocodeLookupsApi", () => {
       });
 
       try {
-        await new ReverseGeocodeLookupsApi(configWithBaseOptions).lookup(
-          mockLocation
-        );
+        await new ReverseGeocodeLookupsApi(
+          CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+        ).lookup(mockLocation);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");

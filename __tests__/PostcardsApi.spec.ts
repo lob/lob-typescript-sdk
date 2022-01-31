@@ -65,12 +65,12 @@ describe("postcardsApi", () => {
 
     it("creates, retrieves, and deletes a postcard", async () => {
       const postcard = await postcardsApi.create(dummyPostcard);
-      expect(postcard?.id).toBeDefined();
-      if (postcard?.id) {
+      expect(postcard.id).toBeDefined();
+      if (postcard.id) {
         const retrievedPostcard = await postcardsApi.get(postcard.id);
         expect(retrievedPostcard).toBeDefined();
         const deletedPostcard = await postcardsApi.cancel(postcard.id);
-        expect(deletedPostcard?.deleted).toBeTruthy();
+        expect(deletedPostcard.deleted).toBeTruthy();
       } else {
         throw new Error("postcard ID should be defined upon creation");
       }
@@ -180,22 +180,22 @@ describe("postcardsApi", () => {
 
     it("lists postcards", async () => {
       const response = await postcardsApi.list();
-      expect(response?.data).toBeDefined();
-      postcardList = response?.data || [];
+      expect(response.data).toBeDefined();
+      postcardList = response.data || [];
       expect(postcardList.length).toBeGreaterThan(0);
     });
 
     it("lists postcards given an after param", async () => {
       const responseAfter = await postcardsApi.list(10, undefined, nextUrl);
-      expect(responseAfter?.data).toBeDefined();
-      const postcardList2: Postcard[] = responseAfter?.data || [];
+      expect(responseAfter.data).toBeDefined();
+      const postcardList2: Postcard[] = responseAfter.data || [];
       expect(postcardList2.length).toBeGreaterThan(0);
     });
 
     it("lists postcards given a before param", async () => {
       const responseBefore = await postcardsApi.list(10, previousUrl);
-      expect(responseBefore?.data).toBeDefined();
-      const postcardList3: Postcard[] = responseBefore?.data || [];
+      expect(responseBefore.data).toBeDefined();
+      const postcardList3: Postcard[] = responseBefore.data || [];
       expect(postcardList3.length).toBeGreaterThan(0);
     });
   });

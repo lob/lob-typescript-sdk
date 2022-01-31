@@ -1,10 +1,12 @@
-import { Configuration } from "../configuration";
-
 import { LetterEditable, AddressEditable, MailType } from "../models";
 import { LettersApi } from "../api/letters-api";
 
 import { fail } from "./testUtilities";
-import { DATE_FILTER } from "./testFixtures";
+import {
+  CONFIG_FOR_UNIT,
+  CONFIG_WITH_BASE_OPTIONS_FOR_UNIT,
+  DATE_FILTER,
+} from "./testFixtures";
 
 import axios from "axios";
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
@@ -13,27 +15,15 @@ jest.mock("axios", () => ({
 }));
 
 describe("LetterApi", () => {
-  const config: Configuration = new Configuration({
-    username: "Totally Fake Key",
-  });
-  const configWithBaseOptions = new Configuration({
-    username: "Totally Fake Key",
-    baseOptions: {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-  });
-
   it("Letter API can be instantiated", () => {
-    const letterApi = new LettersApi(config);
+    const letterApi = new LettersApi(CONFIG_FOR_UNIT);
     expect(letterApi).toBeDefined();
     expect(typeof letterApi).toEqual("object");
     expect(letterApi).toBeInstanceOf(LettersApi);
   });
 
   it("Letter API can be instantiated with base options", () => {
-    const letterApi = new LettersApi(configWithBaseOptions);
+    const letterApi = new LettersApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT);
     expect(letterApi).toBeDefined();
     expect(typeof letterApi).toEqual("object");
     expect(letterApi).toBeInstanceOf(LettersApi);
@@ -41,7 +31,7 @@ describe("LetterApi", () => {
 
   describe("get", () => {
     it("exists", () => {
-      const letterApi = new LettersApi(config);
+      const letterApi = new LettersApi(CONFIG_FOR_UNIT);
       expect(letterApi.get).toBeDefined();
       expect(typeof letterApi.get).toEqual("function");
     });
@@ -51,7 +41,7 @@ describe("LetterApi", () => {
         data: { id: "ltr_fakeId", deleted: false },
       }));
 
-      const letter = await new LettersApi(config).get("ltr_fakeId");
+      const letter = await new LettersApi(CONFIG_FOR_UNIT).get("ltr_fakeId");
       expect(letter).toBeDefined();
       expect(letter.id).toEqual("ltr_fakeId");
       expect(letter.deleted).toEqual(false);
@@ -62,9 +52,9 @@ describe("LetterApi", () => {
         data: { id: "ltr_fakeId2" },
       }));
 
-      const letter = await new LettersApi(configWithBaseOptions).get(
-        "ltr_fakeId"
-      );
+      const letter = await new LettersApi(
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+      ).get("ltr_fakeId");
       expect(letter).toBeDefined();
       expect(letter?.id).toEqual("ltr_fakeId2");
     });
@@ -78,7 +68,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).get("ltr_fakeId");
+        await new LettersApi(CONFIG_FOR_UNIT).get("ltr_fakeId");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
       }
@@ -93,7 +83,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).get("ltr_fakeId");
+        await new LettersApi(CONFIG_FOR_UNIT).get("ltr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -109,7 +99,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).get("ltr_fakeId");
+        await new LettersApi(CONFIG_FOR_UNIT).get("ltr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -122,7 +112,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).get("ltr_fakeId");
+        await new LettersApi(CONFIG_FOR_UNIT).get("ltr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -132,7 +122,7 @@ describe("LetterApi", () => {
 
   describe("list", () => {
     it("exists", () => {
-      const lettersApi = new LettersApi(config);
+      const lettersApi = new LettersApi(CONFIG_FOR_UNIT);
       expect(lettersApi.list).toBeDefined();
       expect(typeof lettersApi.list).toEqual("function");
     });
@@ -142,7 +132,7 @@ describe("LetterApi", () => {
         data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
       }));
 
-      const response = await new LettersApi(config).list();
+      const response = await new LettersApi(CONFIG_FOR_UNIT).list();
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
       expect(response?.data?.length).toEqual(2);
@@ -153,7 +143,9 @@ describe("LetterApi", () => {
         data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
       }));
 
-      const response = await new LettersApi(configWithBaseOptions).list();
+      const response = await new LettersApi(
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+      ).list();
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
       expect(response?.data?.length).toEqual(2);
@@ -168,7 +160,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).list();
+        await new LettersApi(CONFIG_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -184,7 +176,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).list();
+        await new LettersApi(CONFIG_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -200,7 +192,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).list();
+        await new LettersApi(CONFIG_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -213,7 +205,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).list();
+        await new LettersApi(CONFIG_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -228,7 +220,7 @@ describe("LetterApi", () => {
         };
       });
 
-      const response = await new LettersApi(config).list(10);
+      const response = await new LettersApi(CONFIG_FOR_UNIT).list(10);
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
       expect(response?.data?.length).toEqual(2);
@@ -242,7 +234,10 @@ describe("LetterApi", () => {
         };
       });
 
-      const response = await new LettersApi(config).list(undefined, "before");
+      const response = await new LettersApi(CONFIG_FOR_UNIT).list(
+        undefined,
+        "before"
+      );
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
       expect(response?.data?.length).toEqual(2);
@@ -256,7 +251,7 @@ describe("LetterApi", () => {
         };
       });
 
-      const response = await new LettersApi(config).list(
+      const response = await new LettersApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         "after"
@@ -274,7 +269,7 @@ describe("LetterApi", () => {
         };
       });
 
-      const response = await new LettersApi(config).list(
+      const response = await new LettersApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -295,7 +290,7 @@ describe("LetterApi", () => {
         };
       });
 
-      const response = await new LettersApi(config).list(
+      const response = await new LettersApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -317,7 +312,7 @@ describe("LetterApi", () => {
         };
       });
 
-      const response = await new LettersApi(config).list(
+      const response = await new LettersApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -338,7 +333,7 @@ describe("LetterApi", () => {
         };
       });
 
-      const response = await new LettersApi(config).list(
+      const response = await new LettersApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -360,7 +355,7 @@ describe("LetterApi", () => {
         };
       });
 
-      const response = await new LettersApi(config).list(
+      const response = await new LettersApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -385,7 +380,7 @@ describe("LetterApi", () => {
         };
       });
 
-      const response = await new LettersApi(config).list(
+      const response = await new LettersApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -409,7 +404,7 @@ describe("LetterApi", () => {
         };
       });
 
-      const response = await new LettersApi(config).list(
+      const response = await new LettersApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -436,7 +431,7 @@ describe("LetterApi", () => {
         };
       });
 
-      const letter = await new LettersApi(config).list(
+      const letter = await new LettersApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -461,7 +456,7 @@ describe("LetterApi", () => {
         };
       });
 
-      const response = await new LettersApi(config).list(
+      const response = await new LettersApi(CONFIG_FOR_UNIT).list(
         10,
         undefined,
         "after"
@@ -474,7 +469,7 @@ describe("LetterApi", () => {
 
   describe("cancel", () => {
     it("exists", () => {
-      const letterApi = new LettersApi(config);
+      const letterApi = new LettersApi(CONFIG_FOR_UNIT);
       expect(letterApi.create).toBeDefined();
       expect(typeof letterApi.create).toEqual("function");
     });
@@ -486,7 +481,9 @@ describe("LetterApi", () => {
           deleted: true,
         },
       }));
-      const canceledLetter = await new LettersApi(config).cancel("ltr_fakeId");
+      const canceledLetter = await new LettersApi(CONFIG_FOR_UNIT).cancel(
+        "ltr_fakeId"
+      );
       expect(canceledLetter?.deleted).toEqual(true);
     });
 
@@ -497,9 +494,9 @@ describe("LetterApi", () => {
           deleted: true,
         },
       }));
-      const canceledLetter = await new LettersApi(configWithBaseOptions).cancel(
-        "ltr_fakeId"
-      );
+      const canceledLetter = await new LettersApi(
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+      ).cancel("ltr_fakeId");
       expect(canceledLetter?.deleted).toEqual(true);
     });
 
@@ -512,7 +509,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).cancel("ltr_fakeId");
+        await new LettersApi(CONFIG_FOR_UNIT).cancel("ltr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by Api");
@@ -528,7 +525,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).cancel("ltr_fakeId");
+        await new LettersApi(CONFIG_FOR_UNIT).cancel("ltr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -544,7 +541,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).cancel("ltr_fakeId");
+        await new LettersApi(CONFIG_FOR_UNIT).cancel("ltr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -557,7 +554,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).cancel("ltr_fakeId");
+        await new LettersApi(CONFIG_FOR_UNIT).cancel("ltr_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -580,7 +577,7 @@ describe("LetterApi", () => {
     };
 
     it("exists", () => {
-      const letterApi = new LettersApi(config);
+      const letterApi = new LettersApi(CONFIG_FOR_UNIT);
       expect(letterApi.create).toBeDefined();
       expect(typeof letterApi.create).toEqual("function");
     });
@@ -590,7 +587,7 @@ describe("LetterApi", () => {
         data: { id: "ltr_fakeId" },
       }));
 
-      const letter = await new LettersApi(config).create(createLetter);
+      const letter = await new LettersApi(CONFIG_FOR_UNIT).create(createLetter);
       expect(letter).toBeDefined();
       expect(letter?.id).toBeDefined();
     });
@@ -600,9 +597,9 @@ describe("LetterApi", () => {
         data: { id: "ltr_fakeId" },
       }));
 
-      const letter = await new LettersApi(configWithBaseOptions).create(
-        createLetter
-      );
+      const letter = await new LettersApi(
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+      ).create(createLetter);
       expect(letter).toBeDefined();
       expect(letter?.id).toBeDefined();
     });
@@ -612,7 +609,7 @@ describe("LetterApi", () => {
         data: { id: "ltr_fakeId" },
       }));
 
-      const letter = await new LettersApi(config).create(
+      const letter = await new LettersApi(CONFIG_FOR_UNIT).create(
         createLetter,
         "fake key"
       );
@@ -630,7 +627,7 @@ describe("LetterApi", () => {
 
       try {
         //
-        await new LettersApi(config).create(createLetter);
+        await new LettersApi(CONFIG_FOR_UNIT).create(createLetter);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -646,7 +643,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).create(createLetter);
+        await new LettersApi(CONFIG_FOR_UNIT).create(createLetter);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -658,7 +655,7 @@ describe("LetterApi", () => {
       });
 
       try {
-        await new LettersApi(config).create(createLetter);
+        await new LettersApi(CONFIG_FOR_UNIT).create(createLetter);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -676,7 +673,7 @@ describe("LetterApi", () => {
         };
       });
 
-      const letterApi = new LettersApi(config);
+      const letterApi = new LettersApi(CONFIG_FOR_UNIT);
       expect(letterApi.create).toBeDefined();
       expect(typeof letterApi.create).toEqual("function");
     });

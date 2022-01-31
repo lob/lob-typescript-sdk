@@ -1,10 +1,12 @@
-import { Configuration } from "../configuration";
-
 import { BillingGroupEditable } from "../models";
 import { BillingGroupsApi } from "../api";
 
 import { fail } from "./testUtilities";
-import { DATE_FILTER } from "./testFixtures";
+import {
+  CONFIG_FOR_UNIT,
+  CONFIG_WITH_BASE_OPTIONS_FOR_UNIT,
+  DATE_FILTER,
+} from "./testFixtures";
 
 // Axios Mock
 import axios from "axios";
@@ -14,20 +16,8 @@ jest.mock("axios", () => ({
 }));
 
 describe("BillingGroupsApi", () => {
-  const config: Configuration = new Configuration({
-    username: "Totally Fake Key",
-  });
-  const configWithBaseOptions = new Configuration({
-    username: "Totally Fake Key",
-    baseOptions: {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-  });
-
   it("Billing Groups API can be instantiated", () => {
-    const bgApi = new BillingGroupsApi(config);
+    const bgApi = new BillingGroupsApi(CONFIG_FOR_UNIT);
     expect(bgApi).toBeDefined();
     expect(typeof bgApi).toEqual("object");
     expect(bgApi).toBeInstanceOf(BillingGroupsApi);
@@ -39,7 +29,7 @@ describe("BillingGroupsApi", () => {
     };
 
     it("exists", async () => {
-      const bgApi = new BillingGroupsApi(config);
+      const bgApi = new BillingGroupsApi(CONFIG_FOR_UNIT);
       expect(bgApi.create).toBeDefined();
       expect(typeof bgApi.create).toEqual("function");
     });
@@ -49,7 +39,7 @@ describe("BillingGroupsApi", () => {
         data: { id: "bg_fakeId" },
       }));
 
-      const bg_product = await new BillingGroupsApi(config).create(
+      const bg_product = await new BillingGroupsApi(CONFIG_FOR_UNIT).create(
         bgEditableMock
       );
       expect(bg_product).toBeDefined();
@@ -61,9 +51,9 @@ describe("BillingGroupsApi", () => {
         data: { id: "bg_fakeId" },
       }));
 
-      const bgApi = await new BillingGroupsApi(configWithBaseOptions).create(
-        bgEditableMock
-      );
+      const bgApi = await new BillingGroupsApi(
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+      ).create(bgEditableMock);
       expect(bgApi).toBeDefined();
       expect(bgApi?.id).toEqual("bg_fakeId");
     });
@@ -77,7 +67,7 @@ describe("BillingGroupsApi", () => {
       });
 
       try {
-        await new BillingGroupsApi(configWithBaseOptions).create(
+        await new BillingGroupsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).create(
           bgEditableMock
         );
         fail("Should throw");
@@ -95,7 +85,7 @@ describe("BillingGroupsApi", () => {
       });
 
       try {
-        await new BillingGroupsApi(configWithBaseOptions).create(
+        await new BillingGroupsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).create(
           bgEditableMock
         );
         fail("Should throw");
@@ -113,7 +103,7 @@ describe("BillingGroupsApi", () => {
       });
 
       try {
-        await new BillingGroupsApi(configWithBaseOptions).create(
+        await new BillingGroupsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).create(
           bgEditableMock
         );
         fail("Should throw");
@@ -131,7 +121,7 @@ describe("BillingGroupsApi", () => {
       };
 
       try {
-        await new BillingGroupsApi(configWithBaseOptions).create(
+        await new BillingGroupsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).create(
           bgEditableMock
         );
         fail("Should throw");
@@ -143,7 +133,7 @@ describe("BillingGroupsApi", () => {
 
   describe("get", () => {
     it("exists", async () => {
-      const billingGroupsApi = new BillingGroupsApi(config);
+      const billingGroupsApi = new BillingGroupsApi(CONFIG_FOR_UNIT);
       expect(billingGroupsApi.get).toBeDefined();
       expect(typeof billingGroupsApi.get).toEqual("function");
     });
@@ -153,7 +143,9 @@ describe("BillingGroupsApi", () => {
         data: { id: "bg_fakeId" },
       }));
 
-      const billing_groups = await new BillingGroupsApi(config).get("fake id");
+      const billing_groups = await new BillingGroupsApi(CONFIG_FOR_UNIT).get(
+        "fake id"
+      );
       expect(billing_groups).toBeDefined();
       expect(billing_groups?.id).toEqual("bg_fakeId");
     });
@@ -164,7 +156,7 @@ describe("BillingGroupsApi", () => {
       }));
 
       const billing_groups = await new BillingGroupsApi(
-        configWithBaseOptions
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).get("fake id");
       expect(billing_groups).toBeDefined();
       expect(billing_groups?.id).toEqual("bg_fakeId");
@@ -179,7 +171,9 @@ describe("BillingGroupsApi", () => {
       });
 
       try {
-        await new BillingGroupsApi(configWithBaseOptions).get("fake id");
+        await new BillingGroupsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).get(
+          "fake id"
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -195,7 +189,7 @@ describe("BillingGroupsApi", () => {
       });
 
       try {
-        await new BillingGroupsApi(config).get("fake id");
+        await new BillingGroupsApi(CONFIG_FOR_UNIT).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -211,7 +205,7 @@ describe("BillingGroupsApi", () => {
       });
 
       try {
-        await new BillingGroupsApi(config).get("fake id");
+        await new BillingGroupsApi(CONFIG_FOR_UNIT).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -224,7 +218,9 @@ describe("BillingGroupsApi", () => {
       });
 
       try {
-        await new BillingGroupsApi(configWithBaseOptions).get("fake id");
+        await new BillingGroupsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).get(
+          "fake id"
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -238,7 +234,7 @@ describe("BillingGroupsApi", () => {
     };
 
     it("exists", async () => {
-      const billingGroupsApi = new BillingGroupsApi(config);
+      const billingGroupsApi = new BillingGroupsApi(CONFIG_FOR_UNIT);
       expect(billingGroupsApi.update).toBeDefined();
       expect(typeof billingGroupsApi.update).toEqual("function");
     });
@@ -248,7 +244,7 @@ describe("BillingGroupsApi", () => {
         data: { id: "bg_fakeId" },
       }));
 
-      const billing_groups = await new BillingGroupsApi(config).update(
+      const billing_groups = await new BillingGroupsApi(CONFIG_FOR_UNIT).update(
         "fake id",
         bgUpdatable
       );
@@ -262,7 +258,7 @@ describe("BillingGroupsApi", () => {
       }));
 
       const billing_groups = await new BillingGroupsApi(
-        configWithBaseOptions
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).update("fake id", bgUpdatable);
       expect(billing_groups).toBeDefined();
       expect(billing_groups?.id).toEqual("bg_fakeId");
@@ -277,7 +273,7 @@ describe("BillingGroupsApi", () => {
       });
 
       try {
-        await new BillingGroupsApi(configWithBaseOptions).update(
+        await new BillingGroupsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).update(
           "fake id",
           bgUpdatable
         );
@@ -296,7 +292,10 @@ describe("BillingGroupsApi", () => {
       });
 
       try {
-        await new BillingGroupsApi(config).update("fake id", bgUpdatable);
+        await new BillingGroupsApi(CONFIG_FOR_UNIT).update(
+          "fake id",
+          bgUpdatable
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -312,7 +311,10 @@ describe("BillingGroupsApi", () => {
       });
 
       try {
-        await new BillingGroupsApi(config).update("fake id", bgUpdatable);
+        await new BillingGroupsApi(CONFIG_FOR_UNIT).update(
+          "fake id",
+          bgUpdatable
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -325,7 +327,7 @@ describe("BillingGroupsApi", () => {
       });
 
       try {
-        await new BillingGroupsApi(configWithBaseOptions).update(
+        await new BillingGroupsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).update(
           "fake id",
           bgUpdatable
         );
@@ -338,7 +340,7 @@ describe("BillingGroupsApi", () => {
 
   describe("list", () => {
     it("exists", async () => {
-      const bgApi = new BillingGroupsApi(config);
+      const bgApi = new BillingGroupsApi(CONFIG_FOR_UNIT);
       expect(bgApi.list).toBeDefined();
       expect(typeof bgApi.list).toEqual("function");
     });
@@ -350,7 +352,7 @@ describe("BillingGroupsApi", () => {
         },
       }));
 
-      const bgApi = await new BillingGroupsApi(config).list();
+      const bgApi = await new BillingGroupsApi(CONFIG_FOR_UNIT).list();
       expect(bgApi).toBeDefined();
       expect(bgApi?.data?.length).toEqual(2);
     });
@@ -360,7 +362,7 @@ describe("BillingGroupsApi", () => {
         data: { data: [{ id: "bg_fakeId" }] },
       }));
 
-      const bgApi = await new BillingGroupsApi(config).list(1);
+      const bgApi = await new BillingGroupsApi(CONFIG_FOR_UNIT).list(1);
       expect(bgApi).toBeDefined();
       expect(bgApi?.data?.length).toEqual(1);
     });
@@ -373,7 +375,7 @@ describe("BillingGroupsApi", () => {
         };
       });
 
-      const response = await new BillingGroupsApi(config).list(
+      const response = await new BillingGroupsApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         ["this"]
@@ -391,7 +393,10 @@ describe("BillingGroupsApi", () => {
         };
       });
 
-      const bgApi = await new BillingGroupsApi(config).list(undefined, 1);
+      const bgApi = await new BillingGroupsApi(CONFIG_FOR_UNIT).list(
+        undefined,
+        1
+      );
       expect(bgApi).toBeDefined();
       expect(bgApi?.data?.length).toEqual(1);
     });
@@ -406,7 +411,7 @@ describe("BillingGroupsApi", () => {
         };
       });
 
-      const bgApi = await new BillingGroupsApi(config).list(
+      const bgApi = await new BillingGroupsApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -426,7 +431,7 @@ describe("BillingGroupsApi", () => {
         };
       });
 
-      const bgApi = await new BillingGroupsApi(config).list(
+      const bgApi = await new BillingGroupsApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -447,7 +452,7 @@ describe("BillingGroupsApi", () => {
         };
       });
 
-      const bgApi = await new BillingGroupsApi(config).list(
+      const bgApi = await new BillingGroupsApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -468,7 +473,7 @@ describe("BillingGroupsApi", () => {
       });
 
       try {
-        await new BillingGroupsApi(configWithBaseOptions).list();
+        await new BillingGroupsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -484,7 +489,7 @@ describe("BillingGroupsApi", () => {
       });
 
       try {
-        await new BillingGroupsApi(configWithBaseOptions).list();
+        await new BillingGroupsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -500,7 +505,7 @@ describe("BillingGroupsApi", () => {
       });
 
       try {
-        await new BillingGroupsApi(configWithBaseOptions).list();
+        await new BillingGroupsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -513,7 +518,7 @@ describe("BillingGroupsApi", () => {
       });
 
       try {
-        await new BillingGroupsApi(configWithBaseOptions).list();
+        await new BillingGroupsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");

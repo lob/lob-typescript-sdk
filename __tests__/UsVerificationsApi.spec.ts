@@ -1,13 +1,8 @@
-import { Configuration } from "../configuration";
-
 import { UsVerificationsWritable, MultipleComponentsList } from "../models";
 import { USVerificationsApi } from "../api";
+import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
 
 describe("UsVerificationApi", () => {
-  const config: Configuration = new Configuration({
-    username: process.env.LOB_API_KEY,
-  });
-
   const singleAddress: UsVerificationsWritable = {
     primary_line: "001 CEMETERY LANE",
     city: "WESTFIELD",
@@ -31,7 +26,7 @@ describe("UsVerificationApi", () => {
   };
 
   it("US Verifications API can be instantiated", () => {
-    const usvApi = new USVerificationsApi(config);
+    const usvApi = new USVerificationsApi(CONFIG_FOR_INTEGRATION);
     expect(usvApi).toBeDefined();
     expect(typeof usvApi).toEqual("object");
     expect(usvApi).toBeInstanceOf(USVerificationsApi);
@@ -39,19 +34,19 @@ describe("UsVerificationApi", () => {
 
   describe("verifySingle", () => {
     it("exists", () => {
-      const usvApi = new USVerificationsApi(config);
+      const usvApi = new USVerificationsApi(CONFIG_FOR_INTEGRATION);
       expect(usvApi.verifySingle).toBeDefined();
       expect(typeof usvApi.verifySingle).toEqual("function");
     });
 
     it("verifies a single multi-line US address", async () => {
-      const usvApi = new USVerificationsApi(config);
+      const usvApi = new USVerificationsApi(CONFIG_FOR_INTEGRATION);
       const response = await usvApi.verifySingle(singleAddress);
       expect(response.deliverability).toBeDefined();
     });
 
     it("verifies a single one-line US address", async () => {
-      const usvApi = new USVerificationsApi(config);
+      const usvApi = new USVerificationsApi(CONFIG_FOR_INTEGRATION);
       const response = await usvApi.verifySingle(singleLine);
       expect(response.deliverability).toBeDefined();
     });
@@ -59,13 +54,13 @@ describe("UsVerificationApi", () => {
 
   describe("verifyBulk", () => {
     it("exists", () => {
-      const usvApi = new USVerificationsApi(config);
+      const usvApi = new USVerificationsApi(CONFIG_FOR_INTEGRATION);
       expect(usvApi.verifyBulk).toBeDefined();
       expect(typeof usvApi.verifyBulk).toEqual("function");
     });
 
     it("verifies multiple US addresses", async () => {
-      const usvApi = new USVerificationsApi(config);
+      const usvApi = new USVerificationsApi(CONFIG_FOR_INTEGRATION);
       const response = await usvApi.verifyBulk(addressList);
       expect(response).toBeDefined();
       expect(response.addresses?.length).toEqual(2);

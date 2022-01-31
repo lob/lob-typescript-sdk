@@ -61,13 +61,13 @@ describe("CardsApi", () => {
 
     it("creates, retrieves, and cancels a CERTIFIED letter", async () => {
       const letter = await lettersApi.create(certifiedLetter);
-      expect(letter?.id).toBeDefined();
-      expect(letter?.extra_service).toEqual("certified");
-      if (letter?.id) {
+      expect(letter.id).toBeDefined();
+      expect(letter.extra_service).toEqual("certified");
+      if (letter.id) {
         const retrievedLetter = await lettersApi.get(letter.id);
         expect(retrievedLetter).toBeDefined();
         const cancelledLetter = await lettersApi.cancel(letter.id);
-        expect(cancelledLetter?.deleted).toBeTruthy();
+        expect(cancelledLetter.deleted).toBeTruthy();
       } else {
         throw new Error("letter ID should be defined upon creation");
       }
@@ -97,13 +97,13 @@ describe("CardsApi", () => {
         file: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/us_letter_1pg.pdf",
       };
       const letter = await lettersApi.create(registeredLetter);
-      expect(letter?.id).toBeDefined();
-      expect(letter?.extra_service).toEqual("registered");
-      if (letter?.id) {
+      expect(letter.id).toBeDefined();
+      expect(letter.extra_service).toEqual("registered");
+      if (letter.id) {
         const retrievedLetter = await lettersApi.get(letter.id);
         expect(retrievedLetter).toBeDefined();
         const cancelledLetter = await lettersApi.cancel(letter.id);
-        expect(cancelledLetter?.deleted).toBeTruthy();
+        expect(cancelledLetter.deleted).toBeTruthy();
       } else {
         throw new Error("letter ID should be defined upon creation");
       }
@@ -132,13 +132,13 @@ describe("CardsApi", () => {
         file: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/us_letter_1pg.pdf",
       };
       const letter = await lettersApi.create(registeredLetter);
-      expect(letter?.id).toBeDefined();
-      expect(letter?.extra_service).toBeFalsy();
-      if (letter?.id) {
+      expect(letter.id).toBeDefined();
+      expect(letter.extra_service).toBeFalsy();
+      if (letter.id) {
         const retrievedLetter = await lettersApi.get(letter.id);
         expect(retrievedLetter).toBeDefined();
         const cancelledLetter = await lettersApi.cancel(letter.id);
-        expect(cancelledLetter?.deleted).toBeTruthy();
+        expect(cancelledLetter.deleted).toBeTruthy();
       } else {
         throw new Error("letter ID should be defined upon creation");
       }
