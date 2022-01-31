@@ -1,5 +1,3 @@
-import { Configuration } from "../configuration";
-
 import { ChecksApi } from "../api/checks-api";
 import { CheckEditable } from "../models/check-editable";
 import { Check } from "../models/check";
@@ -10,8 +8,8 @@ import {
   BankAccountWritable,
   BankTypeEnum,
   CountryExtended,
-  MailType,
 } from "..";
+import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
 
 let bankApi: BankAccountsApi;
 let account: BankAccount;
@@ -24,7 +22,7 @@ describe("ChecksApi", () => {
       signatory: "Sinead Connor",
       account_type: BankTypeEnum.Individual,
     };
-    bankApi = new BankAccountsApi(config);
+    bankApi = new BankAccountsApi(CONFIG_FOR_INTEGRATION);
     account = await bankApi.create(dummyAccount);
     const verify: BankAccountVerify = {
       amounts: [11, 35],
@@ -35,19 +33,16 @@ describe("ChecksApi", () => {
       expect(verification?.verified).toBeTruthy();
     }
   });
-  const config: Configuration = new Configuration({
-    username: process.env.LOB_API_KEY,
-  });
 
   it("Checks API can be instantiated", () => {
-    const checksApi = new ChecksApi(config);
+    const checksApi = new ChecksApi(CONFIG_FOR_INTEGRATION);
     expect(checksApi).toBeDefined();
     expect(typeof checksApi).toEqual("object");
     expect(checksApi).toBeInstanceOf(ChecksApi);
   });
 
   it("all individual Check functions exists", () => {
-    const checksApi = new ChecksApi(config);
+    const checksApi = new ChecksApi(CONFIG_FOR_INTEGRATION);
     expect(checksApi.cancel).toBeDefined();
     expect(typeof checksApi.cancel).toEqual("function");
 
@@ -90,19 +85,23 @@ describe("ChecksApi", () => {
           amount: 100,
         };
 
-        checksApi = new ChecksApi(config);
+        checksApi = new ChecksApi(CONFIG_FOR_INTEGRATION);
       });
 
       it("creates a check", async () => {
         // create
-        const createdCheck = await new ChecksApi(config).create(createCheck);
+        const createdCheck = await new ChecksApi(CONFIG_FOR_INTEGRATION).create(
+          createCheck
+        );
         expect(createdCheck?.id).toBeDefined();
         expect(createdCheck?.description).toEqual(createCheck.description);
       });
 
       it("Retrieves a check", async () => {
         // Retrieve
-        const createdCheck = await new ChecksApi(config).create(createCheck);
+        const createdCheck = await new ChecksApi(CONFIG_FOR_INTEGRATION).create(
+          createCheck
+        );
 
         const retrievedCheck = await checksApi.get(createdCheck.id as string);
         expect(retrievedCheck).toBeDefined();
@@ -111,7 +110,9 @@ describe("ChecksApi", () => {
 
       it("cancels a check", async () => {
         // cancel
-        const createdCheck = await new ChecksApi(config).create(createCheck);
+        const createdCheck = await new ChecksApi(CONFIG_FOR_INTEGRATION).create(
+          createCheck
+        );
 
         const cancelledCheck = await checksApi.cancel(
           createdCheck.id as string
@@ -122,7 +123,9 @@ describe("ChecksApi", () => {
 
       it("Lists a check", async () => {
         // List
-        const createdCheck = await new ChecksApi(config).create(createCheck);
+        const createdCheck = await new ChecksApi(CONFIG_FOR_INTEGRATION).create(
+          createCheck
+        );
 
         const updatedCheck = await checksApi.list(1);
         expect(updatedCheck).toBeDefined();
@@ -166,7 +169,7 @@ describe("ChecksApi", () => {
         amount: 300,
       });
 
-      const checksApi = new ChecksApi(config);
+      const checksApi = new ChecksApi(CONFIG_FOR_INTEGRATION);
       await Promise.all([
         checksApi.create(check1),
         checksApi.create(check2),
@@ -182,13 +185,13 @@ describe("ChecksApi", () => {
     });
 
     it("exists", () => {
-      const checksApi = new ChecksApi(config);
+      const checksApi = new ChecksApi(CONFIG_FOR_INTEGRATION);
       expect(checksApi.list).toBeDefined();
       expect(typeof checksApi.list).toEqual("function");
     });
 
     it("lists checks", async () => {
-      const response = await new ChecksApi(config).list();
+      const response = await new ChecksApi(CONFIG_FOR_INTEGRATION).list();
       expect(response?.data).toBeDefined();
       const bgList = response?.data || [];
       expect(bgList.length).toBeGreaterThan(0);

@@ -1,5 +1,3 @@
-import { Configuration } from "../configuration";
-
 import {
   BankAccountVerify,
   BankAccountWritable,
@@ -8,7 +6,11 @@ import {
 import { BankAccountsApi } from "../api/bank-accounts-api";
 
 import { fail } from "./testUtilities";
-import { DATE_FILTER } from "./testFixtures";
+import {
+  CONFIG_FOR_UNIT,
+  CONFIG_WITH_BASE_OPTIONS_FOR_UNIT,
+  DATE_FILTER,
+} from "./testFixtures";
 
 // Axios Mock
 import axios from "axios";
@@ -18,27 +20,17 @@ jest.mock("axios", () => ({
 }));
 
 describe("BankAccountsApi", () => {
-  const config: Configuration = new Configuration({
-    username: "Totally Fake Key",
-  });
-  const configWithBaseOptions = new Configuration({
-    username: "Totally Fake Key",
-    baseOptions: {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-  });
-
   it("BankAccounts API can be instantiated", () => {
-    const bankAccountsApi = new BankAccountsApi(config);
+    const bankAccountsApi = new BankAccountsApi(CONFIG_FOR_UNIT);
     expect(bankAccountsApi).toBeDefined();
     expect(typeof bankAccountsApi).toEqual("object");
     expect(bankAccountsApi).toBeInstanceOf(BankAccountsApi);
   });
 
   it("BankAccounts API can be instantiated with base options", () => {
-    const bankAccountsApi = new BankAccountsApi(configWithBaseOptions);
+    const bankAccountsApi = new BankAccountsApi(
+      CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+    );
     expect(bankAccountsApi).toBeDefined();
     expect(typeof bankAccountsApi).toEqual("object");
     expect(bankAccountsApi).toBeInstanceOf(BankAccountsApi);
@@ -53,7 +45,7 @@ describe("BankAccountsApi", () => {
     };
 
     it("exists", () => {
-      const bankAccountsApi = new BankAccountsApi(config);
+      const bankAccountsApi = new BankAccountsApi(CONFIG_FOR_UNIT);
       expect(bankAccountsApi.create).toBeDefined();
       expect(typeof bankAccountsApi.create).toEqual("function");
     });
@@ -67,7 +59,7 @@ describe("BankAccountsApi", () => {
       });
 
       try {
-        await new BankAccountsApi(config).create(create);
+        await new BankAccountsApi(CONFIG_FOR_UNIT).create(create);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -80,7 +72,7 @@ describe("BankAccountsApi", () => {
       });
 
       try {
-        await new BankAccountsApi(config).create(create);
+        await new BankAccountsApi(CONFIG_FOR_UNIT).create(create);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -92,7 +84,9 @@ describe("BankAccountsApi", () => {
         data: { id: "bank_fakeId" },
       }));
 
-      const bankAccount = await new BankAccountsApi(config).create(create);
+      const bankAccount = await new BankAccountsApi(CONFIG_FOR_UNIT).create(
+        create
+      );
       expect(bankAccount).toBeDefined();
       expect(bankAccount?.id).toBeDefined();
     });
@@ -103,7 +97,7 @@ describe("BankAccountsApi", () => {
       }));
 
       const bankAccount = await new BankAccountsApi(
-        configWithBaseOptions
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).create(create);
       expect(bankAccount).toBeDefined();
       expect(bankAccount?.id).toBeDefined();
@@ -112,7 +106,7 @@ describe("BankAccountsApi", () => {
 
   describe("delete", () => {
     it("exists", () => {
-      const bankAccountsApi = new BankAccountsApi(config);
+      const bankAccountsApi = new BankAccountsApi(CONFIG_FOR_UNIT);
       expect(bankAccountsApi.delete).toBeDefined();
       expect(typeof bankAccountsApi.delete).toEqual("function");
     });
@@ -124,7 +118,7 @@ describe("BankAccountsApi", () => {
           deleted: true,
         },
       }));
-      const bankAccount = await new BankAccountsApi(config).delete(
+      const bankAccount = await new BankAccountsApi(CONFIG_FOR_UNIT).delete(
         "bank_fakeId"
       );
       expect(bankAccount?.deleted).toEqual(true);
@@ -138,7 +132,7 @@ describe("BankAccountsApi", () => {
         },
       }));
       const bankAccount = await new BankAccountsApi(
-        configWithBaseOptions
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).delete("bank_fakeId");
       expect(bankAccount?.deleted).toEqual(true);
     });
@@ -152,7 +146,7 @@ describe("BankAccountsApi", () => {
       });
 
       try {
-        await new BankAccountsApi(config).delete("bank_fakeId");
+        await new BankAccountsApi(CONFIG_FOR_UNIT).delete("bank_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -165,7 +159,7 @@ describe("BankAccountsApi", () => {
       });
 
       try {
-        await new BankAccountsApi(config).delete("bank_fakeId");
+        await new BankAccountsApi(CONFIG_FOR_UNIT).delete("bank_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -175,7 +169,7 @@ describe("BankAccountsApi", () => {
 
   describe("get", () => {
     it("exists", () => {
-      const bankAccountsApi = new BankAccountsApi(config);
+      const bankAccountsApi = new BankAccountsApi(CONFIG_FOR_UNIT);
       expect(bankAccountsApi.get).toBeDefined();
       expect(typeof bankAccountsApi.get).toEqual("function");
     });
@@ -185,7 +179,9 @@ describe("BankAccountsApi", () => {
         data: { id: "bank_fakeId2" },
       }));
 
-      const bankAccount = await new BankAccountsApi(config).get("bank_fakeId");
+      const bankAccount = await new BankAccountsApi(CONFIG_FOR_UNIT).get(
+        "bank_fakeId"
+      );
       expect(bankAccount?.id).toEqual("bank_fakeId2");
     });
 
@@ -194,9 +190,9 @@ describe("BankAccountsApi", () => {
         data: { id: "bank_fakeId2" },
       }));
 
-      const bankAccount = await new BankAccountsApi(configWithBaseOptions).get(
-        "bank_fakeId"
-      );
+      const bankAccount = await new BankAccountsApi(
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+      ).get("bank_fakeId");
       expect(bankAccount?.id).toEqual("bank_fakeId2");
     });
 
@@ -209,7 +205,7 @@ describe("BankAccountsApi", () => {
       });
 
       try {
-        await new BankAccountsApi(config).get("bank_fakeId");
+        await new BankAccountsApi(CONFIG_FOR_UNIT).get("bank_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -222,7 +218,7 @@ describe("BankAccountsApi", () => {
       });
 
       try {
-        await new BankAccountsApi(config).get("bank_fakeId");
+        await new BankAccountsApi(CONFIG_FOR_UNIT).get("bank_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -232,7 +228,7 @@ describe("BankAccountsApi", () => {
 
   describe("verify", () => {
     it("exists", () => {
-      const bankAccountsApi = new BankAccountsApi(config);
+      const bankAccountsApi = new BankAccountsApi(CONFIG_FOR_UNIT);
       expect(bankAccountsApi.verify).toBeDefined();
       expect(typeof bankAccountsApi.verify).toEqual("function");
     });
@@ -245,7 +241,7 @@ describe("BankAccountsApi", () => {
       const verify: BankAccountVerify = {
         amounts: [1, 2],
       };
-      const bankAccount = await new BankAccountsApi(config).verify(
+      const bankAccount = await new BankAccountsApi(CONFIG_FOR_UNIT).verify(
         "an id",
         verify
       );
@@ -262,7 +258,7 @@ describe("BankAccountsApi", () => {
         amounts: [1, 2],
       };
       const bankAccount = await new BankAccountsApi(
-        configWithBaseOptions
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).verify("an id", verify);
       expect(bankAccount).toBeDefined();
       expect(bankAccount?.id).toEqual("bank_fakeId");
@@ -280,7 +276,7 @@ describe("BankAccountsApi", () => {
         const verify: BankAccountVerify = {
           amounts: [1, 2],
         };
-        await new BankAccountsApi(config).verify("an id", verify);
+        await new BankAccountsApi(CONFIG_FOR_UNIT).verify("an id", verify);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -296,7 +292,7 @@ describe("BankAccountsApi", () => {
         const verify: BankAccountVerify = {
           amounts: [1, 2],
         };
-        await new BankAccountsApi(config).verify("an id", verify);
+        await new BankAccountsApi(CONFIG_FOR_UNIT).verify("an id", verify);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -306,7 +302,7 @@ describe("BankAccountsApi", () => {
 
   describe("list", () => {
     it("exists", () => {
-      const bankAccountsApi = new BankAccountsApi(config);
+      const bankAccountsApi = new BankAccountsApi(CONFIG_FOR_UNIT);
       expect(bankAccountsApi.list).toBeDefined();
       expect(typeof bankAccountsApi.list).toEqual("function");
     });
@@ -316,7 +312,7 @@ describe("BankAccountsApi", () => {
         data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
       }));
 
-      const response = await new BankAccountsApi(config).list();
+      const response = await new BankAccountsApi(CONFIG_FOR_UNIT).list();
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
       expect(response?.data?.length).toEqual(2);
@@ -327,7 +323,9 @@ describe("BankAccountsApi", () => {
         data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
       }));
 
-      const response = await new BankAccountsApi(configWithBaseOptions).list();
+      const response = await new BankAccountsApi(
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+      ).list();
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
       expect(response?.data?.length).toEqual(2);
@@ -342,7 +340,7 @@ describe("BankAccountsApi", () => {
       });
 
       try {
-        await new BankAccountsApi(config).list();
+        await new BankAccountsApi(CONFIG_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -355,7 +353,7 @@ describe("BankAccountsApi", () => {
       });
 
       try {
-        await new BankAccountsApi(config).list();
+        await new BankAccountsApi(CONFIG_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -370,7 +368,7 @@ describe("BankAccountsApi", () => {
         };
       });
 
-      const response = await new BankAccountsApi(config).list(10);
+      const response = await new BankAccountsApi(CONFIG_FOR_UNIT).list(10);
       expect(response).toBeDefined();
       expect(response?.data).toBeDefined();
       expect(response?.data?.length).toEqual(2);
@@ -384,7 +382,7 @@ describe("BankAccountsApi", () => {
         };
       });
 
-      const response = await new BankAccountsApi(config).list(
+      const response = await new BankAccountsApi(CONFIG_FOR_UNIT).list(
         undefined,
         "before"
       );
@@ -401,7 +399,7 @@ describe("BankAccountsApi", () => {
         };
       });
 
-      const response = await new BankAccountsApi(config).list(
+      const response = await new BankAccountsApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         "after"
@@ -419,7 +417,7 @@ describe("BankAccountsApi", () => {
         };
       });
 
-      const response = await new BankAccountsApi(config).list(
+      const response = await new BankAccountsApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -440,7 +438,7 @@ describe("BankAccountsApi", () => {
         };
       });
 
-      const response = await new BankAccountsApi(config).list(
+      const response = await new BankAccountsApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -462,7 +460,7 @@ describe("BankAccountsApi", () => {
         };
       });
 
-      const response = await new BankAccountsApi(config).list(
+      const response = await new BankAccountsApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -483,7 +481,7 @@ describe("BankAccountsApi", () => {
         };
       });
 
-      const response = await new BankAccountsApi(config).list(
+      const response = await new BankAccountsApi(CONFIG_FOR_UNIT).list(
         10,
         undefined,
         "after"
