@@ -28,6 +28,8 @@ export interface ConfigurationParameters {
   basePath?: string;
   baseOptions?: any;
   formDataCtor?: new () => any;
+  packageName?: string;
+  packageVersion?: string;
 }
 
 export class Configuration {
@@ -88,6 +90,20 @@ export class Configuration {
    * @type {new () => FormData}
    */
   formDataCtor?: new () => any;
+  /**
+   * The public name for the package
+   *
+   * @type {string}
+   * @memberof Configuration
+   */
+  packageName?: string;
+  /**
+   * The published version of the package
+   *
+   * @type {string}
+   * @memberof Configuration
+   */
+  packageVersion?: string;
 
   constructor(param: ConfigurationParameters = {}) {
     this.apiKey = param.apiKey;
@@ -97,6 +113,8 @@ export class Configuration {
     this.basePath = param.basePath;
     this.baseOptions = param.baseOptions;
     this.formDataCtor = param.formDataCtor;
+    this.packageName = process.env.npm_package_name;
+    this.packageVersion = process.env.npm_package_version;
   }
 
   /**
