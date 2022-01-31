@@ -427,10 +427,7 @@ describe("TemplatesApi", () => {
         data: { data: [{ id: "tmpl_fakeId" }] },
       }));
 
-      const templates = await new TemplatesApi(CONFIG_FOR_UNIT).list(
-        1,
-        "fake"
-      );
+      const templates = await new TemplatesApi(CONFIG_FOR_UNIT).list(1, "fake");
       expect(templates).toBeDefined();
       expect(templates.data?.length).toEqual(1);
     });
