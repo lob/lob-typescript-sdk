@@ -172,6 +172,14 @@ export const createRequestFunction = function (
     axios: AxiosInstance = globalAxios,
     basePath: string = BASE_PATH
   ) => {
+    axiosArgs.options = {
+      ...axiosArgs.options,
+      ...{
+        options: {
+          "User-Agent": `${process.env.npm_package_name}/${process.env.npm_package_version}`,
+        },
+      },
+    };
     const axiosRequestArgs = {
       ...axiosArgs.options,
       url: (configuration?.basePath || basePath) + axiosArgs.url,
