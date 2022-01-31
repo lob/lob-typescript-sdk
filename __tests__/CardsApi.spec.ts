@@ -132,8 +132,6 @@ describe("CardsApi", () => {
     });
 
     it("lists cards given before or after params", async () => {
-      // ToDo:
-      // list responses should map the before and after tokens for the consumer
       const response = await new CardsApi(config).list();
       expect(response.next_url).toBeDefined();
       const after: string = (response as { next_url: string }).next_url

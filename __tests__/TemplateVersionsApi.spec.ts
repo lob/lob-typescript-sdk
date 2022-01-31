@@ -1,5 +1,3 @@
-import { Configuration } from "../configuration";
-
 import {
   Template,
   TemplateVersion,
@@ -9,21 +7,18 @@ import {
   EngineHtml,
 } from "../models";
 import { TemplateVersionsApi, TemplatesApi } from "../api";
+import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
 
 describe("TemplateVersionsApi", () => {
-  const config: Configuration = new Configuration({
-    username: process.env.LOB_API_KEY,
-  });
-
   it("Template API can be instantiated", () => {
-    const templateVersionsApi = new TemplateVersionsApi(config);
+    const templateVersionsApi = new TemplateVersionsApi(CONFIG_FOR_INTEGRATION);
     expect(templateVersionsApi).toBeDefined();
     expect(typeof templateVersionsApi).toEqual("object");
     expect(templateVersionsApi).toBeInstanceOf(TemplateVersionsApi);
   });
 
   it("all individual Template Versions functions exists", () => {
-    const templateVersionsApi = new TemplateVersionsApi(config);
+    const templateVersionsApi = new TemplateVersionsApi(CONFIG_FOR_INTEGRATION);
     expect(templateVersionsApi.create).toBeDefined();
     expect(typeof templateVersionsApi.create).toEqual("function");
 
@@ -40,7 +35,7 @@ describe("TemplateVersionsApi", () => {
   describe("performs template version operations", () => {
     let dummyTemplate: Template;
     beforeAll(async () => {
-      const templatesApi = new TemplatesApi(config);
+      const templatesApi = new TemplatesApi(CONFIG_FOR_INTEGRATION);
       const editableTemplate: TemplateWritable = {
         description: "Newer Template",
         html: "<html>Updated HTML for Template 1/html>",
@@ -58,10 +53,12 @@ describe("TemplateVersionsApi", () => {
     };
 
     it("creates, updates, retrieves, and deletes a template", async () => {
-      const templateVersionsApi = new TemplateVersionsApi(config);
+      const templateVersionsApi = new TemplateVersionsApi(
+        CONFIG_FOR_INTEGRATION
+      );
       // Create
       const createdTemplateVersion = await new TemplateVersionsApi(
-        config
+        CONFIG_FOR_INTEGRATION
       ).create(dummyTemplate.id as string, templateVersionWrite);
       expect(createdTemplateVersion?.id).toBeDefined();
       expect(createdTemplateVersion?.description).toEqual(
@@ -101,7 +98,7 @@ describe("TemplateVersionsApi", () => {
   describe("list templates", () => {
     let createdTemplateVersions: TemplateVersion[] = [];
     let dummyTemplate: Template;
-    const templatesApi = new TemplatesApi(config);
+    const templatesApi = new TemplatesApi(CONFIG_FOR_INTEGRATION);
 
     beforeAll(async () => {
       const editableTemplate: TemplateWritable = {
@@ -135,7 +132,9 @@ describe("TemplateVersionsApi", () => {
         }
       );
 
-      const templateVersionsApi = new TemplateVersionsApi(config);
+      const templateVersionsApi = new TemplateVersionsApi(
+        CONFIG_FOR_INTEGRATION
+      );
       await Promise.all([
         templateVersionsApi.create(
           dummyTemplate.id as string,
@@ -163,7 +162,9 @@ describe("TemplateVersionsApi", () => {
     });
 
     afterAll(async () => {
-      const templateVersionsApi = new TemplateVersionsApi(config);
+      const templateVersionsApi = new TemplateVersionsApi(
+        CONFIG_FOR_INTEGRATION
+      );
       const deleteOperations: Promise<unknown>[] = [];
       for (const templateVersion of createdTemplateVersions) {
         deleteOperations.push(
@@ -178,15 +179,17 @@ describe("TemplateVersionsApi", () => {
     });
 
     it("exists", () => {
-      const templateVersionsApi = new TemplateVersionsApi(config);
+      const templateVersionsApi = new TemplateVersionsApi(
+        CONFIG_FOR_INTEGRATION
+      );
       expect(templateVersionsApi.list).toBeDefined();
       expect(typeof templateVersionsApi.list).toEqual("function");
     });
 
     it("lists template versions", async () => {
-      const response = await new TemplateVersionsApi(config).list(
-        dummyTemplate.id as string
-      );
+      const response = await new TemplateVersionsApi(
+        CONFIG_FOR_INTEGRATION
+      ).list(dummyTemplate.id as string);
       expect(response?.data).toBeDefined();
       const templateList = response?.data || [];
       expect(templateList.length).toBeGreaterThan(0);
@@ -195,10 +198,9 @@ describe("TemplateVersionsApi", () => {
     it("lists template versions given before or after params", async () => {
       // ToDo:
       // list responses should map the before and after tokens for the consumer
-      const response = await new TemplateVersionsApi(config).list(
-        dummyTemplate.id as string,
-        3
-      );
+      const response = await new TemplateVersionsApi(
+        CONFIG_FOR_INTEGRATION
+      ).list(dummyTemplate.id as string, 3);
       expect(response.next_url).toBeDefined();
       const after: string = (response as { next_url: string }).next_url
         .slice(
@@ -206,12 +208,9 @@ describe("TemplateVersionsApi", () => {
         )
         .split("=")[1];
 
-      const responseAfter = await new TemplateVersionsApi(config).list(
-        dummyTemplate.id as string,
-        10,
-        undefined,
-        after
-      );
+      const responseAfter = await new TemplateVersionsApi(
+        CONFIG_FOR_INTEGRATION
+      ).list(dummyTemplate.id as string, 10, undefined, after);
       expect(responseAfter?.data).toBeDefined();
       expect(responseAfter.previous_url).toBeDefined();
       expect(responseAfter.previous_url).not.toBeNull();
@@ -231,11 +230,9 @@ describe("TemplateVersionsApi", () => {
         )
         .split("=")[1];
 
-      const responseBefore = await new TemplateVersionsApi(config).list(
-        dummyTemplate.id as string,
-        10,
-        before
-      );
+      const responseBefore = await new TemplateVersionsApi(
+        CONFIG_FOR_INTEGRATION
+      ).list(dummyTemplate.id as string, 10, before);
       expect(responseBefore?.data).toBeDefined();
       const previousPage: TemplateVersion[] = responseBefore?.data || [];
       expect(previousPage.length).toBeGreaterThan(0);

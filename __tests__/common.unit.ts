@@ -1,6 +1,5 @@
 import { Configuration } from "../configuration";
-import { RequiredError, RequestArgs } from "../base";
-import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { RequestArgs } from "../base";
 
 import {
   assertParamExists,
@@ -15,10 +14,10 @@ import {
   valueToString,
 } from "../common";
 
-const axiosRequest: jest.Mock = axios.request as jest.Mock;
-
 import { fail } from "./testUtilities";
 
+import axios from "axios";
+const axiosRequest: jest.Mock = axios.request as jest.Mock;
 jest.mock("axios", () => ({
   request: jest.fn().mockImplementation(async (args) => ({ data: "blah" })),
 }));

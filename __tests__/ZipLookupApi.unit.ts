@@ -1,38 +1,27 @@
-import { Configuration } from "../configuration";
-
-import { Zip } from "../models";
 import { ZipLookupsApi } from "../api";
 import { fail } from "./testUtilities";
 
 // Axios Mock
 import axios from "axios";
+import {
+  CONFIG_FOR_UNIT,
+  CONFIG_WITH_BASE_OPTIONS_FOR_UNIT,
+} from "./testFixtures";
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
 jest.mock("axios", () => ({
   request: jest.fn(),
 }));
 
 describe("ZipLookupsApi", () => {
-  const config: Configuration = new Configuration({
-    username: "Totally Fake Key",
-  });
-  const configWithBaseOptions = new Configuration({
-    username: "Totally Fake Key",
-    baseOptions: {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-  });
-
   it("can be instantiated", () => {
-    const zipLookupsApi = new ZipLookupsApi(config);
+    const zipLookupsApi = new ZipLookupsApi(CONFIG_FOR_UNIT);
     expect(zipLookupsApi).toBeDefined();
     expect(typeof zipLookupsApi).toEqual("object");
     expect(zipLookupsApi).toBeInstanceOf(ZipLookupsApi);
   });
 
   it("can be instantiated with base options", () => {
-    const zipLookupsApi = new ZipLookupsApi(configWithBaseOptions);
+    const zipLookupsApi = new ZipLookupsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT);
     expect(zipLookupsApi).toBeDefined();
     expect(typeof zipLookupsApi).toEqual("object");
     expect(zipLookupsApi).toBeInstanceOf(ZipLookupsApi);
@@ -40,7 +29,7 @@ describe("ZipLookupsApi", () => {
 
   describe("lookup", () => {
     it("exists", () => {
-      const zipLookupsApi = new ZipLookupsApi(config);
+      const zipLookupsApi = new ZipLookupsApi(CONFIG_FOR_UNIT);
       expect(zipLookupsApi.lookup).toBeDefined();
       expect(typeof zipLookupsApi.lookup).toEqual("function");
     });
@@ -54,7 +43,7 @@ describe("ZipLookupsApi", () => {
       });
 
       try {
-        await new ZipLookupsApi(config).lookup("07090");
+        await new ZipLookupsApi(CONFIG_FOR_UNIT).lookup("07090");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
       }
@@ -69,7 +58,7 @@ describe("ZipLookupsApi", () => {
       });
 
       try {
-        await new ZipLookupsApi(config).lookup("07090");
+        await new ZipLookupsApi(CONFIG_FOR_UNIT).lookup("07090");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -85,7 +74,7 @@ describe("ZipLookupsApi", () => {
       });
 
       try {
-        await new ZipLookupsApi(config).lookup("07090");
+        await new ZipLookupsApi(CONFIG_FOR_UNIT).lookup("07090");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -98,7 +87,7 @@ describe("ZipLookupsApi", () => {
       });
 
       try {
-        await new ZipLookupsApi(config).lookup("07090");
+        await new ZipLookupsApi(CONFIG_FOR_UNIT).lookup("07090");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -110,7 +99,7 @@ describe("ZipLookupsApi", () => {
         data: { id: "us_zip_fakeId" },
       }));
 
-      const response = await new ZipLookupsApi(config).lookup("07090");
+      const response = await new ZipLookupsApi(CONFIG_FOR_UNIT).lookup("07090");
       expect(response).toBeDefined();
       expect(response.id).toEqual("us_zip_fakeId");
     });
@@ -120,9 +109,9 @@ describe("ZipLookupsApi", () => {
         data: { id: "us_zip_fakeId" },
       }));
 
-      const response = await new ZipLookupsApi(configWithBaseOptions).lookup(
-        "07090"
-      );
+      const response = await new ZipLookupsApi(
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+      ).lookup("07090");
       expect(response).toBeDefined();
       expect(response.id).toEqual("us_zip_fakeId");
     });

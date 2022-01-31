@@ -1,5 +1,3 @@
-import { Configuration } from "../configuration";
-
 import {
   CountryExtended,
   MailType,
@@ -9,7 +7,11 @@ import {
 import { SelfMailersApi } from "../api";
 
 import { fail } from "./testUtilities";
-import { DATE_FILTER } from "./testFixtures";
+import {
+  CONFIG_FOR_UNIT,
+  CONFIG_WITH_BASE_OPTIONS_FOR_UNIT,
+  DATE_FILTER,
+} from "./testFixtures";
 
 // Axios Mock
 import axios from "axios";
@@ -19,27 +21,17 @@ jest.mock("axios", () => ({
 }));
 
 describe("SelfMailersApi", () => {
-  const config: Configuration = new Configuration({
-    username: "Totally Fake Key",
-  });
-  const configWithBaseOptions = new Configuration({
-    username: "Totally Fake Key",
-    baseOptions: {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-  });
-
   it("self-mailers API can be instantiated", () => {
-    const selfMailersApi = new SelfMailersApi(config);
+    const selfMailersApi = new SelfMailersApi(CONFIG_FOR_UNIT);
     expect(selfMailersApi).toBeDefined();
     expect(typeof selfMailersApi).toEqual("object");
     expect(selfMailersApi).toBeInstanceOf(SelfMailersApi);
   });
 
   it("self-mailers API can be instantiated with base options", () => {
-    const selfMailersApi = new SelfMailersApi(configWithBaseOptions);
+    const selfMailersApi = new SelfMailersApi(
+      CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+    );
     expect(selfMailersApi).toBeDefined();
     expect(typeof selfMailersApi).toEqual("object");
     expect(selfMailersApi).toBeInstanceOf(SelfMailersApi);
@@ -71,7 +63,7 @@ describe("SelfMailersApi", () => {
     };
 
     it("exists", async () => {
-      const selfMailersApi = new SelfMailersApi(config);
+      const selfMailersApi = new SelfMailersApi(CONFIG_FOR_UNIT);
       expect(selfMailersApi.create).toBeDefined();
       expect(typeof selfMailersApi.create).toEqual("function");
     });
@@ -81,7 +73,7 @@ describe("SelfMailersApi", () => {
         data: { id: "sfm_fakeId" },
       }));
 
-      const self_mailer = await new SelfMailersApi(config).create(
+      const self_mailer = await new SelfMailersApi(CONFIG_FOR_UNIT).create(
         sfmEditableMock
       );
       expect(self_mailer).toBeDefined();
@@ -94,7 +86,7 @@ describe("SelfMailersApi", () => {
       }));
 
       const selfMailersApi = await new SelfMailersApi(
-        configWithBaseOptions
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).create(sfmEditableMock);
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.id).toEqual("sfm_fakeId");
@@ -111,9 +103,10 @@ describe("SelfMailersApi", () => {
         };
       });
 
-      const selfMailersApi = await new SelfMailersApi(
-        configWithBaseOptions
-      ).create(sfmEditableMock, "fake idempotency");
+      const selfMailersApi = await new SelfMailersApi(CONFIG_FOR_UNIT).create(
+        sfmEditableMock,
+        "fake idempotency"
+      );
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.id).toEqual("sfm_fakeId");
     });
@@ -127,7 +120,7 @@ describe("SelfMailersApi", () => {
       });
 
       try {
-        await new SelfMailersApi(configWithBaseOptions).create(sfmEditableMock);
+        await new SelfMailersApi(CONFIG_FOR_UNIT).create(sfmEditableMock);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -143,7 +136,7 @@ describe("SelfMailersApi", () => {
       });
 
       try {
-        await new SelfMailersApi(configWithBaseOptions).create(sfmEditableMock);
+        await new SelfMailersApi(CONFIG_FOR_UNIT).create(sfmEditableMock);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -159,7 +152,7 @@ describe("SelfMailersApi", () => {
       });
 
       try {
-        await new SelfMailersApi(configWithBaseOptions).create(sfmEditableMock);
+        await new SelfMailersApi(CONFIG_FOR_UNIT).create(sfmEditableMock);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -172,7 +165,7 @@ describe("SelfMailersApi", () => {
       });
 
       try {
-        await new SelfMailersApi(configWithBaseOptions).create(sfmEditableMock);
+        await new SelfMailersApi(CONFIG_FOR_UNIT).create(sfmEditableMock);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -182,7 +175,7 @@ describe("SelfMailersApi", () => {
 
   describe("get", () => {
     it("exists", async () => {
-      const selfMailersApi = new SelfMailersApi(config);
+      const selfMailersApi = new SelfMailersApi(CONFIG_FOR_UNIT);
       expect(selfMailersApi.get).toBeDefined();
       expect(typeof selfMailersApi.get).toEqual("function");
     });
@@ -192,7 +185,9 @@ describe("SelfMailersApi", () => {
         data: { id: "sfm_fakeId" },
       }));
 
-      const self_mailers = await new SelfMailersApi(config).get("fake id");
+      const self_mailers = await new SelfMailersApi(CONFIG_FOR_UNIT).get(
+        "fake id"
+      );
       expect(self_mailers).toBeDefined();
       expect(self_mailers?.id).toEqual("sfm_fakeId");
     });
@@ -202,9 +197,9 @@ describe("SelfMailersApi", () => {
         data: { id: "sfm_fakeId" },
       }));
 
-      const self_mailers = await new SelfMailersApi(configWithBaseOptions).get(
-        "fake id"
-      );
+      const self_mailers = await new SelfMailersApi(
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+      ).get("fake id");
       expect(self_mailers).toBeDefined();
       expect(self_mailers?.id).toEqual("sfm_fakeId");
     });
@@ -218,7 +213,7 @@ describe("SelfMailersApi", () => {
       });
 
       try {
-        await new SelfMailersApi(configWithBaseOptions).get("fake id");
+        await new SelfMailersApi(CONFIG_FOR_UNIT).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -234,7 +229,7 @@ describe("SelfMailersApi", () => {
       });
 
       try {
-        await new SelfMailersApi(config).get("fake id");
+        await new SelfMailersApi(CONFIG_FOR_UNIT).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -250,7 +245,7 @@ describe("SelfMailersApi", () => {
       });
 
       try {
-        await new SelfMailersApi(config).get("fake id");
+        await new SelfMailersApi(CONFIG_FOR_UNIT).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -263,7 +258,7 @@ describe("SelfMailersApi", () => {
       });
 
       try {
-        await new SelfMailersApi(configWithBaseOptions).get("fake id");
+        await new SelfMailersApi(CONFIG_FOR_UNIT).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -273,7 +268,7 @@ describe("SelfMailersApi", () => {
 
   describe("delete", () => {
     it("exists", async () => {
-      const selfMailersApi = new SelfMailersApi(config);
+      const selfMailersApi = new SelfMailersApi(CONFIG_FOR_UNIT);
       expect(selfMailersApi.delete).toBeDefined();
       expect(typeof selfMailersApi.delete).toEqual("function");
     });
@@ -283,7 +278,9 @@ describe("SelfMailersApi", () => {
         data: { id: "sfm_fakeId" },
       }));
 
-      const self_mailers = await new SelfMailersApi(config).delete("fake id");
+      const self_mailers = await new SelfMailersApi(CONFIG_FOR_UNIT).delete(
+        "fake id"
+      );
       expect(self_mailers).toBeDefined();
       expect(self_mailers?.id).toEqual("sfm_fakeId");
     });
@@ -294,7 +291,7 @@ describe("SelfMailersApi", () => {
       }));
 
       const self_mailers = await new SelfMailersApi(
-        configWithBaseOptions
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).delete("fake id");
       expect(self_mailers).toBeDefined();
       expect(self_mailers?.id).toEqual("sfm_fakeId");
@@ -309,7 +306,7 @@ describe("SelfMailersApi", () => {
       });
 
       try {
-        await new SelfMailersApi(configWithBaseOptions).delete("fake id");
+        await new SelfMailersApi(CONFIG_FOR_UNIT).delete("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -325,7 +322,7 @@ describe("SelfMailersApi", () => {
       });
 
       try {
-        await new SelfMailersApi(config).delete("fake id");
+        await new SelfMailersApi(CONFIG_FOR_UNIT).delete("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -341,7 +338,7 @@ describe("SelfMailersApi", () => {
       });
 
       try {
-        await new SelfMailersApi(config).delete("fake id");
+        await new SelfMailersApi(CONFIG_FOR_UNIT).delete("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -354,7 +351,7 @@ describe("SelfMailersApi", () => {
       });
 
       try {
-        await new SelfMailersApi(configWithBaseOptions).delete("fake id");
+        await new SelfMailersApi(CONFIG_FOR_UNIT).delete("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -364,7 +361,7 @@ describe("SelfMailersApi", () => {
 
   describe("list", () => {
     it("exists", async () => {
-      const selfMailersApi = new SelfMailersApi(config);
+      const selfMailersApi = new SelfMailersApi(CONFIG_FOR_UNIT);
       expect(selfMailersApi.list).toBeDefined();
       expect(typeof selfMailersApi.list).toEqual("function");
     });
@@ -376,7 +373,7 @@ describe("SelfMailersApi", () => {
         },
       }));
 
-      const selfMailersApi = await new SelfMailersApi(config).list();
+      const selfMailersApi = await new SelfMailersApi(CONFIG_FOR_UNIT).list();
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.data?.length).toEqual(2);
     });
@@ -386,7 +383,7 @@ describe("SelfMailersApi", () => {
         data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
-      const selfMailersApi = await new SelfMailersApi(config).list(1);
+      const selfMailersApi = await new SelfMailersApi(CONFIG_FOR_UNIT).list(1);
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.data?.length).toEqual(1);
     });
@@ -396,7 +393,7 @@ describe("SelfMailersApi", () => {
         data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
-      const selfMailersApi = await new SelfMailersApi(config).list(
+      const selfMailersApi = await new SelfMailersApi(CONFIG_FOR_UNIT).list(
         undefined,
         "fake"
       );
@@ -409,7 +406,7 @@ describe("SelfMailersApi", () => {
         data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
-      const selfMailersApi = await new SelfMailersApi(config).list(
+      const selfMailersApi = await new SelfMailersApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         "id"
@@ -423,7 +420,7 @@ describe("SelfMailersApi", () => {
         data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
-      const selfMailersApi = await new SelfMailersApi(config).list(
+      const selfMailersApi = await new SelfMailersApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -438,7 +435,7 @@ describe("SelfMailersApi", () => {
         data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
-      const selfMailersApi = await new SelfMailersApi(config).list(
+      const selfMailersApi = await new SelfMailersApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -454,7 +451,7 @@ describe("SelfMailersApi", () => {
         data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
-      const selfMailersApi = await new SelfMailersApi(config).list(
+      const selfMailersApi = await new SelfMailersApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -471,7 +468,7 @@ describe("SelfMailersApi", () => {
         data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
-      const selfMailersApi = await new SelfMailersApi(config).list(
+      const selfMailersApi = await new SelfMailersApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -489,7 +486,7 @@ describe("SelfMailersApi", () => {
         data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
-      const selfMailersApi = await new SelfMailersApi(config).list(
+      const selfMailersApi = await new SelfMailersApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -508,7 +505,7 @@ describe("SelfMailersApi", () => {
         data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
-      const selfMailersApi = await new SelfMailersApi(config).list(
+      const selfMailersApi = await new SelfMailersApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -528,7 +525,7 @@ describe("SelfMailersApi", () => {
         data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
-      const selfMailersApi = await new SelfMailersApi(config).list(
+      const selfMailersApi = await new SelfMailersApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -549,7 +546,7 @@ describe("SelfMailersApi", () => {
         data: { data: [{ id: "sfm_fakeId" }] },
       }));
 
-      const selfMailersApi = await new SelfMailersApi(config).list(
+      const selfMailersApi = await new SelfMailersApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -575,7 +572,7 @@ describe("SelfMailersApi", () => {
       });
 
       try {
-        await new SelfMailersApi(configWithBaseOptions).list();
+        await new SelfMailersApi(CONFIG_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -591,7 +588,7 @@ describe("SelfMailersApi", () => {
       });
 
       try {
-        await new SelfMailersApi(configWithBaseOptions).list();
+        await new SelfMailersApi(CONFIG_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -607,7 +604,7 @@ describe("SelfMailersApi", () => {
       });
 
       try {
-        await new SelfMailersApi(configWithBaseOptions).list();
+        await new SelfMailersApi(CONFIG_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -620,7 +617,7 @@ describe("SelfMailersApi", () => {
       });
 
       try {
-        await new SelfMailersApi(configWithBaseOptions).list();
+        await new SelfMailersApi(CONFIG_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");

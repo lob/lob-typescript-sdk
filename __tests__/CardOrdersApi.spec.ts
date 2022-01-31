@@ -3,12 +3,9 @@ import { Configuration } from "../configuration";
 import { Card, CardEditable, CardEditableSizeEnum } from "../models";
 import { CardsApi, CardOrdersApi } from "../api";
 import { CardOrderEditable } from "..";
+import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
 
 describe("CardOrdersApi", () => {
-  const config: Configuration = new Configuration({
-    username: process.env.LOB_API_KEY,
-  });
-
   const dummyCardOrder: CardOrderEditable = {
     quantity: 10000,
   };
@@ -30,7 +27,7 @@ describe("CardOrdersApi", () => {
   };
 
   it("Card API can be instantiated", () => {
-    const cardOrdersApi = new CardOrdersApi(config);
+    const cardOrdersApi = new CardOrdersApi(CONFIG_FOR_INTEGRATION);
     expect(cardOrdersApi).toBeDefined();
     expect(typeof cardOrdersApi).toEqual("object");
     expect(cardOrdersApi).toBeInstanceOf(CardOrdersApi);
@@ -40,8 +37,8 @@ describe("CardOrdersApi", () => {
     let dummyCard: Card;
 
     beforeAll(async () => {
-      const cardsApi = new CardsApi(config);
-      const cardOrdersApi = new CardOrdersApi(config);
+      const cardsApi = new CardsApi(CONFIG_FOR_INTEGRATION);
+      const cardOrdersApi = new CardOrdersApi(CONFIG_FOR_INTEGRATION);
       dummyCard = await cardsApi.create(editableCard);
 
       if (!dummyCard.id) {
@@ -54,7 +51,7 @@ describe("CardOrdersApi", () => {
     });
 
     it("all individual Card Orders functions exists", () => {
-      const cardOrdersApi = new CardOrdersApi(config);
+      const cardOrdersApi = new CardOrdersApi(CONFIG_FOR_INTEGRATION);
       expect(cardOrdersApi.create).toBeDefined();
       expect(typeof cardOrdersApi.create).toEqual("function");
 
@@ -63,7 +60,7 @@ describe("CardOrdersApi", () => {
     });
 
     it("creates and retrieves card orders associated with a card", async () => {
-      const cardOrdersApi = new CardOrdersApi(config);
+      const cardOrdersApi = new CardOrdersApi(CONFIG_FOR_INTEGRATION);
       const dummyCardId = dummyCard.id || "nope";
 
       const retrievedCardOrders = await cardOrdersApi.get(dummyCardId);

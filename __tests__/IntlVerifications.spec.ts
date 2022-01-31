@@ -1,17 +1,12 @@
-import { Configuration } from "../configuration";
-
 import {
   IntlVerificationWritable,
   CountryExtended,
   IntlVerificationsPayload,
 } from "../models";
 import { IntlVerificationsApi } from "../api";
+import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
 
 describe("IntlVerificationsApi", () => {
-  const config: Configuration = new Configuration({
-    username: process.env.LOB_API_KEY,
-  });
-
   const multiLine: IntlVerificationWritable = {
     primary_line: "370 WATER ST",
     postal_code: "C1N 1C4",
@@ -34,7 +29,7 @@ describe("IntlVerificationsApi", () => {
   };
 
   it("International Verifications API can be instantiated", () => {
-    const intlvApi = new IntlVerificationsApi(config);
+    const intlvApi = new IntlVerificationsApi(CONFIG_FOR_INTEGRATION);
     expect(intlvApi).toBeDefined();
     expect(typeof intlvApi).toEqual("object");
     expect(intlvApi).toBeInstanceOf(IntlVerificationsApi);
@@ -42,37 +37,37 @@ describe("IntlVerificationsApi", () => {
 
   describe("verifySingle", () => {
     it("exists", () => {
-      const intlvApi = new IntlVerificationsApi(config);
+      const intlvApi = new IntlVerificationsApi(CONFIG_FOR_INTEGRATION);
       expect(intlvApi.verifySingle).toBeDefined();
       expect(typeof intlvApi.verifySingle).toEqual("function");
     });
 
     it("verifies a single international address", async () => {
-      const response = await new IntlVerificationsApi(config).verifySingle(
-        multiLine
-      );
+      const response = await new IntlVerificationsApi(
+        CONFIG_FOR_INTEGRATION
+      ).verifySingle(multiLine);
       expect(response.status).toBeDefined();
     });
 
     it("verifies a single-line international address", async () => {
-      const response = await new IntlVerificationsApi(config).verifySingle(
-        singleLine
-      );
+      const response = await new IntlVerificationsApi(
+        CONFIG_FOR_INTEGRATION
+      ).verifySingle(singleLine);
       expect(response.status).toBeDefined();
     });
   });
 
   describe("verifyBulk", () => {
     it("exists", () => {
-      const intlvApi = new IntlVerificationsApi(config);
+      const intlvApi = new IntlVerificationsApi(CONFIG_FOR_INTEGRATION);
       expect(intlvApi.verifyBulk).toBeDefined();
       expect(typeof intlvApi.verifyBulk).toEqual("function");
     });
 
     it("verifies a list of international addresses", async () => {
-      const response = await new IntlVerificationsApi(config).verifyBulk(
-        addressList
-      );
+      const response = await new IntlVerificationsApi(
+        CONFIG_FOR_INTEGRATION
+      ).verifyBulk(addressList);
       expect(response).toBeDefined();
       expect(response.addresses?.length).toEqual(2);
     });
