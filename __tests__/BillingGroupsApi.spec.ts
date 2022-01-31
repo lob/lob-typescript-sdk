@@ -34,13 +34,13 @@ describe("BillingGroupsApi", () => {
       const createdBg = await new BillingGroupsApi(
         CONFIG_FOR_INTEGRATION
       ).create(createBg);
-      expect(createdBg?.id).toBeDefined();
-      expect(createdBg?.description).toEqual(createBg.description);
+      expect(createdBg.id).toBeDefined();
+      expect(createdBg.description).toEqual(createBg.description);
 
       // Get
       const retrievedBg = await billingGroupsApi.get(createdBg.id as string);
       expect(retrievedBg).toBeDefined();
-      expect(retrievedBg?.id).toEqual(createdBg?.id);
+      expect(retrievedBg.id).toEqual(createdBg.id);
 
       // Update
       const updates: BillingGroupEditable = {
@@ -52,7 +52,7 @@ describe("BillingGroupsApi", () => {
         updates
       );
       expect(updatedBg).toBeDefined();
-      expect(updatedBg?.description).toEqual("updated billing group");
+      expect(updatedBg.description).toEqual("updated billing group");
     });
   });
 
@@ -99,9 +99,8 @@ describe("BillingGroupsApi", () => {
       const response = await new BillingGroupsApi(
         CONFIG_FOR_INTEGRATION
       ).list();
-      expect(response?.data).toBeDefined();
-      const bgList = response?.data || [];
-      expect(bgList.length).toBeGreaterThan(0);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toBeGreaterThan(0);
     });
   });
 });

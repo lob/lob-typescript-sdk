@@ -1,4 +1,4 @@
-import { SelfMailer, SelfMailerEditable, CountryExtended } from "../models";
+import { SelfMailerEditable, CountryExtended } from "../models";
 import { SelfMailersApi } from "../api";
 import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
 
@@ -57,8 +57,8 @@ describe("smApi", () => {
       const selfMailer = await new SelfMailersApi(
         CONFIG_FOR_INTEGRATION
       ).create(dummySelfMailer);
-      expect(selfMailer?.id).toBeDefined();
-      if (selfMailer?.id) {
+      expect(selfMailer.id).toBeDefined();
+      if (selfMailer.id) {
         const retrievedSelfMailer = await new SelfMailersApi(
           CONFIG_FOR_INTEGRATION
         ).get(selfMailer.id);
@@ -66,7 +66,7 @@ describe("smApi", () => {
         const deletedSelfMailer = await new SelfMailersApi(
           CONFIG_FOR_INTEGRATION
         ).delete(selfMailer.id);
-        expect(deletedSelfMailer?.deleted).toBeTruthy();
+        expect(deletedSelfMailer.deleted).toBeTruthy();
       } else {
         throw new Error("self-mailer ID should be defined upon creation");
       }
@@ -76,7 +76,6 @@ describe("smApi", () => {
   describe("list self-mailers", () => {
     let nextUrl = "";
     let previousUrl = "";
-    let selfMailerList: SelfMailer[] = [];
     beforeAll(async () => {
       const smApi = new SelfMailersApi(CONFIG_FOR_INTEGRATION);
       // ensure there are at least 3 cards present, to test pagination
@@ -182,27 +181,24 @@ describe("smApi", () => {
 
     it("lists self-mailers", async () => {
       const response = await new SelfMailersApi(CONFIG_FOR_INTEGRATION).list();
-      expect(response?.data).toBeDefined();
-      selfMailerList = response?.data || [];
-      expect(selfMailerList.length).toBeGreaterThan(0);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toBeGreaterThan(0);
     });
 
     it("lists self-mailers given an after param", async () => {
       const responseAfter = await new SelfMailersApi(
         CONFIG_FOR_INTEGRATION
       ).list(10, undefined, nextUrl);
-      expect(responseAfter?.data).toBeDefined();
-      const selfMailerList2: SelfMailer[] = responseAfter?.data || [];
-      expect(selfMailerList2.length).toBeGreaterThan(0);
+      expect(responseAfter.data).toBeDefined();
+      expect(responseAfter.data?.length).toBeGreaterThan(0);
     });
 
     it("lists self-mailers given a before param", async () => {
       const responseBefore = await new SelfMailersApi(
         CONFIG_FOR_INTEGRATION
       ).list(10, previousUrl);
-      expect(responseBefore?.data).toBeDefined();
-      const selfMailerList3: SelfMailer[] = responseBefore?.data || [];
-      expect(selfMailerList3.length).toBeGreaterThan(0);
+      expect(responseBefore.data).toBeDefined();
+      expect(responseBefore.data?.length).toBeGreaterThan(0);
     });
   });
 });

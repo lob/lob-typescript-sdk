@@ -61,7 +61,7 @@ describe("PostcardsApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).get("psc_ID");
       expect(postcard).toBeDefined();
-      expect(postcard?.id).toEqual("psc_differentFakeId");
+      expect(postcard.id).toEqual("psc_differentFakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -139,8 +139,8 @@ describe("PostcardsApi", () => {
 
       const response = await new PostcardsApi(CONFIG_FOR_UNIT).list();
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("includes custom headers while it lists postcards", async () => {
@@ -152,8 +152,8 @@ describe("PostcardsApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).list();
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("handles errors returned by the api", async () => {
@@ -227,8 +227,8 @@ describe("PostcardsApi", () => {
 
       const response = await new PostcardsApi(CONFIG_FOR_UNIT).list(10);
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists postcards with a before parameter", async () => {
@@ -244,8 +244,8 @@ describe("PostcardsApi", () => {
         "before"
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists postcards with an after parameter", async () => {
@@ -262,8 +262,8 @@ describe("PostcardsApi", () => {
         "after"
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists postcards with an include parameter", async () => {
@@ -281,8 +281,8 @@ describe("PostcardsApi", () => {
         ["this"]
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists postcards with a dateCreated parameter", async () => {

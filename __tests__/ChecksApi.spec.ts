@@ -27,10 +27,10 @@ describe("ChecksApi", () => {
     const verify: BankAccountVerify = {
       amounts: [11, 35],
     };
-    if (account?.id) {
+    if (account.id) {
       const verification = await bankApi.verify(account.id, verify);
       expect(verification).toBeDefined();
-      expect(verification?.verified).toBeTruthy();
+      expect(verification.verified).toBeTruthy();
     }
   });
 
@@ -93,8 +93,8 @@ describe("ChecksApi", () => {
         const createdCheck = await new ChecksApi(CONFIG_FOR_INTEGRATION).create(
           createCheck
         );
-        expect(createdCheck?.id).toBeDefined();
-        expect(createdCheck?.description).toEqual(createCheck.description);
+        expect(createdCheck.id).toBeDefined();
+        expect(createdCheck.description).toEqual(createCheck.description);
       });
 
       it("Retrieves a check", async () => {
@@ -105,7 +105,7 @@ describe("ChecksApi", () => {
 
         const retrievedCheck = await checksApi.get(createdCheck.id as string);
         expect(retrievedCheck).toBeDefined();
-        expect(retrievedCheck?.id).toEqual(createdCheck?.id);
+        expect(retrievedCheck.id).toEqual(createdCheck.id);
       });
 
       it("cancels a check", async () => {
@@ -118,7 +118,7 @@ describe("ChecksApi", () => {
           createdCheck.id as string
         );
         expect(cancelledCheck).toBeDefined();
-        expect(cancelledCheck?.id).toEqual(createdCheck?.id);
+        expect(cancelledCheck.id).toEqual(createdCheck.id);
       });
 
       it("Lists a check", async () => {
@@ -192,8 +192,8 @@ describe("ChecksApi", () => {
 
     it("lists checks", async () => {
       const response = await new ChecksApi(CONFIG_FOR_INTEGRATION).list();
-      expect(response?.data).toBeDefined();
-      const bgList = response?.data || [];
+      expect(response.data).toBeDefined();
+      const bgList = response.data || [];
       expect(bgList.length).toBeGreaterThan(0);
     });
   });

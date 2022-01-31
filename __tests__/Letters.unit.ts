@@ -56,7 +56,7 @@ describe("LetterApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).get("ltr_fakeId");
       expect(letter).toBeDefined();
-      expect(letter?.id).toEqual("ltr_fakeId2");
+      expect(letter.id).toEqual("ltr_fakeId2");
     });
 
     it("handles errors returned by the api", async () => {
@@ -134,8 +134,8 @@ describe("LetterApi", () => {
 
       const response = await new LettersApi(CONFIG_FOR_UNIT).list();
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("includes custom headers while it lists letters", async () => {
@@ -147,8 +147,8 @@ describe("LetterApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).list();
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("handles errors returned by the api", async () => {
@@ -222,8 +222,8 @@ describe("LetterApi", () => {
 
       const response = await new LettersApi(CONFIG_FOR_UNIT).list(10);
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists letters with a before parameter", async () => {
@@ -239,8 +239,8 @@ describe("LetterApi", () => {
         "before"
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists letters with an after parameter", async () => {
@@ -257,8 +257,8 @@ describe("LetterApi", () => {
         "after"
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists letters with an include parameter", async () => {
@@ -276,8 +276,8 @@ describe("LetterApi", () => {
         ["this"]
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists letters with a dateCreated parameter", async () => {
@@ -298,8 +298,8 @@ describe("LetterApi", () => {
         { gt: "2020-01-01", lt: "2020-01-31T12:34:56Z" }
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists letters with a metadata parameter", async () => {
@@ -321,8 +321,8 @@ describe("LetterApi", () => {
         { what: "this" }
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists letters with a color parameter", async () => {
@@ -343,8 +343,8 @@ describe("LetterApi", () => {
         true
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists letters with a scheduled parameter", async () => {
@@ -366,8 +366,8 @@ describe("LetterApi", () => {
         true
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists letters with a sendDate parameter", async () => {
@@ -392,8 +392,8 @@ describe("LetterApi", () => {
         DATE_FILTER
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists letters with a mailType parameter", async () => {
@@ -417,8 +417,8 @@ describe("LetterApi", () => {
         MailType.FirstClass
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("should handle the sortBy correctly", async () => {
@@ -445,7 +445,7 @@ describe("LetterApi", () => {
         { id: "asc" }
       );
       expect(letter).toBeDefined();
-      expect(letter?.data?.length).toEqual(1);
+      expect(letter.data?.length).toEqual(1);
     });
 
     it("lists letters with multiple parameters", async () => {
@@ -462,8 +462,8 @@ describe("LetterApi", () => {
         "after"
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
   });
 
@@ -484,7 +484,7 @@ describe("LetterApi", () => {
       const canceledLetter = await new LettersApi(CONFIG_FOR_UNIT).cancel(
         "ltr_fakeId"
       );
-      expect(canceledLetter?.deleted).toEqual(true);
+      expect(canceledLetter.deleted).toEqual(true);
     });
 
     it("includes custom headers while it deletes a letter", async () => {
@@ -497,7 +497,7 @@ describe("LetterApi", () => {
       const canceledLetter = await new LettersApi(
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).cancel("ltr_fakeId");
-      expect(canceledLetter?.deleted).toEqual(true);
+      expect(canceledLetter.deleted).toEqual(true);
     });
 
     it("handles errors returned by the api", async () => {
@@ -589,7 +589,7 @@ describe("LetterApi", () => {
 
       const letter = await new LettersApi(CONFIG_FOR_UNIT).create(createLetter);
       expect(letter).toBeDefined();
-      expect(letter?.id).toBeDefined();
+      expect(letter.id).toBeDefined();
     });
 
     it("includes custom headers while it creates a letter", async () => {
@@ -601,7 +601,7 @@ describe("LetterApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).create(createLetter);
       expect(letter).toBeDefined();
-      expect(letter?.id).toBeDefined();
+      expect(letter.id).toBeDefined();
     });
 
     it("creates a letter with idempotency", async () => {
@@ -614,7 +614,7 @@ describe("LetterApi", () => {
         "fake key"
       );
       expect(letter).toBeDefined();
-      expect(letter?.id).toBeDefined();
+      expect(letter.id).toBeDefined();
     });
 
     it("handles errors returned by the api", async () => {

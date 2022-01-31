@@ -88,7 +88,7 @@ describe("BankAccountsApi", () => {
         create
       );
       expect(bankAccount).toBeDefined();
-      expect(bankAccount?.id).toBeDefined();
+      expect(bankAccount.id).toBeDefined();
     });
 
     it("includes custom headers while it creates a new bank account", async () => {
@@ -100,7 +100,7 @@ describe("BankAccountsApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).create(create);
       expect(bankAccount).toBeDefined();
-      expect(bankAccount?.id).toBeDefined();
+      expect(bankAccount.id).toBeDefined();
     });
   });
 
@@ -121,7 +121,7 @@ describe("BankAccountsApi", () => {
       const bankAccount = await new BankAccountsApi(CONFIG_FOR_UNIT).delete(
         "bank_fakeId"
       );
-      expect(bankAccount?.deleted).toEqual(true);
+      expect(bankAccount.deleted).toEqual(true);
     });
 
     it("includes custom headers while it deletes a bank account", async () => {
@@ -134,7 +134,7 @@ describe("BankAccountsApi", () => {
       const bankAccount = await new BankAccountsApi(
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).delete("bank_fakeId");
-      expect(bankAccount?.deleted).toEqual(true);
+      expect(bankAccount.deleted).toEqual(true);
     });
 
     it("handles errors returned by the api", async () => {
@@ -182,7 +182,7 @@ describe("BankAccountsApi", () => {
       const bankAccount = await new BankAccountsApi(CONFIG_FOR_UNIT).get(
         "bank_fakeId"
       );
-      expect(bankAccount?.id).toEqual("bank_fakeId2");
+      expect(bankAccount.id).toEqual("bank_fakeId2");
     });
 
     it("includes custom headers while it retrieves a bank account", async () => {
@@ -193,7 +193,7 @@ describe("BankAccountsApi", () => {
       const bankAccount = await new BankAccountsApi(
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).get("bank_fakeId");
-      expect(bankAccount?.id).toEqual("bank_fakeId2");
+      expect(bankAccount.id).toEqual("bank_fakeId2");
     });
 
     it("handles errors returned by the api", async () => {
@@ -246,7 +246,7 @@ describe("BankAccountsApi", () => {
         verify
       );
       expect(bankAccount).toBeDefined();
-      expect(bankAccount?.id).toEqual("bank_fakeId");
+      expect(bankAccount.id).toEqual("bank_fakeId");
     });
 
     it("includes custom headers while verifies a bank account", async () => {
@@ -261,7 +261,7 @@ describe("BankAccountsApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).verify("an id", verify);
       expect(bankAccount).toBeDefined();
-      expect(bankAccount?.id).toEqual("bank_fakeId");
+      expect(bankAccount.id).toEqual("bank_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -314,8 +314,8 @@ describe("BankAccountsApi", () => {
 
       const response = await new BankAccountsApi(CONFIG_FOR_UNIT).list();
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("includes custom headers while it lists bankAccounts", async () => {
@@ -327,8 +327,8 @@ describe("BankAccountsApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).list();
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("handles errors returned by the api", async () => {

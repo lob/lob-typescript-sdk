@@ -43,7 +43,7 @@ describe("BankAccountsApi", () => {
         CONFIG_FOR_INTEGRATION
       ).verify(createdBankAccountId, verify);
       expect(verification).toBeDefined();
-      expect(verification?.verified).toBeTruthy();
+      expect(verification.verified).toBeTruthy();
     });
 
     it("gets a bank account", async () => {
@@ -57,7 +57,7 @@ describe("BankAccountsApi", () => {
       const deletedBankAccount = await new BankAccountsApi(
         CONFIG_FOR_INTEGRATION
       ).delete(createdBankAccountId);
-      expect(deletedBankAccount?.deleted).toBeTruthy();
+      expect(deletedBankAccount.deleted).toBeTruthy();
     });
   });
 
@@ -90,8 +90,8 @@ describe("BankAccountsApi", () => {
 
       const response = await bankApi.list();
       if (response && response.next_url) {
-        nextUrl = response?.next_url.slice(
-          response?.next_url.lastIndexOf("after=") + 6
+        nextUrl = response.next_url.slice(
+          response.next_url.lastIndexOf("after=") + 6
         );
         const responseAfter = await bankApi.list(10, undefined, nextUrl);
         if (responseAfter && responseAfter.previous_url) {
@@ -119,27 +119,24 @@ describe("BankAccountsApi", () => {
 
     it("lists bank accounts", async () => {
       const response = await new BankAccountsApi(CONFIG_FOR_INTEGRATION).list();
-      expect(response?.data).toBeDefined();
-      bankList = response?.data || [];
-      expect(bankList.length).toBeGreaterThan(0);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toBeGreaterThan(0);
     });
 
     it("lists bank accounts given an after param", async () => {
       const responseAfter = await new BankAccountsApi(
         CONFIG_FOR_INTEGRATION
       ).list(10, undefined, nextUrl);
-      expect(responseAfter?.data).toBeDefined();
-      const bankList2: BankAccount[] = responseAfter?.data || [];
-      expect(bankList2.length).toBeGreaterThan(0);
+      expect(responseAfter.data).toBeDefined();
+      expect(responseAfter.data?.length).toBeGreaterThan(0);
     });
 
     it("lists bank accounts given a before param", async () => {
       const responseBefore = await new BankAccountsApi(
         CONFIG_FOR_INTEGRATION
       ).list(10, previousUrl);
-      expect(responseBefore?.data).toBeDefined();
-      const bankList3: BankAccount[] = responseBefore?.data || [];
-      expect(bankList3.length).toBeGreaterThan(0);
+      expect(responseBefore.data).toBeDefined();
+      expect(responseBefore.data?.length).toBeGreaterThan(0);
     });
   });
 });

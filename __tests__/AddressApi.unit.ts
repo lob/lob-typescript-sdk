@@ -126,7 +126,7 @@ describe("AddressApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).create(addressCreate);
       expect(address).toBeDefined();
-      expect(address?.id).toBeDefined();
+      expect(address.id).toBeDefined();
     });
   });
 
@@ -143,7 +143,7 @@ describe("AddressApi", () => {
       }));
 
       const address = await new AddressesApi(CONFIG_FOR_UNIT).get("adr_fakeId");
-      expect(address?.id).toEqual("adr_differentFakeId");
+      expect(address.id).toEqual("adr_differentFakeId");
     });
 
     it("includes custom headers while it retrieves an address", async () => {
@@ -154,7 +154,7 @@ describe("AddressApi", () => {
       const address = await new AddressesApi(
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).get("adr_fakeId");
-      expect(address?.id).toEqual("adr_differentFakeId");
+      expect(address.id).toEqual("adr_differentFakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -233,8 +233,8 @@ describe("AddressApi", () => {
 
       const response = await new AddressesApi(CONFIG_FOR_UNIT).list();
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("includes custom headers while it lists addresses", async () => {
@@ -246,8 +246,8 @@ describe("AddressApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).list();
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("handles errors returned by the api", async () => {
@@ -321,8 +321,8 @@ describe("AddressApi", () => {
 
       const response = await new AddressesApi(CONFIG_FOR_UNIT).list(10);
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists addresses with a before parameter", async () => {
@@ -338,8 +338,8 @@ describe("AddressApi", () => {
         "before"
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists addresses with an after parameter", async () => {
@@ -356,8 +356,8 @@ describe("AddressApi", () => {
         "after"
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists addresses with an include parameter", async () => {
@@ -375,8 +375,8 @@ describe("AddressApi", () => {
         ["this"]
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists addresses with a dateCreated parameter", async () => {
@@ -397,8 +397,8 @@ describe("AddressApi", () => {
         DATE_FILTER
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists addresses with a metadata parameter", async () => {
@@ -420,8 +420,8 @@ describe("AddressApi", () => {
         { what: "this" }
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists addresses with multiple parameters", async () => {
@@ -438,8 +438,8 @@ describe("AddressApi", () => {
         "after"
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
   });
 
@@ -460,7 +460,7 @@ describe("AddressApi", () => {
       const deletedAddress = await new AddressesApi(CONFIG_FOR_UNIT).delete(
         "adr_fakeId"
       );
-      expect(deletedAddress?.deleted).toEqual(true);
+      expect(deletedAddress.deleted).toEqual(true);
     });
 
     it("includes custom headers while it deletes an address", async () => {
@@ -473,7 +473,7 @@ describe("AddressApi", () => {
       const deletedAddress = await new AddressesApi(
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).delete("adr_fakeId");
-      expect(deletedAddress?.deleted).toEqual(true);
+      expect(deletedAddress.deleted).toEqual(true);
     });
 
     it("handles errors returned by the api", async () => {

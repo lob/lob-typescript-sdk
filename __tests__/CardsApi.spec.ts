@@ -48,13 +48,13 @@ describe("CardsApi", () => {
       const cardsApi = new CardsApi(config);
       // Create
       const createdCard = await new CardsApi(config).create(create);
-      expect(createdCard?.id).toBeDefined();
-      expect(createdCard?.description).toEqual(create.description);
+      expect(createdCard.id).toBeDefined();
+      expect(createdCard.description).toEqual(create.description);
 
       // Get
       const retrievedCard = await cardsApi.get(createdCard.id as string);
       expect(retrievedCard).toBeDefined();
-      expect(retrievedCard?.id).toEqual(createdCard?.id);
+      expect(retrievedCard.id).toEqual(createdCard.id);
 
       // Update
       const updates: CardUpdatable = {
@@ -65,11 +65,11 @@ describe("CardsApi", () => {
         updates
       );
       expect(updatedCard).toBeDefined();
-      expect(updatedCard?.description).toEqual("updated card");
+      expect(updatedCard.description).toEqual("updated card");
 
       // Delete
       const deletedCard = await cardsApi.delete(updatedCard.id as string);
-      expect(deletedCard?.deleted).toBeTruthy();
+      expect(deletedCard.deleted).toBeTruthy();
     });
   });
 
@@ -126,9 +126,8 @@ describe("CardsApi", () => {
 
     it("lists cards", async () => {
       const response = await new CardsApi(config).list();
-      expect(response?.data).toBeDefined();
-      const cardList = response?.data || [];
-      expect(cardList.length).toBeGreaterThan(0);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toBeGreaterThan(0);
     });
 
     it("lists cards given before or after params", async () => {
@@ -145,11 +144,11 @@ describe("CardsApi", () => {
         undefined,
         after
       );
-      expect(responseAfter?.data).toBeDefined();
+      expect(responseAfter.data).toBeDefined();
       expect(responseAfter.previous_url).toBeDefined();
       expect(responseAfter.previous_url).not.toBeNull();
 
-      const firstPage: Card[] = responseAfter?.data || [];
+      const firstPage: Card[] = responseAfter.data || [];
       expect(firstPage.length).toBeGreaterThan(0);
 
       expect(responseAfter.previous_url).toBeDefined();
@@ -165,8 +164,8 @@ describe("CardsApi", () => {
         .split("=")[1];
 
       const responseBefore = await new CardsApi(config).list(10, before);
-      expect(responseBefore?.data).toBeDefined();
-      const previousPage: Card[] = responseBefore?.data || [];
+      expect(responseBefore.data).toBeDefined();
+      const previousPage: Card[] = responseBefore.data || [];
       expect(previousPage.length).toBeGreaterThan(0);
     });
   });

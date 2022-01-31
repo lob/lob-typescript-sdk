@@ -151,8 +151,8 @@ describe("AddressApi", () => {
         nextUrl
       );
       expect(responseAfter).toBeDefined();
-      expect(responseAfter?.data).toBeDefined();
-      const addressList2: Address[] = responseAfter?.data || [];
+      expect(responseAfter.data).toBeDefined();
+      const addressList2: Address[] = responseAfter.data || [];
       expect(addressList2.length).toBeGreaterThan(0);
     });
 
@@ -161,8 +161,8 @@ describe("AddressApi", () => {
         CONFIG_FOR_INTEGRATION
       ).list(10, previousUrl);
       expect(responseBefore).toBeDefined();
-      expect(responseBefore?.data).toBeDefined();
-      const addressList3: Address[] = responseBefore?.data || [];
+      expect(responseBefore.data).toBeDefined();
+      const addressList3: Address[] = responseBefore.data || [];
       expect(addressList3.length).toBeGreaterThan(0);
     });
 
@@ -174,9 +174,9 @@ describe("AddressApi", () => {
         ["total_es"]
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
+      expect(response.data).toBeDefined();
       expect(response.count).toBeDefined();
-      const addressList2: Address[] = response?.data || [];
+      const addressList2: Address[] = response.data || [];
       expect(addressList2.length).toBeGreaterThan(0);
     });
 
@@ -190,8 +190,8 @@ describe("AddressApi", () => {
         listResponse.nextPageToken
       );
       expect(responseAfter).toBeDefined();
-      expect(responseAfter?.data).toBeDefined();
-      const addressList2: Address[] = responseAfter?.data || [];
+      expect(responseAfter.data).toBeDefined();
+      const addressList2: Address[] = responseAfter.data || [];
       expect(addressList2.length).toBeGreaterThan(0);
     });
   });

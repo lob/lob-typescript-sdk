@@ -39,33 +39,33 @@ describe("TemplatesApi", () => {
       const createdTemplate = await new TemplatesApi(
         CONFIG_FOR_INTEGRATION
       ).create(templateWrite);
-      expect(createdTemplate?.id).toBeDefined();
-      expect(createdTemplate?.description).toEqual(templateWrite.description);
+      expect(createdTemplate.id).toBeDefined();
+      expect(createdTemplate.description).toEqual(templateWrite.description);
 
       // Get
       const retrievedTemplate = await templatesApi.get(
         createdTemplate.id as string
       );
       expect(retrievedTemplate).toBeDefined();
-      expect(retrievedTemplate?.id).toEqual(createdTemplate?.id);
+      expect(retrievedTemplate.id).toEqual(createdTemplate.id);
 
       // Update
       const updates: TemplateUpdate = {
         description: "updated template",
-        published_version: retrievedTemplate?.published_version?.id as string,
+        published_version: retrievedTemplate.published_version?.id as string,
       };
       const updatedTemplate = await templatesApi.update(
         retrievedTemplate.id as string,
         updates
       );
       expect(updatedTemplate).toBeDefined();
-      expect(updatedTemplate?.description).toEqual("updated template");
+      expect(updatedTemplate.description).toEqual("updated template");
 
       // Delete
       const deletedTemplate = await templatesApi.delete(
         updatedTemplate.id as string
       );
-      expect(deletedTemplate?.deleted).toBeTruthy();
+      expect(deletedTemplate.deleted).toBeTruthy();
     });
   });
 
@@ -121,9 +121,8 @@ describe("TemplatesApi", () => {
 
     it("lists templates", async () => {
       const response = await new TemplatesApi(CONFIG_FOR_INTEGRATION).list();
-      expect(response?.data).toBeDefined();
-      const templateList = response?.data || [];
-      expect(templateList.length).toBeGreaterThan(0);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toBeGreaterThan(0);
     });
 
     it("lists templates given before or after params", async () => {
@@ -137,12 +136,11 @@ describe("TemplatesApi", () => {
         .split("=")[1];
 
       const responseAfter = await templatesApi.list(10, undefined, after);
-      expect(responseAfter?.data).toBeDefined();
+      expect(responseAfter.data).toBeDefined();
       expect(responseAfter.previous_url).toBeDefined();
       expect(responseAfter.previous_url).not.toBeNull();
 
-      const firstPage: Template[] = responseAfter?.data || [];
-      expect(firstPage.length).toBeGreaterThan(0);
+      expect(responseAfter.data?.length).toBeGreaterThan(0);
 
       expect(responseAfter.previous_url).toBeDefined();
       expect(responseAfter.previous_url).not.toBeNull();
@@ -157,9 +155,8 @@ describe("TemplatesApi", () => {
         .split("=")[1];
 
       const responseBefore = await templatesApi.list(10, before);
-      expect(responseBefore?.data).toBeDefined();
-      const previousPage: Template[] = responseBefore?.data || [];
-      expect(previousPage.length).toBeGreaterThan(0);
+      expect(responseBefore.data).toBeDefined();
+      expect(responseBefore.data?.length).toBeGreaterThan(0);
     });
   });
 });
