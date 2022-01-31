@@ -413,13 +413,27 @@ describe("createRequestFunction", () => {
   });
 
   it("includes the correct package name and version", () => {
-    const config = new Configuration();
-    const packageName = process.env.npm_package_name;
-    const packageVersion = process.env.npm_package_version;
-    expect(config.packageName).toBeDefined();
-    expect(config.packageName).toEqual(packageName)
-    expect(config.packageVersion).toBeDefined();
-    expect(config.packageVersion).toEqual(packageVersion);
+    const fakePath = "/path";
+    const config = { basePath: "https://configured.fake.com" } as Configuration;
+    axiosRequest.mockImplementationOnce((requestArgs) => {
+      expect(requestArgs.headers["User-Agent"]).toEqual(
+        `${process.env.npm_package_name}/${process.env.npm_package_version}`
+      );
+      return { response: "value" };
+    });
+
+    const requestArgs: RequestArgs = {
+      url: fakePath,
+      options: {
+        method: "POST",
+        data: { fake: "data" },
+        headers: {
+          "User-Agent": `${process.env.npm_package_name}/${process.env.npm_package_version}`,
+        },
+      },
+    };
+
+    createRequestFunction(requestArgs, axios, fakeUrl, config);
   });
 });
 
