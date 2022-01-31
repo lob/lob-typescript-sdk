@@ -88,12 +88,6 @@ export class Configuration {
    * @type {new () => FormData}
    */
   formDataCtor?: new () => any;
-  /**
-   * The public name for the package
-   *
-   * @type {string}
-   * @memberof Configuration
-   */
 
   constructor(param: ConfigurationParameters = {}) {
     this.apiKey = param.apiKey;
