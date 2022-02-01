@@ -128,4 +128,5 @@ __exportStar(require("./us-verifications"), exports);
 __exportStar(require("./us-verifications-writable"), exports);
 __exportStar(require("./zip"), exports);
 __exportStar(require("./zip-code-type"), exports);
+__exportStar(require("./zip-editable"), exports);
 __exportStar(require("./zip-lookup-city"), exports);

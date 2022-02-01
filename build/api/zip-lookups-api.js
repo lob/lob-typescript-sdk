@@ -219,11 +219,11 @@ var ZipLookupsApiAxiosParamCreator = function (configuration) {
     /**
      * Returns information about a ZIP code
      * @summary lookup
-     * @param {string} body
+     * @param {ZipEditable} zipEditable
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    zipLookup: function (body, options) {
+    zipLookup: function (zipEditable, options) {
       if (options === void 0) {
         options = {};
       }
@@ -236,8 +236,9 @@ var ZipLookupsApiAxiosParamCreator = function (configuration) {
           localVarQueryParameter,
           headersFromBaseOptions;
         return __generator(this, function (_a) {
-          // verify required parameter 'body' is not null or undefined
-          (0, common_1.assertParamExists)("zipLookup", "body", body);
+          // verify required parameter 'zipEditable' is not null or undefined
+          (0,
+          common_1.assertParamExists)("zipLookup", "zipEditable", zipEditable);
           localVarPath = "/us_zip_lookups";
           localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
           if (configuration) {
@@ -265,7 +266,7 @@ var ZipLookupsApiAxiosParamCreator = function (configuration) {
             options.headers
           );
           localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(
-            body,
+            zipEditable,
             localVarRequestOptions,
             configuration
           );
@@ -294,11 +295,11 @@ var ZipLookupsApiFp = function (configuration) {
     /**
      * Returns information about a ZIP code
      * @summary lookup
-     * @param {string} body
+     * @param {ZipEditable} zipEditable
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    zipLookup: function (body, options) {
+    zipLookup: function (zipEditable, options) {
       return __awaiter(this, void 0, void 0, function () {
         var localVarAxiosArgs;
         return __generator(this, function (_a) {
@@ -306,7 +307,7 @@ var ZipLookupsApiFp = function (configuration) {
             case 0:
               return [
                 4 /*yield*/,
-                localVarAxiosParamCreator.zipLookup(body, options),
+                localVarAxiosParamCreator.zipLookup(zipEditable, options),
               ];
             case 1:
               localVarAxiosArgs = _a.sent();
@@ -340,15 +341,15 @@ var ZipLookupsApi = /** @class */ (function (_super) {
   /**
    * Returns information about a ZIP code
    * @summary lookup
-   * @param {string} body
+   * @param {ZipEditable} zipEditable
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof ZipLookupsApi
    */
-  ZipLookupsApi.prototype.lookup = function (body, options) {
+  ZipLookupsApi.prototype.lookup = function (zipEditable, options) {
     var _this = this;
     return (0, exports.ZipLookupsApiFp)(this.configuration)
-      .zipLookup(body, options)
+      .zipLookup(zipEditable, options)
       .then(function (request) {
         return request(_this.axios, _this.basePath);
       })
