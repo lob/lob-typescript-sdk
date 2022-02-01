@@ -1,12 +1,13 @@
 import { ZipLookupsApi } from "../api";
-import { fail } from "./testUtilities";
 
-// Axios Mock
-import axios from "axios";
+import { fail } from "./testUtilities";
 import {
   CONFIG_FOR_UNIT,
   CONFIG_WITH_BASE_OPTIONS_FOR_UNIT,
 } from "./testFixtures";
+
+// Axios Mock
+import axios from "axios";
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
 jest.mock("axios", () => ({
   request: jest.fn(),

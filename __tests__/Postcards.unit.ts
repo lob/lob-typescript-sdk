@@ -10,7 +10,10 @@ import { fail } from "./testUtilities";
 import {
   CONFIG_FOR_UNIT,
   CONFIG_WITH_BASE_OPTIONS_FOR_UNIT,
+  DATE_CREATED_QUERY_STRING,
   DATE_FILTER,
+  METADATA_OBJECT,
+  METADATA_QUERY_STRING,
 } from "./testFixtures";
 
 import axios from "axios";
@@ -287,9 +290,7 @@ describe("PostcardsApi", () => {
 
     it("lists postcards with a dateCreated parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "date_created=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
-        );
+        expect(request.url.split("?")[1]).toEqual(DATE_CREATED_QUERY_STRING);
         return {
           data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
         };
@@ -303,15 +304,13 @@ describe("PostcardsApi", () => {
         DATE_FILTER
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists postcards with a metadata parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "metadata=%7B%22what%22%3A%22this%22%7D"
-        );
+        expect(request.url.split("?")[1]).toEqual(METADATA_QUERY_STRING);
         return {
           data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
         };
@@ -323,11 +322,11 @@ describe("PostcardsApi", () => {
         undefined,
         undefined,
         undefined,
-        { what: "this" }
+        METADATA_OBJECT
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists postcards with a size parameter", async () => {
@@ -348,8 +347,8 @@ describe("PostcardsApi", () => {
         PostcardSize._4x6
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists postcards with a scheduled parameter", async () => {
@@ -371,8 +370,8 @@ describe("PostcardsApi", () => {
         true
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists postcards with a sendDate parameter", async () => {
@@ -397,8 +396,8 @@ describe("PostcardsApi", () => {
         DATE_FILTER
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists postcards with a mailType parameter", async () => {
@@ -422,8 +421,8 @@ describe("PostcardsApi", () => {
         MailType.FirstClass
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("should handle the sortBy correctly", async () => {
@@ -467,8 +466,8 @@ describe("PostcardsApi", () => {
         "after"
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
   });
 

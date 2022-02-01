@@ -1,33 +1,19 @@
-import { SelfMailerEditable, CountryExtended } from "../models";
+import { SelfMailerEditable } from "../models";
 import { SelfMailersApi } from "../api";
-import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
+import {
+  ADDRESSES_EDITABLE,
+  CONFIG_FOR_INTEGRATION,
+  FILE_LOCATION_6X18,
+} from "./testFixtures";
 
 describe("smApi", () => {
   jest.setTimeout(60000); // 60 seconds
 
   const dummySelfMailer: SelfMailerEditable = {
-    to: {
-      company: "Gothic home (old)",
-      address_line1: "001 CEMETARY LN",
-      address_line2: "# 000",
-      address_city: "WESTFIELD",
-      address_state: "NJ",
-      address_zip: "07000",
-      address_country: CountryExtended.Us,
-    },
-    from: {
-      company: "Gothic home (new)",
-      address_line1: "1313 CEMETARY LN",
-      address_line2: "# 000",
-      address_city: "WESTFIELD",
-      address_state: "NJ",
-      address_zip: "07000",
-      address_country: CountryExtended.Us,
-    },
-    inside:
-      "https://s3.us-west-2.amazonaws.com/public.lob.com/assets/templates/self_mailers/6x18_sfm_inside.pdf",
-    outside:
-      "https://s3.us-west-2.amazonaws.com/public.lob.com/assets/templates/self_mailers/6x18_sfm_outside.pdf",
+    to: ADDRESSES_EDITABLE[0],
+    from: ADDRESSES_EDITABLE[1],
+    inside: FILE_LOCATION_6X18,
+    outside: FILE_LOCATION_6X18,
   };
 
   it("SelfMailer API can be instantiated", () => {
@@ -80,73 +66,22 @@ describe("smApi", () => {
       const smApi = new SelfMailersApi(CONFIG_FOR_INTEGRATION);
       // ensure there are at least 3 cards present, to test pagination
       const sfm1: SelfMailerEditable = {
-        to: {
-          name: "FESTER",
-          address_line1: "001 CEMETERY LN",
-          address_line2: "# 000",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
-        from: {
-          name: "MORTICIA ADDAMS",
-          address_line1: "1212 CEMETERY LN",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
-        inside:
-          "https://s3.us-west-2.amazonaws.com/public.lob.com/assets/templates/self_mailers/6x18_sfm_inside.pdf",
-        outside:
-          "https://s3.us-west-2.amazonaws.com/public.lob.com/assets/templates/self_mailers/6x18_sfm_outside.pdf",
+        to: ADDRESSES_EDITABLE[1],
+        from: ADDRESSES_EDITABLE[2],
+        inside: FILE_LOCATION_6X18,
+        outside: FILE_LOCATION_6X18,
       };
       const sfm2: SelfMailerEditable = {
-        to: {
-          name: "COUSIN ITT",
-          address_line1: "1515 CEMETERY LN",
-          address_line2: "# 000",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
-        from: {
-          name: "PUGSLEY",
-          address_line1: "1313 CEMETERY LN",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
-        inside:
-          "https://s3.us-west-2.amazonaws.com/public.lob.com/assets/templates/self_mailers/6x18_sfm_inside.pdf",
-        outside:
-          "https://s3.us-west-2.amazonaws.com/public.lob.com/assets/templates/self_mailers/6x18_sfm_outside.pdf",
+        to: ADDRESSES_EDITABLE[3],
+        from: ADDRESSES_EDITABLE[6],
+        inside: FILE_LOCATION_6X18,
+        outside: FILE_LOCATION_6X18,
       };
       const sfm3: SelfMailerEditable = {
-        to: {
-          name: "WEDNESDAY ADDAMS",
-          address_line1: "1313 CEMETERY LN",
-          address_line2: "# 000",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
-        from: {
-          name: "GORDON CRAVEN",
-          address_line1: "1313 CEMETERY LN",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
-        inside:
-          "https://s3.us-west-2.amazonaws.com/public.lob.com/assets/templates/self_mailers/6x18_sfm_inside.pdf",
-        outside:
-          "https://s3.us-west-2.amazonaws.com/public.lob.com/assets/templates/self_mailers/6x18_sfm_outside.pdf",
+        to: ADDRESSES_EDITABLE[4],
+        from: ADDRESSES_EDITABLE[5],
+        inside: FILE_LOCATION_6X18,
+        outside: FILE_LOCATION_6X18,
       };
       const c1 = await smApi.create(sfm1);
       const c2 = await smApi.create(sfm2);

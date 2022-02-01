@@ -5,7 +5,9 @@ import { fail } from "./testUtilities";
 import {
   CONFIG_FOR_UNIT,
   CONFIG_WITH_BASE_OPTIONS_FOR_UNIT,
+  DATE_CREATED_QUERY_STRING,
   DATE_FILTER,
+  DATE_MODIFIED_QUERY_STRING,
 } from "./testFixtures";
 
 // Axios Mock
@@ -354,7 +356,7 @@ describe("BillingGroupsApi", () => {
 
       const bgApi = await new BillingGroupsApi(CONFIG_FOR_UNIT).list();
       expect(bgApi).toBeDefined();
-      expect(bgApi?.data?.length).toEqual(2);
+      expect(bgApi.data?.length).toEqual(2);
     });
 
     it("should handle the limit", async () => {
@@ -364,7 +366,7 @@ describe("BillingGroupsApi", () => {
 
       const bgApi = await new BillingGroupsApi(CONFIG_FOR_UNIT).list(1);
       expect(bgApi).toBeDefined();
-      expect(bgApi?.data?.length).toEqual(1);
+      expect(bgApi.data?.length).toEqual(1);
     });
 
     it("lists billing groups with an include parameter", async () => {
@@ -381,8 +383,8 @@ describe("BillingGroupsApi", () => {
         ["this"]
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("should handle the offset correctly", async () => {
@@ -398,14 +400,12 @@ describe("BillingGroupsApi", () => {
         1
       );
       expect(bgApi).toBeDefined();
-      expect(bgApi?.data?.length).toEqual(1);
+      expect(bgApi.data?.length).toEqual(1);
     });
 
     it("should handle the dateCreated correctly", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "date_created=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
-        );
+        expect(request.url.split("?")[1]).toEqual(DATE_CREATED_QUERY_STRING);
         return {
           data: { data: [{ id: "bg_fakeId" }] },
         };
@@ -418,14 +418,12 @@ describe("BillingGroupsApi", () => {
         DATE_FILTER
       );
       expect(bgApi).toBeDefined();
-      expect(bgApi?.data?.length).toEqual(1);
+      expect(bgApi.data?.length).toEqual(1);
     });
 
     it("should handle the dateModified correctly", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "date_modified=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
-        );
+        expect(request.url.split("?")[1]).toEqual(DATE_MODIFIED_QUERY_STRING);
         return {
           data: { data: [{ id: "bg_fakeId" }] },
         };
@@ -439,7 +437,7 @@ describe("BillingGroupsApi", () => {
         DATE_FILTER
       );
       expect(bgApi).toBeDefined();
-      expect(bgApi?.data?.length).toEqual(1);
+      expect(bgApi.data?.length).toEqual(1);
     });
 
     it("should handle the sortBy correctly", async () => {
@@ -461,7 +459,7 @@ describe("BillingGroupsApi", () => {
         { id: "asc" }
       );
       expect(bgApi).toBeDefined();
-      expect(bgApi?.data?.length).toEqual(1);
+      expect(bgApi.data?.length).toEqual(1);
     });
 
     it("handles errors returned by the api", async () => {

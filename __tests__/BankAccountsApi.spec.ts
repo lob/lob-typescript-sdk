@@ -1,5 +1,4 @@
 import {
-  BankAccount,
   BankAccountWritable,
   BankAccountVerify,
   BankTypeEnum,
@@ -64,27 +63,19 @@ describe("BankAccountsApi", () => {
   describe("list Cards", () => {
     let nextUrl = "";
     let previousUrl = "";
-    let bankList: BankAccount[] = [];
 
     const createdBankAccounts: string[] = [];
     beforeAll(async () => {
       const bankApi = new BankAccountsApi(CONFIG_FOR_INTEGRATION);
 
       // ensure there are at least 3 cards present, to test pagination
-      const bank1: BankAccountWritable = {
-        description: "Test Bank Account",
-        routing_number: "322271627",
-        account_number: "123456789",
-        signatory: "Zsanett Farkas",
-        account_type: BankTypeEnum.Individual,
-      };
-      const bank2: BankAccountWritable = Object.assign({}, bank1, {
+      const bank2: BankAccountWritable = Object.assign({}, dummyAccount, {
         signatory: "Juanita Lupo",
       });
-      const bank3: BankAccountWritable = Object.assign({}, bank1, {
+      const bank3: BankAccountWritable = Object.assign({}, dummyAccount, {
         signatory: "Jeanette Leloup",
       });
-      createdBankAccounts.push((await bankApi.create(bank1)).id);
+      createdBankAccounts.push((await bankApi.create(dummyAccount)).id);
       createdBankAccounts.push((await bankApi.create(bank2)).id);
       createdBankAccounts.push((await bankApi.create(bank3)).id);
 

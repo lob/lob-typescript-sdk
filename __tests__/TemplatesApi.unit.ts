@@ -2,13 +2,14 @@ import { TemplateWritable } from "../models";
 import { TemplatesApi } from "../api";
 
 import { fail } from "./testUtilities";
-
-// Axios Mock
-import axios from "axios";
 import {
   CONFIG_FOR_UNIT,
   CONFIG_WITH_BASE_OPTIONS_FOR_UNIT,
+  METADATA_OBJECT,
 } from "./testFixtures";
+
+// Axios Mock
+import axios from "axios";
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
 jest.mock("axios", () => ({
   request: jest.fn(),
@@ -488,7 +489,7 @@ describe("TemplatesApi", () => {
         "after",
         ["fake"],
         { date: "Jan. 26, 2022" },
-        {}
+        METADATA_OBJECT
       );
       expect(templatesApi).toBeDefined();
       expect(templatesApi?.data?.length).toEqual(1);
