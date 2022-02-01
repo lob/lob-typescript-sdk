@@ -12,6 +12,7 @@ module.exports = {
     "!**/coverage/**",
     "!**/node_modules/**",
     "!**/*.config.{js,ts}",
+    "!**/build/**",
     "!**/__tests__/**",
     "!jest.integrationConfig.js",
   ],
