@@ -103,4 +103,5 @@ export * from "./us-verifications";
 export * from "./us-verifications-writable";
 export * from "./zip";
 export * from "./zip-code-type";
+export * from "./zip-editable";
 export * from "./zip-lookup-city";

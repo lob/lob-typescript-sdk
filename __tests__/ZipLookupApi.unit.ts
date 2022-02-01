@@ -43,7 +43,7 @@ describe("ZipLookupsApi", () => {
       });
 
       try {
-        await new ZipLookupsApi(CONFIG_FOR_UNIT).lookup("07090");
+        await new ZipLookupsApi(CONFIG_FOR_UNIT).lookup({ zip_code: "07090" });
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
       }
@@ -58,7 +58,7 @@ describe("ZipLookupsApi", () => {
       });
 
       try {
-        await new ZipLookupsApi(CONFIG_FOR_UNIT).lookup("07090");
+        await new ZipLookupsApi(CONFIG_FOR_UNIT).lookup({ zip_code: "07090" });
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -74,7 +74,7 @@ describe("ZipLookupsApi", () => {
       });
 
       try {
-        await new ZipLookupsApi(CONFIG_FOR_UNIT).lookup("07090");
+        await new ZipLookupsApi(CONFIG_FOR_UNIT).lookup({ zip_code: "07090" });
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -87,7 +87,7 @@ describe("ZipLookupsApi", () => {
       });
 
       try {
-        await new ZipLookupsApi(CONFIG_FOR_UNIT).lookup("07090");
+        await new ZipLookupsApi(CONFIG_FOR_UNIT).lookup({ zip_code: "07090" });
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -99,7 +99,9 @@ describe("ZipLookupsApi", () => {
         data: { id: "us_zip_fakeId" },
       }));
 
-      const response = await new ZipLookupsApi(CONFIG_FOR_UNIT).lookup("07090");
+      const response = await new ZipLookupsApi(CONFIG_FOR_UNIT).lookup({
+        zip_code: "07090",
+      });
       expect(response).toBeDefined();
       expect(response.id).toEqual("us_zip_fakeId");
     });
@@ -111,7 +113,7 @@ describe("ZipLookupsApi", () => {
 
       const response = await new ZipLookupsApi(
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
-      ).lookup("07090");
+      ).lookup({ zip_code: "07090" });
       expect(response).toBeDefined();
       expect(response.id).toEqual("us_zip_fakeId");
     });
