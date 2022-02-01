@@ -124,5 +124,6 @@ models/us-verification.ts
 models/us-verifications-writable.ts
 models/us-verifications.ts
 models/zip-code-type.ts
+models/zip-editable.ts
 models/zip-lookup-city.ts
 models/zip.ts
