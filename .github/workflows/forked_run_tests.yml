@@ -1,0 +1,41 @@
+name: Run Tests from Forked Repo
+
+on:
+  pull_request_target:
+    types: [labeled]
+
+jobs:
+  node_tests:
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'Approved')
+    strategy:
+      matrix:
+        node: ["12", "14", "16", "17"]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Am I Pretty
+        run: npm run pretty:check
+
+      - name: Run Unit Tests with coverage
+        run: npm run test
+
+      - name: Run Integration Tests
+        env:
+          LOB_API_KEY: ${{ secrets.LOB_API_KEY }}
+          LOB_LIVE_API_KEY: ${{ secrets.LOB_LIVE_API_KEY }}
+        run: npm run test:integration
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./coverage/lcov.info
