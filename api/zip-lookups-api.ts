@@ -45,6 +45,8 @@ import {
 import { LobError } from "../models";
 // @ts-ignore
 import { Zip } from "../models";
+// @ts-ignore
+import { ZipEditable } from "../models";
 /**
  * ZipLookupsApi - axios parameter creator
  * @export
@@ -56,16 +58,16 @@ export const ZipLookupsApiAxiosParamCreator = function (
     /**
      * Returns information about a ZIP code
      * @summary lookup
-     * @param {string} body
+     * @param {ZipEditable} zipEditable
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     zipLookup: async (
-      body: string,
+      zipEditable: ZipEditable,
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
-      // verify required parameter 'body' is not null or undefined
-      assertParamExists("zipLookup", "body", body);
+      // verify required parameter 'zipEditable' is not null or undefined
+      assertParamExists("zipLookup", "zipEditable", zipEditable);
       const localVarPath = `/us_zip_lookups`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -97,7 +99,7 @@ export const ZipLookupsApiAxiosParamCreator = function (
         ...options.headers,
       };
       localVarRequestOptions.data = serializeDataIfNeeded(
-        body,
+        zipEditable,
         localVarRequestOptions,
         configuration
       );
@@ -121,18 +123,18 @@ export const ZipLookupsApiFp = function (configuration?: Configuration) {
     /**
      * Returns information about a ZIP code
      * @summary lookup
-     * @param {string} body
+     * @param {ZipEditable} zipEditable
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async zipLookup(
-      body: string,
+      zipEditable: ZipEditable,
       options?: AxiosRequestConfig
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Zip>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.zipLookup(
-        body,
+        zipEditable,
         options
       );
       return createRequestFunction(
@@ -155,14 +157,14 @@ export class ZipLookupsApi extends BaseAPI {
   /**
    * Returns information about a ZIP code
    * @summary lookup
-   * @param {string} body
+   * @param {ZipEditable} zipEditable
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof ZipLookupsApi
    */
-  public lookup(body: string, options?: AxiosRequestConfig) {
+  public lookup(zipEditable: ZipEditable, options?: AxiosRequestConfig) {
     return ZipLookupsApiFp(this.configuration)
-      .zipLookup(body, options)
+      .zipLookup(zipEditable, options)
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {
         return new Zip(response.data);
