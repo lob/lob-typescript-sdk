@@ -55,7 +55,7 @@ describe("BillingGroupsApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).create(bgEditableMock);
       expect(bgApi).toBeDefined();
-      expect(bgApi?.id).toEqual("bg_fakeId");
+      expect(bgApi.id).toEqual("bg_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -147,7 +147,7 @@ describe("BillingGroupsApi", () => {
         "fake id"
       );
       expect(billing_groups).toBeDefined();
-      expect(billing_groups?.id).toEqual("bg_fakeId");
+      expect(billing_groups.id).toEqual("bg_fakeId");
     });
 
     it("includes custom headers while it gets a billing group for a billing group id", async () => {
@@ -159,7 +159,7 @@ describe("BillingGroupsApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).get("fake id");
       expect(billing_groups).toBeDefined();
-      expect(billing_groups?.id).toEqual("bg_fakeId");
+      expect(billing_groups.id).toEqual("bg_fakeId");
     });
 
     it("handles errors returned by the api", async () => {

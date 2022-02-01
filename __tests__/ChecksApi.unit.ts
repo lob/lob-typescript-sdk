@@ -68,7 +68,7 @@ describe("ChecksApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).create(chkEditableMock);
       expect(chkApi).toBeDefined();
-      expect(chkApi?.id).toEqual("chk_fakeId");
+      expect(chkApi.id).toEqual("chk_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -163,7 +163,7 @@ describe("ChecksApi", () => {
         "chk_fakeId"
       );
       expect(billing_groups).toBeDefined();
-      expect(billing_groups?.id).toEqual("chk_fakeId");
+      expect(billing_groups.id).toEqual("chk_fakeId");
     });
 
     it("includes custom headers while it retrieves a check for a check id", async () => {
@@ -175,7 +175,7 @@ describe("ChecksApi", () => {
         "chk_fakeId"
       );
       expect(checks).toBeDefined();
-      expect(checks?.id).toEqual("chk_fakeId");
+      expect(checks.id).toEqual("chk_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -264,7 +264,7 @@ describe("ChecksApi", () => {
         "chk_fakeId"
       );
       expect(billing_groups).toBeDefined();
-      expect(billing_groups?.id).toEqual("chk_fakeId");
+      expect(billing_groups.id).toEqual("chk_fakeId");
     });
 
     it("includes custom headers while it cancels a check for a check id", async () => {
@@ -276,7 +276,7 @@ describe("ChecksApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).cancel("chk_fakeId");
       expect(billing_groups).toBeDefined();
-      expect(billing_groups?.id).toEqual("chk_fakeId");
+      expect(billing_groups.id).toEqual("chk_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -361,7 +361,7 @@ describe("ChecksApi", () => {
 
       const chkApi = await new ChecksApi(CONFIG_FOR_UNIT).list();
       expect(chkApi).toBeDefined();
-      expect(chkApi?.data?.length).toEqual(2);
+      expect(chkApi.data?.length).toEqual(2);
     });
 
     it("should handle the limit", async () => {
@@ -371,7 +371,7 @@ describe("ChecksApi", () => {
 
       const chkApi = await new ChecksApi(CONFIG_FOR_UNIT).list(1);
       expect(chkApi).toBeDefined();
-      expect(chkApi?.data?.length).toEqual(1);
+      expect(chkApi.data?.length).toEqual(1);
     });
 
     it("lists checks with an include parameter", async () => {
@@ -389,8 +389,8 @@ describe("ChecksApi", () => {
         ["this"]
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("should handle the after date correctly", async () => {
@@ -408,7 +408,7 @@ describe("ChecksApi", () => {
         dateFilter.gt
       );
       expect(chkApi).toBeDefined();
-      expect(chkApi?.data?.length).toEqual(1);
+      expect(chkApi.data?.length).toEqual(1);
     });
 
     it("should handle the date created correctly", async () => {

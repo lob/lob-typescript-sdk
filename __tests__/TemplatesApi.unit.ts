@@ -55,7 +55,7 @@ describe("TemplatesApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).create(templateWritableMock);
       expect(templatesApi).toBeDefined();
-      expect(templatesApi?.id).toEqual("tmpl_fakeId");
+      expect(templatesApi.id).toEqual("tmpl_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -142,7 +142,7 @@ describe("TemplatesApi", () => {
 
       const templates = await new TemplatesApi(CONFIG_FOR_UNIT).get("fake id");
       expect(templates).toBeDefined();
-      expect(templates?.id).toEqual("tmpl_fakeId");
+      expect(templates.id).toEqual("tmpl_fakeId");
     });
 
     it("includes custom headers while it gets a template for a template id", async () => {
@@ -154,7 +154,7 @@ describe("TemplatesApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).get("fake id");
       expect(templates).toBeDefined();
-      expect(templates?.id).toEqual("tmpl_fakeId");
+      expect(templates.id).toEqual("tmpl_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -239,7 +239,7 @@ describe("TemplatesApi", () => {
         "fake id"
       );
       expect(templates).toBeDefined();
-      expect(templates?.id).toEqual("tmpl_fakeId");
+      expect(templates.id).toEqual("tmpl_fakeId");
     });
 
     it("includes custom headers while it deletes a template for a template id", async () => {
@@ -251,7 +251,7 @@ describe("TemplatesApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).delete("fake id");
       expect(templates).toBeDefined();
-      expect(templates?.id).toEqual("tmpl_fakeId");
+      expect(templates.id).toEqual("tmpl_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -342,7 +342,7 @@ describe("TemplatesApi", () => {
         templateUpdatable
       );
       expect(templates).toBeDefined();
-      expect(templates?.id).toEqual("tmpl_fakeId");
+      expect(templates.id).toEqual("tmpl_fakeId");
     });
 
     it("includes custom headers while it updates a template for a template id", async () => {
@@ -354,7 +354,7 @@ describe("TemplatesApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).update("fake id", templateUpdatable);
       expect(templates).toBeDefined();
-      expect(templates?.id).toEqual("tmpl_fakeId");
+      expect(templates.id).toEqual("tmpl_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -407,9 +407,9 @@ describe("TemplatesApi", () => {
         },
       }));
 
-      const templatesApi = await new TemplatesApi(CONFIG_FOR_UNIT).list();
-      expect(templatesApi).toBeDefined();
-      expect(templatesApi?.data?.length).toEqual(2);
+      const templates = await new TemplatesApi(CONFIG_FOR_UNIT).list();
+      expect(templates).toBeDefined();
+      expect(templates.data?.length).toEqual(2);
     });
 
     it("should handle the limit", async () => {
@@ -417,9 +417,9 @@ describe("TemplatesApi", () => {
         data: { data: [{ id: "tmpl_fakeId" }] },
       }));
 
-      const templatesApi = await new TemplatesApi(CONFIG_FOR_UNIT).list(1);
-      expect(templatesApi).toBeDefined();
-      expect(templatesApi?.data?.length).toEqual(1);
+      const templates = await new TemplatesApi(CONFIG_FOR_UNIT).list(1);
+      expect(templates).toBeDefined();
+      expect(templates.data?.length).toEqual(1);
     });
 
     it("should handle before pagination", async () => {
@@ -427,12 +427,9 @@ describe("TemplatesApi", () => {
         data: { data: [{ id: "tmpl_fakeId" }] },
       }));
 
-      const templatesApi = await new TemplatesApi(CONFIG_FOR_UNIT).list(
-        1,
-        "fake"
-      );
-      expect(templatesApi).toBeDefined();
-      expect(templatesApi?.data?.length).toEqual(1);
+      const templates = await new TemplatesApi(CONFIG_FOR_UNIT).list(1, "fake");
+      expect(templates).toBeDefined();
+      expect(templates.data?.length).toEqual(1);
     });
 
     it("should handle the after pagination", async () => {
@@ -446,7 +443,7 @@ describe("TemplatesApi", () => {
         "id"
       );
       expect(templatesApi).toBeDefined();
-      expect(templatesApi?.data?.length).toEqual(1);
+      expect(templatesApi.data?.length).toEqual(1);
     });
 
     it("should handle the sortBy correctly", async () => {
@@ -461,7 +458,7 @@ describe("TemplatesApi", () => {
         ["fake"]
       );
       expect(templatesApi).toBeDefined();
-      expect(templatesApi?.data?.length).toEqual(1);
+      expect(templatesApi.data?.length).toEqual(1);
     });
 
     it("should handle date_created parameter", async () => {

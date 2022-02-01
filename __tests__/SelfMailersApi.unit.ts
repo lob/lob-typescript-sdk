@@ -89,7 +89,7 @@ describe("SelfMailersApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).create(sfmEditableMock);
       expect(selfMailersApi).toBeDefined();
-      expect(selfMailersApi?.id).toEqual("sfm_fakeId");
+      expect(selfMailersApi.id).toEqual("sfm_fakeId");
     });
 
     it("creates a self-mailer with idempotency", async () => {
@@ -108,7 +108,7 @@ describe("SelfMailersApi", () => {
         "fake idempotency"
       );
       expect(selfMailersApi).toBeDefined();
-      expect(selfMailersApi?.id).toEqual("sfm_fakeId");
+      expect(selfMailersApi.id).toEqual("sfm_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -189,7 +189,7 @@ describe("SelfMailersApi", () => {
         "fake id"
       );
       expect(self_mailers).toBeDefined();
-      expect(self_mailers?.id).toEqual("sfm_fakeId");
+      expect(self_mailers.id).toEqual("sfm_fakeId");
     });
 
     it("includes custom headers while it gets a self-mailer for a self-mailer id", async () => {
@@ -201,7 +201,7 @@ describe("SelfMailersApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).get("fake id");
       expect(self_mailers).toBeDefined();
-      expect(self_mailers?.id).toEqual("sfm_fakeId");
+      expect(self_mailers.id).toEqual("sfm_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -282,7 +282,7 @@ describe("SelfMailersApi", () => {
         "fake id"
       );
       expect(self_mailers).toBeDefined();
-      expect(self_mailers?.id).toEqual("sfm_fakeId");
+      expect(self_mailers.id).toEqual("sfm_fakeId");
     });
 
     it("includes custom headers while it deletes a self-mailer for a self-mailer id", async () => {
@@ -294,7 +294,7 @@ describe("SelfMailersApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).delete("fake id");
       expect(self_mailers).toBeDefined();
-      expect(self_mailers?.id).toEqual("sfm_fakeId");
+      expect(self_mailers.id).toEqual("sfm_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -375,7 +375,7 @@ describe("SelfMailersApi", () => {
 
       const selfMailersApi = await new SelfMailersApi(CONFIG_FOR_UNIT).list();
       expect(selfMailersApi).toBeDefined();
-      expect(selfMailersApi?.data?.length).toEqual(2);
+      expect(selfMailersApi.data?.length).toEqual(2);
     });
 
     it("should handle the limit", async () => {
@@ -385,7 +385,7 @@ describe("SelfMailersApi", () => {
 
       const selfMailersApi = await new SelfMailersApi(CONFIG_FOR_UNIT).list(1);
       expect(selfMailersApi).toBeDefined();
-      expect(selfMailersApi?.data?.length).toEqual(1);
+      expect(selfMailersApi.data?.length).toEqual(1);
     });
 
     it("should handle before pagination", async () => {
@@ -398,7 +398,7 @@ describe("SelfMailersApi", () => {
         "fake"
       );
       expect(selfMailersApi).toBeDefined();
-      expect(selfMailersApi?.data?.length).toEqual(1);
+      expect(selfMailersApi.data?.length).toEqual(1);
     });
 
     it("should handle the after pagination", async () => {

@@ -116,7 +116,7 @@ describe("CardOrdersApi", () => {
         cardForCreate
       );
       expect(cardOrder).toBeDefined();
-      expect(cardOrder?.id).toEqual("co_fakeId");
+      expect(cardOrder.id).toEqual("co_fakeId");
     });
 
     it("includes custom headers while it creates a card order", async () => {
@@ -128,7 +128,7 @@ describe("CardOrdersApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).create("card_fakeId", cardForCreate);
       expect(cardOrder).toBeDefined();
-      expect(cardOrder?.id).toEqual("co_fakeId");
+      expect(cardOrder.id).toEqual("co_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -201,7 +201,7 @@ describe("CardOrdersApi", () => {
         "co_fakeId"
       );
       expect(cardOrders).toBeDefined();
-      expect(cardOrders?.data?.length).toEqual(1);
+      expect(cardOrders.data?.length).toEqual(1);
     });
 
     it("includes custom headers while it gets card orders for a card id", async () => {
@@ -213,7 +213,7 @@ describe("CardOrdersApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).get("co_fakeId");
       expect(cardOrders).toBeDefined();
-      expect(cardOrders?.data?.length).toEqual(1);
+      expect(cardOrders.data?.length).toEqual(1);
     });
 
     it("handles errors returned by the api", async () => {

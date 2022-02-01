@@ -55,7 +55,7 @@ describe("CardsApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).create(cardEditableMock);
       expect(cardsApi).toBeDefined();
-      expect(cardsApi?.id).toEqual("card_fakeId");
+      expect(cardsApi.id).toEqual("card_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -137,7 +137,7 @@ describe("CardsApi", () => {
 
       const cards = await new CardsApi(CONFIG_FOR_UNIT).get("fake id");
       expect(cards).toBeDefined();
-      expect(cards?.id).toEqual("card_fakeId");
+      expect(cards.id).toEqual("card_fakeId");
     });
 
     it("includes custom headers while it gets a card for a card id", async () => {
@@ -149,7 +149,7 @@ describe("CardsApi", () => {
         "fake id"
       );
       expect(cards).toBeDefined();
-      expect(cards?.id).toEqual("card_fakeId");
+      expect(cards.id).toEqual("card_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -228,7 +228,7 @@ describe("CardsApi", () => {
 
       const cards = await new CardsApi(CONFIG_FOR_UNIT).delete("fake id");
       expect(cards).toBeDefined();
-      expect(cards?.id).toEqual("card_fakeId");
+      expect(cards.id).toEqual("card_fakeId");
     });
 
     it("includes custom headers while it deletes a card for a card id", async () => {
@@ -240,7 +240,7 @@ describe("CardsApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).delete("fake id");
       expect(cards).toBeDefined();
-      expect(cards?.id).toEqual("card_fakeId");
+      expect(cards.id).toEqual("card_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -326,7 +326,7 @@ describe("CardsApi", () => {
         cardUpdatable
       );
       expect(cards).toBeDefined();
-      expect(cards?.id).toEqual("card_fakeId");
+      expect(cards.id).toEqual("card_fakeId");
     });
 
     it("includes custom headers while it updates a card for a card id", async () => {
@@ -338,7 +338,7 @@ describe("CardsApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).update("fake id", cardUpdatable);
       expect(cards).toBeDefined();
-      expect(cards?.id).toEqual("card_fakeId");
+      expect(cards.id).toEqual("card_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -424,7 +424,7 @@ describe("CardsApi", () => {
         cardUpdatable
       );
       expect(cards).toBeDefined();
-      expect(cards?.id).toEqual("card_fakeId");
+      expect(cards.id).toEqual("card_fakeId");
     });
 
     it("includes custom headers while it updates a card for a card id", async () => {
@@ -436,7 +436,7 @@ describe("CardsApi", () => {
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).update("fake id", cardUpdatable);
       expect(cards).toBeDefined();
-      expect(cards?.id).toEqual("card_fakeId");
+      expect(cards.id).toEqual("card_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -485,7 +485,7 @@ describe("CardsApi", () => {
 
       const cardsApi = await new CardsApi(CONFIG_FOR_UNIT).list();
       expect(cardsApi).toBeDefined();
-      expect(cardsApi?.data?.length).toEqual(2);
+      expect(cardsApi.data?.length).toEqual(2);
     });
 
     it("should handle the limit", async () => {
@@ -495,7 +495,7 @@ describe("CardsApi", () => {
 
       const cardsApi = await new CardsApi(CONFIG_FOR_UNIT).list(1);
       expect(cardsApi).toBeDefined();
-      expect(cardsApi?.data?.length).toEqual(1);
+      expect(cardsApi.data?.length).toEqual(1);
     });
 
     it("should handle before pagination", async () => {
@@ -505,7 +505,7 @@ describe("CardsApi", () => {
 
       const cardsApi = await new CardsApi(CONFIG_FOR_UNIT).list(1, "fake");
       expect(cardsApi).toBeDefined();
-      expect(cardsApi?.data?.length).toEqual(1);
+      expect(cardsApi.data?.length).toEqual(1);
     });
 
     it("should handle the after pagination", async () => {
@@ -519,7 +519,7 @@ describe("CardsApi", () => {
         "id"
       );
       expect(cardsApi).toBeDefined();
-      expect(cardsApi?.data?.length).toEqual(1);
+      expect(cardsApi.data?.length).toEqual(1);
     });
 
     it("should handle the sortBy correctly", async () => {
@@ -536,7 +536,7 @@ describe("CardsApi", () => {
         }
       );
       expect(cardsApi).toBeDefined();
-      expect(cardsApi?.data?.length).toEqual(1);
+      expect(cardsApi.data?.length).toEqual(1);
     });
 
     it("handles errors returned by the api", async () => {
