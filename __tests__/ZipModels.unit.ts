@@ -1,4 +1,4 @@
-import { Zip, ZipCodeType, ZipLookupCity } from "../models";
+import { Zip, ZipCodeType, ZipLookupCity, ZipEditable } from "../models";
 
 describe("Zip Models", () => {
   describe("Zip", () => {
@@ -129,6 +129,40 @@ describe("Zip Models", () => {
         rec.county_fips = val;
         expect(rec.county_fips).toBeDefined();
         expect(rec.county_fips).toEqual(val);
+      }
+    });
+  });
+
+  describe("ZipEditable", () => {
+    it("can be created", () => {
+      const rec = new ZipEditable();
+      expect(rec).toBeDefined();
+    });
+
+    it.each([
+      ["zip_code", 11111]
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new ZipEditable(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
+    });
+
+    it("rejects invalid values for zip_code", () => {
+      const rec = new ZipEditable();
+      expect(rec.zip_code).not.toBeDefined();
+
+      const invalidValues = ["Nope"];
+      for (const val of invalidValues) {
+        try {
+          rec.zip_code = val;
+          throw new Error("Should Throw");
+        } catch (err: any) {
+          expect(err.message).toEqual("Invalid zip_code provided");
+        }
       }
     });
   });

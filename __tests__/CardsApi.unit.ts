@@ -473,6 +473,18 @@ describe("CardsApi", () => {
       expect(cardsApi.data?.length).toEqual(1);
     });
 
+    it("includes custom headers while it lists cards", async () => {
+      axiosRequest.mockImplementationOnce(async () => ({
+        data: { data: [{ id: "card_fakeId" }] },
+      }));
+
+      const cards = await new CardsApi(
+          CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+      ).list();
+      expect(cards).toBeDefined();
+      expect(cards.data?.length).toEqual(1);
+    });
+
     it("handles errors returned by the api", async () => {
       axiosRequest.mockImplementationOnce(async () => {
         throw {
