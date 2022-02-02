@@ -1,48 +1,26 @@
-import { Configuration } from "../configuration";
-
-import {
-  Postcard,
-  PostcardEditable,
-  CountryExtended,
-  MailType,
-} from "../models";
+import { Postcard, PostcardEditable, CountryExtended } from "../models";
 import { PostcardsApi } from "../api";
+import {
+  ADDRESSES_DOMESTIC,
+  ADDRESSES_EDITABLE,
+  CONFIG_FOR_INTEGRATION,
+  FILE_LOCATION_4X6,
+} from "./testFixtures";
 
 describe("postcardsApi", () => {
   jest.setTimeout(60000); // 60 seconds
 
-  const config: Configuration = new Configuration({
-    username: process.env.LOB_API_KEY,
-  });
-
   let postcardsApi: PostcardsApi;
 
   const dummyPostcard: PostcardEditable = {
-    to: {
-      company: "Gothic home (old)",
-      address_line1: "001 CEMETARY LN",
-      address_line2: "# 000",
-      address_city: "WESTFIELD",
-      address_state: "NJ",
-      address_zip: "07000",
-      address_country: CountryExtended.Us,
-    },
-    from: {
-      company: "Gothic home (new)",
-      address_line1: "1313 CEMETARY LN",
-      address_line2: "# 000",
-      address_city: "WESTFIELD",
-      address_state: "NJ",
-      address_zip: "07000",
-      address_country: CountryExtended.Us,
-    },
-    front:
-      "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
-    back: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
+    to: ADDRESSES_EDITABLE[2],
+    from: ADDRESSES_DOMESTIC[1],
+    front: FILE_LOCATION_4X6,
+    back: FILE_LOCATION_4X6,
   };
 
   it("Postcard API can be instantiated", () => {
-    postcardsApi = new PostcardsApi(config);
+    postcardsApi = new PostcardsApi(CONFIG_FOR_INTEGRATION);
     expect(postcardsApi).toBeDefined();
     expect(typeof postcardsApi).toEqual("object");
     expect(postcardsApi).toBeInstanceOf(PostcardsApi);
@@ -84,70 +62,22 @@ describe("postcardsApi", () => {
     beforeAll(async () => {
       // ensure there are at least 3 cards present, to test pagination
       const postcard1: PostcardEditable = {
-        to: {
-          name: "THING T. THING",
-          address_line1: "001 CEMETERY LN",
-          address_line2: "# 000",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
-        from: {
-          name: "FESTER ADDAMS",
-          address_line1: "1313 CEMETERY LN",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: "US",
-        },
-        front:
-          "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
-        back: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
+        to: ADDRESSES_EDITABLE[1],
+        from: ADDRESSES_DOMESTIC[0],
+        front: FILE_LOCATION_4X6,
+        back: FILE_LOCATION_4X6,
       };
       const postcard2: PostcardEditable = {
-        to: {
-          name: "MORTICIA ADDAMS",
-          address_line1: "1313 CEMETERY LN",
-          address_line2: "# 000",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
-        from: {
-          name: "COUSIN ITT",
-          address_line1: "1313 CEMETERY LN",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: "US",
-        },
-        front:
-          "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
-        back: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
+        to: ADDRESSES_EDITABLE[3],
+        from: ADDRESSES_DOMESTIC[0],
+        front: FILE_LOCATION_4X6,
+        back: FILE_LOCATION_4X6,
       };
       const postcard3: PostcardEditable = {
-        to: {
-          name: "GORDON CRAVEN",
-          address_line1: "1313 CEMETERY LN",
-          address_line2: "# 000",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
-        from: {
-          name: "WEDNESDAY ADDAMS",
-          address_line1: "1313 CEMETERY LN",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: "US",
-        },
-        front:
-          "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
-        back: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
+        to: ADDRESSES_EDITABLE[6],
+        from: ADDRESSES_DOMESTIC[1],
+        front: FILE_LOCATION_4X6,
+        back: FILE_LOCATION_4X6,
       };
       const c1 = await postcardsApi.create(postcard1);
       const c2 = await postcardsApi.create(postcard2);

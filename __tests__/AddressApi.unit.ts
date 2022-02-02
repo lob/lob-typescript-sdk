@@ -3,9 +3,13 @@ import { AddressesApi } from "../api/addresses-api";
 
 import { fail } from "./testUtilities";
 import {
+  ADDRESSES_EDITABLE,
   CONFIG_FOR_UNIT,
   CONFIG_WITH_BASE_OPTIONS_FOR_UNIT,
+  DATE_CREATED_QUERY_STRING,
   DATE_FILTER,
+  METADATA_OBJECT,
+  METADATA_QUERY_STRING,
 } from "./testFixtures";
 
 // Axios Mock
@@ -31,14 +35,6 @@ describe("AddressApi", () => {
   });
 
   describe("create", () => {
-    const addressCreate: AddressEditable = {
-      name: "Thing T. Thing",
-      address_line1: "1313 CEMETERY LN",
-      address_city: "WESTFIELD",
-      address_state: "NJ",
-      address_zip: "07000",
-    };
-
     it("exists", () => {
       const addressApi = new AddressesApi(CONFIG_FOR_UNIT);
       expect(addressApi.create).toBeDefined();
@@ -54,7 +50,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(CONFIG_FOR_UNIT).create(addressCreate);
+        await new AddressesApi(CONFIG_FOR_UNIT).create(ADDRESSES_EDITABLE[0]);
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
       }
@@ -69,7 +65,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(CONFIG_FOR_UNIT).create(addressCreate);
+        await new AddressesApi(CONFIG_FOR_UNIT).create(ADDRESSES_EDITABLE[0]);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -85,7 +81,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(CONFIG_FOR_UNIT).create(addressCreate);
+        await new AddressesApi(CONFIG_FOR_UNIT).create(ADDRESSES_EDITABLE[0]);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -98,7 +94,7 @@ describe("AddressApi", () => {
       });
 
       try {
-        await new AddressesApi(CONFIG_FOR_UNIT).create(addressCreate);
+        await new AddressesApi(CONFIG_FOR_UNIT).create(ADDRESSES_EDITABLE[0]);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -111,7 +107,7 @@ describe("AddressApi", () => {
       }));
 
       const address = await new AddressesApi(CONFIG_FOR_UNIT).create(
-        addressCreate
+        ADDRESSES_EDITABLE[0]
       );
       expect(address).toBeDefined();
       expect(address.id).toBeDefined();
@@ -124,7 +120,7 @@ describe("AddressApi", () => {
 
       const address = await new AddressesApi(
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
-      ).create(addressCreate);
+      ).create(ADDRESSES_EDITABLE[0]);
       expect(address).toBeDefined();
       expect(address.id).toBeDefined();
     });
@@ -381,9 +377,7 @@ describe("AddressApi", () => {
 
     it("lists addresses with a dateCreated parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "date_created=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
-        );
+        expect(request.url.split("?")[1]).toEqual(DATE_CREATED_QUERY_STRING);
         return {
           data: { data: [{ id: "adr_fakeId1" }, { id: "adr_fakeId2" }] },
         };
@@ -403,9 +397,7 @@ describe("AddressApi", () => {
 
     it("lists addresses with a metadata parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "metadata=%7B%22what%22%3A%22this%22%7D"
-        );
+        expect(request.url.split("?")[1]).toEqual(METADATA_QUERY_STRING);
         return {
           data: { data: [{ id: "adr_fakeId1" }, { id: "adr_fakeId2" }] },
         };
@@ -417,7 +409,7 @@ describe("AddressApi", () => {
         undefined,
         undefined,
         undefined,
-        { what: "this" }
+        METADATA_OBJECT
       );
       expect(response).toBeDefined();
       expect(response.data).toBeDefined();

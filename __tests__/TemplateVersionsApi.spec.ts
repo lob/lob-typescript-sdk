@@ -190,9 +190,8 @@ describe("TemplateVersionsApi", () => {
       const response = await new TemplateVersionsApi(
         CONFIG_FOR_INTEGRATION
       ).list(dummyTemplate.id as string);
-      expect(response?.data).toBeDefined();
-      const templateList = response?.data || [];
-      expect(templateList.length).toBeGreaterThan(0);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toBeGreaterThan(0);
     });
 
     it("lists template versions given before or after params", async () => {

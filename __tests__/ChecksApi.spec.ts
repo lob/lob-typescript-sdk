@@ -1,15 +1,14 @@
 import { ChecksApi } from "../api/checks-api";
-import { CheckEditable } from "../models/check-editable";
-import { Check } from "../models/check";
+import { CheckEditable } from "../models";
+import { Check } from "../models";
 import {
   BankAccount,
   BankAccountsApi,
   BankAccountVerify,
   BankAccountWritable,
   BankTypeEnum,
-  CountryExtended,
 } from "..";
-import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
+import { ADDRESSES_DOMESTIC, CONFIG_FOR_INTEGRATION } from "./testFixtures";
 
 let bankApi: BankAccountsApi;
 let account: BankAccount;
@@ -64,23 +63,8 @@ describe("ChecksApi", () => {
       beforeAll(() => {
         createCheck = {
           description: "check 1",
-          to: {
-            company: "Gothic Home (old)",
-            address_line1: "001 CEMETERY LN",
-            address_line2: "# 000",
-            address_city: "WESTFIELD",
-            address_state: "NJ",
-            address_zip: "07000",
-            address_country: CountryExtended.Us,
-          },
-          from: {
-            company: "Gothic Home (new)",
-            address_line1: "1313 CEMETERY LN",
-            address_city: "WESTFIELD",
-            address_state: "NJ",
-            address_zip: "07000",
-            address_country: "US",
-          },
+          to: ADDRESSES_DOMESTIC[0],
+          from: ADDRESSES_DOMESTIC[1],
           bank_account: account.id,
           amount: 100,
         };
@@ -140,23 +124,8 @@ describe("ChecksApi", () => {
       // ensure there are at least 3 checks present, to test pagination
       const check1: CheckEditable = {
         description: "check 1",
-        to: {
-          company: "Gothic Home (old)",
-          address_line1: "0001 CEMETERY LN",
-          address_line2: "# 000",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
-        from: {
-          company: "Gothic Home (new)",
-          address_line1: "1313 CEMETERY LN",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: "US",
-        },
+        to: ADDRESSES_DOMESTIC[0],
+        from: ADDRESSES_DOMESTIC[1],
         bank_account: account.id,
         amount: 100,
       };

@@ -1,47 +1,20 @@
-import { Configuration } from "../configuration";
-
 import {
-  Letter,
   LetterEditable,
   LetterEditableExtraServiceEnum,
   CountryExtended,
-  LetterEditableAddressPlacementEnum,
-  MailType,
 } from "../models";
 import { LettersApi } from "../api";
+import {
+  ADDRESSES_EDITABLE,
+  CONFIG_FOR_INTEGRATION,
+  FILE_LOCATION_8X11,
+} from "./testFixtures";
 
 describe("CardsApi", () => {
-  const config: Configuration = new Configuration({
-    username: process.env.LOB_API_KEY,
-  });
-
   let lettersApi: LettersApi;
 
-  const certifiedLetter: LetterEditable = {
-    to: {
-      company: "Gothic Home(old)",
-      address_line1: "001 CEMETERY LN",
-      address_line2: "# 000",
-      address_city: "WESTFIELD",
-      address_state: "NJ",
-      address_zip: "07000",
-      address_country: CountryExtended.Us,
-    },
-    from: {
-      company: "Gothic Home (new)",
-      address_line1: "1313 CEMETERY LN",
-      address_city: "WESTFIELD",
-      address_state: "NJ",
-      address_zip: "07000",
-      address_country: CountryExtended.Us,
-    },
-    color: true,
-    extra_service: LetterEditableExtraServiceEnum.Certified,
-    file: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/us_letter_1pg.pdf",
-  };
-
   it("Letter API can be instantiated", () => {
-    lettersApi = new LettersApi(config);
+    lettersApi = new LettersApi(CONFIG_FOR_INTEGRATION);
     expect(lettersApi).toBeDefined();
     expect(typeof lettersApi).toEqual("object");
     expect(lettersApi).toBeInstanceOf(LettersApi);
@@ -60,6 +33,14 @@ describe("CardsApi", () => {
     });
 
     it("creates, retrieves, and cancels a CERTIFIED letter", async () => {
+      const certifiedLetter: LetterEditable = {
+        to: ADDRESSES_EDITABLE[0],
+        from: ADDRESSES_EDITABLE[0],
+        color: true,
+        extra_service: LetterEditableExtraServiceEnum.Certified,
+        file: FILE_LOCATION_8X11,
+      };
+
       const letter = await lettersApi.create(certifiedLetter);
       expect(letter.id).toBeDefined();
       expect(letter.extra_service).toEqual("certified");
@@ -75,26 +56,11 @@ describe("CardsApi", () => {
 
     it("creates, retrieves, and cancels a REGISTERED letter", async () => {
       const registeredLetter: LetterEditable = {
-        to: {
-          company: "Gothic Home(old)",
-          address_line1: "001 CEMETERY LN",
-          address_line2: "# 000",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
-        from: {
-          company: "Gothic Home (new)",
-          address_line1: "1313 CEMETERY LN",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
+        to: ADDRESSES_EDITABLE[0],
+        from: ADDRESSES_EDITABLE[0],
         color: true,
         extra_service: LetterEditableExtraServiceEnum.Registered,
-        file: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/us_letter_1pg.pdf",
+        file: FILE_LOCATION_8X11,
       };
       const letter = await lettersApi.create(registeredLetter);
       expect(letter.id).toBeDefined();
@@ -111,25 +77,10 @@ describe("CardsApi", () => {
 
     it("creates, retrieves, and cancels a letter with NO EXTRA SERVICES", async () => {
       const registeredLetter: LetterEditable = {
-        to: {
-          company: "Gothic Home (old)",
-          address_line1: "001 CEMETERY LN",
-          address_line2: "# 000",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
-        from: {
-          company: "Gothic Home (new)",
-          address_line1: "1313 CEMETERY LN",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
+        to: ADDRESSES_EDITABLE[0],
+        from: ADDRESSES_EDITABLE[0],
         color: true,
-        file: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/us_letter_1pg.pdf",
+        file: FILE_LOCATION_8X11,
       };
       const letter = await lettersApi.create(registeredLetter);
       expect(letter.id).toBeDefined();

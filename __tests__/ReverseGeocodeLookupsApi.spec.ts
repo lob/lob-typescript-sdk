@@ -26,7 +26,7 @@ describe("ReverseGeocodeLookupsApi", () => {
       const geocodeApi = new ReverseGeocodeLookupsApi(CONFIG_FOR_INTEGRATION);
       const response = await geocodeApi.lookup(testCoordinates);
       expect(response.addresses).toBeDefined();
-      expect(response?.addresses?.length).toBeGreaterThan(0);
+      expect(response.addresses?.length).toBeGreaterThan(0);
     });
   });
 });

@@ -3,9 +3,15 @@ import { LettersApi } from "../api/letters-api";
 
 import { fail } from "./testUtilities";
 import {
+  ADDRESSES_EDITABLE,
   CONFIG_FOR_UNIT,
   CONFIG_WITH_BASE_OPTIONS_FOR_UNIT,
+  DATE_CREATED_QUERY_STRING,
   DATE_FILTER,
+  DATE_SEND_QUERY_STRING,
+  FILE_LOCATION,
+  METADATA_OBJECT,
+  METADATA_QUERY_STRING,
 } from "./testFixtures";
 
 import axios from "axios";
@@ -282,9 +288,7 @@ describe("LetterApi", () => {
 
     it("lists letters with a dateCreated parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "date_created=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%3A34%3A56Z%22%7D"
-        );
+        expect(request.url.split("?")[1]).toEqual(DATE_CREATED_QUERY_STRING);
         return {
           data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
         };
@@ -295,7 +299,7 @@ describe("LetterApi", () => {
         undefined,
         undefined,
         undefined,
-        { gt: "2020-01-01", lt: "2020-01-31T12:34:56Z" }
+        DATE_FILTER
       );
       expect(response).toBeDefined();
       expect(response.data).toBeDefined();
@@ -304,9 +308,7 @@ describe("LetterApi", () => {
 
     it("lists letters with a metadata parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "metadata=%7B%22what%22%3A%22this%22%7D"
-        );
+        expect(request.url.split("?")[1]).toEqual(METADATA_QUERY_STRING);
         return {
           data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
         };
@@ -318,7 +320,7 @@ describe("LetterApi", () => {
         undefined,
         undefined,
         undefined,
-        { what: "this" }
+        METADATA_OBJECT
       );
       expect(response).toBeDefined();
       expect(response.data).toBeDefined();
@@ -372,9 +374,7 @@ describe("LetterApi", () => {
 
     it("lists letters with a sendDate parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "send_date=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
-        );
+        expect(request.url.split("?")[1]).toEqual(DATE_SEND_QUERY_STRING);
         return {
           data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
         };
@@ -563,17 +563,10 @@ describe("LetterApi", () => {
   });
 
   describe("create", () => {
-    const addressCreate: AddressEditable = {
-      name: "Thing T. Thing",
-      address_line1: "1313 CEMETERY LN",
-      address_city: "WESTFIELD",
-      address_state: "NJ",
-      address_zip: "07000",
-    };
     const createLetter: LetterEditable = {
-      to: addressCreate,
-      from: addressCreate,
-      file: "https://docs.google.com/document/d/1YE9GsoeWl5oPIXxsJ2SI0JweTURfOR8tW0UGK9_H_vo/edit?usp=sharing",
+      to: ADDRESSES_EDITABLE[0],
+      from: ADDRESSES_EDITABLE[0],
+      file: FILE_LOCATION,
     };
 
     it("exists", () => {

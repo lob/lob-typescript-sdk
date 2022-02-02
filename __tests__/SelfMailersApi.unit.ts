@@ -8,9 +8,14 @@ import { SelfMailersApi } from "../api";
 
 import { fail } from "./testUtilities";
 import {
+  ADDRESSES_DOMESTIC,
+  ADDRESSES_EDITABLE,
   CONFIG_FOR_UNIT,
   CONFIG_WITH_BASE_OPTIONS_FOR_UNIT,
   DATE_FILTER,
+  FILE_LOCATION_4X6,
+  METADATA_OBJECT,
+  METADATA_QUERY_STRING,
 } from "./testFixtures";
 
 // Axios Mock
@@ -39,27 +44,10 @@ describe("SelfMailersApi", () => {
 
   describe("create", () => {
     const sfmEditableMock: SelfMailerEditable = {
-      to: {
-        company: "Gothic Home (old)",
-        address_line1: "001 CEMETERY LN",
-        address_line2: "# 000",
-        address_city: "WESTFIELD",
-        address_state: "NJ",
-        address_zip: "07000",
-        address_country: CountryExtended.Us,
-      },
-      from: {
-        company: "Gothic Home (new)",
-        address_line1: "1313 CEMETERY LN",
-        address_city: "WESTFIELD",
-        address_state: "NJ",
-        address_zip: "07000",
-        address_country: CountryExtended.Us,
-      },
-      inside:
-        "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
-      outside:
-        "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/4x6_pc_template.pdf",
+      to: ADDRESSES_EDITABLE[5],
+      from: ADDRESSES_EDITABLE[0],
+      inside: FILE_LOCATION_4X6,
+      outside: FILE_LOCATION_4X6,
     };
 
     it("exists", async () => {
@@ -447,9 +435,12 @@ describe("SelfMailersApi", () => {
     });
 
     it("should handle the metadata correctly", async () => {
-      axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "sfm_fakeId" }] },
-      }));
+      axiosRequest.mockImplementationOnce(async (request) => {
+        expect(request.url.split("?")[1]).toEqual(METADATA_QUERY_STRING);
+        return {
+          data: { data: [{ id: "sfm_fakeId" }] },
+        };
+      });
 
       const selfMailersApi = await new SelfMailersApi(CONFIG_FOR_UNIT).list(
         undefined,
@@ -457,7 +448,7 @@ describe("SelfMailersApi", () => {
         undefined,
         undefined,
         undefined,
-        { what: "this" }
+        METADATA_OBJECT
       );
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.data?.length).toEqual(1);

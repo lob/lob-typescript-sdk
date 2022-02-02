@@ -4,18 +4,12 @@ import { Address, AddressEditable, AddressList } from "../models";
 import { AddressesApi } from "../api/addresses-api";
 
 import { fail, debugLog } from "./testUtilities";
-import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
+import { ADDRESSES_EDITABLE, CONFIG_FOR_INTEGRATION } from "./testFixtures";
 
 describe("AddressApi", () => {
   jest.setTimeout(1000 * 60);
 
-  const addressCreate: AddressEditable = {
-    name: "Thing T. Thing",
-    address_line1: "1313 CEMETERY LN",
-    address_city: "WESTFIELD",
-    address_state: "NJ",
-    address_zip: "07000",
-  };
+  const addressCreate: AddressEditable = ADDRESSES_EDITABLE[0];
 
   const createdAddressIds: string[] = [];
   afterAll(async () => {
@@ -78,32 +72,15 @@ describe("AddressApi", () => {
     beforeAll(async () => {
       const addressApi = new AddressesApi(CONFIG_FOR_INTEGRATION);
       // ensure there are at least 3 addresses present, to test pagination
-      const address1: AddressEditable = {
-        name: "FESTER",
-        address_line1: "001 CEMETERY LN",
-        address_line2: "SUITE 666",
-        address_city: "WESTFIELD ",
-        address_state: "NJ",
-        address_zip: "07000",
-      };
-      const address2: AddressEditable = {
-        name: "MORTICIA ADDAMS",
-        address_line1: "1212 CEMETERY LANE",
-        address_city: "WESTFIELD",
-        address_state: "NJ",
-        address_zip: "07000",
-      };
-      const address3: AddressEditable = {
-        name: "COUSIN ITT",
-        address_line1: "1515 CEMETERY LN",
-        address_line2: "FLOOR 0",
-        address_city: "WESTFIELD",
-        address_state: "NJ",
-        address_zip: "07000",
-      };
-      createdAddressIds.push((await addressApi.create(address1)).id);
-      createdAddressIds.push((await addressApi.create(address2)).id);
-      createdAddressIds.push((await addressApi.create(address3)).id);
+      createdAddressIds.push(
+        (await addressApi.create(ADDRESSES_EDITABLE[1])).id
+      );
+      createdAddressIds.push(
+        (await addressApi.create(ADDRESSES_EDITABLE[2])).id
+      );
+      createdAddressIds.push(
+        (await addressApi.create(ADDRESSES_EDITABLE[3])).id
+      );
 
       const response = await addressApi.list();
       if (response && response.next_url) {

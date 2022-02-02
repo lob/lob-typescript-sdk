@@ -9,7 +9,10 @@ import { fail } from "./testUtilities";
 import {
   CONFIG_FOR_UNIT,
   CONFIG_WITH_BASE_OPTIONS_FOR_UNIT,
+  DATE_CREATED_QUERY_STRING,
   DATE_FILTER,
+  METADATA_OBJECT,
+  METADATA_QUERY_STRING,
 } from "./testFixtures";
 
 // Axios Mock
@@ -370,8 +373,8 @@ describe("BankAccountsApi", () => {
 
       const response = await new BankAccountsApi(CONFIG_FOR_UNIT).list(10);
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists bankAccounts with a before parameter", async () => {
@@ -387,8 +390,8 @@ describe("BankAccountsApi", () => {
         "before"
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists bankAccounts with an after parameter", async () => {
@@ -405,8 +408,8 @@ describe("BankAccountsApi", () => {
         "after"
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists bankAccounts with an include parameter", async () => {
@@ -424,15 +427,13 @@ describe("BankAccountsApi", () => {
         ["this"]
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists bankAccounts with a dateCreated parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "date_created=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
-        );
+        expect(request.url.split("?")[1]).toEqual(DATE_CREATED_QUERY_STRING);
         return {
           data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
         };
@@ -446,15 +447,13 @@ describe("BankAccountsApi", () => {
         DATE_FILTER
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists bankAccounts with a metadata parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "metadata=%7B%22what%22%3A%22this%22%7D"
-        );
+        expect(request.url.split("?")[1]).toEqual(METADATA_QUERY_STRING);
         return {
           data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
         };
@@ -466,11 +465,11 @@ describe("BankAccountsApi", () => {
         undefined,
         undefined,
         undefined,
-        { what: "this" }
+        METADATA_OBJECT
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists bankAccounts with multiple parameters", async () => {
@@ -487,8 +486,8 @@ describe("BankAccountsApi", () => {
         "after"
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
   });
 });

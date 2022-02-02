@@ -3,11 +3,15 @@ import { ChecksApi } from "../api/checks-api";
 import axios from "axios";
 
 import { fail } from "./testUtilities";
-import { CheckEditable } from "../models/check-editable";
+import { CheckEditable } from "../models";
 import { MailType } from "..";
 import {
   CONFIG_FOR_UNIT,
   CONFIG_WITH_BASE_OPTIONS_FOR_UNIT,
+  DATE_CREATED_QUERY_STRING,
+  DATE_FILTER,
+  METADATA_OBJECT,
+  METADATA_QUERY_STRING,
 } from "./testFixtures";
 
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
@@ -78,9 +82,6 @@ describe("ChecksApi", () => {
           response: { data: { error: { message: "error reported by API" } } },
         };
       });
-      const bgUpdatable = {
-        description: "check updated",
-      };
 
       try {
         await new ChecksApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).create(
@@ -132,9 +133,6 @@ describe("ChecksApi", () => {
       axiosRequest.mockImplementationOnce(async () => {
         throw new Error("Unknown Error");
       });
-      const bgUpdatable = {
-        description: "check updated",
-      };
 
       try {
         await new ChecksApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).create(
@@ -245,10 +243,6 @@ describe("ChecksApi", () => {
   });
 
   describe("cancel", () => {
-    const chkcancelled = {
-      description: "check cancelled",
-    };
-
     it("exists", async () => {
       const checksApi = new ChecksApi(CONFIG_FOR_UNIT);
       expect(checksApi.cancel).toBeDefined();
@@ -413,21 +407,18 @@ describe("ChecksApi", () => {
 
     it("should handle the date created correctly", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "date_created=%7B%22date%22%3A%222020-01-01%22%7D"
-        );
+        expect(request.url.split("?")[1]).toEqual(DATE_CREATED_QUERY_STRING);
         return {
           data: { data: [{ id: "chk_fakeId" }] },
         };
       });
 
-      const dateFilter = { gt: "2020-01-01", lt: "2020-01-31T12" };
       const chkApi = await new ChecksApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
         undefined,
-        { date: dateFilter.gt }
+        DATE_FILTER
       );
       expect(chkApi).toBeDefined();
       expect(chkApi?.data?.length).toEqual(1);
@@ -435,22 +426,19 @@ describe("ChecksApi", () => {
 
     it("should handle the metadata correctly", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "metadata=%7B%22fakeMetadata%22%3A%22fakemetadata%22%7D"
-        );
+        expect(request.url.split("?")[1]).toEqual(METADATA_QUERY_STRING);
         return {
           data: { data: [{ id: "chk_fakeId" }] },
         };
       });
 
-      const fakeMetadata = { metadata: "fakemetadata" };
       const chkApi = await new ChecksApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
         undefined,
         undefined,
-        { fakeMetadata: "fakemetadata" }
+        METADATA_OBJECT
       );
       expect(chkApi).toBeDefined();
       expect(chkApi?.data?.length).toEqual(1);
@@ -464,7 +452,6 @@ describe("ChecksApi", () => {
         };
       });
 
-      const fakeMetadata = { metadata: "fakemetadata" };
       const chkApi = await new ChecksApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
@@ -486,7 +473,6 @@ describe("ChecksApi", () => {
         };
       });
 
-      const dateFilter = { gt: "2020-01-01", lt: "2020-01-31T12" };
       const chkApi = await new ChecksApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
@@ -495,7 +481,7 @@ describe("ChecksApi", () => {
         undefined,
         undefined,
         undefined,
-        dateFilter.gt
+        DATE_FILTER.gt
       );
       expect(chkApi).toBeDefined();
       expect(chkApi?.data?.length).toEqual(1);
@@ -532,10 +518,9 @@ describe("ChecksApi", () => {
         };
       });
 
-      const dateFilter = { gt: "2020-01-01", lt: "2020-01-31T12" };
       const chkApi = await new ChecksApi(CONFIG_FOR_UNIT).list(
         undefined,
-        dateFilter.lt
+        DATE_FILTER.lt
       );
       expect(chkApi).toBeDefined();
       expect(chkApi?.data?.length).toEqual(1);

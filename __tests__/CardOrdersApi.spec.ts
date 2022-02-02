@@ -1,9 +1,7 @@
-import { Configuration } from "../configuration";
-
 import { Card, CardEditable, CardEditableSizeEnum } from "../models";
 import { CardsApi, CardOrdersApi } from "../api";
 import { CardOrderEditable } from "..";
-import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
+import { CONFIG_FOR_INTEGRATION, FILE_LOCATION } from "./testFixtures";
 
 describe("CardOrdersApi", () => {
   const dummyCardOrder: CardOrderEditable = {
@@ -20,9 +18,8 @@ describe("CardOrdersApi", () => {
 
   const editableCard: CardEditable = {
     description: "Test card",
-    front:
-      "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/card_horizontal.pdf",
-    back: "https://s3-us-west-2.amazonaws.com/public.lob.com/assets/card_horizontal.pdf",
+    front: FILE_LOCATION,
+    back: FILE_LOCATION,
     size: CardEditableSizeEnum._2125x3375,
   };
 
