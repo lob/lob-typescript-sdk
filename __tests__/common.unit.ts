@@ -410,6 +410,30 @@ describe("createRequestFunction", () => {
     expect(axiosRequest).toHaveBeenCalledTimes(1);
     expect(result.response).toEqual("value");
   });
+
+  it("includes the correct package name and version", () => {
+    const fakePath = "/path";
+    const config = { basePath: "https://configured.fake.com" } as Configuration;
+    axiosRequest.mockImplementationOnce((requestArgs) => {
+      expect(requestArgs.headers["User-Agent"]).toEqual(
+        `${process.env.npm_package_name}/${process.env.npm_package_version}`
+      );
+      return { response: "value" };
+    });
+
+    const requestArgs: RequestArgs = {
+      url: fakePath,
+      options: {
+        method: "POST",
+        data: { fake: "data" },
+        headers: {
+          "User-Agent": `${process.env.npm_package_name}/${process.env.npm_package_version}`,
+        },
+      },
+    };
+
+    createRequestFunction(requestArgs, axios, fakeUrl, config);
+  });
 });
 
 describe("valueToString", () => {
