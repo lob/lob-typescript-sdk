@@ -455,7 +455,7 @@ describe("TemplateVersionsApi", () => {
       }));
 
       const templateVersions = await new TemplateVersionsApi(
-          CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).list("fake id");
       expect(templateVersions).toBeDefined();
       expect(templateVersions.data?.length).toEqual(2);

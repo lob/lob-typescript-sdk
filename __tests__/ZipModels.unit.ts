@@ -139,17 +139,18 @@ describe("Zip Models", () => {
       expect(rec).toBeDefined();
     });
 
-    it.each([
-      ["zip_code", 11111]
-    ])("can be created with a provided %s value", (prop, val) => {
-      const input = {};
-      (input as any)[prop] = val;
+    it.each([["zip_code", 11111]])(
+      "can be created with a provided %s value",
+      (prop, val) => {
+        const input = {};
+        (input as any)[prop] = val;
 
-      const rec = new ZipEditable(input);
+        const rec = new ZipEditable(input);
 
-      expect(rec).toBeDefined();
-      expect((rec as any)[prop]).toEqual(val);
-    });
+        expect(rec).toBeDefined();
+        expect((rec as any)[prop]).toEqual(val);
+      }
+    );
 
     it("rejects invalid values for zip_code", () => {
       const rec = new ZipEditable();

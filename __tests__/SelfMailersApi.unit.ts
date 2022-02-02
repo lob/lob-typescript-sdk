@@ -373,7 +373,9 @@ describe("SelfMailersApi", () => {
         },
       }));
 
-      const selfMailersApi = await new SelfMailersApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).list();
+      const selfMailersApi = await new SelfMailersApi(
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+      ).list();
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi.data?.length).toEqual(2);
     });

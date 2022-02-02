@@ -1,10 +1,9 @@
-
 import { BaseAPI, RequiredError } from "../base";
 
 import { fail } from "./testUtilities";
 
 import axios from "axios";
-import {Configuration} from "../configuration";
+import { Configuration } from "../configuration";
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
 jest.mock("axios", () => ({
   request: jest.fn().mockImplementation(async (args) => ({ data: "blah" })),

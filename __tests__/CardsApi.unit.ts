@@ -479,7 +479,7 @@ describe("CardsApi", () => {
       }));
 
       const cards = await new CardsApi(
-          CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).list();
       expect(cards).toBeDefined();
       expect(cards.data?.length).toEqual(1);
