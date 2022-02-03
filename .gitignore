@@ -12,13 +12,13 @@ coverage
 !/sdks/*/__tests__
 
 # Typescript specific exceptions
-!/sdks/lob-sdk-ts/.openapi-generator-ignore
-!/sdks/lob-sdk-ts/jest.config.js
-!/sdks/lob-sdk-ts/jest.integrationConfig.js
-!/sdks/lob-sdk-ts/package.json
-!/sdks/lob-sdk-ts/tsconfig.json
-!/sdks/lob-sdk-ts/.npmignore
+!/sdks/lob-typescript-sdk/.openapi-generator-ignore
+!/sdks/lob-typescript-sdk/jest.config.js
+!/sdks/lob-typescript-sdk/jest.integrationConfig.js
+!/sdks/lob-typescript-sdk/package.json
+!/sdks/lob-typescript-sdk/tsconfig.json
+!/sdks/lob-typescript-sdk/.npmignore
 
-!/sdks/lob-sdk-ts/build/__tests__
+!/sdks/lob-typescript-sdk/build/__tests__
 
 LOCAL.env

@@ -1,4 +1,4 @@
-# lob-sdk-ts
+# lob-typescript-sdk
 
 Typescript SDK for the [Lob.com](https://lob.com) API. See full Lob.com API documentation [here](https://lob.com/docs/node). For best results, be sure that you're using [the latest version](https://lob.com/docs/node#version) of the Lob API and the latest version of the Node wrapper.
 
@@ -12,12 +12,12 @@ Once you have created an account, you can access your API Keys from the [Setting
 
 ### Installation
 
-lob-sdk-ts can be installed through the npm:
+lob-typescript-sdk can be installed through the npm:
 
 ```bash
 # FOR PRE PUBLISH ALPHA TESTING ONLY!!!!!
 # UPDATE BEFORE PUBLISHING
-$ npm i https://github.com/lob/lob-sdk-ts
+$ npm i https://github.com/lob/lob-typescript-sdk
 ```
 
 ## Examples
@@ -25,7 +25,7 @@ $ npm i https://github.com/lob/lob-sdk-ts
 ### First API Calls
 
 ```typescript
-import { Configuration, AddressesApi } from "lob-sdk-ts";
+import { Configuration, AddressesApi } from "lob-typescript-sdk";
 const config: Configuration = new Configuration({
   username: "<<YOUR API KEY HERE>>",
 });
