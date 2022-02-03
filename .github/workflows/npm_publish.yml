@@ -1,0 +1,27 @@
+# This is a basic workflow to automate the manual steps required for publishing updated versions of this SDK package to NPM
+
+name: NPM Publish
+
+# Run the workflow when a new release is published
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # use node setup library (more info here https://github.com/actions/setup-node)
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 12
+
+      # publishes to NPM using third party tool (more info here https://github.com/JS-DevTools/npm-publish)
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
