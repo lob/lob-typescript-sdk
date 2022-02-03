@@ -1,19 +1,12 @@
-import { Configuration } from "../configuration";
-
 import {
-  BankAccount,
   BankAccountWritable,
   BankAccountVerify,
   BankTypeEnum,
 } from "../models";
 import { BankAccountsApi } from "../api/bank-accounts-api";
+import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
 
 describe("BankAccountsApi", () => {
-  const config: Configuration = new Configuration({
-    username: process.env.LOB_API_KEY,
-  });
-  let bankApi: BankAccountsApi;
-
   const dummyAccount: BankAccountWritable = {
     description: "Test Bank Account",
     routing_number: "322271627",
@@ -23,74 +16,73 @@ describe("BankAccountsApi", () => {
   };
 
   it("Bank Accounts API can be instantiated", () => {
-    bankApi = new BankAccountsApi(config);
+    const bankApi = new BankAccountsApi(CONFIG_FOR_INTEGRATION);
     expect(bankApi).toBeDefined();
     expect(typeof bankApi).toEqual("object");
     expect(bankApi).toBeInstanceOf(BankAccountsApi);
   });
 
   describe("test operations on a single bank account", () => {
-    it("create exists", () => {
-      expect(bankApi.create).toBeDefined();
-      expect(typeof bankApi.create).toEqual("function");
-    });
+    let createdBankAccountId: string;
 
     it("creates, verifies, retrieves, and deletes a bank account", async () => {
-      const account = await bankApi.create(dummyAccount);
+      const account = await new BankAccountsApi(CONFIG_FOR_INTEGRATION).create(
+        dummyAccount
+      );
+      expect(account.id).toBeDefined();
+      createdBankAccountId = account.id;
+    });
+
+    it("verifies a bank account", async () => {
       const verify: BankAccountVerify = {
         amounts: [11, 35],
       };
-      if (account?.id) {
-        const verification = await bankApi.verify(account.id, verify);
-        expect(verification).toBeDefined();
-        expect(verification?.verified).toBeTruthy();
 
-        const retrievedBankAccount = await bankApi.get(account.id);
-        expect(retrievedBankAccount?.id).toEqual(account.id);
+      const verification = await new BankAccountsApi(
+        CONFIG_FOR_INTEGRATION
+      ).verify(createdBankAccountId, verify);
+      expect(verification).toBeDefined();
+      expect(verification.verified).toBeTruthy();
+    });
 
-        const deletedBankAccount = await bankApi.delete(account.id);
-        expect(deletedBankAccount?.deleted).toBeTruthy();
-      } else {
-        throw new Error("bank account ID must be defined on creation");
-      }
+    it("gets a bank account", async () => {
+      const retrievedBankAccount = await new BankAccountsApi(
+        CONFIG_FOR_INTEGRATION
+      ).get(createdBankAccountId);
+      expect(retrievedBankAccount.id).toEqual(createdBankAccountId);
+    });
+
+    it("deletes a bank account", async () => {
+      const deletedBankAccount = await new BankAccountsApi(
+        CONFIG_FOR_INTEGRATION
+      ).delete(createdBankAccountId);
+      expect(deletedBankAccount.deleted).toBeTruthy();
     });
   });
 
   describe("list Cards", () => {
     let nextUrl = "";
     let previousUrl = "";
-    let bankList: BankAccount[] = [];
+
+    const createdBankAccounts: string[] = [];
     beforeAll(async () => {
+      const bankApi = new BankAccountsApi(CONFIG_FOR_INTEGRATION);
+
       // ensure there are at least 3 cards present, to test pagination
-      const bank1: BankAccountWritable = {
-        description: "Test Bank Account",
-        routing_number: "322271627",
-        account_number: "123456789",
-        signatory: "Zsanett Farkas",
-        account_type: BankTypeEnum.Individual,
-      };
-      const bank2: BankAccountWritable = {
-        description: "Test Bank Account",
-        routing_number: "322271627",
-        account_number: "123456789",
+      const bank2: BankAccountWritable = Object.assign({}, dummyAccount, {
         signatory: "Juanita Lupo",
-        account_type: BankTypeEnum.Individual,
-      };
-      const bank3: BankAccountWritable = {
-        description: "Test Bank Account",
-        routing_number: "322271627",
-        account_number: "123456789",
+      });
+      const bank3: BankAccountWritable = Object.assign({}, dummyAccount, {
         signatory: "Jeanette Leloup",
-        account_type: BankTypeEnum.Individual,
-      };
-      const c1 = await bankApi.create(bank1);
-      const c2 = await bankApi.create(bank2);
-      const c3 = await bankApi.create(bank3);
+      });
+      createdBankAccounts.push((await bankApi.create(dummyAccount)).id);
+      createdBankAccounts.push((await bankApi.create(bank2)).id);
+      createdBankAccounts.push((await bankApi.create(bank3)).id);
 
       const response = await bankApi.list();
       if (response && response.next_url) {
-        nextUrl = response?.next_url.slice(
-          response?.next_url.lastIndexOf("after=") + 6
+        nextUrl = response.next_url.slice(
+          response.next_url.lastIndexOf("after=") + 6
         );
         const responseAfter = await bankApi.list(10, undefined, nextUrl);
         if (responseAfter && responseAfter.previous_url) {
@@ -109,30 +101,33 @@ describe("BankAccountsApi", () => {
       }
     });
 
-    it("exists", () => {
-      expect(bankApi.list).toBeDefined();
-      expect(typeof bankApi.list).toEqual("function");
+    afterAll(async () => {
+      const bankAccountApi = new BankAccountsApi(CONFIG_FOR_INTEGRATION);
+      for (const bankAcctId of createdBankAccounts) {
+        await bankAccountApi.delete(bankAcctId);
+      }
     });
 
     it("lists bank accounts", async () => {
-      const response = await bankApi.list();
-      expect(response?.data).toBeDefined();
-      bankList = response?.data || [];
-      expect(bankList.length).toBeGreaterThan(0);
+      const response = await new BankAccountsApi(CONFIG_FOR_INTEGRATION).list();
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toBeGreaterThan(0);
     });
 
     it("lists bank accounts given an after param", async () => {
-      const responseAfter = await bankApi.list(10, undefined, nextUrl);
-      expect(responseAfter?.data).toBeDefined();
-      const bankList2: BankAccount[] = responseAfter?.data || [];
-      expect(bankList2.length).toBeGreaterThan(0);
+      const responseAfter = await new BankAccountsApi(
+        CONFIG_FOR_INTEGRATION
+      ).list(10, undefined, nextUrl);
+      expect(responseAfter.data).toBeDefined();
+      expect(responseAfter.data?.length).toBeGreaterThan(0);
     });
 
     it("lists bank accounts given a before param", async () => {
-      const responseBefore = await bankApi.list(10, previousUrl);
-      expect(responseBefore?.data).toBeDefined();
-      const bankList3: BankAccount[] = responseBefore?.data || [];
-      expect(bankList3.length).toBeGreaterThan(0);
+      const responseBefore = await new BankAccountsApi(
+        CONFIG_FOR_INTEGRATION
+      ).list(10, previousUrl);
+      expect(responseBefore.data).toBeDefined();
+      expect(responseBefore.data?.length).toBeGreaterThan(0);
     });
   });
 });

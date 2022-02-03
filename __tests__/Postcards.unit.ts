@@ -1,5 +1,3 @@
-import { Configuration } from "../configuration";
-
 import {
   PostcardEditable,
   AddressEditable,
@@ -9,7 +7,14 @@ import {
 import { PostcardsApi } from "../api/postcards-api";
 
 import { fail } from "./testUtilities";
-import { DATE_FILTER } from "./testFixtures";
+import {
+  CONFIG_FOR_UNIT,
+  CONFIG_WITH_BASE_OPTIONS_FOR_UNIT,
+  DATE_CREATED_QUERY_STRING,
+  DATE_FILTER,
+  METADATA_OBJECT,
+  METADATA_QUERY_STRING,
+} from "./testFixtures";
 
 import axios from "axios";
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
@@ -18,27 +23,15 @@ jest.mock("axios", () => ({
 }));
 
 describe("PostcardsApi", () => {
-  const config: Configuration = new Configuration({
-    username: "Totally Fake Key",
-  });
-  const configWithBaseOptions = new Configuration({
-    username: "Totally Fake Key",
-    baseOptions: {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-  });
-
   it("Postcards API can be instantiated", () => {
-    const postcardApi = new PostcardsApi(config);
+    const postcardApi = new PostcardsApi(CONFIG_FOR_UNIT);
     expect(postcardApi).toBeDefined();
     expect(typeof postcardApi).toEqual("object");
     expect(postcardApi).toBeInstanceOf(PostcardsApi);
   });
 
   it("Postcards API can be instantiated with base options", () => {
-    const postcardApi = new PostcardsApi(configWithBaseOptions);
+    const postcardApi = new PostcardsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT);
     expect(postcardApi).toBeDefined();
     expect(typeof postcardApi).toEqual("object");
     expect(postcardApi).toBeInstanceOf(PostcardsApi);
@@ -46,7 +39,7 @@ describe("PostcardsApi", () => {
 
   describe("get", () => {
     it("exists", () => {
-      const postcardApi = new PostcardsApi(config);
+      const postcardApi = new PostcardsApi(CONFIG_FOR_UNIT);
       expect(postcardApi.get).toBeDefined();
       expect(typeof postcardApi.get).toEqual("function");
     });
@@ -56,7 +49,7 @@ describe("PostcardsApi", () => {
         data: { id: "psc_fakeId", deleted: false },
       }));
 
-      const postcard = await new PostcardsApi(config).get("ID");
+      const postcard = await new PostcardsApi(CONFIG_FOR_UNIT).get("ID");
       expect(postcard).toBeDefined();
       expect(postcard.id).toEqual("psc_fakeId");
       expect(postcard.deleted).toEqual(false);
@@ -67,11 +60,11 @@ describe("PostcardsApi", () => {
         data: { id: "psc_differentFakeId" },
       }));
 
-      const postcard = await new PostcardsApi(configWithBaseOptions).get(
-        "psc_ID"
-      );
+      const postcard = await new PostcardsApi(
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+      ).get("psc_ID");
       expect(postcard).toBeDefined();
-      expect(postcard?.id).toEqual("psc_differentFakeId");
+      expect(postcard.id).toEqual("psc_differentFakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -83,7 +76,7 @@ describe("PostcardsApi", () => {
       });
 
       try {
-        await new PostcardsApi(config).get("fake id");
+        await new PostcardsApi(CONFIG_FOR_UNIT).get("fake id");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
       }
@@ -98,7 +91,7 @@ describe("PostcardsApi", () => {
       });
 
       try {
-        await new PostcardsApi(config).get("fake id");
+        await new PostcardsApi(CONFIG_FOR_UNIT).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -114,7 +107,7 @@ describe("PostcardsApi", () => {
       });
 
       try {
-        await new PostcardsApi(config).get("fake id");
+        await new PostcardsApi(CONFIG_FOR_UNIT).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -127,7 +120,7 @@ describe("PostcardsApi", () => {
       });
 
       try {
-        await new PostcardsApi(config).get("fake id");
+        await new PostcardsApi(CONFIG_FOR_UNIT).get("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -137,7 +130,7 @@ describe("PostcardsApi", () => {
 
   describe("list", () => {
     it("exists", () => {
-      const postcardApi = new PostcardsApi(config);
+      const postcardApi = new PostcardsApi(CONFIG_FOR_UNIT);
       expect(postcardApi.list).toBeDefined();
       expect(typeof postcardApi.list).toEqual("function");
     });
@@ -147,10 +140,10 @@ describe("PostcardsApi", () => {
         data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
       }));
 
-      const response = await new PostcardsApi(config).list();
+      const response = await new PostcardsApi(CONFIG_FOR_UNIT).list();
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("includes custom headers while it lists postcards", async () => {
@@ -158,10 +151,12 @@ describe("PostcardsApi", () => {
         data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
       }));
 
-      const response = await new PostcardsApi(configWithBaseOptions).list();
+      const response = await new PostcardsApi(
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+      ).list();
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("handles errors returned by the api", async () => {
@@ -173,7 +168,7 @@ describe("PostcardsApi", () => {
       });
 
       try {
-        await new PostcardsApi(config).list();
+        await new PostcardsApi(CONFIG_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -189,7 +184,7 @@ describe("PostcardsApi", () => {
       });
 
       try {
-        await new PostcardsApi(config).list();
+        await new PostcardsApi(CONFIG_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -205,7 +200,7 @@ describe("PostcardsApi", () => {
       });
 
       try {
-        await new PostcardsApi(config).list();
+        await new PostcardsApi(CONFIG_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -218,7 +213,7 @@ describe("PostcardsApi", () => {
       });
 
       try {
-        await new PostcardsApi(config).list();
+        await new PostcardsApi(CONFIG_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -233,10 +228,10 @@ describe("PostcardsApi", () => {
         };
       });
 
-      const response = await new PostcardsApi(config).list(10);
+      const response = await new PostcardsApi(CONFIG_FOR_UNIT).list(10);
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists postcards with a before parameter", async () => {
@@ -247,10 +242,13 @@ describe("PostcardsApi", () => {
         };
       });
 
-      const response = await new PostcardsApi(config).list(undefined, "before");
+      const response = await new PostcardsApi(CONFIG_FOR_UNIT).list(
+        undefined,
+        "before"
+      );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists postcards with an after parameter", async () => {
@@ -261,14 +259,14 @@ describe("PostcardsApi", () => {
         };
       });
 
-      const response = await new PostcardsApi(config).list(
+      const response = await new PostcardsApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         "after"
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists postcards with an include parameter", async () => {
@@ -279,28 +277,26 @@ describe("PostcardsApi", () => {
         };
       });
 
-      const response = await new PostcardsApi(config).list(
+      const response = await new PostcardsApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
         ["this"]
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists postcards with a dateCreated parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "date_created=%7B%22gt%22%3A%222020-01-01%22%2C%22lt%22%3A%222020-01-31T12%22%7D"
-        );
+        expect(request.url.split("?")[1]).toEqual(DATE_CREATED_QUERY_STRING);
         return {
           data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
         };
       });
 
-      const response = await new PostcardsApi(config).list(
+      const response = await new PostcardsApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -308,31 +304,29 @@ describe("PostcardsApi", () => {
         DATE_FILTER
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists postcards with a metadata parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "metadata=%7B%22what%22%3A%22this%22%7D"
-        );
+        expect(request.url.split("?")[1]).toEqual(METADATA_QUERY_STRING);
         return {
           data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
         };
       });
 
-      const response = await new PostcardsApi(config).list(
+      const response = await new PostcardsApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
         undefined,
         undefined,
-        { what: "this" }
+        METADATA_OBJECT
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists postcards with a size parameter", async () => {
@@ -343,7 +337,7 @@ describe("PostcardsApi", () => {
         };
       });
 
-      const response = await new PostcardsApi(config).list(
+      const response = await new PostcardsApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -353,8 +347,8 @@ describe("PostcardsApi", () => {
         PostcardSize._4x6
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists postcards with a scheduled parameter", async () => {
@@ -365,7 +359,7 @@ describe("PostcardsApi", () => {
         };
       });
 
-      const response = await new PostcardsApi(config).list(
+      const response = await new PostcardsApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -376,8 +370,8 @@ describe("PostcardsApi", () => {
         true
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists postcards with a sendDate parameter", async () => {
@@ -390,7 +384,7 @@ describe("PostcardsApi", () => {
         };
       });
 
-      const response = await new PostcardsApi(config).list(
+      const response = await new PostcardsApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -402,8 +396,8 @@ describe("PostcardsApi", () => {
         DATE_FILTER
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("lists postcards with a mailType parameter", async () => {
@@ -414,7 +408,7 @@ describe("PostcardsApi", () => {
         };
       });
 
-      const response = await new PostcardsApi(config).list(
+      const response = await new PostcardsApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -427,8 +421,8 @@ describe("PostcardsApi", () => {
         MailType.FirstClass
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
 
     it("should handle the sortBy correctly", async () => {
@@ -441,7 +435,7 @@ describe("PostcardsApi", () => {
         };
       });
 
-      const postcard = await new PostcardsApi(config).list(
+      const postcard = await new PostcardsApi(CONFIG_FOR_UNIT).list(
         undefined,
         undefined,
         undefined,
@@ -466,20 +460,20 @@ describe("PostcardsApi", () => {
         };
       });
 
-      const response = await new PostcardsApi(config).list(
+      const response = await new PostcardsApi(CONFIG_FOR_UNIT).list(
         10,
         undefined,
         "after"
       );
       expect(response).toBeDefined();
-      expect(response?.data).toBeDefined();
-      expect(response?.data?.length).toEqual(2);
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toEqual(2);
     });
   });
 
   describe("cancel", () => {
     it("exists", () => {
-      const postcardApi = new PostcardsApi(config);
+      const postcardApi = new PostcardsApi(CONFIG_FOR_UNIT);
       expect(postcardApi.create).toBeDefined();
       expect(typeof postcardApi.create).toEqual("function");
     });
@@ -491,7 +485,7 @@ describe("PostcardsApi", () => {
           deleted: true,
         },
       }));
-      const canceledPostcard = await new PostcardsApi(config).cancel(
+      const canceledPostcard = await new PostcardsApi(CONFIG_FOR_UNIT).cancel(
         "psc_fakeId"
       );
       expect(canceledPostcard?.deleted).toEqual(true);
@@ -505,7 +499,7 @@ describe("PostcardsApi", () => {
         },
       }));
       const canceledPostcard = await new PostcardsApi(
-        configWithBaseOptions
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).cancel("psc_fakeId");
       expect(canceledPostcard?.deleted).toEqual(true);
     });
@@ -519,7 +513,7 @@ describe("PostcardsApi", () => {
       });
 
       try {
-        await new PostcardsApi(config).cancel("fake id");
+        await new PostcardsApi(CONFIG_FOR_UNIT).cancel("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by Api");
@@ -535,7 +529,7 @@ describe("PostcardsApi", () => {
       });
 
       try {
-        await new PostcardsApi(config).cancel("fake id");
+        await new PostcardsApi(CONFIG_FOR_UNIT).cancel("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -551,7 +545,7 @@ describe("PostcardsApi", () => {
       });
 
       try {
-        await new PostcardsApi(config).cancel("fake id");
+        await new PostcardsApi(CONFIG_FOR_UNIT).cancel("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -564,7 +558,7 @@ describe("PostcardsApi", () => {
       });
 
       try {
-        await new PostcardsApi(config).cancel("fake id");
+        await new PostcardsApi(CONFIG_FOR_UNIT).cancel("fake id");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -584,7 +578,7 @@ describe("PostcardsApi", () => {
       to: addressCreate,
     };
     it("exists", () => {
-      const postcardApi = new PostcardsApi(config);
+      const postcardApi = new PostcardsApi(CONFIG_FOR_UNIT);
       expect(postcardApi.create).toBeDefined();
       expect(typeof postcardApi.create).toEqual("function");
     });
@@ -594,7 +588,9 @@ describe("PostcardsApi", () => {
         data: { id: "psc_fakeId" },
       }));
 
-      const postcard = await new PostcardsApi(config).create(createPostcard);
+      const postcard = await new PostcardsApi(CONFIG_FOR_UNIT).create(
+        createPostcard
+      );
       expect(postcard).toBeDefined();
       expect(postcard?.id).toBeDefined();
     });
@@ -604,9 +600,9 @@ describe("PostcardsApi", () => {
         data: { id: "psc_fakeId" },
       }));
 
-      const postcard = await new PostcardsApi(configWithBaseOptions).create(
-        createPostcard
-      );
+      const postcard = await new PostcardsApi(
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+      ).create(createPostcard);
       expect(postcard).toBeDefined();
       expect(postcard?.id).toBeDefined();
     });
@@ -616,7 +612,7 @@ describe("PostcardsApi", () => {
         data: { id: "psc_fakeId" },
       }));
 
-      const postcard = await new PostcardsApi(config).create(
+      const postcard = await new PostcardsApi(CONFIG_FOR_UNIT).create(
         createPostcard,
         "fake key"
       );
@@ -634,7 +630,7 @@ describe("PostcardsApi", () => {
 
       try {
         //
-        await new PostcardsApi(config).create(createPostcard);
+        await new PostcardsApi(CONFIG_FOR_UNIT).create(createPostcard);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -650,7 +646,7 @@ describe("PostcardsApi", () => {
       });
 
       try {
-        await new PostcardsApi(config).create(createPostcard);
+        await new PostcardsApi(CONFIG_FOR_UNIT).create(createPostcard);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -663,7 +659,7 @@ describe("PostcardsApi", () => {
       });
 
       try {
-        await new PostcardsApi(config).create(createPostcard);
+        await new PostcardsApi(CONFIG_FOR_UNIT).create(createPostcard);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -681,7 +677,7 @@ describe("PostcardsApi", () => {
         };
       });
 
-      const postcardApi = new PostcardsApi(config);
+      const postcardApi = new PostcardsApi(CONFIG_FOR_UNIT);
       expect(postcardApi.create).toBeDefined();
       expect(typeof postcardApi.create).toEqual("function");
     });

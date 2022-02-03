@@ -1,13 +1,15 @@
-import { Configuration } from "../configuration";
-
 import {
   IntlVerificationWritable,
   CountryExtended,
   IntlVerificationsPayload,
   IntlVerificationStatusEnum,
 } from "../models";
-import { AddressesApi, IntlVerificationsApi } from "../api";
+import { IntlVerificationsApi } from "../api";
 import { fail } from "./testUtilities";
+import {
+  CONFIG_FOR_UNIT,
+  CONFIG_WITH_BASE_OPTIONS_FOR_UNIT,
+} from "./testFixtures";
 
 // Axios Mock
 import axios from "axios";
@@ -17,27 +19,17 @@ jest.mock("axios", () => ({
 }));
 
 describe("IntlVerificationsApi", () => {
-  const config: Configuration = new Configuration({
-    username: "Totally Fake Key",
-  });
-  const configWithBaseOptions = new Configuration({
-    username: "Totally Fake Key",
-    baseOptions: {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-  });
-
   it("can be instantiated", () => {
-    const intlvApi = new IntlVerificationsApi(config);
+    const intlvApi = new IntlVerificationsApi(CONFIG_FOR_UNIT);
     expect(intlvApi).toBeDefined();
     expect(typeof intlvApi).toEqual("object");
     expect(intlvApi).toBeInstanceOf(IntlVerificationsApi);
   });
 
   it("can be instantiated with base options", () => {
-    const intlvApi = new IntlVerificationsApi(configWithBaseOptions);
+    const intlvApi = new IntlVerificationsApi(
+      CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+    );
     expect(intlvApi).toBeDefined();
     expect(typeof intlvApi).toEqual("object");
     expect(intlvApi).toBeInstanceOf(IntlVerificationsApi);
@@ -51,7 +43,7 @@ describe("IntlVerificationsApi", () => {
     };
 
     it("exists", () => {
-      const intlvApi = new IntlVerificationsApi(config);
+      const intlvApi = new IntlVerificationsApi(CONFIG_FOR_UNIT);
       expect(intlvApi.verifySingle).toBeDefined();
       expect(typeof intlvApi.verifySingle).toEqual("function");
     });
@@ -65,7 +57,9 @@ describe("IntlVerificationsApi", () => {
       });
 
       try {
-        await new IntlVerificationsApi(config).verifySingle(verification);
+        await new IntlVerificationsApi(CONFIG_FOR_UNIT).verifySingle(
+          verification
+        );
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
       }
@@ -80,7 +74,9 @@ describe("IntlVerificationsApi", () => {
       });
 
       try {
-        await new IntlVerificationsApi(config).verifySingle(verification);
+        await new IntlVerificationsApi(CONFIG_FOR_UNIT).verifySingle(
+          verification
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -96,7 +92,9 @@ describe("IntlVerificationsApi", () => {
       });
 
       try {
-        await new IntlVerificationsApi(config).verifySingle(verification);
+        await new IntlVerificationsApi(CONFIG_FOR_UNIT).verifySingle(
+          verification
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -109,7 +107,9 @@ describe("IntlVerificationsApi", () => {
       });
 
       try {
-        await new IntlVerificationsApi(config).verifySingle(verification);
+        await new IntlVerificationsApi(CONFIG_FOR_UNIT).verifySingle(
+          verification
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -121,9 +121,9 @@ describe("IntlVerificationsApi", () => {
         data: { status: IntlVerificationStatusEnum.Lf1 },
       }));
 
-      const response = await new IntlVerificationsApi(config).verifySingle(
-        verification
-      );
+      const response = await new IntlVerificationsApi(
+        CONFIG_FOR_UNIT
+      ).verifySingle(verification);
       expect(response.status).toBeDefined();
       expect(response.status).toEqual(IntlVerificationStatusEnum.Lf1);
     });
@@ -134,7 +134,7 @@ describe("IntlVerificationsApi", () => {
       }));
 
       const response = await new IntlVerificationsApi(
-        configWithBaseOptions
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).verifySingle(verification);
       expect(response.status).toBeDefined();
       expect(response.status).toEqual(IntlVerificationStatusEnum.Lf1);
@@ -145,10 +145,9 @@ describe("IntlVerificationsApi", () => {
         data: { status: IntlVerificationStatusEnum.Lf1 },
       }));
 
-      const response = await new IntlVerificationsApi(config).verifySingle(
-        verification,
-        "native"
-      );
+      const response = await new IntlVerificationsApi(
+        CONFIG_FOR_UNIT
+      ).verifySingle(verification, "native");
       expect(response.status).toBeDefined();
       expect(response.status).toEqual(IntlVerificationStatusEnum.Lf1);
     });
@@ -171,7 +170,7 @@ describe("IntlVerificationsApi", () => {
     };
 
     it("exists", () => {
-      const intlvApi = new IntlVerificationsApi(config);
+      const intlvApi = new IntlVerificationsApi(CONFIG_FOR_UNIT);
       expect(intlvApi.verifyBulk).toBeDefined();
       expect(typeof intlvApi.verifyBulk).toEqual("function");
     });
@@ -185,7 +184,9 @@ describe("IntlVerificationsApi", () => {
       });
 
       try {
-        await new IntlVerificationsApi(config).verifyBulk(verification);
+        await new IntlVerificationsApi(CONFIG_FOR_UNIT).verifyBulk(
+          verification
+        );
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
       }
@@ -200,7 +201,9 @@ describe("IntlVerificationsApi", () => {
       });
 
       try {
-        await new IntlVerificationsApi(config).verifyBulk(verification);
+        await new IntlVerificationsApi(CONFIG_FOR_UNIT).verifyBulk(
+          verification
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -216,7 +219,9 @@ describe("IntlVerificationsApi", () => {
       });
 
       try {
-        await new IntlVerificationsApi(config).verifyBulk(verification);
+        await new IntlVerificationsApi(CONFIG_FOR_UNIT).verifyBulk(
+          verification
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -229,7 +234,9 @@ describe("IntlVerificationsApi", () => {
       });
 
       try {
-        await new IntlVerificationsApi(config).verifyBulk(verification);
+        await new IntlVerificationsApi(CONFIG_FOR_UNIT).verifyBulk(
+          verification
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -245,9 +252,9 @@ describe("IntlVerificationsApi", () => {
           ],
         },
       }));
-      const response = await new IntlVerificationsApi(config).verifyBulk(
-        verification
-      );
+      const response = await new IntlVerificationsApi(
+        CONFIG_FOR_UNIT
+      ).verifyBulk(verification);
       expect(response).toBeDefined();
       expect(response.addresses?.length).toEqual(2);
     });
@@ -263,7 +270,7 @@ describe("IntlVerificationsApi", () => {
       }));
 
       const response = await new IntlVerificationsApi(
-        configWithBaseOptions
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).verifyBulk(verification);
       expect(response.addresses?.length).toEqual(2);
     });

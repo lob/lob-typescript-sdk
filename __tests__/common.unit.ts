@@ -1,6 +1,5 @@
 import { Configuration } from "../configuration";
-import { RequiredError, RequestArgs } from "../base";
-import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { RequestArgs } from "../base";
 
 import {
   assertParamExists,
@@ -15,10 +14,10 @@ import {
   valueToString,
 } from "../common";
 
-const axiosRequest: jest.Mock = axios.request as jest.Mock;
-
 import { fail } from "./testUtilities";
 
+import axios from "axios";
+const axiosRequest: jest.Mock = axios.request as jest.Mock;
 jest.mock("axios", () => ({
   request: jest.fn().mockImplementation(async (args) => ({ data: "blah" })),
 }));
@@ -410,6 +409,30 @@ describe("createRequestFunction", () => {
     const result = (await res()) as { response: string };
     expect(axiosRequest).toHaveBeenCalledTimes(1);
     expect(result.response).toEqual("value");
+  });
+
+  it("includes the correct package name and version", () => {
+    const fakePath = "/path";
+    const config = { basePath: "https://configured.fake.com" } as Configuration;
+    axiosRequest.mockImplementationOnce((requestArgs) => {
+      expect(requestArgs.headers["User-Agent"]).toEqual(
+        `${process.env.npm_package_name}/${process.env.npm_package_version}`
+      );
+      return { response: "value" };
+    });
+
+    const requestArgs: RequestArgs = {
+      url: fakePath,
+      options: {
+        method: "POST",
+        data: { fake: "data" },
+        headers: {
+          "User-Agent": `${process.env.npm_package_name}/${process.env.npm_package_version}`,
+        },
+      },
+    };
+
+    createRequestFunction(requestArgs, axios, fakeUrl, config);
   });
 });
 

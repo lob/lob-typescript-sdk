@@ -1,22 +1,17 @@
-import { Configuration } from "../configuration";
-
 import { BillingGroup, BillingGroupEditable } from "../models";
 import { BillingGroupsApi } from "../api";
+import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
 
 describe("BillingGroupsApi", () => {
-  const config: Configuration = new Configuration({
-    username: process.env.LOB_API_KEY,
-  });
-
   it("Billing Groups API can be instantiated", () => {
-    const billingGroupsApi = new BillingGroupsApi(config);
+    const billingGroupsApi = new BillingGroupsApi(CONFIG_FOR_INTEGRATION);
     expect(billingGroupsApi).toBeDefined();
     expect(typeof billingGroupsApi).toEqual("object");
     expect(billingGroupsApi).toBeInstanceOf(BillingGroupsApi);
   });
 
   it("all individual BillingGroup functions exists", () => {
-    const billingGroupsApi = new BillingGroupsApi(config);
+    const billingGroupsApi = new BillingGroupsApi(CONFIG_FOR_INTEGRATION);
     expect(billingGroupsApi.create).toBeDefined();
     expect(typeof billingGroupsApi.create).toEqual("function");
 
@@ -34,16 +29,18 @@ describe("BillingGroupsApi", () => {
     };
 
     it("creates, updates, and gets a billing group", async () => {
-      const billingGroupsApi = new BillingGroupsApi(config);
+      const billingGroupsApi = new BillingGroupsApi(CONFIG_FOR_INTEGRATION);
       // Create
-      const createdBg = await new BillingGroupsApi(config).create(createBg);
-      expect(createdBg?.id).toBeDefined();
-      expect(createdBg?.description).toEqual(createBg.description);
+      const createdBg = await new BillingGroupsApi(
+        CONFIG_FOR_INTEGRATION
+      ).create(createBg);
+      expect(createdBg.id).toBeDefined();
+      expect(createdBg.description).toEqual(createBg.description);
 
       // Get
       const retrievedBg = await billingGroupsApi.get(createdBg.id as string);
       expect(retrievedBg).toBeDefined();
-      expect(retrievedBg?.id).toEqual(createdBg?.id);
+      expect(retrievedBg.id).toEqual(createdBg.id);
 
       // Update
       const updates: BillingGroupEditable = {
@@ -55,7 +52,7 @@ describe("BillingGroupsApi", () => {
         updates
       );
       expect(updatedBg).toBeDefined();
-      expect(updatedBg?.description).toEqual("updated billing group");
+      expect(updatedBg.description).toEqual("updated billing group");
     });
   });
 
@@ -77,7 +74,7 @@ describe("BillingGroupsApi", () => {
         name: "TestBillingGroup2",
       });
 
-      const billingGroupsApi = new BillingGroupsApi(config);
+      const billingGroupsApi = new BillingGroupsApi(CONFIG_FOR_INTEGRATION);
       await Promise.all([
         billingGroupsApi.create(bg1),
         billingGroupsApi.create(bg2),
@@ -93,16 +90,17 @@ describe("BillingGroupsApi", () => {
     });
 
     it("exists", () => {
-      const billingGroupsApi = new BillingGroupsApi(config);
+      const billingGroupsApi = new BillingGroupsApi(CONFIG_FOR_INTEGRATION);
       expect(billingGroupsApi.list).toBeDefined();
       expect(typeof billingGroupsApi.list).toEqual("function");
     });
 
     it("lists billing groups", async () => {
-      const response = await new BillingGroupsApi(config).list();
-      expect(response?.data).toBeDefined();
-      const bgList = response?.data || [];
-      expect(bgList.length).toBeGreaterThan(0);
+      const response = await new BillingGroupsApi(
+        CONFIG_FOR_INTEGRATION
+      ).list();
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toBeGreaterThan(0);
     });
   });
 });

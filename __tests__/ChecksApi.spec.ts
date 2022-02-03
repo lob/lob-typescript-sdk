@@ -1,17 +1,14 @@
-import { Configuration } from "../configuration";
-
 import { ChecksApi } from "../api/checks-api";
-import { CheckEditable } from "../models/check-editable";
-import { Check } from "../models/check";
+import { CheckEditable } from "../models";
+import { Check } from "../models";
 import {
   BankAccount,
   BankAccountsApi,
   BankAccountVerify,
   BankAccountWritable,
   BankTypeEnum,
-  CountryExtended,
-  MailType,
 } from "..";
+import { ADDRESSES_DOMESTIC, CONFIG_FOR_INTEGRATION } from "./testFixtures";
 
 let bankApi: BankAccountsApi;
 let account: BankAccount;
@@ -24,30 +21,27 @@ describe("ChecksApi", () => {
       signatory: "Sinead Connor",
       account_type: BankTypeEnum.Individual,
     };
-    bankApi = new BankAccountsApi(config);
+    bankApi = new BankAccountsApi(CONFIG_FOR_INTEGRATION);
     account = await bankApi.create(dummyAccount);
     const verify: BankAccountVerify = {
       amounts: [11, 35],
     };
-    if (account?.id) {
+    if (account.id) {
       const verification = await bankApi.verify(account.id, verify);
       expect(verification).toBeDefined();
-      expect(verification?.verified).toBeTruthy();
+      expect(verification.verified).toBeTruthy();
     }
-  });
-  const config: Configuration = new Configuration({
-    username: process.env.LOB_API_KEY,
   });
 
   it("Checks API can be instantiated", () => {
-    const checksApi = new ChecksApi(config);
+    const checksApi = new ChecksApi(CONFIG_FOR_INTEGRATION);
     expect(checksApi).toBeDefined();
     expect(typeof checksApi).toEqual("object");
     expect(checksApi).toBeInstanceOf(ChecksApi);
   });
 
   it("all individual Check functions exists", () => {
-    const checksApi = new ChecksApi(config);
+    const checksApi = new ChecksApi(CONFIG_FOR_INTEGRATION);
     expect(checksApi.cancel).toBeDefined();
     expect(typeof checksApi.cancel).toEqual("function");
 
@@ -69,60 +63,53 @@ describe("ChecksApi", () => {
       beforeAll(() => {
         createCheck = {
           description: "check 1",
-          to: {
-            company: "Gothic Home (old)",
-            address_line1: "001 CEMETERY LN",
-            address_line2: "# 000",
-            address_city: "WESTFIELD",
-            address_state: "NJ",
-            address_zip: "07000",
-            address_country: CountryExtended.Us,
-          },
-          from: {
-            company: "Gothic Home (new)",
-            address_line1: "1313 CEMETERY LN",
-            address_city: "WESTFIELD",
-            address_state: "NJ",
-            address_zip: "07000",
-            address_country: "US",
-          },
+          to: ADDRESSES_DOMESTIC[0],
+          from: ADDRESSES_DOMESTIC[1],
           bank_account: account.id,
           amount: 100,
         };
 
-        checksApi = new ChecksApi(config);
+        checksApi = new ChecksApi(CONFIG_FOR_INTEGRATION);
       });
 
       it("creates a check", async () => {
         // create
-        const createdCheck = await new ChecksApi(config).create(createCheck);
-        expect(createdCheck?.id).toBeDefined();
-        expect(createdCheck?.description).toEqual(createCheck.description);
+        const createdCheck = await new ChecksApi(CONFIG_FOR_INTEGRATION).create(
+          createCheck
+        );
+        expect(createdCheck.id).toBeDefined();
+        expect(createdCheck.description).toEqual(createCheck.description);
       });
 
       it("Retrieves a check", async () => {
         // Retrieve
-        const createdCheck = await new ChecksApi(config).create(createCheck);
+        const createdCheck = await new ChecksApi(CONFIG_FOR_INTEGRATION).create(
+          createCheck
+        );
 
         const retrievedCheck = await checksApi.get(createdCheck.id as string);
         expect(retrievedCheck).toBeDefined();
-        expect(retrievedCheck?.id).toEqual(createdCheck?.id);
+        expect(retrievedCheck.id).toEqual(createdCheck.id);
       });
 
       it("cancels a check", async () => {
         // cancel
-        const createdCheck = await new ChecksApi(config).create(createCheck);
+        const createdCheck = await new ChecksApi(CONFIG_FOR_INTEGRATION).create(
+          createCheck
+        );
 
         const cancelledCheck = await checksApi.cancel(
           createdCheck.id as string
         );
         expect(cancelledCheck).toBeDefined();
-        expect(cancelledCheck?.id).toEqual(createdCheck?.id);
+        expect(cancelledCheck.id).toEqual(createdCheck.id);
       });
 
       it("Lists a check", async () => {
         // List
-        const createdCheck = await new ChecksApi(config).create(createCheck);
+        const createdCheck = await new ChecksApi(CONFIG_FOR_INTEGRATION).create(
+          createCheck
+        );
 
         const updatedCheck = await checksApi.list(1);
         expect(updatedCheck).toBeDefined();
@@ -137,23 +124,8 @@ describe("ChecksApi", () => {
       // ensure there are at least 3 checks present, to test pagination
       const check1: CheckEditable = {
         description: "check 1",
-        to: {
-          company: "Gothic Home (old)",
-          address_line1: "0001 CEMETERY LN",
-          address_line2: "# 000",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
-        from: {
-          company: "Gothic Home (new)",
-          address_line1: "1313 CEMETERY LN",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: "US",
-        },
+        to: ADDRESSES_DOMESTIC[0],
+        from: ADDRESSES_DOMESTIC[1],
         bank_account: account.id,
         amount: 100,
       };
@@ -166,7 +138,7 @@ describe("ChecksApi", () => {
         amount: 300,
       });
 
-      const checksApi = new ChecksApi(config);
+      const checksApi = new ChecksApi(CONFIG_FOR_INTEGRATION);
       await Promise.all([
         checksApi.create(check1),
         checksApi.create(check2),
@@ -182,15 +154,15 @@ describe("ChecksApi", () => {
     });
 
     it("exists", () => {
-      const checksApi = new ChecksApi(config);
+      const checksApi = new ChecksApi(CONFIG_FOR_INTEGRATION);
       expect(checksApi.list).toBeDefined();
       expect(typeof checksApi.list).toEqual("function");
     });
 
     it("lists checks", async () => {
-      const response = await new ChecksApi(config).list();
-      expect(response?.data).toBeDefined();
-      const bgList = response?.data || [];
+      const response = await new ChecksApi(CONFIG_FOR_INTEGRATION).list();
+      expect(response.data).toBeDefined();
+      const bgList = response.data || [];
       expect(bgList.length).toBeGreaterThan(0);
     });
   });

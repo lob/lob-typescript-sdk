@@ -12,6 +12,7 @@ module.exports = {
     "!**/coverage/**",
     "!**/node_modules/**",
     "!**/*.config.{js,ts}",
+    "!**/build/**",
     "!**/__tests__/**",
     "!jest.integrationConfig.js",
   ],
@@ -19,10 +20,10 @@ module.exports = {
   coverageReporters: ["clover", "html", "json", "lcov", "text"],
   coverageThreshold: {
     global: {
-      branches: 50,
-      functions: 50,
-      lines: 50,
-      statements: 50,
+      branches: 98,
+      functions: 98,
+      lines: 100,
+      statements: 100,
     },
   },
   verbose: true,

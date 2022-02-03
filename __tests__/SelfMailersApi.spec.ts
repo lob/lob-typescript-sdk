@@ -1,49 +1,23 @@
-import { Configuration } from "../configuration";
-
-import {
-  SelfMailer,
-  SelfMailerEditable,
-  CountryExtended,
-  MailType,
-} from "../models";
+import { SelfMailerEditable } from "../models";
 import { SelfMailersApi } from "../api";
+import {
+  ADDRESSES_EDITABLE,
+  CONFIG_FOR_INTEGRATION,
+  FILE_LOCATION_6X18,
+} from "./testFixtures";
 
 describe("smApi", () => {
   jest.setTimeout(60000); // 60 seconds
 
-  const config: Configuration = new Configuration({
-    username: process.env.LOB_API_KEY,
-  });
-
-  let smApi: SelfMailersApi;
-
   const dummySelfMailer: SelfMailerEditable = {
-    to: {
-      company: "Gothic home (old)",
-      address_line1: "001 CEMETARY LN",
-      address_line2: "# 000",
-      address_city: "WESTFIELD",
-      address_state: "NJ",
-      address_zip: "07000",
-      address_country: CountryExtended.Us,
-    },
-    from: {
-      company: "Gothic home (new)",
-      address_line1: "1313 CEMETARY LN",
-      address_line2: "# 000",
-      address_city: "WESTFIELD",
-      address_state: "NJ",
-      address_zip: "07000",
-      address_country: CountryExtended.Us,
-    },
-    inside:
-      "https://s3.us-west-2.amazonaws.com/public.lob.com/assets/templates/self_mailers/6x18_sfm_inside.pdf",
-    outside:
-      "https://s3.us-west-2.amazonaws.com/public.lob.com/assets/templates/self_mailers/6x18_sfm_outside.pdf",
+    to: ADDRESSES_EDITABLE[0],
+    from: ADDRESSES_EDITABLE[1],
+    inside: FILE_LOCATION_6X18,
+    outside: FILE_LOCATION_6X18,
   };
 
   it("SelfMailer API can be instantiated", () => {
-    smApi = new SelfMailersApi(config);
+    const smApi = new SelfMailersApi(CONFIG_FOR_INTEGRATION);
     expect(smApi).toBeDefined();
     expect(typeof smApi).toEqual("object");
     expect(smApi).toBeInstanceOf(SelfMailersApi);
@@ -51,6 +25,7 @@ describe("smApi", () => {
 
   describe("performs single-SelfMailer operations", () => {
     it("all individual SelfMailer functions exists", () => {
+      const smApi = new SelfMailersApi(CONFIG_FOR_INTEGRATION);
       expect(smApi.create).toBeDefined();
       expect(typeof smApi.create).toEqual("function");
 
@@ -65,13 +40,19 @@ describe("smApi", () => {
     });
 
     it("creates, retrieves, and deletes a selfMailer", async () => {
-      const selfMailer = await smApi.create(dummySelfMailer);
-      expect(selfMailer?.id).toBeDefined();
-      if (selfMailer?.id) {
-        const retrievedSelfMailer = await smApi.get(selfMailer.id);
+      const selfMailer = await new SelfMailersApi(
+        CONFIG_FOR_INTEGRATION
+      ).create(dummySelfMailer);
+      expect(selfMailer.id).toBeDefined();
+      if (selfMailer.id) {
+        const retrievedSelfMailer = await new SelfMailersApi(
+          CONFIG_FOR_INTEGRATION
+        ).get(selfMailer.id);
         expect(retrievedSelfMailer).toBeDefined();
-        const deletedSelfMailer = await smApi.delete(selfMailer.id);
-        expect(deletedSelfMailer?.deleted).toBeTruthy();
+        const deletedSelfMailer = await new SelfMailersApi(
+          CONFIG_FOR_INTEGRATION
+        ).delete(selfMailer.id);
+        expect(deletedSelfMailer.deleted).toBeTruthy();
       } else {
         throw new Error("self-mailer ID should be defined upon creation");
       }
@@ -81,77 +62,26 @@ describe("smApi", () => {
   describe("list self-mailers", () => {
     let nextUrl = "";
     let previousUrl = "";
-    let selfMailerList: SelfMailer[] = [];
     beforeAll(async () => {
+      const smApi = new SelfMailersApi(CONFIG_FOR_INTEGRATION);
       // ensure there are at least 3 cards present, to test pagination
       const sfm1: SelfMailerEditable = {
-        to: {
-          name: "FESTER",
-          address_line1: "001 CEMETERY LN",
-          address_line2: "# 000",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
-        from: {
-          name: "MORTICIA ADDAMS",
-          address_line1: "1212 CEMETERY LN",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
-        inside:
-          "https://s3.us-west-2.amazonaws.com/public.lob.com/assets/templates/self_mailers/6x18_sfm_inside.pdf",
-        outside:
-          "https://s3.us-west-2.amazonaws.com/public.lob.com/assets/templates/self_mailers/6x18_sfm_outside.pdf",
+        to: ADDRESSES_EDITABLE[1],
+        from: ADDRESSES_EDITABLE[2],
+        inside: FILE_LOCATION_6X18,
+        outside: FILE_LOCATION_6X18,
       };
       const sfm2: SelfMailerEditable = {
-        to: {
-          name: "COUSIN ITT",
-          address_line1: "1515 CEMETERY LN",
-          address_line2: "# 000",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
-        from: {
-          name: "PUGSLEY",
-          address_line1: "1313 CEMETERY LN",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
-        inside:
-          "https://s3.us-west-2.amazonaws.com/public.lob.com/assets/templates/self_mailers/6x18_sfm_inside.pdf",
-        outside:
-          "https://s3.us-west-2.amazonaws.com/public.lob.com/assets/templates/self_mailers/6x18_sfm_outside.pdf",
+        to: ADDRESSES_EDITABLE[3],
+        from: ADDRESSES_EDITABLE[6],
+        inside: FILE_LOCATION_6X18,
+        outside: FILE_LOCATION_6X18,
       };
       const sfm3: SelfMailerEditable = {
-        to: {
-          name: "WEDNESDAY ADDAMS",
-          address_line1: "1313 CEMETERY LN",
-          address_line2: "# 000",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
-        from: {
-          name: "GORDON CRAVEN",
-          address_line1: "1313 CEMETERY LN",
-          address_city: "WESTFIELD",
-          address_state: "NJ",
-          address_zip: "07000",
-          address_country: CountryExtended.Us,
-        },
-        inside:
-          "https://s3.us-west-2.amazonaws.com/public.lob.com/assets/templates/self_mailers/6x18_sfm_inside.pdf",
-        outside:
-          "https://s3.us-west-2.amazonaws.com/public.lob.com/assets/templates/self_mailers/6x18_sfm_outside.pdf",
+        to: ADDRESSES_EDITABLE[4],
+        from: ADDRESSES_EDITABLE[5],
+        inside: FILE_LOCATION_6X18,
+        outside: FILE_LOCATION_6X18,
       };
       const c1 = await smApi.create(sfm1);
       const c2 = await smApi.create(sfm2);
@@ -178,29 +108,32 @@ describe("smApi", () => {
     });
 
     it("exists", () => {
-      expect(smApi.list).toBeDefined();
-      expect(typeof smApi.list).toEqual("function");
+      expect(new SelfMailersApi(CONFIG_FOR_INTEGRATION).list).toBeDefined();
+      expect(typeof new SelfMailersApi(CONFIG_FOR_INTEGRATION).list).toEqual(
+        "function"
+      );
     });
 
     it("lists self-mailers", async () => {
-      const response = await smApi.list();
-      expect(response?.data).toBeDefined();
-      selfMailerList = response?.data || [];
-      expect(selfMailerList.length).toBeGreaterThan(0);
+      const response = await new SelfMailersApi(CONFIG_FOR_INTEGRATION).list();
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toBeGreaterThan(0);
     });
 
     it("lists self-mailers given an after param", async () => {
-      const responseAfter = await smApi.list(10, undefined, nextUrl);
-      expect(responseAfter?.data).toBeDefined();
-      const selfMailerList2: SelfMailer[] = responseAfter?.data || [];
-      expect(selfMailerList2.length).toBeGreaterThan(0);
+      const responseAfter = await new SelfMailersApi(
+        CONFIG_FOR_INTEGRATION
+      ).list(10, undefined, nextUrl);
+      expect(responseAfter.data).toBeDefined();
+      expect(responseAfter.data?.length).toBeGreaterThan(0);
     });
 
     it("lists self-mailers given a before param", async () => {
-      const responseBefore = await smApi.list(10, previousUrl);
-      expect(responseBefore?.data).toBeDefined();
-      const selfMailerList3: SelfMailer[] = responseBefore?.data || [];
-      expect(selfMailerList3.length).toBeGreaterThan(0);
+      const responseBefore = await new SelfMailersApi(
+        CONFIG_FOR_INTEGRATION
+      ).list(10, previousUrl);
+      expect(responseBefore.data).toBeDefined();
+      expect(responseBefore.data?.length).toBeGreaterThan(0);
     });
   });
 });

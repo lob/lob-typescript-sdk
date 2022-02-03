@@ -19,4 +19,6 @@ coverage
 !/sdks/lob-sdk-ts/tsconfig.json
 !/sdks/lob-sdk-ts/.npmignore
 
+!/sdks/lob-sdk-ts/build/__tests__
+
 LOCAL.env
