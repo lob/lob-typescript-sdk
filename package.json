@@ -24,7 +24,8 @@
   },
   "license": "MIT",
   "files": [
-    "LICENSE.txt"
+    "LICENSE.txt",
+    "dist"
   ],
   "scripts": {
     "clean": "rm -rf ./dist/",
