@@ -25,6 +25,9 @@ export class CardOrder {
     if (typeof input?.card_id !== "undefined") {
       this.card_id = input.card_id;
     }
+    if (typeof input?.cool_new_card_id !== "undefined") {
+      this.cool_new_card_id = input.cool_new_card_id;
+    }
     if (typeof input?.status !== "undefined") {
       this.status = input.status;
     }
@@ -90,6 +93,22 @@ export class CardOrder {
       throw new Error("Invalid card_id provided");
     }
     this._card_id = newValue;
+  }
+
+  /**
+   * Unique identifier prefixed with `card_`.
+   * @type {string}
+   * @memberof CardOrder
+   */
+  private "_cool_new_card_id"?: string;
+  public get cool_new_card_id() {
+    return (this._cool_new_card_id || undefined) as string;
+  }
+  public set cool_new_card_id(newValue: string) {
+    if (newValue && !/^card_[a-zA-Z0-9]+$/.test(newValue)) {
+      throw new Error("Invalid cool_new_card_id provided");
+    }
+    this._cool_new_card_id = newValue;
   }
 
   /**
