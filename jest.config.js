@@ -13,6 +13,7 @@ module.exports = {
     "!**/node_modules/**",
     "!**/*.config.{js,ts}",
     "!**/build/**",
+    "!**/dist/**",
     "!**/__tests__/**",
     "!jest.integrationConfig.js",
   ],
