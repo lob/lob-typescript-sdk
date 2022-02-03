@@ -106,7 +106,7 @@ export class CheckEditable {
    * @type {any}
    * @memberof CheckEditable
    */
-  "logo"?: any | null;
+  "logo"?: any;
 
   /**
    *
