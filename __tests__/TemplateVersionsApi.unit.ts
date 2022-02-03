@@ -420,82 +420,6 @@ describe("TemplateVersionsApi", () => {
     });
   });
 
-  describe("update", () => {
-    const templateVersionUpdatable = {
-      description: "template  version updated",
-      published_version: "fake version",
-    };
-
-    it("exists", async () => {
-      const templateVersionsApi = new TemplateVersionsApi(CONFIG_FOR_UNIT);
-      expect(templateVersionsApi.update).toBeDefined();
-      expect(typeof templateVersionsApi.update).toEqual("function");
-    });
-
-    it("updates template  version for a template id", async () => {
-      axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "vrsn_tmplFakeId" },
-      }));
-
-      const templates = await new TemplateVersionsApi(CONFIG_FOR_UNIT).update(
-        "fake id",
-        "fake vrsn id",
-        templateVersionUpdatable
-      );
-      expect(templates).toBeDefined();
-      expect(templates.id).toEqual("vrsn_tmplFakeId");
-    });
-
-    it("includes custom headers while it updates a template version for a template id", async () => {
-      axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "vrsn_tmplFakeId" },
-      }));
-
-      const templates = await new TemplateVersionsApi(
-        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
-      ).update("fake id", "fake vrsn id", templateVersionUpdatable);
-      expect(templates).toBeDefined();
-      expect(templates.id).toEqual("vrsn_tmplFakeId");
-    });
-
-    it("handles errors returned by the api", async () => {
-      axiosRequest.mockImplementationOnce(async () => {
-        throw {
-          message: "error",
-          response: { data: { error: { message: "error reported by API" } } },
-        };
-      });
-
-      try {
-        await new TemplateVersionsApi(CONFIG_FOR_UNIT).update(
-          "fake id",
-          "fake vrsn id",
-          templateVersionUpdatable
-        );
-        fail("Should throw");
-      } catch (err: any) {
-        expect(err.message).toEqual("error reported by API");
-      }
-    });
-
-    it("handles errors in making the request", async () => {
-      axiosRequest.mockImplementationOnce(async () => {
-        throw new Error("Unknown Error");
-      });
-
-      try {
-        await new TemplateVersionsApi(CONFIG_FOR_UNIT).update(
-          "fake id",
-          "fake vrsn id",
-          templateVersionUpdatable
-        );
-        fail("Should throw");
-      } catch (err: any) {
-        expect(err.message).toEqual("Unknown Error");
-      }
-    });
-  });
-
   describe("list", () => {
     it("exists", async () => {
       const templateVersionsApi = new TemplateVersionsApi(CONFIG_FOR_UNIT);
@@ -515,6 +439,23 @@ describe("TemplateVersionsApi", () => {
 
       const templateVersions = await new TemplateVersionsApi(
         CONFIG_FOR_UNIT
+      ).list("fake id");
+      expect(templateVersions).toBeDefined();
+      expect(templateVersions.data?.length).toEqual(2);
+    });
+
+    it("includes custom headers while it lists template versions", async () => {
+      axiosRequest.mockImplementationOnce(async () => ({
+        data: {
+          data: [
+            { id: "vrsn_tmpl_fakeId" },
+            { id: "vrsn_another tmpl_fakeId" },
+          ],
+        },
+      }));
+
+      const templateVersions = await new TemplateVersionsApi(
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).list("fake id");
       expect(templateVersions).toBeDefined();
       expect(templateVersions.data?.length).toEqual(2);

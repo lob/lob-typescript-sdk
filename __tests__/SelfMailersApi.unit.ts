@@ -366,6 +366,20 @@ describe("SelfMailersApi", () => {
       expect(selfMailersApi.data?.length).toEqual(2);
     });
 
+    it("includes custom headers while it gets all self_mailers", async () => {
+      axiosRequest.mockImplementationOnce(async () => ({
+        data: {
+          data: [{ id: "sfm_fakeId" }, { id: "another sfm_fakeId" }],
+        },
+      }));
+
+      const selfMailersApi = await new SelfMailersApi(
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+      ).list();
+      expect(selfMailersApi).toBeDefined();
+      expect(selfMailersApi.data?.length).toEqual(2);
+    });
+
     it("should handle the limit", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: { data: [{ id: "sfm_fakeId" }] },
