@@ -33,19 +33,19 @@ const config: Configuration = new Configuration({
 const addressApi = new AddressesApi(config);
 
 try {
-    const addressCreate = new AddressEditable({
-        name: "Thing T. Thing",
-        address_line1: "1313 CEMETERY LN",
-        address_city: "WESTFIELD",
-        address_state: "NJ",
-        address_zip: "07090",
-    });
-    
-    const myAddress = await addressApi.create(addressCreate);
-    const myAddressFromApi = await addressApi.get(myAddress.id);
-    const addressList = await addressApi.list();
+  const addressCreate = new AddressEditable({
+    name: "Thing T. Thing",
+    address_line1: "1313 CEMETERY LN",
+    address_city: "WESTFIELD",
+    address_state: "NJ",
+    address_zip: "07090",
+  });
+
+  const myAddress = await addressApi.create(addressCreate);
+  const myAddressFromApi = await addressApi.get(myAddress.id);
+  const addressList = await addressApi.list();
 } catch (err: any) {
-    console.error(err);
+  console.error(err);
 }
 ```
 
@@ -71,14 +71,17 @@ To contribute, please see the [Contributing.md](https://github.com/lob/lob-types
 ### Unit Tests
 
 To run unit tests:
+
 ```bash
 $ npm test
 ```
 
 ### Integration Tests
+
 Integration tests run against a live deployment of the Lob API and require multiple valid API keys with access to specific features. As such, it is not expected that these tests will pass for every user in every environment.
 
 To run integration tests:
+
 ```bash
 $ LOB_API_KEY=<<API KEY 1>> LOB_LIVE_API_KEY=<< API KEY 2>> npm run test:integration
 ```
@@ -86,13 +89,15 @@ $ LOB_API_KEY=<<API KEY 1>> LOB_LIVE_API_KEY=<< API KEY 2>> npm run test:integra
 #### A cleaner alternative if you are going to run integration tests frequently
 
 Run this the first time:
+
 ```bash
 $ echo "LOB_API_KEY=<<API KEY 1>>\nLOB_LIVE_API_KEY=<< API KEY 2>>" > LOCAL.env
 ```
 
 Then, to run the integration tests:
+
 ```bash
-$ env $(cat LOCAL.env) npm run test:integration 
+$ env $(cat LOCAL.env) npm run test:integration
 ```
 
 =======================
