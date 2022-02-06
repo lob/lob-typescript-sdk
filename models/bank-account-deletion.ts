@@ -66,7 +66,7 @@ export class BankAccountDeletion {
  * @enum {string}
  */
 export enum BankAccountDeletionObjectEnum {
-  BankAccountDeleted = "bank_account_deleted",
+  BankAccountDeleted = "bank_account_delete",
 }
 
 /**
