@@ -5,6 +5,8 @@ dist
 coverage
 /.idea
 
+.DS_Store
+
 # Test directory exception in all sdks
 /sdks/*
 !/sdks/*
