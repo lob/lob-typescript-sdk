@@ -25,7 +25,7 @@ $ npm i @lob/lob-typescript-sdk
 ### First API Calls
 
 ```typescript
-import { Configuration, AddressesApi } from "lob-typescript-sdk";
+import { Configuration, AddressesApi } from "@lob/lob-typescript-sdk";
 const config: Configuration = new Configuration({
   username: "<<YOUR API KEY HERE>>",
 });
@@ -43,7 +43,7 @@ try {
 
   const myAddress = await addressApi.create(addressCreate);
   const myAddressFromApi = await addressApi.get(myAddress.id);
-  const addressList = await addressApi.list();
+  const addressList = await addressApi.list(3); // lists up to 3 addresses
 } catch (err: any) {
   console.error(err);
 }
