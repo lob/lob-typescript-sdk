@@ -1,6 +1,8 @@
 # lob-typescript-sdk
 
-Typescript SDK for the [Lob.com](https://lob.com) API. See full Lob.com API documentation [here](https://lob.com/docs/node). For best results, be sure that you're using [the latest version](https://lob.com/docs/node#version) of the Lob API and the latest version of the Node wrapper.
+[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+
+Typescript SDK for the [Lob.com](https://lob.com) API. See the full Lob.com API documentation [here](https://docs.lob.com).
 
 ## Getting Started
 
@@ -15,9 +17,7 @@ Once you have created an account, you can access your API Keys from the [Setting
 lob-typescript-sdk can be installed through the npm:
 
 ```bash
-# FOR PRE PUBLISH ALPHA TESTING ONLY!!!!!
-# UPDATE BEFORE PUBLISHING
-$ npm i https://github.com/lob/lob-typescript-sdk
+$ npm i @lob/lob-typescript-sdk
 ```
 
 ## Examples
@@ -30,17 +30,20 @@ const config: Configuration = new Configuration({
   username: "<<YOUR API KEY HERE>>",
 });
 
-const addressCreate: AddressEditable = {
-  name: "Thing T. Thing",
-  address_line1: "1313 CEMETERY LN",
-  address_city: "WESTFIELD",
-  address_state: "NJ",
-  address_zip: "07090",
-};
+const addressApi = new AddressesApi(config);
+
 try {
-  const myAddress = await new AddressesApi(config).create(addressCreate);
-  const myAddressFromApi = await new AddressesApi(config).get(myAddress.id);
-  const response = await new AddressesApi(config).list();
+  const addressCreate = new AddressEditable({
+    name: "Thing T. Thing",
+    address_line1: "1313 CEMETERY LN",
+    address_city: "WESTFIELD",
+    address_state: "NJ",
+    address_zip: "07090",
+  });
+
+  const myAddress = await addressApi.create(addressCreate);
+  const myAddressFromApi = await addressApi.get(myAddress.id);
+  const addressList = await addressApi.list();
 } catch (err: any) {
   console.error(err);
 }
@@ -50,11 +53,18 @@ try {
 
 The full and comprehensive documentation of Lob's APIs is available [here](https://docs.lob.com/).
 
+## Supported Node.js Versions
+
+Our client libraries follow the [Node.js release schedule](https://nodejs.org/en/about/releases/).
+This package is compatible with all current _active_ and _maintenance_ versions of
+Node.js. If you are using a version that is not listed as an _active_ or _maintenance_ version we recommend that you switch to an actively supported LTS version.
+
+Any support or compatability with versions of Node.js not listed as _active_ or _maintenance_ is on a
+best-efforts basis.
+
 ## Contributing
 
-<<<< UPDATE BEFORE PUBLISHING >>>>
-
-To contribute, please see the CONTRIBUTING.md file.
+To contribute, please see the [Contributing.md](https://github.com/lob/lob-typescript-sdk/blob/main/.github/Contributing.md) file.
 
 ## Testing
 
@@ -68,8 +78,30 @@ $ npm test
 
 ### Integration Tests
 
-Running integration tests requires multiple valid API keys with access to specific features. As such, it is not expected that these tests will pass for every user in every environment.
+Integration tests run against a live deployment of the Lob API and require multiple valid API keys with access to specific features. As such, it is not expected that these tests will pass for every user in every environment.
+
+To run integration tests:
 
 ```bash
 $ LOB_API_KEY=<<API KEY 1>> LOB_LIVE_API_KEY=<< API KEY 2>> npm run test:integration
 ```
+
+#### A cleaner alternative if you are going to run integration tests frequently
+
+Run this the first time:
+
+```bash
+$ echo "LOB_API_KEY=<<API KEY 1>>\nLOB_LIVE_API_KEY=<< API KEY 2>>" > LOCAL.env
+```
+
+Then, to run the integration tests:
+
+```bash
+$ env $(cat LOCAL.env) npm run test:integration
+```
+
+=======================
+
+Copyright © 2022 Lob.com
+
+Released under the MIT License, which can be found in the repository in [LICENSE.txt](https://github.com/lob/lob-typescript-sdk/blob/main/LICENSE.txt).
