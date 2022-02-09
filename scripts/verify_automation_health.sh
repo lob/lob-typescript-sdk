@@ -1,11 +1,13 @@
 #!/bin/bash
 
 generatedFolders=("api" "models")
-acceptedAuthor=$1
-baseBranch=$2
+baseBranch=$1
+currentBranch=$2
 
+git fetch
+git checkout "${currentBranch}"
 for folder in ${generatedFolders[@]}; do
-    prohibitedAuthors=$(git shortlog ${baseBranch}.. -se  --perl-regexp --author="^((?!${acceptedAuthor}).*)$" -- ${folder} 2>&1)
+    prohibitedAuthors=$(git shortlog origin/${baseBranch}.. -se  --perl-regexp --author='^((?!BennyKitchell).*)$' -- ${folder} 2>&1)
     if [ -z "$prohibitedAuthors" ]
     then
         continue
@@ -13,5 +15,3 @@ for folder in ${generatedFolders[@]}; do
         exit 13
     fi
 done
-
- echo 'Begin Middle End' | awk -F ' | ' '{print $2}'

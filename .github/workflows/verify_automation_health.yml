@@ -2,29 +2,27 @@ name: Verify Automation Health
 
 on:
   pull_request:
-    types: [opened, reopened, edited]
+    types: [opened, reopened, edited, synchronize]
     branches:
       - main
 
 env:
-  GENERATED_AUTHOR: BennyKitchell
   BASE_BRANCH: main
 
 jobs:
-  node_tests:
+  verify_authors:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node }}
-
       - name: Install Dependencies
         run: npm ci
 
+      - name: Get branch names
+        id: branch-name
+        uses: tj-actions/branch-names@v4.9
+
       - name: Check commit authors
         run: |
-          chmod +x ./scripts/verifiy_automation_health.sh
-          ./scripts/verifiy_automation_health.sh $GENERATED_AUTHOR $BASE_BRANCH
+          chmod +x scripts/verify_automation_health.sh
+          ./scripts/verify_automation_health.sh $BASE_BRANCH "${{ steps.branch-name.outputs.current_branch }}"
