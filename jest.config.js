@@ -16,7 +16,7 @@ module.exports = {
     "!**/dist/**",
     "!**/__tests__/**",
     "!jest.integrationConfig.js",
-    "!**/actions/monitoring/**"
+    "!**/actions/monitoring/**",
   ],
   coverageDirectory: "coverage",
   coverageReporters: ["clover", "html", "json", "lcov", "text"],
