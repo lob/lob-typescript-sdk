@@ -13,7 +13,6 @@ module.exports.runTests = async function runTests() {
   try {
     exec("npm run test:all", async function (err, stdout) {
       if (err) {
-        console.log(`FOUND AN ERROR, WILL SEND A MESSAGE: ${err}`);
         core.setFailed(`Tests errored out.`);
         try {
           await web.chat.postMessage({
@@ -21,10 +20,8 @@ module.exports.runTests = async function runTests() {
             text: `:octagonal_sign: Failure in the Typescript SDK tests. <https://github.com/lob/TEST-ALERTS-ACTION/actions/runs/${github.context.runId}|Link to Workflow Run>`,
           });
         } catch (slackError) {
-          console.log(slackError);
+          console.error(slackError);
         }
-      } else {
-        console.log("PASS");
       }
     });
   } catch (execError) {
