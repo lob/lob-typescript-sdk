@@ -31,11 +31,12 @@ const config: Configuration = new Configuration({
 _Note:_ If you are using the new TypeScript SDK using JavaScript here is the code that you would use for this:
 ```javascript
 const { Configuration } = require("@lob/lob-typescript-sdk");
+
 const config = new Configuration({
   username: process.env.LOB_API_KEY
 });
 ```
-Like lob-node this approach uses Javascript's built-in require with ES6 destructuring to extract the essential classes from the results of requiring the TypeScript SDK..
+This approach uses ES6 destructuring to extract the essential classes from the results of requiring the TypeScript SDK..
 ## Error Handling
 In the new Typescript SDK, errors returned by the API are thrown, not returned to an error first callback (See below examples in Compare Create methods). As a result, consumer code does not need to do the work of detecting an error, and can
 ## METHODS
