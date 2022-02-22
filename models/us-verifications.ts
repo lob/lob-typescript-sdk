@@ -12,8 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { LobError } from "./lob-error";
-import { UsVerification } from "./us-verification";
+import * as Models from "./index";
 
 /**
  *
@@ -32,10 +31,34 @@ export class UsVerifications {
 
   /**
    *
-   * @type {Array<UsVerification | LobError>}
+   * @type {Array}
    * @memberof UsVerifications
    */
-  "addresses"?: Array<UsVerification | LobError>;
+
+  private "_addresses"?: Models.UsVerification[];
+  private "_error_addresses"?: Models.LobError[];
+  public set addresses(items: Models.UsVerification[] | Models.LobError[]) {
+    if (!this._addresses) {
+      this._addresses = [];
+    }
+    if (!this._error_addresses) {
+      this._error_addresses = [];
+    }
+    for (const item of items) {
+      if ((item as Models.UsVerification).id) {
+        this._addresses.push(new Models.UsVerification(item));
+      }
+      if ((item as Models.LobError).status_code) {
+        this._error_addresses.push(new Models.LobError(item));
+      }
+    }
+  }
+  public get addresses() {
+    return this._addresses || [];
+  }
+  public get errorAddresses() {
+    return this._error_addresses || [];
+  }
 
   /**
    * Indicates whether any errors occurred during the verification process.

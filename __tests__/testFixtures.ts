@@ -1,5 +1,5 @@
 import { Configuration } from "../configuration";
-import { AddressDomestic, AddressEditable, CountryExtended } from "../models";
+import { AddressEditable, CountryExtended } from "../models";
 
 export const URL_VALID_LIST = [
   "https://lob-assets.com/bank-accounts/asd_asdfghjkqwertyui.pdf?version=123&expires=1234567890&signature=aksdf",
@@ -106,24 +106,5 @@ export const ADDRESSES_EDITABLE: AddressEditable[] = [
     address_state: "NJ",
     address_zip: "07000",
     address_country: CountryExtended.Us,
-  },
-];
-export const ADDRESSES_DOMESTIC: AddressDomestic[] = [
-  {
-    company: "Gothic Home (old)",
-    address_line1: "001 CEMETERY LN",
-    address_line2: "# 000",
-    address_city: "WESTFIELD",
-    address_state: "NJ",
-    address_zip: "07000",
-    address_country: CountryExtended.Us,
-  },
-  {
-    company: "Gothic Home (new)",
-    address_line1: "1313 CEMETERY LN",
-    address_city: "WESTFIELD",
-    address_state: "NJ",
-    address_zip: "07000",
-    address_country: "US",
   },
 ];

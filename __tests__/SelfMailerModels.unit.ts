@@ -30,10 +30,10 @@ describe("SelfMailer Models", () => {
       ["mail_type", MailType.FirstClass],
       ["merge_variables", {}],
       ["send_date", new Date().toISOString()],
-      ["outside_template_id", "fake outside_template_id"],
-      ["inside_template_id", "fake inside_template_id"],
-      ["outside_template_version_id", "fake outside_template_version_id"],
-      ["inside_template_version_id", "fake inside_template_version_id"],
+      ["outside_template_id", "tmpl_outsideFakeId"],
+      ["inside_template_id", "tmpl_insideFakeId"],
+      ["outside_template_version_id", "vrsn_outsideFakeId"],
+      ["inside_template_version_id", "vrsn_insideFakeId"],
       ["object", "self_mailer"],
       ["tracking_events", []],
       ["url", URL_VALID_LIST],
@@ -85,6 +85,66 @@ describe("SelfMailer Models", () => {
           throw new Error("Should Throw");
         } catch (err: any) {
           expect(err.message).toEqual("Invalid url provided");
+        }
+      }
+    });
+
+    it("rejects invalid values for outside_template_id", () => {
+      const rec = new SelfMailer();
+      expect(rec.outside_template_id).not.toBeDefined();
+
+      const invalidValues = ["Nope"];
+      for (const val of invalidValues) {
+        try {
+          rec.outside_template_id = val;
+          throw new Error("Should Throw");
+        } catch (err: any) {
+          expect(err.message).toEqual("Invalid outside_template_id provided");
+        }
+      }
+    });
+
+    it("rejects invalid values for outside_template_id", () => {
+      const rec = new SelfMailer();
+      expect(rec.inside_template_id).not.toBeDefined();
+
+      const invalidValues = ["Nope"];
+      for (const val of invalidValues) {
+        try {
+          rec.inside_template_id = val;
+          throw new Error("Should Throw");
+        } catch (err: any) {
+          expect(err.message).toEqual("Invalid inside_template_id provided");
+        }
+      }
+    });
+
+    it("rejects invalid values for outside_template_version_id", () => {
+      const rec = new SelfMailer();
+      expect(rec.outside_template_version_id).not.toBeDefined();
+
+      const invalidValues = ["Nope"];
+      for (const val of invalidValues) {
+        try {
+          rec.outside_template_version_id = val;
+          throw new Error("Should Throw");
+        } catch (err: any) {
+          expect(err.message).toEqual("Invalid outside_template_version_id provided");
+        }
+      }
+    });
+
+    it("rejects invalid values for inside_template_version_id", () => {
+      const rec = new SelfMailer();
+      expect(rec.inside_template_version_id).not.toBeDefined();
+
+      const invalidValues = ["Nope"];
+      for (const val of invalidValues) {
+        try {
+          rec.inside_template_version_id = val;
+          throw new Error("Should Throw");
+        } catch (err: any) {
+          expect(err.message).toEqual("Invalid inside_template_version_id provided");
         }
       }
     });

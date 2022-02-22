@@ -12,7 +12,8 @@
  * Do not edit the class manually.
  */
 
-import { AddressEditable } from "./address-editable";
+import * as Models from "./index";
+
 import { LetterCustomEnvelope } from "./letter-custom-envelope";
 import { MailType } from "./mail-type";
 
@@ -94,10 +95,11 @@ export class LetterEditable {
 
   /**
    * indicates if a return envelope is requested for the letter. The value corresponding to this field is by default a boolean. But if the account is signed up for custom return envelopes, the value is of type string and is `no_9_single_window` for a standard return envelope and a custom `return_envelope_id` for non-standard return envelopes.  To include a return envelope with your letter, set to `true` and specify the `perforated_page`. See [pricing](https://www.lob.com/pricing/print-mail#compare) for extra costs incurred.
-   * @type {boolean | string}
+   * @type {any}
    * @memberof LetterEditable
    */
-  "return_envelope"?: boolean | string;
+
+  "return_envelope"?: string | boolean | null;
 
   /**
    * Required if `return_envelope` is `true`. The number of the page that should be perforated for use with the return envelope. Must be greater than or equal to `1`. The blank page added by `address_placement=insert_blank_page` will be ignored when considering the perforated page number. To see how perforation will impact your letter design, view our [perforation guide](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_perf_template.pdf).
@@ -115,17 +117,19 @@ export class LetterEditable {
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
-   * @type {string | AddressEditable}
+   * @type {string}
    * @memberof LetterEditable
    */
-  "to"?: string | AddressEditable;
+
+  "to"?: string | Models.AddressEditable;
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
-   * @type {string | AddressEditable}
+   * @type {string}
    * @memberof LetterEditable
    */
-  "from"?: string | AddressEditable;
+
+  "from"?: string | Models.AddressEditable;
 
   /**
    * PDF file containing the letter\'s formatting.

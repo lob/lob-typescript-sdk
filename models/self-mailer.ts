@@ -12,7 +12,8 @@
  * Do not edit the class manually.
  */
 
-import { AddressEditable } from "./address-editable";
+import * as Models from "./index";
+
 import { MailType } from "./mail-type";
 import { SelfMailerSize } from "./self-mailer-size";
 import { SendDate } from "./send-date";
@@ -93,17 +94,19 @@ export class SelfMailer {
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
-   * @type {string | AddressEditable}
+   * @type {string}
    * @memberof SelfMailer
    */
-  "to"?: string | AddressEditable;
+
+  "to"?: string | Models.AddressEditable;
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
-   * @type {string | AddressEditable}
+   * @type {string}
    * @memberof SelfMailer
    */
-  "from"?: string | AddressEditable;
+
+  "from"?: string | Models.AddressEditable;
 
   /**
    *
@@ -152,28 +155,64 @@ export class SelfMailer {
    * @type {string}
    * @memberof SelfMailer
    */
-  "outside_template_id"?: string;
+  private "_outside_template_id"?: string | null;
+  public get outside_template_id() {
+    return (this._outside_template_id || null || undefined) as string;
+  }
+  public set outside_template_id(newValue: string | null) {
+    if (newValue && !/^tmpl_[a-zA-Z0-9]+$/.test(newValue)) {
+      throw new Error("Invalid outside_template_id provided");
+    }
+    this._outside_template_id = newValue;
+  }
 
   /**
    * The unique ID of the HTML template used for the inside of the self mailer.
    * @type {string}
    * @memberof SelfMailer
    */
-  "inside_template_id"?: string;
+  private "_inside_template_id"?: string | null;
+  public get inside_template_id() {
+    return (this._inside_template_id || null || undefined) as string;
+  }
+  public set inside_template_id(newValue: string | null) {
+    if (newValue && !/^tmpl_[a-zA-Z0-9]+$/.test(newValue)) {
+      throw new Error("Invalid inside_template_id provided");
+    }
+    this._inside_template_id = newValue;
+  }
 
   /**
    * The unique ID of the specific version of the HTML template used for the outside of the self mailer.
    * @type {string}
    * @memberof SelfMailer
    */
-  "outside_template_version_id"?: string;
+  private "_outside_template_version_id"?: string | null;
+  public get outside_template_version_id() {
+    return (this._outside_template_version_id || null || undefined) as string;
+  }
+  public set outside_template_version_id(newValue: string | null) {
+    if (newValue && !/^vrsn_[a-zA-Z0-9]+$/.test(newValue)) {
+      throw new Error("Invalid outside_template_version_id provided");
+    }
+    this._outside_template_version_id = newValue;
+  }
 
   /**
    * The unique ID of the specific version of the HTML template used for the inside of the self mailer.
    * @type {string}
    * @memberof SelfMailer
    */
-  "inside_template_version_id"?: string;
+  private "_inside_template_version_id"?: string | null;
+  public get inside_template_version_id() {
+    return (this._inside_template_version_id || null || undefined) as string;
+  }
+  public set inside_template_version_id(newValue: string | null) {
+    if (newValue && !/^vrsn_[a-zA-Z0-9]+$/.test(newValue)) {
+      throw new Error("Invalid inside_template_version_id provided");
+    }
+    this._inside_template_version_id = newValue;
+  }
 
   /**
    * Value is resource type.

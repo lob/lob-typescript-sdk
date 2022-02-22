@@ -12,6 +12,8 @@
  * Do not edit the class manually.
  */
 
+import * as Models from "./index";
+
 /**
  * The engine used to combine HTML template with merge variables.   * `legacy` - Lob\'s original engine   * `handlebars`
  * @export

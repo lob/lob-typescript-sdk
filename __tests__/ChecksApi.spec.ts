@@ -8,7 +8,7 @@ import {
   BankAccountWritable,
   BankTypeEnum,
 } from "..";
-import { ADDRESSES_DOMESTIC, CONFIG_FOR_INTEGRATION } from "./testFixtures";
+import { ADDRESSES_EDITABLE, CONFIG_FOR_INTEGRATION } from "./testFixtures";
 
 let bankApi: BankAccountsApi;
 let account: BankAccount;
@@ -63,8 +63,8 @@ describe("ChecksApi", () => {
       beforeAll(() => {
         createCheck = {
           description: "check 1",
-          to: ADDRESSES_DOMESTIC[0],
-          from: ADDRESSES_DOMESTIC[1],
+          to: ADDRESSES_EDITABLE[0],
+          from: ADDRESSES_EDITABLE[1],
           bank_account: account.id,
           amount: 100,
         };
@@ -124,8 +124,8 @@ describe("ChecksApi", () => {
       // ensure there are at least 3 checks present, to test pagination
       const check1: CheckEditable = {
         description: "check 1",
-        to: ADDRESSES_DOMESTIC[0],
-        from: ADDRESSES_DOMESTIC[1],
+        to: ADDRESSES_EDITABLE[0],
+        from: ADDRESSES_EDITABLE[1],
         bank_account: account.id,
         amount: 100,
       };

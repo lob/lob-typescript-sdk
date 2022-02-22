@@ -12,6 +12,8 @@
  * Do not edit the class manually.
  */
 
+import * as Models from "./index";
+
 /**
  * Must be a 2 letter country short-name code (ISO 3166).
  * @export

@@ -1,16 +1,10 @@
 import {
-  AddressTypes,
-  BankAccountTypes,
-  CheckTypes,
   Events,
   EventType,
   EventTypeResourceEnum,
-  LetterTypes,
   LobError,
   LobErrorCodeEnum,
   LobErrorStatusCodeEnum,
-  PostcardTypes,
-  SelfMailerTypes,
   SortBy,
   SortBy1,
   SortBy2,
@@ -30,9 +24,7 @@ import {
   SortBy5DateCreatedEnum,
   SortBy5SendDateEnum,
   Thumbnail,
-  SingleLineAddressIntl,
   CountryExtended,
-  SingleLineAddress,
   TrackingEventCertified,
   TrackingEventCertifiedTypeEnum,
   TrackingEventCertifiedNameEnum,
@@ -275,66 +267,7 @@ describe("EventType", () => {
   });
 
   it.each([
-    ["id", PostcardTypes.Created],
-    ["id", PostcardTypes.RenderedPdf],
-    ["id", PostcardTypes.RenderedThumbnails],
-    ["id", PostcardTypes.Deleted],
-    ["id", PostcardTypes.Mailed],
-    ["id", PostcardTypes.InTransit],
-    ["id", PostcardTypes.InLocalArea],
-    ["id", PostcardTypes.ProcessedForDelivery],
-    ["id", PostcardTypes.ReRouted],
-    ["id", PostcardTypes.ReturnedToSender],
-    ["id", SelfMailerTypes.Created],
-    ["id", SelfMailerTypes.RenderedPdf],
-    ["id", SelfMailerTypes.RenderedThumbnails],
-    ["id", SelfMailerTypes.Deleted],
-    ["id", SelfMailerTypes.Mailed],
-    ["id", SelfMailerTypes.InTransit],
-    ["id", SelfMailerTypes.InLocalArea],
-    ["id", SelfMailerTypes.ProcessedForDelivery],
-    ["id", SelfMailerTypes.ReRouted],
-    ["id", SelfMailerTypes.ReturnedToSender],
-    ["id", LetterTypes.Created],
-    ["id", LetterTypes.RenderedPdf],
-    ["id", LetterTypes.RenderedThumbnails],
-    ["id", LetterTypes.Deleted],
-    ["id", LetterTypes.Mailed],
-    ["id", LetterTypes.InTransit],
-    ["id", LetterTypes.InLocalArea],
-    ["id", LetterTypes.ProcessedForDelivery],
-    ["id", LetterTypes.ReRouted],
-    ["id", LetterTypes.ReturnedToSender],
-    ["id", LetterTypes.CertifiedMailed],
-    ["id", LetterTypes.CertifiedInTransit],
-    ["id", LetterTypes.CertifiedInLocalArea],
-    ["id", LetterTypes.CertifiedProcessedForDelivery],
-    ["id", LetterTypes.CertifiedReRouted],
-    ["id", LetterTypes.CertifiedReturnedToSender],
-    ["id", LetterTypes.CertifiedDelivered],
-    ["id", LetterTypes.CertifiedPickupAvailable],
-    ["id", LetterTypes.CertifiedIssue],
-    ["id", LetterTypes.ReturnEnvelopeCreated],
-    ["id", LetterTypes.ReturnEnvelopeInTransit],
-    ["id", LetterTypes.ReturnEnvelopeInLocalArea],
-    ["id", LetterTypes.ReturnEnvelopeProcessedForDelivery],
-    ["id", LetterTypes.ReturnEnvelopeReRouted],
-    ["id", LetterTypes.ReturnEnvelopeReturnedToSender],
-    ["id", CheckTypes.Created],
-    ["id", CheckTypes.RenderedPdf],
-    ["id", CheckTypes.RenderedThumbnails],
-    ["id", CheckTypes.Deleted],
-    ["id", CheckTypes.Mailed],
-    ["id", CheckTypes.InTransit],
-    ["id", CheckTypes.InLocalArea],
-    ["id", CheckTypes.ProcessedForDelivery],
-    ["id", CheckTypes.ReRouted],
-    ["id", CheckTypes.ReturnedToSender],
-    ["id", AddressTypes.Created],
-    ["id", AddressTypes.Deleted],
-    ["id", BankAccountTypes.Created],
-    ["id", BankAccountTypes.Deleted],
-    ["id", BankAccountTypes.Verified],
+    ["id", "fake id"],
     ["enabled_for_test", true],
     ["enabled_for_test", false],
     ["resource", EventTypeResourceEnum.Addresses],
@@ -686,46 +619,6 @@ describe("Sort Criteria", () => {
       expect(rec).toBeDefined();
       expect((rec as any)[prop]).toEqual(val);
     });
-  });
-});
-
-describe("SingleLineAddress", () => {
-  it("can be created", () => {
-    const rec = new SingleLineAddress();
-    expect(rec).toBeDefined();
-  });
-
-  it.each([["address", "fake address"]])(
-    "can be created with a provided %s value",
-    (prop, val) => {
-      const input = {};
-      (input as any)[prop] = val;
-
-      const rec = new SingleLineAddress(input);
-
-      expect(rec).toBeDefined();
-      expect((rec as any)[prop]).toEqual(val);
-    }
-  );
-});
-
-describe("SingleLineAddressIntl", () => {
-  it("can be created", () => {
-    const rec = new SingleLineAddressIntl();
-    expect(rec).toBeDefined();
-  });
-
-  it.each([
-    ["address", "fake address"],
-    ["country", CountryExtended.Ad],
-  ])("can be created with a provided %s value", (prop, val) => {
-    const input = {};
-    (input as any)[prop] = val;
-
-    const rec = new SingleLineAddressIntl(input);
-
-    expect(rec).toBeDefined();
-    expect((rec as any)[prop]).toEqual(val);
   });
 });
 

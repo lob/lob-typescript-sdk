@@ -12,6 +12,8 @@
  * Do not edit the class manually.
  */
 
+import * as Models from "./index";
+
 import { SelfMailer } from "./self-mailer";
 
 /**
@@ -61,6 +63,7 @@ export class SelfMailerList {
    * @memberof SelfMailerList
    */
   "next_url"?: string | null;
+
   public get nextPageToken(): string | undefined {
     if (!this.next_url) {
       return undefined;
@@ -77,6 +80,7 @@ export class SelfMailerList {
    * @memberof SelfMailerList
    */
   "previous_url"?: string | null;
+
   public get previousPageToken(): string | undefined {
     if (!this.previous_url) {
       return undefined;

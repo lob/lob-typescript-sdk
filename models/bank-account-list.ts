@@ -12,6 +12,8 @@
  * Do not edit the class manually.
  */
 
+import * as Models from "./index";
+
 import { BankAccount } from "./bank-account";
 
 /**
@@ -61,6 +63,7 @@ export class BankAccountList {
    * @memberof BankAccountList
    */
   "next_url"?: string | null;
+
   public get nextPageToken(): string | undefined {
     if (!this.next_url) {
       return undefined;
@@ -77,6 +80,7 @@ export class BankAccountList {
    * @memberof BankAccountList
    */
   "previous_url"?: string | null;
+
   public get previousPageToken(): string | undefined {
     if (!this.previous_url) {
       return undefined;

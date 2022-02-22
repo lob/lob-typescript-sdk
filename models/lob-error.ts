@@ -12,6 +12,8 @@
  * Do not edit the class manually.
  */
 
+import * as Models from "./index";
+
 /**
  * Lob uses RESTful HTTP response codes to indicate success or failure of an API request.
  * @export
