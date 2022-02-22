@@ -2,7 +2,10 @@
 
 This guide illustrates differences between Lob’s current JavaScript library (lob-node) and our new TypeScript SDK (lob-typescript-sdk). The new TypeScript SDK supports all generally available endpoints and has the benefit of being built with TypeScript.
 We have also compared performance and found the new TypeScript SDK is equivalent or improved in most cases with some operations experiencing a consistent 2X improvement.
-In this guide we compare the following method pattern.
+
+Note: apps written in JavaScript or TypeScript can both utilize Lob’s TypeScript SDK
+
+In this guide we compare how lob-node and lob-typescript-sdk implement the following method pattern.
 
 - CREATE
 - LIST
@@ -28,7 +31,7 @@ const config: Configuration = new Configuration({
   username: "<<YOUR API KEY HERE>>"
 });
 ```
-_Note:_ If you are using the new TypeScript SDK using JavaScript here is the code that you would use for this:
+_Note:_ To use the new TypeScript SDK in a JavaScript app the code looks like this:
 ```javascript
 const { Configuration } = require("@lob/lob-typescript-sdk");
 
@@ -38,7 +41,9 @@ const config = new Configuration({
 ```
 This approach uses ES6 destructuring to extract the essential classes from the results of requiring the TypeScript SDK..
 ## Error Handling
-In the new Typescript SDK, errors returned by the API are thrown, not returned to an error first callback (See below examples in Compare Create methods). As a result, consumer code does not need to do the work of detecting an error, and can
+In the new Typescript SDK, errors returned by the API are thrown, not returned to an error first callback (See below examples in Compare Create methods). As a result, consumer code does not need to do the work of detecting an error, and can  focus on handling the application specifics of what to do when there is an error.
+
+
 ## METHODS
 The new TypeScript SDK does not use the callback pattern found in lob-node. Instead, the TypeScript SDK uses promise-based/async and await in a try catch block. Additionally ,the Typescript SDK utilizes the best practice of instantiating a class of the appropriate type providing needed data during instantiation or by setting properties rather than simply passing an object with the intended properties. Switching to this allows model validation to trigger.
 ### COMPARE CREATE METHODS
