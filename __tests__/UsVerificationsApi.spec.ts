@@ -1,28 +1,31 @@
-import { UsVerificationsWritable, MultipleComponentsList } from "../models";
+import {UsVerificationsWritable, MultipleComponentsList, MultipleComponents} from "../models";
 import { USVerificationsApi } from "../api";
 import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
 
 describe("UsVerificationApi", () => {
-  const singleAddress: UsVerificationsWritable = {
-    primary_line: "001 CEMETERY LANE",
+  const singleAddressVerification: UsVerificationsWritable = {
+    primary_line: "deliverable",
     city: "WESTFIELD",
     state: "NJ",
-    zip_code: "07000",
+    zip_code: "11111",
   };
 
-  const address2: UsVerificationsWritable = {
-    primary_line: "1515 CEMETERY LN",
+  const singleAddress: MultipleComponents = {
+    primary_line: "deliverable",
     city: "WESTFIELD",
     state: "NJ",
-    zip_code: "07000",
+    zip_code: "11111",
+  };
+
+  const address2: MultipleComponents = {
+    primary_line: "deliverable",
+    city: "WESTFIELD",
+    state: "NJ",
+    zip_code: "11111",
   };
 
   const addressList: MultipleComponentsList = {
     addresses: [singleAddress, address2],
-  };
-
-  const singleLine: UsVerificationsWritable = {
-    address: "1515 CEMETERY LN WESTFIELD NJ 07000",
   };
 
   it("US Verifications API can be instantiated", () => {
@@ -41,11 +44,15 @@ describe("UsVerificationApi", () => {
 
     it("verifies a single multi-line US address", async () => {
       const usvApi = new USVerificationsApi(CONFIG_FOR_INTEGRATION);
-      const response = await usvApi.verifySingle(singleAddress);
+      const response = await usvApi.verifySingle(singleAddressVerification);
       expect(response.deliverability).toBeDefined();
     });
 
     it("verifies a single one-line US address", async () => {
+      const singleLine: UsVerificationsWritable = {
+        address: "1515 CEMETERY LN WESTFIELD NJ 07000"
+      } as UsVerificationsWritable;
+
       const usvApi = new USVerificationsApi(CONFIG_FOR_INTEGRATION);
       const response = await usvApi.verifySingle(singleLine);
       expect(response.deliverability).toBeDefined();
@@ -63,7 +70,8 @@ describe("UsVerificationApi", () => {
       const usvApi = new USVerificationsApi(CONFIG_FOR_INTEGRATION);
       const response = await usvApi.verifyBulk(addressList);
       expect(response).toBeDefined();
-      expect(response.addresses?.length).toEqual(2);
+      expect(response.addresses?.length).toEqual(0); // Test keys do not verify
+      expect(response.errorAddresses?.length).toEqual(0); // Test keys do not verify
     });
   });
 });
