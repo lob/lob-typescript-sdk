@@ -190,7 +190,7 @@ try {
 
 ### COMPARE BULK VERIFICATION METHOD
 
-The Bulk verify endpoint from our Addresses Verification Api is used to verify a list of US or US territory addresses with a live API key. This endpoint is not currently supported in lob-node. However, this is how it is done in the TypeScript sdk:
+The Bulk verify endpoint from our Addresses Verification Api is used to verify a list of US or US territory addresses with a live API key. This endpoint is not supported in lob-node but it is supported by the TypeScript SDK. This is how it is done:
 
 ```typescript
 const UsVerifications = new USVerificationsApi(av_config);
@@ -320,7 +320,7 @@ try {
 
 ### TEMPLATE UPDATE METHOD
 
-The Template Update endpoint updates the description and/or published version of the template with a given id. This endpoint is not currently supported in lob-node. However, this is how it is done in the TypeScript SDK:
+The Template Update endpoint updates the description and/or published version of the template with a given id. This endpoint is not supported in lob-node but it is supported by the TypeScript SDK. This is how it is done:
 
 ```typescript
 const Templates = new TemplatesApi(config);
