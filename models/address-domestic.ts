@@ -132,11 +132,11 @@ export class AddressDomestic {
    * @type {string}
    * @memberof AddressDomestic
    */
-  private "_address_country"?: string;
+  private "_address_country"?: string | null;
   public get address_country() {
-    return (this._address_country || undefined) as string;
+    return (this._address_country || null || undefined) as string;
   }
-  public set address_country(newValue: string) {
+  public set address_country(newValue: string | null) {
     if (newValue && !/US/.test(newValue)) {
       throw new Error("Invalid address_country provided");
     }

@@ -1,0 +1,25 @@
+name: Run Tests With Alerts
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 5,17 * * *"
+
+jobs:
+  monitor_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          ref: "main"
+
+      - name: run contract tests
+        uses: ./actions/monitoring/
+        env:
+          LOB_API_KEY: ${{ secrets.LOB_API_KEY }}
+          LOB_API_LIVE_KEY: ${{ secrets.LOB_API_LIVE_KEY }}
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+        with:
+          testCommand: "npm run test:alerts"
