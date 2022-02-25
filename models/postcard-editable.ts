@@ -12,8 +12,8 @@
  * Do not edit the class manually.
  */
 
-import { AddressDomestic } from "./address-domestic";
-import { AddressEditable } from "./address-editable";
+import * as Models from "./index";
+
 import { MailType } from "./mail-type";
 import { PostcardSize } from "./postcard-size";
 import { SendDate } from "./send-date";
@@ -62,17 +62,19 @@ export class PostcardEditable {
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
-   * @type {string | AddressEditable}
+   * @type {string}
    * @memberof PostcardEditable
    */
-  "to"?: string | AddressEditable;
+
+  "to"?: string | Models.AddressEditable;
 
   /**
    * Required if `to` address is international. Must either be an address ID or an inline object with correct address parameters.
-   * @type {string | AddressDomestic}
+   * @type {string}
    * @memberof PostcardEditable
    */
-  "from"?: string | AddressDomestic;
+
+  "from"?: string | Models.AddressEditable;
 
   /**
    *

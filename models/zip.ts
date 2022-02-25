@@ -12,6 +12,8 @@
  * Do not edit the class manually.
  */
 
+import * as Models from "./index";
+
 import { ZipCodeType } from "./zip-code-type";
 import { ZipLookupCity } from "./zip-lookup-city";
 

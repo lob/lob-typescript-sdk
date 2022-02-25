@@ -12,6 +12,8 @@
  * Do not edit the class manually.
  */
 
+import * as Models from "./index";
+
 import { Address } from "./address";
 import { AddressDomesticExpanded } from "./address-domestic-expanded";
 import { MailType } from "./mail-type";

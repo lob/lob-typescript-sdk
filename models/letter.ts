@@ -12,10 +12,11 @@
  * Do not edit the class manually.
  */
 
+import * as Models from "./index";
+
 import { Address } from "./address";
 import { LetterCustomEnvelope } from "./letter-custom-envelope";
 import { MailType } from "./mail-type";
-import { ReturnAddress } from "./return-address";
 import { SendDate } from "./send-date";
 import { Thumbnail } from "./thumbnail";
 import { TrackingEventNormal } from "./tracking-event-normal";
@@ -271,11 +272,12 @@ export class Letter {
   "tracking_events"?: Array<TrackingEventNormal>;
 
   /**
-   *
-   * @type {ReturnAddress}
+   * Specifies the address the return envelope will be sent back to. This is an optional argument that is available if an account is signed up for the return envelope tracking beta, and has `return_envelope`, and `perforated_page` fields populated in the API request.
+   * @type {string}
    * @memberof Letter
    */
-  "return_address"?: ReturnAddress;
+
+  "return_address"?: string | Models.AddressEditable;
 
   /**
    *
@@ -307,10 +309,11 @@ export class Letter {
 
   /**
    * indicates if a return envelope is requested for the letter. The value corresponding to this field is by default a boolean. But if the account is signed up for custom return envelopes, the value is of type string and is `no_9_single_window` for a standard return envelope and a custom `return_envelope_id` for non-standard return envelopes.  To include a return envelope with your letter, set to `true` and specify the `perforated_page`. See [pricing](https://www.lob.com/pricing/print-mail#compare) for extra costs incurred.
-   * @type {boolean | string}
+   * @type {any}
    * @memberof Letter
    */
-  "return_envelope"?: boolean | string;
+
+  "return_envelope"?: string | boolean;
 
   /**
    * Required if `return_envelope` is `true`. The number of the page that should be perforated for use with the return envelope. Must be greater than or equal to `1`. The blank page added by `address_placement=insert_blank_page` will be ignored when considering the perforated page number. To see how perforation will impact your letter design, view our [perforation guide](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_perf_template.pdf).

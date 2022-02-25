@@ -12,12 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { AddressTypes } from "./address-types";
-import { BankAccountTypes } from "./bank-account-types";
-import { CheckTypes } from "./check-types";
-import { LetterTypes } from "./letter-types";
-import { PostcardTypes } from "./postcard-types";
-import { SelfMailerTypes } from "./self-mailer-types";
+import * as Models from "./index";
 
 /**
  *
@@ -42,16 +37,10 @@ export class EventType {
 
   /**
    *
-   * @type {PostcardTypes | SelfMailerTypes | LetterTypes | CheckTypes | AddressTypes | BankAccountTypes}
+   * @type {string}
    * @memberof EventType
    */
-  "id"?:
-    | PostcardTypes
-    | SelfMailerTypes
-    | LetterTypes
-    | CheckTypes
-    | AddressTypes
-    | BankAccountTypes;
+  "id"?: string;
 
   /**
    * Value is `true` if the event type is enabled in both the test and live environments.

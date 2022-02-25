@@ -12,7 +12,8 @@
  * Do not edit the class manually.
  */
 
-import { AddressEditable } from "./address-editable";
+import * as Models from "./index";
+
 import { MailType } from "./mail-type";
 import { SelfMailerSize } from "./self-mailer-size";
 import { SendDate } from "./send-date";
@@ -61,17 +62,19 @@ export class SelfMailerEditable {
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
-   * @type {string | AddressEditable}
+   * @type {string}
    * @memberof SelfMailerEditable
    */
-  "to"?: string | AddressEditable;
+
+  "to"?: string | Models.AddressEditable;
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
-   * @type {string | AddressEditable}
+   * @type {string}
    * @memberof SelfMailerEditable
    */
-  "from"?: string | AddressEditable;
+
+  "from"?: string | Models.AddressEditable;
 
   /**
    *

@@ -12,8 +12,9 @@
  * Do not edit the class manually.
  */
 
-import { IntlVerification } from "./intl-verification";
-import { LobError } from "./lob-error";
+import * as Models from "./index";
+
+import { IntlVerificationOrError } from "./intl-verification-or-error";
 
 /**
  *
@@ -32,10 +33,34 @@ export class IntlVerifications {
 
   /**
    *
-   * @type {Array<IntlVerification | LobError>}
+   * @type {Array<IntlVerificationOrError>}
    * @memberof IntlVerifications
    */
-  "addresses"?: Array<IntlVerification | LobError>;
+
+  private "_addresses"?: Models.IntlVerification[];
+  private "_error_addresses"?: Models.LobError[];
+  public set addresses(items: Models.IntlVerification[] | Models.LobError[]) {
+    if (!this._addresses) {
+      this._addresses = [];
+    }
+    if (!this._error_addresses) {
+      this._error_addresses = [];
+    }
+    for (const item of items) {
+      if ((item as Models.IntlVerification).id) {
+        this._addresses.push(new Models.IntlVerification(item));
+      }
+      if ((item as Models.LobError).status_code) {
+        this._error_addresses.push(new Models.LobError(item));
+      }
+    }
+  }
+  public get addresses() {
+    return this._addresses || [];
+  }
+  public get errorAddresses() {
+    return this._error_addresses || [];
+  }
 
   /**
    * Indicates whether any errors occurred during the verification process.

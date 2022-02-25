@@ -12,6 +12,8 @@
  * Do not edit the class manually.
  */
 
+import * as Models from "./index";
+
 /**
  * The type of entity that holds the account.
  * @export
