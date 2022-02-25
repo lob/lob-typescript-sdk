@@ -12,6 +12,8 @@
  * Do not edit the class manually.
  */
 
+import * as Models from "./index";
+
 import { BankTypeEnum } from "./bank-type-enum";
 
 /**

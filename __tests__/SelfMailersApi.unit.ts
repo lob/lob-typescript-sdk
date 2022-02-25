@@ -8,7 +8,6 @@ import { SelfMailersApi } from "../api";
 
 import { fail } from "./testUtilities";
 import {
-  ADDRESSES_DOMESTIC,
   ADDRESSES_EDITABLE,
   CONFIG_FOR_UNIT,
   CONFIG_WITH_BASE_OPTIONS_FOR_UNIT,

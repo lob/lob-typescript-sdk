@@ -1,7 +1,6 @@
-import { Postcard, PostcardEditable, CountryExtended } from "../models";
+import { Postcard, PostcardEditable } from "../models";
 import { PostcardsApi } from "../api";
 import {
-  ADDRESSES_DOMESTIC,
   ADDRESSES_EDITABLE,
   CONFIG_FOR_INTEGRATION,
   FILE_LOCATION_4X6,
@@ -14,7 +13,7 @@ describe("postcardsApi", () => {
 
   const dummyPostcard: PostcardEditable = {
     to: ADDRESSES_EDITABLE[2],
-    from: ADDRESSES_DOMESTIC[1],
+    from: ADDRESSES_EDITABLE[1],
     front: FILE_LOCATION_4X6,
     back: FILE_LOCATION_4X6,
   };
@@ -63,19 +62,19 @@ describe("postcardsApi", () => {
       // ensure there are at least 3 cards present, to test pagination
       const postcard1: PostcardEditable = {
         to: ADDRESSES_EDITABLE[1],
-        from: ADDRESSES_DOMESTIC[0],
+        from: ADDRESSES_EDITABLE[0],
         front: FILE_LOCATION_4X6,
         back: FILE_LOCATION_4X6,
       };
       const postcard2: PostcardEditable = {
         to: ADDRESSES_EDITABLE[3],
-        from: ADDRESSES_DOMESTIC[0],
+        from: ADDRESSES_EDITABLE[0],
         front: FILE_LOCATION_4X6,
         back: FILE_LOCATION_4X6,
       };
       const postcard3: PostcardEditable = {
         to: ADDRESSES_EDITABLE[6],
-        from: ADDRESSES_DOMESTIC[1],
+        from: ADDRESSES_EDITABLE[1],
         front: FILE_LOCATION_4X6,
         back: FILE_LOCATION_4X6,
       };

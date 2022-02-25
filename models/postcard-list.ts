@@ -12,6 +12,8 @@
  * Do not edit the class manually.
  */
 
+import * as Models from "./index";
+
 import { Postcard } from "./postcard";
 
 /**
@@ -61,6 +63,7 @@ export class PostcardList {
    * @memberof PostcardList
    */
   "next_url"?: string | null;
+
   public get nextPageToken(): string | undefined {
     if (!this.next_url) {
       return undefined;
@@ -77,6 +80,7 @@ export class PostcardList {
    * @memberof PostcardList
    */
   "previous_url"?: string | null;
+
   public get previousPageToken(): string | undefined {
     if (!this.previous_url) {
       return undefined;

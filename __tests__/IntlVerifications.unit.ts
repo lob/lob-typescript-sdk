@@ -247,8 +247,8 @@ describe("IntlVerificationsApi", () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
           addresses: [
-            { status: IntlVerificationStatusEnum.Lf1 },
-            { status: IntlVerificationStatusEnum.Lf1 },
+            { id: "intl_ver_fakeId", status: IntlVerificationStatusEnum.Lf1 },
+            { id: "intl_ver_fakeId", status: IntlVerificationStatusEnum.Lf1 },
           ],
         },
       }));
@@ -259,12 +259,12 @@ describe("IntlVerificationsApi", () => {
       expect(response.addresses?.length).toEqual(2);
     });
 
-    it("includes custom headers while it verifies a list of international addressess", async () => {
+    it("includes custom headers while it verifies a list of international addresses", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
           addresses: [
-            { status: IntlVerificationStatusEnum.Lf1 },
-            { status: IntlVerificationStatusEnum.Lf1 },
+            { id: "intl_ver_fakeId", status: IntlVerificationStatusEnum.Lf1 },
+            { id: "intl_ver_fakeId", status: IntlVerificationStatusEnum.Lf1 },
           ],
         },
       }));

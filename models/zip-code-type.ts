@@ -12,6 +12,8 @@
  * Do not edit the class manually.
  */
 
+import * as Models from "./index";
+
 /**
  * A description of the ZIP code type. For more detailed information about each ZIP code type, see [US Verification Details](#tag/US-Verification-Types).
  * @export

@@ -12,6 +12,8 @@
  * Do not edit the class manually.
  */
 
+import * as Models from "./index";
+
 /**
  * A nested object containing a breakdown of the analysis of a reverse geocoded location.
  * @export

@@ -12,6 +12,8 @@
  * Do not edit the class manually.
  */
 
+import * as Models from "./index";
+
 /**
  * A nested object containing a breakdown of each component of an address.
  * @export

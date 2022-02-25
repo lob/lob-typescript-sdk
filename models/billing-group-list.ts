@@ -12,6 +12,8 @@
  * Do not edit the class manually.
  */
 
+import * as Models from "./index";
+
 import { BillingGroup } from "./billing-group";
 
 /**
@@ -58,6 +60,7 @@ export class BillingGroupList {
    * @memberof BillingGroupList
    */
   "next_url"?: string | null;
+
   public get nextPageToken(): string | undefined {
     if (!this.next_url) {
       return undefined;
@@ -74,6 +77,7 @@ export class BillingGroupList {
    * @memberof BillingGroupList
    */
   "previous_url"?: string | null;
+
   public get previousPageToken(): string | undefined {
     if (!this.previous_url) {
       return undefined;

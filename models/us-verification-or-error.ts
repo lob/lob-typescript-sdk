@@ -19,11 +19,11 @@ import { LobConfidenceScore } from "./lob-confidence-score";
 import { UsComponents } from "./us-components";
 
 /**
- *
+ * A model used to represent an entry in a result list where the entry can either be a us_verification or an Error. The SDK will perform necessary casting into the correct corresponding type.
  * @export
- * @class UsVerification
+ * @class UsVerificationOrError
  */
-export class UsVerification {
+export class UsVerificationOrError {
   constructor(input?: any) {
     if (typeof input?.id !== "undefined") {
       this.id = input.id;
@@ -58,12 +58,21 @@ export class UsVerification {
     if (typeof input?.object !== "undefined") {
       this.object = input.object;
     }
+    if (typeof input?.message !== "undefined") {
+      this.message = input.message;
+    }
+    if (typeof input?.status_code !== "undefined") {
+      this.status_code = input.status_code;
+    }
+    if (typeof input?.code !== "undefined") {
+      this.code = input.code;
+    }
   }
 
   /**
    * Unique identifier prefixed with `us_ver_`.
    * @type {string}
-   * @memberof UsVerification
+   * @memberof UsVerificationOrError
    */
   private "_id"?: string;
   public get id() {
@@ -79,79 +88,100 @@ export class UsVerification {
   /**
    * The intended recipient, typically a person\'s or firm\'s name.
    * @type {string}
-   * @memberof UsVerification
+   * @memberof UsVerificationOrError
    */
   "recipient"?: string | null;
 
   /**
    * The primary delivery line (usually the street address) of the address. Combination of the following applicable `components`: * `primary_number` * `street_predirection` * `street_name` * `street_suffix` * `street_postdirection` * `secondary_designator` * `secondary_number` * `pmb_designator` * `pmb_number`
    * @type {string}
-   * @memberof UsVerification
+   * @memberof UsVerificationOrError
    */
   "primary_line"?: string;
 
   /**
    * The secondary delivery line of the address. This field is typically empty but may contain information if `primary_line` is too long.
    * @type {string}
-   * @memberof UsVerification
+   * @memberof UsVerificationOrError
    */
   "secondary_line"?: string;
 
   /**
    * Only present for addresses in Puerto Rico. An urbanization refers to an area, sector, or development within a city. See [USPS documentation](https://pe.usps.com/text/pub28/28api_008.htm#:~:text=I51.,-4%20Urbanizations&text=In%20Puerto%20Rico%2C%20identical%20street,placed%20before%20the%20urbanization%20name.) for clarification.
    * @type {string}
-   * @memberof UsVerification
+   * @memberof UsVerificationOrError
    */
   "urbanization"?: string;
 
   /**
-   * Combination of the following applicable `components`: * City (`city`) * State (`state`) * ZIP code (`zip_code`) * ZIP+4 (`zip_code_plus_4`)
+   *
    * @type {string}
-   * @memberof UsVerification
+   * @memberof UsVerificationOrError
    */
   "last_line"?: string;
 
   /**
-   * Summarizes the deliverability of the `us_verification` object. For full details, see the `deliverability_analysis` field. Possible values are: * `deliverable` – The address is deliverable by the USPS. * `deliverable_unnecessary_unit` – The address is deliverable, but the secondary unit information is unnecessary. * `deliverable_incorrect_unit` – The address is deliverable to the building\'s default address but the secondary unit provided may not exist. There is a chance the mail will not reach the intended recipient. * `deliverable_missing_unit` – The address is deliverable to the building\'s default address but is missing secondary unit information. There is a chance the mail will not reach the intended recipient. * `undeliverable` – The address is not deliverable according to the USPS.
+   *
    * @type {string}
-   * @memberof UsVerification
+   * @memberof UsVerificationOrError
    */
-  "deliverability"?: UsVerificationDeliverabilityEnum;
+  "deliverability"?: UsVerificationOrErrorDeliverabilityEnum;
 
   /**
    *
    * @type {UsComponents}
-   * @memberof UsVerification
+   * @memberof UsVerificationOrError
    */
   "components"?: UsComponents;
 
   /**
    *
    * @type {DeliverabilityAnalysis}
-   * @memberof UsVerification
+   * @memberof UsVerificationOrError
    */
   "deliverability_analysis"?: DeliverabilityAnalysis;
 
   /**
    *
    * @type {LobConfidenceScore}
-   * @memberof UsVerification
+   * @memberof UsVerificationOrError
    */
   "lob_confidence_score"?: LobConfidenceScore;
 
   /**
    *
    * @type {string}
-   * @memberof UsVerification
+   * @memberof UsVerificationOrError
    */
-  "object"?: UsVerificationObjectEnum;
+  "object"?: UsVerificationOrErrorObjectEnum;
+
+  /**
+   * A human-readable message with more details about the error
+   * @type {string}
+   * @memberof UsVerificationOrError
+   */
+  "message"?: string;
+
+  /**
+   * A conventional HTTP status code.
+   * @type {number}
+   * @memberof UsVerificationOrError
+   */
+  "status_code"?: UsVerificationOrErrorStatusCodeEnum;
+
+  /**
+   * A pre-defined string identifying an error.
+   * @type {string}
+   * @memberof UsVerificationOrError
+   */
+  "code"?: UsVerificationOrErrorCodeEnum;
 }
 
 /**
  * @export
  * @enum {string}
  */
-export enum UsVerificationDeliverabilityEnum {
+export enum UsVerificationOrErrorDeliverabilityEnum {
   Deliverable = "deliverable",
   DeliverableUnnecessaryUnit = "deliverable_unnecessary_unit",
   DeliverableIncorrectUnit = "deliverable_incorrect_unit",
@@ -162,8 +192,73 @@ export enum UsVerificationDeliverabilityEnum {
  * @export
  * @enum {string}
  */
-export enum UsVerificationObjectEnum {
+export enum UsVerificationOrErrorObjectEnum {
   UsVerification = "us_verification",
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum UsVerificationOrErrorStatusCodeEnum {
+  NUMBER_401 = 401,
+  NUMBER_403 = 403,
+  NUMBER_404 = 404,
+  NUMBER_413 = 413,
+  NUMBER_422 = 422,
+  NUMBER_429 = 429,
+  NUMBER_500 = 500,
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum UsVerificationOrErrorCodeEnum {
+  BadRequest = "bad_request",
+  Conflict = "conflict",
+  FeatureLimitReached = "feature_limit_reached",
+  InternalServerError = "internal_server_error",
+  Invalid = "invalid",
+  NotDeletable = "not_deletable",
+  NotFound = "not_found",
+  RequestTimeout = "request_timeout",
+  ServiceUnavailable = "service_unavailable",
+  UnrecognizedEndpoint = "unrecognized_endpoint",
+  UnsupportedLobVersion = "unsupported_lob_version",
+  AddressLengthExceedsLimit = "address_length_exceeds_limit",
+  BankAccountAlreadyVerified = "bank_account_already_verified",
+  BankError = "bank_error",
+  CustomEnvelopeInventoryDepleted = "custom_envelope_inventory_depleted",
+  DeletedBankAccount = "deleted_bank_account",
+  FailedDeliverabilityStrictness = "failed_deliverability_strictness",
+  FilePagesBelowMin = "file_pages_below_min",
+  FilePagesExceedMax = "file_pages_exceed_max",
+  FileSizeExceedsLimit = "file_size_exceeds_limit",
+  ForeignReturnAddress = "foreign_return_address",
+  InconsistentPageDimensions = "inconsistent_page_dimensions",
+  InvalidBankAccount = "invalid_bank_account",
+  InvalidBankAccountVerification = "invalid_bank_account_verification",
+  InvalidCheckInternational = "invalid_check_international",
+  InvalidCountryCovid = "invalid_country_covid",
+  InvalidFile = "invalid_file",
+  InvalidFileDimensions = "invalid_file_dimensions",
+  InvalidFileDownloadTime = "invalid_file_download_time",
+  InvalidFileUrl = "invalid_file_url",
+  InvalidImageDpi = "invalid_image_dpi",
+  InvalidInternationalFeature = "invalid_international_feature",
+  InvalidPerforationReturnEnvelope = "invalid_perforation_return_envelope",
+  InvalidTemplateHtml = "invalid_template_html",
+  MergeVariableRequired = "merge_variable_required",
+  MergeVariableWhitespace = "merge_variable_whitespace",
+  PaymentMethodUnverified = "payment_method_unverified",
+  PdfEncrypted = "pdf_encrypted",
+  SpecialCharactersRestricted = "special_characters_restricted",
+  UnembeddedFonts = "unembedded_fonts",
+  EmailRequired = "email_required",
+  InvalidApiKey = "invalid_api_key",
+  PublishableKeyNotAllowed = "publishable_key_not_allowed",
+  RateLimitExceeded = "rate_limit_exceeded",
+  Unauthorized = "unauthorized",
+  UnauthorizedToken = "unauthorized_token",
 }
 
 /**
