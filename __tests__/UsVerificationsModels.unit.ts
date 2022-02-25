@@ -17,10 +17,14 @@ import {
   UsVerification,
   UsVerifications,
   UsVerificationDeliverabilityEnum,
+  UsVerificationOrError,
+  UsVerificationsWritable,
   ZipCodeType,
   LobError,
   Suggestions,
   LobConfidenceScoreLevelEnum,
+  UsVerificationOrErrorCodeEnum,
+  UsVerificationOrErrorStatusCodeEnum,
 } from "../models";
 
 describe("Us Verifications Models", () => {
@@ -156,8 +160,7 @@ describe("Us Verifications Models", () => {
     });
 
     it.each([
-      ["addresses", [new UsVerification()]],
-      ["addresses", [new LobError()]],
+      ["addresses", [new UsVerification({ id: "us_ver_fakeId" })]],
       ["errors", true],
       ["errors", false],
     ])("can be created with a provided %s value", (prop, val) => {
@@ -168,6 +171,179 @@ describe("Us Verifications Models", () => {
 
       expect(rec).toBeDefined();
       expect((rec as any)[prop]).toEqual(val);
+    });
+
+    it("sorts LobError objects into a secondary array", () => {
+      const rec = new UsVerifications({
+        addresses: [new LobError({ status_code: 500 })],
+      });
+      expect(rec).toBeDefined();
+      expect(rec.addresses.length).toEqual(0);
+      expect(rec.errorAddresses.length).toEqual(1);
+    });
+
+    it("rejects invalid values for id", () => {
+      const rec = new UsVerification();
+      expect(rec.id).not.toBeDefined();
+
+      const invalidValues = ["Nope"];
+      for (const val of invalidValues) {
+        try {
+          rec.id = val;
+          throw new Error("Should Throw");
+        } catch (err: any) {
+          expect(err.message).toEqual("Invalid id provided");
+        }
+      }
+    });
+
+    it("allows setting valid values for id", () => {
+      const rec = new UsVerification();
+      expect(rec.id).not.toBeDefined();
+
+      const validValues = ["us_ver_1234"];
+      for (const val of validValues) {
+        rec.id = val;
+        expect(rec.id).toBeDefined();
+        expect(rec.id).toEqual(val);
+      }
+    });
+  });
+
+  describe("UsVerificationsWritable", () => {
+    it("can be created", () => {
+      const rec = new UsVerificationsWritable();
+      expect(rec).toBeDefined();
+    });
+
+    it.each([
+      ["address", "fake address"],
+      ["recipient", "fake recipient"],
+      ["primary_line", "fake primary"],
+      ["secondary_line", "fake secondary"],
+      ["urbanization", "fake urbanization"],
+      ["city", "fake city"],
+      ["state", "fake state"],
+      ["zip_code", "78725"],
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new UsVerificationsWritable(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
+    });
+
+    it("rejects invalid values for id", () => {
+      const rec = new UsVerification();
+      expect(rec.id).not.toBeDefined();
+
+      const invalidValues = ["Nope"];
+      for (const val of invalidValues) {
+        try {
+          rec.id = val;
+          throw new Error("Should Throw");
+        } catch (err: any) {
+          expect(err.message).toEqual("Invalid id provided");
+        }
+      }
+    });
+
+    it("rejects invalid values for zip_code", () => {
+      const rec = new UsVerificationsWritable();
+      expect(rec.zip_code).not.toBeDefined();
+
+      const invalidValues = ["Nope"];
+      for (const val of invalidValues) {
+        try {
+          rec.zip_code = val;
+          throw new Error("Should Throw");
+        } catch (err: any) {
+          expect(err.message).toEqual("Invalid zip_code provided");
+        }
+      }
+    });
+
+    it("allows setting valid values for id", () => {
+      const rec = new UsVerification();
+      expect(rec.id).not.toBeDefined();
+
+      const validValues = ["us_ver_1234"];
+      for (const val of validValues) {
+        rec.id = val;
+        expect(rec.id).toBeDefined();
+        expect(rec.id).toEqual(val);
+      }
+    });
+  });
+
+  describe("UsVerificationOrError", () => {
+    it("can be created", () => {
+      const rec = new UsVerificationOrError();
+      expect(rec).toBeDefined();
+    });
+
+    it.each([
+      ["id", "us_ver_fakeId"],
+      ["recipient", "fake recipient"],
+      ["primary_line", "fake primary"],
+      ["secondary_line", "fake secondary"],
+      ["urbanization", "fake urbanization"],
+      ["last_line", "fake last"],
+      ["deliverability", UsVerificationDeliverabilityEnum.Deliverable],
+      [
+        "deliverability",
+        UsVerificationDeliverabilityEnum.DeliverableIncorrectUnit,
+      ],
+      [
+        "deliverability",
+        UsVerificationDeliverabilityEnum.DeliverableMissingUnit,
+      ],
+      [
+        "deliverability",
+        UsVerificationDeliverabilityEnum.DeliverableUnnecessaryUnit,
+      ],
+      ["deliverability", UsVerificationDeliverabilityEnum.Undeliverable],
+      ["components", new UsComponents()],
+      ["deliverability_analysis", new DeliverabilityAnalysis()],
+      ["lob_confidence_score", new LobConfidenceScore()],
+      ["object", "US Verification"],
+      ["message", "fake message"],
+      ["status_code", UsVerificationOrErrorStatusCodeEnum.NUMBER_403],
+      ["code", UsVerificationOrErrorCodeEnum.AddressLengthExceedsLimit],
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new UsVerificationOrError(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
+    });
+
+    it("rejects invalid values for id", () => {
+      const rec = new UsVerificationOrError();
+      expect(rec.id).not.toBeDefined();
+
+      const invalidValues = ["Nope"];
+      for (const val of invalidValues) {
+        try {
+          rec.id = val;
+          throw new Error("Should Throw");
+        } catch (err: any) {
+          expect(err.message).toEqual("Invalid id provided");
+        }
+      }
+    });
+
+    it("sorts LobError objects into a secondary array", () => {
+      const rec = new UsVerifications({
+        addresses: [new LobError({ status_code: 500 })],
+      });
+      expect(rec).toBeDefined();
+      expect(rec.addresses.length).toEqual(0);
+      expect(rec.errorAddresses.length).toEqual(1);
     });
 
     it("rejects invalid values for id", () => {

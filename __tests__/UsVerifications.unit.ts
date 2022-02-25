@@ -3,6 +3,7 @@ import {
   MultipleComponentsList,
   CountryExtended,
   UsVerificationDeliverabilityEnum,
+  IntlVerificationStatusEnum,
 } from "../models";
 import { USVerificationsApi } from "../api";
 
@@ -243,8 +244,14 @@ describe("USVerificationsApi", () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
           addresses: [
-            { deliverability: UsVerificationDeliverabilityEnum.Deliverable },
-            { deliverability: UsVerificationDeliverabilityEnum.Deliverable },
+            {
+              id: "us_ver_fakeId",
+              deliverability: UsVerificationDeliverabilityEnum.Deliverable,
+            },
+            {
+              id: "us_ver_fakeId",
+              deliverability: UsVerificationDeliverabilityEnum.Deliverable,
+            },
           ],
         },
       }));
@@ -259,8 +266,14 @@ describe("USVerificationsApi", () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
           addresses: [
-            { deliverability: UsVerificationDeliverabilityEnum.Deliverable },
-            { deliverability: UsVerificationDeliverabilityEnum.Deliverable },
+            {
+              id: "us_ver_fakeId",
+              deliverability: UsVerificationDeliverabilityEnum.Deliverable,
+            },
+            {
+              id: "us_ver_fakeId",
+              deliverability: UsVerificationDeliverabilityEnum.Deliverable,
+            },
           ],
         },
       }));
@@ -275,8 +288,14 @@ describe("USVerificationsApi", () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
           addresses: [
-            { deliverability: UsVerificationDeliverabilityEnum.Deliverable },
-            { deliverability: UsVerificationDeliverabilityEnum.Deliverable },
+            {
+              id: "us_ver_fakeId",
+              deliverability: UsVerificationDeliverabilityEnum.Deliverable,
+            },
+            {
+              id: "us_ver_fakeId",
+              deliverability: UsVerificationDeliverabilityEnum.Deliverable,
+            },
           ],
         },
       }));

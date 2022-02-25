@@ -1,7 +1,6 @@
 import {
   Address,
   AddressDeletion,
-  AddressDomestic,
   AddressDomesticExpanded,
   AddressDeletionObjectEnum,
   AddressEditable,
@@ -224,63 +223,6 @@ describe("Address Models", () => {
       expect(rec.address_country).not.toBeDefined();
 
       const validValues = ["UNITED STATES"];
-      for (const val of validValues) {
-        rec.address_country = val;
-        expect(rec.address_country).toBeDefined();
-        expect(rec.address_country).toEqual(val);
-      }
-    });
-  });
-
-  describe("AddressDomestic", () => {
-    it("can be created", () => {
-      const rec = new AddressDomestic();
-      expect(rec).toBeDefined();
-    });
-
-    it.each([
-      ["address_line1", "address line 1"],
-      ["address_line2", "address line 2"],
-      ["address_city", "Some City"],
-      ["address_state", "CA"],
-      ["address_zip", "11111"],
-      ["description", "description"],
-      ["name", "fake name"],
-      ["company", "fake company"],
-      ["phone", "000-000-0000"],
-      ["email", "fake@email.com"],
-      ["address_country", "US"],
-      ["metadata", {}],
-    ])("can be created with a provided %s value", (prop, val) => {
-      const input = {};
-      (input as any)[prop] = val;
-
-      const rec = new AddressDomestic(input);
-
-      expect(rec).toBeDefined();
-      expect((rec as any)[prop]).toEqual(val);
-    });
-
-    it("rejects invalid values for address_country", () => {
-      const rec = new AddressDomestic();
-      expect(rec.address_country).not.toBeDefined();
-
-      const invalidValues = ["Nope"];
-      for (const val of invalidValues) {
-        try {
-          rec.address_country = val;
-          throw new Error("Should Throw");
-        } catch (err: any) {
-          expect(err.message).toEqual("Invalid address_country provided");
-        }
-      }
-    });
-
-    it("allows setting valid values for address_country", () => {
-      const rec = new AddressDomestic();
-      expect(rec.address_country).not.toBeDefined();
-
-      const validValues = ["US"];
       for (const val of validValues) {
         rec.address_country = val;
         expect(rec.address_country).toBeDefined();
