@@ -70,7 +70,7 @@ export enum CountryExtendedExpanded {
   CongoDemocraticRepublicOfThe = "CONGO, DEMOCRATIC REPUBLIC OF THE",
   CookIslands = "COOK ISLANDS",
   CostaRica = "COSTA RICA",
-  CteDivory = "CÔTE D`IVORY",
+  CteDivoire = "CÔTE D`IVOIRE",
   Croatia = "CROATIA",
   Cuba = "CUBA",
   Curaao = "CURAÇAO",
