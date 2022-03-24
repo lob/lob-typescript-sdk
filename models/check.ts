@@ -14,6 +14,7 @@
 
 import * as Models from "./index";
 
+import { Address } from "./address";
 import { BankAccount } from "./bank-account";
 import { SendDate } from "./send-date";
 import { Thumbnail } from "./thumbnail";
@@ -125,20 +126,18 @@ export class Check {
   }
 
   /**
-   * Must either be an address ID or an inline object with correct address parameters.
-   * @type {any}
+   *
+   * @type {Address}
    * @memberof Check
    */
-
-  "to"?: string | Models.AddressEditable;
+  "to"?: Address;
 
   /**
-   * Must either be an address ID or an inline object with correct address parameters.
-   * @type {any}
+   *
+   * @type {Address}
    * @memberof Check
    */
-
-  "from"?: string | Models.AddressEditable;
+  "from"?: Address;
 
   /**
    * An internal description that identifies this resource. Must be no longer than 255 characters.
