@@ -7,7 +7,7 @@ currentBranch=$2
 git fetch
 git checkout "${currentBranch}"
 for folder in ${generatedFolders[@]}; do
-    prohibitedAuthors=$(git shortlog origin/${baseBranch}.. -se  --perl-regexp --author='^((?!BennyKitchell).*)$' -- ${folder} 2>&1)
+    prohibitedAuthors=$(git shortlog origin/${baseBranch}.. -se  --perl-regexp --author='^((?!lobot).*)$' -- ${folder} 2>&1)
     if [ -z "$prohibitedAuthors" ]
     then
         continue
