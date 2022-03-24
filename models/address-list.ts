@@ -32,6 +32,9 @@ export class AddressList {
     if (typeof input?.next_url !== "undefined") {
       this.next_url = input.next_url;
     }
+    if (typeof input?.cool_url !== "undefined") {
+      this.cool_url = input.cool_url;
+    }
     if (typeof input?.previous_url !== "undefined") {
       this.previous_url = input.previous_url;
     }
@@ -63,6 +66,23 @@ export class AddressList {
    * @memberof AddressList
    */
   "next_url"?: string | null;
+
+  public get nextPageToken(): string | undefined {
+    if (!this.next_url) {
+      return undefined;
+    }
+    return this.next_url
+      .split("?")[1]
+      .split("&")
+      .find((raw) => raw.includes("after="))
+      ?.split("=")[1];
+  }
+  /**
+   * url of next page of items in list.
+   * @type {string}
+   * @memberof AddressList
+   */
+  "cool_url"?: string | null;
 
   public get nextPageToken(): string | undefined {
     if (!this.next_url) {
