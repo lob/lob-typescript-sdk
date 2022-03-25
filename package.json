@@ -11,7 +11,7 @@
     "Lob.com",
     "printing"
   ],
-  "version": "0.0.0-development",
+  "version": "0.0.2",
   "homepage": "https://github.com/lob/lob-typescript-sdk",
   "author": "Lob <support@lob.com> (https://lob.com/)",
   "repository": {
