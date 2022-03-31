@@ -46,7 +46,7 @@ import { CardOrder } from "../models";
 // @ts-ignore
 import { CardOrderEditable } from "../models";
 // @ts-ignore
-import { InlineResponse200 } from "../models";
+import { CardOrderList } from "../models";
 // @ts-ignore
 import { LobError } from "../models";
 /**
@@ -221,10 +221,7 @@ export const CardOrdersApiFp = function (configuration?: Configuration) {
       cardId: string,
       options?: AxiosRequestConfig
     ): Promise<
-      (
-        axios?: AxiosInstance,
-        basePath?: string
-      ) => AxiosPromise<InlineResponse200>
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<CardOrderList>
     > {
       const localVarAxiosArgs =
         await localVarAxiosParamCreator.cardOrdersRetrieve(cardId, options);
@@ -286,7 +283,7 @@ export class CardOrdersApi extends BaseAPI {
       .cardOrdersRetrieve(cardId, options)
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {
-        return new InlineResponse200(response.data);
+        return new CardOrderList(response.data);
       })
       .catch((error) => {
         if (error.response?.data?.error?.message) {
