@@ -19,21 +19,61 @@ import { CardOrder } from "./card-order";
 /**
  *
  * @export
- * @class InlineResponse200
+ * @class CardOrderList
  */
-export class InlineResponse200 {
+export class CardOrderList {
   constructor(input?: any) {
     if (typeof input?.data !== "undefined") {
       this.data = input.data;
     }
+    if (typeof input?.object !== "undefined") {
+      this.object = input.object;
+    }
+    if (typeof input?.next_url !== "undefined") {
+      this.next_url = input.next_url;
+    }
+    if (typeof input?.previous_url !== "undefined") {
+      this.previous_url = input.previous_url;
+    }
+    if (typeof input?.count !== "undefined") {
+      this.count = input.count;
+    }
   }
 
   /**
-   * List of card orders
+   * list of card orders
    * @type {Array<CardOrder>}
-   * @memberof InlineResponse200
+   * @memberof CardOrderList
    */
   "data"?: Array<CardOrder>;
+
+  /**
+   * Value is type of resource.
+   * @type {string}
+   * @memberof CardOrderList
+   */
+  "object"?: string;
+
+  /**
+   * url of next page of items in list.
+   * @type {string}
+   * @memberof CardOrderList
+   */
+  "next_url"?: string | null;
+
+  /**
+   * url of previous page of items in list.
+   * @type {string}
+   * @memberof CardOrderList
+   */
+  "previous_url"?: string | null;
+
+  /**
+   * number of resources in a set
+   * @type {number}
+   * @memberof CardOrderList
+   */
+  "count"?: number;
 }
 
 /**
