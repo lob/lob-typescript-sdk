@@ -665,21 +665,5 @@ describe("PostcardsApi", () => {
         expect(err.message).toEqual("Unknown Error");
       }
     });
-
-    it("creates postcards with an idempotency_key  ", async () => {
-      axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual(
-          "idempotencyKey=026e7634-24d7-486c-a0bb-4a17fd0eebc5"
-        );
-        return {
-          id: "fake 1",
-          description: "fake 2",
-        };
-      });
-
-      const postcardApi = new PostcardsApi(CONFIG_FOR_UNIT);
-      expect(postcardApi.create).toBeDefined();
-      expect(typeof postcardApi.create).toEqual("function");
-    });
   });
 });
