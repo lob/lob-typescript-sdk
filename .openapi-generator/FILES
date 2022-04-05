@@ -37,6 +37,7 @@ models/card-deletion.ts
 models/card-editable.ts
 models/card-list.ts
 models/card-order-editable.ts
+models/card-order-list.ts
 models/card-order.ts
 models/card-updatable.ts
 models/card.ts
@@ -54,7 +55,6 @@ models/events.ts
 models/geocode-addresses.ts
 models/geocode-components.ts
 models/index.ts
-models/inline-response200.ts
 models/intl-components.ts
 models/intl-verification-or-error.ts
 models/intl-verification-writable.ts
