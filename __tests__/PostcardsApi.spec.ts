@@ -1,5 +1,5 @@
-import { Postcard, PostcardEditable } from "../models";
-import { PostcardsApi } from "../api";
+import {Postcard, PostcardEditable, TemplateWritable} from "../models";
+import {PostcardsApi, TemplatesApi} from "../api";
 import {
   ADDRESSES_EDITABLE,
   CONFIG_FOR_INTEGRATION,
@@ -11,12 +11,12 @@ describe("postcardsApi", () => {
 
   let postcardsApi: PostcardsApi;
 
-  const dummyPostcard: PostcardEditable = {
+  const dummyPostcard = new PostcardEditable({
     to: ADDRESSES_EDITABLE[2],
     from: ADDRESSES_EDITABLE[1],
     front: FILE_LOCATION_4X6,
     back: FILE_LOCATION_4X6,
-  };
+  });
 
   it("Postcard API can be instantiated", () => {
     postcardsApi = new PostcardsApi(CONFIG_FOR_INTEGRATION);
@@ -43,6 +43,8 @@ describe("postcardsApi", () => {
     it("creates, retrieves, and deletes a postcard", async () => {
       const postcard = await postcardsApi.create(dummyPostcard);
       expect(postcard.id).toBeDefined();
+      expect(postcard.url).toBeDefined();
+
       if (postcard.id) {
         const retrievedPostcard = await postcardsApi.get(postcard.id);
         expect(retrievedPostcard).toBeDefined();
@@ -51,6 +53,39 @@ describe("postcardsApi", () => {
       } else {
         throw new Error("postcard ID should be defined upon creation");
       }
+    });
+
+    it("creates a postcard with templateId", async () => {
+      // Template Fixture
+      const templateWrite = new TemplateWritable({
+        description: "Newer Template",
+        html: "<html>Updated HTML for {{name}}</html>",
+      });
+
+      // Create Template
+      const templatesApi = new TemplatesApi(CONFIG_FOR_INTEGRATION);
+      const createdTemplate = await templatesApi.create(templateWrite);
+      expect(createdTemplate.id).toBeDefined();
+
+      // Postcard Fixture
+      const postcardWithTemplateIds = new PostcardEditable({
+        to: ADDRESSES_EDITABLE[2],
+        from: ADDRESSES_EDITABLE[1],
+        front: createdTemplate.id,
+        back: createdTemplate.id,
+      });
+
+      const postcard = await postcardsApi.create(postcardWithTemplateIds);
+      expect(postcard.id).toBeDefined();
+      expect(postcard.front_template_id).toEqual(createdTemplate.id);
+      expect(postcard.back_template_id).toEqual(createdTemplate.id);
+      expect(postcard.url).toBeDefined();
+
+      // Clean Up
+      const deletedPostcard = await postcardsApi.cancel(postcard.id);
+      expect(deletedPostcard.deleted).toBeTruthy();
+
+      await templatesApi.delete(createdTemplate.id);
     });
   });
 

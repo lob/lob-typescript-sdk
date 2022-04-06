@@ -28,17 +28,15 @@ describe("TemplatesApi", () => {
   });
 
   describe("performs single-Template operations", () => {
-    const templateWrite: TemplateWritable = {
+    const templateWrite = new TemplateWritable({
       description: "Newer Template",
       html: "<html>Updated HTML for {{name}}</html>",
-    };
+    });
 
     it("creates, updates, retrieves, and deletes a template", async () => {
       const templatesApi = new TemplatesApi(CONFIG_FOR_INTEGRATION);
       // Create
-      const createdTemplate = await new TemplatesApi(
-        CONFIG_FOR_INTEGRATION
-      ).create(templateWrite);
+      const createdTemplate = await templatesApi.create(templateWrite);
       expect(createdTemplate.id).toBeDefined();
       expect(createdTemplate.description).toEqual(templateWrite.description);
 
