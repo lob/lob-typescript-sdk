@@ -167,14 +167,14 @@ export class UsVerificationOrError {
    * @type {number}
    * @memberof UsVerificationOrError
    */
-  "status_code"?: UsVerificationOrErrorStatusCodeEnum;
+  "status_code"?: number | null;
 
   /**
    * A pre-defined string identifying an error.
    * @type {string}
    * @memberof UsVerificationOrError
    */
-  "code"?: UsVerificationOrErrorCodeEnum;
+  "code"?: string | null;
 }
 
 /**
@@ -194,71 +194,6 @@ export enum UsVerificationOrErrorDeliverabilityEnum {
  */
 export enum UsVerificationOrErrorObjectEnum {
   UsVerification = "us_verification",
-}
-/**
- * @export
- * @enum {string}
- */
-export enum UsVerificationOrErrorStatusCodeEnum {
-  NUMBER_401 = 401,
-  NUMBER_403 = 403,
-  NUMBER_404 = 404,
-  NUMBER_413 = 413,
-  NUMBER_422 = 422,
-  NUMBER_429 = 429,
-  NUMBER_500 = 500,
-}
-/**
- * @export
- * @enum {string}
- */
-export enum UsVerificationOrErrorCodeEnum {
-  BadRequest = "bad_request",
-  Conflict = "conflict",
-  FeatureLimitReached = "feature_limit_reached",
-  InternalServerError = "internal_server_error",
-  Invalid = "invalid",
-  NotDeletable = "not_deletable",
-  NotFound = "not_found",
-  RequestTimeout = "request_timeout",
-  ServiceUnavailable = "service_unavailable",
-  UnrecognizedEndpoint = "unrecognized_endpoint",
-  UnsupportedLobVersion = "unsupported_lob_version",
-  AddressLengthExceedsLimit = "address_length_exceeds_limit",
-  BankAccountAlreadyVerified = "bank_account_already_verified",
-  BankError = "bank_error",
-  CustomEnvelopeInventoryDepleted = "custom_envelope_inventory_depleted",
-  DeletedBankAccount = "deleted_bank_account",
-  FailedDeliverabilityStrictness = "failed_deliverability_strictness",
-  FilePagesBelowMin = "file_pages_below_min",
-  FilePagesExceedMax = "file_pages_exceed_max",
-  FileSizeExceedsLimit = "file_size_exceeds_limit",
-  ForeignReturnAddress = "foreign_return_address",
-  InconsistentPageDimensions = "inconsistent_page_dimensions",
-  InvalidBankAccount = "invalid_bank_account",
-  InvalidBankAccountVerification = "invalid_bank_account_verification",
-  InvalidCheckInternational = "invalid_check_international",
-  InvalidCountryCovid = "invalid_country_covid",
-  InvalidFile = "invalid_file",
-  InvalidFileDimensions = "invalid_file_dimensions",
-  InvalidFileDownloadTime = "invalid_file_download_time",
-  InvalidFileUrl = "invalid_file_url",
-  InvalidImageDpi = "invalid_image_dpi",
-  InvalidInternationalFeature = "invalid_international_feature",
-  InvalidPerforationReturnEnvelope = "invalid_perforation_return_envelope",
-  InvalidTemplateHtml = "invalid_template_html",
-  MergeVariableRequired = "merge_variable_required",
-  MergeVariableWhitespace = "merge_variable_whitespace",
-  PaymentMethodUnverified = "payment_method_unverified",
-  PdfEncrypted = "pdf_encrypted",
-  SpecialCharactersRestricted = "special_characters_restricted",
-  UnembeddedFonts = "unembedded_fonts",
-  EmailRequired = "email_required",
-  InvalidApiKey = "invalid_api_key",
-  PublishableKeyNotAllowed = "publishable_key_not_allowed",
-  RateLimitExceeded = "rate_limit_exceeded",
-  Unauthorized = "unauthorized",
-  UnauthorizedToken = "unauthorized_token",
 }
 
 /**
