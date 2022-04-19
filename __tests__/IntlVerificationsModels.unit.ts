@@ -12,9 +12,7 @@ import {
   CountryExtended,
   LobError,
   MultipleComponents,
-  UsVerifications,
   IntlVerificationWritable,
-  IntlVerificationOrErrorCodeEnum,
 } from "../models";
 
 describe("Intl Verifications Models", () => {
@@ -227,7 +225,7 @@ describe("Intl Verifications Models", () => {
       ["object", IntlVerificationObjectEnum.IntlVerification],
       ["message", "fake message"],
       ["status_code", 500],
-      ["code", IntlVerificationOrErrorCodeEnum.AddressLengthExceedsLimit],
+      ["code", "address_length_exceeds_limit"],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
