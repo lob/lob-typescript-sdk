@@ -23,8 +23,6 @@ import {
   LobError,
   Suggestions,
   LobConfidenceScoreLevelEnum,
-  UsVerificationOrErrorCodeEnum,
-  UsVerificationOrErrorStatusCodeEnum,
 } from "../models";
 
 describe("Us Verifications Models", () => {
@@ -310,8 +308,8 @@ describe("Us Verifications Models", () => {
       ["lob_confidence_score", new LobConfidenceScore()],
       ["object", "US Verification"],
       ["message", "fake message"],
-      ["status_code", UsVerificationOrErrorStatusCodeEnum.NUMBER_403],
-      ["code", UsVerificationOrErrorCodeEnum.AddressLengthExceedsLimit],
+      ["status_code", 403],
+      ["code", "address_length_exceeds_limit"],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
