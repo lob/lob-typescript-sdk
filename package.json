@@ -9,7 +9,10 @@
     "api",
     "wrapper",
     "Lob.com",
-    "printing"
+    "printing",
+    "address verification",
+    "address validation",
+    "address autocomplete"
   ],
   "version": "0.0.4",
   "homepage": "https://github.com/lob/lob-typescript-sdk",
