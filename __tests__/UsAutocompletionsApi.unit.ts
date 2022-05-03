@@ -1,5 +1,5 @@
 import { UsAutocompletionsWritable } from "../models";
-import { USAutocompletionsApi } from "../api";
+import { UsAutocompletionsApi } from "../api";
 
 import { fail } from "./testUtilities";
 import {
@@ -14,21 +14,21 @@ jest.mock("axios", () => ({
   request: jest.fn(),
 }));
 
-describe("USAutocompletionsApi", () => {
+describe("UsAutocompletionsApi", () => {
   it("US Autocompletions API can be instantiated", () => {
-    const autocompletionApi = new USAutocompletionsApi(CONFIG_FOR_UNIT);
+    const autocompletionApi = new UsAutocompletionsApi(CONFIG_FOR_UNIT);
     expect(autocompletionApi).toBeDefined();
     expect(typeof autocompletionApi).toEqual("object");
-    expect(autocompletionApi).toBeInstanceOf(USAutocompletionsApi);
+    expect(autocompletionApi).toBeInstanceOf(UsAutocompletionsApi);
   });
 
   it("US Autocompletions API can be instantiated with base options", () => {
-    const autocompletionApi = new USAutocompletionsApi(
+    const autocompletionApi = new UsAutocompletionsApi(
       CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
     );
     expect(autocompletionApi).toBeDefined();
     expect(typeof autocompletionApi).toEqual("object");
-    expect(autocompletionApi).toBeInstanceOf(USAutocompletionsApi);
+    expect(autocompletionApi).toBeInstanceOf(UsAutocompletionsApi);
   });
 
   describe("autocomplete", () => {
@@ -41,7 +41,7 @@ describe("USAutocompletionsApi", () => {
     };
 
     it("exists", () => {
-      const autocompletionApi = new USAutocompletionsApi(CONFIG_FOR_UNIT);
+      const autocompletionApi = new UsAutocompletionsApi(CONFIG_FOR_UNIT);
       expect(autocompletionApi.autocomplete).toBeDefined();
       expect(typeof autocompletionApi.autocomplete).toEqual("function");
     });
@@ -55,7 +55,7 @@ describe("USAutocompletionsApi", () => {
         },
       }));
 
-      const response = await new USAutocompletionsApi(
+      const response = await new UsAutocompletionsApi(
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).autocomplete(autocompletionInput);
       expect(response.suggestions).toBeDefined();
@@ -71,7 +71,7 @@ describe("USAutocompletionsApi", () => {
         },
       }));
 
-      const response = await new USAutocompletionsApi(
+      const response = await new UsAutocompletionsApi(
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).autocomplete(autocompletionInput);
       expect(response.suggestions).toBeDefined();
@@ -87,7 +87,7 @@ describe("USAutocompletionsApi", () => {
       });
 
       try {
-        await new USAutocompletionsApi(CONFIG_FOR_UNIT).autocomplete(
+        await new UsAutocompletionsApi(CONFIG_FOR_UNIT).autocomplete(
           autocompletionInput
         );
         fail("Should throw");
@@ -105,7 +105,7 @@ describe("USAutocompletionsApi", () => {
       });
 
       try {
-        await new USAutocompletionsApi(CONFIG_FOR_UNIT).autocomplete(
+        await new UsAutocompletionsApi(CONFIG_FOR_UNIT).autocomplete(
           autocompletionInput
         );
         fail("Should throw");
@@ -123,7 +123,7 @@ describe("USAutocompletionsApi", () => {
       });
 
       try {
-        await new USAutocompletionsApi(CONFIG_FOR_UNIT).autocomplete(
+        await new UsAutocompletionsApi(CONFIG_FOR_UNIT).autocomplete(
           autocompletionInput
         );
         fail("Should throw");
@@ -138,7 +138,7 @@ describe("USAutocompletionsApi", () => {
       });
 
       try {
-        await new USAutocompletionsApi(CONFIG_FOR_UNIT).autocomplete(
+        await new UsAutocompletionsApi(CONFIG_FOR_UNIT).autocomplete(
           autocompletionInput
         );
         fail("Should throw");

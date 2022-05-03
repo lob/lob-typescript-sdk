@@ -5,7 +5,7 @@ import {
   UsVerificationDeliverabilityEnum,
   IntlVerificationStatusEnum,
 } from "../models";
-import { USVerificationsApi } from "../api";
+import { UsVerificationsApi } from "../api";
 
 import { fail } from "./testUtilities";
 import {
@@ -20,21 +20,21 @@ jest.mock("axios", () => ({
   request: jest.fn(),
 }));
 
-describe("USVerificationsApi", () => {
+describe("UsVerificationsApi", () => {
   it("can be instantiated", () => {
-    const verificationApi = new USVerificationsApi(CONFIG_FOR_UNIT);
+    const verificationApi = new UsVerificationsApi(CONFIG_FOR_UNIT);
     expect(verificationApi).toBeDefined();
     expect(typeof verificationApi).toEqual("object");
-    expect(verificationApi).toBeInstanceOf(USVerificationsApi);
+    expect(verificationApi).toBeInstanceOf(UsVerificationsApi);
   });
 
   it("can be instantiated with base options", () => {
-    const verificationApi = new USVerificationsApi(
+    const verificationApi = new UsVerificationsApi(
       CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
     );
     expect(verificationApi).toBeDefined();
     expect(typeof verificationApi).toEqual("object");
-    expect(verificationApi).toBeInstanceOf(USVerificationsApi);
+    expect(verificationApi).toBeInstanceOf(UsVerificationsApi);
   });
 
   describe("verifySingle", () => {
@@ -44,7 +44,7 @@ describe("USVerificationsApi", () => {
     };
 
     it("exists", () => {
-      const verificationApi = new USVerificationsApi(CONFIG_FOR_UNIT);
+      const verificationApi = new UsVerificationsApi(CONFIG_FOR_UNIT);
       expect(verificationApi.verifySingle).toBeDefined();
       expect(typeof verificationApi.verifySingle).toEqual("function");
     });
@@ -58,7 +58,7 @@ describe("USVerificationsApi", () => {
       });
 
       try {
-        await new USVerificationsApi(CONFIG_FOR_UNIT).verifySingle(
+        await new UsVerificationsApi(CONFIG_FOR_UNIT).verifySingle(
           verification
         );
       } catch (err: any) {
@@ -75,7 +75,7 @@ describe("USVerificationsApi", () => {
       });
 
       try {
-        await new USVerificationsApi(CONFIG_FOR_UNIT).verifySingle(
+        await new UsVerificationsApi(CONFIG_FOR_UNIT).verifySingle(
           verification
         );
         fail("Should throw");
@@ -93,7 +93,7 @@ describe("USVerificationsApi", () => {
       });
 
       try {
-        await new USVerificationsApi(CONFIG_FOR_UNIT).verifySingle(
+        await new UsVerificationsApi(CONFIG_FOR_UNIT).verifySingle(
           verification
         );
         fail("Should throw");
@@ -108,7 +108,7 @@ describe("USVerificationsApi", () => {
       });
 
       try {
-        await new USVerificationsApi(CONFIG_FOR_UNIT).verifySingle(
+        await new UsVerificationsApi(CONFIG_FOR_UNIT).verifySingle(
           verification
         );
         fail("Should throw");
@@ -122,7 +122,7 @@ describe("USVerificationsApi", () => {
         data: { deliverability: UsVerificationDeliverabilityEnum.Deliverable },
       }));
 
-      const response = await new USVerificationsApi(
+      const response = await new UsVerificationsApi(
         CONFIG_FOR_UNIT
       ).verifySingle(verification);
       expect(response).toBeDefined();
@@ -136,7 +136,7 @@ describe("USVerificationsApi", () => {
         data: { deliverability: UsVerificationDeliverabilityEnum.Deliverable },
       }));
 
-      const response = await new USVerificationsApi(
+      const response = await new UsVerificationsApi(
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).verifySingle(verification);
       expect(response).toBeDefined();
@@ -150,7 +150,7 @@ describe("USVerificationsApi", () => {
         data: { deliverability: UsVerificationDeliverabilityEnum.Deliverable },
       }));
 
-      const response = await new USVerificationsApi(
+      const response = await new UsVerificationsApi(
         CONFIG_FOR_UNIT
       ).verifySingle(verification, "upper");
       expect(response).toBeDefined();
@@ -175,7 +175,7 @@ describe("USVerificationsApi", () => {
     };
 
     it("exists", () => {
-      const verificationApi = new USVerificationsApi(CONFIG_FOR_UNIT);
+      const verificationApi = new UsVerificationsApi(CONFIG_FOR_UNIT);
       expect(verificationApi.verifyBulk).toBeDefined();
       expect(typeof verificationApi.verifyBulk).toEqual("function");
     });
@@ -189,7 +189,7 @@ describe("USVerificationsApi", () => {
       });
 
       try {
-        await new USVerificationsApi(CONFIG_FOR_UNIT).verifyBulk(verification);
+        await new UsVerificationsApi(CONFIG_FOR_UNIT).verifyBulk(verification);
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
       }
@@ -204,7 +204,7 @@ describe("USVerificationsApi", () => {
       });
 
       try {
-        await new USVerificationsApi(CONFIG_FOR_UNIT).verifyBulk(verification);
+        await new UsVerificationsApi(CONFIG_FOR_UNIT).verifyBulk(verification);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -220,7 +220,7 @@ describe("USVerificationsApi", () => {
       });
 
       try {
-        await new USVerificationsApi(CONFIG_FOR_UNIT).verifyBulk(verification);
+        await new UsVerificationsApi(CONFIG_FOR_UNIT).verifyBulk(verification);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -233,7 +233,7 @@ describe("USVerificationsApi", () => {
       });
 
       try {
-        await new USVerificationsApi(CONFIG_FOR_UNIT).verifyBulk(verification);
+        await new UsVerificationsApi(CONFIG_FOR_UNIT).verifyBulk(verification);
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -255,7 +255,7 @@ describe("USVerificationsApi", () => {
           ],
         },
       }));
-      const response = await new USVerificationsApi(CONFIG_FOR_UNIT).verifyBulk(
+      const response = await new UsVerificationsApi(CONFIG_FOR_UNIT).verifyBulk(
         verification
       );
       expect(response).toBeDefined();
@@ -278,7 +278,7 @@ describe("USVerificationsApi", () => {
         },
       }));
 
-      const response = await new USVerificationsApi(
+      const response = await new UsVerificationsApi(
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).verifyBulk(verification);
       expect(response.addresses?.length).toEqual(2);
@@ -299,7 +299,7 @@ describe("USVerificationsApi", () => {
           ],
         },
       }));
-      const response = await new USVerificationsApi(CONFIG_FOR_UNIT).verifyBulk(
+      const response = await new UsVerificationsApi(CONFIG_FOR_UNIT).verifyBulk(
         verification,
         "proper"
       );

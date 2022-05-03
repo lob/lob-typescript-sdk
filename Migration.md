@@ -193,7 +193,7 @@ try {
 The Bulk verify endpoint from our Addresses Verification Api is used to verify a list of US or US territory addresses with a live API key. This endpoint is not supported in lob-node but it is supported by the TypeScript SDK. This is how it is done:
 
 ```typescript
-const UsVerifications = new USVerificationsApi(av_config);
+const UsVerifications = new UsVerificationsApi(av_config);
 const verificationData1: UsVerificationsWritable = {
   primary_line: "001 CEMETERY LANE",
   city: "WESTFIELD",
@@ -220,7 +220,7 @@ try {
 ​Again, as mentioned above, If you are using the new TypeScript SDK using JavaScript,the code is essentially the same apart from removing the type identifiers found in TypeScript This pattern may be followed for all methods where examples are not supplied as shown here:
 
 ```javascript
-const UsVerifications = new USVerificationsApi(av_config);
+const UsVerifications = new UsVerificationsApi(av_config);
 const verificationData1 = {
     primary_line: "001 CEMETERY LANE",
     city: "WESTFIELD",
@@ -249,7 +249,7 @@ try {
 Here is a sample of the lob-node SINGLE VERIFY method:
 
 ```javascript
-​Lob.usVerifications.verify({
+​Lob.UsVerifications.verify({
   primary_line: '1313 CEMETERY LN',
   city: 'WESTFIELD',
   state: 'NJ',
@@ -262,7 +262,7 @@ Here is a sample of the lob-node SINGLE VERIFY method:
 ​Here is a sample of the TypeScript SDK Single Verify method:
 
 ```typescript
-const UsVerifications = new USVerificationsApi(av_config);
+const UsVerifications = new UsVerificationsApi(av_config);
 const verificationData1: UsVerificationsWritable = {
   primary_line: "001 CEMETERY LANE",
   city: "WESTFIELD",
