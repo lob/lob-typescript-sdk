@@ -60,7 +60,7 @@ describe("postcardsApi", () => {
       const templateWrite = new TemplateWritable({
         description: "Newer Template",
         html: "<html>Updated HTML for {{name}}</html>",
-        mergeVariable: {
+        merge_variables: {
           name: "ADITI",
         },
       });
