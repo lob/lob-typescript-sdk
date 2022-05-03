@@ -12,6 +12,8 @@ export * from "./bank-type-enum";
 export * from "./billing-group";
 export * from "./billing-group-editable";
 export * from "./billing-group-list";
+export * from "./bulk-error";
+export * from "./bulk-error-properties";
 export * from "./card";
 export * from "./card-deletion";
 export * from "./card-editable";

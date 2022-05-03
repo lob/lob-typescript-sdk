@@ -34,6 +34,8 @@ models/bank-type-enum.ts
 models/billing-group-editable.ts
 models/billing-group-list.ts
 models/billing-group.ts
+models/bulk-error-properties.ts
+models/bulk-error.ts
 models/card-deletion.ts
 models/card-editable.ts
 models/card-list.ts
