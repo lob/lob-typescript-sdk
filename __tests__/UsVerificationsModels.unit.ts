@@ -21,6 +21,7 @@ import {
   UsVerificationsWritable,
   ZipCodeType,
   LobError,
+  BulkError,
   Suggestions,
   LobConfidenceScoreLevelEnum,
 } from "../models";
@@ -171,9 +172,9 @@ describe("Us Verifications Models", () => {
       expect((rec as any)[prop]).toEqual(val);
     });
 
-    it("sorts LobError objects into a secondary array", () => {
+    it("sorts BulkError objects into a secondary array", () => {
       const rec = new UsVerifications({
-        addresses: [new LobError({ status_code: 500 })],
+        addresses: [new BulkError({ status_code: 500 })],
       });
       expect(rec).toBeDefined();
       expect(rec.addresses.length).toEqual(0);
@@ -335,9 +336,9 @@ describe("Us Verifications Models", () => {
       }
     });
 
-    it("sorts LobError objects into a secondary array", () => {
+    it("sorts BulkError objects into a secondary array", () => {
       const rec = new UsVerifications({
-        addresses: [new LobError({ status_code: 500 })],
+        addresses: [new BulkError({ status_code: 500 })],
       });
       expect(rec).toBeDefined();
       expect(rec.addresses.length).toEqual(0);

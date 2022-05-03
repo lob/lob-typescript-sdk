@@ -10,7 +10,7 @@ import {
   MultipleComponentsIntl,
   MultipleComponentsList,
   CountryExtended,
-  LobError,
+  BulkError,
   MultipleComponents,
   IntlVerificationWritable,
 } from "../models";
@@ -109,9 +109,9 @@ describe("Intl Verifications Models", () => {
       expect((rec as any)[prop]).toEqual(val);
     });
 
-    it("sorts LobError objects into a secondary array", () => {
+    it("sorts BulkError objects into a secondary array", () => {
       const rec = new IntlVerifications({
-        addresses: [new LobError({ status_code: 500 })],
+        addresses: [new BulkError({ status_code: 500 })],
       });
       expect(rec).toBeDefined();
       expect(rec.addresses.length).toEqual(0);
