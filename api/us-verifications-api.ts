@@ -52,10 +52,10 @@ import { UsVerifications } from "../models";
 // @ts-ignore
 import { UsVerificationsWritable } from "../models";
 /**
- * USVerificationsApi - axios parameter creator
+ * UsVerificationsApi - axios parameter creator
  * @export
  */
-export const USVerificationsApiAxiosParamCreator = function (
+export const UsVerificationsApiAxiosParamCreator = function (
   configuration?: Configuration
 ) {
   return {
@@ -191,12 +191,12 @@ export const USVerificationsApiAxiosParamCreator = function (
 };
 
 /**
- * USVerificationsApi - functional programming interface
+ * UsVerificationsApi - functional programming interface
  * @export
  */
-export const USVerificationsApiFp = function (configuration?: Configuration) {
+export const UsVerificationsApiFp = function (configuration?: Configuration) {
   const localVarAxiosParamCreator =
-    USVerificationsApiAxiosParamCreator(configuration);
+    UsVerificationsApiAxiosParamCreator(configuration);
   return {
     /**
      * Verify a list of US or US territory addresses with a live API key.
@@ -260,12 +260,12 @@ export const USVerificationsApiFp = function (configuration?: Configuration) {
 };
 
 /**
- * USVerificationsApi - object-oriented interface
+ * UsVerificationsApi - object-oriented interface
  * @export
- * @class USVerificationsApi
+ * @class UsVerificationsApi
  * @extends {BaseAPI}
  */
-export class USVerificationsApi extends BaseAPI {
+export class UsVerificationsApi extends BaseAPI {
   /**
    * Verify a list of US or US territory addresses with a live API key.
    * @summary verifyBulk
@@ -273,14 +273,14 @@ export class USVerificationsApi extends BaseAPI {
    * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof USVerificationsApi
+   * @memberof UsVerificationsApi
    */
   public verifyBulk(
     multipleComponentsList: MultipleComponentsList,
     _case?: "upper" | "proper",
     options?: AxiosRequestConfig
   ) {
-    return USVerificationsApiFp(this.configuration)
+    return UsVerificationsApiFp(this.configuration)
       .bulkUsVerifications(multipleComponentsList, _case, options)
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {
@@ -301,14 +301,14 @@ export class USVerificationsApi extends BaseAPI {
    * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof USVerificationsApi
+   * @memberof UsVerificationsApi
    */
   public verifySingle(
     usVerificationsWritable: UsVerificationsWritable,
     _case?: "upper" | "proper",
     options?: AxiosRequestConfig
   ) {
-    return USVerificationsApiFp(this.configuration)
+    return UsVerificationsApiFp(this.configuration)
       .usVerification(usVerificationsWritable, _case, options)
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {

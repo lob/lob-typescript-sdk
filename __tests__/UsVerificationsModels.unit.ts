@@ -554,21 +554,6 @@ describe("Us Verifications Models", () => {
       expect((rec as any)[prop]).toEqual(val);
     });
 
-    it("rejects invalid values for zip_code", () => {
-      const rec = new Suggestions();
-      expect(rec.zip_code).not.toBeDefined();
-
-      const invalidValues = ["Nope"];
-      for (const val of invalidValues) {
-        try {
-          rec.zip_code = val;
-          throw new Error("Should Throw");
-        } catch (err: any) {
-          expect(err.message).toEqual("Invalid zip_code provided");
-        }
-      }
-    });
-
     it("allows setting valid values for zip_code", () => {
       const rec = new Suggestions();
       expect(rec.zip_code).not.toBeDefined();

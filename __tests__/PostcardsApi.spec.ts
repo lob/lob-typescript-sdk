@@ -59,7 +59,7 @@ describe("postcardsApi", () => {
       // Template Fixture
       const templateWrite = new TemplateWritable({
         description: "Newer Template",
-        html: "<html>Updated HTML for {{name}}</html>",
+        html: "<html>Updated HTML</html>",
       });
 
       // Create Template

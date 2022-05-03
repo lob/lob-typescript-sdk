@@ -48,10 +48,10 @@ import { UsAutocompletions } from "../models";
 // @ts-ignore
 import { UsAutocompletionsWritable } from "../models";
 /**
- * USAutocompletionsApi - axios parameter creator
+ * UsAutocompletionsApi - axios parameter creator
  * @export
  */
-export const USAutocompletionsApiAxiosParamCreator = function (
+export const UsAutocompletionsApiAxiosParamCreator = function (
   configuration?: Configuration
 ) {
   return {
@@ -62,13 +62,13 @@ export const USAutocompletionsApiAxiosParamCreator = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    autocompletion: async (
+    usAutocompletion: async (
       usAutocompletionsWritable: UsAutocompletionsWritable,
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'usAutocompletionsWritable' is not null or undefined
       assertParamExists(
-        "autocompletion",
+        "usAutocompletion",
         "usAutocompletionsWritable",
         usAutocompletionsWritable
       );
@@ -117,12 +117,12 @@ export const USAutocompletionsApiAxiosParamCreator = function (
 };
 
 /**
- * USAutocompletionsApi - functional programming interface
+ * UsAutocompletionsApi - functional programming interface
  * @export
  */
-export const USAutocompletionsApiFp = function (configuration?: Configuration) {
+export const UsAutocompletionsApiFp = function (configuration?: Configuration) {
   const localVarAxiosParamCreator =
-    USAutocompletionsApiAxiosParamCreator(configuration);
+    UsAutocompletionsApiAxiosParamCreator(configuration);
   return {
     /**
      * Given an address prefix consisting of a partial primary line, as well as optional input of city, state, and zip code, this functionality returns up to 10 full US address suggestions. Not all of them will turn out to be valid addresses; they\'ll need to be [verified](#operation/verification_us).
@@ -131,7 +131,7 @@ export const USAutocompletionsApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async autocompletion(
+    async usAutocompletion(
       usAutocompletionsWritable: UsAutocompletionsWritable,
       options?: AxiosRequestConfig
     ): Promise<
@@ -140,10 +140,11 @@ export const USAutocompletionsApiFp = function (configuration?: Configuration) {
         basePath?: string
       ) => AxiosPromise<UsAutocompletions>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.autocompletion(
-        usAutocompletionsWritable,
-        options
-      );
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.usAutocompletion(
+          usAutocompletionsWritable,
+          options
+        );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
@@ -155,26 +156,26 @@ export const USAutocompletionsApiFp = function (configuration?: Configuration) {
 };
 
 /**
- * USAutocompletionsApi - object-oriented interface
+ * UsAutocompletionsApi - object-oriented interface
  * @export
- * @class USAutocompletionsApi
+ * @class UsAutocompletionsApi
  * @extends {BaseAPI}
  */
-export class USAutocompletionsApi extends BaseAPI {
+export class UsAutocompletionsApi extends BaseAPI {
   /**
    * Given an address prefix consisting of a partial primary line, as well as optional input of city, state, and zip code, this functionality returns up to 10 full US address suggestions. Not all of them will turn out to be valid addresses; they\'ll need to be [verified](#operation/verification_us).
    * @summary autocomplete
    * @param {UsAutocompletionsWritable} usAutocompletionsWritable
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof USAutocompletionsApi
+   * @memberof UsAutocompletionsApi
    */
   public autocomplete(
     usAutocompletionsWritable: UsAutocompletionsWritable,
     options?: AxiosRequestConfig
   ) {
-    return USAutocompletionsApiFp(this.configuration)
-      .autocompletion(usAutocompletionsWritable, options)
+    return UsAutocompletionsApiFp(this.configuration)
+      .usAutocompletion(usAutocompletionsWritable, options)
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {
         return new UsAutocompletions(response.data);

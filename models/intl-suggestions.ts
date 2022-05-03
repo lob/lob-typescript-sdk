@@ -14,13 +14,18 @@
 
 import * as Models from "./index";
 
+import { CountryExtended } from "./country-extended";
+
 /**
  *
  * @export
- * @class Suggestions
+ * @class IntlSuggestions
  */
-export class Suggestions {
+export class IntlSuggestions {
   constructor(input?: any) {
+    if (typeof input?.primary_number_range !== "undefined") {
+      this.primary_number_range = input.primary_number_range;
+    }
     if (typeof input?.primary_line !== "undefined") {
       this.primary_line = input.primary_line;
     }
@@ -29,6 +34,9 @@ export class Suggestions {
     }
     if (typeof input?.state !== "undefined") {
       this.state = input.state;
+    }
+    if (typeof input?.country !== "undefined") {
+      this.country = input.country;
     }
     if (typeof input?.zip_code !== "undefined") {
       this.zip_code = input.zip_code;
@@ -39,47 +47,61 @@ export class Suggestions {
   }
 
   /**
+   * The primary number range of the address that identifies a building at street level.
+   * @type {string}
+   * @memberof IntlSuggestions
+   */
+  "primary_number_range"?: string;
+
+  /**
    * The primary delivery line (usually the street address) of the address. Combination of the following applicable `components` (primary number & secondary information may be missing or inaccurate): * `primary_number` * `street_predirection` * `street_name` * `street_suffix` * `street_postdirection` * `secondary_designator` * `secondary_number` * `pmb_designator` * `pmb_number`
    * @type {string}
-   * @memberof Suggestions
+   * @memberof IntlSuggestions
    */
   "primary_line"?: string;
 
   /**
    *
    * @type {string}
-   * @memberof Suggestions
+   * @memberof IntlSuggestions
    */
   "city"?: string;
 
   /**
    * The [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) two letter code for the state.
    * @type {string}
-   * @memberof Suggestions
+   * @memberof IntlSuggestions
    */
   "state"?: string;
 
   /**
+   *
+   * @type {CountryExtended}
+   * @memberof IntlSuggestions
+   */
+  "country"?: CountryExtended;
+
+  /**
    * A 5-digit zip code. Left empty if a test key is used.
    * @type {string}
-   * @memberof Suggestions
+   * @memberof IntlSuggestions
    */
   "zip_code"?: string;
 
   /**
    * Value is resource type.
    * @type {string}
-   * @memberof Suggestions
+   * @memberof IntlSuggestions
    */
-  "object"?: SuggestionsObjectEnum;
+  "object"?: IntlSuggestionsObjectEnum;
 }
 
 /**
  * @export
  * @enum {string}
  */
-export enum SuggestionsObjectEnum {
-  UsAutocompletion = "us_autocompletion",
+export enum IntlSuggestionsObjectEnum {
+  IntlAutocompletion = "intl_autocompletion",
 }
 
 /**

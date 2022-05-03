@@ -14,15 +14,17 @@
 
 import * as Models from "./index";
 
+import { CountryExtended } from "./country-extended";
+
 /**
  *
  * @export
- * @class Suggestions
+ * @class IntlAutocompletionsWritable
  */
-export class Suggestions {
+export class IntlAutocompletionsWritable {
   constructor(input?: any) {
-    if (typeof input?.primary_line !== "undefined") {
-      this.primary_line = input.primary_line;
+    if (typeof input?.address_prefix !== "undefined") {
+      this.address_prefix = input.address_prefix;
     }
     if (typeof input?.city !== "undefined") {
       this.city = input.city;
@@ -33,53 +35,45 @@ export class Suggestions {
     if (typeof input?.zip_code !== "undefined") {
       this.zip_code = input.zip_code;
     }
-    if (typeof input?.object !== "undefined") {
-      this.object = input.object;
+    if (typeof input?.country !== "undefined") {
+      this.country = input.country;
     }
   }
 
   /**
-   * The primary delivery line (usually the street address) of the address. Combination of the following applicable `components` (primary number & secondary information may be missing or inaccurate): * `primary_number` * `street_predirection` * `street_name` * `street_suffix` * `street_postdirection` * `secondary_designator` * `secondary_number` * `pmb_designator` * `pmb_number`
+   * Only accepts numbers and street names in an alphanumeric format.
    * @type {string}
-   * @memberof Suggestions
+   * @memberof IntlAutocompletionsWritable
    */
-  "primary_line"?: string;
+  "address_prefix"?: string;
 
   /**
-   *
+   * An optional city input used to filter suggestions. Case insensitive and does not match partial abbreviations.
    * @type {string}
-   * @memberof Suggestions
+   * @memberof IntlAutocompletionsWritable
    */
   "city"?: string;
 
   /**
-   * The [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) two letter code for the state.
+   * An optional state input used to filter suggestions. Case insensitive and does not match partial abbreviations.
    * @type {string}
-   * @memberof Suggestions
+   * @memberof IntlAutocompletionsWritable
    */
   "state"?: string;
 
   /**
-   * A 5-digit zip code. Left empty if a test key is used.
+   * An optional Zip Code input used to filter suggestions. Matches partial entries.
    * @type {string}
-   * @memberof Suggestions
+   * @memberof IntlAutocompletionsWritable
    */
   "zip_code"?: string;
 
   /**
-   * Value is resource type.
-   * @type {string}
-   * @memberof Suggestions
+   *
+   * @type {CountryExtended}
+   * @memberof IntlAutocompletionsWritable
    */
-  "object"?: SuggestionsObjectEnum;
-}
-
-/**
- * @export
- * @enum {string}
- */
-export enum SuggestionsObjectEnum {
-  UsAutocompletion = "us_autocompletion",
+  "country"?: CountryExtended;
 }
 
 /**
