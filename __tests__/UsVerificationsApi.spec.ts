@@ -4,7 +4,7 @@ import {
   MultipleComponents,
 } from "../models";
 import { UsVerificationsApi } from "../api";
-import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
+import { CONFIG_FOR_INTEGRATION, CONFIG_FOR_INTEGRATION_WITH_LIVE } from "./testFixtures";
 
 describe("UsVerificationApi", () => {
   const singleAddressVerification: UsVerificationsWritable = {
@@ -14,22 +14,19 @@ describe("UsVerificationApi", () => {
     zip_code: "11111",
   };
 
-  const singleAddress = new MultipleComponents({
-    primary_line: "deliverable",
+  const address1 = new MultipleComponents({
+    primary_line: "1313 CEMETERY LANE",
     city: "WESTFIELD",
-    state: "NJ",
-    zip_code: "11111",
+    state: "NJ"
   });
 
   const address2 = new MultipleComponents({
-    primary_line: "deliverable",
+    primary_line: "1212 CEMETERY LANE",
     city: "WESTFIELD",
-    state: "NJ",
-    zip_code: "11111",
   });
 
   const addressList = new MultipleComponentsList({
-    addresses: [singleAddress, address2],
+    addresses: [address1, address2],
   });
 
   it("US Verifications API can be instantiated", () => {
@@ -71,11 +68,11 @@ describe("UsVerificationApi", () => {
     });
 
     it("verifies multiple US addresses", async () => {
-      const usvApi = new UsVerificationsApi(CONFIG_FOR_INTEGRATION);
+      const usvApi = new UsVerificationsApi(CONFIG_FOR_INTEGRATION_WITH_LIVE);
       const response = await usvApi.verifyBulk(addressList);
       expect(response).toBeDefined();
-      expect(response.addresses?.length).toEqual(0); // Test keys do not verify
-      expect(response.errorAddresses?.length).toEqual(0); // Test keys do not verify
+      expect(response.addresses?.length).toEqual(1); // Test keys do not verify
+      expect(response.errorAddresses?.length).toEqual(1); // Test keys do not verify
     });
   });
 });
