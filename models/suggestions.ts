@@ -60,20 +60,11 @@ export class Suggestions {
   "state"?: string;
 
   /**
-   * Required if `city` and `state` are not passed in. If included, must be formatted as a US ZIP or ZIP+4 (e.g. `94107`, `941072282`, `94107-2282`).
+   * A 5-digit zip code. Left empty if a test key is used.
    * @type {string}
    * @memberof Suggestions
    */
-  private "_zip_code"?: string;
-  public get zip_code() {
-    return (this._zip_code || undefined) as string;
-  }
-  public set zip_code(newValue: string) {
-    if (newValue && !/^\d{5}((-)?\d{4})?$/.test(newValue)) {
-      throw new Error("Invalid zip_code provided");
-    }
-    this._zip_code = newValue;
-  }
+  "zip_code"?: string;
 
   /**
    * Value is resource type.
@@ -81,6 +72,16 @@ export class Suggestions {
    * @memberof Suggestions
    */
   "object"?: SuggestionsObjectEnum;
+
+  public toJSON() {
+    let out = {};
+    for (const [key, value] of Object.entries(this)) {
+      out = Object.assign({}, out, {
+        [key[0] === "_" ? key.substr(1, key.length) : key]: value,
+      });
+    }
+    return out;
+  }
 }
 
 /**

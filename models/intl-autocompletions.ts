@@ -14,34 +14,45 @@
 
 import * as Models from "./index";
 
+import { IntlSuggestions } from "./intl-suggestions";
+
 /**
  *
  * @export
- * @class SortBy3
+ * @class IntlAutocompletions
  */
-export class SortBy3 {
+export class IntlAutocompletions {
   constructor(input?: any) {
-    if (typeof input?.date_created !== "undefined") {
-      this.date_created = input.date_created;
+    if (typeof input?.id !== "undefined") {
+      this.id = input.id;
     }
-    if (typeof input?.send_date !== "undefined") {
-      this.send_date = input.send_date;
+    if (typeof input?.suggestions !== "undefined") {
+      this.suggestions = input.suggestions;
     }
   }
 
   /**
-   *
+   * Unique identifier prefixed with `intl_auto_`.
    * @type {string}
-   * @memberof SortBy3
+   * @memberof IntlAutocompletions
    */
-  "date_created"?: SortBy3DateCreatedEnum;
+  private "_id"?: string;
+  public get id() {
+    return (this._id || undefined) as string;
+  }
+  public set id(newValue: string) {
+    if (newValue && !/^intl_auto_[a-zA-Z0-9]+$/.test(newValue)) {
+      throw new Error("Invalid id provided");
+    }
+    this._id = newValue;
+  }
 
   /**
-   *
-   * @type {string}
-   * @memberof SortBy3
+   * An array of objects representing suggested addresses.
+   * @type {Array<IntlSuggestions>}
+   * @memberof IntlAutocompletions
    */
-  "send_date"?: SortBy3SendDateEnum;
+  "suggestions"?: Array<IntlSuggestions>;
 
   public toJSON() {
     let out = {};
@@ -52,23 +63,6 @@ export class SortBy3 {
     }
     return out;
   }
-}
-
-/**
- * @export
- * @enum {string}
- */
-export enum SortBy3DateCreatedEnum {
-  Asc = "asc",
-  Desc = "desc",
-}
-/**
- * @export
- * @enum {string}
- */
-export enum SortBy3SendDateEnum {
-  Asc = "asc",
-  Desc = "desc",
 }
 
 /**

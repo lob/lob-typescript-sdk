@@ -19,18 +19,15 @@ import { CountryExtended } from "./country-extended";
 /**
  *
  * @export
- * @class MultipleComponentsIntl
+ * @class IntlSuggestions
  */
-export class MultipleComponentsIntl {
+export class IntlSuggestions {
   constructor(input?: any) {
-    if (typeof input?.recipient !== "undefined") {
-      this.recipient = input.recipient;
+    if (typeof input?.primary_number_range !== "undefined") {
+      this.primary_number_range = input.primary_number_range;
     }
     if (typeof input?.primary_line !== "undefined") {
       this.primary_line = input.primary_line;
-    }
-    if (typeof input?.secondary_line !== "undefined") {
-      this.secondary_line = input.secondary_line;
     }
     if (typeof input?.city !== "undefined") {
       this.city = input.city;
@@ -38,62 +35,65 @@ export class MultipleComponentsIntl {
     if (typeof input?.state !== "undefined") {
       this.state = input.state;
     }
-    if (typeof input?.postal_code !== "undefined") {
-      this.postal_code = input.postal_code;
-    }
     if (typeof input?.country !== "undefined") {
       this.country = input.country;
+    }
+    if (typeof input?.zip_code !== "undefined") {
+      this.zip_code = input.zip_code;
+    }
+    if (typeof input?.object !== "undefined") {
+      this.object = input.object;
     }
   }
 
   /**
-   * The intended recipient, typically a person\'s or firm\'s name.
+   * The primary number range of the address that identifies a building at street level.
    * @type {string}
-   * @memberof MultipleComponentsIntl
+   * @memberof IntlSuggestions
    */
-  "recipient"?: string | null;
+  "primary_number_range"?: string;
 
   /**
-   * The primary delivery line (usually the street address) of the address.
+   * The primary delivery line (usually the street address) of the address. Combination of the following applicable `components` (primary number & secondary information may be missing or inaccurate): * `primary_number` * `street_predirection` * `street_name` * `street_suffix` * `street_postdirection` * `secondary_designator` * `secondary_number` * `pmb_designator` * `pmb_number`
    * @type {string}
-   * @memberof MultipleComponentsIntl
+   * @memberof IntlSuggestions
    */
   "primary_line"?: string;
 
   /**
-   * The secondary delivery line of the address. This field is typically empty but may contain information if `primary_line` is too long.
-   * @type {string}
-   * @memberof MultipleComponentsIntl
-   */
-  "secondary_line"?: string;
-
-  /**
    *
    * @type {string}
-   * @memberof MultipleComponentsIntl
+   * @memberof IntlSuggestions
    */
   "city"?: string;
 
   /**
-   * The name of the state.
+   * The [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) two letter code for the state.
    * @type {string}
-   * @memberof MultipleComponentsIntl
+   * @memberof IntlSuggestions
    */
   "state"?: string;
 
   /**
-   * The postal code.
-   * @type {string}
-   * @memberof MultipleComponentsIntl
-   */
-  "postal_code"?: string;
-
-  /**
    *
    * @type {CountryExtended}
-   * @memberof MultipleComponentsIntl
+   * @memberof IntlSuggestions
    */
   "country"?: CountryExtended;
+
+  /**
+   * A 5-digit zip code. Left empty if a test key is used.
+   * @type {string}
+   * @memberof IntlSuggestions
+   */
+  "zip_code"?: string;
+
+  /**
+   * Value is resource type.
+   * @type {string}
+   * @memberof IntlSuggestions
+   */
+  "object"?: IntlSuggestionsObjectEnum;
 
   public toJSON() {
     let out = {};
@@ -104,6 +104,14 @@ export class MultipleComponentsIntl {
     }
     return out;
   }
+}
+
+/**
+ * @export
+ * @enum {string}
+ */
+export enum IntlSuggestionsObjectEnum {
+  IntlAutocompletion = "intl_autocompletion",
 }
 
 /**

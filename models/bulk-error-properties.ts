@@ -15,33 +15,33 @@
 import * as Models from "./index";
 
 /**
- *
+ * Bulk error properties
  * @export
- * @class SortBy3
+ * @class BulkErrorProperties
  */
-export class SortBy3 {
+export class BulkErrorProperties {
   constructor(input?: any) {
-    if (typeof input?.date_created !== "undefined") {
-      this.date_created = input.date_created;
+    if (typeof input?.message !== "undefined") {
+      this.message = input.message;
     }
-    if (typeof input?.send_date !== "undefined") {
-      this.send_date = input.send_date;
+    if (typeof input?.status_code !== "undefined") {
+      this.status_code = input.status_code;
     }
   }
 
   /**
-   *
+   * A human-readable message with more details about the error
    * @type {string}
-   * @memberof SortBy3
+   * @memberof BulkErrorProperties
    */
-  "date_created"?: SortBy3DateCreatedEnum;
+  "message"?: string;
 
   /**
-   *
-   * @type {string}
-   * @memberof SortBy3
+   * A conventional HTTP status code.
+   * @type {number}
+   * @memberof BulkErrorProperties
    */
-  "send_date"?: SortBy3SendDateEnum;
+  "status_code"?: BulkErrorPropertiesStatusCodeEnum;
 
   public toJSON() {
     let out = {};
@@ -58,17 +58,14 @@ export class SortBy3 {
  * @export
  * @enum {string}
  */
-export enum SortBy3DateCreatedEnum {
-  Asc = "asc",
-  Desc = "desc",
-}
-/**
- * @export
- * @enum {string}
- */
-export enum SortBy3SendDateEnum {
-  Asc = "asc",
-  Desc = "desc",
+export enum BulkErrorPropertiesStatusCodeEnum {
+  NUMBER_401 = 401,
+  NUMBER_403 = 403,
+  NUMBER_404 = 404,
+  NUMBER_413 = 413,
+  NUMBER_422 = 422,
+  NUMBER_429 = 429,
+  NUMBER_500 = 500,
 }
 
 /**

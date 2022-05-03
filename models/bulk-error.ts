@@ -14,34 +14,26 @@
 
 import * as Models from "./index";
 
+import { BulkErrorProperties } from "./bulk-error-properties";
+
 /**
- *
+ * Lob uses RESTful HTTP response codes to indicate success or failure of an API request.
  * @export
- * @class SortBy3
+ * @class BulkError
  */
-export class SortBy3 {
+export class BulkError {
   constructor(input?: any) {
-    if (typeof input?.date_created !== "undefined") {
-      this.date_created = input.date_created;
-    }
-    if (typeof input?.send_date !== "undefined") {
-      this.send_date = input.send_date;
+    if (typeof input?.error !== "undefined") {
+      this.error = input.error;
     }
   }
 
   /**
    *
-   * @type {string}
-   * @memberof SortBy3
+   * @type {BulkErrorProperties}
+   * @memberof BulkError
    */
-  "date_created"?: SortBy3DateCreatedEnum;
-
-  /**
-   *
-   * @type {string}
-   * @memberof SortBy3
-   */
-  "send_date"?: SortBy3SendDateEnum;
+  "error"?: BulkErrorProperties;
 
   public toJSON() {
     let out = {};
@@ -52,23 +44,6 @@ export class SortBy3 {
     }
     return out;
   }
-}
-
-/**
- * @export
- * @enum {string}
- */
-export enum SortBy3DateCreatedEnum {
-  Asc = "asc",
-  Desc = "desc",
-}
-/**
- * @export
- * @enum {string}
- */
-export enum SortBy3SendDateEnum {
-  Asc = "asc",
-  Desc = "desc",
 }
 
 /**

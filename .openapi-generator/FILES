@@ -5,6 +5,7 @@ api/billing-groups-api.ts
 api/card-orders-api.ts
 api/cards-api.ts
 api/checks-api.ts
+api/intl-autocompletions-api.ts
 api/intl-verifications-api.ts
 api/letters-api.ts
 api/postcards-api.ts
@@ -12,8 +13,8 @@ api/reverse-geocode-lookups-api.ts
 api/self-mailers-api.ts
 api/template-versions-api.ts
 api/templates-api.ts
-api/usautocompletions-api.ts
-api/usverifications-api.ts
+api/us-autocompletions-api.ts
+api/us-verifications-api.ts
 api/zip-lookups-api.ts
 base.ts
 common.ts
@@ -33,6 +34,8 @@ models/bank-type-enum.ts
 models/billing-group-editable.ts
 models/billing-group-list.ts
 models/billing-group.ts
+models/bulk-error-properties.ts
+models/bulk-error.ts
 models/card-deletion.ts
 models/card-editable.ts
 models/card-list.ts
@@ -55,7 +58,10 @@ models/events.ts
 models/geocode-addresses.ts
 models/geocode-components.ts
 models/index.ts
+models/intl-autocompletions-writable.ts
+models/intl-autocompletions.ts
 models/intl-components.ts
+models/intl-suggestions.ts
 models/intl-verification-or-error.ts
 models/intl-verification-writable.ts
 models/intl-verification.ts

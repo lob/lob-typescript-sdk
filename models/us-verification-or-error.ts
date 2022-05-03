@@ -14,6 +14,7 @@
 
 import * as Models from "./index";
 
+import { BulkError } from "./bulk-error";
 import { DeliverabilityAnalysis } from "./deliverability-analysis";
 import { LobConfidenceScore } from "./lob-confidence-score";
 import { UsComponents } from "./us-components";
@@ -58,14 +59,8 @@ export class UsVerificationOrError {
     if (typeof input?.object !== "undefined") {
       this.object = input.object;
     }
-    if (typeof input?.message !== "undefined") {
-      this.message = input.message;
-    }
-    if (typeof input?.status_code !== "undefined") {
-      this.status_code = input.status_code;
-    }
-    if (typeof input?.code !== "undefined") {
-      this.code = input.code;
+    if (typeof input?.error !== "undefined") {
+      this.error = input.error;
     }
   }
 
@@ -156,25 +151,21 @@ export class UsVerificationOrError {
   "object"?: UsVerificationOrErrorObjectEnum;
 
   /**
-   * A human-readable message with more details about the error
-   * @type {string}
+   *
+   * @type {BulkError}
    * @memberof UsVerificationOrError
    */
-  "message"?: string;
+  "error"?: BulkError;
 
-  /**
-   * A conventional HTTP status code.
-   * @type {number}
-   * @memberof UsVerificationOrError
-   */
-  "status_code"?: number | null;
-
-  /**
-   * A pre-defined string identifying an error.
-   * @type {string}
-   * @memberof UsVerificationOrError
-   */
-  "code"?: string | null;
+  public toJSON() {
+    let out = {};
+    for (const [key, value] of Object.entries(this)) {
+      out = Object.assign({}, out, {
+        [key[0] === "_" ? key.substr(1, key.length) : key]: value,
+      });
+    }
+    return out;
+  }
 }
 
 /**

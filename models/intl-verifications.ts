@@ -38,8 +38,8 @@ export class IntlVerifications {
    */
 
   private "_addresses"?: Models.IntlVerification[];
-  private "_error_addresses"?: Models.LobError[];
-  public set addresses(items: Models.IntlVerification[] | Models.LobError[]) {
+  private "_error_addresses"?: Models.BulkError[];
+  public set addresses(items: Models.IntlVerification[] | Models.BulkError[]) {
     if (!this._addresses) {
       this._addresses = [];
     }
@@ -50,8 +50,8 @@ export class IntlVerifications {
       if ((item as Models.IntlVerification).id) {
         this._addresses.push(new Models.IntlVerification(item));
       }
-      if ((item as Models.LobError).status_code) {
-        this._error_addresses.push(new Models.LobError(item));
+      if ((item as Models.BulkError).error) {
+        this._error_addresses.push(new Models.BulkError(item));
       }
     }
   }
@@ -68,6 +68,16 @@ export class IntlVerifications {
    * @memberof IntlVerifications
    */
   "errors"?: boolean;
+
+  public toJSON() {
+    let out = {};
+    for (const [key, value] of Object.entries(this)) {
+      out = Object.assign({}, out, {
+        [key[0] === "_" ? key.substr(1, key.length) : key]: value,
+      });
+    }
+    return out;
+  }
 }
 
 /**
