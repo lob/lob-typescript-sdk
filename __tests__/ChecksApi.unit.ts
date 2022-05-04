@@ -3,7 +3,7 @@ import { ChecksApi } from "../api/checks-api";
 import axios from "axios";
 
 import { fail } from "./testUtilities";
-import { CheckEditable } from "../models";
+import {CheckEditable, SendDate} from "../models";
 import { MailType } from "..";
 import {
   CONFIG_FOR_UNIT,
@@ -29,11 +29,11 @@ describe("ChecksApi", () => {
   });
 
   describe("create", () => {
-    const chkEditableMock: CheckEditable = {
+    const chkEditableMock = new CheckEditable({
       from: "fake from",
       bank_account: "fake bank account",
       amount: 100,
-    };
+    });
 
     it("exists", async () => {
       const chkApi = new ChecksApi(CONFIG_FOR_UNIT);
@@ -481,7 +481,7 @@ describe("ChecksApi", () => {
         undefined,
         undefined,
         undefined,
-        DATE_FILTER.gt
+        DATE_FILTER.gt as unknown as SendDate
       );
       expect(chkApi).toBeDefined();
       expect(chkApi?.data?.length).toEqual(1);

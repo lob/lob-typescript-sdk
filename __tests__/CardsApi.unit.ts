@@ -1,4 +1,4 @@
-import { CardEditable, CardEditableSizeEnum } from "../models";
+import {CardEditable, CardEditableSizeEnum, CardUpdatable} from "../models";
 import { CardsApi } from "../api";
 
 import { fail } from "./testUtilities";
@@ -23,12 +23,12 @@ describe("CardsApi", () => {
   });
 
   describe("create", () => {
-    const cardEditableMock: CardEditable = {
+    const cardEditableMock = new CardEditable({
       front: "fake front",
       back: "fake back",
       size: CardEditableSizeEnum._2125x3375,
       description: "fake description",
-    };
+    });
 
     it("exists", async () => {
       const cardsApi = new CardsApi(CONFIG_FOR_UNIT);
@@ -306,9 +306,9 @@ describe("CardsApi", () => {
   });
 
   describe("update", () => {
-    const cardUpdatable = {
+    const cardUpdatable = new CardUpdatable({
       description: "card updated",
-    };
+    });
 
     it("exists", async () => {
       const cardsApi = new CardsApi(CONFIG_FOR_UNIT);

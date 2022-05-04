@@ -1,5 +1,5 @@
 import { Configuration } from "../configuration";
-import { AddressEditable, CountryExtended } from "../models";
+import {AddressEditable, CountryExtended, SendDate, UsComponentsAddressTypeEnum} from "../models";
 
 export const URL_VALID_LIST = [
   "https://lob-assets.com/bank-accounts/asd_asdfghjkqwertyui.pdf?version=123&expires=1234567890&signature=aksdf",
@@ -44,37 +44,37 @@ export const CONFIG_WITH_BASE_OPTIONS_FOR_UNIT: Configuration =
     },
   });
 export const ADDRESSES_EDITABLE: AddressEditable[] = [
-  {
+  new AddressEditable({
     name: "Thing T. Thing",
     address_line1: "1313 CEMETERY LN",
     address_city: "WESTFIELD",
     address_state: "NJ",
     address_zip: "07000",
-  },
-  {
+  }),
+  new AddressEditable({
     name: "FESTER",
     address_line1: "001 CEMETERY LN",
     address_line2: "SUITE 666",
     address_city: "WESTFIELD ",
     address_state: "NJ",
     address_zip: "07000",
-  },
-  {
+  }),
+  new AddressEditable({
     name: "MORTICIA ADDAMS",
     address_line1: "1212 CEMETERY LANE",
     address_city: "WESTFIELD",
     address_state: "NJ",
     address_zip: "07000",
-  },
-  {
+  }),
+  new AddressEditable({
     name: "COUSIN ITT",
     address_line1: "1515 CEMETERY LN",
     address_line2: "FLOOR 0",
     address_city: "WESTFIELD",
     address_state: "NJ",
     address_zip: "07000",
-  },
-  {
+  }),
+  new AddressEditable({
     name: "WEDNESDAY ADDAMS",
     address_line1: "1313 CEMETERY LN",
     address_line2: "# 000",
@@ -82,21 +82,21 @@ export const ADDRESSES_EDITABLE: AddressEditable[] = [
     address_state: "NJ",
     address_zip: "07000",
     address_country: CountryExtended.Us,
-  },
-  {
+  }),
+  new AddressEditable({
     name: "GORDON CRAVEN",
     address_line1: "1313 CEMETERY LN",
     address_city: "WESTFIELD",
     address_state: "NJ",
     address_zip: "07000",
     address_country: CountryExtended.Us,
-  },
-  {
+  }),
+  new AddressEditable({
     name: "PUGSLEY",
     address_line1: "1313 CEMETERY LN",
     address_city: "WESTFIELD",
     address_state: "NJ",
     address_zip: "07000",
     address_country: CountryExtended.Us,
-  },
+  }),
 ];

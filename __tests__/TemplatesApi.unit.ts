@@ -1,4 +1,4 @@
-import { TemplateWritable } from "../models";
+import {TemplateUpdate, TemplateWritable} from "../models";
 import { TemplatesApi } from "../api";
 
 import { fail } from "./testUtilities";
@@ -24,10 +24,10 @@ describe("TemplatesApi", () => {
   });
 
   describe("create", () => {
-    const templateWritableMock: TemplateWritable = {
+    const templateWritableMock = new TemplateWritable({
       description: "Newer Template",
       html: "<html>Updated HTML for {{name}}</html>",
-    };
+    });
 
     it("exists", async () => {
       const templatesApi = new TemplatesApi(CONFIG_FOR_UNIT);
@@ -322,10 +322,10 @@ describe("TemplatesApi", () => {
   });
 
   describe("update", () => {
-    const templateUpdatable = {
+    const templateUpdatable = new TemplateUpdate({
       description: "template updated",
-      published_version: "fake version",
-    };
+      published_version: "vrsn_fakeVersion",
+    });
 
     it("exists", async () => {
       const templatesApi = new TemplatesApi(CONFIG_FOR_UNIT);

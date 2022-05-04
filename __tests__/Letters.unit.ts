@@ -1,4 +1,4 @@
-import { LetterEditable, AddressEditable, MailType } from "../models";
+import {LetterEditable, AddressEditable, MailType, SendDate} from "../models";
 import { LettersApi } from "../api/letters-api";
 
 import { fail } from "./testUtilities";
@@ -389,7 +389,7 @@ describe("LetterApi", () => {
         undefined,
         undefined,
         undefined,
-        DATE_FILTER
+        DATE_FILTER as unknown as SendDate
       );
       expect(response).toBeDefined();
       expect(response.data).toBeDefined();
@@ -563,11 +563,11 @@ describe("LetterApi", () => {
   });
 
   describe("create", () => {
-    const createLetter: LetterEditable = {
+    const createLetter = new LetterEditable({
       to: ADDRESSES_EDITABLE[0],
       from: ADDRESSES_EDITABLE[0],
       file: FILE_LOCATION,
-    };
+    });
 
     it("exists", () => {
       const letterApi = new LettersApi(CONFIG_FOR_UNIT);

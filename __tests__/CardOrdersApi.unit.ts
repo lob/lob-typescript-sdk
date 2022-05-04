@@ -1,5 +1,5 @@
 import { CardOrdersApi } from "../api";
-import { CardOrderEditable } from "..";
+import { CardOrderEditable } from "../models";
 
 import { fail } from "./testUtilities";
 
@@ -24,9 +24,9 @@ describe("CardOrdersApi", () => {
   });
 
   describe("create", () => {
-    const cardForCreate: CardOrderEditable = {
+    const cardForCreate = new CardOrderEditable({
       quantity: 200,
-    };
+    });
 
     it("exists", async () => {
       const cardOrdersApi = new CardOrdersApi(CONFIG_FOR_UNIT);
