@@ -34,6 +34,16 @@ export class BulkError {
    * @memberof BulkError
    */
   "error"?: BulkErrorProperties;
+
+  public toJSON() {
+    let out = {};
+    for (const [key, value] of Object.entries(this)) {
+      out = Object.assign({}, out, {
+        [key[0] === "_" ? key.substr(1, key.length) : key]: value,
+      });
+    }
+    return out;
+  }
 }
 
 /**

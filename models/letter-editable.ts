@@ -99,7 +99,7 @@ export class LetterEditable {
    * @memberof LetterEditable
    */
 
-  "return_envelope"?: string | boolean | null;
+  "return_envelope"?: string | boolean;
 
   /**
    * Required if `return_envelope` is `true`. The number of the page that should be perforated for use with the return envelope. Must be greater than or equal to `1`. The blank page added by `address_placement=insert_blank_page` will be ignored when considering the perforated page number. To see how perforation will impact your letter design, view our [perforation guide](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_perf_template.pdf).
@@ -158,6 +158,16 @@ export class LetterEditable {
    * @memberof LetterEditable
    */
   "billing_group_id"?: string;
+
+  public toJSON() {
+    let out = {};
+    for (const [key, value] of Object.entries(this)) {
+      out = Object.assign({}, out, {
+        [key[0] === "_" ? key.substr(1, key.length) : key]: value,
+      });
+    }
+    return out;
+  }
 }
 
 /**

@@ -4,7 +4,10 @@ import {
   MultipleComponents,
 } from "../models";
 import { UsVerificationsApi } from "../api";
-import { CONFIG_FOR_INTEGRATION, CONFIG_FOR_INTEGRATION_WITH_LIVE } from "./testFixtures";
+import {
+  CONFIG_FOR_INTEGRATION,
+  CONFIG_FOR_INTEGRATION_WITH_LIVE,
+} from "./testFixtures";
 
 describe("UsVerificationApi", () => {
   const singleAddressVerification: UsVerificationsWritable = {
@@ -17,7 +20,7 @@ describe("UsVerificationApi", () => {
   const address1 = new MultipleComponents({
     primary_line: "1313 CEMETERY LANE",
     city: "WESTFIELD",
-    state: "NJ"
+    state: "NJ",
   });
 
   const address2 = new MultipleComponents({

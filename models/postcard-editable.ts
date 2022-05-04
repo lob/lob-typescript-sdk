@@ -138,6 +138,16 @@ export class PostcardEditable {
    * @memberof PostcardEditable
    */
   "billing_group_id"?: string;
+
+  public toJSON() {
+    let out = {};
+    for (const [key, value] of Object.entries(this)) {
+      out = Object.assign({}, out, {
+        [key[0] === "_" ? key.substr(1, key.length) : key]: value,
+      });
+    }
+    return out;
+  }
 }
 
 /**
