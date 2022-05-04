@@ -74,8 +74,8 @@ describe("UsVerificationApi", () => {
       const usvApi = new UsVerificationsApi(CONFIG_FOR_INTEGRATION_WITH_LIVE);
       const response = await usvApi.verifyBulk(addressList);
       expect(response).toBeDefined();
-      expect(response.addresses?.length).toEqual(1); // Test keys do not verify
-      expect(response.errorAddresses?.length).toEqual(1); // Test keys do not verify
+      expect(response.addresses?.length).toEqual(1);
+      expect(response.errorAddresses?.length).toEqual(1);
     });
   });
 });
