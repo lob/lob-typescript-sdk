@@ -65,14 +65,18 @@ describe("BillingGroupsApi", () => {
         description: "Billing Group 1",
         name: "TestBillingGroup1",
       });
-      const bg2 = new BillingGroupEditable(Object.assign({}, bg1, {
-        description: "Billing Group 2",
-        name: "TestBillingGroup2",
-      }));
-      const bg3 = new BillingGroupEditable(Object.assign({}, bg1, {
-        description: "Billing Group 3",
-        name: "TestBillingGroup2",
-      }));
+      const bg2 = new BillingGroupEditable(
+        Object.assign({}, bg1, {
+          description: "Billing Group 2",
+          name: "TestBillingGroup2",
+        })
+      );
+      const bg3 = new BillingGroupEditable(
+        Object.assign({}, bg1, {
+          description: "Billing Group 3",
+          name: "TestBillingGroup2",
+        })
+      );
 
       const billingGroupsApi = new BillingGroupsApi(CONFIG_FOR_INTEGRATION);
       await Promise.all([

@@ -3,7 +3,7 @@ import { ChecksApi } from "../api/checks-api";
 import axios from "axios";
 
 import { fail } from "./testUtilities";
-import {CheckEditable, SendDate} from "../models";
+import { CheckEditable, SendDate } from "../models";
 import { MailType } from "..";
 import {
   CONFIG_FOR_UNIT,

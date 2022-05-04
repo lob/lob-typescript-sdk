@@ -9,7 +9,7 @@ import {
 
 // Axios Mock
 import axios from "axios";
-import {TemplateVersionUpdatable} from "../models";
+import { TemplateVersionUpdatable } from "../models";
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
 
 jest.mock("axios", () => ({

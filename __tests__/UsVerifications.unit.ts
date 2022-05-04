@@ -3,7 +3,8 @@ import {
   MultipleComponentsList,
   CountryExtended,
   UsVerificationDeliverabilityEnum,
-  IntlVerificationStatusEnum, MultipleComponents,
+  IntlVerificationStatusEnum,
+  MultipleComponents,
 } from "../models";
 import { UsVerificationsApi } from "../api";
 

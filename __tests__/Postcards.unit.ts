@@ -2,7 +2,8 @@ import {
   PostcardEditable,
   AddressEditable,
   MailType,
-  PostcardSize, SendDate,
+  PostcardSize,
+  SendDate,
 } from "../models";
 import { PostcardsApi } from "../api/postcards-api";
 

@@ -115,22 +115,18 @@ describe("TemplateVersionsApi", () => {
         description: "Newer Template",
         html: "<html>Updated HTML for Template 1/html>",
       });
-      const templateVersion2 = new TemplateVersionWritable(Object.assign(
-        {},
-        templateVersion1,
-        {
+      const templateVersion2 = new TemplateVersionWritable(
+        Object.assign({}, templateVersion1, {
           description: "Newer Template",
           html: "<html>Updated HTML for Template 2</html>",
-        }
-      ));
-      const templateVersion3 = new TemplateVersionWritable(Object.assign(
-        {},
-        templateVersion1,
-        {
+        })
+      );
+      const templateVersion3 = new TemplateVersionWritable(
+        Object.assign({}, templateVersion1, {
           description: "Newer Template",
           html: "<html>Updated HTML for Template 3</html>",
-        }
-      ));
+        })
+      );
 
       const templateVersionsApi = new TemplateVersionsApi(
         CONFIG_FOR_INTEGRATION

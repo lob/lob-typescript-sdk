@@ -1,5 +1,10 @@
 import { Configuration } from "../configuration";
-import {AddressEditable, CountryExtended, SendDate, UsComponentsAddressTypeEnum} from "../models";
+import {
+  AddressEditable,
+  CountryExtended,
+  SendDate,
+  UsComponentsAddressTypeEnum,
+} from "../models";
 
 export const URL_VALID_LIST = [
   "https://lob-assets.com/bank-accounts/asd_asdfghjkqwertyui.pdf?version=123&expires=1234567890&signature=aksdf",

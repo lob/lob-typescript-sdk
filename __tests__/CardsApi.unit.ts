@@ -1,4 +1,4 @@
-import {CardEditable, CardEditableSizeEnum, CardUpdatable} from "../models";
+import { CardEditable, CardEditableSizeEnum, CardUpdatable } from "../models";
 import { CardsApi } from "../api";
 
 import { fail } from "./testUtilities";

@@ -1,4 +1,4 @@
-import {LetterEditable, AddressEditable, MailType, SendDate} from "../models";
+import { LetterEditable, AddressEditable, MailType, SendDate } from "../models";
 import { LettersApi } from "../api/letters-api";
 
 import { fail } from "./testUtilities";

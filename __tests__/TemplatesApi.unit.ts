@@ -1,4 +1,4 @@
-import {TemplateUpdate, TemplateWritable} from "../models";
+import { TemplateUpdate, TemplateWritable } from "../models";
 import { TemplatesApi } from "../api";
 
 import { fail } from "./testUtilities";

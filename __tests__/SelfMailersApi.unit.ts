@@ -1,7 +1,8 @@
 import {
   MailType,
   SelfMailerEditable,
-  SelfMailerSize, SendDate,
+  SelfMailerSize,
+  SendDate,
 } from "../models";
 import { SelfMailersApi } from "../api";
 

@@ -4,7 +4,8 @@ import {
   AddressDomesticExpanded,
   AddressDeletionObjectEnum,
   AddressEditable,
-  AddressList, CountryExtendedExpanded,
+  AddressList,
+  CountryExtendedExpanded,
 } from "../models";
 
 describe("Address Models", () => {
@@ -126,26 +127,26 @@ describe("Address Models", () => {
       }
     });
 
-    it('correctly outputs in JSON', () => {
+    it("correctly outputs in JSON", () => {
       const untyped_stub = {
-        id: 'adr_fakeId',
-        description: 'fake description',
-        name: 'fake name',
-        company: 'fake company',
-        phone: '123-456-7890',
-        email: 'fake@email.com',
+        id: "adr_fakeId",
+        description: "fake description",
+        name: "fake name",
+        company: "fake company",
+        phone: "123-456-7890",
+        email: "fake@email.com",
         metadata: {},
-        address_line1: '1234 Street Rd.',
-        address_line2: 'apt 1',
-        address_city: 'City',
-        address_state: 'TX',
-        address_zip: '12345',
+        address_line1: "1234 Street Rd.",
+        address_line2: "apt 1",
+        address_city: "City",
+        address_state: "TX",
+        address_zip: "12345",
         address_country: CountryExtendedExpanded.UnitedStates,
-        object: 'address',
+        object: "address",
         date_created: new Date(),
         date_modified: new Date(),
         deleted: false,
-        recipient_moved: false
+        recipient_moved: false,
       };
 
       const recString = JSON.stringify(new Address(untyped_stub));
@@ -165,7 +166,9 @@ describe("Address Models", () => {
       // Ensure that the entity can be re-created from the parsed JSON string
       const reInstantiateRecord = new Address(recMadeRaw);
       expect(reInstantiateRecord.id).toEqual(untyped_stub.id);
-      expect(reInstantiateRecord.address_state).toEqual(untyped_stub.address_state);
+      expect(reInstantiateRecord.address_state).toEqual(
+        untyped_stub.address_state
+      );
       expect(reInstantiateRecord.address_zip).toEqual(untyped_stub.address_zip);
     });
   });

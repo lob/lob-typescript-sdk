@@ -76,14 +76,18 @@ describe("TemplatesApi", () => {
         description: "Newer Template",
         html: "<html>Updated HTML for Template 1/html>",
       });
-      const template2 = new TemplateWritable(Object.assign({}, template1, {
-        description: "Newer Template",
-        html: "<html>Updated HTML for Template 2</html>",
-      }));
-      const template3 = new TemplateWritable(Object.assign({}, template1, {
-        description: "Newer Template",
-        html: "<html>Updated HTML for Template 3</html>",
-      }));
+      const template2 = new TemplateWritable(
+        Object.assign({}, template1, {
+          description: "Newer Template",
+          html: "<html>Updated HTML for Template 2</html>",
+        })
+      );
+      const template3 = new TemplateWritable(
+        Object.assign({}, template1, {
+          description: "Newer Template",
+          html: "<html>Updated HTML for Template 3</html>",
+        })
+      );
 
       const templatesApi = new TemplatesApi(CONFIG_FOR_INTEGRATION);
       await Promise.all([

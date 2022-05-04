@@ -1,4 +1,9 @@
-import { Card, CardEditable, CardEditableSizeEnum, CardOrderEditable } from "../models";
+import {
+  Card,
+  CardEditable,
+  CardEditableSizeEnum,
+  CardOrderEditable,
+} from "../models";
 import { CardsApi, CardOrdersApi } from "../api";
 import { CONFIG_FOR_INTEGRATION, FILE_LOCATION } from "./testFixtures";
 
