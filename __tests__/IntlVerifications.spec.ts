@@ -20,7 +20,7 @@ describe("IntlVerificationsApi", () => {
   });
 
   const addressList = new IntlVerificationsPayload({
-    addresses: [multiLine, address2],
+    addresses: [multiLine, address2, new IntlVerificationWritable()],
   });
 
   const singleLine = new IntlVerificationWritable({
@@ -70,6 +70,7 @@ describe("IntlVerificationsApi", () => {
       ).verifyBulk(addressList);
       expect(response).toBeDefined();
       expect(response.addresses?.length).toEqual(2);
+      expect(response.errorAddresses?.length).toEqual(1);
     });
   });
 });

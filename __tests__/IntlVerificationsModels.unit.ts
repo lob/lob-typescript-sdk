@@ -111,7 +111,7 @@ describe("Intl Verifications Models", () => {
 
     it("sorts BulkError objects into a secondary array", () => {
       const rec = new IntlVerifications({
-        addresses: [new BulkError({ status_code: 500 })],
+        addresses: [new BulkError({ error: {} })],
       });
       expect(rec).toBeDefined();
       expect(rec.addresses.length).toEqual(0);
@@ -126,7 +126,7 @@ describe("Intl Verifications Models", () => {
     });
 
     it.each([
-      ["primary_number", "fake prmary number"],
+      ["primary_number", "fake primary number"],
       ["street_name", "fake street"],
       ["city", "fake city"],
       ["state", "fake state"],
@@ -223,9 +223,6 @@ describe("Intl Verifications Models", () => {
       ["status", IntlVerificationStatusEnum.Lu1],
       ["components", new IntlComponents()],
       ["object", IntlVerificationObjectEnum.IntlVerification],
-      ["message", "fake message"],
-      ["status_code", 500],
-      ["code", "address_length_exceeds_limit"],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
