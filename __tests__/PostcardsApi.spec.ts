@@ -95,24 +95,24 @@ describe("postcardsApi", () => {
     let postcardList: Postcard[] = [];
     beforeAll(async () => {
       // ensure there are at least 3 cards present, to test pagination
-      const postcard1: PostcardEditable = {
+      const postcard1 = new PostcardEditable({
         to: ADDRESSES_EDITABLE[1],
         from: ADDRESSES_EDITABLE[0],
         front: FILE_LOCATION_4X6,
         back: FILE_LOCATION_4X6,
-      };
-      const postcard2: PostcardEditable = {
+      });
+      const postcard2 = new PostcardEditable({
         to: ADDRESSES_EDITABLE[3],
         from: ADDRESSES_EDITABLE[0],
         front: FILE_LOCATION_4X6,
         back: FILE_LOCATION_4X6,
-      };
-      const postcard3: PostcardEditable = {
+      });
+      const postcard3 = new PostcardEditable({
         to: ADDRESSES_EDITABLE[6],
         from: ADDRESSES_EDITABLE[1],
         front: FILE_LOCATION_4X6,
         back: FILE_LOCATION_4X6,
-      };
+      });
       const c1 = await postcardsApi.create(postcard1);
       const c2 = await postcardsApi.create(postcard2);
       const c3 = await postcardsApi.create(postcard3);

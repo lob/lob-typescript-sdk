@@ -36,10 +36,10 @@ describe("TemplateVersionsApi", () => {
     let dummyTemplate: Template;
     beforeAll(async () => {
       const templatesApi = new TemplatesApi(CONFIG_FOR_INTEGRATION);
-      const editableTemplate: TemplateWritable = {
+      const editableTemplate = new TemplateWritable({
         description: "Newer Template",
         html: "<html>Updated HTML for Template 1/html>",
-      };
+      });
       dummyTemplate = await templatesApi.create(editableTemplate);
 
       if (!dummyTemplate.id) {
@@ -47,10 +47,10 @@ describe("TemplateVersionsApi", () => {
       }
     });
 
-    const templateVersionWrite: TemplateVersionWritable = {
+    const templateVersionWrite = new TemplateVersionWritable({
       description: "New Template Version Template",
       html: "<html>Updated HTML for {{name}}</html>",
-    };
+    });
 
     it("creates, updates, retrieves, and deletes a template", async () => {
       const templateVersionsApi = new TemplateVersionsApi(
@@ -74,10 +74,10 @@ describe("TemplateVersionsApi", () => {
       expect(retrievedTemplateVersion?.id).toEqual(createdTemplateVersion?.id);
 
       // Update
-      const updatedVersion: TemplateVersionUpdatable = {
+      const updatedVersion = new TemplateVersionUpdatable({
         description: "updated template",
         engine: EngineHtml.Handlebars,
-      };
+      });
       const updatedTemplateVersion = await templateVersionsApi.update(
         dummyTemplate.id as string,
         createdTemplateVersion.id as string,
@@ -101,36 +101,36 @@ describe("TemplateVersionsApi", () => {
     const templatesApi = new TemplatesApi(CONFIG_FOR_INTEGRATION);
 
     beforeAll(async () => {
-      const editableTemplate: TemplateWritable = {
+      const editableTemplate = new TemplateWritable({
         description: "Newer Template",
         html: "<html>Updated HTML for Template 1/html>",
-      };
+      });
       dummyTemplate = await templatesApi.create(editableTemplate);
 
       if (!dummyTemplate.id) {
         throw new Error("Unable to create required data");
       }
       // ensure there are at least 3 templates present, to test pagination
-      const templateVersion1: TemplateVersionWritable = {
+      const templateVersion1 = new TemplateVersionWritable({
         description: "Newer Template",
         html: "<html>Updated HTML for Template 1/html>",
-      };
-      const templateVersion2: TemplateVersionWritable = Object.assign(
+      });
+      const templateVersion2 = new TemplateVersionWritable(Object.assign(
         {},
         templateVersion1,
         {
           description: "Newer Template",
           html: "<html>Updated HTML for Template 2</html>",
         }
-      );
-      const templateVersion3: TemplateVersionWritable = Object.assign(
+      ));
+      const templateVersion3 = new TemplateVersionWritable(Object.assign(
         {},
         templateVersion1,
         {
           description: "Newer Template",
           html: "<html>Updated HTML for Template 3</html>",
         }
-      );
+      ));
 
       const templateVersionsApi = new TemplateVersionsApi(
         CONFIG_FOR_INTEGRATION

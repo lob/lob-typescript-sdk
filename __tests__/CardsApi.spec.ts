@@ -31,12 +31,12 @@ describe("CardsApi", () => {
   });
 
   describe("performs single-Card operations", () => {
-    const create: CardEditable = {
+    const create = new CardEditable({
       description: "Test card",
       front: FILE_LOCATION,
       back: FILE_LOCATION,
       size: CardEditableSizeEnum._2125x3375,
-    };
+    });
 
     it("creates, updates, retrieves, and deletes a card", async () => {
       const cardsApi = new CardsApi(CONFIG_FOR_INTEGRATION);
@@ -53,9 +53,9 @@ describe("CardsApi", () => {
       expect(retrievedCard.id).toEqual(createdCard.id);
 
       // Update
-      const updates: CardUpdatable = {
+      const updates = new CardUpdatable({
         description: "updated card",
-      };
+      });
       const updatedCard = await cardsApi.update(
         retrievedCard.id as string,
         updates
@@ -74,12 +74,12 @@ describe("CardsApi", () => {
 
     beforeAll(async () => {
       // ensure there are at least 3 cards present, to test pagination
-      const card1: CardEditable = {
+      const card1 = new CardEditable({
         description: "Card 1",
         front: FILE_LOCATION,
         back: FILE_LOCATION,
         size: CardEditableSizeEnum._2125x3375,
-      };
+      });
       const card2: CardEditable = Object.assign({}, card1, {
         description: "Card 2",
       });

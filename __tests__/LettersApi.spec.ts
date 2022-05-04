@@ -33,13 +33,13 @@ describe("CardsApi", () => {
     });
 
     it("creates, retrieves, and cancels a CERTIFIED letter", async () => {
-      const certifiedLetter: LetterEditable = {
+      const certifiedLetter = new LetterEditable({
         to: ADDRESSES_EDITABLE[0],
         from: ADDRESSES_EDITABLE[0],
         color: true,
         extra_service: LetterEditableExtraServiceEnum.Certified,
         file: FILE_LOCATION_8X11,
-      };
+      });
 
       const letter = await lettersApi.create(certifiedLetter);
       expect(letter.id).toBeDefined();
@@ -55,13 +55,13 @@ describe("CardsApi", () => {
     });
 
     it("creates, retrieves, and cancels a REGISTERED letter", async () => {
-      const registeredLetter: LetterEditable = {
+      const registeredLetter = new LetterEditable({
         to: ADDRESSES_EDITABLE[0],
         from: ADDRESSES_EDITABLE[0],
         color: true,
         extra_service: LetterEditableExtraServiceEnum.Registered,
         file: FILE_LOCATION_8X11,
-      };
+      });
       const letter = await lettersApi.create(registeredLetter);
       expect(letter.id).toBeDefined();
       expect(letter.extra_service).toEqual("registered");
@@ -76,12 +76,12 @@ describe("CardsApi", () => {
     });
 
     it("creates, retrieves, and cancels a letter with NO EXTRA SERVICES", async () => {
-      const registeredLetter: LetterEditable = {
+      const registeredLetter = new LetterEditable({
         to: ADDRESSES_EDITABLE[0],
         from: ADDRESSES_EDITABLE[0],
         color: true,
         file: FILE_LOCATION_8X11,
-      };
+      });
       const letter = await lettersApi.create(registeredLetter);
       expect(letter.id).toBeDefined();
       expect(letter.extra_service).toBeFalsy();

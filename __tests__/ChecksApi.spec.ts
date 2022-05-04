@@ -61,13 +61,13 @@ describe("ChecksApi", () => {
       let checksApi: ChecksApi;
 
       beforeAll(() => {
-        createCheck = {
+        createCheck = new CheckEditable({
           description: "check 1",
           to: ADDRESSES_EDITABLE[0],
           from: ADDRESSES_EDITABLE[1],
           bank_account: account.id,
           amount: 100,
-        };
+        });
 
         checksApi = new ChecksApi(CONFIG_FOR_INTEGRATION);
       });
@@ -122,21 +122,21 @@ describe("ChecksApi", () => {
 
     beforeAll(async () => {
       // ensure there are at least 3 checks present, to test pagination
-      const check1: CheckEditable = {
+      const check1 = new CheckEditable({
         description: "check 1",
         to: ADDRESSES_EDITABLE[0],
         from: ADDRESSES_EDITABLE[1],
         bank_account: account.id,
         amount: 100,
-      };
-      const check2: CheckEditable = Object.assign({}, check1, {
+      });
+      const check2 = new CheckEditable(Object.assign({}, check1, {
         description: "Check 2",
         amount: 200,
-      });
-      const check3: CheckEditable = Object.assign({}, check1, {
+      }));
+      const check3 = new CheckEditable(Object.assign({}, check1, {
         description: "Check 3",
         amount: 300,
-      });
+      }));
 
       const checksApi = new ChecksApi(CONFIG_FOR_INTEGRATION);
       await Promise.all([

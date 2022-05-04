@@ -10,12 +10,12 @@ import {
 } from "./testFixtures";
 
 describe("UsVerificationApi", () => {
-  const singleAddressVerification: UsVerificationsWritable = {
+  const singleAddressVerification = new UsVerificationsWritable({
     primary_line: "deliverable",
     city: "WESTFIELD",
     state: "NJ",
     zip_code: "11111",
-  };
+  });
 
   const address1 = new MultipleComponents({
     primary_line: "1313 CEMETERY LANE",

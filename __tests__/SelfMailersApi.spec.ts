@@ -9,12 +9,12 @@ import {
 describe("smApi", () => {
   jest.setTimeout(60000); // 60 seconds
 
-  const dummySelfMailer: SelfMailerEditable = {
+  const dummySelfMailer = new SelfMailerEditable({
     to: ADDRESSES_EDITABLE[0],
     from: ADDRESSES_EDITABLE[1],
     inside: FILE_LOCATION_6X18,
     outside: FILE_LOCATION_6X18,
-  };
+  });
 
   it("SelfMailer API can be instantiated", () => {
     const smApi = new SelfMailersApi(CONFIG_FOR_INTEGRATION);
@@ -65,24 +65,24 @@ describe("smApi", () => {
     beforeAll(async () => {
       const smApi = new SelfMailersApi(CONFIG_FOR_INTEGRATION);
       // ensure there are at least 3 cards present, to test pagination
-      const sfm1: SelfMailerEditable = {
+      const sfm1 = new SelfMailerEditable({
         to: ADDRESSES_EDITABLE[1],
         from: ADDRESSES_EDITABLE[2],
         inside: FILE_LOCATION_6X18,
         outside: FILE_LOCATION_6X18,
-      };
-      const sfm2: SelfMailerEditable = {
+      });
+      const sfm2 = new SelfMailerEditable({
         to: ADDRESSES_EDITABLE[3],
         from: ADDRESSES_EDITABLE[6],
         inside: FILE_LOCATION_6X18,
         outside: FILE_LOCATION_6X18,
-      };
-      const sfm3: SelfMailerEditable = {
+      });
+      const sfm3 = new SelfMailerEditable({
         to: ADDRESSES_EDITABLE[4],
         from: ADDRESSES_EDITABLE[5],
         inside: FILE_LOCATION_6X18,
         outside: FILE_LOCATION_6X18,
-      };
+      });
       const c1 = await smApi.create(sfm1);
       const c2 = await smApi.create(sfm2);
       const c3 = await smApi.create(sfm3);

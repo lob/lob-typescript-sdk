@@ -48,10 +48,10 @@ describe("TemplatesApi", () => {
       expect(retrievedTemplate.id).toEqual(createdTemplate.id);
 
       // Update
-      const updates: TemplateUpdate = {
+      const updates = new TemplateUpdate({
         description: "updated template",
         published_version: retrievedTemplate.published_version?.id as string,
-      };
+      });
       const updatedTemplate = await templatesApi.update(
         retrievedTemplate.id as string,
         updates
@@ -72,18 +72,18 @@ describe("TemplatesApi", () => {
 
     beforeAll(async () => {
       // ensure there are at least 3 templates present, to test pagination
-      const template1: TemplateWritable = {
+      const template1 = new TemplateWritable({
         description: "Newer Template",
         html: "<html>Updated HTML for Template 1/html>",
-      };
-      const template2: TemplateWritable = Object.assign({}, template1, {
+      });
+      const template2 = new TemplateWritable(Object.assign({}, template1, {
         description: "Newer Template",
         html: "<html>Updated HTML for Template 2</html>",
-      });
-      const template3: TemplateWritable = Object.assign({}, template1, {
+      }));
+      const template3 = new TemplateWritable(Object.assign({}, template1, {
         description: "Newer Template",
         html: "<html>Updated HTML for Template 3</html>",
-      });
+      }));
 
       const templatesApi = new TemplatesApi(CONFIG_FOR_INTEGRATION);
       await Promise.all([

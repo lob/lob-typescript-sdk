@@ -7,26 +7,26 @@ import { IntlVerificationsApi } from "../api";
 import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
 
 describe("IntlVerificationsApi", () => {
-  const multiLine: IntlVerificationWritable = {
+  const multiLine = new IntlVerificationWritable({
     primary_line: "370 WATER ST",
     postal_code: "C1N 1C4",
     country: CountryExtended.Ca,
-  };
+  });
 
-  const address2: IntlVerificationWritable = {
+  const address2 = new IntlVerificationWritable({
     primary_line: "012 PLACEHOLDER ST",
     postal_code: "F0O 8A2",
     country: CountryExtended.Ca,
-  };
+  });
 
-  const addressList: IntlVerificationsPayload = {
+  const addressList = new IntlVerificationsPayload({
     addresses: [multiLine, address2],
-  };
+  });
 
-  const singleLine: IntlVerificationWritable = {
+  const singleLine = new IntlVerificationWritable({
     address: "370 WATER ST C1N 1C4",
     country: CountryExtended.Ca,
-  };
+  });
 
   it("International Verifications API can be instantiated", () => {
     const intlvApi = new IntlVerificationsApi(CONFIG_FOR_INTEGRATION);
