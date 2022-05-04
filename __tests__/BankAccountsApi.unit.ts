@@ -40,12 +40,12 @@ describe("BankAccountsApi", () => {
   });
 
   describe("create", () => {
-    const create: BankAccountWritable = {
+    const create = new BankAccountWritable({
       routing_number: "fake routing",
       account_number: "fake account",
       account_type: BankTypeEnum.Individual,
       signatory: "fake signatory",
-    };
+    });
 
     it("exists", () => {
       const bankAccountsApi = new BankAccountsApi(CONFIG_FOR_UNIT);
@@ -241,9 +241,9 @@ describe("BankAccountsApi", () => {
         data: { id: "bank_fakeId" },
       }));
 
-      const verify: BankAccountVerify = {
+      const verify = new BankAccountVerify({
         amounts: [1, 2],
-      };
+      });
       const bankAccount = await new BankAccountsApi(CONFIG_FOR_UNIT).verify(
         "an id",
         verify
@@ -257,9 +257,9 @@ describe("BankAccountsApi", () => {
         data: { id: "bank_fakeId" },
       }));
 
-      const verify: BankAccountVerify = {
+      const verify = new BankAccountVerify({
         amounts: [1, 2],
-      };
+      });
       const bankAccount = await new BankAccountsApi(
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
       ).verify("an id", verify);
@@ -276,9 +276,9 @@ describe("BankAccountsApi", () => {
       });
 
       try {
-        const verify: BankAccountVerify = {
+        const verify = new BankAccountVerify({
           amounts: [1, 2],
-        };
+        });
         await new BankAccountsApi(CONFIG_FOR_UNIT).verify("an id", verify);
         fail("Should throw");
       } catch (err: any) {
@@ -292,9 +292,9 @@ describe("BankAccountsApi", () => {
       });
 
       try {
-        const verify: BankAccountVerify = {
+        const verify = new BankAccountVerify({
           amounts: [1, 2],
-        };
+        });
         await new BankAccountsApi(CONFIG_FOR_UNIT).verify("an id", verify);
         fail("Should throw");
       } catch (err: any) {

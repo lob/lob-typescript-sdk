@@ -4,20 +4,23 @@ import {
   MultipleComponents,
 } from "../models";
 import { UsVerificationsApi } from "../api";
-import { CONFIG_FOR_INTEGRATION, CONFIG_FOR_INTEGRATION_WITH_LIVE } from "./testFixtures";
+import {
+  CONFIG_FOR_INTEGRATION,
+  CONFIG_FOR_INTEGRATION_WITH_LIVE,
+} from "./testFixtures";
 
 describe("UsVerificationApi", () => {
-  const singleAddressVerification: UsVerificationsWritable = {
+  const singleAddressVerification = new UsVerificationsWritable({
     primary_line: "deliverable",
     city: "WESTFIELD",
     state: "NJ",
     zip_code: "11111",
-  };
+  });
 
   const address1 = new MultipleComponents({
     primary_line: "1313 CEMETERY LANE",
     city: "WESTFIELD",
-    state: "NJ"
+    state: "NJ",
   });
 
   const address2 = new MultipleComponents({
@@ -71,8 +74,8 @@ describe("UsVerificationApi", () => {
       const usvApi = new UsVerificationsApi(CONFIG_FOR_INTEGRATION_WITH_LIVE);
       const response = await usvApi.verifyBulk(addressList);
       expect(response).toBeDefined();
-      expect(response.addresses?.length).toEqual(1); // Test keys do not verify
-      expect(response.errorAddresses?.length).toEqual(1); // Test keys do not verify
+      expect(response.addresses?.length).toEqual(1);
+      expect(response.errorAddresses?.length).toEqual(1);
     });
   });
 });

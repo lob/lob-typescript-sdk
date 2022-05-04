@@ -1,5 +1,5 @@
 import { TemplateVersionsApi } from "../api";
-import { TemplateVersionWritable } from "..";
+import { TemplateVersionWritable } from "../models";
 
 import { fail } from "./testUtilities";
 import {
@@ -9,6 +9,7 @@ import {
 
 // Axios Mock
 import axios from "axios";
+import { TemplateVersionUpdatable } from "../models";
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
 
 jest.mock("axios", () => ({
@@ -24,10 +25,10 @@ describe("TemplateVersionsApi", () => {
   });
 
   describe("create", () => {
-    const templateForCreate: TemplateVersionWritable = {
+    const templateForCreate = new TemplateVersionWritable({
       description: "Newer Template",
       html: "<html>Updated HTML for Template 1/html>",
-    };
+    });
 
     it("exists", async () => {
       const templateVersionsApi = new TemplateVersionsApi(CONFIG_FOR_UNIT);
@@ -305,10 +306,10 @@ describe("TemplateVersionsApi", () => {
   });
 
   describe("update", () => {
-    const templateVersionUpdatable = {
+    const templateVersionUpdatable = new TemplateVersionUpdatable({
       description: "template version updated",
       published_version: "fake version",
-    };
+    });
 
     it("exists", async () => {
       const templateVersionsApi = new TemplateVersionsApi(CONFIG_FOR_UNIT);

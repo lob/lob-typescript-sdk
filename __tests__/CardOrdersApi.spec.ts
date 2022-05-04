@@ -1,27 +1,31 @@
-import { Card, CardEditable, CardEditableSizeEnum } from "../models";
+import {
+  Card,
+  CardEditable,
+  CardEditableSizeEnum,
+  CardOrderEditable,
+} from "../models";
 import { CardsApi, CardOrdersApi } from "../api";
-import { CardOrderEditable } from "..";
 import { CONFIG_FOR_INTEGRATION, FILE_LOCATION } from "./testFixtures";
 
 describe("CardOrdersApi", () => {
-  const dummyCardOrder: CardOrderEditable = {
+  const dummyCardOrder = new CardOrderEditable({
     quantity: 10000,
-  };
+  });
 
-  const dummyCardOrder2: CardOrderEditable = {
+  const dummyCardOrder2 = new CardOrderEditable({
     quantity: 10001,
-  };
+  });
 
-  const dummyCardOrder3: CardOrderEditable = {
+  const dummyCardOrder3 = new CardOrderEditable({
     quantity: 10002,
-  };
+  });
 
-  const editableCard: CardEditable = {
+  const editableCard = new CardEditable({
     description: "Test card",
     front: FILE_LOCATION,
     back: FILE_LOCATION,
     size: CardEditableSizeEnum._2125x3375,
-  };
+  });
 
   it("Card API can be instantiated", () => {
     const cardOrdersApi = new CardOrdersApi(CONFIG_FOR_INTEGRATION);

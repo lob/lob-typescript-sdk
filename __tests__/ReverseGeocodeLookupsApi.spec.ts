@@ -3,10 +3,10 @@ import { ReverseGeocodeLookupsApi } from "../api";
 import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
 
 describe("ReverseGeocodeLookupsApi", () => {
-  const testCoordinates: Location = {
+  const testCoordinates = new Location({
     latitude: 37.777456,
     longitude: -122.393039,
-  };
+  });
 
   it("US Reverse Geocode Lookup API can be instantiated", () => {
     const geocodeApi = new ReverseGeocodeLookupsApi(CONFIG_FOR_INTEGRATION);

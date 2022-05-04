@@ -23,10 +23,10 @@ describe("BillingGroupsApi", () => {
   });
 
   describe("performs single-BillingGroup operations", () => {
-    const createBg: BillingGroupEditable = {
+    const createBg = new BillingGroupEditable({
       description: "Test Billing Group Created",
       name: "TestBillingGroup1",
-    };
+    });
 
     it("creates, updates, and gets a billing group", async () => {
       const billingGroupsApi = new BillingGroupsApi(CONFIG_FOR_INTEGRATION);
@@ -43,10 +43,10 @@ describe("BillingGroupsApi", () => {
       expect(retrievedBg.id).toEqual(createdBg.id);
 
       // Update
-      const updates: BillingGroupEditable = {
+      const updates = new BillingGroupEditable({
         description: "updated billing group",
         name: "UpdatedBGName",
-      };
+      });
       const updatedBg = await billingGroupsApi.update(
         retrievedBg.id as string,
         updates
@@ -61,18 +61,22 @@ describe("BillingGroupsApi", () => {
 
     beforeAll(async () => {
       // ensure there are at least 3 billing groups present, to test pagination
-      const bg1: BillingGroupEditable = {
+      const bg1 = new BillingGroupEditable({
         description: "Billing Group 1",
         name: "TestBillingGroup1",
-      };
-      const bg2: BillingGroupEditable = Object.assign({}, bg1, {
-        description: "Billing Group 2",
-        name: "TestBillingGroup2",
       });
-      const bg3: BillingGroupEditable = Object.assign({}, bg1, {
-        description: "Billing Group 3",
-        name: "TestBillingGroup2",
-      });
+      const bg2 = new BillingGroupEditable(
+        Object.assign({}, bg1, {
+          description: "Billing Group 2",
+          name: "TestBillingGroup2",
+        })
+      );
+      const bg3 = new BillingGroupEditable(
+        Object.assign({}, bg1, {
+          description: "Billing Group 3",
+          name: "TestBillingGroup2",
+        })
+      );
 
       const billingGroupsApi = new BillingGroupsApi(CONFIG_FOR_INTEGRATION);
       await Promise.all([

@@ -5,6 +5,7 @@ import {
   AddressDeletionObjectEnum,
   AddressEditable,
   AddressList,
+  CountryExtendedExpanded,
 } from "../models";
 
 describe("Address Models", () => {
@@ -124,6 +125,51 @@ describe("Address Models", () => {
         expect(rec.address_zip).toBeDefined();
         expect(rec.address_zip).toEqual(val);
       }
+    });
+
+    it("correctly outputs in JSON", () => {
+      const untyped_stub = {
+        id: "adr_fakeId",
+        description: "fake description",
+        name: "fake name",
+        company: "fake company",
+        phone: "123-456-7890",
+        email: "fake@email.com",
+        metadata: {},
+        address_line1: "1234 Street Rd.",
+        address_line2: "apt 1",
+        address_city: "City",
+        address_state: "TX",
+        address_zip: "12345",
+        address_country: CountryExtendedExpanded.UnitedStates,
+        object: "address",
+        date_created: new Date(),
+        date_modified: new Date(),
+        deleted: false,
+        recipient_moved: false,
+      };
+
+      const recString = JSON.stringify(new Address(untyped_stub));
+      const recMadeRaw = JSON.parse(recString);
+      expect(typeof recMadeRaw).toEqual("object");
+
+      // Ensure that the private convention attributes have been removed
+      expect(recMadeRaw._id).toBeUndefined();
+      expect(recMadeRaw._address_state).toBeUndefined();
+      expect(recMadeRaw._address_zip).toBeUndefined();
+
+      // Ensure that the attributes are correctly present
+      expect(recMadeRaw.id).toEqual(untyped_stub.id);
+      expect(recMadeRaw.address_state).toEqual(untyped_stub.address_state);
+      expect(recMadeRaw.address_zip).toEqual(untyped_stub.address_zip);
+
+      // Ensure that the entity can be re-created from the parsed JSON string
+      const reInstantiateRecord = new Address(recMadeRaw);
+      expect(reInstantiateRecord.id).toEqual(untyped_stub.id);
+      expect(reInstantiateRecord.address_state).toEqual(
+        untyped_stub.address_state
+      );
+      expect(reInstantiateRecord.address_zip).toEqual(untyped_stub.address_zip);
     });
   });
 

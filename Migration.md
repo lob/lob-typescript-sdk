@@ -87,7 +87,7 @@ Here is a sample of TypeScript SDK CREATE method
 const addressCreate: AddressEditable = new AddressEditable({
   name: "Thing T. Thing",
   address_line1: "1313 CEMETERY LN",
-  address_line2: ""
+  address_line2: "",
   address_city: "WESTFIELD",
   address_state: "NJ",
   address_zip: "07090",
@@ -109,7 +109,7 @@ const addressData = new AddressEditable({
   address_line1: "1313 CEMETERY LN",
   address_city: "WESTFIELD",
   address_state: "NJ",
-  address_zip: "07090",
+  address_zip: "07090"
 });
 
 try {
@@ -167,7 +167,7 @@ try {
 
 ### COMPARE DELETE METHOD
 
-​Here is a sample of the lob-node DELETE method:
+Here is a sample of the lob-node DELETE method:
 
 ```javascript
 Lob.addresses.delete("adr_xxxx", function (err, address) {
@@ -194,21 +194,21 @@ The Bulk verify endpoint from our Addresses Verification Api is used to verify a
 
 ```typescript
 const UsVerifications = new UsVerificationsApi(av_config);
-const verificationData1: UsVerificationsWritable = {
+const verificationData1 = new UsVerificationsWritable({
   primary_line: "001 CEMETERY LANE",
   city: "WESTFIELD",
   state: "NJ",
   zip_code: "07090",
-};
-const verificationData2: UsVerificationsWritable = {
+});
+const verificationData2 = new UsVerificationsWritable({
   primary_line: "1515 CEMETERY LN",
   city: "WESTFIELD",
   state: "NJ",
   zip_code: "07090",
-};
-const addressList: MultipleComponentsList = {
+});
+const addressList = new MultipleComponentsList({
   addresses: [verificationData1, verificationData2],
-};
+});
 
 try {
   const bulkVerified = await UsVerifications.verifyBulk(addressList);
@@ -217,7 +217,7 @@ try {
 }
 ```
 
-​Again, as mentioned above, If you are using the new TypeScript SDK using JavaScript,the code is essentially the same apart from removing the type identifiers found in TypeScript This pattern may be followed for all methods where examples are not supplied as shown here:
+Again, as mentioned above, If you are using the new TypeScript SDK using JavaScript,the code is essentially the same apart from removing the type identifiers found in TypeScript This pattern may be followed for all methods where examples are not supplied as shown here:
 
 ```javascript
 const UsVerifications = new UsVerificationsApi(av_config);
@@ -249,7 +249,7 @@ try {
 Here is a sample of the lob-node SINGLE VERIFY method:
 
 ```javascript
-​Lob.UsVerifications.verify({
+Lob.UsVerifications.verify({
   primary_line: '1313 CEMETERY LN',
   city: 'WESTFIELD',
   state: 'NJ',
@@ -259,16 +259,16 @@ Here is a sample of the lob-node SINGLE VERIFY method:
 });
 ```
 
-​Here is a sample of the TypeScript SDK Single Verify method:
+Here is a sample of the TypeScript SDK Single Verify method:
 
 ```typescript
 const UsVerifications = new UsVerificationsApi(av_config);
-const verificationData1: UsVerificationsWritable = {
+const verificationData1 = new UsVerificationsWritable({
   primary_line: "001 CEMETERY LANE",
   city: "WESTFIELD",
   state: "NJ",
   zip_code: "07090",
-};
+});
 
 try {
   const singleVerified = await UsVerifications.verifySingle(verificationData1);
@@ -299,7 +299,7 @@ Here is a sample of the TypeScript SDK Bank Account Verify method:
 const verificationData= new BankAccountVerify({
     amounts: [11, 35]
 });
-const bankData= new BankAccountWritable = ({
+const bankData = new BankAccountWritable({
     description: "Test Bank Account",
     routing_number: "322271627",
     account_number: "123456789",
@@ -314,8 +314,7 @@ try {
 } catch (err: any) {
     console.error(err);
 }
-  return id;
-}
+return id;
 ```
 
 ### TEMPLATE UPDATE METHOD
@@ -324,7 +323,7 @@ The Template Update endpoint updates the description and/or published version of
 
 ```typescript
 const Templates = new TemplatesApi(config);
-const templateData: new TemplateWritable({
+const templateData = new TemplateWritable({
     description: "Newer Template",
     html: "<html>Updated HTML for {{name}}</html>"
 });
@@ -335,7 +334,7 @@ try {
          description: "updated template",
          published_version: createTemplate.published_version?.id as string
      });
-     const updateTemplate = await Templates.update(createTemplate.id updateData);
+     const updateTemplate = await Templates.update(createTemplate.id ,updateData);
 } catch (err: any) {
      console.error(err);
 }

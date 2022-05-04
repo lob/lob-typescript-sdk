@@ -174,7 +174,7 @@ describe("Us Verifications Models", () => {
 
     it("sorts BulkError objects into a secondary array", () => {
       const rec = new UsVerifications({
-        addresses: [new BulkError({ status_code: 500 })],
+        addresses: [new BulkError({ error: {} })],
       });
       expect(rec).toBeDefined();
       expect(rec.addresses.length).toEqual(0);
@@ -308,9 +308,6 @@ describe("Us Verifications Models", () => {
       ["deliverability_analysis", new DeliverabilityAnalysis()],
       ["lob_confidence_score", new LobConfidenceScore()],
       ["object", "US Verification"],
-      ["message", "fake message"],
-      ["status_code", 403],
-      ["code", "address_length_exceeds_limit"],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -338,7 +335,7 @@ describe("Us Verifications Models", () => {
 
     it("sorts BulkError objects into a secondary array", () => {
       const rec = new UsVerifications({
-        addresses: [new BulkError({ status_code: 500 })],
+        addresses: [new BulkError({ error: {} })],
       });
       expect(rec).toBeDefined();
       expect(rec.addresses.length).toEqual(0);

@@ -3,6 +3,7 @@ import {
   CountryExtended,
   IntlVerificationsPayload,
   IntlVerificationStatusEnum,
+  MultipleComponentsIntl,
 } from "../models";
 import { IntlVerificationsApi } from "../api";
 import { fail } from "./testUtilities";
@@ -36,11 +37,11 @@ describe("IntlVerificationsApi", () => {
   });
 
   describe("verifySingle", () => {
-    const verification: IntlVerificationWritable = {
+    const verification = new IntlVerificationWritable({
       primary_line: "370 WATER ST",
       postal_code: "C1N 1C4",
       country: CountryExtended.Ca,
-    };
+    });
 
     it("exists", () => {
       const intlvApi = new IntlVerificationsApi(CONFIG_FOR_UNIT);
@@ -154,20 +155,20 @@ describe("IntlVerificationsApi", () => {
   });
 
   describe("verifyBulk", () => {
-    const verification: IntlVerificationsPayload = {
+    const verification = new IntlVerificationsPayload({
       addresses: [
-        {
+        new MultipleComponentsIntl({
           primary_line: "370 WATER ST",
           postal_code: "C1N 1C4",
           country: CountryExtended.Ca,
-        },
-        {
+        }),
+        new MultipleComponentsIntl({
           primary_line: "012 PLACEHOLDER ST",
           postal_code: "F0O 8A2",
           country: CountryExtended.Ca,
-        },
+        }),
       ],
-    };
+    });
 
     it("exists", () => {
       const intlvApi = new IntlVerificationsApi(CONFIG_FOR_UNIT);

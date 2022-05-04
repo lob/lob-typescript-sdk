@@ -3,6 +3,7 @@ import {
   AddressEditable,
   MailType,
   PostcardSize,
+  SendDate,
 } from "../models";
 import { PostcardsApi } from "../api/postcards-api";
 
@@ -393,7 +394,7 @@ describe("PostcardsApi", () => {
         undefined,
         undefined,
         undefined,
-        DATE_FILTER
+        DATE_FILTER as unknown as SendDate
       );
       expect(response).toBeDefined();
       expect(response.data).toBeDefined();
@@ -567,16 +568,16 @@ describe("PostcardsApi", () => {
   });
 
   describe("create", () => {
-    const addressCreate: AddressEditable = {
+    const addressCreate = new AddressEditable({
       name: "Thing T. Thing",
       address_line1: "1313 CEMETERY LN",
       address_city: "WESTFIELD",
       address_state: "NJ",
       address_zip: "07000",
-    };
-    const createPostcard: PostcardEditable = {
+    });
+    const createPostcard = new PostcardEditable({
       to: addressCreate,
-    };
+    });
     it("exists", () => {
       const postcardApi = new PostcardsApi(CONFIG_FOR_UNIT);
       expect(postcardApi.create).toBeDefined();

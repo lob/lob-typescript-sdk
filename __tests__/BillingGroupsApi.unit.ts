@@ -26,9 +26,9 @@ describe("BillingGroupsApi", () => {
   });
 
   describe("create", () => {
-    const bgEditableMock: BillingGroupEditable = {
+    const bgEditableMock = new BillingGroupEditable({
       description: "fake billing group description",
-    };
+    });
 
     it("exists", async () => {
       const bgApi = new BillingGroupsApi(CONFIG_FOR_UNIT);
@@ -231,9 +231,9 @@ describe("BillingGroupsApi", () => {
   });
 
   describe("update", () => {
-    const bgUpdatable = {
+    const bgUpdatable = new BillingGroupEditable({
       description: "billing group updated",
-    };
+    });
 
     it("exists", async () => {
       const billingGroupsApi = new BillingGroupsApi(CONFIG_FOR_UNIT);

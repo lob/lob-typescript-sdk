@@ -7,13 +7,13 @@ import { BankAccountsApi } from "../api/bank-accounts-api";
 import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
 
 describe("BankAccountsApi", () => {
-  const dummyAccount: BankAccountWritable = {
+  const dummyAccount = new BankAccountWritable({
     description: "Test Bank Account",
     routing_number: "322271627",
     account_number: "123456789",
     signatory: "Sinead Connor",
     account_type: BankTypeEnum.Individual,
-  };
+  });
 
   it("Bank Accounts API can be instantiated", () => {
     const bankApi = new BankAccountsApi(CONFIG_FOR_INTEGRATION);
@@ -34,9 +34,9 @@ describe("BankAccountsApi", () => {
     });
 
     it("verifies a bank account", async () => {
-      const verify: BankAccountVerify = {
+      const verify = new BankAccountVerify({
         amounts: [11, 35],
-      };
+      });
 
       const verification = await new BankAccountsApi(
         CONFIG_FOR_INTEGRATION

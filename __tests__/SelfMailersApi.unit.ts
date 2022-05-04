@@ -1,8 +1,8 @@
 import {
-  CountryExtended,
   MailType,
   SelfMailerEditable,
   SelfMailerSize,
+  SendDate,
 } from "../models";
 import { SelfMailersApi } from "../api";
 
@@ -42,12 +42,12 @@ describe("SelfMailersApi", () => {
   });
 
   describe("create", () => {
-    const sfmEditableMock: SelfMailerEditable = {
+    const sfmEditableMock = new SelfMailerEditable({
       to: ADDRESSES_EDITABLE[5],
       from: ADDRESSES_EDITABLE[0],
       inside: FILE_LOCATION_4X6,
       outside: FILE_LOCATION_4X6,
-    };
+    });
 
     it("exists", async () => {
       const selfMailersApi = new SelfMailersApi(CONFIG_FOR_UNIT);
@@ -518,7 +518,7 @@ describe("SelfMailersApi", () => {
         undefined,
         undefined,
         undefined,
-        DATE_FILTER
+        new SendDate(DATE_FILTER)
       );
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.data?.length).toEqual(1);

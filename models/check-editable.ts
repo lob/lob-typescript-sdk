@@ -108,7 +108,7 @@ export class CheckEditable {
    * @type {any}
    * @memberof CheckEditable
    */
-  "logo"?: any | null;
+  "logo"?: any;
 
   /**
    * The artwork to use on the bottom of the check page.  Notes: - HTML merge variables should not include delimiting whitespace. - PDF, PNG, and JPGs must be sized at 8.5\"x11\" at 300 DPI, while supplied HTML will be rendered and trimmed to fit on a 8.5\"x11\" page. - The check bottom will always be printed in black & white. - Must conform to [this template](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/check_bottom_template.pdf).  Need more help? Consult our [HTML examples](#section/HTML-Examples).
@@ -186,6 +186,16 @@ export class CheckEditable {
    * @memberof CheckEditable
    */
   "billing_group_id"?: string;
+
+  public toJSON() {
+    let out = {};
+    for (const [key, value] of Object.entries(this)) {
+      out = Object.assign({}, out, {
+        [key[0] === "_" ? key.substr(1, key.length) : key]: value,
+      });
+    }
+    return out;
+  }
 }
 
 /**

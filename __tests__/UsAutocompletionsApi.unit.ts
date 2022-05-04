@@ -32,13 +32,13 @@ describe("UsAutocompletionsApi", () => {
   });
 
   describe("autocomplete", () => {
-    const autocompletionInput: UsAutocompletionsWritable = {
+    const autocompletionInput = new UsAutocompletionsWritable({
       address_prefix: "fake prefix",
       city: "fake city",
       state: "XX",
       zip_code: "12345",
       geo_ip_sort: false,
-    };
+    });
 
     it("exists", () => {
       const autocompletionApi = new UsAutocompletionsApi(CONFIG_FOR_UNIT);

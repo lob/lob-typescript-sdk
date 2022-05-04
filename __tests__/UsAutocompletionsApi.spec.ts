@@ -3,13 +3,13 @@ import { UsAutocompletionsApi } from "../api";
 import { CONFIG_FOR_INTEGRATION_WITH_LIVE } from "./testFixtures";
 
 describe("UsAutocompletionsApi", () => {
-  const autocompletionInput: UsAutocompletionsWritable = {
+  const autocompletionInput = new UsAutocompletionsWritable({
     address_prefix: "1313",
     city: "WESTFIELD",
     state: "NJ",
     zip_code: "07090",
     geo_ip_sort: false,
-  };
+  });
 
   it("US Autocompletions API can be instantiated", () => {
     const autocompletionApi = new UsAutocompletionsApi(

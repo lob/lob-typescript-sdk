@@ -4,6 +4,7 @@ import {
   CountryExtended,
   UsVerificationDeliverabilityEnum,
   IntlVerificationStatusEnum,
+  MultipleComponents,
 } from "../models";
 import { UsVerificationsApi } from "../api";
 
@@ -38,10 +39,10 @@ describe("UsVerificationsApi", () => {
   });
 
   describe("verifySingle", () => {
-    const verification: UsVerificationsWritable = {
+    const verification = new UsVerificationsWritable({
       primary_line: "370 WATER ST",
       zip_code: "07090",
-    };
+    });
 
     it("exists", () => {
       const verificationApi = new UsVerificationsApi(CONFIG_FOR_UNIT);
@@ -161,18 +162,18 @@ describe("UsVerificationsApi", () => {
   });
 
   describe("verifyBulk", () => {
-    const verification: MultipleComponentsList = {
+    const verification = new MultipleComponentsList({
       addresses: [
-        {
+        new MultipleComponents({
           primary_line: "370 WATER ST",
-          zip_code: CountryExtended.Ca,
-        },
-        {
+          zip_code: "12345",
+        }),
+        new MultipleComponents({
           primary_line: "012 PLACEHOLDER ST",
-          zip_code: "F0O 8A2",
-        },
+          zip_code: "12345",
+        }),
       ],
-    };
+    });
 
     it("exists", () => {
       const verificationApi = new UsVerificationsApi(CONFIG_FOR_UNIT);

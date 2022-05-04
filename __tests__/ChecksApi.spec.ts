@@ -14,18 +14,18 @@ let bankApi: BankAccountsApi;
 let account: BankAccount;
 describe("ChecksApi", () => {
   beforeAll(async () => {
-    const dummyAccount: BankAccountWritable = {
+    const dummyAccount = new BankAccountWritable({
       description: "Test Bank Account",
       routing_number: "322271627",
       account_number: "123456789",
       signatory: "Sinead Connor",
       account_type: BankTypeEnum.Individual,
-    };
+    });
     bankApi = new BankAccountsApi(CONFIG_FOR_INTEGRATION);
     account = await bankApi.create(dummyAccount);
-    const verify: BankAccountVerify = {
+    const verify = new BankAccountVerify({
       amounts: [11, 35],
-    };
+    });
     if (account.id) {
       const verification = await bankApi.verify(account.id, verify);
       expect(verification).toBeDefined();
@@ -61,13 +61,13 @@ describe("ChecksApi", () => {
       let checksApi: ChecksApi;
 
       beforeAll(() => {
-        createCheck = {
+        createCheck = new CheckEditable({
           description: "check 1",
           to: ADDRESSES_EDITABLE[0],
           from: ADDRESSES_EDITABLE[1],
           bank_account: account.id,
           amount: 100,
-        };
+        });
 
         checksApi = new ChecksApi(CONFIG_FOR_INTEGRATION);
       });
@@ -122,21 +122,25 @@ describe("ChecksApi", () => {
 
     beforeAll(async () => {
       // ensure there are at least 3 checks present, to test pagination
-      const check1: CheckEditable = {
+      const check1 = new CheckEditable({
         description: "check 1",
         to: ADDRESSES_EDITABLE[0],
         from: ADDRESSES_EDITABLE[1],
         bank_account: account.id,
         amount: 100,
-      };
-      const check2: CheckEditable = Object.assign({}, check1, {
-        description: "Check 2",
-        amount: 200,
       });
-      const check3: CheckEditable = Object.assign({}, check1, {
-        description: "Check 3",
-        amount: 300,
-      });
+      const check2 = new CheckEditable(
+        Object.assign({}, check1, {
+          description: "Check 2",
+          amount: 200,
+        })
+      );
+      const check3 = new CheckEditable(
+        Object.assign({}, check1, {
+          description: "Check 3",
+          amount: 300,
+        })
+      );
 
       const checksApi = new ChecksApi(CONFIG_FOR_INTEGRATION);
       await Promise.all([
