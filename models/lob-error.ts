@@ -128,6 +128,7 @@ export enum LobErrorCodeEnum {
   RateLimitExceeded = "rate_limit_exceeded",
   Unauthorized = "unauthorized",
   UnauthorizedToken = "unauthorized_token",
+  CardQuantityBelowMin = "card_quantity_below_min",
 }
 
 /**

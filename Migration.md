@@ -91,7 +91,7 @@ const addressCreate: AddressEditable = new AddressEditable({
   address_city: "WESTFIELD",
   address_state: "NJ",
   address_zip: "07090",
-  address_county: "US"
+  address_county: "US",
 });
 
 try {
@@ -109,7 +109,7 @@ const addressData = new AddressEditable({
   address_line1: "1313 CEMETERY LN",
   address_city: "WESTFIELD",
   address_state: "NJ",
-  address_zip: "07090"
+  address_zip: "07090",
 });
 
 try {
@@ -249,14 +249,17 @@ try {
 Here is a sample of the lob-node SINGLE VERIFY method:
 
 ```javascript
-Lob.UsVerifications.verify({
-  primary_line: '1313 CEMETERY LN',
-  city: 'WESTFIELD',
-  state: 'NJ',
-  zip_code: '07000'
-}, function (err, res) {
-  console.log(err, res);
-});
+Lob.UsVerifications.verify(
+  {
+    primary_line: "1313 CEMETERY LN",
+    city: "WESTFIELD",
+    state: "NJ",
+    zip_code: "07000",
+  },
+  function (err, res) {
+    console.log(err, res);
+  }
+);
 ```
 
 Here is a sample of the TypeScript SDK Single Verify method:
@@ -296,23 +299,26 @@ Lob.bankAccounts.verify(
 Here is a sample of the TypeScript SDK Bank Account Verify method:
 
 ```typescript
-const verificationData= new BankAccountVerify({
-    amounts: [11, 35]
+const verificationData = new BankAccountVerify({
+  amounts: [11, 35],
 });
 const bankData = new BankAccountWritable({
-    description: "Test Bank Account",
-    routing_number: "322271627",
-    account_number: "123456789",
-    signatory: "Gomez Addams",
-    account_type: BankTypeEnum.Individual
+  description: "Test Bank Account",
+  routing_number: "322271627",
+  account_number: "123456789",
+  signatory: "Gomez Addams",
+  account_type: BankTypeEnum.Individual,
 });
 let id = "";
 try {
-    const result = await new BankAccountsApi(config).create(bankData);
-    const verifiedAccount = await new BankAccountsApi(config).verify(result.id, verificationData);
-    id = verifiedAccount.id;
+  const result = await new BankAccountsApi(config).create(bankData);
+  const verifiedAccount = await new BankAccountsApi(config).verify(
+    result.id,
+    verificationData
+  );
+  id = verifiedAccount.id;
 } catch (err: any) {
-    console.error(err);
+  console.error(err);
 }
 return id;
 ```
@@ -324,18 +330,18 @@ The Template Update endpoint updates the description and/or published version of
 ```typescript
 const Templates = new TemplatesApi(config);
 const templateData = new TemplateWritable({
-    description: "Newer Template",
-    html: "<html>Updated HTML for {{name}}</html>"
+  description: "Newer Template",
+  html: "<html>Updated HTML for {{name}}</html>",
 });
 
 try {
-     const createTemplate = await Templates.create(templateData);
-     const updateData= new TemplateUpdate ({
-         description: "updated template",
-         published_version: createTemplate.published_version?.id as string
-     });
-     const updateTemplate = await Templates.update(createTemplate.id ,updateData);
+  const createTemplate = await Templates.create(templateData);
+  const updateData = new TemplateUpdate({
+    description: "updated template",
+    published_version: createTemplate.published_version?.id as string,
+  });
+  const updateTemplate = await Templates.update(createTemplate.id, updateData);
 } catch (err: any) {
-     console.error(err);
+  console.error(err);
 }
 ```
