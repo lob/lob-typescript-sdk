@@ -13,4 +13,4 @@ Please provide a brief summary of changes made and files affected
 ## Verify
 
 - [ ] Code runs without errors
-- [ ] Tests pass with 100% coverage
+- [ ] Tests pass with >=85% coverage

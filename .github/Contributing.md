@@ -15,9 +15,7 @@ We use github to host code, to track issues and feature requests, as well as acc
 ## All Code Changes Happen Through Pull Requests
 
 Pull requests are the best way to propose changes to the codebase. We actively welcome your pull requests:
-`Note: most of the code in this repo is generated, upon approval the change will be made in the genrator and propogate to this repo on following release`
-
-# (TODO: FILL IN)
+`Note: most of the code in this repo is generated, upon approval the change will be made in the genrator and propogated to this repo in the following release`
 
 ## Any contributions you make will be under the MIT Software License
 
@@ -32,10 +30,6 @@ In short, when you submit code changes, your submissions are understood to be un
 - What you expected would happen
 - What actually happens
 - Notes (possibly including why you think this might be happening, or stuff you tried that didn't work)
-
-## Use a Consistent Coding Style
-
-- 2 spaces for indentation rather than tabs
 
 ## License
 
