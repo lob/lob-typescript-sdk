@@ -12,10 +12,10 @@ We love your input! We want to make contributing to this project as easy and tra
 
 We use github to host code, to track issues and feature requests, as well as accept pull requests.
 
-## All Code Changes Happen Through Pull Requests
+## See something you think should change? The best way is to open an issue!
 
-Pull requests are the best way to propose changes to the codebase. We actively welcome your pull requests:
-`Note: most of the code in this repo is generated, upon approval the change will be made in the genrator and propogated to this repo in the following release`
+Opening an issue is the best way to propose changes to the codebase. We actively welcome contributions:
+`Note: most of the code in this repo is generated, upon approval the change will be made in the generator and propogated to this repo in the following release`
 
 ## Any contributions you make will be under the MIT Software License
 
