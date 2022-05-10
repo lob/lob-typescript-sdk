@@ -63,6 +63,9 @@ export class LetterEditable {
     if (typeof input?.billing_group_id !== "undefined") {
       this.billing_group_id = input.billing_group_id;
     }
+    if (typeof input?.description !== "undefined") {
+      this.description = input.description;
+    }
   }
 
   /**
@@ -158,6 +161,13 @@ export class LetterEditable {
    * @memberof LetterEditable
    */
   "billing_group_id"?: string;
+
+  /**
+   * An internal description that identifies this resource. Must be no longer than 255 characters.
+   * @type {string}
+   * @memberof LetterEditable
+   */
+  "description"?: string | null;
 
   public toJSON() {
     let out = {};
