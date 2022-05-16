@@ -23,8 +23,7 @@ describe("ReverseGeocodeLookupsApi", () => {
   });
 
   describe("lookup", () => {
-    const mockLocation = new Location();
-    (mockLocation.latitude = 10.0518), (mockLocation.longitude = 77.5677);
+    const mockLocation = new Location({ latitude: 10.0518, longitude: 77.5677 });
 
     it("exists", async () => {
       const reverseGeocodeApi = new ReverseGeocodeLookupsApi(CONFIG_FOR_UNIT);
