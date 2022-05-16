@@ -30,7 +30,7 @@ describe("IntlAutocompletionsApi", () => {
     expect(intlApi).toBeInstanceOf(IntlAutocompletionsApi);
   });
 
-  describe("Autocomplete", () => {
+  describe("autocomplete", () => {
     const autoCompletion = new IntlAutocompletionsWritable({
       address_prefix: "340 Wat",
       city: "Summerside",
@@ -50,8 +50,8 @@ describe("IntlAutocompletionsApi", () => {
 
     it("exists", () => {
       const intlApi = new IntlAutocompletionsApi(CONFIG_FOR_UNIT);
-      expect(intlApi.Autocomplete).toBeDefined();
-      expect(typeof intlApi.Autocomplete).toEqual("function");
+      expect(intlApi.autocomplete).toBeDefined();
+      expect(typeof intlApi.autocomplete).toEqual("function");
     });
 
     it("handles errors returned by the api", async () => {
@@ -63,7 +63,7 @@ describe("IntlAutocompletionsApi", () => {
       });
 
       try {
-        await new IntlAutocompletionsApi(CONFIG_FOR_UNIT).Autocomplete(
+        await new IntlAutocompletionsApi(CONFIG_FOR_UNIT).autocomplete(
           autoCompletion
         );
       } catch (err: any) {
@@ -80,7 +80,7 @@ describe("IntlAutocompletionsApi", () => {
       });
 
       try {
-        await new IntlAutocompletionsApi(CONFIG_FOR_UNIT).Autocomplete(
+        await new IntlAutocompletionsApi(CONFIG_FOR_UNIT).autocomplete(
           autoCompletion
         );
         fail("Should throw");
@@ -98,7 +98,7 @@ describe("IntlAutocompletionsApi", () => {
       });
 
       try {
-        await new IntlAutocompletionsApi(CONFIG_FOR_UNIT).Autocomplete(
+        await new IntlAutocompletionsApi(CONFIG_FOR_UNIT).autocomplete(
           autoCompletion
         );
         fail("Should throw");
@@ -113,7 +113,7 @@ describe("IntlAutocompletionsApi", () => {
       });
 
       try {
-        await new IntlAutocompletionsApi(CONFIG_FOR_UNIT).Autocomplete(
+        await new IntlAutocompletionsApi(CONFIG_FOR_UNIT).autocomplete(
           autoCompletion
         );
         fail("Should throw");
@@ -129,7 +129,7 @@ describe("IntlAutocompletionsApi", () => {
 
       const response = await new IntlAutocompletionsApi(
         CONFIG_FOR_UNIT
-      ).Autocomplete(autoCompletion);
+      ).autocomplete(autoCompletion);
       expect(response.suggestions).toBeDefined();
       expect(response.suggestions?.length).toEqual(1);
     });
@@ -141,7 +141,7 @@ describe("IntlAutocompletionsApi", () => {
 
       const response = await new IntlAutocompletionsApi(
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
-      ).Autocomplete(autoCompletion);
+      ).autocomplete(autoCompletion);
       expect(response.suggestions).toBeDefined();
       expect(response.suggestions?.length).toEqual(1);
     });
@@ -153,7 +153,7 @@ describe("IntlAutocompletionsApi", () => {
 
       const response = await new IntlAutocompletionsApi(
         CONFIG_FOR_UNIT
-      ).Autocomplete(autoCompletion, "native");
+      ).autocomplete(autoCompletion, "native");
       expect(response.suggestions).toBeDefined();
       expect(response.suggestions?.length).toEqual(1);
     });
