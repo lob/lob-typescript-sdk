@@ -17,7 +17,6 @@ import * as Models from "./index";
 import { Address } from "./address";
 import { LetterCustomEnvelope } from "./letter-custom-envelope";
 import { MailType } from "./mail-type";
-import { SendDate } from "./send-date";
 import { Thumbnail } from "./thumbnail";
 import { TrackingEventNormal } from "./tracking-event-normal";
 
@@ -244,11 +243,11 @@ export class Letter {
   "merge_variables"?: object | null;
 
   /**
-   *
-   * @type {SendDate}
+   * A timestamp in ISO 8601 format which specifies a date after the current time and up to 180 days in the future to send the letter off for production. Setting a send date overrides the default [cancellation window](#section/Cancellation-Windows) applied to the mailpiece. Until the `send_date` has passed, the mailpiece can be canceled. If a date in the format `2017-11-01` is passed, it will evaluate to midnight UTC of that date (`2017-11-01T00:00:00.000Z`). If a datetime is passed, that exact time will be used. A `send_date` passed with no time zone will default to UTC, while a `send_date` passed with a time zone will be converted to UTC.
+   * @type {string}
    * @memberof Letter
    */
-  "send_date"?: SendDate;
+  "send_date"?: string;
 
   /**
    * Add an extra service to your letter. See [pricing](https://www.lob.com/pricing/print-mail#compare) for extra costs incurred.   * registered - provides tracking and confirmation for international addresses   * `certified` - track and confirm delivery for domestic destinations. An extra sheet (1 PDF page single-sided or 2 PDF pages double-sided) is added to the beginning of your letter for address and barcode information. See here for templates: [#10 envelope](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_certified_template.pdf) and [flat envelope](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_certified_flat_template.pdf) (used for letters over 6 pages single-sided or 12 pages double-sided). You will not be charged for this extra sheet.   * `certified_return_receipt` - request an electronic copy of the recipient\'s signature to prove delivery of your certified letter
