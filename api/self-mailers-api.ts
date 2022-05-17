@@ -55,8 +55,6 @@ import { SelfMailerEditable } from "../models";
 import { SelfMailerList } from "../models";
 // @ts-ignore
 import { SelfMailerSize } from "../models";
-// @ts-ignore
-import { SendDate } from "../models";
 /**
  * SelfMailersApi - axios parameter creator
  * @export
@@ -240,7 +238,7 @@ export const SelfMailersApiAxiosParamCreator = function (
      * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
      * @param {SelfMailerSize} [size] The self mailer sizes to be returned.
      * @param {boolean} [scheduled] * &#x60;true&#x60; - only return orders (past or future) where &#x60;send_date&#x60; is greater than &#x60;date_created&#x60; * &#x60;false&#x60; - only return orders where &#x60;send_date&#x60; is equal to &#x60;date_created&#x60;
-     * @param {SendDate} [sendDate] Filter by ISO-8601 date or datetime, e.g. &#x60;{ gt: \&#39;2012-01-01\&#39;, lt: \&#39;2012-01-31T12:34:56Z\&#39; }&#x60; where &#x60;gt&#x60; is &gt;, &#x60;lt&#x60; is &lt;, &#x60;gte&#x60; is ≥, and &#x60;lte&#x60; is ≤.
+     * @param {{ [key: string]: string; }} [sendDate] Filter by date sent.
      * @param {MailType} [mailType] A string designating the mail postage type: * &#x60;usps_first_class&#x60; - (default) * &#x60;usps_standard&#x60; - a [cheaper option](https://lob.com/pricing/print-mail#compare) which is less predictable and takes longer to deliver. &#x60;usps_standard&#x60; cannot be used with &#x60;4x6&#x60; postcards or for any postcards sent outside of the United States.
      * @param {object} [sortBy] Sorts items by ascending or descending dates. Use either &#x60;date_created&#x60; or &#x60;send_date&#x60;, not both.
      * @param {*} [options] Override http request option.
@@ -255,7 +253,7 @@ export const SelfMailersApiAxiosParamCreator = function (
       metadata?: { [key: string]: string },
       size?: SelfMailerSize,
       scheduled?: boolean,
-      sendDate?: SendDate,
+      sendDate?: { [key: string]: string },
       mailType?: MailType,
       sortBy?: object,
       options: AxiosRequestConfig = {}
@@ -435,7 +433,7 @@ export const SelfMailersApiFp = function (configuration?: Configuration) {
      * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
      * @param {SelfMailerSize} [size] The self mailer sizes to be returned.
      * @param {boolean} [scheduled] * &#x60;true&#x60; - only return orders (past or future) where &#x60;send_date&#x60; is greater than &#x60;date_created&#x60; * &#x60;false&#x60; - only return orders where &#x60;send_date&#x60; is equal to &#x60;date_created&#x60;
-     * @param {SendDate} [sendDate] Filter by ISO-8601 date or datetime, e.g. &#x60;{ gt: \&#39;2012-01-01\&#39;, lt: \&#39;2012-01-31T12:34:56Z\&#39; }&#x60; where &#x60;gt&#x60; is &gt;, &#x60;lt&#x60; is &lt;, &#x60;gte&#x60; is ≥, and &#x60;lte&#x60; is ≤.
+     * @param {{ [key: string]: string; }} [sendDate] Filter by date sent.
      * @param {MailType} [mailType] A string designating the mail postage type: * &#x60;usps_first_class&#x60; - (default) * &#x60;usps_standard&#x60; - a [cheaper option](https://lob.com/pricing/print-mail#compare) which is less predictable and takes longer to deliver. &#x60;usps_standard&#x60; cannot be used with &#x60;4x6&#x60; postcards or for any postcards sent outside of the United States.
      * @param {object} [sortBy] Sorts items by ascending or descending dates. Use either &#x60;date_created&#x60; or &#x60;send_date&#x60;, not both.
      * @param {*} [options] Override http request option.
@@ -450,7 +448,7 @@ export const SelfMailersApiFp = function (configuration?: Configuration) {
       metadata?: { [key: string]: string },
       size?: SelfMailerSize,
       scheduled?: boolean,
-      sendDate?: SendDate,
+      sendDate?: { [key: string]: string },
       mailType?: MailType,
       sortBy?: object,
       options?: AxiosRequestConfig
@@ -573,7 +571,7 @@ export class SelfMailersApi extends BaseAPI {
    * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
    * @param {SelfMailerSize} [size] The self mailer sizes to be returned.
    * @param {boolean} [scheduled] * &#x60;true&#x60; - only return orders (past or future) where &#x60;send_date&#x60; is greater than &#x60;date_created&#x60; * &#x60;false&#x60; - only return orders where &#x60;send_date&#x60; is equal to &#x60;date_created&#x60;
-   * @param {SendDate} [sendDate] Filter by ISO-8601 date or datetime, e.g. &#x60;{ gt: \&#39;2012-01-01\&#39;, lt: \&#39;2012-01-31T12:34:56Z\&#39; }&#x60; where &#x60;gt&#x60; is &gt;, &#x60;lt&#x60; is &lt;, &#x60;gte&#x60; is ≥, and &#x60;lte&#x60; is ≤.
+   * @param {{ [key: string]: string; }} [sendDate] Filter by date sent.
    * @param {MailType} [mailType] A string designating the mail postage type: * &#x60;usps_first_class&#x60; - (default) * &#x60;usps_standard&#x60; - a [cheaper option](https://lob.com/pricing/print-mail#compare) which is less predictable and takes longer to deliver. &#x60;usps_standard&#x60; cannot be used with &#x60;4x6&#x60; postcards or for any postcards sent outside of the United States.
    * @param {object} [sortBy] Sorts items by ascending or descending dates. Use either &#x60;date_created&#x60; or &#x60;send_date&#x60;, not both.
    * @param {*} [options] Override http request option.
@@ -589,7 +587,7 @@ export class SelfMailersApi extends BaseAPI {
     metadata?: { [key: string]: string },
     size?: SelfMailerSize,
     scheduled?: boolean,
-    sendDate?: SendDate,
+    sendDate?: { [key: string]: string },
     mailType?: MailType,
     sortBy?: object,
     options?: AxiosRequestConfig

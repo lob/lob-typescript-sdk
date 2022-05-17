@@ -1,4 +1,4 @@
-import { LetterEditable, AddressEditable, MailType, SendDate } from "../models";
+import { LetterEditable, AddressEditable, MailType } from "../models";
 import { LettersApi } from "../api/letters-api";
 
 import { fail } from "./testUtilities";
@@ -389,7 +389,7 @@ describe("LetterApi", () => {
         undefined,
         undefined,
         undefined,
-        DATE_FILTER as unknown as SendDate
+        DATE_FILTER as unknown as { [key: string]: string }
       );
       expect(response).toBeDefined();
       expect(response.data).toBeDefined();

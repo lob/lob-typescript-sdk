@@ -3,7 +3,7 @@ import { ChecksApi } from "../api/checks-api";
 import axios from "axios";
 
 import { fail } from "./testUtilities";
-import { CheckEditable, SendDate } from "../models";
+import { CheckEditable } from "../models";
 import { MailType } from "..";
 import {
   CONFIG_FOR_UNIT,
@@ -481,7 +481,7 @@ describe("ChecksApi", () => {
         undefined,
         undefined,
         undefined,
-        DATE_FILTER.gt as unknown as SendDate
+        DATE_FILTER.gt as unknown as { [key: string]: string }
       );
       expect(chkApi).toBeDefined();
       expect(chkApi?.data?.length).toEqual(1);

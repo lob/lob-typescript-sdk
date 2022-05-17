@@ -3,7 +3,6 @@ import {
   AddressEditable,
   MailType,
   PostcardSize,
-  SendDate,
 } from "../models";
 import { PostcardsApi } from "../api/postcards-api";
 
@@ -394,7 +393,7 @@ describe("PostcardsApi", () => {
         undefined,
         undefined,
         undefined,
-        DATE_FILTER as unknown as SendDate
+        DATE_FILTER as unknown as { [key: string]: string }
       );
       expect(response).toBeDefined();
       expect(response.data).toBeDefined();

@@ -1,9 +1,4 @@
-import {
-  MailType,
-  SelfMailerEditable,
-  SelfMailerSize,
-  SendDate,
-} from "../models";
+import { MailType, SelfMailerEditable, SelfMailerSize } from "../models";
 import { SelfMailersApi } from "../api";
 
 import { fail } from "./testUtilities";
@@ -518,7 +513,7 @@ describe("SelfMailersApi", () => {
         undefined,
         undefined,
         undefined,
-        new SendDate(DATE_FILTER)
+        DATE_FILTER
       );
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.data?.length).toEqual(1);
