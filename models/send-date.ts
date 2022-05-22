@@ -17,40 +17,14 @@ import * as Models from './index';
 
 
 /**
- * 
+ * A timestamp in ISO 8601 format which specifies a date after the current time and up to 180 days in the future to send the letter off for production. Setting a send date overrides the default [cancellation window](#section/Cancellation-Windows) applied to the mailpiece. Until the `send_date` has passed, the mailpiece can be canceled. If a date in the format `2017-11-01` is passed, it will evaluate to midnight UTC of that date (`2017-11-01T00:00:00.000Z`). If a datetime is passed, that exact time will be used. A `send_date` passed with no time zone will default to UTC, while a `send_date` passed with a time zone will be converted to UTC.
  * @export
- * @class SortBy
+ * @class SendDate
  */
-export class SortBy {
+export class SendDate {
     constructor(input?: any) {
-        if (typeof input?.date_created !== "undefined") {
-            this.date_created = input.date_created;
-        }
-        if (typeof input?.send_date !== "undefined") {
-            this.send_date = input.send_date;
-        }
     }
 
-    /**
-     * 
-     * @type {string}
-     * @memberof SortBy
-     */
-    'date_created'?: SortByDateCreatedEnum;
-
-
-
-    
-    /**
-     * 
-     * @type {string}
-     * @memberof SortBy
-     */
-    'send_date'?: SortBySendDateEnum;
-
-
-
-    
     public toJSON() {
         let out = {};
         for (const [key, value] of Object.entries(this)) {
@@ -59,24 +33,6 @@ export class SortBy {
         return out;
     }
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum SortByDateCreatedEnum {
-    Asc = 'asc',
-    Desc = 'desc'
-}
-/**
-    * @export
-    * @enum {string}
-    */
-export enum SortBySendDateEnum {
-    Asc = 'asc',
-    Desc = 'desc'
-}
-
 
 
 /**

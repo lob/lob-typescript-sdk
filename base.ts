@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Lob
- * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)?
+ * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)? 
  *
  * The version of the OpenAPI document: 1.3.0
  * Contact: lob-openapi@lob.com
@@ -12,14 +12,11 @@
  * Do not edit the class manually.
  */
 
+
 import { Configuration } from "./configuration";
 // Some imports not used depending on template conditions
 // @ts-ignore
-import globalAxios, {
-  AxiosPromise,
-  AxiosInstance,
-  AxiosRequestConfig,
-} from "axios";
+import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
 
 export const BASE_PATH = "https://api.lob.com/v1".replace(/\/+$/, "");
 
@@ -28,10 +25,10 @@ export const BASE_PATH = "https://api.lob.com/v1".replace(/\/+$/, "");
  * @export
  */
 export const COLLECTION_FORMATS = {
-  csv: ",",
-  ssv: " ",
-  tsv: "\t",
-  pipes: "|",
+    csv: ",",
+    ssv: " ",
+    tsv: "\t",
+    pipes: "|",
 };
 
 /**
@@ -40,8 +37,8 @@ export const COLLECTION_FORMATS = {
  * @interface RequestArgs
  */
 export interface RequestArgs {
-  url: string;
-  options: AxiosRequestConfig;
+    url: string;
+    options: AxiosRequestConfig;
 }
 
 /**
@@ -50,19 +47,15 @@ export interface RequestArgs {
  * @class BaseAPI
  */
 export class BaseAPI {
-  protected configuration: Configuration | undefined;
+    protected configuration: Configuration | undefined;
 
-  constructor(
-    configuration?: Configuration,
-    protected basePath: string = BASE_PATH,
-    protected axios: AxiosInstance = globalAxios
-  ) {
-    if (configuration) {
-      this.configuration = configuration;
-      this.basePath = configuration.basePath || this.basePath;
+    constructor(configuration?: Configuration, protected basePath: string = BASE_PATH, protected axios: AxiosInstance = globalAxios) {
+        if (configuration) {
+            this.configuration = configuration;
+            this.basePath = configuration.basePath || this.basePath;
+        }
     }
-  }
-}
+};
 
 /**
  *
@@ -71,10 +64,10 @@ export class BaseAPI {
  * @extends {Error}
  */
 export class RequiredError extends Error {
-  name: "RequiredError" = "RequiredError";
-  constructor(public field: string, msg?: string) {
-    super(msg);
-  }
+    name: "RequiredError" = "RequiredError";
+    constructor(public field: string, msg?: string) {
+        super(msg);
+    }
 }
 
 /**
@@ -82,3 +75,4 @@ export class RequiredError extends Error {
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+

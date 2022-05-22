@@ -3,7 +3,6 @@
 ## Address Api
 
 ### List
-
 ```bash
 curl -X GET "https://api.lob.com/v1/addresses?limit=2" \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -20,7 +19,6 @@ try {
 ## Postcards Api
 
 ### List
-
 ```bash
 curl -X GET "https://api.lob.com/v1/postcards?limit=2" \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -37,7 +35,6 @@ try {
 ## SelfMailers Api
 
 ### List
-
 ```bash
 curl -X GET "https://api.lob.com/v1/self_mailers?limit=2" \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -54,7 +51,6 @@ try {
 ## Letters Api
 
 ### List
-
 ```bash
 curl -X GET "https://api.lob.com/v1/letters?limit=2" \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -71,7 +67,6 @@ try {
 ## Checks Api
 
 ### List
-
 ```bash
 curl -X GET "https://api.lob.com/v1/checks?limit=2" \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -88,7 +83,6 @@ try {
 ## BankAccounts Api
 
 ### List
-
 ```bash
 curl -X GET "https://api.lob.com/v1/bank_accounts?limit=2" \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -105,7 +99,6 @@ try {
 ## Templates Api
 
 ### List
-
 ```bash
 curl -X GET "https://api.lob.com/v1/templates?limit=2" \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -121,11 +114,15 @@ try {
 
 ## TemplateVersions Api
 
+### List
+```bash
+curl -X GET "https://api.lob.com/v1/templates/tmpl_ea6e6a1abf01703/versions?limit=2" \
+  -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
+```
+
 ```typescript
 try {
-  const templateVersions = await new TemplateVersionsApi(config).list(
-    tmpl_xxxx
-  );
+  const templateVersions = await new TemplateVersionsApi(config).list(tmpl_xxxx);
 } catch (err: any) {
   console.error(err);
 }

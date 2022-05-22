@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Lob
- * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)?
+ * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)? 
  *
  * The version of the OpenAPI document: 1.3.0
  * Contact: lob-openapi@lob.com
@@ -12,89 +12,104 @@
  * Do not edit the class manually.
  */
 
-import * as Models from "./index";
+
+import * as Models from './index';
+
 
 /**
- *
+ * 
  * @export
  * @class ZipLookupCity
  */
 export class ZipLookupCity {
-  constructor(input?: any) {
-    if (typeof input?.city !== "undefined") {
-      this.city = input.city;
+    constructor(input?: any) {
+        if (typeof input?.city !== "undefined") {
+            this.city = input.city;
+        }
+        if (typeof input?.state !== "undefined") {
+            this.state = input.state;
+        }
+        if (typeof input?.county !== "undefined") {
+            this.county = input.county;
+        }
+        if (typeof input?.county_fips !== "undefined") {
+            this.county_fips = input.county_fips;
+        }
+        if (typeof input?.preferred !== "undefined") {
+            this.preferred = input.preferred;
+        }
     }
-    if (typeof input?.state !== "undefined") {
-      this.state = input.state;
-    }
-    if (typeof input?.county !== "undefined") {
-      this.county = input.county;
-    }
-    if (typeof input?.county_fips !== "undefined") {
-      this.county_fips = input.county_fips;
-    }
-    if (typeof input?.preferred !== "undefined") {
-      this.preferred = input.preferred;
-    }
-  }
 
-  /**
-   *
-   * @type {string}
-   * @memberof ZipLookupCity
-   */
-  "city"?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ZipLookupCity
+     */
+    'city'?: string;
 
-  /**
-   * The [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) two letter code for the state.
-   * @type {string}
-   * @memberof ZipLookupCity
-   */
-  "state"?: string;
 
-  /**
-   * County name of the address city.
-   * @type {string}
-   * @memberof ZipLookupCity
-   */
-  "county"?: string;
 
-  /**
-   * A 5-digit [FIPS county code](https://en.wikipedia.org/wiki/FIPS_county_code) which uniquely identifies `components[county]`. It consists of a 2-digit state code and a 3-digit county code.
-   * @type {string}
-   * @memberof ZipLookupCity
-   */
-  private "_county_fips"?: string;
-  public get county_fips() {
-    return (this._county_fips || undefined) as string;
-  }
-  public set county_fips(newValue: string) {
-    if (newValue && !/\d{5}/.test(newValue)) {
-      throw new Error("Invalid county_fips provided");
+    
+    /**
+     * The [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) two letter code for the state. 
+     * @type {string}
+     * @memberof ZipLookupCity
+     */
+    'state'?: string;
+
+
+
+    
+    /**
+     * County name of the address city.
+     * @type {string}
+     * @memberof ZipLookupCity
+     */
+    'county'?: string;
+
+
+
+    
+    /**
+     * A 5-digit [FIPS county code](https://en.wikipedia.org/wiki/FIPS_county_code) which uniquely identifies `components[county]`. It consists of a 2-digit state code and a 3-digit county code. 
+     * @type {string}
+     * @memberof ZipLookupCity
+     */
+    private '_county_fips'?: string;
+    public get county_fips() { return (this._county_fips || undefined) as string; }
+    public set county_fips(newValue: string) {
+        if(newValue && !/\d{5}/.test(newValue)) {
+            throw new Error("Invalid county_fips provided");
+        }
+        this._county_fips = newValue;
     }
-    this._county_fips = newValue;
-  }
 
-  /**
-   * Indicates whether or not the city is the [USPS default city](https://en.wikipedia.org/wiki/ZIP_Code#ZIP_Codes_and_previous_zoning_lines) (preferred city) of a ZIP code. There is only one preferred city per ZIP code, which will always be in position 0 in the array of cities.
-   * @type {boolean}
-   * @memberof ZipLookupCity
-   */
-  "preferred"?: boolean;
 
-  public toJSON() {
-    let out = {};
-    for (const [key, value] of Object.entries(this)) {
-      out = Object.assign({}, out, {
-        [key[0] === "_" ? key.substr(1, key.length) : key]: value,
-      });
+
+    
+    /**
+     * Indicates whether or not the city is the [USPS default city](https://en.wikipedia.org/wiki/ZIP_Code#ZIP_Codes_and_previous_zoning_lines) (preferred city) of a ZIP code. There is only one preferred city per ZIP code, which will always be in position 0 in the array of cities. 
+     * @type {boolean}
+     * @memberof ZipLookupCity
+     */
+    'preferred'?: boolean;
+
+
+
+    
+    public toJSON() {
+        let out = {};
+        for (const [key, value] of Object.entries(this)) {
+            out = Object.assign({}, out, { [key[0] === '_' ? key.substr(1, key.length) : key]: value});
+        }
+        return out;
     }
-    return out;
-  }
 }
+
 
 /**
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+
