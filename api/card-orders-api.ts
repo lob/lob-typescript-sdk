@@ -126,11 +126,15 @@ export const CardOrdersApiAxiosParamCreator = function (
      * Retrieves the card orders associated with the given card id.
      * @summary get
      * @param {string} cardId The ID of the card to which the card orders belong.
+     * @param {number} [limit] How many results to return.
+     * @param {number} [offset] An integer that designates the offset at which to begin returning results. Defaults to 0.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     cardOrdersRetrieve: async (
       cardId: string,
+      limit?: number,
+      offset?: number,
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'cardId' is not null or undefined
@@ -157,6 +161,14 @@ export const CardOrdersApiAxiosParamCreator = function (
       // authentication basicAuth required
       // http basic authentication required
       setBasicAuthToObject(localVarRequestOptions, configuration);
+
+      if (limit !== undefined) {
+        localVarQueryParameter["limit"] = limit;
+      }
+
+      if (offset !== undefined) {
+        localVarQueryParameter["offset"] = offset;
+      }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -214,17 +226,26 @@ export const CardOrdersApiFp = function (configuration?: Configuration) {
      * Retrieves the card orders associated with the given card id.
      * @summary get
      * @param {string} cardId The ID of the card to which the card orders belong.
+     * @param {number} [limit] How many results to return.
+     * @param {number} [offset] An integer that designates the offset at which to begin returning results. Defaults to 0.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async cardOrdersRetrieve(
       cardId: string,
+      limit?: number,
+      offset?: number,
       options?: AxiosRequestConfig
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<CardOrderList>
     > {
       const localVarAxiosArgs =
-        await localVarAxiosParamCreator.cardOrdersRetrieve(cardId, options);
+        await localVarAxiosParamCreator.cardOrdersRetrieve(
+          cardId,
+          limit,
+          offset,
+          options
+        );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
@@ -274,13 +295,20 @@ export class CardOrdersApi extends BaseAPI {
    * Retrieves the card orders associated with the given card id.
    * @summary get
    * @param {string} cardId The ID of the card to which the card orders belong.
+   * @param {number} [limit] How many results to return.
+   * @param {number} [offset] An integer that designates the offset at which to begin returning results. Defaults to 0.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof CardOrdersApi
    */
-  public get(cardId: string, options?: AxiosRequestConfig) {
+  public get(
+    cardId: string,
+    limit?: number,
+    offset?: number,
+    options?: AxiosRequestConfig
+  ) {
     return CardOrdersApiFp(this.configuration)
-      .cardOrdersRetrieve(cardId, options)
+      .cardOrdersRetrieve(cardId, limit, offset, options)
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {
         return new CardOrderList(response.data);
