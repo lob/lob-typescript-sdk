@@ -39,6 +39,7 @@ describe("CardsApi", () => {
         color: true,
         extra_service: LetterEditableExtraServiceEnum.Certified,
         file: FILE_LOCATION_8X11,
+        metadata: { internal_id: "fake internal id" },
       });
 
       const letter = await lettersApi.create(certifiedLetter);
@@ -47,6 +48,11 @@ describe("CardsApi", () => {
       if (letter.id) {
         const retrievedLetter = await lettersApi.get(letter.id);
         expect(retrievedLetter).toBeDefined();
+        expect(retrievedLetter.metadata).toBeDefined();
+        expect(retrievedLetter.metadata?.internal_id).toBeDefined();
+        expect(retrievedLetter.metadata?.internal_id).toEqual(
+          "fake internal id"
+        );
         const cancelledLetter = await lettersApi.cancel(letter.id);
         expect(cancelledLetter.deleted).toBeTruthy();
       } else {
