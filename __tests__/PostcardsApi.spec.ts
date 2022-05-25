@@ -16,6 +16,7 @@ describe("postcardsApi", () => {
     from: ADDRESSES_EDITABLE[1],
     front: FILE_LOCATION_4X6,
     back: FILE_LOCATION_4X6,
+    merge_variables: { object: "banana" },
   });
 
   it("Postcard API can be instantiated", () => {
@@ -59,7 +60,7 @@ describe("postcardsApi", () => {
       // Template Fixture
       const templateWrite = new TemplateWritable({
         description: "Newer Template",
-        html: "<html>Updated HTML</html>",
+        html: "<html>Updated HTML for {{object}}</html>",
       });
 
       // Create Template
