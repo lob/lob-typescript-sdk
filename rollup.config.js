@@ -1,4 +1,5 @@
 import pluginTypescript from "@rollup/plugin-typescript";
+import json from "@rollup/plugin-json";
 import pluginCommonjs from "@rollup/plugin-commonjs";
 import pluginNodeResolve from "@rollup/plugin-node-resolve";
 import * as path from "path";
@@ -62,6 +63,7 @@ export default [
       pluginCommonjs({
         extensions: [".js", ".ts"],
       }),
+      json(),
       pluginNodeResolve({
         browser: false,
       }),
