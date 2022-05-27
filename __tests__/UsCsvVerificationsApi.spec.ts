@@ -7,7 +7,7 @@ import { USVerificationsApi } from "../api/usverifications-api";
 
 describe("USVerificationsApi", () => {
   it("US CSV API can be instantiated", () => {
-    const UsCsvApi = new USVerificationsApi(CONFIG_FOR_INTEGRATION);
+    const UsCsvApi = new USVerificationsApi(CONFIG_FOR_INTEGRATION_WITH_LIVE);
     expect(UsCsvApi).toEqual("object");
     expect(UsCsvApi).toBeInstanceOf(USVerificationsApi);
   });
