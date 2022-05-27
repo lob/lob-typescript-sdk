@@ -26,6 +26,7 @@ export * from "./api/reverse-geocode-lookups-api";
 export * from "./api/self-mailers-api";
 export * from "./api/template-versions-api";
 export * from "./api/templates-api";
+export * from "./api/usverifications-api";
 export * from "./api/us-autocompletions-api";
 export * from "./api/us-verifications-api";
 export * from "./api/zip-lookups-api";

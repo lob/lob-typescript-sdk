@@ -92,6 +92,7 @@ export * from "./tracking-event-normal";
 export * from "./us-autocompletions";
 export * from "./us-autocompletions-writable";
 export * from "./us-components";
+export * from "./us-csv-verifications-response";
 export * from "./us-verification";
 export * from "./us-verification-or-error";
 export * from "./us-verifications";
