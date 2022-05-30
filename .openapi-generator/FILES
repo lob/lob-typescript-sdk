@@ -92,7 +92,6 @@ models/self-mailer-editable.ts
 models/self-mailer-list.ts
 models/self-mailer-size.ts
 models/self-mailer.ts
-models/send-date.ts
 models/sort-by.ts
 models/sort-by1.ts
 models/sort-by2.ts

@@ -2,6 +2,28 @@
 
 ## Address Api
 
+<<<<<<< HEAD
+### Retrieve
+```bash
+curl https://api.lob.com/v1/addresses/adr_fa85158b26c3eb7c \
+  -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
+```
+
+```typescript
+try {
+  const address = await new AddressesApi(config).get('adr_fa85158b26c3eb7c');
+} catch (err: any) {
+  console.error(err);
+}
+```
+=======
+
+>>>>>>> 51728890 (docs: create code snippets)
+
+
+<<<<<<< HEAD
+
+=======
 ### Create
 ```bash
 curl https://api.lob.com/v1/addresses \
@@ -40,9 +62,14 @@ try {
   console.error(err);
 }
 ```
+>>>>>>> 51728890 (docs: create code snippets)
 
 
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 51728890 (docs: create code snippets)
 ### List
 ```bash
 curl -X GET "https://api.lob.com/v1/addresses?limit=2" \
@@ -117,6 +144,28 @@ try {
 
 ## SelfMailers Api
 
+<<<<<<< HEAD
+### Retrieve
+```bash
+curl https://api.lob.com/v1/self_mailers/sfm_8ffbe811dea49dcf \
+  -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
+```
+
+```typescript
+try {
+  const selfMailer = await new SelfMailersApi(config).get('sfm_8ffbe811dea49dcf');
+} catch (err: any) {
+  console.error(err);
+}
+```
+=======
+
+>>>>>>> 51728890 (docs: create code snippets)
+
+
+<<<<<<< HEAD
+
+=======
 ### Create
 ```bash
 curl https://api.lob.com/v1/self_mailers \
@@ -154,9 +203,14 @@ try {
   console.error(err);
 }
 ```
+>>>>>>> 51728890 (docs: create code snippets)
 
 
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 51728890 (docs: create code snippets)
 ### List
 ```bash
 curl -X GET "https://api.lob.com/v1/self_mailers?limit=2" \
@@ -173,6 +227,28 @@ try {
 
 ## Letters Api
 
+<<<<<<< HEAD
+### Retrieve
+```bash
+curl https://api.lob.com/v1/letters/ltr_4868c3b754655f90 \
+  -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
+```
+
+```typescript
+try {
+  const letter = await new LettersApi(config).get('ltr_4868c3b754655f90');
+} catch (err: any) {
+  console.error(err);
+}
+```
+=======
+
+>>>>>>> 51728890 (docs: create code snippets)
+
+
+<<<<<<< HEAD
+
+=======
 ### Create
 ```bash
 curl https://api.lob.com/v1/letters \
@@ -213,9 +289,14 @@ try {
   console.error(err);
 }
 ```
+>>>>>>> 51728890 (docs: create code snippets)
 
 
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 51728890 (docs: create code snippets)
 ### List
 ```bash
 curl -X GET "https://api.lob.com/v1/letters?limit=2" \
@@ -232,6 +313,28 @@ try {
 
 ## Checks Api
 
+<<<<<<< HEAD
+### Retrieve
+```bash
+curl https://api.lob.com/v1/checks/chk_534f10783683daa0 \
+  -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
+```
+
+```typescript
+try {
+  const check = await new ChecksApi(config).get('chk_534f10783683daa0');
+} catch (err: any) {
+  console.error(err);
+}
+```
+=======
+
+>>>>>>> 51728890 (docs: create code snippets)
+
+
+<<<<<<< HEAD
+
+=======
 ### Create
 ```bash
 curl https://api.lob.com/v1/checks \
@@ -274,9 +377,14 @@ try {
   console.error(err);
 }
 ```
+>>>>>>> 51728890 (docs: create code snippets)
 
 
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 51728890 (docs: create code snippets)
 ### List
 ```bash
 curl -X GET "https://api.lob.com/v1/checks?limit=2" \
@@ -293,7 +401,30 @@ try {
 
 ## BankAccounts Api
 
+<<<<<<< HEAD
+### Retrieve
+```bash
+curl https://api.lob.com/v1/bank_accounts/bank_8cad8df5354d33f \
+  -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
+```
 
+```typescript
+try {
+  const bankAccount = await new BankAccountsApi(config).get('bank_8cad8df5354d33f');
+} catch (err: any) {
+  console.error(err);
+}
+```
+=======
+
+>>>>>>> 51728890 (docs: create code snippets)
+
+
+<<<<<<< HEAD
+
+=======
+
+>>>>>>> 51728890 (docs: create code snippets)
 ### List
 ```bash
 curl -X GET "https://api.lob.com/v1/bank_accounts?limit=2" \
@@ -308,6 +439,9 @@ try {
 }
 ```
 
+<<<<<<< HEAD
+
+=======
 ### Create
 ```bash
 curl https://api.lob.com/v1/bank_accounts \
@@ -334,11 +468,35 @@ try {
   console.error(err);
 }
 ```
+>>>>>>> 51728890 (docs: create code snippets)
 
 
 ## Templates Api
 
+<<<<<<< HEAD
+### Retrieve
+```bash
+curl https://api.lob.com/v1/templates/tmpl_c94e83ca2cd5121 \
+  -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
+```
 
+```typescript
+try {
+  const template = await new TemplatesApi(config).get('tmpl_c94e83ca2cd5121');
+} catch (err: any) {
+  console.error(err);
+}
+```
+=======
+
+>>>>>>> 51728890 (docs: create code snippets)
+
+
+<<<<<<< HEAD
+
+=======
+
+>>>>>>> 51728890 (docs: create code snippets)
 ### List
 ```bash
 curl -X GET "https://api.lob.com/v1/templates?limit=2" \
@@ -353,6 +511,9 @@ try {
 }
 ```
 
+<<<<<<< HEAD
+
+=======
 ### Create
 ```bash
 curl https://api.lob.com/v1/templates \
@@ -373,11 +534,33 @@ try {
   console.error(err);
 }
 ```
+>>>>>>> 51728890 (docs: create code snippets)
 
 
 ## TemplateVersions Api
 
+<<<<<<< HEAD
+### Retrieve
+```bash
+curl -X GET "https://api.lob.com/v1/templates/tmpl_c94e83ca2cd5121/versions/vrsn_534e339882d2282" \
+  -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
+```
 
+```typescript
+try {
+  const templateVersion = await new TemplateVersionsApi(config).get('tmpl_c94e83ca2cd5121', 'vrsn_534e339882d2282');
+} catch (err: any) {
+  console.error(err);
+}
+```
+=======
+
+>>>>>>> 51728890 (docs: create code snippets)
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> 51728890 (docs: create code snippets)
 ### List
 ```bash
 curl -X GET "https://api.lob.com/v1/templates/tmpl_ea6e6a1abf01703/versions?limit=2" \
@@ -392,6 +575,8 @@ try {
 }
 ```
 
+<<<<<<< HEAD
+=======
 ### Create
 ```bash
 curl https://api.lob.com/v1/templates/tmpl_4aa14648113e45b/versions \
@@ -412,3 +597,4 @@ try {
   console.error(err);
 }
 ```
+>>>>>>> 51728890 (docs: create code snippets)

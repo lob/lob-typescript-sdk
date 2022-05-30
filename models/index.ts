@@ -68,7 +68,6 @@ export * from './self-mailer-deletion';
 export * from './self-mailer-editable';
 export * from './self-mailer-list';
 export * from './self-mailer-size';
-export * from './send-date';
 export * from './sort-by';
 export * from './sort-by1';
 export * from './sort-by2';
