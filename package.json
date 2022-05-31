@@ -14,7 +14,7 @@
     "address validation",
     "address autocomplete"
   ],
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/lob/lob-typescript-sdk",
   "author": "Lob <support@lob.com> (https://lob.com/)",
   "repository": {
