@@ -25,11 +25,11 @@ export const METADATA_OBJECT: { [key: string]: string } = {
 export const METADATA_QUERY_STRING: string =
   "metadata=%7B%22fakeMetadata%22%3A%22fakemetadata%22%7D";
 export const CONFIG_FOR_INTEGRATION: Configuration = new Configuration({
-  username: process.env.LOB_API_KEY,
+  username: process.env.LOB_API_TEST_KEY,
 });
 export const CONFIG_FOR_INTEGRATION_WITH_LIVE: Configuration =
   new Configuration({
-    username: process.env.LOB_LIVE_API_KEY,
+    username: process.env.LOB_API_LIVE_KEY,
   });
 export const CONFIG_FOR_UNIT: Configuration = new Configuration({
   username: "Totally Fake Key",

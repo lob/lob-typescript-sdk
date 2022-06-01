@@ -176,7 +176,7 @@ describe("AddressApi", () => {
   // Module level container
   jest.setTimeout(1000 * 60); // Extends the allowed time for the test
   const config: Configuration = new Configuration({
-    username: process.env.LOB_API_KEY,
+    username: process.env.LOB_API_TEST_KEY,
   }); // Static data required for the remote call
 
   const addressCreate: AddressEditable = {
