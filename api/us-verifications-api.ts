@@ -18,6 +18,7 @@ import globalAxios, {
   AxiosRequestConfig,
 } from "axios";
 import { Configuration } from "../configuration";
+import FormData = require("form-data");
 // Some imports not used depending on template conditions
 // @ts-ignore
 import {
@@ -45,6 +46,8 @@ import {
 import { LobError } from "../models";
 // @ts-ignore
 import { MultipleComponentsList } from "../models";
+// @ts-ignore
+import { UsCsvVerificationsResponse } from "../models";
 // @ts-ignore
 import { UsVerification } from "../models";
 // @ts-ignore
@@ -117,6 +120,100 @@ export const UsVerificationsApiAxiosParamCreator = function (
         localVarRequestOptions,
         configuration
       );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Verify a CSV of US or US territory addresses _with a live API key_. A completed CSV will be emailed to your account once the cleansing and verification process is finished. It\'s recommended that your CSV file is under 250k lines. The endpoint requires a `csv_file` and the index of your column headers. The columns should be 1-indexed  For example if you have a CSV with address primary lines in the first column and all postal codes in the 5th column, pass in `primary_line_mapping` as 1 and `postal_code_mapping` as 5.
+     * @summary verifyCsv
+     * @param {number} [recipientMapping] The index of the recipient column.
+     * @param {number} [primaryLineMapping] The index of the primary line column.
+     * @param {number} [secondaryLineMapping] The index of the secondary line column.
+     * @param {number} [cityMapping] The index of the city column. &#x60;city_mapping&#x60; and &#x60;state_mapping&#x60; are required if no &#x60;postal_code_mapping&#x60; is passed.
+     * @param {number} [stateMapping] The index of the state column. &#x60;city_mapping&#x60; and &#x60;state_mapping&#x60; are required if no &#x60;postal_code_mapping&#x60; is passed.
+     * @param {number} [postalCodeMapping] The index of the postal_code column. &#x60;postal_code_mapping&#x60; is required if no &#x60;state_mapping&#x60; or &#x60;city_mapping&#x60;  is passed.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    usCsvVerifications: async (
+      recipientMapping?: number,
+      primaryLineMapping?: number,
+      secondaryLineMapping?: number,
+      cityMapping?: number,
+      stateMapping?: number,
+      postalCodeMapping?: number,
+      options: AxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/us_csv_verifications`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "POST",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+      const localVarFormParams = new ((configuration &&
+        configuration.formDataCtor) ||
+        FormData)();
+
+      // authentication basicAuth required
+      // http basic authentication required
+      setBasicAuthToObject(localVarRequestOptions, configuration);
+
+      if (recipientMapping !== undefined) {
+        localVarFormParams.append("recipient_mapping", recipientMapping as any);
+      }
+
+      if (primaryLineMapping !== undefined) {
+        localVarFormParams.append(
+          "primary_line_mapping",
+          primaryLineMapping as any
+        );
+      }
+
+      if (secondaryLineMapping !== undefined) {
+        localVarFormParams.append(
+          "secondary_line_mapping",
+          secondaryLineMapping as any
+        );
+      }
+
+      if (cityMapping !== undefined) {
+        localVarFormParams.append("city_mapping", cityMapping as any);
+      }
+
+      if (stateMapping !== undefined) {
+        localVarFormParams.append("state_mapping", stateMapping as any);
+      }
+
+      if (postalCodeMapping !== undefined) {
+        localVarFormParams.append(
+          "postal_code_mapping",
+          postalCodeMapping as any
+        );
+      }
+
+      localVarHeaderParameter["Content-Type"] = "multipart/form-data";
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = localVarFormParams;
 
       return {
         url: toPathString(localVarUrlObj),
@@ -230,6 +327,49 @@ export const UsVerificationsApiFp = function (configuration?: Configuration) {
       );
     },
     /**
+     * Verify a CSV of US or US territory addresses _with a live API key_. A completed CSV will be emailed to your account once the cleansing and verification process is finished. It\'s recommended that your CSV file is under 250k lines. The endpoint requires a `csv_file` and the index of your column headers. The columns should be 1-indexed  For example if you have a CSV with address primary lines in the first column and all postal codes in the 5th column, pass in `primary_line_mapping` as 1 and `postal_code_mapping` as 5.
+     * @summary verifyCsv
+     * @param {number} [recipientMapping] The index of the recipient column.
+     * @param {number} [primaryLineMapping] The index of the primary line column.
+     * @param {number} [secondaryLineMapping] The index of the secondary line column.
+     * @param {number} [cityMapping] The index of the city column. &#x60;city_mapping&#x60; and &#x60;state_mapping&#x60; are required if no &#x60;postal_code_mapping&#x60; is passed.
+     * @param {number} [stateMapping] The index of the state column. &#x60;city_mapping&#x60; and &#x60;state_mapping&#x60; are required if no &#x60;postal_code_mapping&#x60; is passed.
+     * @param {number} [postalCodeMapping] The index of the postal_code column. &#x60;postal_code_mapping&#x60; is required if no &#x60;state_mapping&#x60; or &#x60;city_mapping&#x60;  is passed.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async usCsvVerifications(
+      recipientMapping?: number,
+      primaryLineMapping?: number,
+      secondaryLineMapping?: number,
+      cityMapping?: number,
+      stateMapping?: number,
+      postalCodeMapping?: number,
+      options?: AxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<UsCsvVerificationsResponse>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.usCsvVerifications(
+          recipientMapping,
+          primaryLineMapping,
+          secondaryLineMapping,
+          cityMapping,
+          stateMapping,
+          postalCodeMapping,
+          options
+        );
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+    /**
      * Verify a US or US territory address with a live API key.
      * @summary verifySingle
      * @param {UsVerificationsWritable} usVerificationsWritable
@@ -285,6 +425,50 @@ export class UsVerificationsApi extends BaseAPI {
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {
         return new UsVerifications(response.data);
+      })
+      .catch((error) => {
+        if (error.response?.data?.error?.message) {
+          error.message = error.response.data.error.message;
+        }
+        throw error;
+      });
+  }
+
+  /**
+   * Verify a CSV of US or US territory addresses _with a live API key_. A completed CSV will be emailed to your account once the cleansing and verification process is finished. It\'s recommended that your CSV file is under 250k lines. The endpoint requires a `csv_file` and the index of your column headers. The columns should be 1-indexed  For example if you have a CSV with address primary lines in the first column and all postal codes in the 5th column, pass in `primary_line_mapping` as 1 and `postal_code_mapping` as 5.
+   * @summary verifyCsv
+   * @param {number} [recipientMapping] The index of the recipient column.
+   * @param {number} [primaryLineMapping] The index of the primary line column.
+   * @param {number} [secondaryLineMapping] The index of the secondary line column.
+   * @param {number} [cityMapping] The index of the city column. &#x60;city_mapping&#x60; and &#x60;state_mapping&#x60; are required if no &#x60;postal_code_mapping&#x60; is passed.
+   * @param {number} [stateMapping] The index of the state column. &#x60;city_mapping&#x60; and &#x60;state_mapping&#x60; are required if no &#x60;postal_code_mapping&#x60; is passed.
+   * @param {number} [postalCodeMapping] The index of the postal_code column. &#x60;postal_code_mapping&#x60; is required if no &#x60;state_mapping&#x60; or &#x60;city_mapping&#x60;  is passed.
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof UsVerificationsApi
+   */
+  public verifyCsv(
+    recipientMapping?: number,
+    primaryLineMapping?: number,
+    secondaryLineMapping?: number,
+    cityMapping?: number,
+    stateMapping?: number,
+    postalCodeMapping?: number,
+    options?: AxiosRequestConfig
+  ) {
+    return UsVerificationsApiFp(this.configuration)
+      .usCsvVerifications(
+        recipientMapping,
+        primaryLineMapping,
+        secondaryLineMapping,
+        cityMapping,
+        stateMapping,
+        postalCodeMapping,
+        options
+      )
+      .then((request) => request(this.axios, this.basePath))
+      .then(function (response) {
+        return new UsCsvVerificationsResponse(response.data);
       })
       .catch((error) => {
         if (error.response?.data?.error?.message) {
