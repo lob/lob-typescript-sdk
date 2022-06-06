@@ -18,6 +18,7 @@ import globalAxios, {
   AxiosRequestConfig,
 } from "axios";
 import { Configuration } from "../configuration";
+import FormData = require("form-data");
 // Some imports not used depending on template conditions
 // @ts-ignore
 import {
@@ -45,6 +46,10 @@ import {
 import { LobError } from "../models";
 // @ts-ignore
 import { MultipleComponentsList } from "../models";
+// @ts-ignore
+import { UsCsvVerificationsResponse } from "../models";
+// @ts-ignore
+import { UsCsvVerificationsWritable } from "../models";
 // @ts-ignore
 import { UsVerification } from "../models";
 // @ts-ignore
@@ -114,6 +119,64 @@ export const UsVerificationsApiAxiosParamCreator = function (
       };
       localVarRequestOptions.data = serializeDataIfNeeded(
         multipleComponentsList,
+        localVarRequestOptions,
+        configuration
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Verify a CSV of US or US territory addresses _with a live API key_.
+     * @summary verifyCsv
+     * @param {UsCsvVerificationsWritable} usCsvVerificationsWritable
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    usCsvVerifications: async (
+      usCsvVerificationsWritable: UsCsvVerificationsWritable,
+      options: AxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'usCsvVerificationsWritable' is not null or undefined
+      assertParamExists(
+        "usCsvVerifications",
+        "usCsvVerificationsWritable",
+        usCsvVerificationsWritable
+      );
+      const localVarPath = `/us_csv_verifications`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "POST",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication basicAuth required
+      // http basic authentication required
+      setBasicAuthToObject(localVarRequestOptions, configuration);
+
+      localVarHeaderParameter["Content-Type"] = "application/json";
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        usCsvVerificationsWritable,
         localVarRequestOptions,
         configuration
       );
@@ -230,6 +293,34 @@ export const UsVerificationsApiFp = function (configuration?: Configuration) {
       );
     },
     /**
+     * Verify a CSV of US or US territory addresses _with a live API key_.
+     * @summary verifyCsv
+     * @param {UsCsvVerificationsWritable} usCsvVerificationsWritable
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async usCsvVerifications(
+      usCsvVerificationsWritable: UsCsvVerificationsWritable,
+      options?: AxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<UsCsvVerificationsResponse>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.usCsvVerifications(
+          usCsvVerificationsWritable,
+          options
+        );
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+    /**
      * Verify a US or US territory address with a live API key.
      * @summary verifySingle
      * @param {UsVerificationsWritable} usVerificationsWritable
@@ -285,6 +376,32 @@ export class UsVerificationsApi extends BaseAPI {
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {
         return new UsVerifications(response.data);
+      })
+      .catch((error) => {
+        if (error.response?.data?.error?.message) {
+          error.message = error.response.data.error.message;
+        }
+        throw error;
+      });
+  }
+
+  /**
+   * Verify a CSV of US or US territory addresses _with a live API key_.
+   * @summary verifyCsv
+   * @param {UsCsvVerificationsWritable} usCsvVerificationsWritable
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof UsVerificationsApi
+   */
+  public verifyCsv(
+    usCsvVerificationsWritable: UsCsvVerificationsWritable,
+    options?: AxiosRequestConfig
+  ) {
+    return UsVerificationsApiFp(this.configuration)
+      .usCsvVerifications(usCsvVerificationsWritable, options)
+      .then((request) => request(this.axios, this.basePath))
+      .then(function (response) {
+        return new UsCsvVerificationsResponse(response.data);
       })
       .catch((error) => {
         if (error.response?.data?.error?.message) {

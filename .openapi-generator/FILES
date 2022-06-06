@@ -115,6 +115,8 @@ models/tracking-event-normal.ts
 models/us-autocompletions-writable.ts
 models/us-autocompletions.ts
 models/us-components.ts
+models/us-csv-verifications-response.ts
+models/us-csv-verifications-writable.ts
 models/us-verification-or-error.ts
 models/us-verification.ts
 models/us-verifications-writable.ts
