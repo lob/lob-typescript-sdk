@@ -72,20 +72,20 @@ export class CheckEditable {
   }
 
   /**
-   * Required if `to` address is international. Must either be an address ID or an inline object with correct address parameters.
+   * Must either be an address ID or an inline object with correct address parameters.
    * @type {string}
    * @memberof CheckEditable
    */
 
-  "from"?: string | Models.AddressEditable;
+  "from"?: string | Models.AddressDomestic;
 
   /**
-   * Required if `to` address is international. Must either be an address ID or an inline object with correct address parameters.
+   * Must either be an address ID or an inline object with correct address parameters.
    * @type {string}
    * @memberof CheckEditable
    */
 
-  "to"?: string | Models.AddressEditable;
+  "to"?: string | Models.AddressDomestic;
 
   /**
    *
