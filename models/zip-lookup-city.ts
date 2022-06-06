@@ -64,16 +64,7 @@ export class ZipLookupCity {
    * @type {string}
    * @memberof ZipLookupCity
    */
-  private "_county_fips"?: string;
-  public get county_fips() {
-    return (this._county_fips || undefined) as string;
-  }
-  public set county_fips(newValue: string) {
-    if (newValue && !/\d{5}/.test(newValue)) {
-      throw new Error("Invalid county_fips provided");
-    }
-    this._county_fips = newValue;
-  }
+  "county_fips"?: string;
 
   /**
    * Indicates whether or not the city is the [USPS default city](https://en.wikipedia.org/wiki/ZIP_Code#ZIP_Codes_and_previous_zoning_lines) (preferred city) of a ZIP code. There is only one preferred city per ZIP code, which will always be in position 0 in the array of cities.
