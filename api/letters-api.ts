@@ -18,6 +18,7 @@ import globalAxios, {
   AxiosRequestConfig,
 } from "axios";
 import { Configuration } from "../configuration";
+import FormData = require("form-data");
 // Some imports not used depending on template conditions
 // @ts-ignore
 import {
