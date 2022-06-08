@@ -24,6 +24,9 @@ export class AddressDeletion {
     if (typeof input?.id !== "undefined") {
       this.id = input.id;
     }
+    if (typeof input?.cool_id !== "undefined") {
+      this.cool_id = input.cool_id;
+    }
     if (typeof input?.deleted !== "undefined") {
       this.deleted = input.deleted;
     }
@@ -46,6 +49,22 @@ export class AddressDeletion {
       throw new Error("Invalid id provided");
     }
     this._id = newValue;
+  }
+
+  /**
+   * Unique identifier prefixed with `adr_`.
+   * @type {string}
+   * @memberof AddressDeletion
+   */
+  private "_cool_id"?: string;
+  public get cool_id() {
+    return (this._cool_id || undefined) as string;
+  }
+  public set cool_id(newValue: string) {
+    if (newValue && !/^adr_[a-zA-Z0-9]+$/.test(newValue)) {
+      throw new Error("Invalid cool_id provided");
+    }
+    this._cool_id = newValue;
   }
 
   /**
