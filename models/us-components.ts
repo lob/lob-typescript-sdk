@@ -273,16 +273,7 @@ export class UsComponents {
    * @type {string}
    * @memberof UsComponents
    */
-  private "_county_fips"?: string;
-  public get county_fips() {
-    return (this._county_fips || undefined) as string;
-  }
-  public set county_fips(newValue: string) {
-    if (newValue && !/\d{5}/.test(newValue)) {
-      throw new Error("Invalid county_fips provided");
-    }
-    this._county_fips = newValue;
-  }
+  "county_fips"?: string;
 
   /**
    * A 4-character code assigned to a mail delivery route within a ZIP code.
