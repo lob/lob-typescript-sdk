@@ -72,7 +72,7 @@ export class CheckEditable {
   }
 
   /**
-   * Required if `to` address is international. Must either be an address ID or an inline object with correct address parameters.
+   * Must either be an address ID or an inline object with correct address parameters.
    * @type {string}
    * @memberof CheckEditable
    */
@@ -80,7 +80,7 @@ export class CheckEditable {
   "from"?: string | Models.AddressEditable;
 
   /**
-   * Required if `to` address is international. Must either be an address ID or an inline object with correct address parameters.
+   * Must either be an address ID or an inline object with correct address parameters.
    * @type {string}
    * @memberof CheckEditable
    */
