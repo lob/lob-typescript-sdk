@@ -72,34 +72,34 @@ export class CheckEditable {
   }
 
   /**
-   * Required if `to` address is international. Must either be an address ID or an inline object with correct address parameters.
+   * Must either be an address ID or an inline object with correct address parameters.
    * @type {string}
    * @memberof CheckEditable
    */
 
-  "from"?: string | Models.AddressEditable;
+  "from": string | Models.AddressEditable;
 
   /**
-   * Required if `to` address is international. Must either be an address ID or an inline object with correct address parameters.
+   * Must either be an address ID or an inline object with correct address parameters.
    * @type {string}
    * @memberof CheckEditable
    */
 
-  "to"?: string | Models.AddressEditable;
+  "to": string | Models.AddressEditable;
 
   /**
    *
    * @type {string}
    * @memberof CheckEditable
    */
-  "bank_account"?: string | null;
+  "bank_account": string | null;
 
   /**
    * The payment amount to be sent in US dollars.
    * @type {number}
    * @memberof CheckEditable
    */
-  "amount"?: number;
+  "amount": number;
 
   /**
    * Accepts a remote URL or local file upload to an image to print (in grayscale) in the upper-left corner of your check.

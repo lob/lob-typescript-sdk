@@ -101,9 +101,9 @@ export class Postcard {
    * @type {string}
    * @memberof Postcard
    */
-  private "_id"?: string;
+  private "_id": string;
   public get id() {
-    return (this._id || undefined) as string;
+    return this._id;
   }
   public set id(newValue: string) {
     if (newValue && !/^psc_[a-zA-Z0-9]+$/.test(newValue)) {
@@ -180,9 +180,9 @@ export class Postcard {
    * @type {string}
    * @memberof Postcard
    */
-  private "_front_template_id"?: string | null;
+  private "_front_template_id": string | null;
   public get front_template_id() {
-    return (this._front_template_id || null || undefined) as string;
+    return this._front_template_id || null;
   }
   public set front_template_id(newValue: string | null) {
     if (newValue && !/^tmpl_[a-zA-Z0-9]+$/.test(newValue)) {
@@ -196,9 +196,9 @@ export class Postcard {
    * @type {string}
    * @memberof Postcard
    */
-  private "_back_template_id"?: string | null;
+  private "_back_template_id": string | null;
   public get back_template_id() {
-    return (this._back_template_id || null || undefined) as string;
+    return this._back_template_id || null;
   }
   public set back_template_id(newValue: string | null) {
     if (newValue && !/^tmpl_[a-zA-Z0-9]+$/.test(newValue)) {
@@ -258,9 +258,9 @@ export class Postcard {
    * @type {string}
    * @memberof Postcard
    */
-  private "_url"?: string;
+  private "_url": string;
   public get url() {
-    return (this._url || undefined) as string;
+    return this._url;
   }
   public set url(newValue: string) {
     if (

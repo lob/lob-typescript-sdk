@@ -58,7 +58,7 @@ export class MultipleComponentsIntl {
    * @type {string}
    * @memberof MultipleComponentsIntl
    */
-  "primary_line"?: string;
+  "primary_line": string;
 
   /**
    * The secondary delivery line of the address. This field is typically empty but may contain information if `primary_line` is too long.
@@ -93,7 +93,7 @@ export class MultipleComponentsIntl {
    * @type {CountryExtended}
    * @memberof MultipleComponentsIntl
    */
-  "country"?: CountryExtended;
+  "country": CountryExtended;
 
   public toJSON() {
     let out = {};

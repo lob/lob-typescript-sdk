@@ -69,6 +69,7 @@ models/intl-verifications-payload.ts
 models/intl-verifications.ts
 models/letter-custom-envelope.ts
 models/letter-deletion.ts
+models/letter-editable-custom-envelope.ts
 models/letter-editable.ts
 models/letter-list.ts
 models/letter.ts
