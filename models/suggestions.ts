@@ -43,28 +43,28 @@ export class Suggestions {
    * @type {string}
    * @memberof Suggestions
    */
-  "primary_line"?: string;
+  "primary_line": string;
 
   /**
    *
    * @type {string}
    * @memberof Suggestions
    */
-  "city"?: string;
+  "city": string;
 
   /**
    * The [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) two letter code for the state.
    * @type {string}
    * @memberof Suggestions
    */
-  "state"?: string;
+  "state": string;
 
   /**
    * A 5-digit zip code. Left empty if a test key is used.
    * @type {string}
    * @memberof Suggestions
    */
-  "zip_code"?: string;
+  "zip_code": string;
 
   /**
    * Value is resource type.

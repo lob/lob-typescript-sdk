@@ -64,9 +64,9 @@ export class Template {
    * @type {string}
    * @memberof Template
    */
-  private "_id"?: string;
+  private "_id": string;
   public get id() {
-    return (this._id || undefined) as string;
+    return this._id;
   }
   public set id(newValue: string) {
     if (newValue && !/^tmpl_[a-zA-Z0-9]+$/.test(newValue)) {
@@ -80,14 +80,14 @@ export class Template {
    * @type {Array<TemplateVersion>}
    * @memberof Template
    */
-  "versions"?: Array<TemplateVersion>;
+  "versions": Array<TemplateVersion>;
 
   /**
    *
    * @type {TemplateVersion}
    * @memberof Template
    */
-  "published_version"?: TemplateVersion;
+  "published_version": TemplateVersion;
 
   /**
    * Value is resource type.

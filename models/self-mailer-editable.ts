@@ -65,7 +65,7 @@ export class SelfMailerEditable {
    * @memberof SelfMailerEditable
    */
 
-  "to"?: string | Models.AddressEditable;
+  "to": string | Models.AddressEditable;
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
@@ -122,14 +122,14 @@ export class SelfMailerEditable {
    * @type {string}
    * @memberof SelfMailerEditable
    */
-  "inside"?: string;
+  "inside": string;
 
   /**
    * The artwork to use as the outside of your self mailer.
    * @type {string}
    * @memberof SelfMailerEditable
    */
-  "outside"?: string;
+  "outside": string;
 
   /**
    * An optional string with the billing group ID to tag your usage with. Is used for billing purposes. Requires special activation to use. See [Billing Group API](https://lob.github.io/lob-openapi/#tag/Billing-Groups) for more information.
