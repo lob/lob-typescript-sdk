@@ -86,7 +86,7 @@ describe("Postcard Models", () => {
 
     it("rejects invalid values for front_template_id", () => {
       const rec = new Postcard();
-      expect(rec.front_template_id).toBeUndefined();
+      expect(rec.front_template_id).toBeNull();
 
       const invalidValues = ["Nope"];
       for (const val of invalidValues) {
@@ -101,7 +101,7 @@ describe("Postcard Models", () => {
 
     it("allows setting valid values for front_template_id", () => {
       const rec = new Postcard();
-      expect(rec.front_template_id).toBeUndefined();
+      expect(rec.front_template_id).toBeNull();
 
       const validValues = ["tmpl_1234"];
       for (const val of validValues) {
@@ -113,7 +113,7 @@ describe("Postcard Models", () => {
 
     it("rejects invalid values for back_template_id", () => {
       const rec = new Postcard();
-      expect(rec.back_template_id).toBeUndefined();
+      expect(rec.back_template_id).toBeNull();
 
       const invalidValues = ["Nope"];
       for (const val of invalidValues) {
@@ -128,7 +128,7 @@ describe("Postcard Models", () => {
 
     it("allows setting valid values for back_template_id", () => {
       const rec = new Postcard();
-      expect(rec.back_template_id).toBeUndefined();
+      expect(rec.back_template_id).toBeNull();
 
       const validValues = ["tmpl_1234"];
       for (const val of validValues) {
@@ -140,7 +140,7 @@ describe("Postcard Models", () => {
 
     it("rejects invalid values for front_template_version_id", () => {
       const rec = new Postcard();
-      expect(rec.front_template_version_id).toBeUndefined();
+      expect(rec.front_template_version_id).toBeNull();
 
       const invalidValues = ["Nope"];
       for (const val of invalidValues) {
@@ -157,7 +157,7 @@ describe("Postcard Models", () => {
 
     it("allows setting valid values for front_template_version_id", () => {
       const rec = new Postcard();
-      expect(rec.front_template_version_id).toBeUndefined();
+      expect(rec.front_template_version_id).toBeNull();
 
       const validValues = ["vrsn_1234"];
       for (const val of validValues) {
@@ -169,7 +169,7 @@ describe("Postcard Models", () => {
 
     it("rejects invalid values for back_template_version_id", () => {
       const rec = new Postcard();
-      expect(rec.back_template_version_id).toBeUndefined();
+      expect(rec.back_template_version_id).toBeNull();
 
       const invalidValues = ["Nope"];
       for (const val of invalidValues) {
@@ -186,7 +186,7 @@ describe("Postcard Models", () => {
 
     it("allows setting valid values for back_template_version_id", () => {
       const rec = new Postcard();
-      expect(rec.back_template_version_id).toBeUndefined();
+      expect(rec.back_template_version_id).toBeNull();
 
       const validValues = ["vrsn_1234"];
       for (const val of validValues) {
@@ -340,7 +340,7 @@ describe("Postcard Models", () => {
         const rec = new PostcardList({
           next_url: null,
         });
-        expect(rec.nextPageToken).toBeUndefined();
+        expect(rec.nextPageToken).toBeNull();
       });
     });
 
@@ -356,7 +356,7 @@ describe("Postcard Models", () => {
         const rec = new PostcardList({
           previous_url: null,
         });
-        expect(rec.previousPageToken).toBeUndefined();
+        expect(rec.previousPageToken).toBeNull();
       });
     });
   });

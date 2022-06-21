@@ -282,7 +282,7 @@ describe("SelfMailer Models", () => {
         const rec = new SelfMailerList({
           next_url: null,
         });
-        expect(rec.nextPageToken).toBeUndefined();
+        expect(rec.nextPageToken).toBeNull();
       });
     });
 
@@ -298,7 +298,7 @@ describe("SelfMailer Models", () => {
         const rec = new SelfMailerList({
           previous_url: null,
         });
-        expect(rec.previousPageToken).toBeUndefined();
+        expect(rec.previousPageToken).toBeNull();
       });
     });
   });
