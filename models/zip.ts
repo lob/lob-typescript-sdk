@@ -62,9 +62,9 @@ export class Zip {
    * @type {string}
    * @memberof Zip
    */
-  private "_id"?: string;
+  private "_id": string;
   public get id() {
-    return (this._id || undefined) as string;
+    return this._id;
   }
   public set id(newValue: string) {
     if (newValue && !/^us_zip_[a-zA-Z0-9]+$/.test(newValue)) {
@@ -78,21 +78,21 @@ export class Zip {
    * @type {Array<ZipLookupCity>}
    * @memberof Zip
    */
-  "cities"?: Array<ZipLookupCity>;
+  "cities": Array<ZipLookupCity>;
 
   /**
    *
    * @type {ZipCodeType}
    * @memberof Zip
    */
-  "zip_code_type"?: ZipCodeType;
+  "zip_code_type": ZipCodeType;
 
   /**
    *
    * @type {string}
    * @memberof Zip
    */
-  "object"?: ZipObjectEnum;
+  "object": ZipObjectEnum;
 
   public toJSON() {
     let out = {};
