@@ -57,14 +57,14 @@ export class TrackingEventCertified {
    * @type {string}
    * @memberof TrackingEventCertified
    */
-  "type"?: TrackingEventCertifiedTypeEnum;
+  "type": TrackingEventCertifiedTypeEnum;
 
   /**
    * Name of tracking event for Certified letters. Letters sent with USPS Certified Mail are fully tracked by USPS, therefore their tracking events have an additional details object with more detailed information about the tracking event. Some certified tracking event names have multiple meanings, noted in the list here. See the description of the details object for the full set of combined certified tracking event name meanings.    * `Mailed` - Package has been accepted into the carrier network for delivery.    * `In Transit` - Maps to four distinct stages of transit.    * `In Local Area` - Package is at a location near the end destination.    * `Processed for Delivery` - Maps to two distinct stages of delivery.    * `Pickup Available` - Package is available for pickup at carrier location.    * `Delivered` - Package has been delivered.    * `Re-Routed` - Package has been forwarded.    * `Returned to Sender` - Package is to be returned to sender.    * `Issue` - Maps to (at least) 15 possible issues, some of which are actionable.
    * @type {string}
    * @memberof TrackingEventCertified
    */
-  "name"?: TrackingEventCertifiedNameEnum;
+  "name": TrackingEventCertifiedNameEnum;
 
   /**
    *
@@ -85,9 +85,9 @@ export class TrackingEventCertified {
    * @type {string}
    * @memberof TrackingEventCertified
    */
-  private "_id"?: string;
+  private "_id": string;
   public get id() {
-    return (this._id || undefined) as string;
+    return this._id;
   }
   public set id(newValue: string) {
     if (newValue && !/^evnt_[a-zA-Z0-9]+$/.test(newValue)) {
@@ -108,21 +108,21 @@ export class TrackingEventCertified {
    * @type {string}
    * @memberof TrackingEventCertified
    */
-  "date_created"?: string;
+  "date_created": string;
 
   /**
    * A timestamp in ISO 8601 format of the date the resource was last modified.
    * @type {string}
    * @memberof TrackingEventCertified
    */
-  "date_modified"?: string;
+  "date_modified": string;
 
   /**
    *
    * @type {string}
    * @memberof TrackingEventCertified
    */
-  "object"?: TrackingEventCertifiedObjectEnum;
+  "object": TrackingEventCertifiedObjectEnum;
 
   public toJSON() {
     let out = {};

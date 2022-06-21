@@ -87,9 +87,9 @@ export class Card {
    * @type {string}
    * @memberof Card
    */
-  private "_id"?: string;
+  private "_id": string;
   public get id() {
-    return (this._id || undefined) as string;
+    return this._id;
   }
   public set id(newValue: string) {
     if (newValue && !/^card_[a-zA-Z0-9]+$/.test(newValue)) {
@@ -103,98 +103,98 @@ export class Card {
    * @type {string}
    * @memberof Card
    */
-  "url"?: string;
+  "url": string;
 
   /**
    * True if the cards should be auto-reordered.
    * @type {boolean}
    * @memberof Card
    */
-  "auto_reorder"?: boolean;
+  "auto_reorder": boolean;
 
   /**
    * The number of cards to be reordered.
    * @type {number}
    * @memberof Card
    */
-  "reorder_quantity"?: number | null;
+  "reorder_quantity": number | null;
 
   /**
    * The raw URL of the card.
    * @type {string}
    * @memberof Card
    */
-  "raw_url"?: string;
+  "raw_url": string;
 
   /**
    * The original URL of the front template.
    * @type {string}
    * @memberof Card
    */
-  "front_original_url"?: string;
+  "front_original_url": string;
 
   /**
    * The original URL of the back template.
    * @type {string}
    * @memberof Card
    */
-  "back_original_url"?: string;
+  "back_original_url": string;
 
   /**
    *
    * @type {Array<Thumbnail>}
    * @memberof Card
    */
-  "thumbnails"?: Array<Thumbnail>;
+  "thumbnails": Array<Thumbnail>;
 
   /**
    * The available quantity of cards.
    * @type {number}
    * @memberof Card
    */
-  "available_quantity"?: number;
+  "available_quantity": number;
 
   /**
    * The pending quantity of cards.
    * @type {number}
    * @memberof Card
    */
-  "pending_quantity"?: number;
+  "pending_quantity": number;
 
   /**
    *
    * @type {string}
    * @memberof Card
    */
-  "status"?: CardStatusEnum;
+  "status": CardStatusEnum;
 
   /**
    * The orientation of the card.
    * @type {string}
    * @memberof Card
    */
-  "orientation"?: CardOrientationEnum;
+  "orientation": CardOrientationEnum;
 
   /**
    * The threshold amount of the card
    * @type {number}
    * @memberof Card
    */
-  "threshold_amount"?: number;
+  "threshold_amount": number;
 
   /**
    * A timestamp in ISO 8601 format of the date the resource was created.
    * @type {string}
    * @memberof Card
    */
-  "date_created"?: string;
+  "date_created": string;
 
   /**
    * A timestamp in ISO 8601 format of the date the resource was last modified.
    * @type {string}
    * @memberof Card
    */
-  "date_modified"?: string;
+  "date_modified": string;
 
   /**
    * Only returned if the resource has been successfully deleted.
@@ -208,7 +208,7 @@ export class Card {
    * @type {string}
    * @memberof Card
    */
-  "object"?: CardObjectEnum;
+  "object": CardObjectEnum;
 
   /**
    * Description of the card.

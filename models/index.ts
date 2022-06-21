@@ -48,6 +48,7 @@ export * from "./letter";
 export * from "./letter-custom-envelope";
 export * from "./letter-deletion";
 export * from "./letter-editable";
+export * from "./letter-editable-custom-envelope";
 export * from "./letter-list";
 export * from "./lob-confidence-score";
 export * from "./lob-error";

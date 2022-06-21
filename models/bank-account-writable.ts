@@ -55,28 +55,28 @@ export class BankAccountWritable {
    * @type {string}
    * @memberof BankAccountWritable
    */
-  "routing_number"?: string;
+  "routing_number": string;
 
   /**
    *
    * @type {string}
    * @memberof BankAccountWritable
    */
-  "account_number"?: string;
+  "account_number": string;
 
   /**
    *
    * @type {BankTypeEnum}
    * @memberof BankAccountWritable
    */
-  "account_type"?: BankTypeEnum;
+  "account_type": BankTypeEnum;
 
   /**
    * The signatory associated with your account. This name will be printed on checks created with this bank account. If you prefer to use a custom signature image on your checks instead, please create your bank account from the [Dashboard](https://dashboard.lob.com/#/login).
    * @type {string}
    * @memberof BankAccountWritable
    */
-  "signatory"?: string;
+  "signatory": string;
 
   /**
    * Use metadata to store custom information for tagging and labeling back to your internal systems. Must be an object with up to 20 key-value pairs. Keys must be at most 40 characters and values must be at most 500 characters. Neither can contain the characters `\"` and `\\`. i.e. \'{\"customer_id\" : \"NEWYORK2015\"}\' Nested objects are not supported.  See [Metadata](#section/Metadata) for more information.

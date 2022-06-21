@@ -77,28 +77,28 @@ export class BankAccount {
    * @type {string}
    * @memberof BankAccount
    */
-  "routing_number"?: string;
+  "routing_number": string;
 
   /**
    *
    * @type {string}
    * @memberof BankAccount
    */
-  "account_number"?: string;
+  "account_number": string;
 
   /**
    * The type of entity that holds the account.
    * @type {string}
    * @memberof BankAccount
    */
-  "account_type"?: BankAccountAccountTypeEnum;
+  "account_type": BankAccountAccountTypeEnum;
 
   /**
    * The signatory associated with your account. This name will be printed on checks created with this bank account. If you prefer to use a custom signature image on your checks instead, please create your bank account from the [Dashboard](https://dashboard.lob.com/#/login).
    * @type {string}
    * @memberof BankAccount
    */
-  "signatory"?: string;
+  "signatory": string;
 
   /**
    * Use metadata to store custom information for tagging and labeling back to your internal systems. Must be an object with up to 20 key-value pairs. Keys must be at most 40 characters and values must be at most 500 characters. Neither can contain the characters `\"` and `\\`. i.e. \'{\"customer_id\" : \"NEWYORK2015\"}\' Nested objects are not supported.  See [Metadata](#section/Metadata) for more information.
@@ -112,9 +112,9 @@ export class BankAccount {
    * @type {string}
    * @memberof BankAccount
    */
-  private "_id"?: string;
+  private "_id": string;
   public get id() {
-    return (this._id || undefined) as string;
+    return this._id;
   }
   public set id(newValue: string) {
     if (newValue && !/^bank_[a-zA-Z0-9]+$/.test(newValue)) {
@@ -163,14 +163,14 @@ export class BankAccount {
    * @type {string}
    * @memberof BankAccount
    */
-  "date_created"?: string;
+  "date_created": string;
 
   /**
    * A timestamp in ISO 8601 format of the date the resource was last modified.
    * @type {string}
    * @memberof BankAccount
    */
-  "date_modified"?: string;
+  "date_modified": string;
 
   /**
    * Only returned if the resource has been successfully deleted.
@@ -184,7 +184,7 @@ export class BankAccount {
    * @type {string}
    * @memberof BankAccount
    */
-  "object"?: BankAccountObjectEnum;
+  "object": BankAccountObjectEnum;
 
   public toJSON() {
     let out = {};
