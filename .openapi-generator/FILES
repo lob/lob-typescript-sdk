@@ -1,3 +1,4 @@
+CODE_SNIPPETS.md
 api.ts
 api/addresses-api.ts
 api/bank-accounts-api.ts
@@ -69,6 +70,7 @@ models/intl-verifications-payload.ts
 models/intl-verifications.ts
 models/letter-custom-envelope.ts
 models/letter-deletion.ts
+models/letter-editable-custom-envelope.ts
 models/letter-editable.ts
 models/letter-list.ts
 models/letter.ts

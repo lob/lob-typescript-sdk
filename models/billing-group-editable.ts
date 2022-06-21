@@ -41,7 +41,7 @@ export class BillingGroupEditable {
    * @type {string}
    * @memberof BillingGroupEditable
    */
-  "name"?: string;
+  "name": string;
 
   public toJSON() {
     let out = {};

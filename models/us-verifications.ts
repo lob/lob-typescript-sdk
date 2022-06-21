@@ -67,7 +67,7 @@ export class UsVerifications {
    * @type {boolean}
    * @memberof UsVerifications
    */
-  "errors"?: boolean;
+  "errors": boolean;
 
   public toJSON() {
     let out = {};

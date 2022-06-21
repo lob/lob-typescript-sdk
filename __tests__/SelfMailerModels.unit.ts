@@ -91,7 +91,7 @@ describe("SelfMailer Models", () => {
 
     it("rejects invalid values for outside_template_id", () => {
       const rec = new SelfMailer();
-      expect(rec.outside_template_id).not.toBeDefined();
+      expect(rec.outside_template_id).toBeNull();
 
       const invalidValues = ["Nope"];
       for (const val of invalidValues) {
@@ -106,7 +106,7 @@ describe("SelfMailer Models", () => {
 
     it("rejects invalid values for outside_template_id", () => {
       const rec = new SelfMailer();
-      expect(rec.inside_template_id).not.toBeDefined();
+      expect(rec.inside_template_id).toBeNull();
 
       const invalidValues = ["Nope"];
       for (const val of invalidValues) {
@@ -121,7 +121,7 @@ describe("SelfMailer Models", () => {
 
     it("rejects invalid values for outside_template_version_id", () => {
       const rec = new SelfMailer();
-      expect(rec.outside_template_version_id).not.toBeDefined();
+      expect(rec.outside_template_version_id).toBeNull();
 
       const invalidValues = ["Nope"];
       for (const val of invalidValues) {
@@ -138,7 +138,7 @@ describe("SelfMailer Models", () => {
 
     it("rejects invalid values for inside_template_version_id", () => {
       const rec = new SelfMailer();
-      expect(rec.inside_template_version_id).not.toBeDefined();
+      expect(rec.inside_template_version_id).toBeNull();
 
       const invalidValues = ["Nope"];
       for (const val of invalidValues) {

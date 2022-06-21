@@ -14,7 +14,7 @@
 
 import * as Models from "./index";
 
-import { LetterCustomEnvelope } from "./letter-custom-envelope";
+import { LetterEditableCustomEnvelope } from "./letter-editable-custom-envelope";
 import { MailType } from "./mail-type";
 
 /**
@@ -117,7 +117,7 @@ export class LetterEditable {
    * @type {boolean}
    * @memberof LetterEditable
    */
-  "color"?: boolean;
+  "color": boolean;
 
   /**
    * Set this attribute to `true` for double sided printing, or `false` for for single sided printing. Defaults to `true`.
@@ -139,7 +139,7 @@ export class LetterEditable {
    * @memberof LetterEditable
    */
 
-  "return_envelope"?: string | boolean;
+  "return_envelope"?: string | boolean | null;
 
   /**
    * Required if `return_envelope` is `true`. The number of the page that should be perforated for use with the return envelope. Must be greater than or equal to `1`. The blank page added by `address_placement=insert_blank_page` will be ignored when considering the perforated page number. To see how perforation will impact your letter design, view our [perforation guide](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_perf_template.pdf).
@@ -150,10 +150,10 @@ export class LetterEditable {
 
   /**
    *
-   * @type {LetterCustomEnvelope}
+   * @type {LetterEditableCustomEnvelope}
    * @memberof LetterEditable
    */
-  "custom_envelope"?: LetterCustomEnvelope | null;
+  "custom_envelope"?: LetterEditableCustomEnvelope | null;
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
@@ -161,7 +161,7 @@ export class LetterEditable {
    * @memberof LetterEditable
    */
 
-  "to"?: string | Models.AddressEditable;
+  "to": string | Models.AddressEditable;
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
@@ -169,14 +169,14 @@ export class LetterEditable {
    * @memberof LetterEditable
    */
 
-  "from"?: string | Models.AddressEditable;
+  "from": string | Models.AddressEditable;
 
   /**
    * PDF file containing the letter\'s formatting.
    * @type {string}
    * @memberof LetterEditable
    */
-  "file"?: string;
+  "file": string;
 
   /**
    * Add an extra service to your letter:   * `certified` - track and confirm delivery for domestic destinations. An extra sheet (1 PDF page single-sided or 2 PDF pages double-sided) is added to the beginning of your letter for address and barcode information. See here for templates: [#10 envelope](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_certified_template.pdf) and [flat envelope](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_certified_flat_template.pdf) (used for letters over 6 pages single-sided or 12 pages double-sided). You will not be charged for this extra sheet.   * `certified_return_receipt` - request an electronic copy of the recipient\'s signature to prove delivery of your certified letter   * `registered` - provides tracking and confirmation for international addresses

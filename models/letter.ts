@@ -115,14 +115,14 @@ export class Letter {
    * @type {Address}
    * @memberof Letter
    */
-  "to"?: Address;
+  "to": Address;
 
   /**
    *
    * @type {Address}
    * @memberof Letter
    */
-  "from"?: Address;
+  "from": Address;
 
   /**
    *
@@ -150,14 +150,14 @@ export class Letter {
    * @type {string}
    * @memberof Letter
    */
-  "date_created"?: string;
+  "date_created": string;
 
   /**
    * A timestamp in ISO 8601 format of the date the resource was last modified.
    * @type {string}
    * @memberof Letter
    */
-  "date_modified"?: string;
+  "date_modified": string;
 
   /**
    * Only returned if the resource has been successfully deleted.
@@ -171,9 +171,9 @@ export class Letter {
    * @type {string}
    * @memberof Letter
    */
-  private "_id"?: string;
+  private "_id": string;
   public get id() {
-    return (this._id || undefined) as string;
+    return this._id;
   }
   public set id(newValue: string) {
     if (newValue && !/^ltr_[a-zA-Z0-9]+$/.test(newValue)) {
@@ -219,7 +219,7 @@ export class Letter {
    * @type {string}
    * @memberof Letter
    */
-  "object"?: LetterObjectEnum;
+  "object": LetterObjectEnum;
 
   /**
    * An internal description that identifies this resource. Must be no longer than 255 characters.
@@ -312,7 +312,7 @@ export class Letter {
    * @memberof Letter
    */
 
-  "return_envelope"?: string | boolean;
+  "return_envelope"?: string | boolean | null;
 
   /**
    * Required if `return_envelope` is `true`. The number of the page that should be perforated for use with the return envelope. Must be greater than or equal to `1`. The blank page added by `address_placement=insert_blank_page` will be ignored when considering the perforated page number. To see how perforation will impact your letter design, view our [perforation guide](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_perf_template.pdf).
