@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Lob
- * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)? 
+ * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)?
  *
  * The version of the OpenAPI document: 1.3.0
  * Contact: lob-openapi@lob.com
@@ -12,347 +12,557 @@
  * Do not edit the class manually.
  */
 
-
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
+import globalAxios, {
+  AxiosPromise,
+  AxiosInstance,
+  AxiosRequestConfig,
+} from "axios";
+import { Configuration } from "../configuration";
+import FormData = require("form-data");
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, valueToString } from '../common';
+import {
+  DUMMY_BASE_URL,
+  assertParamExists,
+  setApiKeyToObject,
+  setBasicAuthToObject,
+  setBearerAuthToObject,
+  setOAuthToObject,
+  setSearchParams,
+  serializeDataIfNeeded,
+  toPathString,
+  createRequestFunction,
+  valueToString,
+} from "../common";
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import {
+  BASE_PATH,
+  COLLECTION_FORMATS,
+  RequestArgs,
+  BaseAPI,
+  RequiredError,
+} from "../base";
 // @ts-ignore
-import { LobError } from '../models';
+import { LobError } from "../models";
 // @ts-ignore
-import { TemplateVersion } from '../models';
+import { TemplateVersion } from "../models";
 // @ts-ignore
-import { TemplateVersionDeletion } from '../models';
+import { TemplateVersionDeletion } from "../models";
 // @ts-ignore
-import { TemplateVersionList } from '../models';
+import { TemplateVersionList } from "../models";
 // @ts-ignore
-import { TemplateVersionUpdatable } from '../models';
+import { TemplateVersionUpdatable } from "../models";
 // @ts-ignore
-import { TemplateVersionWritable } from '../models';
+import { TemplateVersionWritable } from "../models";
 /**
  * TemplateVersionsApi - axios parameter creator
  * @export
  */
-export const TemplateVersionsApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * Creates a new template version attached to the specified template.
-         * @summary create
-         * @param {string} tmplId The ID of the template the new version will be attached to
-         * @param {TemplateVersionWritable} templateVersionWritable 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createTemplateVersion: async (tmplId: string, templateVersionWritable: TemplateVersionWritable, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'tmplId' is not null or undefined
-            assertParamExists('createTemplateVersion', 'tmplId', tmplId)
-            // verify required parameter 'templateVersionWritable' is not null or undefined
-            assertParamExists('createTemplateVersion', 'templateVersionWritable', templateVersionWritable)
-            const localVarPath = `/templates/{tmpl_id}/versions`
-                .replace(`{${"tmpl_id"}}`, encodeURIComponent(String(tmplId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
+export const TemplateVersionsApiAxiosParamCreator = function (
+  configuration?: Configuration
+) {
+  return {
+    /**
+     * Creates a new template version attached to the specified template.
+     * @summary create
+     * @param {string} tmplId The ID of the template the new version will be attached to
+     * @param {TemplateVersionWritable} templateVersionWritable
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createTemplateVersion: async (
+      tmplId: string,
+      templateVersionWritable: TemplateVersionWritable,
+      options: AxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'tmplId' is not null or undefined
+      assertParamExists("createTemplateVersion", "tmplId", tmplId);
+      // verify required parameter 'templateVersionWritable' is not null or undefined
+      assertParamExists(
+        "createTemplateVersion",
+        "templateVersionWritable",
+        templateVersionWritable
+      );
+      const localVarPath = `/templates/{tmpl_id}/versions`.replace(
+        `{${"tmpl_id"}}`,
+        encodeURIComponent(String(tmplId))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
+      const localVarRequestOptions = {
+        method: "POST",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
+      // authentication basicAuth required
+      // http basic authentication required
+      setBasicAuthToObject(localVarRequestOptions, configuration);
 
+      localVarHeaderParameter["Content-Type"] = "application/json";
 
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        templateVersionWritable,
+        localVarRequestOptions,
+        configuration
+      );
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(templateVersionWritable, localVarRequestOptions, configuration)
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Permanently deletes a template version. A template\'s `published_version` can not be deleted.
+     * @summary delete
+     * @param {string} tmplId The ID of the template to which the version belongs.
+     * @param {string} vrsnId id of the template_version
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    templateVersionDelete: async (
+      tmplId: string,
+      vrsnId: string,
+      options: AxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'tmplId' is not null or undefined
+      assertParamExists("templateVersionDelete", "tmplId", tmplId);
+      // verify required parameter 'vrsnId' is not null or undefined
+      assertParamExists("templateVersionDelete", "vrsnId", vrsnId);
+      const localVarPath = `/templates/{tmpl_id}/versions/{vrsn_id}`
+        .replace(`{${"tmpl_id"}}`, encodeURIComponent(String(tmplId)))
+        .replace(`{${"vrsn_id"}}`, encodeURIComponent(String(vrsnId)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
 
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Permanently deletes a template version. A template\'s `published_version` can not be deleted.
-         * @summary delete
-         * @param {string} tmplId The ID of the template to which the version belongs.
-         * @param {string} vrsnId id of the template_version
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        templateVersionDelete: async (tmplId: string, vrsnId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'tmplId' is not null or undefined
-            assertParamExists('templateVersionDelete', 'tmplId', tmplId)
-            // verify required parameter 'vrsnId' is not null or undefined
-            assertParamExists('templateVersionDelete', 'vrsnId', vrsnId)
-            const localVarPath = `/templates/{tmpl_id}/versions/{vrsn_id}`
-                .replace(`{${"tmpl_id"}}`, encodeURIComponent(String(tmplId)))
-                .replace(`{${"vrsn_id"}}`, encodeURIComponent(String(vrsnId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
+      const localVarRequestOptions = {
+        method: "DELETE",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
+      // authentication basicAuth required
+      // http basic authentication required
+      setBasicAuthToObject(localVarRequestOptions, configuration);
 
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
 
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Retrieves the template version with the given template and version ids.
+     * @summary get
+     * @param {string} tmplId The ID of the template to which the version belongs.
+     * @param {string} vrsnId id of the template_version
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    templateVersionRetrieve: async (
+      tmplId: string,
+      vrsnId: string,
+      options: AxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'tmplId' is not null or undefined
+      assertParamExists("templateVersionRetrieve", "tmplId", tmplId);
+      // verify required parameter 'vrsnId' is not null or undefined
+      assertParamExists("templateVersionRetrieve", "vrsnId", vrsnId);
+      const localVarPath = `/templates/{tmpl_id}/versions/{vrsn_id}`
+        .replace(`{${"tmpl_id"}}`, encodeURIComponent(String(tmplId)))
+        .replace(`{${"vrsn_id"}}`, encodeURIComponent(String(vrsnId)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
 
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Retrieves the template version with the given template and version ids.
-         * @summary get
-         * @param {string} tmplId The ID of the template to which the version belongs.
-         * @param {string} vrsnId id of the template_version
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        templateVersionRetrieve: async (tmplId: string, vrsnId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'tmplId' is not null or undefined
-            assertParamExists('templateVersionRetrieve', 'tmplId', tmplId)
-            // verify required parameter 'vrsnId' is not null or undefined
-            assertParamExists('templateVersionRetrieve', 'vrsnId', vrsnId)
-            const localVarPath = `/templates/{tmpl_id}/versions/{vrsn_id}`
-                .replace(`{${"tmpl_id"}}`, encodeURIComponent(String(tmplId)))
-                .replace(`{${"vrsn_id"}}`, encodeURIComponent(String(vrsnId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
+      // authentication basicAuth required
+      // http basic authentication required
+      setBasicAuthToObject(localVarRequestOptions, configuration);
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
 
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Updates the template version with the given template and version ids.
+     * @summary update
+     * @param {string} tmplId The ID of the template to which the version belongs.
+     * @param {string} vrsnId id of the template_version
+     * @param {TemplateVersionUpdatable} templateVersionUpdatable
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    templateVersionUpdate: async (
+      tmplId: string,
+      vrsnId: string,
+      templateVersionUpdatable: TemplateVersionUpdatable,
+      options: AxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'tmplId' is not null or undefined
+      assertParamExists("templateVersionUpdate", "tmplId", tmplId);
+      // verify required parameter 'vrsnId' is not null or undefined
+      assertParamExists("templateVersionUpdate", "vrsnId", vrsnId);
+      // verify required parameter 'templateVersionUpdatable' is not null or undefined
+      assertParamExists(
+        "templateVersionUpdate",
+        "templateVersionUpdatable",
+        templateVersionUpdatable
+      );
+      const localVarPath = `/templates/{tmpl_id}/versions/{vrsn_id}`
+        .replace(`{${"tmpl_id"}}`, encodeURIComponent(String(tmplId)))
+        .replace(`{${"vrsn_id"}}`, encodeURIComponent(String(vrsnId)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
 
+      const localVarRequestOptions = {
+        method: "POST",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+      // authentication basicAuth required
+      // http basic authentication required
+      setBasicAuthToObject(localVarRequestOptions, configuration);
 
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Updates the template version with the given template and version ids.
-         * @summary update
-         * @param {string} tmplId The ID of the template to which the version belongs.
-         * @param {string} vrsnId id of the template_version
-         * @param {TemplateVersionUpdatable} templateVersionUpdatable 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        templateVersionUpdate: async (tmplId: string, vrsnId: string, templateVersionUpdatable: TemplateVersionUpdatable, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'tmplId' is not null or undefined
-            assertParamExists('templateVersionUpdate', 'tmplId', tmplId)
-            // verify required parameter 'vrsnId' is not null or undefined
-            assertParamExists('templateVersionUpdate', 'vrsnId', vrsnId)
-            // verify required parameter 'templateVersionUpdatable' is not null or undefined
-            assertParamExists('templateVersionUpdate', 'templateVersionUpdatable', templateVersionUpdatable)
-            const localVarPath = `/templates/{tmpl_id}/versions/{vrsn_id}`
-                .replace(`{${"tmpl_id"}}`, encodeURIComponent(String(tmplId)))
-                .replace(`{${"vrsn_id"}}`, encodeURIComponent(String(vrsnId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
+      localVarHeaderParameter["Content-Type"] = "application/json";
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        templateVersionUpdatable,
+        localVarRequestOptions,
+        configuration
+      );
 
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Returns a list of template versions for the given template ID. The template versions are sorted by creation date, with the most recently created appearing first.
+     * @summary list
+     * @param {string} tmplId The ID of the template associated with the retrieved versions
+     * @param {number} [limit] How many results to return.
+     * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response.
+     * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response.
+     * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
+     * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    templateVersionsList: async (
+      tmplId: string,
+      limit?: number,
+      before?: string,
+      after?: string,
+      include?: Array<string>,
+      dateCreated?: { [key: string]: string },
+      options: AxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'tmplId' is not null or undefined
+      assertParamExists("templateVersionsList", "tmplId", tmplId);
+      const localVarPath = `/templates/{tmpl_id}/versions`.replace(
+        `{${"tmpl_id"}}`,
+        encodeURIComponent(String(tmplId))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
 
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
+      // authentication basicAuth required
+      // http basic authentication required
+      setBasicAuthToObject(localVarRequestOptions, configuration);
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(templateVersionUpdatable, localVarRequestOptions, configuration)
+      if (limit !== undefined) {
+        localVarQueryParameter["limit"] = limit;
+      }
 
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns a list of template versions for the given template ID. The template versions are sorted by creation date, with the most recently created appearing first. 
-         * @summary list
-         * @param {string} tmplId The ID of the template associated with the retrieved versions
-         * @param {number} [limit] How many results to return.
-         * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
-         * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
-         * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
-         * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        templateVersionsList: async (tmplId: string, limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'tmplId' is not null or undefined
-            assertParamExists('templateVersionsList', 'tmplId', tmplId)
-            const localVarPath = `/templates/{tmpl_id}/versions`
-                .replace(`{${"tmpl_id"}}`, encodeURIComponent(String(tmplId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
+      if (before !== undefined) {
+        localVarQueryParameter["before"] = before;
+      }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
+      if (after !== undefined) {
+        localVarQueryParameter["after"] = after;
+      }
 
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
+      if (include) {
+        localVarQueryParameter["include"] = valueToString(include);
+      }
 
-            if (limit !== undefined) {
-                localVarQueryParameter['limit'] = limit;
-            }
+      if (dateCreated !== undefined) {
+        localVarQueryParameter["date_created"] = valueToString(dateCreated);
+      }
 
-            if (before !== undefined) {
-                localVarQueryParameter['before'] = before;
-            }
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
 
-            if (after !== undefined) {
-                localVarQueryParameter['after'] = after;
-            }
-
-            if (include) {
-                localVarQueryParameter['include'] = valueToString(include);
-            }
-
-            if (dateCreated !== undefined) {
-                localVarQueryParameter['date_created'] = valueToString(dateCreated);
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
 };
 
 /**
  * TemplateVersionsApi - functional programming interface
  * @export
  */
-export const TemplateVersionsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = TemplateVersionsApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * Creates a new template version attached to the specified template.
-         * @summary create
-         * @param {string} tmplId The ID of the template the new version will be attached to
-         * @param {TemplateVersionWritable} templateVersionWritable 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createTemplateVersion(tmplId: string, templateVersionWritable: TemplateVersionWritable, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TemplateVersion>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createTemplateVersion(tmplId, templateVersionWritable, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Permanently deletes a template version. A template\'s `published_version` can not be deleted.
-         * @summary delete
-         * @param {string} tmplId The ID of the template to which the version belongs.
-         * @param {string} vrsnId id of the template_version
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async templateVersionDelete(tmplId: string, vrsnId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TemplateVersionDeletion>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.templateVersionDelete(tmplId, vrsnId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Retrieves the template version with the given template and version ids.
-         * @summary get
-         * @param {string} tmplId The ID of the template to which the version belongs.
-         * @param {string} vrsnId id of the template_version
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async templateVersionRetrieve(tmplId: string, vrsnId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TemplateVersion>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.templateVersionRetrieve(tmplId, vrsnId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Updates the template version with the given template and version ids.
-         * @summary update
-         * @param {string} tmplId The ID of the template to which the version belongs.
-         * @param {string} vrsnId id of the template_version
-         * @param {TemplateVersionUpdatable} templateVersionUpdatable 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async templateVersionUpdate(tmplId: string, vrsnId: string, templateVersionUpdatable: TemplateVersionUpdatable, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TemplateVersion>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.templateVersionUpdate(tmplId, vrsnId, templateVersionUpdatable, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Returns a list of template versions for the given template ID. The template versions are sorted by creation date, with the most recently created appearing first. 
-         * @summary list
-         * @param {string} tmplId The ID of the template associated with the retrieved versions
-         * @param {number} [limit] How many results to return.
-         * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
-         * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
-         * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
-         * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async templateVersionsList(tmplId: string, limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TemplateVersionList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.templateVersionsList(tmplId, limit, before, after, include, dateCreated, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
+export const TemplateVersionsApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator =
+    TemplateVersionsApiAxiosParamCreator(configuration);
+  return {
+    /**
+     * Creates a new template version attached to the specified template.
+     * @summary create
+     * @param {string} tmplId The ID of the template the new version will be attached to
+     * @param {TemplateVersionWritable} templateVersionWritable
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async createTemplateVersion(
+      tmplId: string,
+      templateVersionWritable: TemplateVersionWritable,
+      options?: AxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<TemplateVersion>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.createTemplateVersion(
+          tmplId,
+          templateVersionWritable,
+          options
+        );
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+    /**
+     * Permanently deletes a template version. A template\'s `published_version` can not be deleted.
+     * @summary delete
+     * @param {string} tmplId The ID of the template to which the version belongs.
+     * @param {string} vrsnId id of the template_version
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async templateVersionDelete(
+      tmplId: string,
+      vrsnId: string,
+      options?: AxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<TemplateVersionDeletion>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.templateVersionDelete(
+          tmplId,
+          vrsnId,
+          options
+        );
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+    /**
+     * Retrieves the template version with the given template and version ids.
+     * @summary get
+     * @param {string} tmplId The ID of the template to which the version belongs.
+     * @param {string} vrsnId id of the template_version
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async templateVersionRetrieve(
+      tmplId: string,
+      vrsnId: string,
+      options?: AxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<TemplateVersion>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.templateVersionRetrieve(
+          tmplId,
+          vrsnId,
+          options
+        );
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+    /**
+     * Updates the template version with the given template and version ids.
+     * @summary update
+     * @param {string} tmplId The ID of the template to which the version belongs.
+     * @param {string} vrsnId id of the template_version
+     * @param {TemplateVersionUpdatable} templateVersionUpdatable
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async templateVersionUpdate(
+      tmplId: string,
+      vrsnId: string,
+      templateVersionUpdatable: TemplateVersionUpdatable,
+      options?: AxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<TemplateVersion>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.templateVersionUpdate(
+          tmplId,
+          vrsnId,
+          templateVersionUpdatable,
+          options
+        );
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+    /**
+     * Returns a list of template versions for the given template ID. The template versions are sorted by creation date, with the most recently created appearing first.
+     * @summary list
+     * @param {string} tmplId The ID of the template associated with the retrieved versions
+     * @param {number} [limit] How many results to return.
+     * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response.
+     * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response.
+     * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
+     * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async templateVersionsList(
+      tmplId: string,
+      limit?: number,
+      before?: string,
+      after?: string,
+      include?: Array<string>,
+      dateCreated?: { [key: string]: string },
+      options?: AxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<TemplateVersionList>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.templateVersionsList(
+          tmplId,
+          limit,
+          before,
+          after,
+          include,
+          dateCreated,
+          options
+        );
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+  };
 };
 
 /**
@@ -362,115 +572,155 @@ export const TemplateVersionsApiFp = function(configuration?: Configuration) {
  * @extends {BaseAPI}
  */
 export class TemplateVersionsApi extends BaseAPI {
-    /**
-     * Creates a new template version attached to the specified template.
-     * @summary create
-     * @param {string} tmplId The ID of the template the new version will be attached to
-     * @param {TemplateVersionWritable} templateVersionWritable 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TemplateVersionsApi
-     */
-    public create(tmplId: string, templateVersionWritable: TemplateVersionWritable, options?: AxiosRequestConfig) {
-        return TemplateVersionsApiFp(this.configuration).createTemplateVersion(tmplId, templateVersionWritable, options).then((request) => request(this.axios, this.basePath))
-            .then(function (response) {
-                return new TemplateVersion(response.data);
-            }).catch(error => {
-                if (error.response?.data?.error?.message) {
-                    error.message = error.response.data.error.message;
-                }
-                throw error;
-              });
-    }
+  /**
+   * Creates a new template version attached to the specified template.
+   * @summary create
+   * @param {string} tmplId The ID of the template the new version will be attached to
+   * @param {TemplateVersionWritable} templateVersionWritable
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof TemplateVersionsApi
+   */
+  public create(
+    tmplId: string,
+    templateVersionWritable: TemplateVersionWritable,
+    options?: AxiosRequestConfig
+  ) {
+    return TemplateVersionsApiFp(this.configuration)
+      .createTemplateVersion(tmplId, templateVersionWritable, options)
+      .then((request) => request(this.axios, this.basePath))
+      .then(function (response) {
+        return new TemplateVersion(response.data);
+      })
+      .catch((error) => {
+        if (error.response?.data?.error?.message) {
+          error.message = error.response.data.error.message;
+        }
+        throw error;
+      });
+  }
 
-    /**
-     * Permanently deletes a template version. A template\'s `published_version` can not be deleted.
-     * @summary delete
-     * @param {string} tmplId The ID of the template to which the version belongs.
-     * @param {string} vrsnId id of the template_version
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TemplateVersionsApi
-     */
-    public delete(tmplId: string, vrsnId: string, options?: AxiosRequestConfig) {
-        return TemplateVersionsApiFp(this.configuration).templateVersionDelete(tmplId, vrsnId, options).then((request) => request(this.axios, this.basePath))
-            .then(function (response) {
-                return new TemplateVersionDeletion(response.data);
-            }).catch(error => {
-                if (error.response?.data?.error?.message) {
-                    error.message = error.response.data.error.message;
-                }
-                throw error;
-              });
-    }
+  /**
+   * Permanently deletes a template version. A template\'s `published_version` can not be deleted.
+   * @summary delete
+   * @param {string} tmplId The ID of the template to which the version belongs.
+   * @param {string} vrsnId id of the template_version
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof TemplateVersionsApi
+   */
+  public delete(tmplId: string, vrsnId: string, options?: AxiosRequestConfig) {
+    return TemplateVersionsApiFp(this.configuration)
+      .templateVersionDelete(tmplId, vrsnId, options)
+      .then((request) => request(this.axios, this.basePath))
+      .then(function (response) {
+        return new TemplateVersionDeletion(response.data);
+      })
+      .catch((error) => {
+        if (error.response?.data?.error?.message) {
+          error.message = error.response.data.error.message;
+        }
+        throw error;
+      });
+  }
 
-    /**
-     * Retrieves the template version with the given template and version ids.
-     * @summary get
-     * @param {string} tmplId The ID of the template to which the version belongs.
-     * @param {string} vrsnId id of the template_version
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TemplateVersionsApi
-     */
-    public get(tmplId: string, vrsnId: string, options?: AxiosRequestConfig) {
-        return TemplateVersionsApiFp(this.configuration).templateVersionRetrieve(tmplId, vrsnId, options).then((request) => request(this.axios, this.basePath))
-            .then(function (response) {
-                return new TemplateVersion(response.data);
-            }).catch(error => {
-                if (error.response?.data?.error?.message) {
-                    error.message = error.response.data.error.message;
-                }
-                throw error;
-              });
-    }
+  /**
+   * Retrieves the template version with the given template and version ids.
+   * @summary get
+   * @param {string} tmplId The ID of the template to which the version belongs.
+   * @param {string} vrsnId id of the template_version
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof TemplateVersionsApi
+   */
+  public get(tmplId: string, vrsnId: string, options?: AxiosRequestConfig) {
+    return TemplateVersionsApiFp(this.configuration)
+      .templateVersionRetrieve(tmplId, vrsnId, options)
+      .then((request) => request(this.axios, this.basePath))
+      .then(function (response) {
+        return new TemplateVersion(response.data);
+      })
+      .catch((error) => {
+        if (error.response?.data?.error?.message) {
+          error.message = error.response.data.error.message;
+        }
+        throw error;
+      });
+  }
 
-    /**
-     * Updates the template version with the given template and version ids.
-     * @summary update
-     * @param {string} tmplId The ID of the template to which the version belongs.
-     * @param {string} vrsnId id of the template_version
-     * @param {TemplateVersionUpdatable} templateVersionUpdatable 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TemplateVersionsApi
-     */
-    public update(tmplId: string, vrsnId: string, templateVersionUpdatable: TemplateVersionUpdatable, options?: AxiosRequestConfig) {
-        return TemplateVersionsApiFp(this.configuration).templateVersionUpdate(tmplId, vrsnId, templateVersionUpdatable, options).then((request) => request(this.axios, this.basePath))
-            .then(function (response) {
-                return new TemplateVersion(response.data);
-            }).catch(error => {
-                if (error.response?.data?.error?.message) {
-                    error.message = error.response.data.error.message;
-                }
-                throw error;
-              });
-    }
+  /**
+   * Updates the template version with the given template and version ids.
+   * @summary update
+   * @param {string} tmplId The ID of the template to which the version belongs.
+   * @param {string} vrsnId id of the template_version
+   * @param {TemplateVersionUpdatable} templateVersionUpdatable
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof TemplateVersionsApi
+   */
+  public update(
+    tmplId: string,
+    vrsnId: string,
+    templateVersionUpdatable: TemplateVersionUpdatable,
+    options?: AxiosRequestConfig
+  ) {
+    return TemplateVersionsApiFp(this.configuration)
+      .templateVersionUpdate(tmplId, vrsnId, templateVersionUpdatable, options)
+      .then((request) => request(this.axios, this.basePath))
+      .then(function (response) {
+        return new TemplateVersion(response.data);
+      })
+      .catch((error) => {
+        if (error.response?.data?.error?.message) {
+          error.message = error.response.data.error.message;
+        }
+        throw error;
+      });
+  }
 
-    /**
-     * Returns a list of template versions for the given template ID. The template versions are sorted by creation date, with the most recently created appearing first. 
-     * @summary list
-     * @param {string} tmplId The ID of the template associated with the retrieved versions
-     * @param {number} [limit] How many results to return.
-     * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response. 
-     * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response. 
-     * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;. 
-     * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TemplateVersionsApi
-     */
-    public list(tmplId: string, limit?: number, before?: string, after?: string, include?: Array<string>, dateCreated?: { [key: string]: string; }, options?: AxiosRequestConfig) {
-        return TemplateVersionsApiFp(this.configuration).templateVersionsList(tmplId, limit, before, after, include, dateCreated, options).then((request) => request(this.axios, this.basePath))
-            .then(function (response) {
-                return new TemplateVersionList(response.data);
-            }).catch(error => {
-                if (error.response?.data?.error?.message) {
-                    error.message = error.response.data.error.message;
-                }
-                throw error;
-              });
-    }
+  /**
+   * Returns a list of template versions for the given template ID. The template versions are sorted by creation date, with the most recently created appearing first.
+   * @summary list
+   * @param {string} tmplId The ID of the template associated with the retrieved versions
+   * @param {number} [limit] How many results to return.
+   * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response.
+   * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response.
+   * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
+   * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof TemplateVersionsApi
+   */
+  public list(
+    tmplId: string,
+    limit?: number,
+    before?: string,
+    after?: string,
+    include?: Array<string>,
+    dateCreated?: { [key: string]: string },
+    options?: AxiosRequestConfig
+  ) {
+    return TemplateVersionsApiFp(this.configuration)
+      .templateVersionsList(
+        tmplId,
+        limit,
+        before,
+        after,
+        include,
+        dateCreated,
+        options
+      )
+      .then((request) => request(this.axios, this.basePath))
+      .then(function (response) {
+        return new TemplateVersionList(response.data);
+      })
+      .catch((error) => {
+        if (error.response?.data?.error?.message) {
+          error.message = error.response.data.error.message;
+        }
+        throw error;
+      });
+  }
 }
 
 /**
@@ -478,4 +728,3 @@ export class TemplateVersionsApi extends BaseAPI {
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-

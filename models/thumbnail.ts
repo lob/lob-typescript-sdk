@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Lob
- * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)? 
+ * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)?
  *
  * The version of the OpenAPI document: 1.3.0
  * Contact: lob-openapi@lob.com
@@ -12,92 +12,102 @@
  * Do not edit the class manually.
  */
 
-
-import * as Models from './index';
-
+import * as Models from "./index";
 
 /**
- * 
+ *
  * @export
  * @class Thumbnail
  */
 export class Thumbnail {
-    constructor(input?: any) {
-        if (typeof input?.small !== "undefined") {
-            this.small = input.small;
-        }
-        if (typeof input?.medium !== "undefined") {
-            this.medium = input.medium;
-        }
-        if (typeof input?.large !== "undefined") {
-            this.large = input.large;
-        }
+  constructor(input?: any) {
+    if (typeof input?.small !== "undefined") {
+      this.small = input.small;
     }
-
-    /**
-     * A [signed link](#section/Asset-URLs) served over HTTPS. The link returned will expire in 30 days to prevent mis-sharing. Each time a GET request is initiated, a new signed URL will be generated.
-     * @type {string}
-     * @memberof Thumbnail
-     */
-    private '_small'?: string;
-    public get small() { return (this._small || undefined) as string; }
-    public set small(newValue: string) {
-        if(newValue && !/^https:\/\/(lob-assets|lob-assets-staging)\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\.pdf|_thumb_[a-z]+_[0-9]+\.png)\?(version=[a-z0-9-]*&)?expires=[0-9]{10}&signature=[a-zA-Z0-9-_]+$/.test(newValue)) {
-            throw new Error("Invalid small provided");
-        }
-        this._small = newValue;
+    if (typeof input?.medium !== "undefined") {
+      this.medium = input.medium;
     }
-
-
-
-    
-    /**
-     * A [signed link](#section/Asset-URLs) served over HTTPS. The link returned will expire in 30 days to prevent mis-sharing. Each time a GET request is initiated, a new signed URL will be generated.
-     * @type {string}
-     * @memberof Thumbnail
-     */
-    private '_medium'?: string;
-    public get medium() { return (this._medium || undefined) as string; }
-    public set medium(newValue: string) {
-        if(newValue && !/^https:\/\/(lob-assets|lob-assets-staging)\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\.pdf|_thumb_[a-z]+_[0-9]+\.png)\?(version=[a-z0-9-]*&)?expires=[0-9]{10}&signature=[a-zA-Z0-9-_]+$/.test(newValue)) {
-            throw new Error("Invalid medium provided");
-        }
-        this._medium = newValue;
+    if (typeof input?.large !== "undefined") {
+      this.large = input.large;
     }
+  }
 
-
-
-    
-    /**
-     * A [signed link](#section/Asset-URLs) served over HTTPS. The link returned will expire in 30 days to prevent mis-sharing. Each time a GET request is initiated, a new signed URL will be generated.
-     * @type {string}
-     * @memberof Thumbnail
-     */
-    private '_large'?: string;
-    public get large() { return (this._large || undefined) as string; }
-    public set large(newValue: string) {
-        if(newValue && !/^https:\/\/(lob-assets|lob-assets-staging)\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\.pdf|_thumb_[a-z]+_[0-9]+\.png)\?(version=[a-z0-9-]*&)?expires=[0-9]{10}&signature=[a-zA-Z0-9-_]+$/.test(newValue)) {
-            throw new Error("Invalid large provided");
-        }
-        this._large = newValue;
+  /**
+   * A [signed link](#section/Asset-URLs) served over HTTPS. The link returned will expire in 30 days to prevent mis-sharing. Each time a GET request is initiated, a new signed URL will be generated.
+   * @type {string}
+   * @memberof Thumbnail
+   */
+  private "_small"?: string;
+  public get small() {
+    return (this._small || undefined) as string;
+  }
+  public set small(newValue: string) {
+    if (
+      newValue &&
+      !/^https:\/\/(lob-assets|lob-assets-staging)\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\.pdf|_thumb_[a-z]+_[0-9]+\.png)\?(version=[a-z0-9-]*&)?expires=[0-9]{10}&signature=[a-zA-Z0-9-_]+$/.test(
+        newValue
+      )
+    ) {
+      throw new Error("Invalid small provided");
     }
+    this._small = newValue;
+  }
 
-
-
-    
-    public toJSON() {
-        let out = {};
-        for (const [key, value] of Object.entries(this)) {
-            out = Object.assign({}, out, { [key[0] === '_' ? key.substr(1, key.length) : key]: value});
-        }
-        return out;
+  /**
+   * A [signed link](#section/Asset-URLs) served over HTTPS. The link returned will expire in 30 days to prevent mis-sharing. Each time a GET request is initiated, a new signed URL will be generated.
+   * @type {string}
+   * @memberof Thumbnail
+   */
+  private "_medium"?: string;
+  public get medium() {
+    return (this._medium || undefined) as string;
+  }
+  public set medium(newValue: string) {
+    if (
+      newValue &&
+      !/^https:\/\/(lob-assets|lob-assets-staging)\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\.pdf|_thumb_[a-z]+_[0-9]+\.png)\?(version=[a-z0-9-]*&)?expires=[0-9]{10}&signature=[a-zA-Z0-9-_]+$/.test(
+        newValue
+      )
+    ) {
+      throw new Error("Invalid medium provided");
     }
+    this._medium = newValue;
+  }
+
+  /**
+   * A [signed link](#section/Asset-URLs) served over HTTPS. The link returned will expire in 30 days to prevent mis-sharing. Each time a GET request is initiated, a new signed URL will be generated.
+   * @type {string}
+   * @memberof Thumbnail
+   */
+  private "_large"?: string;
+  public get large() {
+    return (this._large || undefined) as string;
+  }
+  public set large(newValue: string) {
+    if (
+      newValue &&
+      !/^https:\/\/(lob-assets|lob-assets-staging)\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\.pdf|_thumb_[a-z]+_[0-9]+\.png)\?(version=[a-z0-9-]*&)?expires=[0-9]{10}&signature=[a-zA-Z0-9-_]+$/.test(
+        newValue
+      )
+    ) {
+      throw new Error("Invalid large provided");
+    }
+    this._large = newValue;
+  }
+
+  public toJSON() {
+    let out = {};
+    for (const [key, value] of Object.entries(this)) {
+      out = Object.assign({}, out, {
+        [key[0] === "_" ? key.substr(1, key.length) : key]: value,
+      });
+    }
+    return out;
+  }
 }
-
 
 /**
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-

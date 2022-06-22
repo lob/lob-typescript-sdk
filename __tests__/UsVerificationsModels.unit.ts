@@ -510,7 +510,7 @@ describe("Us Verifications Models", () => {
       for (const val of invalidValues) {
         try {
           rec.county_fips = val;
-          throw new Error("Should Throw");
+          throw new Error("Invalid county_fips provided");
         } catch (err: any) {
           expect(err.message).toEqual("Invalid county_fips provided");
         }

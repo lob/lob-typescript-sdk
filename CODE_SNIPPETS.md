@@ -3,7 +3,9 @@
 ## Address Api
 
 <<<<<<< HEAD
+
 ### Retrieve
+
 ```bash
 curl https://api.lob.com/v1/addresses/adr_fa85158b26c3eb7c \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -11,20 +13,22 @@ curl https://api.lob.com/v1/addresses/adr_fa85158b26c3eb7c \
 
 ```typescript
 try {
-  const address = await new AddressesApi(config).get('adr_fa85158b26c3eb7c');
+  const address = await new AddressesApi(config).get("adr_fa85158b26c3eb7c");
 } catch (err: any) {
   console.error(err);
 }
 ```
+
 =======
 
->>>>>>> 51728890 (docs: create code snippets)
-
+> > > > > > > 51728890 (docs: create code snippets)
 
 <<<<<<< HEAD
 
 =======
+
 ### Create
+
 ```bash
 curl https://api.lob.com/v1/addresses \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc: \
@@ -43,17 +47,17 @@ curl https://api.lob.com/v1/addresses \
 
 ```typescript
 const addressCreate = new AddressEditable({
-  description: 'Harry - Office',
-  name: 'Harry Zhang',
-  company: 'Lob',
-  email: 'harry@lob.com',
-  phone: '5555555555',
-  address_line1: '210 King St',
-  address_line2: '# 6100',
-  address_city: 'San Francisco',
-  address_state: 'CA',
-  address_zip: '94107',
-  address_country: 'US'
+  description: "Harry - Office",
+  name: "Harry Zhang",
+  company: "Lob",
+  email: "harry@lob.com",
+  phone: "5555555555",
+  address_line1: "210 King St",
+  address_line2: "# 6100",
+  address_city: "San Francisco",
+  address_state: "CA",
+  address_zip: "94107",
+  address_country: "US",
 });
 
 try {
@@ -62,15 +66,17 @@ try {
   console.error(err);
 }
 ```
->>>>>>> 51728890 (docs: create code snippets)
 
+> > > > > > > 51728890 (docs: create code snippets)
 
 <<<<<<< HEAD
 
 =======
 
->>>>>>> 51728890 (docs: create code snippets)
+> > > > > > > 51728890 (docs: create code snippets)
+
 ### List
+
 ```bash
 curl -X GET "https://api.lob.com/v1/addresses?limit=2" \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -87,6 +93,7 @@ try {
 ## Postcards Api
 
 ### Create
+
 ```bash
 curl https://api.lob.com/v1/postcards \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc: \
@@ -126,9 +133,8 @@ try {
 }
 ```
 
-
-
 ### List
+
 ```bash
 curl -X GET "https://api.lob.com/v1/postcards?limit=2" \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -145,7 +151,9 @@ try {
 ## SelfMailers Api
 
 <<<<<<< HEAD
+
 ### Retrieve
+
 ```bash
 curl https://api.lob.com/v1/self_mailers/sfm_8ffbe811dea49dcf \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -153,20 +161,24 @@ curl https://api.lob.com/v1/self_mailers/sfm_8ffbe811dea49dcf \
 
 ```typescript
 try {
-  const selfMailer = await new SelfMailersApi(config).get('sfm_8ffbe811dea49dcf');
+  const selfMailer = await new SelfMailersApi(config).get(
+    "sfm_8ffbe811dea49dcf"
+  );
 } catch (err: any) {
   console.error(err);
 }
 ```
+
 =======
 
->>>>>>> 51728890 (docs: create code snippets)
-
+> > > > > > > 51728890 (docs: create code snippets)
 
 <<<<<<< HEAD
 
 =======
+
 ### Create
+
 ```bash
 curl https://api.lob.com/v1/self_mailers \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc: \
@@ -203,15 +215,17 @@ try {
   console.error(err);
 }
 ```
->>>>>>> 51728890 (docs: create code snippets)
 
+> > > > > > > 51728890 (docs: create code snippets)
 
 <<<<<<< HEAD
 
 =======
 
->>>>>>> 51728890 (docs: create code snippets)
+> > > > > > > 51728890 (docs: create code snippets)
+
 ### List
+
 ```bash
 curl -X GET "https://api.lob.com/v1/self_mailers?limit=2" \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -228,7 +242,9 @@ try {
 ## Letters Api
 
 <<<<<<< HEAD
+
 ### Retrieve
+
 ```bash
 curl https://api.lob.com/v1/letters/ltr_4868c3b754655f90 \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -236,20 +252,22 @@ curl https://api.lob.com/v1/letters/ltr_4868c3b754655f90 \
 
 ```typescript
 try {
-  const letter = await new LettersApi(config).get('ltr_4868c3b754655f90');
+  const letter = await new LettersApi(config).get("ltr_4868c3b754655f90");
 } catch (err: any) {
   console.error(err);
 }
 ```
+
 =======
 
->>>>>>> 51728890 (docs: create code snippets)
-
+> > > > > > > 51728890 (docs: create code snippets)
 
 <<<<<<< HEAD
 
 =======
+
 ### Create
+
 ```bash
 curl https://api.lob.com/v1/letters \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc: \
@@ -289,15 +307,17 @@ try {
   console.error(err);
 }
 ```
->>>>>>> 51728890 (docs: create code snippets)
 
+> > > > > > > 51728890 (docs: create code snippets)
 
 <<<<<<< HEAD
 
 =======
 
->>>>>>> 51728890 (docs: create code snippets)
+> > > > > > > 51728890 (docs: create code snippets)
+
 ### List
+
 ```bash
 curl -X GET "https://api.lob.com/v1/letters?limit=2" \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -314,7 +334,9 @@ try {
 ## Checks Api
 
 <<<<<<< HEAD
+
 ### Retrieve
+
 ```bash
 curl https://api.lob.com/v1/checks/chk_534f10783683daa0 \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -322,20 +344,22 @@ curl https://api.lob.com/v1/checks/chk_534f10783683daa0 \
 
 ```typescript
 try {
-  const check = await new ChecksApi(config).get('chk_534f10783683daa0');
+  const check = await new ChecksApi(config).get("chk_534f10783683daa0");
 } catch (err: any) {
   console.error(err);
 }
 ```
+
 =======
 
->>>>>>> 51728890 (docs: create code snippets)
-
+> > > > > > > 51728890 (docs: create code snippets)
 
 <<<<<<< HEAD
 
 =======
+
 ### Create
+
 ```bash
 curl https://api.lob.com/v1/checks \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc: \
@@ -377,15 +401,17 @@ try {
   console.error(err);
 }
 ```
->>>>>>> 51728890 (docs: create code snippets)
 
+> > > > > > > 51728890 (docs: create code snippets)
 
 <<<<<<< HEAD
 
 =======
 
->>>>>>> 51728890 (docs: create code snippets)
+> > > > > > > 51728890 (docs: create code snippets)
+
 ### List
+
 ```bash
 curl -X GET "https://api.lob.com/v1/checks?limit=2" \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -402,7 +428,9 @@ try {
 ## BankAccounts Api
 
 <<<<<<< HEAD
+
 ### Retrieve
+
 ```bash
 curl https://api.lob.com/v1/bank_accounts/bank_8cad8df5354d33f \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -410,22 +438,26 @@ curl https://api.lob.com/v1/bank_accounts/bank_8cad8df5354d33f \
 
 ```typescript
 try {
-  const bankAccount = await new BankAccountsApi(config).get('bank_8cad8df5354d33f');
+  const bankAccount = await new BankAccountsApi(config).get(
+    "bank_8cad8df5354d33f"
+  );
 } catch (err: any) {
   console.error(err);
 }
 ```
+
 =======
 
->>>>>>> 51728890 (docs: create code snippets)
-
+> > > > > > > 51728890 (docs: create code snippets)
 
 <<<<<<< HEAD
 
 =======
 
->>>>>>> 51728890 (docs: create code snippets)
+> > > > > > > 51728890 (docs: create code snippets)
+
 ### List
+
 ```bash
 curl -X GET "https://api.lob.com/v1/bank_accounts?limit=2" \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -442,7 +474,9 @@ try {
 <<<<<<< HEAD
 
 =======
+
 ### Create
+
 ```bash
 curl https://api.lob.com/v1/bank_accounts \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc: \
@@ -455,26 +489,30 @@ curl https://api.lob.com/v1/bank_accounts \
 
 ```typescript
 const bankAccountCreate = new BankAccountWritable({
-  description: 'Test Bank Account',
-  routing_number: '322271627',
-  account_number: '123456789',
-  signatory: 'John Doe',
+  description: "Test Bank Account",
+  routing_number: "322271627",
+  account_number: "123456789",
+  signatory: "John Doe",
   account_type: BankTypeEnum.Company,
 });
 
 try {
-  const myBankAccount = await new BankAccountsApi(config).create(bankAccountCreate);
+  const myBankAccount = await new BankAccountsApi(config).create(
+    bankAccountCreate
+  );
 } catch (err: any) {
   console.error(err);
 }
 ```
->>>>>>> 51728890 (docs: create code snippets)
 
+> > > > > > > 51728890 (docs: create code snippets)
 
 ## Templates Api
 
 <<<<<<< HEAD
+
 ### Retrieve
+
 ```bash
 curl https://api.lob.com/v1/templates/tmpl_c94e83ca2cd5121 \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -482,22 +520,24 @@ curl https://api.lob.com/v1/templates/tmpl_c94e83ca2cd5121 \
 
 ```typescript
 try {
-  const template = await new TemplatesApi(config).get('tmpl_c94e83ca2cd5121');
+  const template = await new TemplatesApi(config).get("tmpl_c94e83ca2cd5121");
 } catch (err: any) {
   console.error(err);
 }
 ```
+
 =======
 
->>>>>>> 51728890 (docs: create code snippets)
-
+> > > > > > > 51728890 (docs: create code snippets)
 
 <<<<<<< HEAD
 
 =======
 
->>>>>>> 51728890 (docs: create code snippets)
+> > > > > > > 51728890 (docs: create code snippets)
+
 ### List
+
 ```bash
 curl -X GET "https://api.lob.com/v1/templates?limit=2" \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -514,7 +554,9 @@ try {
 <<<<<<< HEAD
 
 =======
+
 ### Create
+
 ```bash
 curl https://api.lob.com/v1/templates \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc: \
@@ -524,8 +566,8 @@ curl https://api.lob.com/v1/templates \
 
 ```typescript
 const templateCreate = new TemplateWritable({
-  description: 'Test Template',
-  html: '<html>HTML for {{name}}</html>',
+  description: "Test Template",
+  html: "<html>HTML for {{name}}</html>",
 });
 
 try {
@@ -534,13 +576,15 @@ try {
   console.error(err);
 }
 ```
->>>>>>> 51728890 (docs: create code snippets)
 
+> > > > > > > 51728890 (docs: create code snippets)
 
 ## TemplateVersions Api
 
 <<<<<<< HEAD
+
 ### Retrieve
+
 ```bash
 curl -X GET "https://api.lob.com/v1/templates/tmpl_c94e83ca2cd5121/versions/vrsn_534e339882d2282" \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -548,20 +592,25 @@ curl -X GET "https://api.lob.com/v1/templates/tmpl_c94e83ca2cd5121/versions/vrsn
 
 ```typescript
 try {
-  const templateVersion = await new TemplateVersionsApi(config).get('tmpl_c94e83ca2cd5121', 'vrsn_534e339882d2282');
+  const templateVersion = await new TemplateVersionsApi(config).get(
+    "tmpl_c94e83ca2cd5121",
+    "vrsn_534e339882d2282"
+  );
 } catch (err: any) {
   console.error(err);
 }
 ```
+
 =======
 
->>>>>>> 51728890 (docs: create code snippets)
+> > > > > > > 51728890 (docs: create code snippets)
 
-<<<<<<< HEAD
-=======
+# <<<<<<< HEAD
 
->>>>>>> 51728890 (docs: create code snippets)
+> > > > > > > 51728890 (docs: create code snippets)
+
 ### List
+
 ```bash
 curl -X GET "https://api.lob.com/v1/templates/tmpl_ea6e6a1abf01703/versions?limit=2" \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc:
@@ -569,15 +618,18 @@ curl -X GET "https://api.lob.com/v1/templates/tmpl_ea6e6a1abf01703/versions?limi
 
 ```typescript
 try {
-  const templateVersions = await new TemplateVersionsApi(config).list(tmpl_xxxx);
+  const templateVersions = await new TemplateVersionsApi(config).list(
+    tmpl_xxxx
+  );
 } catch (err: any) {
   console.error(err);
 }
 ```
 
-<<<<<<< HEAD
-=======
+# <<<<<<< HEAD
+
 ### Create
+
 ```bash
 curl https://api.lob.com/v1/templates/tmpl_4aa14648113e45b/versions \
   -u test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc: \
@@ -587,14 +639,17 @@ curl https://api.lob.com/v1/templates/tmpl_4aa14648113e45b/versions \
 
 ```typescript
 const templateVersionCreate = new TemplateVersionWritable({
-  description: 'Second Version',
-  html: '<html>Second HTML for {{name}}</html>',
+  description: "Second Version",
+  html: "<html>Second HTML for {{name}}</html>",
 });
 
 try {
-  const myTemplateVersion = await new TemplateVersionsApi(config).create(templateVersionCreate);
+  const myTemplateVersion = await new TemplateVersionsApi(config).create(
+    templateVersionCreate
+  );
 } catch (err: any) {
   console.error(err);
 }
 ```
->>>>>>> 51728890 (docs: create code snippets)
+
+> > > > > > > 51728890 (docs: create code snippets)

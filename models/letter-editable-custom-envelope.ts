@@ -15,17 +15,17 @@
 import * as Models from "./index";
 
 /**
- * Lob uses RESTful HTTP response codes to indicate success or failure of an API request. In general, 2xx indicates success, 4xx indicate an input error, and 5xx indicates an error on Lob\'s end.
+ * A nested custom envelope object containing more information about the custom envelope used or `null` if a custom envelope was not used.  Accepts an envelope ID for any customized envelope with available inventory. If no inventory is available for the specified ID, the letter will not be sent, and an error will be returned. If the letter has more than 6 sheets, it will be sent in a blank flat envelope. Custom envelopes may be created and ordered from the dashboard. This feature is exclusive to certain customers. Upgrade to the appropriate [Print & Mail Edition](https://dashboard.lob.com/#/settings/editions) to gain access.
  * @export
- * @class CardDeletion
+ * @class LetterEditableCustomEnvelope
  */
-export class CardDeletion {
+export class LetterEditableCustomEnvelope {
   constructor(input?: any) {
     if (typeof input?.id !== "undefined") {
       this.id = input.id;
     }
-    if (typeof input?.deleted !== "undefined") {
-      this.deleted = input.deleted;
+    if (typeof input?.url !== "undefined") {
+      this.url = input.url;
     }
     if (typeof input?.object !== "undefined") {
       this.object = input.object;
@@ -33,34 +33,25 @@ export class CardDeletion {
   }
 
   /**
-   * Unique identifier prefixed with `card_`.
+   * The unique identifier of the custom envelope used.
    * @type {string}
-   * @memberof CardDeletion
+   * @memberof LetterEditableCustomEnvelope
    */
-  private "_id"?: string;
-  public get id() {
-    return (this._id || undefined) as string;
-  }
-  public set id(newValue: string) {
-    if (newValue && !/^card_[a-zA-Z0-9]+$/.test(newValue)) {
-      throw new Error("Invalid id provided");
-    }
-    this._id = newValue;
-  }
+  "id": string;
 
   /**
-   * Only returned if the resource has been successfully deleted.
-   * @type {boolean}
-   * @memberof CardDeletion
+   * The url of the envelope asset used.
+   * @type {string}
+   * @memberof LetterEditableCustomEnvelope
    */
-  "deleted"?: boolean;
+  "url": string;
 
   /**
-   * Value is type of resource.
+   *
    * @type {string}
-   * @memberof CardDeletion
+   * @memberof LetterEditableCustomEnvelope
    */
-  "object"?: CardDeletionObjectEnum;
+  "object": LetterEditableCustomEnvelopeObjectEnum;
 
   public toJSON() {
     let out = {};
@@ -77,8 +68,8 @@ export class CardDeletion {
  * @export
  * @enum {string}
  */
-export enum CardDeletionObjectEnum {
-  CardDeleted = "card_deleted",
+export enum LetterEditableCustomEnvelopeObjectEnum {
+  Envelope = "envelope",
 }
 
 /**

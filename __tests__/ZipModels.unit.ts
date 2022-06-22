@@ -35,7 +35,7 @@ describe("Zip Models", () => {
       for (const val of invalidValues) {
         try {
           rec.id = val;
-          throw new Error("Should Throw");
+          throw new Error("Invalid id provided");
         } catch (err: any) {
           expect(err.message).toEqual("Invalid id provided");
         }
@@ -62,7 +62,7 @@ describe("Zip Models", () => {
       for (const val of invalidValues) {
         try {
           rec.zip_code = val;
-          throw new Error("Should Throw");
+          throw new Error("Invalid zip_code provided");
         } catch (err: any) {
           expect(err.message).toEqual("Invalid zip_code provided");
         }
@@ -113,7 +113,7 @@ describe("Zip Models", () => {
       for (const val of invalidValues) {
         try {
           rec.county_fips = val;
-          throw new Error("Should Throw");
+          throw new Error("Invalid county_fips provided");
         } catch (err: any) {
           expect(err.message).toEqual("Invalid county_fips provided");
         }
