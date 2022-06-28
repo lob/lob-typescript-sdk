@@ -40,7 +40,7 @@ export class CardEditable {
    * @type {string}
    * @memberof CardEditable
    */
-  "front": string;
+  "front"?: string;
 
   /**
    * A PDF template for the back of the card

@@ -77,7 +77,7 @@ export class CheckEditable {
    * @memberof CheckEditable
    */
 
-  "from": string | Models.AddressEditable;
+  "from"?: string | Models.AddressDomestic;
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
@@ -85,28 +85,28 @@ export class CheckEditable {
    * @memberof CheckEditable
    */
 
-  "to": string | Models.AddressEditable;
+  "to"?: string | Models.AddressDomestic;
 
   /**
    *
    * @type {string}
    * @memberof CheckEditable
    */
-  "bank_account": string | null;
+  "bank_account"?: string | null;
 
   /**
    * The payment amount to be sent in US dollars.
    * @type {number}
    * @memberof CheckEditable
    */
-  "amount": number;
+  "amount"?: number;
 
   /**
    * Accepts a remote URL or local file upload to an image to print (in grayscale) in the upper-left corner of your check.
    * @type {any}
    * @memberof CheckEditable
    */
-  "logo"?: any | null;
+  "logo"?: any;
 
   /**
    * The artwork to use on the bottom of the check page.  Notes: - HTML merge variables should not include delimiting whitespace. - PDF, PNG, and JPGs must be sized at 8.5\"x11\" at 300 DPI, while supplied HTML will be rendered and trimmed to fit on a 8.5\"x11\" page. - The check bottom will always be printed in black & white. - Must conform to [this template](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/check_bottom_template.pdf).  Need more help? Consult our [HTML examples](#section/HTML-Examples).

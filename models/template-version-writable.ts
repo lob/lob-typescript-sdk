@@ -46,7 +46,7 @@ export class TemplateVersionWritable {
    * @type {string}
    * @memberof TemplateVersionWritable
    */
-  "html": string;
+  "html"?: string;
 
   /**
    *

@@ -51,42 +51,42 @@ export class IntlSuggestions {
    * @type {string}
    * @memberof IntlSuggestions
    */
-  "primary_number_range": string;
+  "primary_number_range"?: string;
 
   /**
    * The primary delivery line (usually the street address) of the address. Combination of the following applicable `components` (primary number & secondary information may be missing or inaccurate): * `primary_number` * `street_predirection` * `street_name` * `street_suffix` * `street_postdirection` * `secondary_designator` * `secondary_number` * `pmb_designator` * `pmb_number`
    * @type {string}
    * @memberof IntlSuggestions
    */
-  "primary_line": string;
+  "primary_line"?: string;
 
   /**
    *
    * @type {string}
    * @memberof IntlSuggestions
    */
-  "city": string;
+  "city"?: string;
 
   /**
    * The [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) two letter code for the state.
    * @type {string}
    * @memberof IntlSuggestions
    */
-  "state": string;
+  "state"?: string;
 
   /**
    *
    * @type {CountryExtended}
    * @memberof IntlSuggestions
    */
-  "country": CountryExtended;
+  "country"?: CountryExtended;
 
   /**
    * A 5-digit zip code. Left empty if a test key is used.
    * @type {string}
    * @memberof IntlSuggestions
    */
-  "zip_code": string;
+  "zip_code"?: string;
 
   /**
    * Value is resource type.

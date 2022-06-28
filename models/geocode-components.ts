@@ -34,9 +34,9 @@ export class GeocodeComponents {
    * @type {string}
    * @memberof GeocodeComponents
    */
-  private "_zip_code": string;
+  private "_zip_code"?: string;
   public get zip_code() {
-    return this._zip_code;
+    return (this._zip_code || undefined) as string;
   }
   public set zip_code(newValue: string) {
     if (newValue && !/^\d{5}$/.test(newValue)) {
@@ -50,9 +50,9 @@ export class GeocodeComponents {
    * @type {string}
    * @memberof GeocodeComponents
    */
-  private "_zip_code_plus_4": string;
+  private "_zip_code_plus_4"?: string;
   public get zip_code_plus_4() {
-    return this._zip_code_plus_4;
+    return (this._zip_code_plus_4 || undefined) as string;
   }
   public set zip_code_plus_4(newValue: string) {
     if (newValue && !/^\d{4}$/.test(newValue)) {

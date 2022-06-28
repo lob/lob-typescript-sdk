@@ -48,9 +48,9 @@ export class Events {
    * @type {string}
    * @memberof Events
    */
-  private "_id": string;
+  private "_id"?: string;
   public get id() {
-    return this._id;
+    return (this._id || undefined) as string;
   }
   public set id(newValue: string) {
     if (newValue && !/^evt_[a-zA-Z0-9_]+$/.test(newValue)) {
@@ -64,35 +64,35 @@ export class Events {
    * @type {object}
    * @memberof Events
    */
-  "body": object;
+  "body"?: object;
 
   /**
    * Unique identifier of the related resource for the event.
    * @type {string}
    * @memberof Events
    */
-  "reference_id": string;
+  "reference_id"?: string;
 
   /**
    *
    * @type {EventType}
    * @memberof Events
    */
-  "event_type": EventType;
+  "event_type"?: EventType;
 
   /**
    * A timestamp in ISO 8601 format of the date the resource was created.
    * @type {string}
    * @memberof Events
    */
-  "date_created": string;
+  "date_created"?: string;
 
   /**
    * Value is resource type.
    * @type {string}
    * @memberof Events
    */
-  "object": EventsObjectEnum;
+  "object"?: EventsObjectEnum;
 
   public toJSON() {
     let out = {};

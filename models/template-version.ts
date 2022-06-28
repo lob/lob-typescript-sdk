@@ -60,9 +60,9 @@ export class TemplateVersion {
    * @type {string}
    * @memberof TemplateVersion
    */
-  private "_id": string;
+  private "_id"?: string;
   public get id() {
-    return this._id;
+    return (this._id || undefined) as string;
   }
   public set id(newValue: string) {
     if (newValue && !/^vrsn_[a-zA-Z0-9]+$/.test(newValue)) {
@@ -83,7 +83,7 @@ export class TemplateVersion {
    * @type {string}
    * @memberof TemplateVersion
    */
-  "html": string;
+  "html"?: string;
 
   /**
    *

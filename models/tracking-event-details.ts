@@ -40,14 +40,14 @@ export class TrackingEventDetails {
    * @type {string}
    * @memberof TrackingEventDetails
    */
-  "event": TrackingEventDetailsEventEnum;
+  "event"?: TrackingEventDetailsEventEnum;
 
   /**
    * The description as listed in the description for event.
    * @type {string}
    * @memberof TrackingEventDetails
    */
-  "description": string;
+  "description"?: string;
 
   /**
    * Event-specific notes from USPS about the tracking event.
@@ -61,7 +61,7 @@ export class TrackingEventDetails {
    * @type {boolean}
    * @memberof TrackingEventDetails
    */
-  "action_required": boolean;
+  "action_required"?: boolean;
 
   public toJSON() {
     let out = {};

@@ -33,7 +33,7 @@ export class IntlVerificationsPayload {
    * @type {Array<MultipleComponentsIntl>}
    * @memberof IntlVerificationsPayload
    */
-  "addresses": Array<MultipleComponentsIntl>;
+  "addresses"?: Array<MultipleComponentsIntl>;
 
   public toJSON() {
     let out = {};

@@ -31,7 +31,7 @@ export class BankAccountVerify {
    * @type {Array<number>}
    * @memberof BankAccountVerify
    */
-  "amounts": Array<number>;
+  "amounts"?: Array<number>;
 
   public toJSON() {
     let out = {};

@@ -45,7 +45,7 @@ export class IntlAutocompletionsWritable {
    * @type {string}
    * @memberof IntlAutocompletionsWritable
    */
-  "address_prefix": string;
+  "address_prefix"?: string;
 
   /**
    * An optional city input used to filter suggestions. Case insensitive and does not match partial abbreviations.
@@ -73,7 +73,7 @@ export class IntlAutocompletionsWritable {
    * @type {CountryExtended}
    * @memberof IntlAutocompletionsWritable
    */
-  "country": CountryExtended;
+  "country"?: CountryExtended;
 
   public toJSON() {
     let out = {};

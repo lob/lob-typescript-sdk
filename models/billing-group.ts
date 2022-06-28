@@ -53,16 +53,16 @@ export class BillingGroup {
    * @type {string}
    * @memberof BillingGroup
    */
-  "name": string;
+  "name"?: string;
 
   /**
    * Unique identifier prefixed with `bg_`.
    * @type {string}
    * @memberof BillingGroup
    */
-  private "_id": string;
+  private "_id"?: string;
   public get id() {
-    return this._id;
+    return (this._id || undefined) as string;
   }
   public set id(newValue: string) {
     if (newValue && !/^bg_[a-zA-Z0-9]+$/.test(newValue)) {
@@ -76,21 +76,21 @@ export class BillingGroup {
    * @type {string}
    * @memberof BillingGroup
    */
-  "date_created": string;
+  "date_created"?: string;
 
   /**
    * A timestamp in ISO 8601 format of the date the resource was last modified.
    * @type {string}
    * @memberof BillingGroup
    */
-  "date_modified": string;
+  "date_modified"?: string;
 
   /**
    * Value is resource type.
    * @type {string}
    * @memberof BillingGroup
    */
-  "object": BillingGroupObjectEnum;
+  "object"?: BillingGroupObjectEnum;
 
   public toJSON() {
     let out = {};

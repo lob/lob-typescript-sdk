@@ -57,63 +57,63 @@ export class DeliverabilityAnalysis {
    * @type {string}
    * @memberof DeliverabilityAnalysis
    */
-  "dpv_confirmation": DeliverabilityAnalysisDpvConfirmationEnum;
+  "dpv_confirmation"?: DeliverabilityAnalysisDpvConfirmationEnum;
 
   /**
    * indicates whether or not the address is [CMRA-authorized](https://en.wikipedia.org/wiki/Commercial_mail_receiving_agency). Possible values are: * `Y` –– Address is CMRA-authorized. * `N` –– Address is not CMRA-authorized. * `\'\'` –– A DPV match is not made (`deliverability_analysis[dpv_confirmation]` is `N` or an empty string).
    * @type {string}
    * @memberof DeliverabilityAnalysis
    */
-  "dpv_cmra": DeliverabilityAnalysisDpvCmraEnum;
+  "dpv_cmra"?: DeliverabilityAnalysisDpvCmraEnum;
 
   /**
    * indicates that an address was once deliverable, but has become vacant and is no longer receiving deliveries. Possible values are: * `Y` –– Address is vacant. * `N` –– Address is not vacant. * `\'\'` –– A DPV match is not made (`deliverability_analysis[dpv_confirmation]` is `N` or an empty string).
    * @type {string}
    * @memberof DeliverabilityAnalysis
    */
-  "dpv_vacant": DeliverabilityAnalysisDpvVacantEnum;
+  "dpv_vacant"?: DeliverabilityAnalysisDpvVacantEnum;
 
   /**
    * Corresponds to the USPS field `dpv_no_stat`. Indicates that an address has been vacated in the recent past, and is no longer receiving deliveries. If it\'s been unoccupied for 90+ days, or temporarily vacant, this will be flagged. Possible values are: * `Y` –– Address is active. * `N` –– Address is not active. * `\'\'` –– A DPV match is not made (`deliverability_analysis[dpv_confirmation]` is `N` or an empty string).
    * @type {string}
    * @memberof DeliverabilityAnalysis
    */
-  "dpv_active": DeliverabilityAnalysisDpvActiveEnum;
+  "dpv_active"?: DeliverabilityAnalysisDpvActiveEnum;
 
   /**
    * An array of 2-character strings that gives more insight into how `deliverability_analysis[dpv_confirmation]` was determined. Will always include at least 1 string, and can include up to 3. For details, see [US Verification Details](#tag/US-Verification-Types).
    * @type {Array<DpvFootnote>}
    * @memberof DeliverabilityAnalysis
    */
-  "dpv_footnotes": Array<DpvFootnote>;
+  "dpv_footnotes"?: Array<DpvFootnote>;
 
   /**
    * indicates whether or not an address has been flagged in the [Early Warning System](https://docs.informatica.com/data-engineering/data-engineering-quality/10-4-0/address-validator-port-reference/postal-carrier-certification-data-ports/early-warning-system-return-code.html), meaning the address is under development and not yet ready to receive mail. However, it should become available in a few months.
    * @type {boolean}
    * @memberof DeliverabilityAnalysis
    */
-  "ews_match": boolean;
+  "ews_match"?: boolean;
 
   /**
    * indicates whether this address has been converted by [LACS<sup>Link</sup>](https://postalpro.usps.com/address-quality/lacslink). LACS<sup>Link</sup> corrects outdated addresses into their modern counterparts. Possible values are: * `Y` –– New address produced with a matching record in LACS<sup>Link</sup>. * `N` –– New address could not be produced with a matching record in LACS<sup>Link</sup>. * `\'\'` –– A DPV match is not made (`deliverability_analysis[dpv_confirmation]` is `N` or an empty string).
    * @type {string}
    * @memberof DeliverabilityAnalysis
    */
-  "lacs_indicator": DeliverabilityAnalysisLacsIndicatorEnum;
+  "lacs_indicator"?: DeliverabilityAnalysisLacsIndicatorEnum;
 
   /**
    * A code indicating how `deliverability_analysis[lacs_indicator]` was determined. Possible values are: * `A` — A new address was produced because a match was found in LACS<sup>Link</sup>. * `92` — A LACS<sup>Link</sup> record was matched after dropping secondary information. * `14` — A match was found in LACS<sup>Link</sup>, but could not be converted to a deliverable address. * `00` — A match was not found in LACS<sup>Link</sup>, and no new address was produced. * `\'\'` — LACS<sup>Link</sup> was not attempted.
    * @type {string}
    * @memberof DeliverabilityAnalysis
    */
-  "lacs_return_code": string;
+  "lacs_return_code"?: string;
 
   /**
    * A return code that indicates whether the address was matched and corrected by [Suite<sup>Link</sup>](https://postalpro.usps.com/address-quality-solutions/suitelink). Suite<sup>Link</sup> attempts to provide secondary information to business addresses. Possible values are: * `A` –– A Suite<sup>Link</sup> match was found and secondary information was added. * `00` –– A Suite<sup>Link</sup> match could not be found and no secondary information was added. * `\'\'` –– Suite<sup>Link</sup> lookup was not attempted.
    * @type {string}
    * @memberof DeliverabilityAnalysis
    */
-  "suite_return_code": DeliverabilityAnalysisSuiteReturnCodeEnum;
+  "suite_return_code"?: DeliverabilityAnalysisSuiteReturnCodeEnum;
 
   public toJSON() {
     let out = {};

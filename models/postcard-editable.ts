@@ -65,7 +65,7 @@ export class PostcardEditable {
    * @memberof PostcardEditable
    */
 
-  "to": string | Models.AddressEditable;
+  "to"?: string | Models.AddressEditable;
 
   /**
    * Required if `to` address is international. Must either be an address ID or an inline object with correct address parameters.
@@ -122,14 +122,14 @@ export class PostcardEditable {
    * @type {string}
    * @memberof PostcardEditable
    */
-  "front": string;
+  "front"?: string;
 
   /**
    * The artwork to use as the back of your postcard.
    * @type {string}
    * @memberof PostcardEditable
    */
-  "back": string;
+  "back"?: string;
 
   /**
    * An optional string with the billing group ID to tag your usage with. Is used for billing purposes. Requires special activation to use. See [Billing Group API](https://lob.github.io/lob-openapi/#tag/Billing-Groups) for more information.
