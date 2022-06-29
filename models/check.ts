@@ -113,9 +113,9 @@ export class Check {
    * @type {string}
    * @memberof Check
    */
-  private "_id": string;
+  private "_id"?: string;
   public get id() {
-    return this._id;
+    return (this._id || undefined) as string;
   }
   public set id(newValue: string) {
     if (newValue && !/^chk_[a-zA-Z0-9]+$/.test(newValue)) {
@@ -129,7 +129,7 @@ export class Check {
    * @type {Address}
    * @memberof Check
    */
-  "to": Address;
+  "to"?: Address;
 
   /**
    *
@@ -199,14 +199,14 @@ export class Check {
    * @type {number}
    * @memberof Check
    */
-  "amount": number;
+  "amount"?: number;
 
   /**
    *
    * @type {BankAccount}
    * @memberof Check
    */
-  "bank_account": BankAccount;
+  "bank_account"?: BankAccount;
 
   /**
    * Unique identifier prefixed with `tmpl_`. ID of a saved [HTML template](#section/HTML-Templates).
@@ -277,9 +277,9 @@ export class Check {
    * @type {string}
    * @memberof Check
    */
-  private "_url": string;
+  private "_url"?: string;
   public get url() {
-    return this._url;
+    return (this._url || undefined) as string;
   }
   public set url(newValue: string) {
     if (
@@ -298,7 +298,7 @@ export class Check {
    * @type {string}
    * @memberof Check
    */
-  "carrier": CheckCarrierEnum;
+  "carrier"?: CheckCarrierEnum;
 
   /**
    *
@@ -326,21 +326,21 @@ export class Check {
    * @type {string}
    * @memberof Check
    */
-  "object": CheckObjectEnum;
+  "object"?: CheckObjectEnum;
 
   /**
    * A timestamp in ISO 8601 format of the date the resource was created.
    * @type {string}
    * @memberof Check
    */
-  "date_created": string;
+  "date_created"?: string;
 
   /**
    * A timestamp in ISO 8601 format of the date the resource was last modified.
    * @type {string}
    * @memberof Check
    */
-  "date_modified": string;
+  "date_modified"?: string;
 
   /**
    * Only returned if the resource has been successfully deleted.

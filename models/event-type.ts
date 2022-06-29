@@ -40,28 +40,28 @@ export class EventType {
    * @type {string}
    * @memberof EventType
    */
-  "id": string;
+  "id"?: string;
 
   /**
    * Value is `true` if the event type is enabled in both the test and live environments.
    * @type {boolean}
    * @memberof EventType
    */
-  "enabled_for_test": boolean;
+  "enabled_for_test"?: boolean;
 
   /**
    *
    * @type {string}
    * @memberof EventType
    */
-  "resource": EventTypeResourceEnum;
+  "resource"?: EventTypeResourceEnum;
 
   /**
    * Value is resource type.
    * @type {string}
    * @memberof EventType
    */
-  "object": EventTypeObjectEnum;
+  "object"?: EventTypeObjectEnum;
 
   public toJSON() {
     let out = {};

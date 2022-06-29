@@ -33,7 +33,7 @@ export class MultipleComponentsList {
    * @type {Array<MultipleComponents>}
    * @memberof MultipleComponentsList
    */
-  "addresses": Array<MultipleComponents>;
+  "addresses"?: Array<MultipleComponents>;
 
   public toJSON() {
     let out = {};

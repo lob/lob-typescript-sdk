@@ -67,7 +67,7 @@ export class IntlVerifications {
    * @type {boolean}
    * @memberof IntlVerifications
    */
-  "errors": boolean;
+  "errors"?: boolean;
 
   public toJSON() {
     let out = {};

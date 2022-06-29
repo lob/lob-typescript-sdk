@@ -148,14 +148,14 @@ export class CardOrder {
    * @type {string}
    * @memberof CardOrder
    */
-  "date_created": string;
+  "date_created"?: string;
 
   /**
    * A timestamp in ISO 8601 format of the date the resource was last modified.
    * @type {string}
    * @memberof CardOrder
    */
-  "date_modified": string;
+  "date_modified"?: string;
 
   /**
    * Only returned if the resource has been successfully deleted.
@@ -169,7 +169,7 @@ export class CardOrder {
    * @type {string}
    * @memberof CardOrder
    */
-  "object": string;
+  "object"?: string;
 
   public toJSON() {
     let out = {};

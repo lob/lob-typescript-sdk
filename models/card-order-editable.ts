@@ -31,7 +31,7 @@ export class CardOrderEditable {
    * @type {number}
    * @memberof CardOrderEditable
    */
-  "quantity": number;
+  "quantity"?: number;
 
   public toJSON() {
     let out = {};

@@ -43,7 +43,7 @@ export class UsAutocompletionsWritable {
    * @type {string}
    * @memberof UsAutocompletionsWritable
    */
-  "address_prefix": string;
+  "address_prefix"?: string;
 
   /**
    * An optional city input used to filter suggestions. Case insensitive and does not match partial abbreviations.

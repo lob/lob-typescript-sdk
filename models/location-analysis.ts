@@ -37,21 +37,21 @@ export class LocationAnalysis {
    * @type {number}
    * @memberof LocationAnalysis
    */
-  "latitude": number | null;
+  "latitude"?: number | null;
 
   /**
    * A positive or negative decimal indicating the geographic longitude of the address.
    * @type {number}
    * @memberof LocationAnalysis
    */
-  "longitude": number | null;
+  "longitude"?: number | null;
 
   /**
    * The distance from the input location to this exact zip code in miles.
    * @type {number}
    * @memberof LocationAnalysis
    */
-  "distance": number;
+  "distance"?: number;
 
   public toJSON() {
     let out = {};
