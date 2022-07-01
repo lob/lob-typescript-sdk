@@ -344,7 +344,7 @@ describe("PostcardsApi", () => {
         undefined,
         undefined,
         undefined,
-        PostcardSize._4x6
+        [PostcardSize._4x6]
       );
       expect(response).toBeDefined();
       expect(response.data).toBeDefined();
