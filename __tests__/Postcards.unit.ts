@@ -331,7 +331,7 @@ describe("PostcardsApi", () => {
 
     it("lists postcards with a size parameter", async () => {
       axiosRequest.mockImplementationOnce(async (request) => {
-        expect(request.url.split("?")[1]).toEqual("size=4x6");
+        expect(request.url.split("?")[1]).toEqual("size=%5B%224x6%22%5D");
         return {
           data: { data: [{ id: "fake 1" }, { id: "fake 2" }] },
         };
@@ -344,7 +344,7 @@ describe("PostcardsApi", () => {
         undefined,
         undefined,
         undefined,
-        PostcardSize._4x6
+        [PostcardSize._4x6]
       );
       expect(response).toBeDefined();
       expect(response.data).toBeDefined();

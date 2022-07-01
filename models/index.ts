@@ -63,6 +63,7 @@ export * from "./postcard-deletion";
 export * from "./postcard-editable";
 export * from "./postcard-list";
 export * from "./postcard-size";
+export * from "./return-envelope";
 export * from "./reverse-geocode";
 export * from "./self-mailer";
 export * from "./self-mailer-deletion";
