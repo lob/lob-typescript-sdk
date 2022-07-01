@@ -237,7 +237,7 @@ export const SelfMailersApiAxiosParamCreator = function (
      * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
      * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
      * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
-     * @param {SelfMailerSize} [size] The self mailer sizes to be returned.
+     * @param {Array<SelfMailerSize>} [size] The self mailer sizes to be returned.
      * @param {boolean} [scheduled] * &#x60;true&#x60; - only return orders (past or future) where &#x60;send_date&#x60; is greater than &#x60;date_created&#x60; * &#x60;false&#x60; - only return orders where &#x60;send_date&#x60; is equal to &#x60;date_created&#x60;
      * @param {{ [key: string]: string; }} [sendDate] Filter by date sent.
      * @param {MailType} [mailType] A string designating the mail postage type: * &#x60;usps_first_class&#x60; - (default) * &#x60;usps_standard&#x60; - a [cheaper option](https://lob.com/pricing/print-mail#compare) which is less predictable and takes longer to deliver. &#x60;usps_standard&#x60; cannot be used with &#x60;4x6&#x60; postcards or for any postcards sent outside of the United States.
@@ -252,7 +252,7 @@ export const SelfMailersApiAxiosParamCreator = function (
       include?: Array<string>,
       dateCreated?: { [key: string]: string },
       metadata?: { [key: string]: string },
-      size?: SelfMailerSize,
+      size?: Array<SelfMailerSize>,
       scheduled?: boolean,
       sendDate?: { [key: string]: string },
       mailType?: MailType,
@@ -303,7 +303,7 @@ export const SelfMailersApiAxiosParamCreator = function (
         localVarQueryParameter["metadata"] = valueToString(metadata);
       }
 
-      if (size !== undefined) {
+      if (size) {
         localVarQueryParameter["size"] = valueToString(size);
       }
 
@@ -432,7 +432,7 @@ export const SelfMailersApiFp = function (configuration?: Configuration) {
      * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
      * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
      * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
-     * @param {SelfMailerSize} [size] The self mailer sizes to be returned.
+     * @param {Array<SelfMailerSize>} [size] The self mailer sizes to be returned.
      * @param {boolean} [scheduled] * &#x60;true&#x60; - only return orders (past or future) where &#x60;send_date&#x60; is greater than &#x60;date_created&#x60; * &#x60;false&#x60; - only return orders where &#x60;send_date&#x60; is equal to &#x60;date_created&#x60;
      * @param {{ [key: string]: string; }} [sendDate] Filter by date sent.
      * @param {MailType} [mailType] A string designating the mail postage type: * &#x60;usps_first_class&#x60; - (default) * &#x60;usps_standard&#x60; - a [cheaper option](https://lob.com/pricing/print-mail#compare) which is less predictable and takes longer to deliver. &#x60;usps_standard&#x60; cannot be used with &#x60;4x6&#x60; postcards or for any postcards sent outside of the United States.
@@ -447,7 +447,7 @@ export const SelfMailersApiFp = function (configuration?: Configuration) {
       include?: Array<string>,
       dateCreated?: { [key: string]: string },
       metadata?: { [key: string]: string },
-      size?: SelfMailerSize,
+      size?: Array<SelfMailerSize>,
       scheduled?: boolean,
       sendDate?: { [key: string]: string },
       mailType?: MailType,
@@ -570,7 +570,7 @@ export class SelfMailersApi extends BaseAPI {
    * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
    * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
    * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
-   * @param {SelfMailerSize} [size] The self mailer sizes to be returned.
+   * @param {Array<SelfMailerSize>} [size] The self mailer sizes to be returned.
    * @param {boolean} [scheduled] * &#x60;true&#x60; - only return orders (past or future) where &#x60;send_date&#x60; is greater than &#x60;date_created&#x60; * &#x60;false&#x60; - only return orders where &#x60;send_date&#x60; is equal to &#x60;date_created&#x60;
    * @param {{ [key: string]: string; }} [sendDate] Filter by date sent.
    * @param {MailType} [mailType] A string designating the mail postage type: * &#x60;usps_first_class&#x60; - (default) * &#x60;usps_standard&#x60; - a [cheaper option](https://lob.com/pricing/print-mail#compare) which is less predictable and takes longer to deliver. &#x60;usps_standard&#x60; cannot be used with &#x60;4x6&#x60; postcards or for any postcards sent outside of the United States.
@@ -586,7 +586,7 @@ export class SelfMailersApi extends BaseAPI {
     include?: Array<string>,
     dateCreated?: { [key: string]: string },
     metadata?: { [key: string]: string },
-    size?: SelfMailerSize,
+    size?: Array<SelfMailerSize>,
     scheduled?: boolean,
     sendDate?: { [key: string]: string },
     mailType?: MailType,

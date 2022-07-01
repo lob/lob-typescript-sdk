@@ -233,7 +233,7 @@ export const PostcardsApiAxiosParamCreator = function (
      * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
      * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
      * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
-     * @param {PostcardSize} [size] Specifies the size of the postcard. Only &#x60;4x6&#x60; postcards can be sent to international destinations.
+     * @param {Array<PostcardSize>} [size] Specifies the size of the postcard. Only &#x60;4x6&#x60; postcards can be sent to international destinations.
      * @param {boolean} [scheduled] * &#x60;true&#x60; - only return orders (past or future) where &#x60;send_date&#x60; is greater than &#x60;date_created&#x60; * &#x60;false&#x60; - only return orders where &#x60;send_date&#x60; is equal to &#x60;date_created&#x60;
      * @param {{ [key: string]: string; }} [sendDate] Filter by date sent.
      * @param {MailType} [mailType] A string designating the mail postage type: * &#x60;usps_first_class&#x60; - (default) * &#x60;usps_standard&#x60; - a [cheaper option](https://lob.com/pricing/print-mail#compare) which is less predictable and takes longer to deliver. &#x60;usps_standard&#x60; cannot be used with &#x60;4x6&#x60; postcards or for any postcards sent outside of the United States.
@@ -248,7 +248,7 @@ export const PostcardsApiAxiosParamCreator = function (
       include?: Array<string>,
       dateCreated?: { [key: string]: string },
       metadata?: { [key: string]: string },
-      size?: PostcardSize,
+      size?: Array<PostcardSize>,
       scheduled?: boolean,
       sendDate?: { [key: string]: string },
       mailType?: MailType,
@@ -299,7 +299,7 @@ export const PostcardsApiAxiosParamCreator = function (
         localVarQueryParameter["metadata"] = valueToString(metadata);
       }
 
-      if (size !== undefined) {
+      if (size) {
         localVarQueryParameter["size"] = valueToString(size);
       }
 
@@ -429,7 +429,7 @@ export const PostcardsApiFp = function (configuration?: Configuration) {
      * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
      * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
      * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
-     * @param {PostcardSize} [size] Specifies the size of the postcard. Only &#x60;4x6&#x60; postcards can be sent to international destinations.
+     * @param {Array<PostcardSize>} [size] Specifies the size of the postcard. Only &#x60;4x6&#x60; postcards can be sent to international destinations.
      * @param {boolean} [scheduled] * &#x60;true&#x60; - only return orders (past or future) where &#x60;send_date&#x60; is greater than &#x60;date_created&#x60; * &#x60;false&#x60; - only return orders where &#x60;send_date&#x60; is equal to &#x60;date_created&#x60;
      * @param {{ [key: string]: string; }} [sendDate] Filter by date sent.
      * @param {MailType} [mailType] A string designating the mail postage type: * &#x60;usps_first_class&#x60; - (default) * &#x60;usps_standard&#x60; - a [cheaper option](https://lob.com/pricing/print-mail#compare) which is less predictable and takes longer to deliver. &#x60;usps_standard&#x60; cannot be used with &#x60;4x6&#x60; postcards or for any postcards sent outside of the United States.
@@ -444,7 +444,7 @@ export const PostcardsApiFp = function (configuration?: Configuration) {
       include?: Array<string>,
       dateCreated?: { [key: string]: string },
       metadata?: { [key: string]: string },
-      size?: PostcardSize,
+      size?: Array<PostcardSize>,
       scheduled?: boolean,
       sendDate?: { [key: string]: string },
       mailType?: MailType,
@@ -567,7 +567,7 @@ export class PostcardsApi extends BaseAPI {
    * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
    * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
    * @param {{ [key: string]: string; }} [metadata] Filter by metadata key-value pair&#x60;.
-   * @param {PostcardSize} [size] Specifies the size of the postcard. Only &#x60;4x6&#x60; postcards can be sent to international destinations.
+   * @param {Array<PostcardSize>} [size] Specifies the size of the postcard. Only &#x60;4x6&#x60; postcards can be sent to international destinations.
    * @param {boolean} [scheduled] * &#x60;true&#x60; - only return orders (past or future) where &#x60;send_date&#x60; is greater than &#x60;date_created&#x60; * &#x60;false&#x60; - only return orders where &#x60;send_date&#x60; is equal to &#x60;date_created&#x60;
    * @param {{ [key: string]: string; }} [sendDate] Filter by date sent.
    * @param {MailType} [mailType] A string designating the mail postage type: * &#x60;usps_first_class&#x60; - (default) * &#x60;usps_standard&#x60; - a [cheaper option](https://lob.com/pricing/print-mail#compare) which is less predictable and takes longer to deliver. &#x60;usps_standard&#x60; cannot be used with &#x60;4x6&#x60; postcards or for any postcards sent outside of the United States.
@@ -583,7 +583,7 @@ export class PostcardsApi extends BaseAPI {
     include?: Array<string>,
     dateCreated?: { [key: string]: string },
     metadata?: { [key: string]: string },
-    size?: PostcardSize,
+    size?: Array<PostcardSize>,
     scheduled?: boolean,
     sendDate?: { [key: string]: string },
     mailType?: MailType,

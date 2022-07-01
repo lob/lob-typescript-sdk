@@ -474,7 +474,7 @@ describe("SelfMailersApi", () => {
         undefined,
         undefined,
         undefined,
-        SelfMailerSize._6x18Bifold
+        [SelfMailerSize._6x18Bifold]
       );
       expect(selfMailersApi).toBeDefined();
       expect(selfMailersApi?.data?.length).toEqual(1);
