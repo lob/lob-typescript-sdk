@@ -154,9 +154,9 @@ export class SelfMailer {
    * @type {string}
    * @memberof SelfMailer
    */
-  private "_outside_template_id": string | null;
+  private "_outside_template_id"?: string | null;
   public get outside_template_id() {
-    return this._outside_template_id || null;
+    return (this._outside_template_id || null || undefined) as string;
   }
   public set outside_template_id(newValue: string | null) {
     if (newValue && !/^tmpl_[a-zA-Z0-9]+$/.test(newValue)) {
@@ -170,9 +170,9 @@ export class SelfMailer {
    * @type {string}
    * @memberof SelfMailer
    */
-  private "_inside_template_id": string | null;
+  private "_inside_template_id"?: string | null;
   public get inside_template_id() {
-    return this._inside_template_id || null;
+    return (this._inside_template_id || null || undefined) as string;
   }
   public set inside_template_id(newValue: string | null) {
     if (newValue && !/^tmpl_[a-zA-Z0-9]+$/.test(newValue)) {
@@ -186,9 +186,9 @@ export class SelfMailer {
    * @type {string}
    * @memberof SelfMailer
    */
-  private "_outside_template_version_id": string | null;
+  private "_outside_template_version_id"?: string | null;
   public get outside_template_version_id() {
-    return this._outside_template_version_id || null;
+    return (this._outside_template_version_id || null || undefined) as string;
   }
   public set outside_template_version_id(newValue: string | null) {
     if (newValue && !/^vrsn_[a-zA-Z0-9]+$/.test(newValue)) {
@@ -202,9 +202,9 @@ export class SelfMailer {
    * @type {string}
    * @memberof SelfMailer
    */
-  private "_inside_template_version_id": string | null;
+  private "_inside_template_version_id"?: string | null;
   public get inside_template_version_id() {
-    return this._inside_template_version_id || null;
+    return (this._inside_template_version_id || null || undefined) as string;
   }
   public set inside_template_version_id(newValue: string | null) {
     if (newValue && !/^vrsn_[a-zA-Z0-9]+$/.test(newValue)) {
