@@ -113,11 +113,11 @@ export class Card {
   "auto_reorder": boolean;
 
   /**
-   * The number of cards to be reordered.
+   * The number of cards to be reordered. Only present when auto_reorder is True.
    * @type {number}
    * @memberof Card
    */
-  "reorder_quantity": number | null;
+  "reorder_quantity"?: number | null;
 
   /**
    * The raw URL of the card.
@@ -180,7 +180,7 @@ export class Card {
    * @type {number}
    * @memberof Card
    */
-  "threshold_amount": number;
+  "threshold_amount"?: number;
 
   /**
    * A timestamp in ISO 8601 format of the date the resource was created.
