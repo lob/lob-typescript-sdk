@@ -113,11 +113,11 @@ export class Card {
   "auto_reorder": boolean;
 
   /**
-   * The number of cards to be reordered.
+   * The number of cards to be reordered. Only present when auto_reorder is True.
    * @type {number}
    * @memberof Card
    */
-  "reorder_quantity": number | null;
+  "reorder_quantity"?: number | null;
 
   /**
    * The raw URL of the card.

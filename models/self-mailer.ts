@@ -97,7 +97,7 @@ export class SelfMailer {
    * @memberof SelfMailer
    */
 
-  "to"?: string | Models.AddressEditable;
+  "to"?: string | Models.Address;
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
@@ -105,7 +105,7 @@ export class SelfMailer {
    * @memberof SelfMailer
    */
 
-  "from"?: string | Models.AddressEditable;
+  "from"?: string | Models.Address;
 
   /**
    *
