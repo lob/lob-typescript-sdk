@@ -180,7 +180,7 @@ export class Card {
    * @type {number}
    * @memberof Card
    */
-  "threshold_amount": number;
+  "threshold_amount"?: number;
 
   /**
    * A timestamp in ISO 8601 format of the date the resource was created.
