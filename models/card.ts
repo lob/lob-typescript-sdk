@@ -124,21 +124,21 @@ export class Card {
    * @type {string}
    * @memberof Card
    */
-  "raw_url": string;
+  "raw_url"?: string;
 
   /**
    * The original URL of the front template.
    * @type {string}
    * @memberof Card
    */
-  "front_original_url": string;
+  "front_original_url"?: string;
 
   /**
    * The original URL of the back template.
    * @type {string}
    * @memberof Card
    */
-  "back_original_url": string;
+  "back_original_url"?: string;
 
   /**
    *
@@ -166,14 +166,14 @@ export class Card {
    * @type {string}
    * @memberof Card
    */
-  "status": CardStatusEnum;
+  "status"?: CardStatusEnum;
 
   /**
    * The orientation of the card.
    * @type {string}
    * @memberof Card
    */
-  "orientation": CardOrientationEnum;
+  "orientation"?: CardOrientationEnum;
 
   /**
    * The threshold amount of the card
@@ -222,7 +222,7 @@ export class Card {
    * @type {string}
    * @memberof Card
    */
-  "size"?: CardSizeEnum;
+  "size": CardSizeEnum;
 
   public toJSON() {
     let out = {};
