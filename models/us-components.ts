@@ -376,6 +376,7 @@ export enum UsComponentsCarrierRouteTypeEnum {
   HighwayContract = "highway_contract",
   PoBox = "po_box",
   GeneralDelivery = "general_delivery",
+  Empty = "",
 }
 
 /**

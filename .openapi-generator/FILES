@@ -86,7 +86,6 @@ models/postcard-editable.ts
 models/postcard-list.ts
 models/postcard-size.ts
 models/postcard.ts
-models/return-envelope.ts
 models/reverse-geocode.ts
 models/self-mailer-deletion.ts
 models/self-mailer-editable.ts
