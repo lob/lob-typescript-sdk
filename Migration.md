@@ -46,7 +46,7 @@ _Note:_ To use the new TypeScript SDK in a JavaScript app the code looks like th
 const { Configuration } = require("@lob/lob-typescript-sdk");
 
 const config = new Configuration({
-  username: process.env.LOB_API_KEY,
+  username: process.env.LOB_API_TEST_KEY,
 });
 ```
 

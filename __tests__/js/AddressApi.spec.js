@@ -2,7 +2,7 @@ const { AddressesApi } = require("../../api");
 
 describe("AddressApi Javascript Consumer", () => {
   const config = {
-    username: process.env.LOB_API_KEY,
+    username: process.env.LOB_API_TEST_KEY,
   };
 
   let addressApi;
