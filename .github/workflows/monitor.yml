@@ -18,7 +18,7 @@ jobs:
       - name: run contract tests
         uses: ./actions/monitoring/
         env:
-          LOB_API_KEY: ${{ secrets.LOB_API_KEY }}
+          LOB_API_TEST_KEY: ${{ secrets.LOB_API_TEST_KEY }}
           LOB_API_LIVE_KEY: ${{ secrets.LOB_API_LIVE_KEY }}
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
         with:
