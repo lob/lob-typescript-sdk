@@ -17,7 +17,6 @@ import * as Models from "./index";
 import { Address } from "./address";
 import { LetterCustomEnvelope } from "./letter-custom-envelope";
 import { MailType } from "./mail-type";
-import { ReturnEnvelope } from "./return-envelope";
 import { Thumbnail } from "./thumbnail";
 import { TrackingEventNormal } from "./tracking-event-normal";
 
@@ -251,7 +250,7 @@ export class Letter {
   "send_date"?: string;
 
   /**
-   * Add an extra service to your letter. See [pricing](https://www.lob.com/pricing/print-mail#compare) for extra costs incurred.   * registered - provides tracking and confirmation for international addresses   * `certified` - track and confirm delivery for domestic destinations. An extra sheet (1 PDF page single-sided or 2 PDF pages double-sided) is added to the beginning of your letter for address and barcode information. See here for templates: [#10 envelope](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_certified_template.pdf) and [flat envelope](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_certified_flat_template.pdf) (used for letters over 6 pages single-sided or 12 pages double-sided). You will not be charged for this extra sheet.   * `certified_return_receipt` - request an electronic copy of the recipient\'s signature to prove delivery of your certified letter
+   * Add an extra service to your letter. See [pricing](https://www.lob.com/pricing/print-mail#compare) for extra costs incurred.
    * @type {string}
    * @memberof Letter
    */
@@ -301,7 +300,7 @@ export class Letter {
   "double_sided"?: boolean;
 
   /**
-   * Specifies the location of the address information that will show through the double-window envelope. To see how this will impact your letter design, view our letter template.   * `top_first_page` - (default) print address information at the top of your provided first page   * `insert_blank_page` - insert a blank address page at the beginning of your file (you will be charged for the extra page)   * `bottom_first_page_center` - **(deprecation planned within a few months)** print address information at the bottom center of your provided first page   * `bottom_first_page` - print address information at the bottom of your provided first page
+   * Specifies the location of the address information that will show through the double-window envelope.
    * @type {string}
    * @memberof Letter
    */
@@ -309,10 +308,11 @@ export class Letter {
 
   /**
    *
-   * @type {ReturnEnvelope}
+   * @type {any}
    * @memberof Letter
    */
-  "return_envelope"?: ReturnEnvelope;
+
+  "return_envelope": boolean | Models.ReturnEnvelope | null;
 
   /**
    * Required if `return_envelope` is `true`. The number of the page that should be perforated for use with the return envelope. Must be greater than or equal to `1`. The blank page added by `address_placement=insert_blank_page` will be ignored when considering the perforated page number. To see how perforation will impact your letter design, view our [perforation guide](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_perf_template.pdf).

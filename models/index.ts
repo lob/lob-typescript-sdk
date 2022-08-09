@@ -1,5 +1,6 @@
 export * from "./address";
 export * from "./address-deletion";
+export * from "./address-domestic";
 export * from "./address-domestic-expanded";
 export * from "./address-editable";
 export * from "./address-list";
@@ -58,6 +59,7 @@ export * from "./mail-type";
 export * from "./multiple-components";
 export * from "./multiple-components-intl";
 export * from "./multiple-components-list";
+export * from "./placeholder-model";
 export * from "./postcard";
 export * from "./postcard-deletion";
 export * from "./postcard-editable";
