@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Lob
- * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)? 
+ * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)?
  *
  * The version of the OpenAPI document: 1.3.0
  * Contact: lob-openapi@lob.com
@@ -12,156 +12,252 @@
  * Do not edit the class manually.
  */
 
-
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
-import FormData = require("form-data")
+import globalAxios, {
+  AxiosPromise,
+  AxiosInstance,
+  AxiosRequestConfig,
+} from "axios";
+import { Configuration } from "../configuration";
+import FormData = require("form-data");
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, valueToString } from '../common';
+import {
+  DUMMY_BASE_URL,
+  assertParamExists,
+  setApiKeyToObject,
+  setBasicAuthToObject,
+  setBearerAuthToObject,
+  setOAuthToObject,
+  setSearchParams,
+  serializeDataIfNeeded,
+  toPathString,
+  createRequestFunction,
+  valueToString,
+} from "../common";
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import {
+  BASE_PATH,
+  COLLECTION_FORMATS,
+  RequestArgs,
+  BaseAPI,
+  RequiredError,
+} from "../base";
 // @ts-ignore
-import { LobError } from '../models';
+import { LobError } from "../models";
 // @ts-ignore
-import { MultipleComponentsList } from '../models';
+import { MultipleComponentsList } from "../models";
 // @ts-ignore
-import { UsVerification } from '../models';
+import { UsVerification } from "../models";
 // @ts-ignore
-import { UsVerifications } from '../models';
+import { UsVerifications } from "../models";
 // @ts-ignore
-import { UsVerificationsWritable } from '../models';
+import { UsVerificationsWritable } from "../models";
 /**
  * UsVerificationsApi - axios parameter creator
  * @export
  */
-export const UsVerificationsApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * Verify a list of US or US territory addresses with a live API key.
-         * @summary verifyBulk
-         * @param {MultipleComponentsList} multipleComponentsList 
-         * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bulkUsVerifications: async (multipleComponentsList: MultipleComponentsList, _case?: 'upper' | 'proper', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'multipleComponentsList' is not null or undefined
-            assertParamExists('bulkUsVerifications', 'multipleComponentsList', multipleComponentsList)
-            const localVarPath = `/bulk/us_verifications`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
+export const UsVerificationsApiAxiosParamCreator = function (
+  configuration?: Configuration
+) {
+  return {
+    /**
+     * Verify a list of US or US territory addresses with a live API key.
+     * @summary verifyBulk
+     * @param {MultipleComponentsList} multipleComponentsList
+     * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bulkUsVerifications: async (
+      multipleComponentsList: MultipleComponentsList,
+      _case?: "upper" | "proper",
+      options: AxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'multipleComponentsList' is not null or undefined
+      assertParamExists(
+        "bulkUsVerifications",
+        "multipleComponentsList",
+        multipleComponentsList
+      );
+      const localVarPath = `/bulk/us_verifications`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
+      const localVarRequestOptions = {
+        method: "POST",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
+      // authentication basicAuth required
+      // http basic authentication required
+      setBasicAuthToObject(localVarRequestOptions, configuration);
 
-            if (_case !== undefined) {
-                localVarQueryParameter['case'] = _case;
-            }
+      if (_case !== undefined) {
+        localVarQueryParameter["case"] = _case;
+      }
 
+      localVarHeaderParameter["Content-Type"] = "application/json";
 
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        multipleComponentsList,
+        localVarRequestOptions,
+        configuration
+      );
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(multipleComponentsList, localVarRequestOptions, configuration)
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Verify a US or US territory address with a live API key.
+     * @summary verifySingle
+     * @param {UsVerificationsWritable} usVerificationsWritable
+     * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    usVerification: async (
+      usVerificationsWritable: UsVerificationsWritable,
+      _case?: "upper" | "proper",
+      options: AxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'usVerificationsWritable' is not null or undefined
+      assertParamExists(
+        "usVerification",
+        "usVerificationsWritable",
+        usVerificationsWritable
+      );
+      const localVarPath = `/us_verifications`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
 
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Verify a US or US territory address with a live API key.
-         * @summary verifySingle
-         * @param {UsVerificationsWritable} usVerificationsWritable 
-         * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usVerification: async (usVerificationsWritable: UsVerificationsWritable, _case?: 'upper' | 'proper', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'usVerificationsWritable' is not null or undefined
-            assertParamExists('usVerification', 'usVerificationsWritable', usVerificationsWritable)
-            const localVarPath = `/us_verifications`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
+      const localVarRequestOptions = {
+        method: "POST",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
+      // authentication basicAuth required
+      // http basic authentication required
+      setBasicAuthToObject(localVarRequestOptions, configuration);
 
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
+      if (_case !== undefined) {
+        localVarQueryParameter["case"] = _case;
+      }
 
-            if (_case !== undefined) {
-                localVarQueryParameter['case'] = _case;
-            }
+      localVarHeaderParameter["Content-Type"] = "application/json";
 
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        usVerificationsWritable,
+        localVarRequestOptions,
+        configuration
+      );
 
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(usVerificationsWritable, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
 };
 
 /**
  * UsVerificationsApi - functional programming interface
  * @export
  */
-export const UsVerificationsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = UsVerificationsApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * Verify a list of US or US territory addresses with a live API key.
-         * @summary verifyBulk
-         * @param {MultipleComponentsList} multipleComponentsList 
-         * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bulkUsVerifications(multipleComponentsList: MultipleComponentsList, _case?: 'upper' | 'proper', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsVerifications>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bulkUsVerifications(multipleComponentsList, _case, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Verify a US or US territory address with a live API key.
-         * @summary verifySingle
-         * @param {UsVerificationsWritable} usVerificationsWritable 
-         * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async usVerification(usVerificationsWritable: UsVerificationsWritable, _case?: 'upper' | 'proper', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsVerification>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usVerification(usVerificationsWritable, _case, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
+export const UsVerificationsApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator =
+    UsVerificationsApiAxiosParamCreator(configuration);
+  return {
+    /**
+     * Verify a list of US or US territory addresses with a live API key.
+     * @summary verifyBulk
+     * @param {MultipleComponentsList} multipleComponentsList
+     * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async bulkUsVerifications(
+      multipleComponentsList: MultipleComponentsList,
+      _case?: "upper" | "proper",
+      options?: AxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<UsVerifications>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.bulkUsVerifications(
+          multipleComponentsList,
+          _case,
+          options
+        );
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+    /**
+     * Verify a US or US territory address with a live API key.
+     * @summary verifySingle
+     * @param {UsVerificationsWritable} usVerificationsWritable
+     * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async usVerification(
+      usVerificationsWritable: UsVerificationsWritable,
+      _case?: "upper" | "proper",
+      options?: AxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsVerification>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.usVerification(
+        usVerificationsWritable,
+        _case,
+        options
+      );
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+  };
 };
 
 /**
@@ -171,47 +267,61 @@ export const UsVerificationsApiFp = function(configuration?: Configuration) {
  * @extends {BaseAPI}
  */
 export class UsVerificationsApi extends BaseAPI {
-    /**
-     * Verify a list of US or US territory addresses with a live API key.
-     * @summary verifyBulk
-     * @param {MultipleComponentsList} multipleComponentsList 
-     * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsVerificationsApi
-     */
-    public verifyBulk(multipleComponentsList: MultipleComponentsList, _case?: 'upper' | 'proper', options?: AxiosRequestConfig) {
-        return UsVerificationsApiFp(this.configuration).bulkUsVerifications(multipleComponentsList, _case, options).then((request) => request(this.axios, this.basePath))
-            .then(function (response) {
-                return new UsVerifications(response.data);
-            }).catch(error => {
-                if (error.response?.data?.error?.message) {
-                    error.message = error.response.data.error.message;
-                }
-                throw error;
-              });
-    }
+  /**
+   * Verify a list of US or US territory addresses with a live API key.
+   * @summary verifyBulk
+   * @param {MultipleComponentsList} multipleComponentsList
+   * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof UsVerificationsApi
+   */
+  public verifyBulk(
+    multipleComponentsList: MultipleComponentsList,
+    _case?: "upper" | "proper",
+    options?: AxiosRequestConfig
+  ) {
+    return UsVerificationsApiFp(this.configuration)
+      .bulkUsVerifications(multipleComponentsList, _case, options)
+      .then((request) => request(this.axios, this.basePath))
+      .then(function (response) {
+        return new UsVerifications(response.data);
+      })
+      .catch((error) => {
+        if (error.response?.data?.error?.message) {
+          error.message = error.response.data.error.message;
+        }
+        throw error;
+      });
+  }
 
-    /**
-     * Verify a US or US territory address with a live API key.
-     * @summary verifySingle
-     * @param {UsVerificationsWritable} usVerificationsWritable 
-     * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsVerificationsApi
-     */
-    public verifySingle(usVerificationsWritable: UsVerificationsWritable, _case?: 'upper' | 'proper', options?: AxiosRequestConfig) {
-        return UsVerificationsApiFp(this.configuration).usVerification(usVerificationsWritable, _case, options).then((request) => request(this.axios, this.basePath))
-            .then(function (response) {
-                return new UsVerification(response.data);
-            }).catch(error => {
-                if (error.response?.data?.error?.message) {
-                    error.message = error.response.data.error.message;
-                }
-                throw error;
-              });
-    }
+  /**
+   * Verify a US or US territory address with a live API key.
+   * @summary verifySingle
+   * @param {UsVerificationsWritable} usVerificationsWritable
+   * @param {'upper' | 'proper'} [_case] Casing of the verified address. Possible values are &#x60;upper&#x60; and &#x60;proper&#x60; for uppercased (e.g. \&quot;PO BOX\&quot;) and proper-cased (e.g. \&quot;PO Box\&quot;), respectively.
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof UsVerificationsApi
+   */
+  public verifySingle(
+    usVerificationsWritable: UsVerificationsWritable,
+    _case?: "upper" | "proper",
+    options?: AxiosRequestConfig
+  ) {
+    return UsVerificationsApiFp(this.configuration)
+      .usVerification(usVerificationsWritable, _case, options)
+      .then((request) => request(this.axios, this.basePath))
+      .then(function (response) {
+        return new UsVerification(response.data);
+      })
+      .catch((error) => {
+        if (error.response?.data?.error?.message) {
+          error.message = error.response.data.error.message;
+        }
+        throw error;
+      });
+  }
 }
 
 /**
@@ -219,4 +329,3 @@ export class UsVerificationsApi extends BaseAPI {
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-

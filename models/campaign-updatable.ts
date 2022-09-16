@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Lob
- * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)? 
+ * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)?
  *
  * The version of the OpenAPI document: 1.3.0
  * Contact: lob-openapi@lob.com
@@ -12,164 +12,134 @@
  * Do not edit the class manually.
  */
 
+import * as Models from "./index";
 
-import * as Models from './index';
-
-import { CmpScheduleType } from './cmp-schedule-type';
-import { CmpUseType } from './cmp-use-type';
+import { CmpScheduleType } from "./cmp-schedule-type";
+import { CmpUseType } from "./cmp-use-type";
 
 /**
- * 
+ *
  * @export
  * @class CampaignUpdatable
  */
 export class CampaignUpdatable {
-    constructor(input?: any) {
-        if (typeof input?.name !== "undefined") {
-            this.name = input.name;
-        }
-        if (typeof input?.description !== "undefined") {
-            this.description = input.description;
-        }
-        if (typeof input?.schedule_type !== "undefined") {
-            this.schedule_type = input.schedule_type;
-        }
-        if (typeof input?.target_delivery_date !== "undefined") {
-            this.target_delivery_date = input.target_delivery_date;
-        }
-        if (typeof input?.send_date !== "undefined") {
-            this.send_date = input.send_date;
-        }
-        if (typeof input?.cancel_window_campaign_minutes !== "undefined") {
-            this.cancel_window_campaign_minutes = input.cancel_window_campaign_minutes;
-        }
-        if (typeof input?.metadata !== "undefined") {
-            this.metadata = input.metadata;
-        }
-        if (typeof input?.is_draft !== "undefined") {
-            this.is_draft = input.is_draft;
-        }
-        if (typeof input?.use_type !== "undefined") {
-            this.use_type = input.use_type;
-        }
-        if (typeof input?.auto_cancel_if_ncoa !== "undefined") {
-            this.auto_cancel_if_ncoa = input.auto_cancel_if_ncoa;
-        }
+  constructor(input?: any) {
+    if (typeof input?.name !== "undefined") {
+      this.name = input.name;
     }
-
-    /**
-     * 
-     * @type {string}
-     * @memberof CampaignUpdatable
-     */
-    'name'?: string;
-
-
-
-    
-    /**
-     * An internal description that identifies this resource. Must be no longer than 255 characters. 
-     * @type {string}
-     * @memberof CampaignUpdatable
-     */
-    'description'?: string | null;
-
-
-
-    
-    /**
-     * 
-     * @type {CmpScheduleType}
-     * @memberof CampaignUpdatable
-     */
-    'schedule_type'?: CmpScheduleType;
-
-
-
-    
-    /**
-     * If `schedule_type` is `target_delivery_date`, provide a targeted delivery date for mail pieces in this campaign.
-     * @type {string}
-     * @memberof CampaignUpdatable
-     */
-    'target_delivery_date'?: string;
-
-
-
-    
-    /**
-     * If `schedule_type` is `scheduled_send_date`, provide a date to send this campaign.
-     * @type {string}
-     * @memberof CampaignUpdatable
-     */
-    'send_date'?: string;
-
-
-
-    
-    /**
-     * A window, in minutes, within which the campaign can be canceled.
-     * @type {number}
-     * @memberof CampaignUpdatable
-     */
-    'cancel_window_campaign_minutes'?: number;
-
-
-
-    
-    /**
-     * Use metadata to store custom information for tagging and labeling back to your internal systems. Must be an object with up to 20 key-value pairs. Keys must be at most 40 characters and values must be at most 500 characters. Neither can contain the characters `\"` and `\\`. i.e. \'{\"customer_id\" : \"NEWYORK2015\"}\' Nested objects are not supported.  See [Metadata](#section/Metadata) for more information.
-     * @type {{ [key: string]: string; }}
-     * @memberof CampaignUpdatable
-     */
-    'metadata'?: { [key: string]: string; };
-
-
-
-    
-    /**
-     * Whether or not the campaign is still a draft.
-     * @type {boolean}
-     * @memberof CampaignUpdatable
-     */
-    'is_draft'?: boolean;
-
-
-
-    
-    /**
-     * 
-     * @type {CmpUseType}
-     * @memberof CampaignUpdatable
-     */
-    'use_type'?: CmpUseType | null;
-
-
-
-    
-    /**
-     * Whether or not a mail piece should be automatically canceled and not sent if the address is updated via NCOA.
-     * @type {boolean}
-     * @memberof CampaignUpdatable
-     */
-    'auto_cancel_if_ncoa'?: boolean;
-
-
-
-    
-    public toJSON() {
-        let out = {};
-        for (const [key, value] of Object.entries(this)) {
-            out = Object.assign({}, out, { [key[0] === '_' ? key.substr(1, key.length) : key]: value});
-        }
-        return out;
+    if (typeof input?.description !== "undefined") {
+      this.description = input.description;
     }
+    if (typeof input?.schedule_type !== "undefined") {
+      this.schedule_type = input.schedule_type;
+    }
+    if (typeof input?.target_delivery_date !== "undefined") {
+      this.target_delivery_date = input.target_delivery_date;
+    }
+    if (typeof input?.send_date !== "undefined") {
+      this.send_date = input.send_date;
+    }
+    if (typeof input?.cancel_window_campaign_minutes !== "undefined") {
+      this.cancel_window_campaign_minutes =
+        input.cancel_window_campaign_minutes;
+    }
+    if (typeof input?.metadata !== "undefined") {
+      this.metadata = input.metadata;
+    }
+    if (typeof input?.is_draft !== "undefined") {
+      this.is_draft = input.is_draft;
+    }
+    if (typeof input?.use_type !== "undefined") {
+      this.use_type = input.use_type;
+    }
+    if (typeof input?.auto_cancel_if_ncoa !== "undefined") {
+      this.auto_cancel_if_ncoa = input.auto_cancel_if_ncoa;
+    }
+  }
+
+  /**
+   *
+   * @type {string}
+   * @memberof CampaignUpdatable
+   */
+  "name"?: string;
+
+  /**
+   * An internal description that identifies this resource. Must be no longer than 255 characters.
+   * @type {string}
+   * @memberof CampaignUpdatable
+   */
+  "description"?: string | null;
+
+  /**
+   *
+   * @type {CmpScheduleType}
+   * @memberof CampaignUpdatable
+   */
+  "schedule_type"?: CmpScheduleType;
+
+  /**
+   * If `schedule_type` is `target_delivery_date`, provide a targeted delivery date for mail pieces in this campaign.
+   * @type {string}
+   * @memberof CampaignUpdatable
+   */
+  "target_delivery_date"?: string;
+
+  /**
+   * If `schedule_type` is `scheduled_send_date`, provide a date to send this campaign.
+   * @type {string}
+   * @memberof CampaignUpdatable
+   */
+  "send_date"?: string;
+
+  /**
+   * A window, in minutes, within which the campaign can be canceled.
+   * @type {number}
+   * @memberof CampaignUpdatable
+   */
+  "cancel_window_campaign_minutes"?: number;
+
+  /**
+   * Use metadata to store custom information for tagging and labeling back to your internal systems. Must be an object with up to 20 key-value pairs. Keys must be at most 40 characters and values must be at most 500 characters. Neither can contain the characters `\"` and `\\`. i.e. \'{\"customer_id\" : \"NEWYORK2015\"}\' Nested objects are not supported.  See [Metadata](#section/Metadata) for more information.
+   * @type {{ [key: string]: string; }}
+   * @memberof CampaignUpdatable
+   */
+  "metadata"?: { [key: string]: string };
+
+  /**
+   * Whether or not the campaign is still a draft.
+   * @type {boolean}
+   * @memberof CampaignUpdatable
+   */
+  "is_draft"?: boolean;
+
+  /**
+   *
+   * @type {CmpUseType}
+   * @memberof CampaignUpdatable
+   */
+  "use_type"?: CmpUseType | null;
+
+  /**
+   * Whether or not a mail piece should be automatically canceled and not sent if the address is updated via NCOA.
+   * @type {boolean}
+   * @memberof CampaignUpdatable
+   */
+  "auto_cancel_if_ncoa"?: boolean;
+
+  public toJSON() {
+    let out = {};
+    for (const [key, value] of Object.entries(this)) {
+      out = Object.assign({}, out, {
+        [key[0] === "_" ? key.substr(1, key.length) : key]: value,
+      });
+    }
+    return out;
+  }
 }
-
 
 /**
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-

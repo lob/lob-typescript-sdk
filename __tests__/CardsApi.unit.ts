@@ -462,12 +462,10 @@ describe("CardsApi", () => {
       }));
 
       const cardsApi = await new CardsApi(CONFIG_FOR_UNIT).list(
-        1,
-        "fake",
-        "id",
-        {
-          id: "asc",
-        }
+        1, // limit
+        "fake", // before
+        "id", // after
+        ["total_count"] // include
       );
       expect(cardsApi).toBeDefined();
       expect(cardsApi.data?.length).toEqual(1);
