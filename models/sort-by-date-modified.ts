@@ -17,31 +17,31 @@ import * as Models from "./index";
 /**
  *
  * @export
- * @class SortBy4
+ * @class SortByDateModified
  */
-export class SortBy4 {
+export class SortByDateModified {
   constructor(input?: any) {
     if (typeof input?.date_created !== "undefined") {
       this.date_created = input.date_created;
     }
-    if (typeof input?.send_date !== "undefined") {
-      this.send_date = input.send_date;
+    if (typeof input?.date_modified !== "undefined") {
+      this.date_modified = input.date_modified;
     }
   }
 
   /**
    *
    * @type {string}
-   * @memberof SortBy4
+   * @memberof SortByDateModified
    */
-  "date_created"?: SortBy4DateCreatedEnum;
+  "date_created"?: SortByDateModifiedDateCreatedEnum;
 
   /**
    *
    * @type {string}
-   * @memberof SortBy4
+   * @memberof SortByDateModified
    */
-  "send_date"?: SortBy4SendDateEnum;
+  "date_modified"?: SortByDateModifiedDateModifiedEnum;
 
   public toJSON() {
     let out = {};
@@ -58,7 +58,7 @@ export class SortBy4 {
  * @export
  * @enum {string}
  */
-export enum SortBy4DateCreatedEnum {
+export enum SortByDateModifiedDateCreatedEnum {
   Asc = "asc",
   Desc = "desc",
 }
@@ -66,7 +66,7 @@ export enum SortBy4DateCreatedEnum {
  * @export
  * @enum {string}
  */
-export enum SortBy4SendDateEnum {
+export enum SortByDateModifiedDateModifiedEnum {
   Asc = "asc",
   Desc = "desc",
 }
