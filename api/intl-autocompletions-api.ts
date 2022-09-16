@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Lob
- * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)?
+ * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)? 
  *
  * The version of the OpenAPI document: 1.3.0
  * Contact: lob-openapi@lob.com
@@ -12,159 +12,95 @@
  * Do not edit the class manually.
  */
 
-import globalAxios, {
-  AxiosPromise,
-  AxiosInstance,
-  AxiosRequestConfig,
-} from "axios";
-import { Configuration } from "../configuration";
-import FormData = require("form-data");
+
+import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import { Configuration } from '../configuration';
+import FormData = require("form-data")
 // Some imports not used depending on template conditions
 // @ts-ignore
-import {
-  DUMMY_BASE_URL,
-  assertParamExists,
-  setApiKeyToObject,
-  setBasicAuthToObject,
-  setBearerAuthToObject,
-  setOAuthToObject,
-  setSearchParams,
-  serializeDataIfNeeded,
-  toPathString,
-  createRequestFunction,
-  valueToString,
-} from "../common";
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, valueToString } from '../common';
 // @ts-ignore
-import {
-  BASE_PATH,
-  COLLECTION_FORMATS,
-  RequestArgs,
-  BaseAPI,
-  RequiredError,
-} from "../base";
+import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { IntlAutocompletions } from "../models";
+import { IntlAutocompletions } from '../models';
 // @ts-ignore
-import { IntlAutocompletionsWritable } from "../models";
+import { IntlAutocompletionsWritable } from '../models';
 // @ts-ignore
-import { LobError } from "../models";
+import { LobError } from '../models';
 /**
  * IntlAutocompletionsApi - axios parameter creator
  * @export
  */
-export const IntlAutocompletionsApiAxiosParamCreator = function (
-  configuration?: Configuration
-) {
-  return {
-    /**
-     * Given an address prefix consisting of a partial primary line and country, as well as optional input of city, state, and zip code, this functionality returns up to 10 full International address suggestions. Not all of them will turn out to be valid addresses; they\'ll need to be [verified](#operation/intl_verification).
-     * @summary autocomplete
-     * @param {IntlAutocompletionsWritable} intlAutocompletionsWritable
-     * @param {'native' | 'match'} [xLangOutput] * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    intlAutocompletion: async (
-      intlAutocompletionsWritable: IntlAutocompletionsWritable,
-      xLangOutput?: "native" | "match",
-      options: AxiosRequestConfig = {}
-    ): Promise<RequestArgs> => {
-      // verify required parameter 'intlAutocompletionsWritable' is not null or undefined
-      assertParamExists(
-        "intlAutocompletion",
-        "intlAutocompletionsWritable",
-        intlAutocompletionsWritable
-      );
-      const localVarPath = `/intl_autocompletions`;
-      // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-      let baseOptions;
-      if (configuration) {
-        baseOptions = configuration.baseOptions;
-      }
+export const IntlAutocompletionsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Given an address prefix consisting of a partial primary line and country, as well as optional input of city, state, and zip code, this functionality returns up to 10 full International address suggestions. Not all of them will turn out to be valid addresses; they\'ll need to be [verified](#operation/intl_verification).
+         * @summary autocomplete
+         * @param {IntlAutocompletionsWritable} intlAutocompletionsWritable 
+         * @param {'native' | 'match'} [xLangOutput] * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        intlAutocompletion: async (intlAutocompletionsWritable: IntlAutocompletionsWritable, xLangOutput?: 'native' | 'match', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'intlAutocompletionsWritable' is not null or undefined
+            assertParamExists('intlAutocompletion', 'intlAutocompletionsWritable', intlAutocompletionsWritable)
+            const localVarPath = `/intl_autocompletions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
 
-      const localVarRequestOptions = {
-        method: "POST",
-        ...baseOptions,
-        ...options,
-      };
-      const localVarHeaderParameter = {} as any;
-      const localVarQueryParameter = {} as any;
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
-      // authentication basicAuth required
-      // http basic authentication required
-      setBasicAuthToObject(localVarRequestOptions, configuration);
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
 
-      if (xLangOutput !== undefined && xLangOutput !== null) {
-        localVarHeaderParameter["x-lang-output"] = String(xLangOutput);
-      }
+            if (xLangOutput !== undefined && xLangOutput !== null) {
+                localVarHeaderParameter['x-lang-output'] = String(xLangOutput);
+            }
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
 
-      setSearchParams(localVarUrlObj, localVarQueryParameter);
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
-      localVarRequestOptions.data = serializeDataIfNeeded(
-        intlAutocompletionsWritable,
-        localVarRequestOptions,
-        configuration
-      );
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
 
-      return {
-        url: toPathString(localVarUrlObj),
-        options: localVarRequestOptions,
-      };
-    },
-  };
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(intlAutocompletionsWritable, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
 };
 
 /**
  * IntlAutocompletionsApi - functional programming interface
  * @export
  */
-export const IntlAutocompletionsApiFp = function (
-  configuration?: Configuration
-) {
-  const localVarAxiosParamCreator =
-    IntlAutocompletionsApiAxiosParamCreator(configuration);
-  return {
-    /**
-     * Given an address prefix consisting of a partial primary line and country, as well as optional input of city, state, and zip code, this functionality returns up to 10 full International address suggestions. Not all of them will turn out to be valid addresses; they\'ll need to be [verified](#operation/intl_verification).
-     * @summary autocomplete
-     * @param {IntlAutocompletionsWritable} intlAutocompletionsWritable
-     * @param {'native' | 'match'} [xLangOutput] * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    async intlAutocompletion(
-      intlAutocompletionsWritable: IntlAutocompletionsWritable,
-      xLangOutput?: "native" | "match",
-      options?: AxiosRequestConfig
-    ): Promise<
-      (
-        axios?: AxiosInstance,
-        basePath?: string
-      ) => AxiosPromise<IntlAutocompletions>
-    > {
-      const localVarAxiosArgs =
-        await localVarAxiosParamCreator.intlAutocompletion(
-          intlAutocompletionsWritable,
-          xLangOutput,
-          options
-        );
-      return createRequestFunction(
-        localVarAxiosArgs,
-        globalAxios,
-        BASE_PATH,
-        configuration
-      );
-    },
-  };
+export const IntlAutocompletionsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = IntlAutocompletionsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Given an address prefix consisting of a partial primary line and country, as well as optional input of city, state, and zip code, this functionality returns up to 10 full International address suggestions. Not all of them will turn out to be valid addresses; they\'ll need to be [verified](#operation/intl_verification).
+         * @summary autocomplete
+         * @param {IntlAutocompletionsWritable} intlAutocompletionsWritable 
+         * @param {'native' | 'match'} [xLangOutput] * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async intlAutocompletion(intlAutocompletionsWritable: IntlAutocompletionsWritable, xLangOutput?: 'native' | 'match', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IntlAutocompletions>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.intlAutocompletion(intlAutocompletionsWritable, xLangOutput, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
 };
 
 /**
@@ -174,33 +110,26 @@ export const IntlAutocompletionsApiFp = function (
  * @extends {BaseAPI}
  */
 export class IntlAutocompletionsApi extends BaseAPI {
-  /**
-   * Given an address prefix consisting of a partial primary line and country, as well as optional input of city, state, and zip code, this functionality returns up to 10 full International address suggestions. Not all of them will turn out to be valid addresses; they\'ll need to be [verified](#operation/intl_verification).
-   * @summary autocomplete
-   * @param {IntlAutocompletionsWritable} intlAutocompletionsWritable
-   * @param {'native' | 'match'} [xLangOutput] * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English.
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof IntlAutocompletionsApi
-   */
-  public autocomplete(
-    intlAutocompletionsWritable: IntlAutocompletionsWritable,
-    xLangOutput?: "native" | "match",
-    options?: AxiosRequestConfig
-  ) {
-    return IntlAutocompletionsApiFp(this.configuration)
-      .intlAutocompletion(intlAutocompletionsWritable, xLangOutput, options)
-      .then((request) => request(this.axios, this.basePath))
-      .then(function (response) {
-        return new IntlAutocompletions(response.data);
-      })
-      .catch((error) => {
-        if (error.response?.data?.error?.message) {
-          error.message = error.response.data.error.message;
-        }
-        throw error;
-      });
-  }
+    /**
+     * Given an address prefix consisting of a partial primary line and country, as well as optional input of city, state, and zip code, this functionality returns up to 10 full International address suggestions. Not all of them will turn out to be valid addresses; they\'ll need to be [verified](#operation/intl_verification).
+     * @summary autocomplete
+     * @param {IntlAutocompletionsWritable} intlAutocompletionsWritable 
+     * @param {'native' | 'match'} [xLangOutput] * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IntlAutocompletionsApi
+     */
+    public autocomplete(intlAutocompletionsWritable: IntlAutocompletionsWritable, xLangOutput?: 'native' | 'match', options?: AxiosRequestConfig) {
+        return IntlAutocompletionsApiFp(this.configuration).intlAutocompletion(intlAutocompletionsWritable, xLangOutput, options).then((request) => request(this.axios, this.basePath))
+            .then(function (response) {
+                return new IntlAutocompletions(response.data);
+            }).catch(error => {
+                if (error.response?.data?.error?.message) {
+                    error.message = error.response.data.error.message;
+                }
+                throw error;
+              });
+    }
 }
 
 /**
@@ -208,3 +137,4 @@ export class IntlAutocompletionsApi extends BaseAPI {
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+

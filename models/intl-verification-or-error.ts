@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Lob
- * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)?
+ * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)? 
  *
  * The version of the OpenAPI document: 1.3.0
  * Contact: lob-openapi@lob.com
@@ -12,209 +12,245 @@
  * Do not edit the class manually.
  */
 
-import * as Models from "./index";
 
-import { BulkError } from "./bulk-error";
-import { IntlComponents } from "./intl-components";
+import * as Models from './index';
+
+import { BulkError } from './bulk-error';
+import { IntlComponents } from './intl-components';
 
 /**
- * A model used to represent an entry in a result list where the entry can either be a intl_verification or an Error. The SDK will perform necessary casting into the correct corresponding type.
+ * A model used to represent an entry in a result list where the entry can either be a intl_verification or an Error. The SDK will perform necessary casting into the correct corresponding type. 
  * @export
  * @class IntlVerificationOrError
  */
 export class IntlVerificationOrError {
-  constructor(input?: any) {
-    if (typeof input?.id !== "undefined") {
-      this.id = input.id;
+    constructor(input?: any) {
+        if (typeof input?.id !== "undefined") {
+            this.id = input.id;
+        }
+        if (typeof input?.recipient !== "undefined") {
+            this.recipient = input.recipient;
+        }
+        if (typeof input?.primary_line !== "undefined") {
+            this.primary_line = input.primary_line;
+        }
+        if (typeof input?.secondary_line !== "undefined") {
+            this.secondary_line = input.secondary_line;
+        }
+        if (typeof input?.last_line !== "undefined") {
+            this.last_line = input.last_line;
+        }
+        if (typeof input?.country !== "undefined") {
+            this.country = input.country;
+        }
+        if (typeof input?.coverage !== "undefined") {
+            this.coverage = input.coverage;
+        }
+        if (typeof input?.deliverability !== "undefined") {
+            this.deliverability = input.deliverability;
+        }
+        if (typeof input?.status !== "undefined") {
+            this.status = input.status;
+        }
+        if (typeof input?.components !== "undefined") {
+            this.components = input.components;
+        }
+        if (typeof input?.object !== "undefined") {
+            this.object = input.object;
+        }
+        if (typeof input?.error !== "undefined") {
+            this.error = input.error;
+        }
     }
-    if (typeof input?.recipient !== "undefined") {
-      this.recipient = input.recipient;
-    }
-    if (typeof input?.primary_line !== "undefined") {
-      this.primary_line = input.primary_line;
-    }
-    if (typeof input?.secondary_line !== "undefined") {
-      this.secondary_line = input.secondary_line;
-    }
-    if (typeof input?.last_line !== "undefined") {
-      this.last_line = input.last_line;
-    }
-    if (typeof input?.country !== "undefined") {
-      this.country = input.country;
-    }
-    if (typeof input?.coverage !== "undefined") {
-      this.coverage = input.coverage;
-    }
-    if (typeof input?.deliverability !== "undefined") {
-      this.deliverability = input.deliverability;
-    }
-    if (typeof input?.status !== "undefined") {
-      this.status = input.status;
-    }
-    if (typeof input?.components !== "undefined") {
-      this.components = input.components;
-    }
-    if (typeof input?.object !== "undefined") {
-      this.object = input.object;
-    }
-    if (typeof input?.error !== "undefined") {
-      this.error = input.error;
-    }
-  }
 
-  /**
-   * Unique identifier prefixed with `intl_ver_`.
-   * @type {string}
-   * @memberof IntlVerificationOrError
-   */
-  private "_id"?: string;
-  public get id() {
-    return (this._id || undefined) as string;
-  }
-  public set id(newValue: string) {
-    if (newValue && !/^intl_ver_[a-zA-Z0-9]+$/.test(newValue)) {
-      throw new Error("Invalid id provided");
+    /**
+     * Unique identifier prefixed with `intl_ver_`.
+     * @type {string}
+     * @memberof IntlVerificationOrError
+     */
+    private '_id'?: string;
+    public get id() { return (this._id || undefined) as string; }
+    public set id(newValue: string) {
+        if(newValue && !/^intl_ver_[a-zA-Z0-9]+$/.test(newValue)) {
+            throw new Error("Invalid id provided");
+        }
+        this._id = newValue;
     }
-    this._id = newValue;
-  }
 
-  /**
-   * The intended recipient, typically a person\'s or firm\'s name.
-   * @type {string}
-   * @memberof IntlVerificationOrError
-   */
-  "recipient"?: string | null;
 
-  /**
-   *
-   * @type {string}
-   * @memberof IntlVerificationOrError
-   */
-  "primary_line"?: string;
 
-  /**
-   * The secondary delivery line of the address. This field is typically empty but may contain information if `primary_line` is too long.
-   * @type {string}
-   * @memberof IntlVerificationOrError
-   */
-  "secondary_line"?: string;
+    
+    /**
+     * The intended recipient, typically a person\'s or firm\'s name.
+     * @type {string}
+     * @memberof IntlVerificationOrError
+     */
+    'recipient'?: string | null;
 
-  /**
-   *
-   * @type {string}
-   * @memberof IntlVerificationOrError
-   */
-  "last_line"?: string;
 
-  /**
-   *
-   * @type {string}
-   * @memberof IntlVerificationOrError
-   */
-  "country"?: string;
 
-  /**
-   *
-   * @type {string}
-   * @memberof IntlVerificationOrError
-   */
-  "coverage"?: IntlVerificationOrErrorCoverageEnum;
+    
+    /**
+     * 
+     * @type {string}
+     * @memberof IntlVerificationOrError
+     */
+    'primary_line'?: string;
 
-  /**
-   *
-   * @type {string}
-   * @memberof IntlVerificationOrError
-   */
-  "deliverability"?: IntlVerificationOrErrorDeliverabilityEnum;
 
-  /**
-   *
-   * @type {string}
-   * @memberof IntlVerificationOrError
-   */
-  "status"?: IntlVerificationOrErrorStatusEnum;
 
-  /**
-   *
-   * @type {IntlComponents}
-   * @memberof IntlVerificationOrError
-   */
-  "components"?: IntlComponents;
+    
+    /**
+     * The secondary delivery line of the address. This field is typically empty but may contain information if `primary_line` is too long. 
+     * @type {string}
+     * @memberof IntlVerificationOrError
+     */
+    'secondary_line'?: string;
 
-  /**
-   *
-   * @type {string}
-   * @memberof IntlVerificationOrError
-   */
-  "object"?: IntlVerificationOrErrorObjectEnum;
 
-  /**
-   *
-   * @type {BulkError}
-   * @memberof IntlVerificationOrError
-   */
-  "error"?: BulkError;
 
-  public toJSON() {
-    let out = {};
-    for (const [key, value] of Object.entries(this)) {
-      out = Object.assign({}, out, {
-        [key[0] === "_" ? key.substr(1, key.length) : key]: value,
-      });
+    
+    /**
+     * 
+     * @type {string}
+     * @memberof IntlVerificationOrError
+     */
+    'last_line'?: string;
+
+
+
+    
+    /**
+     * 
+     * @type {string}
+     * @memberof IntlVerificationOrError
+     */
+    'country'?: string;
+
+
+
+    
+    /**
+     * 
+     * @type {string}
+     * @memberof IntlVerificationOrError
+     */
+    'coverage'?: IntlVerificationOrErrorCoverageEnum;
+
+
+
+    
+    /**
+     * 
+     * @type {string}
+     * @memberof IntlVerificationOrError
+     */
+    'deliverability'?: IntlVerificationOrErrorDeliverabilityEnum;
+
+
+
+    
+    /**
+     * 
+     * @type {string}
+     * @memberof IntlVerificationOrError
+     */
+    'status'?: IntlVerificationOrErrorStatusEnum;
+
+
+
+    
+    /**
+     * 
+     * @type {IntlComponents}
+     * @memberof IntlVerificationOrError
+     */
+    'components'?: IntlComponents;
+
+
+
+    
+    /**
+     * 
+     * @type {string}
+     * @memberof IntlVerificationOrError
+     */
+    'object'?: IntlVerificationOrErrorObjectEnum;
+
+
+
+    
+    /**
+     * 
+     * @type {BulkError}
+     * @memberof IntlVerificationOrError
+     */
+    'error'?: BulkError;
+
+
+
+    
+    public toJSON() {
+        let out = {};
+        for (const [key, value] of Object.entries(this)) {
+            out = Object.assign({}, out, { [key[0] === '_' ? key.substr(1, key.length) : key]: value});
+        }
+        return out;
     }
-    return out;
-  }
 }
 
 /**
- * @export
- * @enum {string}
- */
+    * @export
+    * @enum {string}
+    */
 export enum IntlVerificationOrErrorCoverageEnum {
-  Subbuilding = "SUBBUILDING",
-  HousenumberBuilding = "HOUSENUMBER/BUILDING",
-  Street = "STREET",
-  Locality = "LOCALITY",
-  Sparse = "SPARSE",
+    Subbuilding = 'SUBBUILDING',
+    HousenumberBuilding = 'HOUSENUMBER/BUILDING',
+    Street = 'STREET',
+    Locality = 'LOCALITY',
+    Sparse = 'SPARSE'
 }
 /**
- * @export
- * @enum {string}
- */
+    * @export
+    * @enum {string}
+    */
 export enum IntlVerificationOrErrorDeliverabilityEnum {
-  Deliverable = "deliverable",
-  DeliverableMissingInfo = "deliverable_missing_info",
-  Undeliverable = "undeliverable",
-  NoMatch = "no_match",
+    Deliverable = 'deliverable',
+    DeliverableMissingInfo = 'deliverable_missing_info',
+    Undeliverable = 'undeliverable',
+    NoMatch = 'no_match'
 }
 /**
- * @export
- * @enum {string}
- */
+    * @export
+    * @enum {string}
+    */
 export enum IntlVerificationOrErrorStatusEnum {
-  Lv4 = "LV4",
-  Lv3 = "LV3",
-  Lv2 = "LV2",
-  Lv1 = "LV1",
-  Lf4 = "LF4",
-  Lf3 = "LF3",
-  Lf2 = "LF2",
-  Lf1 = "LF1",
-  Lm4 = "LM4",
-  Lm3 = "LM3",
-  Lm2 = "LM2",
-  Lu1 = "LU1",
+    Lv4 = 'LV4',
+    Lv3 = 'LV3',
+    Lv2 = 'LV2',
+    Lv1 = 'LV1',
+    Lf4 = 'LF4',
+    Lf3 = 'LF3',
+    Lf2 = 'LF2',
+    Lf1 = 'LF1',
+    Lm4 = 'LM4',
+    Lm3 = 'LM3',
+    Lm2 = 'LM2',
+    Lu1 = 'LU1'
 }
 /**
- * @export
- * @enum {string}
- */
+    * @export
+    * @enum {string}
+    */
 export enum IntlVerificationOrErrorObjectEnum {
-  IntlVerification = "intl_verification",
+    IntlVerification = 'intl_verification'
 }
+
+
 
 /**
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+

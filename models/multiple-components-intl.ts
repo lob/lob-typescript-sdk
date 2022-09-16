@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Lob
- * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)?
+ * The Lob API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and uses HTTP response codes to indicate any API errors. <p> Looking for our [previous documentation](https://lob.github.io/legacy-docs/)? 
  *
  * The version of the OpenAPI document: 1.3.0
  * Contact: lob-openapi@lob.com
@@ -12,102 +12,124 @@
  * Do not edit the class manually.
  */
 
-import * as Models from "./index";
 
-import { CountryExtended } from "./country-extended";
+import * as Models from './index';
+
+import { CountryExtended } from './country-extended';
 
 /**
- *
+ * 
  * @export
  * @class MultipleComponentsIntl
  */
 export class MultipleComponentsIntl {
-  constructor(input?: any) {
-    if (typeof input?.recipient !== "undefined") {
-      this.recipient = input.recipient;
+    constructor(input?: any) {
+        if (typeof input?.recipient !== "undefined") {
+            this.recipient = input.recipient;
+        }
+        if (typeof input?.primary_line !== "undefined") {
+            this.primary_line = input.primary_line;
+        }
+        if (typeof input?.secondary_line !== "undefined") {
+            this.secondary_line = input.secondary_line;
+        }
+        if (typeof input?.city !== "undefined") {
+            this.city = input.city;
+        }
+        if (typeof input?.state !== "undefined") {
+            this.state = input.state;
+        }
+        if (typeof input?.postal_code !== "undefined") {
+            this.postal_code = input.postal_code;
+        }
+        if (typeof input?.country !== "undefined") {
+            this.country = input.country;
+        }
     }
-    if (typeof input?.primary_line !== "undefined") {
-      this.primary_line = input.primary_line;
+
+    /**
+     * The intended recipient, typically a person\'s or firm\'s name.
+     * @type {string}
+     * @memberof MultipleComponentsIntl
+     */
+    'recipient'?: string | null;
+
+
+
+    
+    /**
+     * The primary delivery line (usually the street address) of the address. 
+     * @type {string}
+     * @memberof MultipleComponentsIntl
+     */
+    'primary_line': string;
+
+
+
+    
+    /**
+     * The secondary delivery line of the address. This field is typically empty but may contain information if `primary_line` is too long. 
+     * @type {string}
+     * @memberof MultipleComponentsIntl
+     */
+    'secondary_line'?: string;
+
+
+
+    
+    /**
+     * 
+     * @type {string}
+     * @memberof MultipleComponentsIntl
+     */
+    'city'?: string;
+
+
+
+    
+    /**
+     * The name of the state.
+     * @type {string}
+     * @memberof MultipleComponentsIntl
+     */
+    'state'?: string;
+
+
+
+    
+    /**
+     * The postal code.
+     * @type {string}
+     * @memberof MultipleComponentsIntl
+     */
+    'postal_code'?: string;
+
+
+
+    
+    /**
+     * 
+     * @type {CountryExtended}
+     * @memberof MultipleComponentsIntl
+     */
+    'country': CountryExtended;
+
+
+
+    
+    public toJSON() {
+        let out = {};
+        for (const [key, value] of Object.entries(this)) {
+            out = Object.assign({}, out, { [key[0] === '_' ? key.substr(1, key.length) : key]: value});
+        }
+        return out;
     }
-    if (typeof input?.secondary_line !== "undefined") {
-      this.secondary_line = input.secondary_line;
-    }
-    if (typeof input?.city !== "undefined") {
-      this.city = input.city;
-    }
-    if (typeof input?.state !== "undefined") {
-      this.state = input.state;
-    }
-    if (typeof input?.postal_code !== "undefined") {
-      this.postal_code = input.postal_code;
-    }
-    if (typeof input?.country !== "undefined") {
-      this.country = input.country;
-    }
-  }
-
-  /**
-   * The intended recipient, typically a person\'s or firm\'s name.
-   * @type {string}
-   * @memberof MultipleComponentsIntl
-   */
-  "recipient"?: string | null;
-
-  /**
-   * The primary delivery line (usually the street address) of the address.
-   * @type {string}
-   * @memberof MultipleComponentsIntl
-   */
-  "primary_line": string;
-
-  /**
-   * The secondary delivery line of the address. This field is typically empty but may contain information if `primary_line` is too long.
-   * @type {string}
-   * @memberof MultipleComponentsIntl
-   */
-  "secondary_line"?: string;
-
-  /**
-   *
-   * @type {string}
-   * @memberof MultipleComponentsIntl
-   */
-  "city"?: string;
-
-  /**
-   * The name of the state.
-   * @type {string}
-   * @memberof MultipleComponentsIntl
-   */
-  "state"?: string;
-
-  /**
-   * The postal code.
-   * @type {string}
-   * @memberof MultipleComponentsIntl
-   */
-  "postal_code"?: string;
-
-  /**
-   *
-   * @type {CountryExtended}
-   * @memberof MultipleComponentsIntl
-   */
-  "country": CountryExtended;
-
-  public toJSON() {
-    let out = {};
-    for (const [key, value] of Object.entries(this)) {
-      out = Object.assign({}, out, {
-        [key[0] === "_" ? key.substr(1, key.length) : key]: value,
-      });
-    }
-    return out;
-  }
 }
+
 
 /**
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+
