@@ -15,6 +15,10 @@
 import * as Models from "./index";
 
 import { AddressDomestic } from "./address-domestic";
+import { LetterDetailsReturned } from "./letter-details-returned";
+import { LetterDetailsWritable } from "./letter-details-writable";
+import { PostcardDetailsReturned } from "./postcard-details-returned";
+import { PostcardDetailsWritable } from "./postcard-details-writable";
 import { ReturnEnvelope } from "./return-envelope";
 
 /**
@@ -29,6 +33,18 @@ export class PlaceholderModel {
     }
     if (typeof input?.address_domestic !== "undefined") {
       this.address_domestic = input.address_domestic;
+    }
+    if (typeof input?.letter_details_writable !== "undefined") {
+      this.letter_details_writable = input.letter_details_writable;
+    }
+    if (typeof input?.postcard_details_writable !== "undefined") {
+      this.postcard_details_writable = input.postcard_details_writable;
+    }
+    if (typeof input?.letter_details_returned !== "undefined") {
+      this.letter_details_returned = input.letter_details_returned;
+    }
+    if (typeof input?.postcard_details_returned !== "undefined") {
+      this.postcard_details_returned = input.postcard_details_returned;
     }
   }
 
@@ -45,6 +61,34 @@ export class PlaceholderModel {
    * @memberof PlaceholderModel
    */
   "address_domestic"?: AddressDomestic;
+
+  /**
+   *
+   * @type {LetterDetailsWritable}
+   * @memberof PlaceholderModel
+   */
+  "letter_details_writable"?: LetterDetailsWritable;
+
+  /**
+   *
+   * @type {PostcardDetailsWritable}
+   * @memberof PlaceholderModel
+   */
+  "postcard_details_writable"?: PostcardDetailsWritable;
+
+  /**
+   *
+   * @type {LetterDetailsReturned}
+   * @memberof PlaceholderModel
+   */
+  "letter_details_returned"?: LetterDetailsReturned;
+
+  /**
+   *
+   * @type {PostcardDetailsReturned}
+   * @memberof PlaceholderModel
+   */
+  "postcard_details_returned"?: PostcardDetailsReturned;
 
   public toJSON() {
     let out = {};

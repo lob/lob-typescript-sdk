@@ -14,8 +14,6 @@
 
 import * as Models from "./index";
 
-import { Address } from "./address";
-import { AddressDomesticExpanded } from "./address-domestic-expanded";
 import { MailType } from "./mail-type";
 import { SelfMailerSize } from "./self-mailer-size";
 import { TrackingEventCertified } from "./tracking-event-certified";
@@ -95,7 +93,7 @@ export class SelfMailer {
 
   /**
    *
-   * @type {Address}
+   * @type {any}
    * @memberof SelfMailer
    */
 
@@ -103,11 +101,11 @@ export class SelfMailer {
 
   /**
    *
-   * @type {AddressDomesticExpanded}
+   * @type {any}
    * @memberof SelfMailer
    */
 
-  "from"?: string | Models.Address;
+  "from"?: string | Models.AddressDomesticExpanded;
 
   /**
    *
