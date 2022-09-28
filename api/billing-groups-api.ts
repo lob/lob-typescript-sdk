@@ -239,7 +239,7 @@ export const BillingGroupsApiAxiosParamCreator = function (
      * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
      * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
      * @param {{ [key: string]: string; }} [dateModified] Filter by date modified.
-     * @param {object} [sortBy] Sorts items by ascending or descending dates. Use either &#x60;date_created&#x60; or &#x60;send_date&#x60;, not both.
+     * @param {object} [sortByDateModified] Sorts items by ascending or descending dates. Use either &#x60;date_created&#x60; or &#x60;date_modfied&#x60;, not both.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -249,7 +249,7 @@ export const BillingGroupsApiAxiosParamCreator = function (
       include?: Array<string>,
       dateCreated?: { [key: string]: string },
       dateModified?: { [key: string]: string },
-      sortBy?: object,
+      sortByDateModified?: object,
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
       const localVarPath = `/billing_groups`;
@@ -292,8 +292,8 @@ export const BillingGroupsApiAxiosParamCreator = function (
         localVarQueryParameter["date_modified"] = valueToString(dateModified);
       }
 
-      if (sortBy !== undefined) {
-        localVarQueryParameter["sort_by"] = valueToString(sortBy);
+      if (sortByDateModified !== undefined) {
+        localVarQueryParameter["sort_by"] = valueToString(sortByDateModified);
       }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -404,7 +404,7 @@ export const BillingGroupsApiFp = function (configuration?: Configuration) {
      * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
      * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
      * @param {{ [key: string]: string; }} [dateModified] Filter by date modified.
-     * @param {object} [sortBy] Sorts items by ascending or descending dates. Use either &#x60;date_created&#x60; or &#x60;send_date&#x60;, not both.
+     * @param {object} [sortByDateModified] Sorts items by ascending or descending dates. Use either &#x60;date_created&#x60; or &#x60;date_modfied&#x60;, not both.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -414,7 +414,7 @@ export const BillingGroupsApiFp = function (configuration?: Configuration) {
       include?: Array<string>,
       dateCreated?: { [key: string]: string },
       dateModified?: { [key: string]: string },
-      sortBy?: object,
+      sortByDateModified?: object,
       options?: AxiosRequestConfig
     ): Promise<
       (
@@ -429,7 +429,7 @@ export const BillingGroupsApiFp = function (configuration?: Configuration) {
           include,
           dateCreated,
           dateModified,
-          sortBy,
+          sortByDateModified,
           options
         );
       return createRequestFunction(
@@ -534,7 +534,7 @@ export class BillingGroupsApi extends BaseAPI {
    * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
    * @param {{ [key: string]: string; }} [dateCreated] Filter by date created.
    * @param {{ [key: string]: string; }} [dateModified] Filter by date modified.
-   * @param {object} [sortBy] Sorts items by ascending or descending dates. Use either &#x60;date_created&#x60; or &#x60;send_date&#x60;, not both.
+   * @param {object} [sortByDateModified] Sorts items by ascending or descending dates. Use either &#x60;date_created&#x60; or &#x60;date_modfied&#x60;, not both.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof BillingGroupsApi
@@ -545,7 +545,7 @@ export class BillingGroupsApi extends BaseAPI {
     include?: Array<string>,
     dateCreated?: { [key: string]: string },
     dateModified?: { [key: string]: string },
-    sortBy?: object,
+    sortByDateModified?: object,
     options?: AxiosRequestConfig
   ) {
     return BillingGroupsApiFp(this.configuration)
@@ -555,7 +555,7 @@ export class BillingGroupsApi extends BaseAPI {
         include,
         dateCreated,
         dateModified,
-        sortBy,
+        sortByDateModified,
         options
       )
       .then((request) => request(this.axios, this.basePath))
