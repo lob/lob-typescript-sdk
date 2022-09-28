@@ -15,33 +15,42 @@
 import * as Models from "./index";
 
 /**
- *
+ * Lob uses RESTful HTTP response codes to indicate success or failure of an API request. In general, 2xx indicates success, 4xx indicate an input error, and 5xx indicates an error on Lob\'s end.
  * @export
- * @class SortBy5
+ * @class CampaignDeletion
  */
-export class SortBy5 {
+export class CampaignDeletion {
   constructor(input?: any) {
-    if (typeof input?.date_created !== "undefined") {
-      this.date_created = input.date_created;
+    if (typeof input?.id !== "undefined") {
+      this.id = input.id;
     }
-    if (typeof input?.send_date !== "undefined") {
-      this.send_date = input.send_date;
+    if (typeof input?.deleted !== "undefined") {
+      this.deleted = input.deleted;
     }
   }
 
   /**
-   *
+   * Unique identifier prefixed with `cmp_`.
    * @type {string}
-   * @memberof SortBy5
+   * @memberof CampaignDeletion
    */
-  "date_created"?: SortBy5DateCreatedEnum;
+  private "_id"?: string;
+  public get id() {
+    return (this._id || undefined) as string;
+  }
+  public set id(newValue: string) {
+    if (newValue && !/^cmp_[a-zA-Z0-9]+$/.test(newValue)) {
+      throw new Error("Invalid id provided");
+    }
+    this._id = newValue;
+  }
 
   /**
-   *
-   * @type {string}
-   * @memberof SortBy5
+   * True if the resource has been successfully deleted.
+   * @type {boolean}
+   * @memberof CampaignDeletion
    */
-  "send_date"?: SortBy5SendDateEnum;
+  "deleted"?: boolean;
 
   public toJSON() {
     let out = {};
@@ -52,23 +61,6 @@ export class SortBy5 {
     }
     return out;
   }
-}
-
-/**
- * @export
- * @enum {string}
- */
-export enum SortBy5DateCreatedEnum {
-  Asc = "asc",
-  Desc = "desc",
-}
-/**
- * @export
- * @enum {string}
- */
-export enum SortBy5SendDateEnum {
-  Asc = "asc",
-  Desc = "desc",
 }
 
 /**

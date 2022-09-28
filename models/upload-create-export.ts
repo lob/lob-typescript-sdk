@@ -17,31 +17,31 @@ import * as Models from "./index";
 /**
  *
  * @export
- * @class SortBy4
+ * @class UploadCreateExport
  */
-export class SortBy4 {
+export class UploadCreateExport {
   constructor(input?: any) {
-    if (typeof input?.date_created !== "undefined") {
-      this.date_created = input.date_created;
+    if (typeof input?.message !== "undefined") {
+      this.message = input.message;
     }
-    if (typeof input?.send_date !== "undefined") {
-      this.send_date = input.send_date;
+    if (typeof input?.exportId !== "undefined") {
+      this.exportId = input.exportId;
     }
   }
 
   /**
    *
    * @type {string}
-   * @memberof SortBy4
+   * @memberof UploadCreateExport
    */
-  "date_created"?: SortBy4DateCreatedEnum;
+  "message": UploadCreateExportMessageEnum;
 
   /**
    *
    * @type {string}
-   * @memberof SortBy4
+   * @memberof UploadCreateExport
    */
-  "send_date"?: SortBy4SendDateEnum;
+  "exportId": string;
 
   public toJSON() {
     let out = {};
@@ -58,17 +58,8 @@ export class SortBy4 {
  * @export
  * @enum {string}
  */
-export enum SortBy4DateCreatedEnum {
-  Asc = "asc",
-  Desc = "desc",
-}
-/**
- * @export
- * @enum {string}
- */
-export enum SortBy4SendDateEnum {
-  Asc = "asc",
-  Desc = "desc",
+export enum UploadCreateExportMessageEnum {
+  ExportIsProcessing = "Export is processing.",
 }
 
 /**

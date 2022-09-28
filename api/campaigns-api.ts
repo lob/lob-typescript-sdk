@@ -43,39 +43,41 @@ import {
   RequiredError,
 } from "../base";
 // @ts-ignore
-import { Card } from "../models";
+import { Campaign } from "../models";
 // @ts-ignore
-import { CardDeletion } from "../models";
+import { CampaignDeletion } from "../models";
 // @ts-ignore
-import { CardEditable } from "../models";
+import { CampaignUpdatable } from "../models";
 // @ts-ignore
-import { CardList } from "../models";
+import { CampaignWritable } from "../models";
 // @ts-ignore
-import { CardUpdatable } from "../models";
+import { CampaignsList } from "../models";
 // @ts-ignore
 import { LobError } from "../models";
 /**
- * CardsApi - axios parameter creator
+ * CampaignsApi - axios parameter creator
  * @export
  */
-export const CardsApiAxiosParamCreator = function (
+export const CampaignsApiAxiosParamCreator = function (
   configuration?: Configuration
 ) {
   return {
     /**
-     * Creates a new card given information
+     * Creates a new campaign with the provided properties. See how to launch your first campaign [here](https://help.lob.com/best-practices/launching-your-first-campaign).
      * @summary create
-     * @param {CardEditable} cardEditable
+     * @param {CampaignWritable} campaignWritable
+     * @param {'native' | 'match'} [xLangOutput] * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    cardCreate: async (
-      cardEditable: CardEditable,
+    campaignCreate: async (
+      campaignWritable: CampaignWritable,
+      xLangOutput?: "native" | "match",
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
-      // verify required parameter 'cardEditable' is not null or undefined
-      assertParamExists("cardCreate", "cardEditable", cardEditable);
-      const localVarPath = `/cards`;
+      // verify required parameter 'campaignWritable' is not null or undefined
+      assertParamExists("campaignCreate", "campaignWritable", campaignWritable);
+      const localVarPath = `/campaigns`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;
@@ -95,6 +97,10 @@ export const CardsApiAxiosParamCreator = function (
       // http basic authentication required
       setBasicAuthToObject(localVarRequestOptions, configuration);
 
+      if (xLangOutput !== undefined && xLangOutput !== null) {
+        localVarHeaderParameter["x-lang-output"] = String(xLangOutput);
+      }
+
       localVarHeaderParameter["Content-Type"] = "application/json";
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -106,7 +112,7 @@ export const CardsApiAxiosParamCreator = function (
         ...options.headers,
       };
       localVarRequestOptions.data = serializeDataIfNeeded(
-        cardEditable,
+        campaignWritable,
         localVarRequestOptions,
         configuration
       );
@@ -117,21 +123,21 @@ export const CardsApiAxiosParamCreator = function (
       };
     },
     /**
-     * Delete an existing card. You need only supply the unique identifier that was returned upon card creation.
+     * Delete an existing campaign. You need only supply the unique identifier that was returned upon campaign creation. Deleting a campaign also deletes any associated mail pieces that have been created but not sent. A campaign\'s `send_date` matches its associated mail pieces\' `send_date`s.
      * @summary delete
-     * @param {string} cardId id of the card
+     * @param {string} cmpId id of the campaign
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    cardDelete: async (
-      cardId: string,
+    campaignDelete: async (
+      cmpId: string,
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
-      // verify required parameter 'cardId' is not null or undefined
-      assertParamExists("cardDelete", "cardId", cardId);
-      const localVarPath = `/cards/{card_id}`.replace(
-        `{${"card_id"}}`,
-        encodeURIComponent(String(cardId))
+      // verify required parameter 'cmpId' is not null or undefined
+      assertParamExists("campaignDelete", "cmpId", cmpId);
+      const localVarPath = `/campaigns/{cmp_id}`.replace(
+        `{${"cmp_id"}}`,
+        encodeURIComponent(String(cmpId))
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -167,21 +173,21 @@ export const CardsApiAxiosParamCreator = function (
       };
     },
     /**
-     * Retrieves the details of an existing card. You need only supply the unique customer identifier that was returned upon card creation.
+     * Retrieves the details of an existing campaign. You need only supply the unique campaign identifier that was returned upon campaign creation.
      * @summary get
-     * @param {string} cardId id of the card
+     * @param {string} cmpId id of the campaign
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    cardRetrieve: async (
-      cardId: string,
+    campaignRetrieve: async (
+      cmpId: string,
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
-      // verify required parameter 'cardId' is not null or undefined
-      assertParamExists("cardRetrieve", "cardId", cardId);
-      const localVarPath = `/cards/{card_id}`.replace(
-        `{${"card_id"}}`,
-        encodeURIComponent(String(cardId))
+      // verify required parameter 'cmpId' is not null or undefined
+      assertParamExists("campaignRetrieve", "cmpId", cmpId);
+      const localVarPath = `/campaigns/{cmp_id}`.replace(
+        `{${"cmp_id"}}`,
+        encodeURIComponent(String(cmpId))
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -217,25 +223,29 @@ export const CardsApiAxiosParamCreator = function (
       };
     },
     /**
-     * Update the details of an existing card. You need only supply the unique identifier that was returned upon card creation.
+     * Update the details of an existing campaign. You need only supply the unique identifier that was returned upon campaign creation.
      * @summary update
-     * @param {string} cardId id of the card
-     * @param {CardUpdatable} cardUpdatable
+     * @param {string} cmpId id of the campaign
+     * @param {CampaignUpdatable} campaignUpdatable
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    cardUpdate: async (
-      cardId: string,
-      cardUpdatable: CardUpdatable,
+    campaignUpdate: async (
+      cmpId: string,
+      campaignUpdatable: CampaignUpdatable,
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
-      // verify required parameter 'cardId' is not null or undefined
-      assertParamExists("cardUpdate", "cardId", cardId);
-      // verify required parameter 'cardUpdatable' is not null or undefined
-      assertParamExists("cardUpdate", "cardUpdatable", cardUpdatable);
-      const localVarPath = `/cards/{card_id}`.replace(
-        `{${"card_id"}}`,
-        encodeURIComponent(String(cardId))
+      // verify required parameter 'cmpId' is not null or undefined
+      assertParamExists("campaignUpdate", "cmpId", cmpId);
+      // verify required parameter 'campaignUpdatable' is not null or undefined
+      assertParamExists(
+        "campaignUpdate",
+        "campaignUpdatable",
+        campaignUpdatable
+      );
+      const localVarPath = `/campaigns/{cmp_id}`.replace(
+        `{${"cmp_id"}}`,
+        encodeURIComponent(String(cmpId))
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -245,7 +255,7 @@ export const CardsApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "POST",
+        method: "PATCH",
         ...baseOptions,
         ...options,
       };
@@ -267,7 +277,7 @@ export const CardsApiAxiosParamCreator = function (
         ...options.headers,
       };
       localVarRequestOptions.data = serializeDataIfNeeded(
-        cardUpdatable,
+        campaignUpdatable,
         localVarRequestOptions,
         configuration
       );
@@ -278,23 +288,23 @@ export const CardsApiAxiosParamCreator = function (
       };
     },
     /**
-     * Returns a list of your cards. The cards are returned sorted by creation date, with the most recently created addresses appearing first.
+     * Returns a list of your campaigns. The campaigns are returned sorted by creation date, with the most recently created campaigns appearing first.
      * @summary list
      * @param {number} [limit] How many results to return.
+     * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
      * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response.
      * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response.
-     * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    cardsList: async (
+    campaignsList: async (
       limit?: number,
+      include?: Array<string>,
       before?: string,
       after?: string,
-      include?: Array<string>,
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
-      const localVarPath = `/cards`;
+      const localVarPath = `/campaigns`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;
@@ -318,16 +328,16 @@ export const CardsApiAxiosParamCreator = function (
         localVarQueryParameter["limit"] = limit;
       }
 
+      if (include) {
+        localVarQueryParameter["include"] = valueToString(include);
+      }
+
       if (before !== undefined) {
         localVarQueryParameter["before"] = before;
       }
 
       if (after !== undefined) {
         localVarQueryParameter["after"] = after;
-      }
-
-      if (include) {
-        localVarQueryParameter["include"] = valueToString(include);
       }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -348,27 +358,31 @@ export const CardsApiAxiosParamCreator = function (
 };
 
 /**
- * CardsApi - functional programming interface
+ * CampaignsApi - functional programming interface
  * @export
  */
-export const CardsApiFp = function (configuration?: Configuration) {
-  const localVarAxiosParamCreator = CardsApiAxiosParamCreator(configuration);
+export const CampaignsApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator =
+    CampaignsApiAxiosParamCreator(configuration);
   return {
     /**
-     * Creates a new card given information
+     * Creates a new campaign with the provided properties. See how to launch your first campaign [here](https://help.lob.com/best-practices/launching-your-first-campaign).
      * @summary create
-     * @param {CardEditable} cardEditable
+     * @param {CampaignWritable} campaignWritable
+     * @param {'native' | 'match'} [xLangOutput] * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async cardCreate(
-      cardEditable: CardEditable,
+    async campaignCreate(
+      campaignWritable: CampaignWritable,
+      xLangOutput?: "native" | "match",
       options?: AxiosRequestConfig
     ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Card>
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Campaign>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.cardCreate(
-        cardEditable,
+      const localVarAxiosArgs = await localVarAxiosParamCreator.campaignCreate(
+        campaignWritable,
+        xLangOutput,
         options
       );
       return createRequestFunction(
@@ -379,20 +393,23 @@ export const CardsApiFp = function (configuration?: Configuration) {
       );
     },
     /**
-     * Delete an existing card. You need only supply the unique identifier that was returned upon card creation.
+     * Delete an existing campaign. You need only supply the unique identifier that was returned upon campaign creation. Deleting a campaign also deletes any associated mail pieces that have been created but not sent. A campaign\'s `send_date` matches its associated mail pieces\' `send_date`s.
      * @summary delete
-     * @param {string} cardId id of the card
+     * @param {string} cmpId id of the campaign
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async cardDelete(
-      cardId: string,
+    async campaignDelete(
+      cmpId: string,
       options?: AxiosRequestConfig
     ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<CardDeletion>
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<CampaignDeletion>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.cardDelete(
-        cardId,
+      const localVarAxiosArgs = await localVarAxiosParamCreator.campaignDelete(
+        cmpId,
         options
       );
       return createRequestFunction(
@@ -403,22 +420,20 @@ export const CardsApiFp = function (configuration?: Configuration) {
       );
     },
     /**
-     * Retrieves the details of an existing card. You need only supply the unique customer identifier that was returned upon card creation.
+     * Retrieves the details of an existing campaign. You need only supply the unique campaign identifier that was returned upon campaign creation.
      * @summary get
-     * @param {string} cardId id of the card
+     * @param {string} cmpId id of the campaign
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async cardRetrieve(
-      cardId: string,
+    async campaignRetrieve(
+      cmpId: string,
       options?: AxiosRequestConfig
     ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Card>
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Campaign>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.cardRetrieve(
-        cardId,
-        options
-      );
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.campaignRetrieve(cmpId, options);
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
@@ -427,23 +442,23 @@ export const CardsApiFp = function (configuration?: Configuration) {
       );
     },
     /**
-     * Update the details of an existing card. You need only supply the unique identifier that was returned upon card creation.
+     * Update the details of an existing campaign. You need only supply the unique identifier that was returned upon campaign creation.
      * @summary update
-     * @param {string} cardId id of the card
-     * @param {CardUpdatable} cardUpdatable
+     * @param {string} cmpId id of the campaign
+     * @param {CampaignUpdatable} campaignUpdatable
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async cardUpdate(
-      cardId: string,
-      cardUpdatable: CardUpdatable,
+    async campaignUpdate(
+      cmpId: string,
+      campaignUpdatable: CampaignUpdatable,
       options?: AxiosRequestConfig
     ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Card>
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Campaign>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.cardUpdate(
-        cardId,
-        cardUpdatable,
+      const localVarAxiosArgs = await localVarAxiosParamCreator.campaignUpdate(
+        cmpId,
+        campaignUpdatable,
         options
       );
       return createRequestFunction(
@@ -454,29 +469,29 @@ export const CardsApiFp = function (configuration?: Configuration) {
       );
     },
     /**
-     * Returns a list of your cards. The cards are returned sorted by creation date, with the most recently created addresses appearing first.
+     * Returns a list of your campaigns. The campaigns are returned sorted by creation date, with the most recently created campaigns appearing first.
      * @summary list
      * @param {number} [limit] How many results to return.
+     * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
      * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response.
      * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response.
-     * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async cardsList(
+    async campaignsList(
       limit?: number,
+      include?: Array<string>,
       before?: string,
       after?: string,
-      include?: Array<string>,
       options?: AxiosRequestConfig
     ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<CardList>
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<CampaignsList>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.cardsList(
+      const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsList(
         limit,
+        include,
         before,
         after,
-        include,
         options
       );
       return createRequestFunction(
@@ -490,100 +505,31 @@ export const CardsApiFp = function (configuration?: Configuration) {
 };
 
 /**
- * CardsApi - object-oriented interface
+ * CampaignsApi - object-oriented interface
  * @export
- * @class CardsApi
+ * @class CampaignsApi
  * @extends {BaseAPI}
  */
-export class CardsApi extends BaseAPI {
+export class CampaignsApi extends BaseAPI {
   /**
-   * Creates a new card given information
+   * Creates a new campaign with the provided properties. See how to launch your first campaign [here](https://help.lob.com/best-practices/launching-your-first-campaign).
    * @summary create
-   * @param {CardEditable} cardEditable
+   * @param {CampaignWritable} campaignWritable
+   * @param {'native' | 'match'} [xLangOutput] * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof CardsApi
+   * @memberof CampaignsApi
    */
-  public create(cardEditable: CardEditable, options?: AxiosRequestConfig) {
-    return CardsApiFp(this.configuration)
-      .cardCreate(cardEditable, options)
-      .then((request) => request(this.axios, this.basePath))
-      .then(function (response) {
-        return new Card(response.data);
-      })
-      .catch((error) => {
-        if (error.response?.data?.error?.message) {
-          error.message = error.response.data.error.message;
-        }
-        throw error;
-      });
-  }
-
-  /**
-   * Delete an existing card. You need only supply the unique identifier that was returned upon card creation.
-   * @summary delete
-   * @param {string} cardId id of the card
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof CardsApi
-   */
-  public delete(cardId: string, options?: AxiosRequestConfig) {
-    return CardsApiFp(this.configuration)
-      .cardDelete(cardId, options)
-      .then((request) => request(this.axios, this.basePath))
-      .then(function (response) {
-        return new CardDeletion(response.data);
-      })
-      .catch((error) => {
-        if (error.response?.data?.error?.message) {
-          error.message = error.response.data.error.message;
-        }
-        throw error;
-      });
-  }
-
-  /**
-   * Retrieves the details of an existing card. You need only supply the unique customer identifier that was returned upon card creation.
-   * @summary get
-   * @param {string} cardId id of the card
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof CardsApi
-   */
-  public get(cardId: string, options?: AxiosRequestConfig) {
-    return CardsApiFp(this.configuration)
-      .cardRetrieve(cardId, options)
-      .then((request) => request(this.axios, this.basePath))
-      .then(function (response) {
-        return new Card(response.data);
-      })
-      .catch((error) => {
-        if (error.response?.data?.error?.message) {
-          error.message = error.response.data.error.message;
-        }
-        throw error;
-      });
-  }
-
-  /**
-   * Update the details of an existing card. You need only supply the unique identifier that was returned upon card creation.
-   * @summary update
-   * @param {string} cardId id of the card
-   * @param {CardUpdatable} cardUpdatable
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof CardsApi
-   */
-  public update(
-    cardId: string,
-    cardUpdatable: CardUpdatable,
+  public create(
+    campaignWritable: CampaignWritable,
+    xLangOutput?: "native" | "match",
     options?: AxiosRequestConfig
   ) {
-    return CardsApiFp(this.configuration)
-      .cardUpdate(cardId, cardUpdatable, options)
+    return CampaignsApiFp(this.configuration)
+      .campaignCreate(campaignWritable, xLangOutput, options)
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {
-        return new Card(response.data);
+        return new Campaign(response.data);
       })
       .catch((error) => {
         if (error.response?.data?.error?.message) {
@@ -594,28 +540,102 @@ export class CardsApi extends BaseAPI {
   }
 
   /**
-   * Returns a list of your cards. The cards are returned sorted by creation date, with the most recently created addresses appearing first.
-   * @summary list
-   * @param {number} [limit] How many results to return.
-   * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response.
-   * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response.
-   * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
+   * Delete an existing campaign. You need only supply the unique identifier that was returned upon campaign creation. Deleting a campaign also deletes any associated mail pieces that have been created but not sent. A campaign\'s `send_date` matches its associated mail pieces\' `send_date`s.
+   * @summary delete
+   * @param {string} cmpId id of the campaign
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof CardsApi
+   * @memberof CampaignsApi
+   */
+  public delete(cmpId: string, options?: AxiosRequestConfig) {
+    return CampaignsApiFp(this.configuration)
+      .campaignDelete(cmpId, options)
+      .then((request) => request(this.axios, this.basePath))
+      .then(function (response) {
+        return new CampaignDeletion(response.data);
+      })
+      .catch((error) => {
+        if (error.response?.data?.error?.message) {
+          error.message = error.response.data.error.message;
+        }
+        throw error;
+      });
+  }
+
+  /**
+   * Retrieves the details of an existing campaign. You need only supply the unique campaign identifier that was returned upon campaign creation.
+   * @summary get
+   * @param {string} cmpId id of the campaign
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof CampaignsApi
+   */
+  public get(cmpId: string, options?: AxiosRequestConfig) {
+    return CampaignsApiFp(this.configuration)
+      .campaignRetrieve(cmpId, options)
+      .then((request) => request(this.axios, this.basePath))
+      .then(function (response) {
+        return new Campaign(response.data);
+      })
+      .catch((error) => {
+        if (error.response?.data?.error?.message) {
+          error.message = error.response.data.error.message;
+        }
+        throw error;
+      });
+  }
+
+  /**
+   * Update the details of an existing campaign. You need only supply the unique identifier that was returned upon campaign creation.
+   * @summary update
+   * @param {string} cmpId id of the campaign
+   * @param {CampaignUpdatable} campaignUpdatable
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof CampaignsApi
+   */
+  public update(
+    cmpId: string,
+    campaignUpdatable: CampaignUpdatable,
+    options?: AxiosRequestConfig
+  ) {
+    return CampaignsApiFp(this.configuration)
+      .campaignUpdate(cmpId, campaignUpdatable, options)
+      .then((request) => request(this.axios, this.basePath))
+      .then(function (response) {
+        return new Campaign(response.data);
+      })
+      .catch((error) => {
+        if (error.response?.data?.error?.message) {
+          error.message = error.response.data.error.message;
+        }
+        throw error;
+      });
+  }
+
+  /**
+   * Returns a list of your campaigns. The campaigns are returned sorted by creation date, with the most recently created campaigns appearing first.
+   * @summary list
+   * @param {number} [limit] How many results to return.
+   * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
+   * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response.
+   * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response.
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof CampaignsApi
    */
   public list(
     limit?: number,
+    include?: Array<string>,
     before?: string,
     after?: string,
-    include?: Array<string>,
     options?: AxiosRequestConfig
   ) {
-    return CardsApiFp(this.configuration)
-      .cardsList(limit, before, after, include, options)
+    return CampaignsApiFp(this.configuration)
+      .campaignsList(limit, include, before, after, options)
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {
-        return new CardList(response.data);
+        return new CampaignsList(response.data);
       })
       .catch((error) => {
         if (error.response?.data?.error?.message) {
