@@ -45,13 +45,13 @@ import {
 // @ts-ignore
 import { Campaign } from "../models";
 // @ts-ignore
+import { CampaignDeletion } from "../models";
+// @ts-ignore
 import { CampaignUpdatable } from "../models";
 // @ts-ignore
 import { CampaignWritable } from "../models";
 // @ts-ignore
 import { CampaignsList } from "../models";
-// @ts-ignore
-import { InlineResponse200 } from "../models";
 // @ts-ignore
 import { LobError } from "../models";
 /**
@@ -406,7 +406,7 @@ export const CampaignsApiFp = function (configuration?: Configuration) {
       (
         axios?: AxiosInstance,
         basePath?: string
-      ) => AxiosPromise<InlineResponse200>
+      ) => AxiosPromise<CampaignDeletion>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.campaignDelete(
         cmpId,
@@ -552,7 +552,7 @@ export class CampaignsApi extends BaseAPI {
       .campaignDelete(cmpId, options)
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {
-        return new InlineResponse200(response.data);
+        return new CampaignDeletion(response.data);
       })
       .catch((error) => {
         if (error.response?.data?.error?.message) {

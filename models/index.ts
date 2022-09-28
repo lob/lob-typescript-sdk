@@ -17,6 +17,7 @@ export * from "./bulk-error";
 export * from "./bulk-error-properties";
 export * from "./campaign";
 export * from "./campaign-creative";
+export * from "./campaign-deletion";
 export * from "./campaign-updatable";
 export * from "./campaign-writable";
 export * from "./campaigns-list";
