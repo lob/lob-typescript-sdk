@@ -21,6 +21,7 @@ import * as Models from "./index";
  */
 
 export enum CountryExtendedExpanded {
+  Empty = "",
   Afghanistan = "AFGHANISTAN",
   Albania = "ALBANIA",
   Algeria = "ALGERIA",

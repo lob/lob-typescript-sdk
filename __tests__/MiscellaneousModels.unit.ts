@@ -9,8 +9,6 @@ import {
   SortBy1,
   SortBy2,
   SortBy3,
-  SortBy4,
-  SortBy5,
   SortByDateCreatedEnum,
   SortBySendDateEnum,
   SortBy1DateCreatedEnum,
@@ -19,12 +17,7 @@ import {
   SortBy2SendDateEnum,
   SortBy3DateCreatedEnum,
   SortBy3SendDateEnum,
-  SortBy4DateCreatedEnum,
-  SortBy4SendDateEnum,
-  SortBy5DateCreatedEnum,
-  SortBy5SendDateEnum,
   Thumbnail,
-  CountryExtended,
   TrackingEventCertified,
   TrackingEventCertifiedTypeEnum,
   TrackingEventCertifiedNameEnum,
@@ -579,20 +572,20 @@ describe("Sort Criteria", () => {
 
   describe("SortBy4", () => {
     it("can be created", () => {
-      const rec = new SortBy4();
+      const rec = new SortBy3();
       expect(rec).toBeDefined();
     });
 
     it.each([
-      ["date_created", SortBy4DateCreatedEnum.Asc],
-      ["date_created", SortBy4DateCreatedEnum.Desc],
-      ["send_date", SortBy4SendDateEnum.Asc],
-      ["send_date", SortBy4SendDateEnum.Desc],
+      ["date_created", SortBySendDateEnum.Asc],
+      ["date_created", SortBySendDateEnum.Desc],
+      ["send_date", SortBySendDateEnum.Asc],
+      ["send_date", SortBySendDateEnum.Desc],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
 
-      const rec = new SortBy4(input);
+      const rec = new SortBy3(input);
 
       expect(rec).toBeDefined();
       expect((rec as any)[prop]).toEqual(val);
@@ -601,20 +594,20 @@ describe("Sort Criteria", () => {
 
   describe("SortBy5", () => {
     it("can be created", () => {
-      const rec = new SortBy5();
+      const rec = new SortBy3();
       expect(rec).toBeDefined();
     });
 
     it.each([
-      ["date_created", SortBy5DateCreatedEnum.Asc],
-      ["date_created", SortBy5DateCreatedEnum.Desc],
-      ["send_date", SortBy5SendDateEnum.Asc],
-      ["send_date", SortBy5SendDateEnum.Desc],
+      ["date_created", SortBySendDateEnum.Asc],
+      ["date_created", SortBySendDateEnum.Desc],
+      ["send_date", SortBySendDateEnum.Asc],
+      ["send_date", SortBySendDateEnum.Desc],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
 
-      const rec = new SortBy5(input);
+      const rec = new SortBy3(input);
 
       expect(rec).toBeDefined();
       expect((rec as any)[prop]).toEqual(val);

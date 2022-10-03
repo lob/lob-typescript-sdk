@@ -24,6 +24,9 @@ export class MultiLineAddress {
     if (typeof input?.recipient !== "undefined") {
       this.recipient = input.recipient;
     }
+    if (typeof input?.company !== "undefined") {
+      this.company = input.company;
+    }
     if (typeof input?.primary_line !== "undefined") {
       this.primary_line = input.primary_line;
     }
@@ -49,7 +52,14 @@ export class MultiLineAddress {
    * @type {string}
    * @memberof MultiLineAddress
    */
-  "recipient": string | null;
+  "recipient"?: string | null;
+
+  /**
+   * Either `name` or `company` is required, you may also add both.
+   * @type {string}
+   * @memberof MultiLineAddress
+   */
+  "company"?: string | null;
 
   /**
    * The primary delivery line (usually the street address) of the address. Combination of the following applicable `components`: * `primary_number` * `street_predirection` * `street_name` * `street_suffix` * `street_postdirection` * `secondary_designator` * `secondary_number` * `pmb_designator` * `pmb_number`
