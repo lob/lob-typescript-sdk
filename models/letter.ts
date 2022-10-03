@@ -60,6 +60,9 @@ export class Letter {
     if (typeof input?.template_version_id !== "undefined") {
       this.template_version_id = input.template_version_id;
     }
+    if (typeof input?.url !== "undefined") {
+      this.url = input.url;
+    }
     if (typeof input?.object !== "undefined") {
       this.object = input.object;
     }
@@ -212,6 +215,27 @@ export class Letter {
       throw new Error("Invalid template_version_id provided");
     }
     this._template_version_id = newValue;
+  }
+
+  /**
+   * A [signed link](#section/Asset-URLs) served over HTTPS. The link returned will expire in 30 days to prevent mis-sharing. Each time a GET request is initiated, a new signed URL will be generated.
+   * @type {string}
+   * @memberof Letter
+   */
+  private "_url"?: string;
+  public get url() {
+    return (this._url || undefined) as string;
+  }
+  public set url(newValue: string) {
+    if (
+      newValue &&
+      !/^https:\/\/(lob-assets|lob-assets-staging)\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\.pdf|_thumb_[a-z]+_[0-9]+\.png)\?(version=[a-z0-9-]*&)?expires=[0-9]{10}&signature=[a-zA-Z0-9-_]+$/.test(
+        newValue
+      )
+    ) {
+      throw new Error("Invalid url provided");
+    }
+    this._url = newValue;
   }
 
   /**
