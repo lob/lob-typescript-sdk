@@ -69,6 +69,8 @@ describe("CardsApi", () => {
         file: FILE_LOCATION_8X11,
       });
       const letter = await lettersApi.create(registeredLetter);
+      console.log("benny!!");
+      console.log({ letter });
       expect(letter.id).toBeDefined();
       expect(letter.extra_service).toEqual("registered");
       if (letter.id) {

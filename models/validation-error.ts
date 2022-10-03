@@ -17,31 +17,41 @@ import * as Models from "./index";
 /**
  *
  * @export
- * @class SortBy4
+ * @class ValidationError
  */
-export class SortBy4 {
+export class ValidationError {
   constructor(input?: any) {
-    if (typeof input?.date_created !== "undefined") {
-      this.date_created = input.date_created;
+    if (typeof input?.loc !== "undefined") {
+      this.loc = input.loc;
     }
-    if (typeof input?.send_date !== "undefined") {
-      this.send_date = input.send_date;
+    if (typeof input?.msg !== "undefined") {
+      this.msg = input.msg;
+    }
+    if (typeof input?.type !== "undefined") {
+      this.type = input.type;
     }
   }
 
   /**
    *
-   * @type {string}
-   * @memberof SortBy4
+   * @type {Array<string | number>}
+   * @memberof ValidationError
    */
-  "date_created"?: SortBy4DateCreatedEnum;
+  "loc": Array<string | number>;
 
   /**
    *
    * @type {string}
-   * @memberof SortBy4
+   * @memberof ValidationError
    */
-  "send_date"?: SortBy4SendDateEnum;
+  "msg": string;
+
+  /**
+   *
+   * @type {string}
+   * @memberof ValidationError
+   */
+  "type": string;
 
   public toJSON() {
     let out = {};
@@ -52,23 +62,6 @@ export class SortBy4 {
     }
     return out;
   }
-}
-
-/**
- * @export
- * @enum {string}
- */
-export enum SortBy4DateCreatedEnum {
-  Asc = "asc",
-  Desc = "desc",
-}
-/**
- * @export
- * @enum {string}
- */
-export enum SortBy4SendDateEnum {
-  Asc = "asc",
-  Desc = "desc",
 }
 
 /**

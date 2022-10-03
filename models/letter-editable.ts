@@ -14,7 +14,6 @@
 
 import * as Models from "./index";
 
-import { LetterEditableCustomEnvelope } from "./letter-editable-custom-envelope";
 import { MailType } from "./mail-type";
 
 /**
@@ -150,10 +149,10 @@ export class LetterEditable {
 
   /**
    *
-   * @type {LetterEditableCustomEnvelope}
+   * @type {string}
    * @memberof LetterEditable
    */
-  "custom_envelope"?: LetterEditableCustomEnvelope | null;
+  "custom_envelope"?: string | null;
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.

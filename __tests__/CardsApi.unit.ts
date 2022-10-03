@@ -465,9 +465,7 @@ describe("CardsApi", () => {
         1,
         "fake",
         "id",
-        {
-          id: "asc",
-        }
+        ["asc"]
       );
       expect(cardsApi).toBeDefined();
       expect(cardsApi.data?.length).toEqual(1);

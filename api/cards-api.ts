@@ -283,7 +283,7 @@ export const CardsApiAxiosParamCreator = function (
      * @param {number} [limit] How many results to return.
      * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response.
      * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response.
-     * @param {object} [sortBy] Sorts items by ascending or descending dates. Use either &#x60;date_created&#x60; or &#x60;send_date&#x60;, not both.
+     * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -291,7 +291,7 @@ export const CardsApiAxiosParamCreator = function (
       limit?: number,
       before?: string,
       after?: string,
-      sortBy?: object,
+      include?: Array<string>,
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
       const localVarPath = `/cards`;
@@ -326,8 +326,8 @@ export const CardsApiAxiosParamCreator = function (
         localVarQueryParameter["after"] = after;
       }
 
-      if (sortBy !== undefined) {
-        localVarQueryParameter["sort_by"] = valueToString(sortBy);
+      if (include) {
+        localVarQueryParameter["include"] = valueToString(include);
       }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -459,7 +459,7 @@ export const CardsApiFp = function (configuration?: Configuration) {
      * @param {number} [limit] How many results to return.
      * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response.
      * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response.
-     * @param {object} [sortBy] Sorts items by ascending or descending dates. Use either &#x60;date_created&#x60; or &#x60;send_date&#x60;, not both.
+     * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -467,7 +467,7 @@ export const CardsApiFp = function (configuration?: Configuration) {
       limit?: number,
       before?: string,
       after?: string,
-      sortBy?: object,
+      include?: Array<string>,
       options?: AxiosRequestConfig
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<CardList>
@@ -476,7 +476,7 @@ export const CardsApiFp = function (configuration?: Configuration) {
         limit,
         before,
         after,
-        sortBy,
+        include,
         options
       );
       return createRequestFunction(
@@ -599,7 +599,7 @@ export class CardsApi extends BaseAPI {
    * @param {number} [limit] How many results to return.
    * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response.
    * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response.
-   * @param {object} [sortBy] Sorts items by ascending or descending dates. Use either &#x60;date_created&#x60; or &#x60;send_date&#x60;, not both.
+   * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof CardsApi
@@ -608,11 +608,11 @@ export class CardsApi extends BaseAPI {
     limit?: number,
     before?: string,
     after?: string,
-    sortBy?: object,
+    include?: Array<string>,
     options?: AxiosRequestConfig
   ) {
     return CardsApiFp(this.configuration)
-      .cardsList(limit, before, after, sortBy, options)
+      .cardsList(limit, before, after, include, options)
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {
         return new CardList(response.data);
