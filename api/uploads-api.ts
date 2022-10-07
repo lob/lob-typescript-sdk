@@ -60,6 +60,8 @@ import { UploadFile } from "../models";
 import { UploadUpdatable } from "../models";
 // @ts-ignore
 import { UploadWritable } from "../models";
+import { Blob } from "buffer";
+import * as fs from "fs";
 /**
  * UploadsApi - axios parameter creator
  * @export
@@ -332,7 +334,8 @@ export const UploadsApiAxiosParamCreator = function (
       if (file !== undefined) {
         localVarFormParams.append(
           "file",
-          new Blob([JSON.stringify(file)], { type: "application/json" })
+          // Buffer.from(file)
+          fs.createReadStream("/Users/jessica-ho/Downloads/lobster-family.csv")
         );
       }
 
