@@ -1,61 +1,65 @@
-import { CardEditable, CardEditableSizeEnum, CardUpdatable } from "../models";
-import { CardsApi } from "../api";
+import {
+  CampaignUpdatable,
+  CampaignWritable,
+  CmpScheduleType,
+} from "../models";
+import { CampaignsApi } from "../api/campaigns-api";
 
 import { fail } from "./testUtilities";
-
-// Axios Mock
-import axios from "axios";
 import {
   CONFIG_FOR_UNIT,
   CONFIG_WITH_BASE_OPTIONS_FOR_UNIT,
 } from "./testFixtures";
+
+// Axios Mock
+import axios from "axios";
 const axiosRequest: jest.Mock = axios.request as jest.Mock;
 jest.mock("axios", () => ({
   request: jest.fn(),
 }));
 
-describe("CardsApi", () => {
-  it("Card API can be instantiated", () => {
-    const cardsApi = new CardsApi(CONFIG_FOR_UNIT);
-    expect(cardsApi).toBeDefined();
-    expect(typeof cardsApi).toEqual("object");
-    expect(cardsApi).toBeInstanceOf(CardsApi);
+describe("CampaignsApi", () => {
+  it("Campaigns API can be instantiated", () => {
+    const campaignsApi = new CampaignsApi(CONFIG_FOR_UNIT);
+    expect(campaignsApi).toBeDefined();
+    expect(typeof campaignsApi).toEqual("object");
+    expect(campaignsApi).toBeInstanceOf(CampaignsApi);
   });
 
   describe("create", () => {
-    const cardEditableMock = new CardEditable({
-      front: "fake front",
-      back: "fake back",
-      size: CardEditableSizeEnum._2125x3375,
-      description: "fake description",
+    const campaignWritableMock = new CampaignWritable({
+      name: "TS Unit Test Campaign",
+      schedule_type: CmpScheduleType.Immediate,
     });
 
     it("exists", async () => {
-      const cardsApi = new CardsApi(CONFIG_FOR_UNIT);
-      expect(cardsApi.create).toBeDefined();
-      expect(typeof cardsApi.create).toEqual("function");
+      const campaignsApi = new CampaignsApi(CONFIG_FOR_UNIT);
+      expect(campaignsApi.create).toBeDefined();
+      expect(typeof campaignsApi.create).toEqual("function");
     });
 
-    it("creates a card", async () => {
+    it("creates a campaign", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "card_fakeId" },
+        data: { id: "cmp_fakeId" },
       }));
 
-      const card = await new CardsApi(CONFIG_FOR_UNIT).create(cardEditableMock);
-      expect(card).toBeDefined();
-      expect(card.id).toEqual("card_fakeId");
+      const campaign = await new CampaignsApi(CONFIG_FOR_UNIT).create(
+        campaignWritableMock
+      );
+      expect(campaign).toBeDefined();
+      expect(campaign.id).toEqual("cmp_fakeId");
     });
 
-    it("includes custom headers while it creates a card", async () => {
+    it("includes custom headers while it creates a campaign", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "card_fakeId" },
+        data: { id: "cmp_fakeId" },
       }));
 
-      const cardsApi = await new CardsApi(
+      const campaignsApi = await new CampaignsApi(
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
-      ).create(cardEditableMock);
-      expect(cardsApi).toBeDefined();
-      expect(cardsApi.id).toEqual("card_fakeId");
+      ).create(campaignWritableMock);
+      expect(campaignsApi).toBeDefined();
+      expect(campaignsApi.id).toEqual("cmp_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -67,7 +71,9 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(CONFIG_FOR_UNIT).create(cardEditableMock);
+        await new CampaignsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).create(
+          campaignWritableMock
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -83,7 +89,9 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(CONFIG_FOR_UNIT).create(cardEditableMock);
+        await new CampaignsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).create(
+          campaignWritableMock
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -99,7 +107,9 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(CONFIG_FOR_UNIT).create(cardEditableMock);
+        await new CampaignsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).create(
+          campaignWritableMock
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -110,12 +120,11 @@ describe("CardsApi", () => {
       axiosRequest.mockImplementationOnce(async () => {
         throw new Error("Unknown Error");
       });
-      const cardUpdatable = {
-        description: "card updated",
-      };
 
       try {
-        await new CardsApi(CONFIG_FOR_UNIT).create(cardEditableMock);
+        await new CampaignsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).create(
+          campaignWritableMock
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -125,31 +134,33 @@ describe("CardsApi", () => {
 
   describe("get", () => {
     it("exists", async () => {
-      const cardsApi = new CardsApi(CONFIG_FOR_UNIT);
-      expect(cardsApi.get).toBeDefined();
-      expect(typeof cardsApi.get).toEqual("function");
+      const campaignsApi = new CampaignsApi(CONFIG_FOR_UNIT);
+      expect(campaignsApi.get).toBeDefined();
+      expect(typeof campaignsApi.get).toEqual("function");
     });
 
-    it("gets cards for a card id", async () => {
+    it("gets campaigns for a campaign id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "card_fakeId" },
+        data: { id: "cmp_fakeId" },
       }));
 
-      const cards = await new CardsApi(CONFIG_FOR_UNIT).get("fake id");
-      expect(cards).toBeDefined();
-      expect(cards.id).toEqual("card_fakeId");
-    });
-
-    it("includes custom headers while it gets a card for a card id", async () => {
-      axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "card_fakeId" },
-      }));
-
-      const cards = await new CardsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).get(
-        "fake id"
+      const campaigns = await new CampaignsApi(CONFIG_FOR_UNIT).get(
+        "cmp_fakeId"
       );
-      expect(cards).toBeDefined();
-      expect(cards.id).toEqual("card_fakeId");
+      expect(campaigns).toBeDefined();
+      expect(campaigns.id).toEqual("cmp_fakeId");
+    });
+
+    it("includes custom headers while it gets a campaign for a campaign id", async () => {
+      axiosRequest.mockImplementationOnce(async () => ({
+        data: { id: "cmp_fakeId" },
+      }));
+
+      const campaigns = await new CampaignsApi(
+        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
+      ).get("cmp_fakeId");
+      expect(campaigns).toBeDefined();
+      expect(campaigns.id).toEqual("cmp_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -161,7 +172,9 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(CONFIG_FOR_UNIT).get("fake id");
+        await new CampaignsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).get(
+          "cmp_fakeId"
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -177,7 +190,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(CONFIG_FOR_UNIT).get("fake id");
+        await new CampaignsApi(CONFIG_FOR_UNIT).get("cmp_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -193,7 +206,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(CONFIG_FOR_UNIT).get("fake id");
+        await new CampaignsApi(CONFIG_FOR_UNIT).get("cmp_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -206,7 +219,9 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(CONFIG_FOR_UNIT).get("fake id");
+        await new CampaignsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).get(
+          "cmp_fakeId"
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -216,31 +231,33 @@ describe("CardsApi", () => {
 
   describe("delete", () => {
     it("exists", async () => {
-      const cardsApi = new CardsApi(CONFIG_FOR_UNIT);
-      expect(cardsApi.delete).toBeDefined();
-      expect(typeof cardsApi.delete).toEqual("function");
+      const campaignsApi = new CampaignsApi(CONFIG_FOR_UNIT);
+      expect(campaignsApi.delete).toBeDefined();
+      expect(typeof campaignsApi.delete).toEqual("function");
     });
 
-    it("deletes card for a card id", async () => {
+    it("deletes campaign for a campaign id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "card_fakeId" },
+        data: { id: "cmp_fakeId" },
       }));
 
-      const cards = await new CardsApi(CONFIG_FOR_UNIT).delete("fake id");
-      expect(cards).toBeDefined();
-      expect(cards.id).toEqual("card_fakeId");
+      const campaigns = await new CampaignsApi(CONFIG_FOR_UNIT).delete(
+        "cmp_fakeId"
+      );
+      expect(campaigns).toBeDefined();
+      expect(campaigns.id).toEqual("cmp_fakeId");
     });
 
-    it("includes custom headers while it deletes a card for a card id", async () => {
+    it("includes custom headers while it deletes a campaign for a campaign id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "card_fakeId" },
+        data: { id: "cmp_fakeId" },
       }));
 
-      const cards = await new CardsApi(
+      const campaigns = await new CampaignsApi(
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
-      ).delete("fake id");
-      expect(cards).toBeDefined();
-      expect(cards.id).toEqual("card_fakeId");
+      ).delete("cmp_fakeId");
+      expect(campaigns).toBeDefined();
+      expect(campaigns.id).toEqual("cmp_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -252,7 +269,9 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(CONFIG_FOR_UNIT).delete("fake id");
+        await new CampaignsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).delete(
+          "cmp_fakeId"
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -268,7 +287,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(CONFIG_FOR_UNIT).delete("fake id");
+        await new CampaignsApi(CONFIG_FOR_UNIT).delete("cmp_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -284,7 +303,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(CONFIG_FOR_UNIT).delete("fake id");
+        await new CampaignsApi(CONFIG_FOR_UNIT).delete("cmp_fakeId");
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -297,7 +316,9 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(CONFIG_FOR_UNIT).delete("fake id");
+        await new CampaignsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).delete(
+          "cmp_fakeId"
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -306,39 +327,39 @@ describe("CardsApi", () => {
   });
 
   describe("update", () => {
-    const cardUpdatable = new CardUpdatable({
-      description: "card updated",
+    const campaignUpdatable = new CampaignUpdatable({
+      description: "TS Unit Test Updated Campaign",
     });
 
     it("exists", async () => {
-      const cardsApi = new CardsApi(CONFIG_FOR_UNIT);
-      expect(cardsApi.update).toBeDefined();
-      expect(typeof cardsApi.update).toEqual("function");
+      const campaignsApi = new CampaignsApi(CONFIG_FOR_UNIT);
+      expect(campaignsApi.update).toBeDefined();
+      expect(typeof campaignsApi.update).toEqual("function");
     });
 
-    it("updates card for a card id", async () => {
+    it("updates campaign for a campaign id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "card_fakeId" },
+        data: { id: "cmp_fakeId" },
       }));
 
-      const cards = await new CardsApi(CONFIG_FOR_UNIT).update(
-        "fake id",
-        cardUpdatable
+      const campaigns = await new CampaignsApi(CONFIG_FOR_UNIT).update(
+        "cmp_fakeId",
+        campaignUpdatable
       );
-      expect(cards).toBeDefined();
-      expect(cards.id).toEqual("card_fakeId");
+      expect(campaigns).toBeDefined();
+      expect(campaigns.id).toEqual("cmp_fakeId");
     });
 
-    it("includes custom headers while it updates a card for a card id", async () => {
+    it("includes custom headers while it updates a campaign for a campaign id", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { id: "card_fakeId" },
+        data: { id: "cmp_fakeId" },
       }));
 
-      const cards = await new CardsApi(
+      const campaigns = await new CampaignsApi(
         CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
-      ).update("fake id", cardUpdatable);
-      expect(cards).toBeDefined();
-      expect(cards.id).toEqual("card_fakeId");
+      ).update("cmp_fakeId", campaignUpdatable);
+      expect(campaigns).toBeDefined();
+      expect(campaigns.id).toEqual("cmp_fakeId");
     });
 
     it("handles errors returned by the api", async () => {
@@ -350,42 +371,13 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(CONFIG_FOR_UNIT).update("fake id", cardUpdatable);
+        await new CampaignsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).update(
+          "cmp_fakeId",
+          campaignUpdatable
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
-      }
-    });
-
-    it("handles errors returned by the api with missing response.data", async () => {
-      axiosRequest.mockImplementationOnce(async () => {
-        throw {
-          message: "error",
-          response: {},
-        };
-      });
-
-      try {
-        await new CardsApi(CONFIG_FOR_UNIT).update("fake id", cardUpdatable);
-        fail("Should throw");
-      } catch (err: any) {
-        expect(err.message).toEqual("error");
-      }
-    });
-
-    it("handles errors returned by the api with missing response.data.error", async () => {
-      axiosRequest.mockImplementationOnce(async () => {
-        throw {
-          message: "error",
-          response: { data: {} },
-        };
-      });
-
-      try {
-        await new CardsApi(CONFIG_FOR_UNIT).update("fake id", cardUpdatable);
-        fail("Should throw");
-      } catch (err: any) {
-        expect(err.message).toEqual("error");
       }
     });
 
@@ -395,7 +387,10 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(CONFIG_FOR_UNIT).update("fake id", cardUpdatable);
+        await new CampaignsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).update(
+          "cmp_fakeId",
+          campaignUpdatable
+        );
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
@@ -405,82 +400,77 @@ describe("CardsApi", () => {
 
   describe("list", () => {
     it("exists", async () => {
-      const cardsApi = new CardsApi(CONFIG_FOR_UNIT);
-      expect(cardsApi.list).toBeDefined();
-      expect(typeof cardsApi.list).toEqual("function");
+      const campaignsApi = new CampaignsApi(CONFIG_FOR_UNIT);
+      expect(campaignsApi.list).toBeDefined();
+      expect(typeof campaignsApi.list).toEqual("function");
     });
 
-    it("gets all cards when no limit is provided", async () => {
+    it("gets all campaigns when no limit is provided", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
         data: {
-          data: [{ id: "card_fakeId" }, { id: "another card_fakeId" }],
+          data: [{ id: "cmp_fakeId" }, { id: "another cmp_fakeId" }],
         },
       }));
 
-      const cardsApi = await new CardsApi(CONFIG_FOR_UNIT).list();
-      expect(cardsApi).toBeDefined();
-      expect(cardsApi.data?.length).toEqual(2);
+      const campaigns = await new CampaignsApi(CONFIG_FOR_UNIT).list();
+      expect(campaigns).toBeDefined();
+      expect(campaigns.data?.length).toEqual(2);
     });
 
     it("should handle the limit", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "card_fakeId" }] },
+        data: { data: [{ id: "cmp_fakeId" }] },
       }));
 
-      const cardsApi = await new CardsApi(CONFIG_FOR_UNIT).list(1);
-      expect(cardsApi).toBeDefined();
-      expect(cardsApi.data?.length).toEqual(1);
+      const campaigns = await new CampaignsApi(CONFIG_FOR_UNIT).list(1);
+      expect(campaigns).toBeDefined();
+      expect(campaigns.data?.length).toEqual(1);
+    });
+
+    it("should handle the include parameter", async () => {
+      axiosRequest.mockImplementationOnce(async () => ({
+        data: {
+          data: [{ id: "cmp_fakeId" }],
+          total_count: 1,
+        },
+      }));
+
+      const campaignsApi = await new CampaignsApi(CONFIG_FOR_UNIT).list(
+        1, // limit
+        ["total_count"] // include
+      );
+      expect(campaignsApi).toBeDefined();
+      expect(campaignsApi.data?.length).toBeLessThanOrEqual(1);
+      expect(campaignsApi.total_count).toBeDefined();
     });
 
     it("should handle before pagination", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "card_fakeId" }] },
+        data: { data: [{ id: "cmp_fakeId" }] },
       }));
 
-      const cardsApi = await new CardsApi(CONFIG_FOR_UNIT).list(1, "fake");
-      expect(cardsApi).toBeDefined();
-      expect(cardsApi.data?.length).toEqual(1);
+      const campaigns = await new CampaignsApi(CONFIG_FOR_UNIT).list(
+        1, // limit
+        undefined, // include
+        "before" // before
+      );
+      expect(campaigns).toBeDefined();
+      expect(campaigns.data?.length).toBeLessThanOrEqual(1);
     });
 
     it("should handle the after pagination", async () => {
       axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "card_fakeId" }] },
+        data: { data: [{ id: "cmp_fakeId" }] },
       }));
 
-      const cardsApi = await new CardsApi(CONFIG_FOR_UNIT).list(
-        1,
-        "fake",
-        "id"
-      );
-      expect(cardsApi).toBeDefined();
-      expect(cardsApi.data?.length).toEqual(1);
-    });
-
-    it("should handle the sortBy correctly", async () => {
-      axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "card_fakeId" }] },
-      }));
-
-      const cardsApi = await new CardsApi(CONFIG_FOR_UNIT).list(
+      const campaignsApi = await new CampaignsApi(CONFIG_FOR_UNIT).list(
         1, // limit
-        "fake", // before
-        "id", // after
-        ["total_count"] // include
+        undefined, // include
+        undefined, // before
+        "after" // after
       );
-      expect(cardsApi).toBeDefined();
-      expect(cardsApi.data?.length).toEqual(1);
-    });
-
-    it("includes custom headers while it lists cards", async () => {
-      axiosRequest.mockImplementationOnce(async () => ({
-        data: { data: [{ id: "card_fakeId" }] },
-      }));
-
-      const cards = await new CardsApi(
-        CONFIG_WITH_BASE_OPTIONS_FOR_UNIT
-      ).list();
-      expect(cards).toBeDefined();
-      expect(cards.data?.length).toEqual(1);
+      expect(campaignsApi).toBeDefined();
+      expect(campaignsApi.data?.length).toBeLessThanOrEqual(1);
     });
 
     it("handles errors returned by the api", async () => {
@@ -492,7 +482,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(CONFIG_FOR_UNIT).list();
+        await new CampaignsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error reported by API");
@@ -508,7 +498,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(CONFIG_FOR_UNIT).list();
+        await new CampaignsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -524,7 +514,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(CONFIG_FOR_UNIT).list();
+        await new CampaignsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("error");
@@ -537,7 +527,7 @@ describe("CardsApi", () => {
       });
 
       try {
-        await new CardsApi(CONFIG_FOR_UNIT).list();
+        await new CampaignsApi(CONFIG_WITH_BASE_OPTIONS_FOR_UNIT).list();
         fail("Should throw");
       } catch (err: any) {
         expect(err.message).toEqual("Unknown Error");
