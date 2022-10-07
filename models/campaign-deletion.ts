@@ -17,9 +17,9 @@ import * as Models from "./index";
 /**
  * Lob uses RESTful HTTP response codes to indicate success or failure of an API request. In general, 2xx indicates success, 4xx indicate an input error, and 5xx indicates an error on Lob\'s end.
  * @export
- * @class InlineResponse200
+ * @class CampaignDeletion
  */
-export class InlineResponse200 {
+export class CampaignDeletion {
   constructor(input?: any) {
     if (typeof input?.id !== "undefined") {
       this.id = input.id;
@@ -32,7 +32,7 @@ export class InlineResponse200 {
   /**
    * Unique identifier prefixed with `cmp_`.
    * @type {string}
-   * @memberof InlineResponse200
+   * @memberof CampaignDeletion
    */
   private "_id"?: string;
   public get id() {
@@ -48,7 +48,7 @@ export class InlineResponse200 {
   /**
    * True if the resource has been successfully deleted.
    * @type {boolean}
-   * @memberof InlineResponse200
+   * @memberof CampaignDeletion
    */
   "deleted"?: boolean;
 
