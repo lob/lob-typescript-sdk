@@ -18,7 +18,6 @@ import {
   SortBy3DateCreatedEnum,
   SortBy3SendDateEnum,
   Thumbnail,
-  CountryExtended,
   TrackingEventCertified,
   TrackingEventCertifiedTypeEnum,
   TrackingEventCertifiedNameEnum,
@@ -560,6 +559,50 @@ describe("Sort Criteria", () => {
       ["date_created", SortBy3DateCreatedEnum.Desc],
       ["send_date", SortBy3SendDateEnum.Asc],
       ["send_date", SortBy3SendDateEnum.Desc],
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new SortBy3(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
+    });
+  });
+
+  describe("SortBy4", () => {
+    it("can be created", () => {
+      const rec = new SortBy3();
+      expect(rec).toBeDefined();
+    });
+
+    it.each([
+      ["date_created", SortBySendDateEnum.Asc],
+      ["date_created", SortBySendDateEnum.Desc],
+      ["send_date", SortBySendDateEnum.Asc],
+      ["send_date", SortBySendDateEnum.Desc],
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
+
+      const rec = new SortBy3(input);
+
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
+    });
+  });
+
+  describe("SortBy5", () => {
+    it("can be created", () => {
+      const rec = new SortBy3();
+      expect(rec).toBeDefined();
+    });
+
+    it.each([
+      ["date_created", SortBySendDateEnum.Asc],
+      ["date_created", SortBySendDateEnum.Desc],
+      ["send_date", SortBySendDateEnum.Asc],
+      ["send_date", SortBySendDateEnum.Desc],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
