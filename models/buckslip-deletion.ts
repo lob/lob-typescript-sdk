@@ -17,9 +17,9 @@ import * as Models from "./index";
 /**
  * Lob uses RESTful HTTP response codes to indicate success or failure of an API request. In general, 2xx indicates success, 4xx indicate an input error, and 5xx indicates an error on Lob\'s end.
  * @export
- * @class CampaignDeletion
+ * @class BuckslipDeletion
  */
-export class CampaignDeletion {
+export class BuckslipDeletion {
   constructor(input?: any) {
     if (typeof input?.id !== "undefined") {
       this.id = input.id;
@@ -30,25 +30,25 @@ export class CampaignDeletion {
   }
 
   /**
-   * Unique identifier prefixed with `cmp_`.
+   * Unique identifier prefixed with `bck_`.
    * @type {string}
-   * @memberof CampaignDeletion
+   * @memberof BuckslipDeletion
    */
   private "_id"?: string;
   public get id() {
     return (this._id || undefined) as string;
   }
   public set id(newValue: string) {
-    if (newValue && !/^cmp_[a-zA-Z0-9]+$/.test(newValue)) {
+    if (newValue && !/^bck_[a-zA-Z0-9]+$/.test(newValue)) {
       throw new Error("Invalid id provided");
     }
     this._id = newValue;
   }
 
   /**
-   * True if the resource has been successfully deleted.
+   * Only returned if the resource has been successfully deleted.
    * @type {boolean}
-   * @memberof CampaignDeletion
+   * @memberof BuckslipDeletion
    */
   "deleted"?: boolean;
 

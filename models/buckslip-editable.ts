@@ -17,31 +17,51 @@ import * as Models from "./index";
 /**
  *
  * @export
- * @class UploadCreateExport
+ * @class BuckslipEditable
  */
-export class UploadCreateExport {
+export class BuckslipEditable {
   constructor(input?: any) {
-    if (typeof input?.message !== "undefined") {
-      this.message = input.message;
+    if (typeof input?.front !== "undefined") {
+      this.front = input.front;
     }
-    if (typeof input?.exportId !== "undefined") {
-      this.exportId = input.exportId;
+    if (typeof input?.back !== "undefined") {
+      this.back = input.back;
+    }
+    if (typeof input?.description !== "undefined") {
+      this.description = input.description;
+    }
+    if (typeof input?.size !== "undefined") {
+      this.size = input.size;
     }
   }
 
   /**
-   *
+   * A PDF template for the front of the buckslip
    * @type {string}
-   * @memberof UploadCreateExport
+   * @memberof BuckslipEditable
    */
-  "message": UploadCreateExportMessageEnum;
+  "front": string;
 
   /**
-   *
+   * A PDF template for the back of the buckslip
    * @type {string}
-   * @memberof UploadCreateExport
+   * @memberof BuckslipEditable
    */
-  "exportId": string;
+  "back"?: string;
+
+  /**
+   * Description of the buckslip.
+   * @type {string}
+   * @memberof BuckslipEditable
+   */
+  "description"?: string | null;
+
+  /**
+   * The size of the buckslip
+   * @type {string}
+   * @memberof BuckslipEditable
+   */
+  "size"?: BuckslipEditableSizeEnum;
 
   public toJSON() {
     let out = {};
@@ -58,8 +78,8 @@ export class UploadCreateExport {
  * @export
  * @enum {string}
  */
-export enum UploadCreateExportMessageEnum {
-  ExportIsProcessing = "Export is processing.",
+export enum BuckslipEditableSizeEnum {
+  _875x375 = "8.75x3.75",
 }
 
 /**

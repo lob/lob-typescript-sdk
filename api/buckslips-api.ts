@@ -43,41 +43,39 @@ import {
   RequiredError,
 } from "../base";
 // @ts-ignore
-import { Campaign } from "../models";
+import { Buckslip } from "../models";
 // @ts-ignore
-import { CampaignDeletion } from "../models";
+import { BuckslipDeletion } from "../models";
 // @ts-ignore
-import { CampaignUpdatable } from "../models";
+import { BuckslipEditable } from "../models";
 // @ts-ignore
-import { CampaignWritable } from "../models";
+import { BuckslipUpdatable } from "../models";
 // @ts-ignore
-import { CampaignsList } from "../models";
+import { BuckslipsList } from "../models";
 // @ts-ignore
 import { LobError } from "../models";
 /**
- * CampaignsApi - axios parameter creator
+ * BuckslipsApi - axios parameter creator
  * @export
  */
-export const CampaignsApiAxiosParamCreator = function (
+export const BuckslipsApiAxiosParamCreator = function (
   configuration?: Configuration
 ) {
   return {
     /**
-     * Creates a new campaign with the provided properties. See how to launch your first campaign [here](https://help.lob.com/best-practices/launching-your-first-campaign).
-     * @summary create
-     * @param {CampaignWritable} campaignWritable
-     * @param {'native' | 'match'} [xLangOutput] * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English.
+     * Creates a new buckslip given information
+     * @summary Create
+     * @param {BuckslipEditable} buckslipEditable
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    campaignCreate: async (
-      campaignWritable: CampaignWritable,
-      xLangOutput?: "native" | "match",
+    buckslipCreate: async (
+      buckslipEditable: BuckslipEditable,
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
-      // verify required parameter 'campaignWritable' is not null or undefined
-      assertParamExists("campaignCreate", "campaignWritable", campaignWritable);
-      const localVarPath = `/campaigns`;
+      // verify required parameter 'buckslipEditable' is not null or undefined
+      assertParamExists("buckslipCreate", "buckslipEditable", buckslipEditable);
+      const localVarPath = `/buckslips`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;
@@ -97,10 +95,6 @@ export const CampaignsApiAxiosParamCreator = function (
       // http basic authentication required
       setBasicAuthToObject(localVarRequestOptions, configuration);
 
-      if (xLangOutput !== undefined && xLangOutput !== null) {
-        localVarHeaderParameter["x-lang-output"] = String(xLangOutput);
-      }
-
       localVarHeaderParameter["Content-Type"] = "application/json";
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -112,7 +106,7 @@ export const CampaignsApiAxiosParamCreator = function (
         ...options.headers,
       };
       localVarRequestOptions.data = serializeDataIfNeeded(
-        campaignWritable,
+        buckslipEditable,
         localVarRequestOptions,
         configuration
       );
@@ -123,21 +117,21 @@ export const CampaignsApiAxiosParamCreator = function (
       };
     },
     /**
-     * Delete an existing campaign. You need only supply the unique identifier that was returned upon campaign creation. Deleting a campaign also deletes any associated mail pieces that have been created but not sent. A campaign\'s `send_date` matches its associated mail pieces\' `send_date`s.
-     * @summary delete
-     * @param {string} cmpId id of the campaign
+     * Delete an existing buckslip. You need only supply the unique identifier that was returned upon buckslip creation.
+     * @summary Delete
+     * @param {string} buckslipId id of the buckslip
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    campaignDelete: async (
-      cmpId: string,
+    buckslipDelete: async (
+      buckslipId: string,
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
-      // verify required parameter 'cmpId' is not null or undefined
-      assertParamExists("campaignDelete", "cmpId", cmpId);
-      const localVarPath = `/campaigns/{cmp_id}`.replace(
-        `{${"cmp_id"}}`,
-        encodeURIComponent(String(cmpId))
+      // verify required parameter 'buckslipId' is not null or undefined
+      assertParamExists("buckslipDelete", "buckslipId", buckslipId);
+      const localVarPath = `/buckslips/{buckslip_id}`.replace(
+        `{${"buckslip_id"}}`,
+        encodeURIComponent(String(buckslipId))
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -173,21 +167,21 @@ export const CampaignsApiAxiosParamCreator = function (
       };
     },
     /**
-     * Retrieves the details of an existing campaign. You need only supply the unique campaign identifier that was returned upon campaign creation.
-     * @summary get
-     * @param {string} cmpId id of the campaign
+     * Retrieves the details of an existing buckslip. You need only supply the unique customer identifier that was returned upon buckslip creation.
+     * @summary Retrieve
+     * @param {string} buckslipId id of the buckslip
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    campaignRetrieve: async (
-      cmpId: string,
+    buckslipRetrieve: async (
+      buckslipId: string,
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
-      // verify required parameter 'cmpId' is not null or undefined
-      assertParamExists("campaignRetrieve", "cmpId", cmpId);
-      const localVarPath = `/campaigns/{cmp_id}`.replace(
-        `{${"cmp_id"}}`,
-        encodeURIComponent(String(cmpId))
+      // verify required parameter 'buckslipId' is not null or undefined
+      assertParamExists("buckslipRetrieve", "buckslipId", buckslipId);
+      const localVarPath = `/buckslips/{buckslip_id}`.replace(
+        `{${"buckslip_id"}}`,
+        encodeURIComponent(String(buckslipId))
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -223,29 +217,29 @@ export const CampaignsApiAxiosParamCreator = function (
       };
     },
     /**
-     * Update the details of an existing campaign. You need only supply the unique identifier that was returned upon campaign creation.
-     * @summary update
-     * @param {string} cmpId id of the campaign
-     * @param {CampaignUpdatable} campaignUpdatable
+     * Update the details of an existing buckslip. You need only supply the unique identifier that was returned upon buckslip creation.
+     * @summary Update
+     * @param {string} buckslipId id of the buckslip
+     * @param {BuckslipUpdatable} buckslipUpdatable
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    campaignUpdate: async (
-      cmpId: string,
-      campaignUpdatable: CampaignUpdatable,
+    buckslipUpdate: async (
+      buckslipId: string,
+      buckslipUpdatable: BuckslipUpdatable,
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
-      // verify required parameter 'cmpId' is not null or undefined
-      assertParamExists("campaignUpdate", "cmpId", cmpId);
-      // verify required parameter 'campaignUpdatable' is not null or undefined
+      // verify required parameter 'buckslipId' is not null or undefined
+      assertParamExists("buckslipUpdate", "buckslipId", buckslipId);
+      // verify required parameter 'buckslipUpdatable' is not null or undefined
       assertParamExists(
-        "campaignUpdate",
-        "campaignUpdatable",
-        campaignUpdatable
+        "buckslipUpdate",
+        "buckslipUpdatable",
+        buckslipUpdatable
       );
-      const localVarPath = `/campaigns/{cmp_id}`.replace(
-        `{${"cmp_id"}}`,
-        encodeURIComponent(String(cmpId))
+      const localVarPath = `/buckslips/{buckslip_id}`.replace(
+        `{${"buckslip_id"}}`,
+        encodeURIComponent(String(buckslipId))
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -277,7 +271,7 @@ export const CampaignsApiAxiosParamCreator = function (
         ...options.headers,
       };
       localVarRequestOptions.data = serializeDataIfNeeded(
-        campaignUpdatable,
+        buckslipUpdatable,
         localVarRequestOptions,
         configuration
       );
@@ -288,23 +282,23 @@ export const CampaignsApiAxiosParamCreator = function (
       };
     },
     /**
-     * Returns a list of your campaigns. The campaigns are returned sorted by creation date, with the most recently created campaigns appearing first.
-     * @summary list
+     * Returns a list of your buckslips. The buckslips are returned sorted by creation date, with the most recently created buckslips appearing first.
+     * @summary List
      * @param {number} [limit] How many results to return.
-     * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
      * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response.
      * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response.
+     * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    campaignsList: async (
+    buckslipsList: async (
       limit?: number,
-      include?: Array<string>,
       before?: string,
       after?: string,
+      include?: Array<string>,
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
-      const localVarPath = `/campaigns`;
+      const localVarPath = `/buckslips`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;
@@ -328,16 +322,16 @@ export const CampaignsApiAxiosParamCreator = function (
         localVarQueryParameter["limit"] = limit;
       }
 
-      if (include) {
-        localVarQueryParameter["include"] = valueToString(include);
-      }
-
       if (before !== undefined) {
         localVarQueryParameter["before"] = before;
       }
 
       if (after !== undefined) {
         localVarQueryParameter["after"] = after;
+      }
+
+      if (include) {
+        localVarQueryParameter["include"] = valueToString(include);
       }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -358,31 +352,28 @@ export const CampaignsApiAxiosParamCreator = function (
 };
 
 /**
- * CampaignsApi - functional programming interface
+ * BuckslipsApi - functional programming interface
  * @export
  */
-export const CampaignsApiFp = function (configuration?: Configuration) {
+export const BuckslipsApiFp = function (configuration?: Configuration) {
   const localVarAxiosParamCreator =
-    CampaignsApiAxiosParamCreator(configuration);
+    BuckslipsApiAxiosParamCreator(configuration);
   return {
     /**
-     * Creates a new campaign with the provided properties. See how to launch your first campaign [here](https://help.lob.com/best-practices/launching-your-first-campaign).
-     * @summary create
-     * @param {CampaignWritable} campaignWritable
-     * @param {'native' | 'match'} [xLangOutput] * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English.
+     * Creates a new buckslip given information
+     * @summary Create
+     * @param {BuckslipEditable} buckslipEditable
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async campaignCreate(
-      campaignWritable: CampaignWritable,
-      xLangOutput?: "native" | "match",
+    async buckslipCreate(
+      buckslipEditable: BuckslipEditable,
       options?: AxiosRequestConfig
     ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Campaign>
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Buckslip>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.campaignCreate(
-        campaignWritable,
-        xLangOutput,
+      const localVarAxiosArgs = await localVarAxiosParamCreator.buckslipCreate(
+        buckslipEditable,
         options
       );
       return createRequestFunction(
@@ -393,23 +384,23 @@ export const CampaignsApiFp = function (configuration?: Configuration) {
       );
     },
     /**
-     * Delete an existing campaign. You need only supply the unique identifier that was returned upon campaign creation. Deleting a campaign also deletes any associated mail pieces that have been created but not sent. A campaign\'s `send_date` matches its associated mail pieces\' `send_date`s.
-     * @summary delete
-     * @param {string} cmpId id of the campaign
+     * Delete an existing buckslip. You need only supply the unique identifier that was returned upon buckslip creation.
+     * @summary Delete
+     * @param {string} buckslipId id of the buckslip
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async campaignDelete(
-      cmpId: string,
+    async buckslipDelete(
+      buckslipId: string,
       options?: AxiosRequestConfig
     ): Promise<
       (
         axios?: AxiosInstance,
         basePath?: string
-      ) => AxiosPromise<CampaignDeletion>
+      ) => AxiosPromise<BuckslipDeletion>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.campaignDelete(
-        cmpId,
+      const localVarAxiosArgs = await localVarAxiosParamCreator.buckslipDelete(
+        buckslipId,
         options
       );
       return createRequestFunction(
@@ -420,20 +411,20 @@ export const CampaignsApiFp = function (configuration?: Configuration) {
       );
     },
     /**
-     * Retrieves the details of an existing campaign. You need only supply the unique campaign identifier that was returned upon campaign creation.
-     * @summary get
-     * @param {string} cmpId id of the campaign
+     * Retrieves the details of an existing buckslip. You need only supply the unique customer identifier that was returned upon buckslip creation.
+     * @summary Retrieve
+     * @param {string} buckslipId id of the buckslip
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async campaignRetrieve(
-      cmpId: string,
+    async buckslipRetrieve(
+      buckslipId: string,
       options?: AxiosRequestConfig
     ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Campaign>
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Buckslip>
     > {
       const localVarAxiosArgs =
-        await localVarAxiosParamCreator.campaignRetrieve(cmpId, options);
+        await localVarAxiosParamCreator.buckslipRetrieve(buckslipId, options);
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
@@ -442,23 +433,23 @@ export const CampaignsApiFp = function (configuration?: Configuration) {
       );
     },
     /**
-     * Update the details of an existing campaign. You need only supply the unique identifier that was returned upon campaign creation.
-     * @summary update
-     * @param {string} cmpId id of the campaign
-     * @param {CampaignUpdatable} campaignUpdatable
+     * Update the details of an existing buckslip. You need only supply the unique identifier that was returned upon buckslip creation.
+     * @summary Update
+     * @param {string} buckslipId id of the buckslip
+     * @param {BuckslipUpdatable} buckslipUpdatable
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async campaignUpdate(
-      cmpId: string,
-      campaignUpdatable: CampaignUpdatable,
+    async buckslipUpdate(
+      buckslipId: string,
+      buckslipUpdatable: BuckslipUpdatable,
       options?: AxiosRequestConfig
     ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Campaign>
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Buckslip>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.campaignUpdate(
-        cmpId,
-        campaignUpdatable,
+      const localVarAxiosArgs = await localVarAxiosParamCreator.buckslipUpdate(
+        buckslipId,
+        buckslipUpdatable,
         options
       );
       return createRequestFunction(
@@ -469,29 +460,29 @@ export const CampaignsApiFp = function (configuration?: Configuration) {
       );
     },
     /**
-     * Returns a list of your campaigns. The campaigns are returned sorted by creation date, with the most recently created campaigns appearing first.
-     * @summary list
+     * Returns a list of your buckslips. The buckslips are returned sorted by creation date, with the most recently created buckslips appearing first.
+     * @summary List
      * @param {number} [limit] How many results to return.
-     * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
      * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response.
      * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response.
+     * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async campaignsList(
+    async buckslipsList(
       limit?: number,
-      include?: Array<string>,
       before?: string,
       after?: string,
+      include?: Array<string>,
       options?: AxiosRequestConfig
     ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<CampaignsList>
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<BuckslipsList>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsList(
+      const localVarAxiosArgs = await localVarAxiosParamCreator.buckslipsList(
         limit,
-        include,
         before,
         after,
+        include,
         options
       );
       return createRequestFunction(
@@ -505,31 +496,29 @@ export const CampaignsApiFp = function (configuration?: Configuration) {
 };
 
 /**
- * CampaignsApi - object-oriented interface
+ * BuckslipsApi - object-oriented interface
  * @export
- * @class CampaignsApi
+ * @class BuckslipsApi
  * @extends {BaseAPI}
  */
-export class CampaignsApi extends BaseAPI {
+export class BuckslipsApi extends BaseAPI {
   /**
-   * Creates a new campaign with the provided properties. See how to launch your first campaign [here](https://help.lob.com/best-practices/launching-your-first-campaign).
-   * @summary create
-   * @param {CampaignWritable} campaignWritable
-   * @param {'native' | 'match'} [xLangOutput] * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English.
+   * Creates a new buckslip given information
+   * @summary Create
+   * @param {BuckslipEditable} buckslipEditable
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof CampaignsApi
+   * @memberof BuckslipsApi
    */
-  public create(
-    campaignWritable: CampaignWritable,
-    xLangOutput?: "native" | "match",
+  public Create(
+    buckslipEditable: BuckslipEditable,
     options?: AxiosRequestConfig
   ) {
-    return CampaignsApiFp(this.configuration)
-      .campaignCreate(campaignWritable, xLangOutput, options)
+    return BuckslipsApiFp(this.configuration)
+      .buckslipCreate(buckslipEditable, options)
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {
-        return new Campaign(response.data);
+        return new Buckslip(response.data);
       })
       .catch((error) => {
         if (error.response?.data?.error?.message) {
@@ -540,19 +529,19 @@ export class CampaignsApi extends BaseAPI {
   }
 
   /**
-   * Delete an existing campaign. You need only supply the unique identifier that was returned upon campaign creation. Deleting a campaign also deletes any associated mail pieces that have been created but not sent. A campaign\'s `send_date` matches its associated mail pieces\' `send_date`s.
-   * @summary delete
-   * @param {string} cmpId id of the campaign
+   * Delete an existing buckslip. You need only supply the unique identifier that was returned upon buckslip creation.
+   * @summary Delete
+   * @param {string} buckslipId id of the buckslip
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof CampaignsApi
+   * @memberof BuckslipsApi
    */
-  public delete(cmpId: string, options?: AxiosRequestConfig) {
-    return CampaignsApiFp(this.configuration)
-      .campaignDelete(cmpId, options)
+  public Delete(buckslipId: string, options?: AxiosRequestConfig) {
+    return BuckslipsApiFp(this.configuration)
+      .buckslipDelete(buckslipId, options)
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {
-        return new CampaignDeletion(response.data);
+        return new BuckslipDeletion(response.data);
       })
       .catch((error) => {
         if (error.response?.data?.error?.message) {
@@ -563,19 +552,19 @@ export class CampaignsApi extends BaseAPI {
   }
 
   /**
-   * Retrieves the details of an existing campaign. You need only supply the unique campaign identifier that was returned upon campaign creation.
-   * @summary get
-   * @param {string} cmpId id of the campaign
+   * Retrieves the details of an existing buckslip. You need only supply the unique customer identifier that was returned upon buckslip creation.
+   * @summary Retrieve
+   * @param {string} buckslipId id of the buckslip
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof CampaignsApi
+   * @memberof BuckslipsApi
    */
-  public get(cmpId: string, options?: AxiosRequestConfig) {
-    return CampaignsApiFp(this.configuration)
-      .campaignRetrieve(cmpId, options)
+  public Retrieve(buckslipId: string, options?: AxiosRequestConfig) {
+    return BuckslipsApiFp(this.configuration)
+      .buckslipRetrieve(buckslipId, options)
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {
-        return new Campaign(response.data);
+        return new Buckslip(response.data);
       })
       .catch((error) => {
         if (error.response?.data?.error?.message) {
@@ -586,24 +575,24 @@ export class CampaignsApi extends BaseAPI {
   }
 
   /**
-   * Update the details of an existing campaign. You need only supply the unique identifier that was returned upon campaign creation.
-   * @summary update
-   * @param {string} cmpId id of the campaign
-   * @param {CampaignUpdatable} campaignUpdatable
+   * Update the details of an existing buckslip. You need only supply the unique identifier that was returned upon buckslip creation.
+   * @summary Update
+   * @param {string} buckslipId id of the buckslip
+   * @param {BuckslipUpdatable} buckslipUpdatable
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof CampaignsApi
+   * @memberof BuckslipsApi
    */
-  public update(
-    cmpId: string,
-    campaignUpdatable: CampaignUpdatable,
+  public Update(
+    buckslipId: string,
+    buckslipUpdatable: BuckslipUpdatable,
     options?: AxiosRequestConfig
   ) {
-    return CampaignsApiFp(this.configuration)
-      .campaignUpdate(cmpId, campaignUpdatable, options)
+    return BuckslipsApiFp(this.configuration)
+      .buckslipUpdate(buckslipId, buckslipUpdatable, options)
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {
-        return new Campaign(response.data);
+        return new Buckslip(response.data);
       })
       .catch((error) => {
         if (error.response?.data?.error?.message) {
@@ -614,28 +603,28 @@ export class CampaignsApi extends BaseAPI {
   }
 
   /**
-   * Returns a list of your campaigns. The campaigns are returned sorted by creation date, with the most recently created campaigns appearing first.
-   * @summary list
+   * Returns a list of your buckslips. The buckslips are returned sorted by creation date, with the most recently created buckslips appearing first.
+   * @summary List
    * @param {number} [limit] How many results to return.
-   * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
    * @param {string} [before] A reference to a list entry used for paginating to the previous set of entries. This field is pre-populated in the &#x60;previous_url&#x60; field in the return response.
    * @param {string} [after] A reference to a list entry used for paginating to the next set of entries. This field is pre-populated in the &#x60;next_url&#x60; field in the return response.
+   * @param {Array<string>} [include] Request that the response include the total count by specifying &#x60;include[]&#x3D;total_count&#x60;.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof CampaignsApi
+   * @memberof BuckslipsApi
    */
-  public list(
+  public List(
     limit?: number,
-    include?: Array<string>,
     before?: string,
     after?: string,
+    include?: Array<string>,
     options?: AxiosRequestConfig
   ) {
-    return CampaignsApiFp(this.configuration)
-      .campaignsList(limit, include, before, after, options)
+    return BuckslipsApiFp(this.configuration)
+      .buckslipsList(limit, before, after, include, options)
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {
-        return new CampaignsList(response.data);
+        return new BuckslipsList(response.data);
       })
       .catch((error) => {
         if (error.response?.data?.error?.message) {

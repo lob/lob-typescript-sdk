@@ -17,42 +17,41 @@ import * as Models from "./index";
 /**
  *
  * @export
- * @class CreativePatch
+ * @class BuckslipUpdatable
  */
-export class CreativePatch {
+export class BuckslipUpdatable {
   constructor(input?: any) {
-    if (typeof input?.from !== "undefined") {
-      this.from = input.from;
-    }
     if (typeof input?.description !== "undefined") {
       this.description = input.description;
     }
-    if (typeof input?.metadata !== "undefined") {
-      this.metadata = input.metadata;
+    if (typeof input?.auto_reorder !== "undefined") {
+      this.auto_reorder = input.auto_reorder;
+    }
+    if (typeof input?.reorder_quantity !== "undefined") {
+      this.reorder_quantity = input.reorder_quantity;
     }
   }
 
   /**
-   * Must either be an address ID or an inline object with correct address parameters.
-   * @type {any}
-   * @memberof CreativePatch
-   */
-
-  "from"?: string | Models.AddressEditable | null;
-
-  /**
-   * An internal description that identifies this resource. Must be no longer than 255 characters.
+   * Description of the buckslip.
    * @type {string}
-   * @memberof CreativePatch
+   * @memberof BuckslipUpdatable
    */
   "description"?: string | null;
 
   /**
-   * Use metadata to store custom information for tagging and labeling back to your internal systems. Must be an object with up to 20 key-value pairs. Keys must be at most 40 characters and values must be at most 500 characters. Neither can contain the characters `\"` and `\\`. i.e. \'{\"customer_id\" : \"NEWYORK2015\"}\' Nested objects are not supported.  See [Metadata](#section/Metadata) for more information.
-   * @type {{ [key: string]: string; }}
-   * @memberof CreativePatch
+   * Allows for auto reordering
+   * @type {boolean}
+   * @memberof BuckslipUpdatable
    */
-  "metadata"?: { [key: string]: string };
+  "auto_reorder"?: boolean;
+
+  /**
+   * The quantity of items to be reordered (only required when auto_reorder is true).
+   * @type {number}
+   * @memberof BuckslipUpdatable
+   */
+  "reorder_quantity"?: number;
 
   public toJSON() {
     let out = {};

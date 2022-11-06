@@ -15,6 +15,7 @@
 import * as Models from "./index";
 
 import { MailType } from "./mail-type";
+import { QrCode } from "./qr-code";
 
 /**
  *
@@ -73,6 +74,9 @@ export class LetterEditable {
     }
     if (typeof input?.billing_group_id !== "undefined") {
       this.billing_group_id = input.billing_group_id;
+    }
+    if (typeof input?.qr_code !== "undefined") {
+      this.qr_code = input.qr_code;
     }
   }
 
@@ -197,6 +201,13 @@ export class LetterEditable {
    * @memberof LetterEditable
    */
   "billing_group_id"?: string;
+
+  /**
+   *
+   * @type {QrCode}
+   * @memberof LetterEditable
+   */
+  "qr_code"?: QrCode;
 
   public toJSON() {
     let out = {};

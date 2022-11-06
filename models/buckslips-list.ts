@@ -14,14 +14,14 @@
 
 import * as Models from "./index";
 
-import { Campaign } from "./campaign";
+import { Buckslip } from "./buckslip";
 
 /**
  *
  * @export
- * @class CampaignsList
+ * @class BuckslipsList
  */
-export class CampaignsList {
+export class BuckslipsList {
   constructor(input?: any) {
     if (typeof input?.data !== "undefined") {
       this.data = input.data;
@@ -44,23 +44,23 @@ export class CampaignsList {
   }
 
   /**
-   * list of campaigns
-   * @type {Array<Campaign>}
-   * @memberof CampaignsList
+   * list of buckslips
+   * @type {Array<Buckslip>}
+   * @memberof BuckslipsList
    */
-  "data"?: Array<Campaign>;
+  "data"?: Array<Buckslip>;
 
   /**
    * Value is type of resource.
    * @type {string}
-   * @memberof CampaignsList
+   * @memberof BuckslipsList
    */
   "object"?: string;
 
   /**
    * url of next page of items in list.
    * @type {string}
-   * @memberof CampaignsList
+   * @memberof BuckslipsList
    */
   "next_url"?: string | null;
 
@@ -77,7 +77,7 @@ export class CampaignsList {
   /**
    * url of previous page of items in list.
    * @type {string}
-   * @memberof CampaignsList
+   * @memberof BuckslipsList
    */
   "previous_url"?: string | null;
 
@@ -94,14 +94,14 @@ export class CampaignsList {
   /**
    * number of resources in a set
    * @type {number}
-   * @memberof CampaignsList
+   * @memberof BuckslipsList
    */
   "count"?: number;
 
   /**
    * indicates the total number of records. Provided when the request specifies an \"include\" query parameter
    * @type {number}
-   * @memberof CampaignsList
+   * @memberof BuckslipsList
    */
   "total_count"?: number;
 
