@@ -14,36 +14,54 @@
 
 import * as Models from "./index";
 
-import { UploadState } from "./upload-state";
-
 /**
  *
  * @export
- * @class UploadUpdatable
+ * @class BuckslipEditable
  */
-export class UploadUpdatable {
+export class BuckslipEditable {
   constructor(input?: any) {
-    if (typeof input?.state !== "undefined") {
-      this.state = input.state;
+    if (typeof input?.front !== "undefined") {
+      this.front = input.front;
     }
-    if (typeof input?.originalFilename !== "undefined") {
-      this.originalFilename = input.originalFilename;
+    if (typeof input?.back !== "undefined") {
+      this.back = input.back;
+    }
+    if (typeof input?.description !== "undefined") {
+      this.description = input.description;
+    }
+    if (typeof input?.size !== "undefined") {
+      this.size = input.size;
     }
   }
 
   /**
-   *
-   * @type {UploadState}
-   * @memberof UploadUpdatable
+   * A PDF template for the front of the buckslip
+   * @type {string}
+   * @memberof BuckslipEditable
    */
-  "state"?: UploadState;
+  "front": string;
 
   /**
-   * Original filename provided when the upload is created.
+   * A PDF template for the back of the buckslip
    * @type {string}
-   * @memberof UploadUpdatable
+   * @memberof BuckslipEditable
    */
-  "originalFilename"?: string;
+  "back"?: string;
+
+  /**
+   * Description of the buckslip.
+   * @type {string}
+   * @memberof BuckslipEditable
+   */
+  "description"?: string | null;
+
+  /**
+   * The size of the buckslip
+   * @type {string}
+   * @memberof BuckslipEditable
+   */
+  "size"?: BuckslipEditableSizeEnum;
 
   public toJSON() {
     let out = {};
@@ -54,6 +72,14 @@ export class UploadUpdatable {
     }
     return out;
   }
+}
+
+/**
+ * @export
+ * @enum {string}
+ */
+export enum BuckslipEditableSizeEnum {
+  _875x375 = "8.75x3.75",
 }
 
 /**

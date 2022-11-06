@@ -16,6 +16,7 @@ import * as Models from "./index";
 
 import { MailType } from "./mail-type";
 import { PostcardSize } from "./postcard-size";
+import { QrCode } from "./qr-code";
 
 /**
  *
@@ -56,6 +57,9 @@ export class PostcardEditable {
     }
     if (typeof input?.billing_group_id !== "undefined") {
       this.billing_group_id = input.billing_group_id;
+    }
+    if (typeof input?.qr_code !== "undefined") {
+      this.qr_code = input.qr_code;
     }
   }
 
@@ -137,6 +141,13 @@ export class PostcardEditable {
    * @memberof PostcardEditable
    */
   "billing_group_id"?: string;
+
+  /**
+   *
+   * @type {QrCode}
+   * @memberof PostcardEditable
+   */
+  "qr_code"?: QrCode;
 
   public toJSON() {
     let out = {};

@@ -14,36 +14,44 @@
 
 import * as Models from "./index";
 
-import { UploadState } from "./upload-state";
-
 /**
  *
  * @export
- * @class UploadUpdatable
+ * @class BuckslipUpdatable
  */
-export class UploadUpdatable {
+export class BuckslipUpdatable {
   constructor(input?: any) {
-    if (typeof input?.state !== "undefined") {
-      this.state = input.state;
+    if (typeof input?.description !== "undefined") {
+      this.description = input.description;
     }
-    if (typeof input?.originalFilename !== "undefined") {
-      this.originalFilename = input.originalFilename;
+    if (typeof input?.auto_reorder !== "undefined") {
+      this.auto_reorder = input.auto_reorder;
+    }
+    if (typeof input?.reorder_quantity !== "undefined") {
+      this.reorder_quantity = input.reorder_quantity;
     }
   }
 
   /**
-   *
-   * @type {UploadState}
-   * @memberof UploadUpdatable
+   * Description of the buckslip.
+   * @type {string}
+   * @memberof BuckslipUpdatable
    */
-  "state"?: UploadState;
+  "description"?: string | null;
 
   /**
-   * Original filename provided when the upload is created.
-   * @type {string}
-   * @memberof UploadUpdatable
+   * Allows for auto reordering
+   * @type {boolean}
+   * @memberof BuckslipUpdatable
    */
-  "originalFilename"?: string;
+  "auto_reorder"?: boolean;
+
+  /**
+   * The quantity of items to be reordered (only required when auto_reorder is true).
+   * @type {number}
+   * @memberof BuckslipUpdatable
+   */
+  "reorder_quantity"?: number;
 
   public toJSON() {
     let out = {};

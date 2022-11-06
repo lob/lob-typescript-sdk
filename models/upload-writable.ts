@@ -24,9 +24,6 @@ export class UploadWritable {
     if (typeof input?.campaignId !== "undefined") {
       this.campaignId = input.campaignId;
     }
-    if (typeof input?.columnMapping !== "undefined") {
-      this.columnMapping = input.columnMapping;
-    }
   }
 
   /**
@@ -44,13 +41,6 @@ export class UploadWritable {
     }
     this._campaignId = newValue;
   }
-
-  /**
-   * The mapping of column headers in your file to Lob-required fields for the resource created. See our <a href=\"https://help.lob.com/best-practices/campaign-audience-guide\" target=\"_blank\">Campaign Audience Guide</a> for additional details.
-   * @type {object}
-   * @memberof UploadWritable
-   */
-  "columnMapping": object;
 
   public toJSON() {
     let out = {};

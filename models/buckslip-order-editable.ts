@@ -14,36 +14,24 @@
 
 import * as Models from "./index";
 
-import { UploadState } from "./upload-state";
-
 /**
  *
  * @export
- * @class UploadUpdatable
+ * @class BuckslipOrderEditable
  */
-export class UploadUpdatable {
+export class BuckslipOrderEditable {
   constructor(input?: any) {
-    if (typeof input?.state !== "undefined") {
-      this.state = input.state;
-    }
-    if (typeof input?.originalFilename !== "undefined") {
-      this.originalFilename = input.originalFilename;
+    if (typeof input?.quantity !== "undefined") {
+      this.quantity = input.quantity;
     }
   }
 
   /**
-   *
-   * @type {UploadState}
-   * @memberof UploadUpdatable
+   * The quantity of buckslips in the order (minimum 5,000).
+   * @type {number}
+   * @memberof BuckslipOrderEditable
    */
-  "state"?: UploadState;
-
-  /**
-   * Original filename provided when the upload is created.
-   * @type {string}
-   * @memberof UploadUpdatable
-   */
-  "originalFilename"?: string;
+  "quantity": number;
 
   public toJSON() {
     let out = {};

@@ -14,36 +14,43 @@
 
 import * as Models from "./index";
 
-import { UploadState } from "./upload-state";
-
 /**
- *
+ * Lob uses RESTful HTTP response codes to indicate success or failure of an API request. In general, 2xx indicates success, 4xx indicate an input error, and 5xx indicates an error on Lob\'s end.
  * @export
- * @class UploadUpdatable
+ * @class BuckslipDeletion
  */
-export class UploadUpdatable {
+export class BuckslipDeletion {
   constructor(input?: any) {
-    if (typeof input?.state !== "undefined") {
-      this.state = input.state;
+    if (typeof input?.id !== "undefined") {
+      this.id = input.id;
     }
-    if (typeof input?.originalFilename !== "undefined") {
-      this.originalFilename = input.originalFilename;
+    if (typeof input?.deleted !== "undefined") {
+      this.deleted = input.deleted;
     }
   }
 
   /**
-   *
-   * @type {UploadState}
-   * @memberof UploadUpdatable
+   * Unique identifier prefixed with `bck_`.
+   * @type {string}
+   * @memberof BuckslipDeletion
    */
-  "state"?: UploadState;
+  private "_id"?: string;
+  public get id() {
+    return (this._id || undefined) as string;
+  }
+  public set id(newValue: string) {
+    if (newValue && !/^bck_[a-zA-Z0-9]+$/.test(newValue)) {
+      throw new Error("Invalid id provided");
+    }
+    this._id = newValue;
+  }
 
   /**
-   * Original filename provided when the upload is created.
-   * @type {string}
-   * @memberof UploadUpdatable
+   * Only returned if the resource has been successfully deleted.
+   * @type {boolean}
+   * @memberof BuckslipDeletion
    */
-  "originalFilename"?: string;
+  "deleted"?: boolean;
 
   public toJSON() {
     let out = {};
