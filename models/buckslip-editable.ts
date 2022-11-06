@@ -17,42 +17,51 @@ import * as Models from "./index";
 /**
  *
  * @export
- * @class CreativePatch
+ * @class BuckslipEditable
  */
-export class CreativePatch {
+export class BuckslipEditable {
   constructor(input?: any) {
-    if (typeof input?.from !== "undefined") {
-      this.from = input.from;
+    if (typeof input?.front !== "undefined") {
+      this.front = input.front;
+    }
+    if (typeof input?.back !== "undefined") {
+      this.back = input.back;
     }
     if (typeof input?.description !== "undefined") {
       this.description = input.description;
     }
-    if (typeof input?.metadata !== "undefined") {
-      this.metadata = input.metadata;
+    if (typeof input?.size !== "undefined") {
+      this.size = input.size;
     }
   }
 
   /**
-   * Must either be an address ID or an inline object with correct address parameters.
-   * @type {any}
-   * @memberof CreativePatch
+   * A PDF template for the front of the buckslip
+   * @type {string}
+   * @memberof BuckslipEditable
    */
-
-  "from"?: string | Models.AddressEditable;
+  "front": string;
 
   /**
-   * An internal description that identifies this resource. Must be no longer than 255 characters.
+   * A PDF template for the back of the buckslip
    * @type {string}
-   * @memberof CreativePatch
+   * @memberof BuckslipEditable
+   */
+  "back"?: string;
+
+  /**
+   * Description of the buckslip.
+   * @type {string}
+   * @memberof BuckslipEditable
    */
   "description"?: string | null;
 
   /**
-   * Use metadata to store custom information for tagging and labeling back to your internal systems. Must be an object with up to 20 key-value pairs. Keys must be at most 40 characters and values must be at most 500 characters. Neither can contain the characters `\"` and `\\`. i.e. \'{\"customer_id\" : \"NEWYORK2015\"}\' Nested objects are not supported.  See [Metadata](#section/Metadata) for more information.
-   * @type {{ [key: string]: string; }}
-   * @memberof CreativePatch
+   * The size of the buckslip
+   * @type {string}
+   * @memberof BuckslipEditable
    */
-  "metadata"?: { [key: string]: string };
+  "size"?: BuckslipEditableSizeEnum;
 
   public toJSON() {
     let out = {};
@@ -63,6 +72,14 @@ export class CreativePatch {
     }
     return out;
   }
+}
+
+/**
+ * @export
+ * @enum {string}
+ */
+export enum BuckslipEditableSizeEnum {
+  _875x375 = "8.75x3.75",
 }
 
 /**

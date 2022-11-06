@@ -15,23 +15,42 @@
 import * as Models from "./index";
 
 /**
- *
+ * Lob uses RESTful HTTP response codes to indicate success or failure of an API request. In general, 2xx indicates success, 4xx indicate an input error, and 5xx indicates an error on Lob\'s end.
  * @export
- * @class InlineObject
+ * @class BuckslipDeletion
  */
-export class InlineObject {
+export class BuckslipDeletion {
   constructor(input?: any) {
-    if (typeof input?.file !== "undefined") {
-      this.file = input.file;
+    if (typeof input?.id !== "undefined") {
+      this.id = input.id;
+    }
+    if (typeof input?.deleted !== "undefined") {
+      this.deleted = input.deleted;
     }
   }
 
   /**
-   *
-   * @type {any}
-   * @memberof InlineObject
+   * Unique identifier prefixed with `bck_`.
+   * @type {string}
+   * @memberof BuckslipDeletion
    */
-  "file": any | null;
+  private "_id"?: string;
+  public get id() {
+    return (this._id || undefined) as string;
+  }
+  public set id(newValue: string) {
+    if (newValue && !/^bck_[a-zA-Z0-9]+$/.test(newValue)) {
+      throw new Error("Invalid id provided");
+    }
+    this._id = newValue;
+  }
+
+  /**
+   * Only returned if the resource has been successfully deleted.
+   * @type {boolean}
+   * @memberof BuckslipDeletion
+   */
+  "deleted"?: boolean;
 
   public toJSON() {
     let out = {};
