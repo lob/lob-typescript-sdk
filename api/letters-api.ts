@@ -75,6 +75,7 @@ export const LettersApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'ltrId' is not null or undefined
       assertParamExists("letterCancel", "ltrId", ltrId);
+
       const localVarPath = `/letters/{ltr_id}`.replace(
         `{${"ltr_id"}}`,
         encodeURIComponent(String(ltrId))
@@ -127,6 +128,7 @@ export const LettersApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'letterEditable' is not null or undefined
       assertParamExists("letterCreate", "letterEditable", letterEditable);
+
       const localVarPath = `/letters`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -185,6 +187,7 @@ export const LettersApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'ltrId' is not null or undefined
       assertParamExists("letterRetrieve", "ltrId", ltrId);
+
       const localVarPath = `/letters/{ltr_id}`.replace(
         `{${"ltr_id"}}`,
         encodeURIComponent(String(ltrId))

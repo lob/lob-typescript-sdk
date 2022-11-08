@@ -79,6 +79,7 @@ export const CardOrdersApiAxiosParamCreator = function (
         "cardOrderEditable",
         cardOrderEditable
       );
+
       const localVarPath = `/cards/{card_id}/orders`.replace(
         `{${"card_id"}}`,
         encodeURIComponent(String(cardId))
@@ -140,6 +141,7 @@ export const CardOrdersApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'cardId' is not null or undefined
       assertParamExists("cardOrdersRetrieve", "cardId", cardId);
+
       const localVarPath = `/cards/{card_id}/orders`.replace(
         `{${"card_id"}}`,
         encodeURIComponent(String(cardId))

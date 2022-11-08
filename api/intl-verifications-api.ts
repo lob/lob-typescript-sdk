@@ -77,6 +77,7 @@ export const IntlVerificationsApiAxiosParamCreator = function (
         "intlVerificationsPayload",
         intlVerificationsPayload
       );
+
       const localVarPath = `/bulk/intl_verifications`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -137,6 +138,7 @@ export const IntlVerificationsApiAxiosParamCreator = function (
         "intlVerificationWritable",
         intlVerificationWritable
       );
+
       const localVarPath = `/intl_verifications`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

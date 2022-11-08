@@ -73,6 +73,7 @@ export const UsAutocompletionsApiAxiosParamCreator = function (
         "usAutocompletionsWritable",
         usAutocompletionsWritable
       );
+
       const localVarPath = `/us_autocompletions`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

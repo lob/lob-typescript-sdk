@@ -79,6 +79,7 @@ export const BankAccountsApiAxiosParamCreator = function (
         "bankAccountWritable",
         bankAccountWritable
       );
+
       const localVarPath = `/bank_accounts`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -133,6 +134,7 @@ export const BankAccountsApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'bankId' is not null or undefined
       assertParamExists("bankAccountDelete", "bankId", bankId);
+
       const localVarPath = `/bank_accounts/{bank_id}`.replace(
         `{${"bank_id"}}`,
         encodeURIComponent(String(bankId))
@@ -183,6 +185,7 @@ export const BankAccountsApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'bankId' is not null or undefined
       assertParamExists("bankAccountRetrieve", "bankId", bankId);
+
       const localVarPath = `/bank_accounts/{bank_id}`.replace(
         `{${"bank_id"}}`,
         encodeURIComponent(String(bankId))
@@ -241,6 +244,7 @@ export const BankAccountsApiAxiosParamCreator = function (
         "bankAccountVerify",
         bankAccountVerify
       );
+
       const localVarPath = `/bank_accounts/{bank_id}/verify`.replace(
         `{${"bank_id"}}`,
         encodeURIComponent(String(bankId))

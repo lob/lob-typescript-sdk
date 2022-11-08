@@ -83,6 +83,7 @@ export const TemplateVersionsApiAxiosParamCreator = function (
         "templateVersionWritable",
         templateVersionWritable
       );
+
       const localVarPath = `/templates/{tmpl_id}/versions`.replace(
         `{${"tmpl_id"}}`,
         encodeURIComponent(String(tmplId))
@@ -144,6 +145,7 @@ export const TemplateVersionsApiAxiosParamCreator = function (
       assertParamExists("templateVersionDelete", "tmplId", tmplId);
       // verify required parameter 'vrsnId' is not null or undefined
       assertParamExists("templateVersionDelete", "vrsnId", vrsnId);
+
       const localVarPath = `/templates/{tmpl_id}/versions/{vrsn_id}`
         .replace(`{${"tmpl_id"}}`, encodeURIComponent(String(tmplId)))
         .replace(`{${"vrsn_id"}}`, encodeURIComponent(String(vrsnId)));
@@ -197,6 +199,7 @@ export const TemplateVersionsApiAxiosParamCreator = function (
       assertParamExists("templateVersionRetrieve", "tmplId", tmplId);
       // verify required parameter 'vrsnId' is not null or undefined
       assertParamExists("templateVersionRetrieve", "vrsnId", vrsnId);
+
       const localVarPath = `/templates/{tmpl_id}/versions/{vrsn_id}`
         .replace(`{${"tmpl_id"}}`, encodeURIComponent(String(tmplId)))
         .replace(`{${"vrsn_id"}}`, encodeURIComponent(String(vrsnId)));
@@ -258,6 +261,7 @@ export const TemplateVersionsApiAxiosParamCreator = function (
         "templateVersionUpdatable",
         templateVersionUpdatable
       );
+
       const localVarPath = `/templates/{tmpl_id}/versions/{vrsn_id}`
         .replace(`{${"tmpl_id"}}`, encodeURIComponent(String(tmplId)))
         .replace(`{${"vrsn_id"}}`, encodeURIComponent(String(vrsnId)));
@@ -324,6 +328,7 @@ export const TemplateVersionsApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'tmplId' is not null or undefined
       assertParamExists("templateVersionsList", "tmplId", tmplId);
+
       const localVarPath = `/templates/{tmpl_id}/versions`.replace(
         `{${"tmpl_id"}}`,
         encodeURIComponent(String(tmplId))

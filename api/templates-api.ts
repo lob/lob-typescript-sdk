@@ -75,6 +75,7 @@ export const TemplatesApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'templateWritable' is not null or undefined
       assertParamExists("createTemplate", "templateWritable", templateWritable);
+
       const localVarPath = `/templates`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -129,6 +130,7 @@ export const TemplatesApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'tmplId' is not null or undefined
       assertParamExists("templateDelete", "tmplId", tmplId);
+
       const localVarPath = `/templates/{tmpl_id}`.replace(
         `{${"tmpl_id"}}`,
         encodeURIComponent(String(tmplId))
@@ -179,6 +181,7 @@ export const TemplatesApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'tmplId' is not null or undefined
       assertParamExists("templateRetrieve", "tmplId", tmplId);
+
       const localVarPath = `/templates/{tmpl_id}`.replace(
         `{${"tmpl_id"}}`,
         encodeURIComponent(String(tmplId))
@@ -233,6 +236,7 @@ export const TemplatesApiAxiosParamCreator = function (
       assertParamExists("templateUpdate", "tmplId", tmplId);
       // verify required parameter 'templateUpdate' is not null or undefined
       assertParamExists("templateUpdate", "templateUpdate", templateUpdate);
+
       const localVarPath = `/templates/{tmpl_id}`.replace(
         `{${"tmpl_id"}}`,
         encodeURIComponent(String(tmplId))

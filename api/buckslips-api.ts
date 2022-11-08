@@ -64,7 +64,7 @@ export const BuckslipsApiAxiosParamCreator = function (
   return {
     /**
      * Creates a new buckslip given information
-     * @summary Create
+     * @summary create
      * @param {BuckslipEditable} buckslipEditable
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -75,6 +75,7 @@ export const BuckslipsApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'buckslipEditable' is not null or undefined
       assertParamExists("buckslipCreate", "buckslipEditable", buckslipEditable);
+      const mpHeaders = options.data ? options.data.getHeaders() : {};
       const localVarPath = `/buckslips`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -98,18 +99,10 @@ export const BuckslipsApiAxiosParamCreator = function (
       localVarHeaderParameter["Content-Type"] = "application/json";
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {};
       localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
+        ...mpHeaders,
       };
-      localVarRequestOptions.data = serializeDataIfNeeded(
-        buckslipEditable,
-        localVarRequestOptions,
-        configuration
-      );
+      localVarRequestOptions.data = options.data;
 
       return {
         url: toPathString(localVarUrlObj),
@@ -118,7 +111,7 @@ export const BuckslipsApiAxiosParamCreator = function (
     },
     /**
      * Delete an existing buckslip. You need only supply the unique identifier that was returned upon buckslip creation.
-     * @summary Delete
+     * @summary delete
      * @param {string} buckslipId id of the buckslip
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -129,6 +122,7 @@ export const BuckslipsApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'buckslipId' is not null or undefined
       assertParamExists("buckslipDelete", "buckslipId", buckslipId);
+
       const localVarPath = `/buckslips/{buckslip_id}`.replace(
         `{${"buckslip_id"}}`,
         encodeURIComponent(String(buckslipId))
@@ -168,7 +162,7 @@ export const BuckslipsApiAxiosParamCreator = function (
     },
     /**
      * Retrieves the details of an existing buckslip. You need only supply the unique customer identifier that was returned upon buckslip creation.
-     * @summary Retrieve
+     * @summary get
      * @param {string} buckslipId id of the buckslip
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -179,6 +173,7 @@ export const BuckslipsApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'buckslipId' is not null or undefined
       assertParamExists("buckslipRetrieve", "buckslipId", buckslipId);
+
       const localVarPath = `/buckslips/{buckslip_id}`.replace(
         `{${"buckslip_id"}}`,
         encodeURIComponent(String(buckslipId))
@@ -218,7 +213,7 @@ export const BuckslipsApiAxiosParamCreator = function (
     },
     /**
      * Update the details of an existing buckslip. You need only supply the unique identifier that was returned upon buckslip creation.
-     * @summary Update
+     * @summary update
      * @param {string} buckslipId id of the buckslip
      * @param {BuckslipUpdatable} buckslipUpdatable
      * @param {*} [options] Override http request option.
@@ -237,6 +232,7 @@ export const BuckslipsApiAxiosParamCreator = function (
         "buckslipUpdatable",
         buckslipUpdatable
       );
+
       const localVarPath = `/buckslips/{buckslip_id}`.replace(
         `{${"buckslip_id"}}`,
         encodeURIComponent(String(buckslipId))
@@ -361,7 +357,7 @@ export const BuckslipsApiFp = function (configuration?: Configuration) {
   return {
     /**
      * Creates a new buckslip given information
-     * @summary Create
+     * @summary create
      * @param {BuckslipEditable} buckslipEditable
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -385,7 +381,7 @@ export const BuckslipsApiFp = function (configuration?: Configuration) {
     },
     /**
      * Delete an existing buckslip. You need only supply the unique identifier that was returned upon buckslip creation.
-     * @summary Delete
+     * @summary delete
      * @param {string} buckslipId id of the buckslip
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -412,7 +408,7 @@ export const BuckslipsApiFp = function (configuration?: Configuration) {
     },
     /**
      * Retrieves the details of an existing buckslip. You need only supply the unique customer identifier that was returned upon buckslip creation.
-     * @summary Retrieve
+     * @summary get
      * @param {string} buckslipId id of the buckslip
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -434,7 +430,7 @@ export const BuckslipsApiFp = function (configuration?: Configuration) {
     },
     /**
      * Update the details of an existing buckslip. You need only supply the unique identifier that was returned upon buckslip creation.
-     * @summary Update
+     * @summary update
      * @param {string} buckslipId id of the buckslip
      * @param {BuckslipUpdatable} buckslipUpdatable
      * @param {*} [options] Override http request option.
@@ -504,13 +500,13 @@ export const BuckslipsApiFp = function (configuration?: Configuration) {
 export class BuckslipsApi extends BaseAPI {
   /**
    * Creates a new buckslip given information
-   * @summary Create
+   * @summary create
    * @param {BuckslipEditable} buckslipEditable
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof BuckslipsApi
    */
-  public Create(
+  public create(
     buckslipEditable: BuckslipEditable,
     options?: AxiosRequestConfig
   ) {
@@ -530,13 +526,13 @@ export class BuckslipsApi extends BaseAPI {
 
   /**
    * Delete an existing buckslip. You need only supply the unique identifier that was returned upon buckslip creation.
-   * @summary Delete
+   * @summary delete
    * @param {string} buckslipId id of the buckslip
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof BuckslipsApi
    */
-  public Delete(buckslipId: string, options?: AxiosRequestConfig) {
+  public delete(buckslipId: string, options?: AxiosRequestConfig) {
     return BuckslipsApiFp(this.configuration)
       .buckslipDelete(buckslipId, options)
       .then((request) => request(this.axios, this.basePath))
@@ -553,13 +549,13 @@ export class BuckslipsApi extends BaseAPI {
 
   /**
    * Retrieves the details of an existing buckslip. You need only supply the unique customer identifier that was returned upon buckslip creation.
-   * @summary Retrieve
+   * @summary get
    * @param {string} buckslipId id of the buckslip
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof BuckslipsApi
    */
-  public Retrieve(buckslipId: string, options?: AxiosRequestConfig) {
+  public get(buckslipId: string, options?: AxiosRequestConfig) {
     return BuckslipsApiFp(this.configuration)
       .buckslipRetrieve(buckslipId, options)
       .then((request) => request(this.axios, this.basePath))
@@ -576,14 +572,14 @@ export class BuckslipsApi extends BaseAPI {
 
   /**
    * Update the details of an existing buckslip. You need only supply the unique identifier that was returned upon buckslip creation.
-   * @summary Update
+   * @summary update
    * @param {string} buckslipId id of the buckslip
    * @param {BuckslipUpdatable} buckslipUpdatable
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof BuckslipsApi
    */
-  public Update(
+  public update(
     buckslipId: string,
     buckslipUpdatable: BuckslipUpdatable,
     options?: AxiosRequestConfig

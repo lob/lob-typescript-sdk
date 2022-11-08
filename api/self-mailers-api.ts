@@ -83,6 +83,7 @@ export const SelfMailersApiAxiosParamCreator = function (
         "selfMailerEditable",
         selfMailerEditable
       );
+
       const localVarPath = `/self_mailers`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -141,6 +142,7 @@ export const SelfMailersApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'sfmId' is not null or undefined
       assertParamExists("selfMailerDelete", "sfmId", sfmId);
+
       const localVarPath = `/self_mailers/{sfm_id}`.replace(
         `{${"sfm_id"}}`,
         encodeURIComponent(String(sfmId))
@@ -191,6 +193,7 @@ export const SelfMailersApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'sfmId' is not null or undefined
       assertParamExists("selfMailerRetrieve", "sfmId", sfmId);
+
       const localVarPath = `/self_mailers/{sfm_id}`.replace(
         `{${"sfm_id"}}`,
         encodeURIComponent(String(sfmId))

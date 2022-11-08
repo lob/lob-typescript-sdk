@@ -79,6 +79,7 @@ export const UsVerificationsApiAxiosParamCreator = function (
         "multipleComponentsList",
         multipleComponentsList
       );
+
       const localVarPath = `/bulk/us_verifications`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -143,6 +144,7 @@ export const UsVerificationsApiAxiosParamCreator = function (
         "usVerificationsWritable",
         usVerificationsWritable
       );
+
       const localVarPath = `/us_verifications`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

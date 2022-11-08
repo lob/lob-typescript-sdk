@@ -60,7 +60,7 @@ export const BuckslipOrdersApiAxiosParamCreator = function (
   return {
     /**
      * Creates a new buckslip order given information
-     * @summary Create
+     * @summary create
      * @param {string} buckslipId The ID of the buckslip to which the buckslip orders belong.
      * @param {BuckslipOrderEditable} buckslipOrderEditable
      * @param {*} [options] Override http request option.
@@ -79,6 +79,7 @@ export const BuckslipOrdersApiAxiosParamCreator = function (
         "buckslipOrderEditable",
         buckslipOrderEditable
       );
+
       const localVarPath = `/buckslips/{buckslip_id}/orders`.replace(
         `{${"buckslip_id"}}`,
         encodeURIComponent(String(buckslipId))
@@ -125,7 +126,7 @@ export const BuckslipOrdersApiAxiosParamCreator = function (
     },
     /**
      * Retrieves the buckslip orders associated with the given buckslip id.
-     * @summary Retrieve
+     * @summary get
      * @param {string} buckslipId The ID of the buckslip to which the buckslip orders belong.
      * @param {number} [limit] How many results to return.
      * @param {number} [offset] An integer that designates the offset at which to begin returning results. Defaults to 0.
@@ -140,6 +141,7 @@ export const BuckslipOrdersApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'buckslipId' is not null or undefined
       assertParamExists("buckslipOrdersRetrieve", "buckslipId", buckslipId);
+
       const localVarPath = `/buckslips/{buckslip_id}/orders`.replace(
         `{${"buckslip_id"}}`,
         encodeURIComponent(String(buckslipId))
@@ -198,7 +200,7 @@ export const BuckslipOrdersApiFp = function (configuration?: Configuration) {
   return {
     /**
      * Creates a new buckslip order given information
-     * @summary Create
+     * @summary create
      * @param {string} buckslipId The ID of the buckslip to which the buckslip orders belong.
      * @param {BuckslipOrderEditable} buckslipOrderEditable
      * @param {*} [options] Override http request option.
@@ -226,7 +228,7 @@ export const BuckslipOrdersApiFp = function (configuration?: Configuration) {
     },
     /**
      * Retrieves the buckslip orders associated with the given buckslip id.
-     * @summary Retrieve
+     * @summary get
      * @param {string} buckslipId The ID of the buckslip to which the buckslip orders belong.
      * @param {number} [limit] How many results to return.
      * @param {number} [offset] An integer that designates the offset at which to begin returning results. Defaults to 0.
@@ -270,14 +272,14 @@ export const BuckslipOrdersApiFp = function (configuration?: Configuration) {
 export class BuckslipOrdersApi extends BaseAPI {
   /**
    * Creates a new buckslip order given information
-   * @summary Create
+   * @summary create
    * @param {string} buckslipId The ID of the buckslip to which the buckslip orders belong.
    * @param {BuckslipOrderEditable} buckslipOrderEditable
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof BuckslipOrdersApi
    */
-  public Create(
+  public create(
     buckslipId: string,
     buckslipOrderEditable: BuckslipOrderEditable,
     options?: AxiosRequestConfig
@@ -298,7 +300,7 @@ export class BuckslipOrdersApi extends BaseAPI {
 
   /**
    * Retrieves the buckslip orders associated with the given buckslip id.
-   * @summary Retrieve
+   * @summary get
    * @param {string} buckslipId The ID of the buckslip to which the buckslip orders belong.
    * @param {number} [limit] How many results to return.
    * @param {number} [offset] An integer that designates the offset at which to begin returning results. Defaults to 0.
@@ -306,7 +308,7 @@ export class BuckslipOrdersApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof BuckslipOrdersApi
    */
-  public Retrieve(
+  public get(
     buckslipId: string,
     limit?: number,
     offset?: number,

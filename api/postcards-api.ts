@@ -79,6 +79,7 @@ export const PostcardsApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'postcardEditable' is not null or undefined
       assertParamExists("postcardCreate", "postcardEditable", postcardEditable);
+
       const localVarPath = `/postcards`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -137,6 +138,7 @@ export const PostcardsApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'pscId' is not null or undefined
       assertParamExists("postcardDelete", "pscId", pscId);
+
       const localVarPath = `/postcards/{psc_id}`.replace(
         `{${"psc_id"}}`,
         encodeURIComponent(String(pscId))
@@ -187,6 +189,7 @@ export const PostcardsApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'pscId' is not null or undefined
       assertParamExists("postcardRetrieve", "pscId", pscId);
+
       const localVarPath = `/postcards/{psc_id}`.replace(
         `{${"psc_id"}}`,
         encodeURIComponent(String(pscId))

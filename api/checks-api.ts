@@ -75,6 +75,7 @@ export const ChecksApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'chkId' is not null or undefined
       assertParamExists("checkCancel", "chkId", chkId);
+
       const localVarPath = `/checks/{chk_id}`.replace(
         `{${"chk_id"}}`,
         encodeURIComponent(String(chkId))
@@ -127,6 +128,7 @@ export const ChecksApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'checkEditable' is not null or undefined
       assertParamExists("checkCreate", "checkEditable", checkEditable);
+
       const localVarPath = `/checks`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -185,6 +187,7 @@ export const ChecksApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'chkId' is not null or undefined
       assertParamExists("checkRetrieve", "chkId", chkId);
+
       const localVarPath = `/checks/{chk_id}`.replace(
         `{${"chk_id"}}`,
         encodeURIComponent(String(chkId))

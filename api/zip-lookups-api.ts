@@ -69,6 +69,7 @@ export const ZipLookupsApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'zipEditable' is not null or undefined
       assertParamExists("zipLookup", "zipEditable", zipEditable);
+
       const localVarPath = `/us_zip_lookups`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

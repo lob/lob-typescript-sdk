@@ -75,6 +75,7 @@ export const BillingGroupsApiAxiosParamCreator = function (
         "billingGroupEditable",
         billingGroupEditable
       );
+
       const localVarPath = `/billing_groups`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -129,6 +130,7 @@ export const BillingGroupsApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'bgId' is not null or undefined
       assertParamExists("billingGroupRetrieve", "bgId", bgId);
+
       const localVarPath = `/billing_groups/{bg_id}`.replace(
         `{${"bg_id"}}`,
         encodeURIComponent(String(bgId))
@@ -187,6 +189,7 @@ export const BillingGroupsApiAxiosParamCreator = function (
         "billingGroupEditable",
         billingGroupEditable
       );
+
       const localVarPath = `/billing_groups/{bg_id}`.replace(
         `{${"bg_id"}}`,
         encodeURIComponent(String(bgId))

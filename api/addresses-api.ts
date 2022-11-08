@@ -73,6 +73,7 @@ export const AddressesApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'addressEditable' is not null or undefined
       assertParamExists("addressCreate", "addressEditable", addressEditable);
+
       const localVarPath = `/addresses`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -127,6 +128,7 @@ export const AddressesApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'adrId' is not null or undefined
       assertParamExists("addressDelete", "adrId", adrId);
+
       const localVarPath = `/addresses/{adr_id}`.replace(
         `{${"adr_id"}}`,
         encodeURIComponent(String(adrId))
@@ -177,6 +179,7 @@ export const AddressesApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'adrId' is not null or undefined
       assertParamExists("addressRetrieve", "adrId", adrId);
+
       const localVarPath = `/addresses/{adr_id}`.replace(
         `{${"adr_id"}}`,
         encodeURIComponent(String(adrId))

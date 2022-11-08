@@ -43,38 +43,25 @@ import {
   RequiredError,
 } from "../base";
 // @ts-ignore
-import { IdentityValidation } from "../models";
-// @ts-ignore
-import { LobError } from "../models";
-// @ts-ignore
-import { MultiLineAddress } from "../models";
+import { PlaceholderModel } from "../models";
 /**
- * IdentityValidationApi - axios parameter creator
+ * DefaultApi - axios parameter creator
  * @export
  */
-export const IdentityValidationApiAxiosParamCreator = function (
+export const DefaultApiAxiosParamCreator = function (
   configuration?: Configuration
 ) {
   return {
     /**
-     * Validates whether a given name is associated with an address.
-     * @summary validate
-     * @param {MultiLineAddress} multiLineAddress
+     * Don\'t call this. It\'s so that the right models can be generated.
+     * @summary placeholder_no_call
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    identityValidation: async (
-      multiLineAddress: MultiLineAddress,
+    placeholder: async (
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
-      // verify required parameter 'multiLineAddress' is not null or undefined
-      assertParamExists(
-        "identityValidation",
-        "multiLineAddress",
-        multiLineAddress
-      );
-
-      const localVarPath = `/identity_validation`;
+      const localVarPath = `/shared_dont_call`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;
@@ -83,7 +70,7 @@ export const IdentityValidationApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "POST",
+        method: "GET",
         ...baseOptions,
         ...options,
       };
@@ -94,8 +81,6 @@ export const IdentityValidationApiAxiosParamCreator = function (
       // http basic authentication required
       setBasicAuthToObject(localVarRequestOptions, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
-
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
         baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -104,11 +89,6 @@ export const IdentityValidationApiAxiosParamCreator = function (
         ...headersFromBaseOptions,
         ...options.headers,
       };
-      localVarRequestOptions.data = serializeDataIfNeeded(
-        multiLineAddress,
-        localVarRequestOptions,
-        configuration
-      );
 
       return {
         url: toPathString(localVarUrlObj),
@@ -119,36 +99,29 @@ export const IdentityValidationApiAxiosParamCreator = function (
 };
 
 /**
- * IdentityValidationApi - functional programming interface
+ * DefaultApi - functional programming interface
  * @export
  */
-export const IdentityValidationApiFp = function (
-  configuration?: Configuration
-) {
-  const localVarAxiosParamCreator =
-    IdentityValidationApiAxiosParamCreator(configuration);
+export const DefaultApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = DefaultApiAxiosParamCreator(configuration);
   return {
     /**
-     * Validates whether a given name is associated with an address.
-     * @summary validate
-     * @param {MultiLineAddress} multiLineAddress
+     * Don\'t call this. It\'s so that the right models can be generated.
+     * @summary placeholder_no_call
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async identityValidation(
-      multiLineAddress: MultiLineAddress,
+    async placeholder(
       options?: AxiosRequestConfig
     ): Promise<
       (
         axios?: AxiosInstance,
         basePath?: string
-      ) => AxiosPromise<IdentityValidation>
+      ) => AxiosPromise<PlaceholderModel>
     > {
-      const localVarAxiosArgs =
-        await localVarAxiosParamCreator.identityValidation(
-          multiLineAddress,
-          options
-        );
+      const localVarAxiosArgs = await localVarAxiosParamCreator.placeholder(
+        options
+      );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
@@ -160,29 +133,25 @@ export const IdentityValidationApiFp = function (
 };
 
 /**
- * IdentityValidationApi - object-oriented interface
+ * DefaultApi - object-oriented interface
  * @export
- * @class IdentityValidationApi
+ * @class DefaultApi
  * @extends {BaseAPI}
  */
-export class IdentityValidationApi extends BaseAPI {
+export class DefaultApi extends BaseAPI {
   /**
-   * Validates whether a given name is associated with an address.
-   * @summary validate
-   * @param {MultiLineAddress} multiLineAddress
+   * Don\'t call this. It\'s so that the right models can be generated.
+   * @summary placeholder_no_call
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof IdentityValidationApi
+   * @memberof DefaultApi
    */
-  public validate(
-    multiLineAddress: MultiLineAddress,
-    options?: AxiosRequestConfig
-  ) {
-    return IdentityValidationApiFp(this.configuration)
-      .identityValidation(multiLineAddress, options)
+  public placeholder_no_call(options?: AxiosRequestConfig) {
+    return DefaultApiFp(this.configuration)
+      .placeholder(options)
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {
-        return new IdentityValidation(response.data);
+        return new PlaceholderModel(response.data);
       })
       .catch((error) => {
         if (error.response?.data?.error?.message) {
