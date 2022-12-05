@@ -21,6 +21,7 @@ import * as Models from "./index";
  */
 
 export enum CountryExtended {
+  Empty = "",
   Ad = "AD",
   Ae = "AE",
   Af = "AF",

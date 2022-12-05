@@ -65,7 +65,7 @@ export class PostcardEditable {
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
-   * @type {string}
+   * @type {any}
    * @memberof PostcardEditable
    */
 
@@ -73,7 +73,7 @@ export class PostcardEditable {
 
   /**
    * Required if `to` address is international. Must either be an address ID or an inline object with correct address parameters.
-   * @type {string}
+   * @type {any}
    * @memberof PostcardEditable
    */
 

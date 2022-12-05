@@ -55,7 +55,7 @@ export class GeocodeComponents {
     return this._zip_code_plus_4;
   }
   public set zip_code_plus_4(newValue: string) {
-    if (newValue && !/^\d{4}$/.test(newValue)) {
+    if (newValue && !/^(\d{4})?$/.test(newValue)) {
       throw new Error("Invalid zip_code_plus_4 provided");
     }
     this._zip_code_plus_4 = newValue;
