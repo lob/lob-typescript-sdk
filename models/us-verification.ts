@@ -46,6 +46,9 @@ export class UsVerification {
     if (typeof input?.deliverability !== "undefined") {
       this.deliverability = input.deliverability;
     }
+    if (typeof input?.valid_address !== "undefined") {
+      this.valid_address = input.valid_address;
+    }
     if (typeof input?.components !== "undefined") {
       this.components = input.components;
     }
@@ -117,6 +120,13 @@ export class UsVerification {
    * @memberof UsVerification
    */
   "deliverability"?: UsVerificationDeliverabilityEnum;
+
+  /**
+   * This field indicates whether an address was found in a more comprehensive address dataset that includes sources from the USPS, open source mapping data, and our proprietary mail delivery data. This field can be interpreted as a representation of whether an address is a real location or not. Additionally a valid address may contradict the deliverability field since an address can be a real valid location but the USPS may not deliver to that address.
+   * @type {string}
+   * @memberof UsVerification
+   */
+  "valid_address"?: boolean;
 
   /**
    *
