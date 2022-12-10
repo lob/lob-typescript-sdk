@@ -296,7 +296,7 @@ export class Letter {
 
   /**
    * Specifies the address the return envelope will be sent back to. This is an optional argument that is available if an account is signed up for the return envelope tracking beta, and has `return_envelope`, and `perforated_page` fields populated in the API request.
-   * @type {string}
+   * @type {any}
    * @memberof Letter
    */
 
@@ -336,7 +336,7 @@ export class Letter {
    * @memberof Letter
    */
 
-  "return_envelope": boolean | Models.ReturnEnvelope | null;
+  "return_envelope": boolean | Models.ReturnEnvelope;
 
   /**
    * Required if `return_envelope` is `true`. The number of the page that should be perforated for use with the return envelope. Must be greater than or equal to `1`. The blank page added by `address_placement=insert_blank_page` will be ignored when considering the perforated page number. To see how perforation will impact your letter design, view our [perforation guide](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/letter_perf_template.pdf).

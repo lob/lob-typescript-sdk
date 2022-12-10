@@ -60,7 +60,6 @@ export * from "./geocode-addresses";
 export * from "./geocode-components";
 export * from "./httpvalidation-error";
 export * from "./identity-validation";
-export * from "./inline-object";
 export * from "./intl-autocompletions";
 export * from "./intl-autocompletions-writable";
 export * from "./intl-components";
