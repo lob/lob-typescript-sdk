@@ -111,7 +111,7 @@ export class LetterDetailsReturned {
    * @memberof LetterDetailsReturned
    */
 
-  "return_envelope"?: boolean | Models.ReturnEnvelope | null;
+  "return_envelope"?: boolean | Models.ReturnEnvelope;
 
   /**
    * Allows for letter bleed. Enabled only with specific feature flags.
