@@ -97,7 +97,7 @@ export class SelfMailer {
    * @memberof SelfMailer
    */
 
-  "to": string | Models.Address | null;
+  "to": string | Models.Address;
 
   /**
    *
@@ -105,7 +105,7 @@ export class SelfMailer {
    * @memberof SelfMailer
    */
 
-  "from"?: string | Models.AddressDomesticExpanded | null;
+  "from"?: string | Models.AddressDomesticExpanded;
 
   /**
    *
