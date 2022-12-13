@@ -61,7 +61,7 @@ export class SelfMailerEditable {
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
-   * @type {string}
+   * @type {any}
    * @memberof SelfMailerEditable
    */
 
@@ -69,7 +69,7 @@ export class SelfMailerEditable {
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
-   * @type {string}
+   * @type {any}
    * @memberof SelfMailerEditable
    */
 
