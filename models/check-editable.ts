@@ -73,7 +73,7 @@ export class CheckEditable {
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
-   * @type {string}
+   * @type {any}
    * @memberof CheckEditable
    */
 
@@ -81,7 +81,7 @@ export class CheckEditable {
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
-   * @type {string}
+   * @type {any}
    * @memberof CheckEditable
    */
 
