@@ -56,7 +56,7 @@ export class CreativeWritable {
    * @memberof CreativeWritable
    */
 
-  "from": string | Models.AddressEditable | null;
+  "from": string | Models.AddressEditable;
 
   /**
    * An internal description that identifies this resource. Must be no longer than 255 characters.
@@ -101,10 +101,7 @@ export class CreativeWritable {
    * @memberof CreativeWritable
    */
 
-  "details"?:
-    | Models.PostcardDetailsWritable
-    | Models.LetterDetailsWritable
-    | null;
+  "details"?: Models.PostcardDetailsWritable | Models.LetterDetailsWritable;
 
   /**
    * PDF file containing the letter\'s formatting. Do not include for resource_type = postcard.

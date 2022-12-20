@@ -38,7 +38,7 @@ export class CreativePatch {
    * @memberof CreativePatch
    */
 
-  "from"?: string | Models.AddressEditable | null;
+  "from"?: string | Models.AddressEditable;
 
   /**
    * An internal description that identifies this resource. Must be no longer than 255 characters.
