@@ -14,7 +14,7 @@
 
 import * as Models from "./index";
 
-import { CountryExtendedExpanded } from "./country-extended-expanded";
+import { CountryExtended } from "./country-extended";
 
 /**
  *
@@ -76,10 +76,10 @@ export class IntlSuggestions {
 
   /**
    *
-   * @type {CountryExtendedExpanded}
+   * @type {CountryExtended}
    * @memberof IntlSuggestions
    */
-  "country": CountryExtendedExpanded;
+  "country": CountryExtended;
 
   /**
    * A 5-digit zip code. Left empty if a test key is used.
