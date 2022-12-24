@@ -4,6 +4,8 @@
 
 Typescript SDK for the [Lob.com](https://lob.com) API. See the full Lob.com API documentation [here](https://docs.lob.com).
 
+Looking for our [legacy Javascript SDK](https://github.com/lob/lob-node)?
+
 ## Getting Started
 
 ### Registration
