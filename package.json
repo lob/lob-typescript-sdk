@@ -41,7 +41,7 @@
     "semantic-release": "semantic-release",
     "open:cov": "open ./coverage/index.html"
   },
-  "main": "./dist/index.cjs.js",
+  "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
