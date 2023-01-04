@@ -47,7 +47,7 @@
   "exports": {
     "node": {
       "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs.js"
+      "require": "./dist/index.mjs"
     },
     "default": "./dist/index.mjs"
   },
