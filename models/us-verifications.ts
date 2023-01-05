@@ -13,6 +13,7 @@
  */
 
 import * as Models from "./index";
+import { BulkError, UsVerification } from "./index";
 
 import { UsVerificationOrError } from "./us-verification-or-error";
 
@@ -48,10 +49,10 @@ export class UsVerifications {
     }
     for (const item of items) {
       if ((item as Models.UsVerification).id) {
-        this._addresses.push(new Models.UsVerification(item));
+        this._addresses.push(new UsVerification(item));
       }
       if ((item as Models.BulkError).error) {
-        this._error_addresses.push(new Models.BulkError(item));
+        this._error_addresses.push(new BulkError(item));
       }
     }
   }
