@@ -16,6 +16,7 @@ import * as Models from "./index";
 
 import { MailType } from "./mail-type";
 import { SelfMailerSize } from "./self-mailer-size";
+import { SfmUseType } from "./sfm-use-type";
 import { TrackingEventCertified } from "./tracking-event-certified";
 
 /**
@@ -72,6 +73,9 @@ export class SelfMailer {
     }
     if (typeof input?.url !== "undefined") {
       this.url = input.url;
+    }
+    if (typeof input?.use_type !== "undefined") {
+      this.use_type = input.use_type;
     }
   }
 
@@ -247,6 +251,13 @@ export class SelfMailer {
     }
     this._url = newValue;
   }
+
+  /**
+   *
+   * @type {SfmUseType}
+   * @memberof SelfMailer
+   */
+  "use_type": SfmUseType | null;
 
   public toJSON() {
     let out = {};

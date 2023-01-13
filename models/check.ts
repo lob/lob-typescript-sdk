@@ -16,6 +16,7 @@ import * as Models from "./index";
 
 import { Address } from "./address";
 import { BankAccount } from "./bank-account";
+import { ChkUseType } from "./chk-use-type";
 import { Thumbnail } from "./thumbnail";
 import { TrackingEventNormal } from "./tracking-event-normal";
 
@@ -105,6 +106,9 @@ export class Check {
     }
     if (typeof input?.deleted !== "undefined") {
       this.deleted = input.deleted;
+    }
+    if (typeof input?.use_type !== "undefined") {
+      this.use_type = input.use_type;
     }
   }
 
@@ -348,6 +352,13 @@ export class Check {
    * @memberof Check
    */
   "deleted"?: boolean;
+
+  /**
+   *
+   * @type {ChkUseType}
+   * @memberof Check
+   */
+  "use_type": ChkUseType | null;
 
   public toJSON() {
     let out = {};

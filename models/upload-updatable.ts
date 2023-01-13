@@ -14,7 +14,9 @@
 
 import * as Models from "./index";
 
-import { UploadState } from "./upload-state";
+import { OptionalAddressColumnMapping } from "./optional-address-column-mapping";
+import { RequiredAddressColumnMapping } from "./required-address-column-mapping";
+import { UploadsMetadata } from "./uploads-metadata";
 
 /**
  *
@@ -23,20 +25,22 @@ import { UploadState } from "./upload-state";
  */
 export class UploadUpdatable {
   constructor(input?: any) {
-    if (typeof input?.state !== "undefined") {
-      this.state = input.state;
-    }
     if (typeof input?.originalFilename !== "undefined") {
       this.originalFilename = input.originalFilename;
     }
+    if (typeof input?.requiredAddressColumnMapping !== "undefined") {
+      this.requiredAddressColumnMapping = input.requiredAddressColumnMapping;
+    }
+    if (typeof input?.optionalAddressColumnMapping !== "undefined") {
+      this.optionalAddressColumnMapping = input.optionalAddressColumnMapping;
+    }
+    if (typeof input?.metadata !== "undefined") {
+      this.metadata = input.metadata;
+    }
+    if (typeof input?.mergeVariableColumnMapping !== "undefined") {
+      this.mergeVariableColumnMapping = input.mergeVariableColumnMapping;
+    }
   }
-
-  /**
-   *
-   * @type {UploadState}
-   * @memberof UploadUpdatable
-   */
-  "state"?: UploadState;
 
   /**
    * Original filename provided when the upload is created.
@@ -44,6 +48,34 @@ export class UploadUpdatable {
    * @memberof UploadUpdatable
    */
   "originalFilename"?: string;
+
+  /**
+   *
+   * @type {RequiredAddressColumnMapping}
+   * @memberof UploadUpdatable
+   */
+  "requiredAddressColumnMapping"?: RequiredAddressColumnMapping;
+
+  /**
+   *
+   * @type {OptionalAddressColumnMapping}
+   * @memberof UploadUpdatable
+   */
+  "optionalAddressColumnMapping"?: OptionalAddressColumnMapping;
+
+  /**
+   *
+   * @type {UploadsMetadata}
+   * @memberof UploadUpdatable
+   */
+  "metadata"?: UploadsMetadata;
+
+  /**
+   * The mapping of column headers in your file to the merge variables present in your creative. See our <a href=\"https://help.lob.com/print-and-mail/building-a-mail-strategy/campaign-or-triggered-sends/campaign-audience-guide#step-3-map-merge-variable-data-if-applicable-7\" target=\"_blank\">Campaign Audience Guide</a> for additional details. <br />If a merge variable has the same \"name\" as a \"key\" in the `requiredAddressColumnMapping` or `optionalAddressColumnMapping` objects, then they **CANNOT** have a different value in this object. If a different value is provided, then when the campaign is processing it will get overwritten with the mapped value present in the `requiredAddressColumnMapping` or `optionalAddressColumnMapping` objects.
+   * @type {object}
+   * @memberof UploadUpdatable
+   */
+  "mergeVariableColumnMapping"?: object | null;
 
   public toJSON() {
     let out = {};

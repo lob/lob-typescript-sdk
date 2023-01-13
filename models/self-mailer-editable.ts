@@ -16,6 +16,7 @@ import * as Models from "./index";
 
 import { MailType } from "./mail-type";
 import { SelfMailerSize } from "./self-mailer-size";
+import { SfmUseType } from "./sfm-use-type";
 
 /**
  *
@@ -57,23 +58,26 @@ export class SelfMailerEditable {
     if (typeof input?.billing_group_id !== "undefined") {
       this.billing_group_id = input.billing_group_id;
     }
+    if (typeof input?.use_type !== "undefined") {
+      this.use_type = input.use_type;
+    }
   }
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
-   * @type {string}
+   * @type {any}
    * @memberof SelfMailerEditable
    */
 
-  "to": string | Models.AddressEditable;
+  "to": string | Models.AddressEditable | null;
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
-   * @type {string}
+   * @type {any}
    * @memberof SelfMailerEditable
    */
 
-  "from"?: string | Models.AddressEditable;
+  "from"?: string | Models.AddressEditable | null;
 
   /**
    *
@@ -137,6 +141,13 @@ export class SelfMailerEditable {
    * @memberof SelfMailerEditable
    */
   "billing_group_id"?: string;
+
+  /**
+   *
+   * @type {SfmUseType}
+   * @memberof SelfMailerEditable
+   */
+  "use_type": SfmUseType | null;
 
   public toJSON() {
     let out = {};

@@ -16,6 +16,7 @@ import * as Models from "./index";
 
 import { MailType } from "./mail-type";
 import { PostcardSize } from "./postcard-size";
+import { PscUseType } from "./psc-use-type";
 import { QrCode } from "./qr-code";
 
 /**
@@ -61,23 +62,26 @@ export class PostcardEditable {
     if (typeof input?.qr_code !== "undefined") {
       this.qr_code = input.qr_code;
     }
+    if (typeof input?.use_type !== "undefined") {
+      this.use_type = input.use_type;
+    }
   }
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
-   * @type {string}
+   * @type {any}
    * @memberof PostcardEditable
    */
 
-  "to": string | Models.AddressEditable;
+  "to": string | Models.AddressEditable | null;
 
   /**
    * Required if `to` address is international. Must either be an address ID or an inline object with correct address parameters.
-   * @type {string}
+   * @type {any}
    * @memberof PostcardEditable
    */
 
-  "from"?: string | Models.AddressEditable;
+  "from"?: string | Models.AddressEditable | null;
 
   /**
    *
@@ -148,6 +152,13 @@ export class PostcardEditable {
    * @memberof PostcardEditable
    */
   "qr_code"?: QrCode;
+
+  /**
+   *
+   * @type {PscUseType}
+   * @memberof PostcardEditable
+   */
+  "use_type": PscUseType | null;
 
   public toJSON() {
     let out = {};

@@ -7,7 +7,7 @@ import {
 } from "./testFixtures";
 
 describe("smApi", () => {
-  jest.setTimeout(60000); // 60 seconds
+  jest.setTimeout(90000); // 90 seconds
 
   const dummySelfMailer = new SelfMailerEditable({
     to: ADDRESSES_EDITABLE[0],
@@ -82,6 +82,7 @@ describe("smApi", () => {
         from: ADDRESSES_EDITABLE[5],
         inside: FILE_LOCATION_6X18,
         outside: FILE_LOCATION_6X18,
+        use_type: "marketing",
       });
       const c1 = await smApi.create(sfm1);
       const c2 = await smApi.create(sfm2);

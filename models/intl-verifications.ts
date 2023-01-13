@@ -13,7 +13,6 @@
  */
 
 import * as Models from "./index";
-import { BulkError, IntlVerification } from "./index";
 
 import { IntlVerificationOrError } from "./intl-verification-or-error";
 
@@ -49,10 +48,10 @@ export class IntlVerifications {
     }
     for (const item of items) {
       if ((item as Models.IntlVerification).id) {
-        this._addresses.push(new IntlVerification(item));
+        this._addresses.push(new Models.IntlVerification(item));
       }
       if ((item as Models.BulkError).error) {
-        this._error_addresses.push(new BulkError(item));
+        this._error_addresses.push(new Models.BulkError(item));
       }
     }
   }

@@ -20,7 +20,7 @@ import * as Models from "./index";
  * @enum {string}
  */
 
-export enum CmpUseType {
+export enum LtrUseType {
   Marketing = "marketing",
   Operational = "operational",
   Null = "null",

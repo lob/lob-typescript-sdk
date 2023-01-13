@@ -14,6 +14,8 @@
 
 import * as Models from "./index";
 
+import { ChkUseType } from "./chk-use-type";
+
 /**
  *
  * @export
@@ -69,23 +71,26 @@ export class CheckEditable {
     if (typeof input?.billing_group_id !== "undefined") {
       this.billing_group_id = input.billing_group_id;
     }
+    if (typeof input?.use_type !== "undefined") {
+      this.use_type = input.use_type;
+    }
   }
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
-   * @type {string}
+   * @type {any}
    * @memberof CheckEditable
    */
 
-  "from": string | Models.AddressDomestic;
+  "from": string | Models.AddressDomestic | null;
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
-   * @type {string}
+   * @type {any}
    * @memberof CheckEditable
    */
 
-  "to": string | Models.AddressDomestic;
+  "to": string | Models.AddressDomestic | null;
 
   /**
    *
@@ -184,6 +189,13 @@ export class CheckEditable {
    * @memberof CheckEditable
    */
   "billing_group_id"?: string;
+
+  /**
+   *
+   * @type {ChkUseType}
+   * @memberof CheckEditable
+   */
+  "use_type": ChkUseType | null;
 
   public toJSON() {
     let out = {};

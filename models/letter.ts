@@ -16,6 +16,7 @@ import * as Models from "./index";
 
 import { Address } from "./address";
 import { LetterCustomEnvelope } from "./letter-custom-envelope";
+import { LtrUseType } from "./ltr-use-type";
 import { MailType } from "./mail-type";
 import { Thumbnail } from "./thumbnail";
 import { TrackingEventNormal } from "./tracking-event-normal";
@@ -110,6 +111,12 @@ export class Letter {
     }
     if (typeof input?.custom_envelope !== "undefined") {
       this.custom_envelope = input.custom_envelope;
+    }
+    if (typeof input?.campaign_id !== "undefined") {
+      this.campaign_id = input.campaign_id;
+    }
+    if (typeof input?.use_type !== "undefined") {
+      this.use_type = input.use_type;
     }
   }
 
@@ -296,11 +303,11 @@ export class Letter {
 
   /**
    * Specifies the address the return envelope will be sent back to. This is an optional argument that is available if an account is signed up for the return envelope tracking beta, and has `return_envelope`, and `perforated_page` fields populated in the API request.
-   * @type {string}
+   * @type {any}
    * @memberof Letter
    */
 
-  "return_address"?: string | Models.AddressEditable;
+  "return_address"?: string | Models.AddressEditable | null;
 
   /**
    *
@@ -351,6 +358,20 @@ export class Letter {
    * @memberof Letter
    */
   "custom_envelope"?: LetterCustomEnvelope | null;
+
+  /**
+   * The unique ID of the associated campaign if the resource was generated from a campaign.
+   * @type {string}
+   * @memberof Letter
+   */
+  "campaign_id"?: string | null;
+
+  /**
+   *
+   * @type {LtrUseType}
+   * @memberof Letter
+   */
+  "use_type": LtrUseType | null;
 
   public toJSON() {
     let out = {};

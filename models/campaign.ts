@@ -152,7 +152,7 @@ export class Campaign {
    * @type {CmpUseType}
    * @memberof Campaign
    */
-  "use_type"?: CmpUseType | null;
+  "use_type": CmpUseType | null;
 
   /**
    * Whether or not a mail piece should be automatically canceled and not sent if the address is updated via NCOA.

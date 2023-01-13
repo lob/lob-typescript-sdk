@@ -14,6 +14,7 @@
 
 import * as Models from "./index";
 
+import { LtrUseType } from "./ltr-use-type";
 import { MailType } from "./mail-type";
 import { QrCode } from "./qr-code";
 
@@ -77,6 +78,9 @@ export class LetterEditable {
     }
     if (typeof input?.qr_code !== "undefined") {
       this.qr_code = input.qr_code;
+    }
+    if (typeof input?.use_type !== "undefined") {
+      this.use_type = input.use_type;
     }
   }
 
@@ -160,19 +164,19 @@ export class LetterEditable {
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
-   * @type {string}
+   * @type {any}
    * @memberof LetterEditable
    */
 
-  "to": string | Models.AddressEditable;
+  "to": string | Models.AddressEditable | null;
 
   /**
    * Must either be an address ID or an inline object with correct address parameters.
-   * @type {string}
+   * @type {any}
    * @memberof LetterEditable
    */
 
-  "from": string | Models.AddressEditable;
+  "from": string | Models.AddressEditable | null;
 
   /**
    * PDF file containing the letter\'s formatting.
@@ -208,6 +212,13 @@ export class LetterEditable {
    * @memberof LetterEditable
    */
   "qr_code"?: QrCode;
+
+  /**
+   *
+   * @type {LtrUseType}
+   * @memberof LetterEditable
+   */
+  "use_type": LtrUseType | null;
 
   public toJSON() {
     let out = {};

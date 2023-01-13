@@ -18,6 +18,7 @@ import { Address } from "./address";
 import { AddressDomesticExpanded } from "./address-domestic-expanded";
 import { MailType } from "./mail-type";
 import { PostcardSize } from "./postcard-size";
+import { PscUseType } from "./psc-use-type";
 import { Thumbnail } from "./thumbnail";
 import { TrackingEventNormal } from "./tracking-event-normal";
 
@@ -93,6 +94,9 @@ export class Postcard {
     }
     if (typeof input?.send_date !== "undefined") {
       this.send_date = input.send_date;
+    }
+    if (typeof input?.use_type !== "undefined") {
+      this.use_type = input.use_type;
     }
   }
 
@@ -308,6 +312,13 @@ export class Postcard {
    * @memberof Postcard
    */
   "send_date"?: string;
+
+  /**
+   *
+   * @type {PscUseType}
+   * @memberof Postcard
+   */
+  "use_type"?: PscUseType | null;
 
   public toJSON() {
     let out = {};

@@ -14,6 +14,10 @@
 
 import * as Models from "./index";
 
+import { OptionalAddressColumnMapping } from "./optional-address-column-mapping";
+import { RequiredAddressColumnMapping } from "./required-address-column-mapping";
+import { UploadsMetadata } from "./uploads-metadata";
+
 /**
  *
  * @export
@@ -24,23 +28,54 @@ export class UploadWritable {
     if (typeof input?.campaignId !== "undefined") {
       this.campaignId = input.campaignId;
     }
+    if (typeof input?.requiredAddressColumnMapping !== "undefined") {
+      this.requiredAddressColumnMapping = input.requiredAddressColumnMapping;
+    }
+    if (typeof input?.optionalAddressColumnMapping !== "undefined") {
+      this.optionalAddressColumnMapping = input.optionalAddressColumnMapping;
+    }
+    if (typeof input?.metadata !== "undefined") {
+      this.metadata = input.metadata;
+    }
+    if (typeof input?.mergeVariableColumnMapping !== "undefined") {
+      this.mergeVariableColumnMapping = input.mergeVariableColumnMapping;
+    }
   }
 
   /**
-   * Unique identifier prefixed with `cmp_`.
+   *
    * @type {string}
    * @memberof UploadWritable
    */
-  private "_campaignId": string;
-  public get campaignId() {
-    return this._campaignId;
-  }
-  public set campaignId(newValue: string) {
-    if (newValue && !/^cmp_[a-zA-Z0-9]+$/.test(newValue)) {
-      throw new Error("Invalid campaignId provided");
-    }
-    this._campaignId = newValue;
-  }
+  "campaignId": string;
+
+  /**
+   *
+   * @type {RequiredAddressColumnMapping}
+   * @memberof UploadWritable
+   */
+  "requiredAddressColumnMapping"?: RequiredAddressColumnMapping;
+
+  /**
+   *
+   * @type {OptionalAddressColumnMapping}
+   * @memberof UploadWritable
+   */
+  "optionalAddressColumnMapping"?: OptionalAddressColumnMapping;
+
+  /**
+   *
+   * @type {UploadsMetadata}
+   * @memberof UploadWritable
+   */
+  "metadata"?: UploadsMetadata;
+
+  /**
+   * The mapping of column headers in your file to the merge variables present in your creative. See our <a href=\"https://help.lob.com/print-and-mail/building-a-mail-strategy/campaign-or-triggered-sends/campaign-audience-guide#step-3-map-merge-variable-data-if-applicable-7\" target=\"_blank\">Campaign Audience Guide</a> for additional details. <br />If a merge variable has the same \"name\" as a \"key\" in the `requiredAddressColumnMapping` or `optionalAddressColumnMapping` objects, then they **CANNOT** have a different value in this object. If a different value is provided, then when the campaign is processing it will get overwritten with the mapped value present in the `requiredAddressColumnMapping` or `optionalAddressColumnMapping` objects.
+   * @type {object}
+   * @memberof UploadWritable
+   */
+  "mergeVariableColumnMapping"?: object | null;
 
   public toJSON() {
     let out = {};

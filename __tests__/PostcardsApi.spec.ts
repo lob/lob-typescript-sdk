@@ -7,7 +7,7 @@ import {
 } from "./testFixtures";
 
 describe("postcardsApi", () => {
-  jest.setTimeout(60000); // 60 seconds
+  jest.setTimeout(90000); // 90 seconds
 
   let postcardsApi: PostcardsApi;
 

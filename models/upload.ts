@@ -14,7 +14,10 @@
 
 import * as Models from "./index";
 
+import { OptionalAddressColumnMapping } from "./optional-address-column-mapping";
+import { RequiredAddressColumnMapping } from "./required-address-column-mapping";
 import { UploadState } from "./upload-state";
+import { UploadsMetadata } from "./uploads-metadata";
 
 /**
  *
@@ -28,9 +31,6 @@ export class Upload {
     }
     if (typeof input?.accountId !== "undefined") {
       this.accountId = input.accountId;
-    }
-    if (typeof input?.campaignId !== "undefined") {
-      this.campaignId = input.campaignId;
     }
     if (typeof input?.mode !== "undefined") {
       this.mode = input.mode;
@@ -62,8 +62,17 @@ export class Upload {
     if (typeof input?.dateModified !== "undefined") {
       this.dateModified = input.dateModified;
     }
-    if (typeof input?.deleted !== "undefined") {
-      this.deleted = input.deleted;
+    if (typeof input?.requiredAddressColumnMapping !== "undefined") {
+      this.requiredAddressColumnMapping = input.requiredAddressColumnMapping;
+    }
+    if (typeof input?.optionalAddressColumnMapping !== "undefined") {
+      this.optionalAddressColumnMapping = input.optionalAddressColumnMapping;
+    }
+    if (typeof input?.metadata !== "undefined") {
+      this.metadata = input.metadata;
+    }
+    if (typeof input?.mergeVariableColumnMapping !== "undefined") {
+      this.mergeVariableColumnMapping = input.mergeVariableColumnMapping;
     }
   }
 
@@ -89,22 +98,6 @@ export class Upload {
    * @memberof Upload
    */
   "accountId": string;
-
-  /**
-   * Unique identifier prefixed with `cmp_`.
-   * @type {string}
-   * @memberof Upload
-   */
-  private "_campaignId": string;
-  public get campaignId() {
-    return this._campaignId;
-  }
-  public set campaignId(newValue: string) {
-    if (newValue && !/^cmp_[a-zA-Z0-9]+$/.test(newValue)) {
-      throw new Error("Invalid campaignId provided");
-    }
-    this._campaignId = newValue;
-  }
 
   /**
    * The environment in which the mailpieces were created. Today, will only be `live`.
@@ -177,11 +170,32 @@ export class Upload {
   "dateModified": string;
 
   /**
-   * Only returned if the resource has been successfully deleted.
-   * @type {boolean}
+   *
+   * @type {RequiredAddressColumnMapping}
    * @memberof Upload
    */
-  "deleted"?: boolean;
+  "requiredAddressColumnMapping": RequiredAddressColumnMapping;
+
+  /**
+   *
+   * @type {OptionalAddressColumnMapping}
+   * @memberof Upload
+   */
+  "optionalAddressColumnMapping": OptionalAddressColumnMapping;
+
+  /**
+   *
+   * @type {UploadsMetadata}
+   * @memberof Upload
+   */
+  "metadata": UploadsMetadata;
+
+  /**
+   * The mapping of column headers in your file to the merge variables present in your creative. See our <a href=\"https://help.lob.com/print-and-mail/building-a-mail-strategy/campaign-or-triggered-sends/campaign-audience-guide#step-3-map-merge-variable-data-if-applicable-7\" target=\"_blank\">Campaign Audience Guide</a> for additional details. <br />If a merge variable has the same \"name\" as a \"key\" in the `requiredAddressColumnMapping` or `optionalAddressColumnMapping` objects, then they **CANNOT** have a different value in this object. If a different value is provided, then when the campaign is processing it will get overwritten with the mapped value present in the `requiredAddressColumnMapping` or `optionalAddressColumnMapping` objects.
+   * @type {object}
+   * @memberof Upload
+   */
+  "mergeVariableColumnMapping": object | null;
 
   public toJSON() {
     let out = {};
