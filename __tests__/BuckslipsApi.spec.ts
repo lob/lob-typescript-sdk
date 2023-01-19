@@ -5,9 +5,14 @@ import {
   FILE_LOCATION_6X18,
 } from "./testFixtures";
 import { BuckslipsApi } from "../api/buckslips-api";
-import { BuckslipEditable, BuckslipEditableSizeEnum } from "../models";
+import {
+  Buckslip,
+  BuckslipEditable,
+  BuckslipEditableSizeEnum,
+} from "../models";
 import FormData from "form-data";
 import fs from "fs";
+import { create } from "domain";
 
 describe("BuckSlipsApi", () => {
   it("Buckslips API can be instantiated", () => {
@@ -51,73 +56,35 @@ describe("BuckSlipsApi", () => {
       expect(createdBe.id).toBeDefined();
       expect(createdBe.description).toEqual(createBe.description);
 
-      //   // Get
-      //   const retrievedBe = await buckslipsApi.get(createdBe.id as string);
-      //   expect(retrievedBe).toBeDefined();
-      //   expect(retrievedBe.id).toEqual(createdBe.id);
+      // Get
+      const retrievedBe = await buckslipsApi.get(createdBe.id as string);
+      expect(retrievedBe).toBeDefined();
+      expect(retrievedBe.id).toEqual(createdBe.id);
 
-      //   // Update
-      //   const updates = new BuckslipEditable({
-      //     description: "updated buckslip",
-      //   });
-      //   const updatedBg = await buckslipsApi.update(
-      //     retrievedBe.id as string,
-      //     updates
-      //   );
-      //   expect(updatedBg).toBeDefined();
-      //   expect(updatedBg.description).toEqual("updated buckslip");
+      // Update
+      const updates = new BuckslipEditable({
+        description: "updated buckslip",
+      });
+      const updatedBe = await buckslipsApi.update(
+        retrievedBe.id as string,
+        updates
+      );
+      expect(updatedBe).toBeDefined();
+      expect(updatedBe.description).toEqual("updated buckslip");
     });
   });
 
-  //   describe("list billing groups", () => {
-  //     let createdBillingGroups: BillingGroup[] = [];
+  describe("list buckslips", () => {
+    it("exists", () => {
+      const buckslipsApi = new BuckslipsApi(CONFIG_FOR_INTEGRATION);
+      expect(buckslipsApi.List).toBeDefined();
+      expect(typeof buckslipsApi.List).toEqual("function");
+    });
 
-  //     beforeAll(async () => {
-  //       // ensure there are at least 3 billing groups present, to test pagination
-  //       const bg1 = new BillingGroupEditable({
-  //         description: "Billing Group 1",
-  //         name: "TestBillingGroup1",
-  //       });
-  //       const bg2 = new BillingGroupEditable(
-  //         Object.assign({}, bg1, {
-  //           description: "Billing Group 2",
-  //           name: "TestBillingGroup2",
-  //         })
-  //       );
-  //       const bg3 = new BillingGroupEditable(
-  //         Object.assign({}, bg1, {
-  //           description: "Billing Group 3",
-  //           name: "TestBillingGroup2",
-  //         })
-  //       );
-
-  //       const billingGroupsApi = new BillingGroupsApi(CONFIG_FOR_INTEGRATION);
-  //       await Promise.all([
-  //         billingGroupsApi.create(bg1),
-  //         billingGroupsApi.create(bg2),
-  //         billingGroupsApi.create(bg3),
-  //       ])
-  //         .then((creationResults) => {
-  //           expect(creationResults.length).toEqual(3);
-  //           createdBillingGroups = createdBillingGroups.concat(creationResults);
-  //         })
-  //         .catch((err) => {
-  //           throw err;
-  //         });
-  //     });
-
-  //     it("exists", () => {
-  //       const billingGroupsApi = new BillingGroupsApi(CONFIG_FOR_INTEGRATION);
-  //       expect(billingGroupsApi.list).toBeDefined();
-  //       expect(typeof billingGroupsApi.list).toEqual("function");
-  //     });
-
-  //     it("lists billing groups", async () => {
-  //       const response = await new BillingGroupsApi(
-  //         CONFIG_FOR_INTEGRATION
-  //       ).list();
-  //       expect(response.data).toBeDefined();
-  //       expect(response.data?.length).toBeGreaterThan(0);
-  //     });
+    it("lists buckslips", async () => {
+      const response = await new BuckslipsApi(CONFIG_FOR_INTEGRATION).List();
+      expect(response.data).toBeDefined();
+      expect(response.data?.length).toBeGreaterThan(0);
+    });
+  });
 });
-// });
