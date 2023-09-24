@@ -126,7 +126,7 @@ export class UsVerification {
    * @type {boolean}
    * @memberof UsVerification
    */
-  "valid_address"?: UsVerificationValidAddressEnum;
+  "valid_address"?: boolean
 
   /**
    *
@@ -177,14 +177,6 @@ export enum UsVerificationDeliverabilityEnum {
   DeliverableIncorrectUnit = "deliverable_incorrect_unit",
   DeliverableMissingUnit = "deliverable_missing_unit",
   Undeliverable = "undeliverable",
-}
-/**
- * @export
- * @enum {string}
- */
-export enum UsVerificationValidAddressEnum {
-  True = "true",
-  False = "false",
 }
 /**
  * @export
