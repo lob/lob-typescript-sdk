@@ -25,17 +25,21 @@ export enum DpvFootnote {
   A1 = "A1",
   Bb = "BB",
   Cc = "CC",
-  N1 = "N1",
+  C1 = "C1",
   F1 = "F1",
   G1 = "G1",
-  U1 = "U1",
+  Ia = "IA",
   M1 = "M1",
   M3 = "M3",
+  N1 = "N1",
+  Pb = "PB",
   P1 = "P1",
   P3 = "P3",
   R1 = "R1",
   R7 = "R7",
   Rr = "RR",
+  Ta = "TA",
+  U1 = "U1",
 }
 
 /**

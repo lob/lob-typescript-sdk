@@ -95,6 +95,9 @@ export class UsComponents {
     if (typeof input?.carrier_route_type !== "undefined") {
       this.carrier_route_type = input.carrier_route_type;
     }
+    if (typeof input?.po_box_only_flag !== "undefined") {
+      this.po_box_only_flag = input.po_box_only_flag;
+    }
     if (typeof input?.latitude !== "undefined") {
       this.latitude = input.latitude;
     }
@@ -204,7 +207,7 @@ export class UsComponents {
     return this._zip_code;
   }
   public set zip_code(newValue: string) {
-    if (newValue && !/^\d{5}$/.test(newValue)) {
+    if (newValue && !/(^$)|(^\d{5}$)/.test(newValue)) {
       throw new Error("Invalid zip_code provided");
     }
     this._zip_code = newValue;
@@ -220,7 +223,7 @@ export class UsComponents {
     return this._zip_code_plus_4;
   }
   public set zip_code_plus_4(newValue: string) {
-    if (newValue && !/^\d{4}$/.test(newValue)) {
+    if (newValue && !/^(\d{4})?$/.test(newValue)) {
       throw new Error("Invalid zip_code_plus_4 provided");
     }
     this._zip_code_plus_4 = newValue;
@@ -288,6 +291,13 @@ export class UsComponents {
    * @memberof UsComponents
    */
   "carrier_route_type": UsComponentsCarrierRouteTypeEnum;
+
+  /**
+   * Indicates the mailing facility for an address only supports PO Box deliveries and other forms of mail delivery are not available.
+   * @type {string}
+   * @memberof UsComponents
+   */
+  "po_box_only_flag": UsComponentsPoBoxOnlyFlagEnum;
 
   /**
    * A positive or negative decimal indicating the geographic latitude of the address, specifying the north-to-south position of a location. This should be used with `longitude` to pinpoint locations on a map. Will not be returned for undeliverable addresses or military addresses (state is `AA`, `AE`, or `AP`).
@@ -376,6 +386,15 @@ export enum UsComponentsCarrierRouteTypeEnum {
   HighwayContract = "highway_contract",
   PoBox = "po_box",
   GeneralDelivery = "general_delivery",
+  Empty = "",
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum UsComponentsPoBoxOnlyFlagEnum {
+  Y = "Y",
+  N = "N",
   Empty = "",
 }
 

@@ -35,6 +35,24 @@ export class DeliverabilityAnalysis {
     if (typeof input?.dpv_active !== "undefined") {
       this.dpv_active = input.dpv_active;
     }
+    if (typeof input?.dpv_inactive_reason !== "undefined") {
+      this.dpv_inactive_reason = input.dpv_inactive_reason;
+    }
+    if (typeof input?.dpv_throwback !== "undefined") {
+      this.dpv_throwback = input.dpv_throwback;
+    }
+    if (typeof input?.dpv_non_delivery_day_flag !== "undefined") {
+      this.dpv_non_delivery_day_flag = input.dpv_non_delivery_day_flag;
+    }
+    if (typeof input?.dpv_non_delivery_day_values !== "undefined") {
+      this.dpv_non_delivery_day_values = input.dpv_non_delivery_day_values;
+    }
+    if (typeof input?.dpv_no_secure_location !== "undefined") {
+      this.dpv_no_secure_location = input.dpv_no_secure_location;
+    }
+    if (typeof input?.dpv_door_not_accessible !== "undefined") {
+      this.dpv_door_not_accessible = input.dpv_door_not_accessible;
+    }
     if (typeof input?.dpv_footnotes !== "undefined") {
       this.dpv_footnotes = input.dpv_footnotes;
     }
@@ -79,6 +97,48 @@ export class DeliverabilityAnalysis {
    * @memberof DeliverabilityAnalysis
    */
   "dpv_active": DeliverabilityAnalysisDpvActiveEnum;
+
+  /**
+   * Indicates the reason why an address is vacant or no longer receiving deliveries. Possible values are: * `01` –– Address does not receive mail from the USPS directly, but is serviced by a drop address. * `02` –– Address not yet deliverable. * `03` –– A DPV match is not made (`deliverability_analysis[dpv_confirmation]` is `N` or an empty string). * `04` –– Address is a College, Military Zone, or other type. * `05` –– Address no longer receives deliveries. * `06` –– Address is missing required secondary information. * `\'\'` –– A DPV match is not made or the address is active.
+   * @type {string}
+   * @memberof DeliverabilityAnalysis
+   */
+  "dpv_inactive_reason": DeliverabilityAnalysisDpvInactiveReasonEnum;
+
+  /**
+   * Indicates a street address for which mail is delivered to a PO Box. Possible values are: * `Y` –– Address is a PO Box throwback delivery point. * `N` –– Address is not a PO Box throwback delivery point. * `\'\'` –– A DPV match is not made (`deliverability_analysis[dpv_confirmation]` is `N` or an empty string).
+   * @type {string}
+   * @memberof DeliverabilityAnalysis
+   */
+  "dpv_throwback": DeliverabilityAnalysisDpvThrowbackEnum;
+
+  /**
+   * Indicates whether deliveries are not performed on one or more days of the week at an address. Possible values are: * `Y` –– Mail delivery does not occur on some days of the week. * `N` –– Mail delivery occurs every day of the week. * `\'\'` –– A DPV match is not made (`deliverability_analysis[dpv_confirmation]` is `N` or an empty string).
+   * @type {string}
+   * @memberof DeliverabilityAnalysis
+   */
+  "dpv_non_delivery_day_flag": DeliverabilityAnalysisDpvNonDeliveryDayFlagEnum;
+
+  /**
+   * Indicates days of the week (starting on Sunday) deliveries are not performed at an address. For example: * `YNNNNNN` –– Mail delivery does not occur on Sunday\'s. * `NYNNNYN` –– Mail delivery does not occur on Monday\'s or Friday\'s. * `\'\'` –– A DPV match is not made (`deliverability_analysis[dpv_confirmation]` is `N` or an empty string) or address receives mail every day of the week (`deliverability_analysis[dpv_non_delivery_day_flag]` is `N` or an empty string).
+   * @type {string}
+   * @memberof DeliverabilityAnalysis
+   */
+  "dpv_non_delivery_day_values": string;
+
+  /**
+   * Indicates packages to this address will not be left due to security concerns. Possible values are: * `Y` –– Address does not have a secure mailbox. * `N` –– Address has a secure mailbox. * `\'\'` –– A DPV match is not made (`deliverability_analysis[dpv_confirmation]` is `N` or an empty string).
+   * @type {string}
+   * @memberof DeliverabilityAnalysis
+   */
+  "dpv_no_secure_location": DeliverabilityAnalysisDpvNoSecureLocationEnum;
+
+  /**
+   * Indicates the door of the address is not accessible for mail delivery. Possible values are: * `Y` –– Door is not accessible. * `N` –– Door is accessible. * `\'\'` –– A DPV match is not made (`deliverability_analysis[dpv_confirmation]` is `N` or an empty string).
+   * @type {string}
+   * @memberof DeliverabilityAnalysis
+   */
+  "dpv_door_not_accessible": DeliverabilityAnalysisDpvDoorNotAccessibleEnum;
 
   /**
    * An array of 2-character strings that gives more insight into how `deliverability_analysis[dpv_confirmation]` was determined. Will always include at least 1 string, and can include up to 3. For details, see [US Verification Details](#tag/US-Verification-Types).
@@ -160,6 +220,55 @@ export enum DeliverabilityAnalysisDpvVacantEnum {
  * @enum {string}
  */
 export enum DeliverabilityAnalysisDpvActiveEnum {
+  Y = "Y",
+  N = "N",
+  Empty = "",
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum DeliverabilityAnalysisDpvInactiveReasonEnum {
+  _01 = "01",
+  _02 = "02",
+  _03 = "03",
+  _04 = "04",
+  _05 = "05",
+  _06 = "06",
+  Empty = "",
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum DeliverabilityAnalysisDpvThrowbackEnum {
+  Y = "Y",
+  N = "N",
+  Empty = "",
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum DeliverabilityAnalysisDpvNonDeliveryDayFlagEnum {
+  Y = "Y",
+  N = "N",
+  Empty = "",
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum DeliverabilityAnalysisDpvNoSecureLocationEnum {
+  Y = "Y",
+  N = "N",
+  Empty = "",
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum DeliverabilityAnalysisDpvDoorNotAccessibleEnum {
   Y = "Y",
   N = "N",
   Empty = "",
