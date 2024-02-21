@@ -11,6 +11,7 @@ api/letters-api.ts
 api/postcards-api.ts
 api/reverse-geocode-lookups-api.ts
 api/self-mailers-api.ts
+api/snap-packs-api.ts
 api/template-versions-api.ts
 api/templates-api.ts
 api/us-autocompletions-api.ts
@@ -93,6 +94,14 @@ models/self-mailer-editable.ts
 models/self-mailer-list.ts
 models/self-mailer-size.ts
 models/self-mailer.ts
+models/sfm-use-type.ts
+models/snap-pack-deletion.ts
+models/snap-pack-editable.ts
+models/snap-pack-list.ts
+models/snap-pack-size.ts
+models/snap-pack.ts
+models/snp-use-type.ts
+models/sort-by-date-modified.ts
 models/sort-by.ts
 models/sort-by1.ts
 models/sort-by2.ts

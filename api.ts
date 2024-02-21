@@ -24,6 +24,7 @@ export * from "./api/letters-api";
 export * from "./api/postcards-api";
 export * from "./api/reverse-geocode-lookups-api";
 export * from "./api/self-mailers-api";
+export * from "./api/snap-packs-api";
 export * from "./api/template-versions-api";
 export * from "./api/templates-api";
 export * from "./api/us-autocompletions-api";
