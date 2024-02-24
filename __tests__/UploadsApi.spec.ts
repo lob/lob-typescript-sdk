@@ -32,23 +32,23 @@ describe("UploadsApi", () => {
     expect(uploadsApi.create_export).toBeDefined();
     expect(typeof uploadsApi.create_export).toEqual("function");
 
-    expect(uploadsApi.create_upload).toBeDefined();
-    expect(typeof uploadsApi.create_upload).toEqual("function");
+    expect(uploadsApi.create).toBeDefined();
+    expect(typeof uploadsApi.create).toEqual("function");
 
-    expect(uploadsApi.delete_upload).toBeDefined();
-    expect(typeof uploadsApi.delete_upload).toEqual("function");
+    expect(uploadsApi.delete).toBeDefined();
+    expect(typeof uploadsApi.delete).toEqual("function");
 
     expect(uploadsApi.get_export).toBeDefined();
     expect(typeof uploadsApi.get_export).toEqual("function");
 
-    expect(uploadsApi.get_upload).toBeDefined();
-    expect(typeof uploadsApi.get_upload).toEqual("function");
+    expect(uploadsApi.get).toBeDefined();
+    expect(typeof uploadsApi.get).toEqual("function");
 
-    expect(uploadsApi.list_upload).toBeDefined();
-    expect(typeof uploadsApi.list_upload).toEqual("function");
+    expect(uploadsApi.list).toBeDefined();
+    expect(typeof uploadsApi.list).toEqual("function");
 
-    expect(uploadsApi.update_upload).toBeDefined();
-    expect(typeof uploadsApi.update_upload).toEqual("function");
+    expect(uploadsApi.update).toBeDefined();
+    expect(typeof uploadsApi.update).toEqual("function");
 
     expect(uploadsApi.upload_file).toBeDefined();
     expect(typeof uploadsApi.upload_file).toEqual("function");
@@ -104,7 +104,7 @@ describe("UploadsApi", () => {
       const data = new FormData();
       data.append("file", file);
 
-      const createdUpload = await uploadsApi.create_upload(uploadWrite, {
+      const createdUpload = await uploadsApi.create(uploadWrite, {
         data,
       });
       expect(createdUpload.id).toBeDefined();
@@ -117,7 +117,7 @@ describe("UploadsApi", () => {
       expect(createdExport).toBeDefined();
 
       // //get upload
-      const fetchedUpload = await uploadsApi.get_upload(createdUpload.id);
+      const fetchedUpload = await uploadsApi.get(createdUpload.id);
       expect(fetchedUpload).toBeDefined();
       expect(fetchedUpload.id).toEqual(createdUpload.id);
 
@@ -131,7 +131,7 @@ describe("UploadsApi", () => {
       expect(fetchedExport.uploadId).toEqual(createdUpload.id);
 
       // //list uploads
-      const listOfUploads = await uploadsApi.list_upload(createdCampaign.id);
+      const listOfUploads = await uploadsApi.list(createdCampaign.id);
       expect(listOfUploads).toBeDefined();
       expect(listOfUploads.length).toBeGreaterThan(0);
     });
