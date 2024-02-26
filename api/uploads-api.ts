@@ -413,19 +413,17 @@ export const UploadsApiAxiosParamCreator = function (
      * Update the details of an existing upload. You need only supply the unique identifier that was returned upon upload creation.
      * @summary update
      * @param {string} uplId id of the upload
-     * @param {UploadUpdatable} uploadUpdatable
+     * @param {UploadUpdatable} [uploadUpdatable]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     uploadUpdate: async (
       uplId: string,
-      uploadUpdatable: UploadUpdatable,
+      uploadUpdatable?: UploadUpdatable,
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'uplId' is not null or undefined
       assertParamExists("uploadUpdate", "uplId", uplId);
-      // verify required parameter 'uploadUpdatable' is not null or undefined
-      assertParamExists("uploadUpdate", "uploadUpdatable", uploadUpdatable);
 
       const localVarPath = `/uploads/{upl_id}`.replace(
         `{${"upl_id"}}`,
@@ -688,13 +686,13 @@ export const UploadsApiFp = function (configuration?: Configuration) {
      * Update the details of an existing upload. You need only supply the unique identifier that was returned upon upload creation.
      * @summary update
      * @param {string} uplId id of the upload
-     * @param {UploadUpdatable} uploadUpdatable
+     * @param {UploadUpdatable} [uploadUpdatable]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async uploadUpdate(
       uplId: string,
-      uploadUpdatable: UploadUpdatable,
+      uploadUpdatable?: UploadUpdatable,
       options?: AxiosRequestConfig
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Upload>
@@ -894,14 +892,14 @@ export class UploadsApi extends BaseAPI {
    * Update the details of an existing upload. You need only supply the unique identifier that was returned upon upload creation.
    * @summary update
    * @param {string} uplId id of the upload
-   * @param {UploadUpdatable} uploadUpdatable
+   * @param {UploadUpdatable} [uploadUpdatable]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof UploadsApi
    */
   public update(
     uplId: string,
-    uploadUpdatable: UploadUpdatable,
+    uploadUpdatable?: UploadUpdatable,
     options?: AxiosRequestConfig
   ) {
     return UploadsApiFp(this.configuration)
