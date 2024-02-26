@@ -1,5 +1,5 @@
 import { ChecksApi } from "../api/checks-api";
-import { CheckEditable } from "../models";
+import { CheckEditable, ChkUseType } from "../models";
 import { Check } from "../models";
 import {
   BankAccount,
@@ -67,6 +67,7 @@ describe("ChecksApi", () => {
           from: ADDRESSES_EDITABLE[1],
           bank_account: account.id,
           amount: 100,
+          use_type: ChkUseType.Operational,
         });
 
         checksApi = new ChecksApi(CONFIG_FOR_INTEGRATION);
@@ -128,17 +129,20 @@ describe("ChecksApi", () => {
         from: ADDRESSES_EDITABLE[1],
         bank_account: account.id,
         amount: 100,
+        use_type: ChkUseType.Operational,
       });
       const check2 = new CheckEditable(
         Object.assign({}, check1, {
           description: "Check 2",
           amount: 200,
+          use_type: ChkUseType.Operational,
         })
       );
       const check3 = new CheckEditable(
         Object.assign({}, check1, {
           description: "Check 3",
           amount: 300,
+          use_type: ChkUseType.Operational,
         })
       );
 

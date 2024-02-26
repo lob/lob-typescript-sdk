@@ -1,4 +1,4 @@
-import { Postcard, PostcardEditable, TemplateWritable } from "../models";
+import { Postcard, PostcardEditable, TemplateWritable, PscUseType } from "../models";
 import { PostcardsApi, TemplatesApi } from "../api";
 import {
   ADDRESSES_EDITABLE,
@@ -16,6 +16,7 @@ describe("postcardsApi", () => {
     from: ADDRESSES_EDITABLE[1],
     front: FILE_LOCATION_4X6,
     back: FILE_LOCATION_4X6,
+    use_type: PscUseType.Marketing,
   });
 
   it("Postcard API can be instantiated", () => {
