@@ -1,4 +1,9 @@
-import { Postcard, PostcardEditable, TemplateWritable, PscUseType } from "../models";
+import {
+  Postcard,
+  PostcardEditable,
+  TemplateWritable,
+  PscUseType,
+} from "../models";
 import { PostcardsApi, TemplatesApi } from "../api";
 import {
   ADDRESSES_EDITABLE,
