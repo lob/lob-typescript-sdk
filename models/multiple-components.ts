@@ -42,6 +42,9 @@ export class MultipleComponents {
     if (typeof input?.zip_code !== "undefined") {
       this.zip_code = input.zip_code;
     }
+    if (typeof input?.transient_id !== "undefined") {
+      this.transient_id = input.transient_id;
+    }
   }
 
   /**
@@ -101,6 +104,13 @@ export class MultipleComponents {
     }
     this._zip_code = newValue;
   }
+
+  /**
+   * ID that is returned in the response body for the verification
+   * @type {string}
+   * @memberof MultipleComponents
+   */
+  "transient_id"?: string;
 
   public toJSON() {
     let out = {};

@@ -35,6 +35,9 @@ export class Upload {
     if (typeof input?.mode !== "undefined") {
       this.mode = input.mode;
     }
+    if (typeof input?.campaignId !== "undefined") {
+      this.campaignId = input.campaignId;
+    }
     if (typeof input?.failuresUrl !== "undefined") {
       this.failuresUrl = input.failuresUrl;
     }
@@ -105,6 +108,13 @@ export class Upload {
    * @memberof Upload
    */
   "mode": UploadModeEnum;
+
+  /**
+   * Campaign ID associated with the upload
+   * @type {string}
+   * @memberof Upload
+   */
+  "campaignId": string;
 
   /**
    * Url where your campaign mailpiece failures can be retrieved

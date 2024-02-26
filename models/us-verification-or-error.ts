@@ -59,6 +59,9 @@ export class UsVerificationOrError {
     if (typeof input?.object !== "undefined") {
       this.object = input.object;
     }
+    if (typeof input?.transient_id !== "undefined") {
+      this.transient_id = input.transient_id;
+    }
     if (typeof input?.error !== "undefined") {
       this.error = input.error;
     }
@@ -149,6 +152,13 @@ export class UsVerificationOrError {
    * @memberof UsVerificationOrError
    */
   "object"?: UsVerificationOrErrorObjectEnum;
+
+  /**
+   * ID that is returned in the response body for the verification
+   * @type {string}
+   * @memberof UsVerificationOrError
+   */
+  "transient_id"?: string;
 
   /**
    *

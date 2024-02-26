@@ -45,10 +45,13 @@ export class UsVerificationsWritable {
     if (typeof input?.zip_code !== "undefined") {
       this.zip_code = input.zip_code;
     }
+    if (typeof input?.transient_id !== "undefined") {
+      this.transient_id = input.transient_id;
+    }
   }
 
   /**
-   * The entire address in one string (e.g., \"210 King Street 94107\"). _Does not support a recipient and will error when other payload parameters are provided._
+   * The entire address in one string (e.g., \"2261 Market Street 94114\"). _Does not support a recipient and will error when other payload parameters are provided._
    * @type {string}
    * @memberof UsVerificationsWritable
    */
@@ -111,6 +114,13 @@ export class UsVerificationsWritable {
     }
     this._zip_code = newValue;
   }
+
+  /**
+   * ID that is returned in the response body for the verification
+   * @type {string}
+   * @memberof UsVerificationsWritable
+   */
+  "transient_id"?: string;
 
   public toJSON() {
     let out = {};

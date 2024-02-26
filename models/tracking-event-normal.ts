@@ -58,7 +58,7 @@ export class TrackingEventNormal {
   "type": TrackingEventNormalTypeEnum;
 
   /**
-   * Name of tracking event (for normal postcards, self mailers, letters, and checks):    * `In Transit` - The mailpiece is being processed at the entry/origin facility.    * `In Local Area` - The mailpiece is being processed at the destination facility.    * `Processed for Delivery` - The mailpiece has been greenlit for     delivery at the recipient\'s nearest postal facility. The mailpiece     should reach the mailbox within 1 business day of this tracking     event.    * `Re-Routed` - The mailpiece is re-routed due to recipient change of     address, address errors, or USPS relabeling of barcode/ID tag     area.    * `Returned to Sender` - The mailpiece is being returned to sender due     to barcode, ID tag area, or address errors.    * `Mailed` - The mailpiece has been handed off to and accepted by USPS     and is en route. [More about     Mailed.](https://support.lob.com/hc/en-us/articles/360001724400-What-does-a-Mailed-tracking-event-mean-)     Note this data is only available in Enterprise editions of     Lob. [Contact Sales](https://lob.com/support/contact#contact) if     you want access to this feature.  [More about tracking](https://support.lob.com/hc/en-us/articles/115000097404-Can-I-track-my-mail-)
+   * Name of tracking event (for normal postcards, self mailers, letters, and checks):    * `Mailed` - The mailpiece has been handed off to and accepted by USPS   and is en route. <a href=\"https://help.lob.com/print-and-mail/getting-data-and-results/tracking-your-mail#mailed-tracking-events-4\" target=\"_blank\">More about   Mailed.</a>   Note this data is only available in Enterprise editions of   Lob. <a href=\"https://lob.com/support/contact#contact\" target=\"_blank\">Contact Sales</a> if   you want access to this feature.  * `In Transit` - The mailpiece is being processed at the entry/origin facility. * `In Local Area` - The mailpiece is being processed at the destination facility. * `Processed for Delivery` - The mailpiece has been greenlit for   delivery at the recipient\'s nearest postal facility. The mailpiece   should reach the mailbox within 1 business day of this tracking   event.  * `Delivered` - The mail piece has been delivered to    the recipients address. The final scan is generated when the mail    carrier\'s GPS unit leaves the delivery area.  * `Re-Routed` - The mailpiece is re-routed due to recipient change of   address, address errors, or USPS relabeling of barcode/ID tag   area.  * `Returned to Sender` - The mailpiece is being returned to sender due   to barcode, ID tag area, or address errors.  * `International Exit` - The mail piece has been processed to    ship to a destination abroad. This is typically the last    scan a US-originated international mail piece will receive    from the USPS.  [More about tracking](https://support.lob.com/hc/en-us/articles/115000097404-Can-I-track-my-mail-)
    * @type {string}
    * @memberof TrackingEventNormal
    */
@@ -145,12 +145,14 @@ export enum TrackingEventNormalTypeEnum {
  * @enum {string}
  */
 export enum TrackingEventNormalNameEnum {
+  Mailed = "Mailed",
   InTransit = "In Transit",
   InLocalArea = "In Local Area",
   ProcessedForDelivery = "Processed for Delivery",
+  Delivered = "Delivered",
   ReRouted = "Re-Routed",
   ReturnedToSender = "Returned to Sender",
-  Mailed = "Mailed",
+  InternationalExit = "International Exit",
 }
 /**
  * @export

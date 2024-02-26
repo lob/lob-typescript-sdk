@@ -118,6 +118,7 @@ export * from "./sort-by";
 export * from "./sort-by1";
 export * from "./sort-by2";
 export * from "./sort-by3";
+export * from "./sort-by4";
 export * from "./sort-by-date-modified";
 export * from "./suggestions";
 export * from "./template";
