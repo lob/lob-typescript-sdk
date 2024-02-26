@@ -66,11 +66,13 @@ export const BuckslipsApiAxiosParamCreator = function (
      * Creates a new buckslip given information
      * @summary create
      * @param {BuckslipEditable} buckslipEditable
+     * @param {object} [front] An optional file upload as either a byte array or file type.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     buckslipCreate: async (
       buckslipEditable: BuckslipEditable,
+      front?: object,
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'buckslipEditable' is not null or undefined
@@ -95,6 +97,10 @@ export const BuckslipsApiAxiosParamCreator = function (
       // authentication basicAuth required
       // http basic authentication required
       setBasicAuthToObject(localVarRequestOptions, configuration);
+
+      if (front !== undefined) {
+        localVarQueryParameter["front"] = valueToString(front);
+      }
 
       localVarHeaderParameter["Content-Type"] = "application/json";
 
@@ -359,17 +365,20 @@ export const BuckslipsApiFp = function (configuration?: Configuration) {
      * Creates a new buckslip given information
      * @summary create
      * @param {BuckslipEditable} buckslipEditable
+     * @param {object} [front] An optional file upload as either a byte array or file type.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async buckslipCreate(
       buckslipEditable: BuckslipEditable,
+      front?: object,
       options?: AxiosRequestConfig
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Buckslip>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.buckslipCreate(
         buckslipEditable,
+        front,
         options
       );
       return createRequestFunction(
@@ -502,16 +511,18 @@ export class BuckslipsApi extends BaseAPI {
    * Creates a new buckslip given information
    * @summary create
    * @param {BuckslipEditable} buckslipEditable
+   * @param {object} [front] An optional file upload as either a byte array or file type.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof BuckslipsApi
    */
   public create(
     buckslipEditable: BuckslipEditable,
+    front?: object,
     options?: AxiosRequestConfig
   ) {
     return BuckslipsApiFp(this.configuration)
-      .buckslipCreate(buckslipEditable, options)
+      .buckslipCreate(buckslipEditable, front, options)
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {
         return new Buckslip(response.data);
