@@ -123,8 +123,59 @@ export const UploadsApiAxiosParamCreator = function (
       };
     },
     /**
+     * Retrieves the details of an existing upload. You need only supply the unique upload identifier that was returned upon upload creation.
+     * @summary get
+     * @param {string} uplId id of the upload
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    get: async (
+      uplId: string,
+      options: AxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'uplId' is not null or undefined
+      assertParamExists("get", "uplId", uplId);
+
+      const localVarPath = `/uploads/{upl_id}`.replace(
+        `{${"upl_id"}}`,
+        encodeURIComponent(String(uplId))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication basicAuth required
+      // http basic authentication required
+      setBasicAuthToObject(localVarRequestOptions, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
      * Creates a new upload with the provided properties.
-     * @summary create_upload
+     * @summary create
      * @param {UploadWritable} uploadWritable
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -179,7 +230,7 @@ export const UploadsApiAxiosParamCreator = function (
     },
     /**
      * Delete an existing upload. You need only supply the unique identifier that was returned upon upload creation.
-     * @summary delete_upload
+     * @summary delete
      * @param {string} uplId id of the upload
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -359,73 +410,20 @@ export const UploadsApiAxiosParamCreator = function (
       };
     },
     /**
-     * Retrieves the details of an existing upload. You need only supply the unique upload identifier that was returned upon upload creation.
-     * @summary get_upload
-     * @param {string} uplId id of the upload
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    uploadRetrieve: async (
-      uplId: string,
-      options: AxiosRequestConfig = {}
-    ): Promise<RequestArgs> => {
-      // verify required parameter 'uplId' is not null or undefined
-      assertParamExists("uploadRetrieve", "uplId", uplId);
-
-      const localVarPath = `/uploads/{upl_id}`.replace(
-        `{${"upl_id"}}`,
-        encodeURIComponent(String(uplId))
-      );
-      // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-      let baseOptions;
-      if (configuration) {
-        baseOptions = configuration.baseOptions;
-      }
-
-      const localVarRequestOptions = {
-        method: "GET",
-        ...baseOptions,
-        ...options,
-      };
-      const localVarHeaderParameter = {} as any;
-      const localVarQueryParameter = {} as any;
-
-      // authentication basicAuth required
-      // http basic authentication required
-      setBasicAuthToObject(localVarRequestOptions, configuration);
-
-      setSearchParams(localVarUrlObj, localVarQueryParameter);
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
-
-      return {
-        url: toPathString(localVarUrlObj),
-        options: localVarRequestOptions,
-      };
-    },
-    /**
      * Update the details of an existing upload. You need only supply the unique identifier that was returned upon upload creation.
-     * @summary update_upload
+     * @summary update
      * @param {string} uplId id of the upload
-     * @param {UploadUpdatable} uploadUpdatable
+     * @param {UploadUpdatable} [uploadUpdatable]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     uploadUpdate: async (
       uplId: string,
-      uploadUpdatable: UploadUpdatable,
+      uploadUpdatable?: UploadUpdatable,
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'uplId' is not null or undefined
       assertParamExists("uploadUpdate", "uplId", uplId);
-      // verify required parameter 'uploadUpdatable' is not null or undefined
-      assertParamExists("uploadUpdate", "uploadUpdatable", uploadUpdatable);
 
       const localVarPath = `/uploads/{upl_id}`.replace(
         `{${"upl_id"}}`,
@@ -473,7 +471,7 @@ export const UploadsApiAxiosParamCreator = function (
     },
     /**
      * Returns a list of your uploads. Optionally, filter uploads by campaign.
-     * @summary list_upload
+     * @summary list
      * @param {string} [campaignId] id of the campaign
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -558,8 +556,32 @@ export const UploadsApiFp = function (configuration?: Configuration) {
       );
     },
     /**
+     * Retrieves the details of an existing upload. You need only supply the unique upload identifier that was returned upon upload creation.
+     * @summary get
+     * @param {string} uplId id of the upload
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async get(
+      uplId: string,
+      options?: AxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Upload>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.get(
+        uplId,
+        options
+      );
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+    /**
      * Creates a new upload with the provided properties.
-     * @summary create_upload
+     * @summary create
      * @param {UploadWritable} uploadWritable
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -583,7 +605,7 @@ export const UploadsApiFp = function (configuration?: Configuration) {
     },
     /**
      * Delete an existing upload. You need only supply the unique identifier that was returned upon upload creation.
-     * @summary delete_upload
+     * @summary delete
      * @param {string} uplId id of the upload
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -661,40 +683,16 @@ export const UploadsApiFp = function (configuration?: Configuration) {
       );
     },
     /**
-     * Retrieves the details of an existing upload. You need only supply the unique upload identifier that was returned upon upload creation.
-     * @summary get_upload
-     * @param {string} uplId id of the upload
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    async uploadRetrieve(
-      uplId: string,
-      options?: AxiosRequestConfig
-    ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Upload>
-    > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.uploadRetrieve(
-        uplId,
-        options
-      );
-      return createRequestFunction(
-        localVarAxiosArgs,
-        globalAxios,
-        BASE_PATH,
-        configuration
-      );
-    },
-    /**
      * Update the details of an existing upload. You need only supply the unique identifier that was returned upon upload creation.
-     * @summary update_upload
+     * @summary update
      * @param {string} uplId id of the upload
-     * @param {UploadUpdatable} uploadUpdatable
+     * @param {UploadUpdatable} [uploadUpdatable]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async uploadUpdate(
       uplId: string,
-      uploadUpdatable: UploadUpdatable,
+      uploadUpdatable?: UploadUpdatable,
       options?: AxiosRequestConfig
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Upload>
@@ -713,7 +711,7 @@ export const UploadsApiFp = function (configuration?: Configuration) {
     },
     /**
      * Returns a list of your uploads. Optionally, filter uploads by campaign.
-     * @summary list_upload
+     * @summary list
      * @param {string} [campaignId] id of the campaign
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -770,17 +768,37 @@ export class UploadsApi extends BaseAPI {
   }
 
   /**
+   * Retrieves the details of an existing upload. You need only supply the unique upload identifier that was returned upon upload creation.
+   * @summary get
+   * @param {string} uplId id of the upload
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof UploadsApi
+   */
+  public get(uplId: string, options?: AxiosRequestConfig) {
+    return UploadsApiFp(this.configuration)
+      .get(uplId, options)
+      .then((request) => request(this.axios, this.basePath))
+      .then(function (response) {
+        return new Upload(response.data);
+      })
+      .catch((error) => {
+        if (error.response?.data?.error?.message) {
+          error.message = error.response.data.error.message;
+        }
+        throw error;
+      });
+  }
+
+  /**
    * Creates a new upload with the provided properties.
-   * @summary create_upload
+   * @summary create
    * @param {UploadWritable} uploadWritable
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof UploadsApi
    */
-  public create_upload(
-    uploadWritable: UploadWritable,
-    options?: AxiosRequestConfig
-  ) {
+  public create(uploadWritable: UploadWritable, options?: AxiosRequestConfig) {
     return UploadsApiFp(this.configuration)
       .uploadCreate(uploadWritable, options)
       .then((request) => request(this.axios, this.basePath))
@@ -797,13 +815,13 @@ export class UploadsApi extends BaseAPI {
 
   /**
    * Delete an existing upload. You need only supply the unique identifier that was returned upon upload creation.
-   * @summary delete_upload
+   * @summary delete
    * @param {string} uplId id of the upload
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof UploadsApi
    */
-  public delete_upload(uplId: string, options?: AxiosRequestConfig) {
+  public delete(uplId: string, options?: AxiosRequestConfig) {
     return UploadsApiFp(this.configuration)
       .uploadDelete(uplId, options)
       .then((request) => request(this.axios, this.basePath))
@@ -871,40 +889,17 @@ export class UploadsApi extends BaseAPI {
   }
 
   /**
-   * Retrieves the details of an existing upload. You need only supply the unique upload identifier that was returned upon upload creation.
-   * @summary get_upload
-   * @param {string} uplId id of the upload
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof UploadsApi
-   */
-  public get_upload(uplId: string, options?: AxiosRequestConfig) {
-    return UploadsApiFp(this.configuration)
-      .uploadRetrieve(uplId, options)
-      .then((request) => request(this.axios, this.basePath))
-      .then(function (response) {
-        return new Upload(response.data);
-      })
-      .catch((error) => {
-        if (error.response?.data?.error?.message) {
-          error.message = error.response.data.error.message;
-        }
-        throw error;
-      });
-  }
-
-  /**
    * Update the details of an existing upload. You need only supply the unique identifier that was returned upon upload creation.
-   * @summary update_upload
+   * @summary update
    * @param {string} uplId id of the upload
-   * @param {UploadUpdatable} uploadUpdatable
+   * @param {UploadUpdatable} [uploadUpdatable]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof UploadsApi
    */
-  public update_upload(
+  public update(
     uplId: string,
-    uploadUpdatable: UploadUpdatable,
+    uploadUpdatable?: UploadUpdatable,
     options?: AxiosRequestConfig
   ) {
     return UploadsApiFp(this.configuration)
@@ -923,13 +918,13 @@ export class UploadsApi extends BaseAPI {
 
   /**
    * Returns a list of your uploads. Optionally, filter uploads by campaign.
-   * @summary list_upload
+   * @summary list
    * @param {string} [campaignId] id of the campaign
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof UploadsApi
    */
-  public list_upload(campaignId?: string, options?: AxiosRequestConfig) {
+  public list(campaignId?: string, options?: AxiosRequestConfig) {
     return UploadsApiFp(this.configuration)
       .uploadsList(campaignId, options)
       .then((request) => request(this.axios, this.basePath))

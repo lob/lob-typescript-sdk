@@ -1,4 +1,4 @@
-import { SelfMailerEditable } from "../models";
+import { SelfMailerEditable, SfmUseType } from "../models";
 import { SelfMailersApi } from "../api";
 import {
   ADDRESSES_EDITABLE,
@@ -14,6 +14,7 @@ describe("smApi", () => {
     from: ADDRESSES_EDITABLE[1],
     inside: FILE_LOCATION_6X18,
     outside: FILE_LOCATION_6X18,
+    use_type: SfmUseType.Operational,
   });
 
   it("SelfMailer API can be instantiated", () => {
@@ -70,19 +71,21 @@ describe("smApi", () => {
         from: ADDRESSES_EDITABLE[2],
         inside: FILE_LOCATION_6X18,
         outside: FILE_LOCATION_6X18,
+        use_type: SfmUseType.Operational,
       });
       const sfm2 = new SelfMailerEditable({
         to: ADDRESSES_EDITABLE[3],
         from: ADDRESSES_EDITABLE[6],
         inside: FILE_LOCATION_6X18,
         outside: FILE_LOCATION_6X18,
+        use_type: SfmUseType.Operational,
       });
       const sfm3 = new SelfMailerEditable({
         to: ADDRESSES_EDITABLE[4],
         from: ADDRESSES_EDITABLE[5],
         inside: FILE_LOCATION_6X18,
         outside: FILE_LOCATION_6X18,
-        use_type: "marketing",
+        use_type: SfmUseType.Operational,
       });
       const c1 = await smApi.create(sfm1);
       const c2 = await smApi.create(sfm2);

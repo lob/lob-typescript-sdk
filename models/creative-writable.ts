@@ -101,10 +101,7 @@ export class CreativeWritable {
    * @memberof CreativeWritable
    */
 
-  "details"?:
-    | Models.PostcardDetailsWritable
-    | Models.LetterDetailsWritable
-    | null;
+  "details"?: Models.PostcardDetailsWritable | null;
 
   /**
    * PDF file containing the letter\'s formatting. Do not include for resource_type = postcard.

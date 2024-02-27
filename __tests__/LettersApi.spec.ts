@@ -2,6 +2,7 @@ import {
   LetterEditable,
   LetterEditableExtraServiceEnum,
   CountryExtended,
+  LtrUseType,
 } from "../models";
 import { LettersApi } from "../api";
 import {
@@ -40,6 +41,7 @@ describe("CardsApi", () => {
         extra_service: LetterEditableExtraServiceEnum.Certified,
         file: FILE_LOCATION_8X11,
         metadata: { internal_id: "fake internal id" },
+        use_type: LtrUseType.Marketing,
       });
 
       const letter = await lettersApi.create(certifiedLetter);
@@ -67,6 +69,7 @@ describe("CardsApi", () => {
         color: true,
         extra_service: LetterEditableExtraServiceEnum.Registered,
         file: FILE_LOCATION_8X11,
+        use_type: LtrUseType.Marketing,
       });
       const letter = await lettersApi.create(registeredLetter);
       expect(letter.id).toBeDefined();
@@ -87,6 +90,7 @@ describe("CardsApi", () => {
         from: ADDRESSES_EDITABLE[0],
         color: true,
         file: FILE_LOCATION_8X11,
+        use_type: LtrUseType.Marketing,
       });
       const letter = await lettersApi.create(registeredLetter);
       expect(letter.id).toBeDefined();

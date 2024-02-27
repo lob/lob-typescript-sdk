@@ -15,51 +15,33 @@
 import * as Models from "./index";
 
 /**
- * A nested object containing a breakdown of each component of a reverse geocoded response.
+ *
  * @export
- * @class GeocodeComponents
+ * @class SortBy4
  */
-export class GeocodeComponents {
+export class SortBy4 {
   constructor(input?: any) {
-    if (typeof input?.zip_code !== "undefined") {
-      this.zip_code = input.zip_code;
+    if (typeof input?.date_created !== "undefined") {
+      this.date_created = input.date_created;
     }
-    if (typeof input?.zip_code_plus_4 !== "undefined") {
-      this.zip_code_plus_4 = input.zip_code_plus_4;
+    if (typeof input?.send_date !== "undefined") {
+      this.send_date = input.send_date;
     }
-  }
-
-  /**
-   * The 5-digit ZIP code
-   * @type {string}
-   * @memberof GeocodeComponents
-   */
-  private "_zip_code": string;
-  public get zip_code() {
-    return this._zip_code;
-  }
-  public set zip_code(newValue: string) {
-    if (newValue && !/^\d{5}$/.test(newValue)) {
-      throw new Error("Invalid zip_code provided");
-    }
-    this._zip_code = newValue;
   }
 
   /**
    *
    * @type {string}
-   * @memberof GeocodeComponents
+   * @memberof SortBy4
    */
-  private "_zip_code_plus_4": string;
-  public get zip_code_plus_4() {
-    return this._zip_code_plus_4;
-  }
-  public set zip_code_plus_4(newValue: string) {
-    if (newValue && !/^(\d{4})?$/.test(newValue)) {
-      throw new Error("Invalid zip_code_plus_4 provided");
-    }
-    this._zip_code_plus_4 = newValue;
-  }
+  "date_created"?: SortBy4DateCreatedEnum;
+
+  /**
+   *
+   * @type {string}
+   * @memberof SortBy4
+   */
+  "send_date"?: SortBy4SendDateEnum;
 
   public toJSON() {
     let out = {};
@@ -70,6 +52,23 @@ export class GeocodeComponents {
     }
     return out;
   }
+}
+
+/**
+ * @export
+ * @enum {string}
+ */
+export enum SortBy4DateCreatedEnum {
+  Asc = "asc",
+  Desc = "desc",
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum SortBy4SendDateEnum {
+  Asc = "asc",
+  Desc = "desc",
 }
 
 /**

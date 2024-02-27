@@ -85,7 +85,7 @@ Integration tests run against a live deployment of the Lob API and require multi
 To run integration tests:
 
 ```bash
-$ LOB_API_LIVE_KEY=<<API KEY 1>> LOB_API_LIVE_KEY=<< API KEY 2>> npm run test:integration
+$ LOB_API_TEST_KEY=<<API KEY 1>> LOB_API_LIVE_KEY=<< API KEY 2>> npm run test:integration
 ```
 
 #### A cleaner alternative if you are going to run integration tests frequently
@@ -93,7 +93,7 @@ $ LOB_API_LIVE_KEY=<<API KEY 1>> LOB_API_LIVE_KEY=<< API KEY 2>> npm run test:in
 Run this the first time:
 
 ```bash
-$ echo "LOB_API_LIVE_KEY=<<API KEY 1>>\nLOB_API_LIVE_KEY=<< API KEY 2>>" > LOCAL.env
+$ echo "LOB_API_TEST_KEY=<<API KEY 1>> LOB_API_LIVE_KEY=<< API KEY 2>>" > LOCAL.env
 ```
 
 Then, to run the integration tests:

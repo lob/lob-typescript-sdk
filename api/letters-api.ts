@@ -118,12 +118,14 @@ export const LettersApiAxiosParamCreator = function (
      * @summary create
      * @param {LetterEditable} letterEditable
      * @param {string} [idempotencyKey] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request).
+     * @param {object} [file] An optional file upload as either a byte array or file type.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     letterCreate: async (
       letterEditable: LetterEditable,
       idempotencyKey?: string,
+      file?: object,
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'letterEditable' is not null or undefined
@@ -148,6 +150,10 @@ export const LettersApiAxiosParamCreator = function (
       // authentication basicAuth required
       // http basic authentication required
       setBasicAuthToObject(localVarRequestOptions, configuration);
+
+      if (file !== undefined) {
+        localVarQueryParameter["file"] = valueToString(file);
+      }
 
       if (idempotencyKey !== undefined && idempotencyKey !== null) {
         localVarHeaderParameter["Idempotency-Key"] = String(idempotencyKey);
@@ -373,12 +379,14 @@ export const LettersApiFp = function (configuration?: Configuration) {
      * @summary create
      * @param {LetterEditable} letterEditable
      * @param {string} [idempotencyKey] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request).
+     * @param {object} [file] An optional file upload as either a byte array or file type.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async letterCreate(
       letterEditable: LetterEditable,
       idempotencyKey?: string,
+      file?: object,
       options?: AxiosRequestConfig
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Letter>
@@ -386,6 +394,7 @@ export const LettersApiFp = function (configuration?: Configuration) {
       const localVarAxiosArgs = await localVarAxiosParamCreator.letterCreate(
         letterEditable,
         idempotencyKey,
+        file,
         options
       );
       return createRequestFunction(
@@ -511,6 +520,7 @@ export class LettersApi extends BaseAPI {
    * @summary create
    * @param {LetterEditable} letterEditable
    * @param {string} [idempotencyKey] A string of no longer than 256 characters that uniquely identifies this resource. For more help integrating idempotency keys, refer to our [implementation guide](https://www.lob.com/guides#idempotent_request).
+   * @param {object} [file] An optional file upload as either a byte array or file type.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof LettersApi
@@ -518,10 +528,11 @@ export class LettersApi extends BaseAPI {
   public create(
     letterEditable: LetterEditable,
     idempotencyKey?: string,
+    file?: object,
     options?: AxiosRequestConfig
   ) {
     return LettersApiFp(this.configuration)
-      .letterCreate(letterEditable, idempotencyKey, options)
+      .letterCreate(letterEditable, idempotencyKey, file, options)
       .then((request) => request(this.axios, this.basePath))
       .then(function (response) {
         return new Letter(response.data);

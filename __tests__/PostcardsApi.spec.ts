@@ -1,4 +1,9 @@
-import { Postcard, PostcardEditable, TemplateWritable } from "../models";
+import {
+  Postcard,
+  PostcardEditable,
+  TemplateWritable,
+  PscUseType,
+} from "../models";
 import { PostcardsApi, TemplatesApi } from "../api";
 import {
   ADDRESSES_EDITABLE,
@@ -16,6 +21,7 @@ describe("postcardsApi", () => {
     from: ADDRESSES_EDITABLE[1],
     front: FILE_LOCATION_4X6,
     back: FILE_LOCATION_4X6,
+    use_type: PscUseType.Marketing,
   });
 
   it("Postcard API can be instantiated", () => {
@@ -73,6 +79,7 @@ describe("postcardsApi", () => {
         from: ADDRESSES_EDITABLE[1],
         front: createdTemplate.id,
         back: createdTemplate.id,
+        use_type: PscUseType.Marketing,
       });
 
       const postcard = await postcardsApi.create(postcardWithTemplateIds);
@@ -100,18 +107,21 @@ describe("postcardsApi", () => {
         from: ADDRESSES_EDITABLE[0],
         front: FILE_LOCATION_4X6,
         back: FILE_LOCATION_4X6,
+        use_type: PscUseType.Marketing,
       });
       const postcard2 = new PostcardEditable({
         to: ADDRESSES_EDITABLE[3],
         from: ADDRESSES_EDITABLE[0],
         front: FILE_LOCATION_4X6,
         back: FILE_LOCATION_4X6,
+        use_type: PscUseType.Marketing,
       });
       const postcard3 = new PostcardEditable({
         to: ADDRESSES_EDITABLE[6],
         from: ADDRESSES_EDITABLE[1],
         front: FILE_LOCATION_4X6,
         back: FILE_LOCATION_4X6,
+        use_type: PscUseType.Marketing,
       });
       const c1 = await postcardsApi.create(postcard1);
       const c2 = await postcardsApi.create(postcard2);

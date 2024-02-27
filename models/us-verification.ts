@@ -61,6 +61,9 @@ export class UsVerification {
     if (typeof input?.object !== "undefined") {
       this.object = input.object;
     }
+    if (typeof input?.transient_id !== "undefined") {
+      this.transient_id = input.transient_id;
+    }
   }
 
   /**
@@ -126,7 +129,7 @@ export class UsVerification {
    * @type {boolean}
    * @memberof UsVerification
    */
-  "valid_address"?: UsVerificationValidAddressEnum;
+  "valid_address"?: boolean;
 
   /**
    *
@@ -156,6 +159,13 @@ export class UsVerification {
    */
   "object"?: UsVerificationObjectEnum;
 
+  /**
+   * ID that is returned in the response body for the verification
+   * @type {string}
+   * @memberof UsVerification
+   */
+  "transient_id"?: string;
+
   public toJSON() {
     let out = {};
     for (const [key, value] of Object.entries(this)) {
@@ -177,14 +187,6 @@ export enum UsVerificationDeliverabilityEnum {
   DeliverableIncorrectUnit = "deliverable_incorrect_unit",
   DeliverableMissingUnit = "deliverable_missing_unit",
   Undeliverable = "undeliverable",
-}
-/**
- * @export
- * @enum {string}
- */
-export enum UsVerificationValidAddressEnum {
-  True = "true",
-  False = "false",
 }
 /**
  * @export
