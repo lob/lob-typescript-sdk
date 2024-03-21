@@ -1,7 +1,6 @@
 import {
   LetterEditable,
   LetterEditableExtraServiceEnum,
-  CountryExtended,
 } from "../models";
 import { LettersApi } from "../api";
 import {
