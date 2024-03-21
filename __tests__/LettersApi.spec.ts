@@ -1,7 +1,4 @@
-import {
-  LetterEditable,
-  LetterEditableExtraServiceEnum,
-} from "../models";
+import { LetterEditable, LetterEditableExtraServiceEnum } from "../models";
 import { LettersApi } from "../api";
 import {
   ADDRESSES_EDITABLE,
