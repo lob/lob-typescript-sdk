@@ -77,6 +77,7 @@ describe("postcardsApi", () => {
         from: ADDRESSES_EDITABLE[1],
         front: createdTemplate.id,
         back: createdTemplate.id,
+        use_type: "operational",
       });
 
       const postcard = await postcardsApi.create(postcardWithTemplateIds);
@@ -104,22 +105,25 @@ describe("postcardsApi", () => {
         from: ADDRESSES_EDITABLE[0],
         front: FILE_LOCATION_4X6,
         back: FILE_LOCATION_4X6,
+        use_type: "operational",
       });
       const postcard2 = new PostcardEditable({
         to: ADDRESSES_EDITABLE[3],
         from: ADDRESSES_EDITABLE[0],
         front: FILE_LOCATION_4X6,
         back: FILE_LOCATION_4X6,
+        use_type: "operational",
       });
       const postcard3 = new PostcardEditable({
         to: ADDRESSES_EDITABLE[6],
         from: ADDRESSES_EDITABLE[1],
         front: FILE_LOCATION_4X6,
         back: FILE_LOCATION_4X6,
+        use_type: "operational",
       });
-      const c1 = await postcardsApi.create(postcard1);
-      const c2 = await postcardsApi.create(postcard2);
-      const c3 = await postcardsApi.create(postcard3);
+      await postcardsApi.create(postcard1);
+      await postcardsApi.create(postcard2);
+      await postcardsApi.create(postcard3);
 
       const response = await postcardsApi.list();
       if (response && response.next_url) {
