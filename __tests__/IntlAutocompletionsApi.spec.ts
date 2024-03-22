@@ -6,6 +6,11 @@ import {
 } from "./testFixtures";
 
 describe("IntlAutocompletionsApi", () => {
+  /*
+  ** this endpoint is only available for one customer
+  ** these tests will fail for our lob-openapi account
+  ** TODO: uncomment when we make the endpoint available to all customers
+
   const autocompletionInput = new IntlAutocompletionsWritable({
     address_prefix: "35 T",
     city: "LONDON",
@@ -34,7 +39,6 @@ describe("IntlAutocompletionsApi", () => {
       const response = await autocompletionApi.autocomplete(
         autocompletionInput
       );
-      console.log("\n\n", { response }, "\n\n");
       expect(response.suggestions).toBeDefined();
       expect(response.suggestions?.length).toBeGreaterThan(0);
     });
@@ -64,4 +68,5 @@ describe("IntlAutocompletionsApi", () => {
       }
     });
   });
+  */
 });
