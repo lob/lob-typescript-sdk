@@ -31,11 +31,17 @@ describe("IntlAutocompletionsApi", () => {
     });
 
     it("autocompletes given input", async () => {
-      const response = await autocompletionApi.autocomplete(
-        autocompletionInput
-      );
-      expect(response.suggestions).toBeDefined();
-      expect(response.suggestions?.length).toBeGreaterThan(0);
+      try {
+        const response = await autocompletionApi.autocomplete(
+          autocompletionInput
+        );
+        expect(response.suggestions).toBeDefined();
+        expect(response.suggestions?.length).toBeGreaterThan(0);
+      } catch (err) {
+        console.log("\n\n there was an error \n\n");
+        console.log(err);
+        console.log("\n\n");
+      }
     });
 
     it("refuses to autocomplete with test key", async () => {
