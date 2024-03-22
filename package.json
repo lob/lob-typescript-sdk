@@ -35,7 +35,7 @@
     "pretty": "prettier --write .",
     "pretty:check": "prettier --check .",
     "test": "jest",
-    "test:integration": "jest -c jest.integrationConfig.js",
+    "test:integration": "jest -c jest.integrationConfig.js --detectOpenHandles",
     "test:all": "npm run test && npm run test:integration",
     "prepare": "npm run clean && tsc && rollup -c",
     "semantic-release": "semantic-release",

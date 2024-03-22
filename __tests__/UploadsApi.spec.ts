@@ -50,7 +50,6 @@ describe("UploadsApi", () => {
   });
 
   describe("performs single-uploads operations", () => {
-    ``;
     let createdCampaign: Campaign;
     let uploadWrite: UploadWritable;
 
