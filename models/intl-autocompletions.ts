@@ -41,6 +41,7 @@ export class IntlAutocompletions {
     return (this._id || undefined) as string;
   }
   public set id(newValue: string) {
+    console.log('we test', newValue);
     if (newValue && !/^intl_auto_[a-zA-Z0-9]+$/.test(newValue)) {
       throw new Error("Invalid id provided");
     }
