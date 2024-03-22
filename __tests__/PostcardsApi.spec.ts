@@ -43,7 +43,7 @@ describe("postcardsApi", () => {
       expect(typeof postcardsApi.cancel).toEqual("function");
     });
 
-    it.only("creates, retrieves, and deletes a postcard", async () => {
+    it("creates, retrieves, and deletes a postcard", async () => {
       try {
         const postcard = await postcardsApi.create(dummyPostcard);
         expect(postcard.id).toBeDefined();
