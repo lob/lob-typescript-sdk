@@ -11,6 +11,10 @@ describe("postcardsApi", () => {
 
   let postcardsApi: PostcardsApi;
 
+  beforeAll(() => {
+    postcardsApi = new PostcardsApi(CONFIG_FOR_INTEGRATION);
+  });
+
   const dummyPostcard = new PostcardEditable({
     to: ADDRESSES_EDITABLE[2],
     from: ADDRESSES_EDITABLE[1],
@@ -19,7 +23,6 @@ describe("postcardsApi", () => {
   });
 
   it("Postcard API can be instantiated", () => {
-    postcardsApi = new PostcardsApi(CONFIG_FOR_INTEGRATION);
     expect(postcardsApi).toBeDefined();
     expect(typeof postcardsApi).toEqual("object");
     expect(postcardsApi).toBeInstanceOf(PostcardsApi);
