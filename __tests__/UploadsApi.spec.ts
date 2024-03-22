@@ -1,21 +1,16 @@
 import {
   Campaign,
   CampaignWritable,
-  CampaignUpdatable,
   CmpScheduleType,
   UploadWritable,
   ExportModel,
   ExportModelTypeEnum,
-  UploadUpdatable,
-  UploadState,
-  Upload,
 } from "../models";
 import { UploadsApi } from "../api/uploads-api";
 import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
 import { CampaignsApi } from "../api/campaigns-api";
 import FormData from "form-data";
 import { createReadStream } from "fs";
-import { assert } from "console";
 
 describe("UploadsApi", () => {
   jest.setTimeout(1000 * 60);
@@ -55,10 +50,8 @@ describe("UploadsApi", () => {
   });
 
   describe("performs single-uploads operations", () => {
-    ``;
     let createdCampaign: Campaign;
     let uploadWrite: UploadWritable;
-    let createdUpload: Upload;
 
     beforeAll(async () => {
       try {

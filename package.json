@@ -14,7 +14,7 @@
     "address validation",
     "address autocomplete"
   ],
-  "version": "1.3.3",
+  "version": "1.3.4",
   "homepage": "https://github.com/lob/lob-typescript-sdk",
   "author": "Lob <support@lob.com> (https://lob.com/)",
   "repository": {
@@ -23,7 +23,7 @@
   },
   "bugs:": "https://github.com/lob/lob-typescript-sdk/issues",
   "engines": {
-    "node": ">= 12.0.0"
+    "node": ">= 16.10"
   },
   "license": "MIT",
   "files": [
@@ -35,7 +35,7 @@
     "pretty": "prettier --write .",
     "pretty:check": "prettier --check .",
     "test": "jest",
-    "test:integration": "jest -c jest.integrationConfig.js",
+    "test:integration": "jest -c jest.integrationConfig.js --detectOpenHandles",
     "test:all": "npm run test && npm run test:integration",
     "prepare": "npm run clean && tsc && rollup -c",
     "semantic-release": "semantic-release",

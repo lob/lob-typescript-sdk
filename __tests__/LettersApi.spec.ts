@@ -1,8 +1,4 @@
-import {
-  LetterEditable,
-  LetterEditableExtraServiceEnum,
-  CountryExtended,
-} from "../models";
+import { LetterEditable, LetterEditableExtraServiceEnum } from "../models";
 import { LettersApi } from "../api";
 import {
   ADDRESSES_EDITABLE,
@@ -10,7 +6,7 @@ import {
   FILE_LOCATION_8X11,
 } from "./testFixtures";
 
-describe("CardsApi", () => {
+describe("LettersApi", () => {
   let lettersApi: LettersApi;
 
   it("Letter API can be instantiated", () => {
@@ -40,6 +36,7 @@ describe("CardsApi", () => {
         extra_service: LetterEditableExtraServiceEnum.Certified,
         file: FILE_LOCATION_8X11,
         metadata: { internal_id: "fake internal id" },
+        use_type: "operational",
       });
 
       const letter = await lettersApi.create(certifiedLetter);
@@ -67,6 +64,7 @@ describe("CardsApi", () => {
         color: true,
         extra_service: LetterEditableExtraServiceEnum.Registered,
         file: FILE_LOCATION_8X11,
+        use_type: "operational",
       });
       const letter = await lettersApi.create(registeredLetter);
       expect(letter.id).toBeDefined();
@@ -87,6 +85,7 @@ describe("CardsApi", () => {
         from: ADDRESSES_EDITABLE[0],
         color: true,
         file: FILE_LOCATION_8X11,
+        use_type: "operational",
       });
       const letter = await lettersApi.create(registeredLetter);
       expect(letter.id).toBeDefined();
