@@ -48,7 +48,7 @@ describe("postcardsApi", () => {
         const postcard = await postcardsApi.create(dummyPostcard);
         expect(postcard.id).toBeDefined();
         expect(postcard.url).toBeDefined();
-      } catch(e) {
+      } catch (e) {
         console.log(e);
       }
 
