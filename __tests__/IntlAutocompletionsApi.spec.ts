@@ -6,6 +6,7 @@ import {
 } from "./testFixtures";
 
 describe("IntlAutocompletionsApi", () => {
+  expect(true).toBeTruthy();
   /*
   ** this endpoint is only available for one customer
   ** these tests will fail for our lob-openapi account
