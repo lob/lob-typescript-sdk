@@ -31,29 +31,21 @@ describe("IntlAutocompletionsApi", () => {
     });
 
     it("autocompletes given input", async () => {
-      try {
-        const response = await autocompletionApi.autocomplete(
-          autocompletionInput
-        );
-        expect(response.suggestions).toBeDefined();
-        expect(response.suggestions?.length).toBeGreaterThan(0);
-      } catch (err) {
-        console.log(err);
-      }
+      const response = await autocompletionApi.autocomplete(
+        autocompletionInput
+      );
+      expect(response.suggestions).toBeDefined();
+      expect(response.suggestions?.length).toBeGreaterThan(0);
     });
 
     it("refuses to autocomplete with test key", async () => {
-      try {
-        const response = await new IntlAutocompletionsApi(
-          CONFIG_FOR_INTEGRATION
-        ).autocomplete(autocompletionInput);
+      const response = await new IntlAutocompletionsApi(
+        CONFIG_FOR_INTEGRATION
+      ).autocomplete(autocompletionInput);
 
-        expect(response.suggestions?.[0].primary_line).toEqual(
-          "TEST KEYS DO NOT AUTOCOMPLETE INTL ADDRESSES"
-        );
-      } catch (err) {
-        console.log(err);
-      }
+      expect(response.suggestions?.[0].primary_line).toEqual(
+        "TEST KEYS DO NOT AUTOCOMPLETE INTL ADDRESSES"
+      );
     });
 
     it("fails on erroneous autocompletion object", async () => {
