@@ -47,11 +47,11 @@ describe("IntlAutocompletionsApi", () => {
         const response = await new IntlAutocompletionsApi(
           CONFIG_FOR_INTEGRATION
         ).autocomplete(autocompletionInput);
-  
+
         expect(response.suggestions?.[0].primary_line).toEqual(
           "TEST KEYS DO NOT AUTOCOMPLETE INTL ADDRESSES"
         );
-      } catch(err) {
+      } catch (err) {
         console.log(err);
       }
     });
