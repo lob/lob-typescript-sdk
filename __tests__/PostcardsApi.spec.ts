@@ -20,6 +20,7 @@ describe("postcardsApi", () => {
     from: ADDRESSES_EDITABLE[1],
     front: FILE_LOCATION_4X6,
     back: FILE_LOCATION_4X6,
+    use_type: 'operational',
   });
 
   it("Postcard API can be instantiated", () => {
