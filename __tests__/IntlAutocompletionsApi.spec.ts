@@ -34,7 +34,7 @@ describe("IntlAutocompletionsApi", () => {
       const response = await autocompletionApi.autocomplete(
         autocompletionInput
       );
-      console.log('\n\n', { response }, '\n\n');
+      console.log("\n\n", { response }, "\n\n");
       expect(response.suggestions).toBeDefined();
       expect(response.suggestions?.length).toBeGreaterThan(0);
     });
