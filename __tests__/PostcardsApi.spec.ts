@@ -20,7 +20,7 @@ describe("postcardsApi", () => {
     from: ADDRESSES_EDITABLE[1],
     front: FILE_LOCATION_4X6,
     back: FILE_LOCATION_4X6,
-    use_type: 'operational',
+    use_type: "operational",
   });
 
   it("Postcard API can be instantiated", () => {
@@ -45,22 +45,18 @@ describe("postcardsApi", () => {
     });
 
     it("creates, retrieves, and deletes a postcard", async () => {
-      try {
-        const postcard = await postcardsApi.create(dummyPostcard);
-        expect(postcard.id).toBeDefined();
-        expect(postcard.url).toBeDefined();
-      } catch (e) {
-        console.log(e);
-      }
+      const postcard = await postcardsApi.create(dummyPostcard);
+      expect(postcard.id).toBeDefined();
+      expect(postcard.url).toBeDefined();
 
-      /*if (postcard.id) {
+      if (postcard.id) {
         const retrievedPostcard = await postcardsApi.get(postcard.id);
         expect(retrievedPostcard).toBeDefined();
         const deletedPostcard = await postcardsApi.cancel(postcard.id);
         expect(deletedPostcard.deleted).toBeTruthy();
       } else {
         throw new Error("postcard ID should be defined upon creation");
-      }*/
+      }
     });
 
     it("creates a postcard with templateId", async () => {
