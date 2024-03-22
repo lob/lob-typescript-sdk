@@ -14,6 +14,7 @@ describe("smApi", () => {
     from: ADDRESSES_EDITABLE[1],
     inside: FILE_LOCATION_6X18,
     outside: FILE_LOCATION_6X18,
+    use_type: "operational",
   });
 
   it("SelfMailer API can be instantiated", () => {
@@ -70,12 +71,14 @@ describe("smApi", () => {
         from: ADDRESSES_EDITABLE[2],
         inside: FILE_LOCATION_6X18,
         outside: FILE_LOCATION_6X18,
+        use_type: "operational",
       });
       const sfm2 = new SelfMailerEditable({
         to: ADDRESSES_EDITABLE[3],
         from: ADDRESSES_EDITABLE[6],
         inside: FILE_LOCATION_6X18,
         outside: FILE_LOCATION_6X18,
+        use_type: "operational",
       });
       const sfm3 = new SelfMailerEditable({
         to: ADDRESSES_EDITABLE[4],
@@ -84,9 +87,9 @@ describe("smApi", () => {
         outside: FILE_LOCATION_6X18,
         use_type: "marketing",
       });
-      const c1 = await smApi.create(sfm1);
-      const c2 = await smApi.create(sfm2);
-      const c3 = await smApi.create(sfm3);
+      await smApi.create(sfm1);
+      await smApi.create(sfm2);
+      await smApi.create(sfm3);
 
       const response = await smApi.list();
       if (response && response.next_url) {
