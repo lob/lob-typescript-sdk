@@ -53,7 +53,7 @@
     "default": "./dist/index.mjs"
   },
   "dependencies": {
-    "axios": "^1.6.0",
+    "axios": "^1.9.0",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
