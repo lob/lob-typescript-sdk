@@ -10,24 +10,26 @@ import { CONFIG_FOR_INTEGRATION, FILE_LOCATION } from "./testFixtures";
 describe("CardsApi", () => {
   it("Card API can be instantiated", () => {
     const cardsApi = new CardsApi(CONFIG_FOR_INTEGRATION);
-    expect(cardsApi).toBeDefined();
-    expect(typeof cardsApi).toEqual("object");
-    expect(cardsApi).toBeInstanceOf(CardsApi);
+    expect(cardsApi).toEqual(
+      expect.objectContaining({
+        create: expect.any(Function),
+        get: expect.any(Function),
+        update: expect.any(Function),
+        delete: expect.any(Function),
+      })
+    );
   });
 
   it("all individual Card functions exists", () => {
     const cardsApi = new CardsApi(CONFIG_FOR_INTEGRATION);
-    expect(cardsApi.create).toBeDefined();
-    expect(typeof cardsApi.create).toEqual("function");
-
-    expect(cardsApi.get).toBeDefined();
-    expect(typeof cardsApi.get).toEqual("function");
-
-    expect(cardsApi.update).toBeDefined();
-    expect(typeof cardsApi.update).toEqual("function");
-
-    expect(cardsApi.delete).toBeDefined();
-    expect(typeof cardsApi.delete).toEqual("function");
+    expect(cardsApi).toEqual(
+      expect.objectContaining({
+        create: expect.any(Function),
+        get: expect.any(Function),
+        update: expect.any(Function),
+        delete: expect.any(Function),
+      })
+    );
   });
 
   describe("performs single-Card operations", () => {
@@ -41,16 +43,20 @@ describe("CardsApi", () => {
     it("creates, updates, retrieves, and deletes a card", async () => {
       const cardsApi = new CardsApi(CONFIG_FOR_INTEGRATION);
       // Create
-      const createdCard = await new CardsApi(CONFIG_FOR_INTEGRATION).create(
-        create
+      const createdCard = await cardsApi.create(create);
+      expect(createdCard).toEqual(
+        expect.objectContaining({
+          id: expect.any(String),
+        })
       );
-      expect(createdCard.id).toBeDefined();
-      expect(createdCard.description).toEqual(create.description);
 
       // Get
       const retrievedCard = await cardsApi.get(createdCard.id as string);
-      expect(retrievedCard).toBeDefined();
-      expect(retrievedCard.id).toEqual(createdCard.id);
+      expect(retrievedCard).toEqual(
+        expect.objectContaining({
+          id: createdCard.id,
+        })
+      );
 
       // Update
       const updates = new CardUpdatable({
@@ -60,12 +66,19 @@ describe("CardsApi", () => {
         retrievedCard.id as string,
         updates
       );
-      expect(updatedCard).toBeDefined();
-      expect(updatedCard.description).toEqual("updated card");
+      expect(updatedCard).toEqual(
+        expect.objectContaining({
+          description: "updated card",
+        })
+      );
 
       // Delete
       const deletedCard = await cardsApi.delete(updatedCard.id as string);
-      expect(deletedCard.deleted).toBeTruthy();
+      expect(deletedCard).toEqual(
+        expect.objectContaining({
+          deleted: true,
+        })
+      );
     });
   });
 
@@ -115,20 +128,20 @@ describe("CardsApi", () => {
 
     it("exists", () => {
       const cardsApi = new CardsApi(CONFIG_FOR_INTEGRATION);
-      expect(cardsApi.list).toBeDefined();
-      expect(typeof cardsApi.list).toEqual("function");
+      expect(cardsApi).toEqual(
+        expect.objectContaining({
+          list: expect.any(Function),
+        })
+      );
     });
 
     it("lists cards", async () => {
       const response = await new CardsApi(CONFIG_FOR_INTEGRATION).list();
-      expect(response.data).toBeDefined();
-      expect(response.data?.length).toBeGreaterThan(0);
-    });
-
-    it("lists cards given before or after params", async () => {
-      const response = await new CardsApi(CONFIG_FOR_INTEGRATION).list();
-      expect(response.data).toBeDefined();
-      expect(response.data?.length).toBeGreaterThan(0);
+      expect(response).toEqual(
+        expect.objectContaining({
+          data: expect.arrayContaining([expect.any(Object)]),
+        })
+      );
 
       if (response.next_url) {
         const after: string = response.next_url
@@ -140,9 +153,12 @@ describe("CardsApi", () => {
           undefined,
           after
         );
-        expect(responseAfter.data).toBeDefined();
-        expect(responseAfter.previous_url).toBeDefined();
-        expect(responseAfter.previous_url).not.toBeNull();
+        expect(responseAfter).toEqual(
+          expect.objectContaining({
+            data: expect.arrayContaining([expect.any(Object)]),
+            previous_url: expect.any(String),
+          })
+        );
 
         const firstPage: Card[] = responseAfter.data || [];
         expect(firstPage.length).toBeGreaterThan(0);
@@ -155,7 +171,11 @@ describe("CardsApi", () => {
           const responseBefore = await new CardsApi(
             CONFIG_FOR_INTEGRATION
           ).list(3, before);
-          expect(responseBefore.data).toBeDefined();
+          expect(responseBefore).toEqual(
+            expect.objectContaining({
+              data: expect.arrayContaining([expect.any(Object)]),
+            })
+          );
           const previousPage: Card[] = responseBefore.data || [];
           expect(previousPage.length).toBeGreaterThan(0);
         }

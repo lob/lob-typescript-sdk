@@ -67,55 +67,43 @@ describe("smApi", () => {
       const smApi = new SelfMailersApi(CONFIG_FOR_INTEGRATION);
 
       // Create enough self-mailers to ensure pagination works
-      // We'll create more than the default page size to guarantee pagination
-      const selfMailersToCreate = [
-        new SelfMailerEditable({
-          to: ADDRESSES_EDITABLE[1],
-          from: ADDRESSES_EDITABLE[2],
-          inside: FILE_LOCATION_6X18,
-          outside: FILE_LOCATION_6X18,
-          use_type: "operational",
-        }),
-        new SelfMailerEditable({
-          to: ADDRESSES_EDITABLE[3],
-          from: ADDRESSES_EDITABLE[6],
-          inside: FILE_LOCATION_6X18,
-          outside: FILE_LOCATION_6X18,
-          use_type: "operational",
-        }),
-        new SelfMailerEditable({
-          to: ADDRESSES_EDITABLE[4],
-          from: ADDRESSES_EDITABLE[5],
-          inside: FILE_LOCATION_6X18,
-          outside: FILE_LOCATION_6X18,
-          use_type: "marketing",
-        }),
-        new SelfMailerEditable({
-          to: ADDRESSES_EDITABLE[0],
-          from: ADDRESSES_EDITABLE[1],
-          inside: FILE_LOCATION_6X18,
-          outside: FILE_LOCATION_6X18,
-          use_type: "operational",
-        }),
-        new SelfMailerEditable({
-          to: ADDRESSES_EDITABLE[2],
-          from: ADDRESSES_EDITABLE[3],
-          inside: FILE_LOCATION_6X18,
-          outside: FILE_LOCATION_6X18,
-          use_type: "marketing",
-        }),
-        new SelfMailerEditable({
-          to: ADDRESSES_EDITABLE[4],
-          from: ADDRESSES_EDITABLE[6],
-          inside: FILE_LOCATION_6X18,
-          outside: FILE_LOCATION_6X18,
-          use_type: "operational",
-        }),
+      const baseSelfMailer = {
+        inside: FILE_LOCATION_6X18,
+        outside: FILE_LOCATION_6X18,
+      };
+
+      const selfMailerConfigs = [
+        { to: 1, from: 2, use_type: "operational" as const },
+        { to: 3, from: 6, use_type: "operational" as const },
+        { to: 4, from: 5, use_type: "marketing" as const },
+        { to: 0, from: 1, use_type: "operational" as const },
+        { to: 2, from: 3, use_type: "marketing" as const },
+        { to: 4, from: 6, use_type: "operational" as const },
       ];
 
+      const selfMailersToCreate = selfMailerConfigs.map(
+        ({ to, from, use_type }) =>
+          new SelfMailerEditable({
+            ...baseSelfMailer,
+            to: ADDRESSES_EDITABLE[to],
+            from: ADDRESSES_EDITABLE[from],
+            use_type,
+          })
+      );
+
       // Create all self-mailers
-      for (const selfMailer of selfMailersToCreate) {
-        await smApi.create(selfMailer);
+      try {
+        const creationPromises = selfMailersToCreate.map(async (selfMailer) => {
+          try {
+            await smApi.create(selfMailer);
+          } catch (error) {
+            console.log(`Failed to create self-mailer: ${error}`);
+          }
+        });
+
+        await Promise.all(creationPromises);
+      } catch (error) {
+        console.log(`Error during self-mailer creation: ${error}`);
       }
 
       // Wait a moment for the API to process

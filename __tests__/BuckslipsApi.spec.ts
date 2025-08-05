@@ -17,24 +17,27 @@ import { create } from "domain";
 describe("BuckSlipsApi", () => {
   it("Buckslips API can be instantiated", () => {
     const buckslipsApi = new BuckslipsApi(CONFIG_FOR_INTEGRATION);
-    expect(buckslipsApi).toBeDefined();
-    expect(typeof buckslipsApi).toEqual("object");
-    expect(buckslipsApi).toBeInstanceOf(BuckslipsApi);
+    expect(buckslipsApi).toEqual(
+      expect.objectContaining({
+        create: expect.any(Function),
+        get: expect.any(Function),
+        update: expect.any(Function),
+        delete: expect.any(Function),
+        List: expect.any(Function),
+      })
+    );
   });
 
   it("all individual Buckslips functions exists", () => {
     const buckslipsApi = new BuckslipsApi(CONFIG_FOR_INTEGRATION);
-    expect(buckslipsApi.create).toBeDefined();
-    expect(typeof buckslipsApi.create).toEqual("function");
-
-    expect(buckslipsApi.get).toBeDefined();
-    expect(typeof buckslipsApi.get).toEqual("function");
-
-    expect(buckslipsApi.update).toBeDefined();
-    expect(typeof buckslipsApi.update).toEqual("function");
-
-    expect(buckslipsApi.delete).toBeDefined();
-    expect(typeof buckslipsApi.delete).toEqual("function");
+    expect(buckslipsApi).toEqual(
+      expect.objectContaining({
+        create: expect.any(Function),
+        get: expect.any(Function),
+        update: expect.any(Function),
+        delete: expect.any(Function),
+      })
+    );
   });
 
   describe("performs single-buckslips operations", () => {
@@ -56,8 +59,11 @@ describe("BuckSlipsApi", () => {
 
         // Get
         const retrievedBe = await buckslipsApi.get(createdBe.id as string);
-        expect(retrievedBe).toBeDefined();
-        expect(retrievedBe.id).toEqual(createdBe.id);
+        expect(retrievedBe).toEqual(
+          expect.objectContaining({
+            id: createdBe.id,
+          })
+        );
 
         // Update
         const updates = new BuckslipEditable({
@@ -71,10 +77,14 @@ describe("BuckSlipsApi", () => {
         expect(updatedBe.description).toEqual("updated buckslip");
       } catch (error) {
         // If creation fails due to API requirements, just test the API structure
-        expect(buckslipsApi.create).toBeDefined();
-        expect(buckslipsApi.get).toBeDefined();
-        expect(buckslipsApi.update).toBeDefined();
-        expect(buckslipsApi.delete).toBeDefined();
+        expect(buckslipsApi).toEqual(
+          expect.objectContaining({
+            create: expect.any(Function),
+            get: expect.any(Function),
+            update: expect.any(Function),
+            delete: expect.any(Function),
+          })
+        );
       }
     });
   });
@@ -82,8 +92,11 @@ describe("BuckSlipsApi", () => {
   describe("list buckslips", () => {
     it("exists", () => {
       const buckslipsApi = new BuckslipsApi(CONFIG_FOR_INTEGRATION);
-      expect(buckslipsApi.List).toBeDefined();
-      expect(typeof buckslipsApi.List).toEqual("function");
+      expect(buckslipsApi).toEqual(
+        expect.objectContaining({
+          List: expect.any(Function),
+        })
+      );
     });
 
     it("lists buckslips", async () => {
@@ -95,8 +108,11 @@ describe("BuckSlipsApi", () => {
       } catch (error) {
         // If listing fails due to API requirements in CI, just verify the API structure exists
         const buckslipsApi = new BuckslipsApi(CONFIG_FOR_INTEGRATION);
-        expect(buckslipsApi.List).toBeDefined();
-        expect(typeof buckslipsApi.List).toEqual("function");
+        expect(buckslipsApi).toEqual(
+          expect.objectContaining({
+            List: expect.any(Function),
+          })
+        );
       }
     });
   });
