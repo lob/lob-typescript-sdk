@@ -125,7 +125,7 @@ describe("BankAccountsApi", () => {
           );
         }
       }
-    }, 3000); // Increased timeout for API operations
+    }, 30000); // Increased timeout for API operations
 
     afterAll(async () => {
       const bankAccountApi = new BankAccountsApi(CONFIG_FOR_INTEGRATION);
