@@ -139,7 +139,20 @@ describe("CardsApi", () => {
       const response = await new CardsApi(CONFIG_FOR_INTEGRATION).list();
       expect(response).toEqual(
         expect.objectContaining({
-          data: expect.arrayContaining([expect.any(Object)]),
+          data: expect.arrayContaining([
+            expect.objectContaining({
+              id: expect.stringMatching(/^card_[a-zA-Z0-9]+$/),
+              description: expect.any(String),
+              size: expect.stringMatching(/^(3\.375x2\.125|2\.125x3\.375)$/),
+              date_created: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              date_modified: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              object: "card",
+            }),
+          ]),
         })
       );
 
@@ -155,7 +168,20 @@ describe("CardsApi", () => {
         );
         expect(responseAfter).toEqual(
           expect.objectContaining({
-            data: expect.arrayContaining([expect.any(Object)]),
+            data: expect.arrayContaining([
+              expect.objectContaining({
+                id: expect.stringMatching(/^card_[a-zA-Z0-9]+$/),
+                description: expect.any(String),
+                size: expect.stringMatching(/^(3\.375x2\.125|2\.125x3\.375)$/),
+                date_created: expect.stringMatching(
+                  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                ),
+                date_modified: expect.stringMatching(
+                  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                ),
+                object: "card",
+              }),
+            ]),
             previous_url: expect.any(String),
           })
         );
@@ -173,7 +199,22 @@ describe("CardsApi", () => {
           ).list(3, before);
           expect(responseBefore).toEqual(
             expect.objectContaining({
-              data: expect.arrayContaining([expect.any(Object)]),
+              data: expect.arrayContaining([
+                expect.objectContaining({
+                  id: expect.stringMatching(/^card_[a-zA-Z0-9]+$/),
+                  description: expect.any(String),
+                  size: expect.stringMatching(
+                    /^(3\.375x2\.125|2\.125x3\.375)$/
+                  ),
+                  date_created: expect.stringMatching(
+                    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                  ),
+                  date_modified: expect.stringMatching(
+                    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                  ),
+                  object: "card",
+                }),
+              ]),
             })
           );
           const previousPage: Card[] = responseBefore.data || [];

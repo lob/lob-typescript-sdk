@@ -144,7 +144,19 @@ describe("TemplatesApi", () => {
       const response = await new TemplatesApi(CONFIG_FOR_INTEGRATION).list();
       expect(response).toEqual(
         expect.objectContaining({
-          data: expect.arrayContaining([expect.any(Object)]),
+          data: expect.arrayContaining([
+            expect.objectContaining({
+              id: expect.stringMatching(/^tmpl_[a-zA-Z0-9]+$/),
+              description: expect.any(String),
+              date_created: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              date_modified: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              object: "template",
+            }),
+          ]),
         })
       );
     });
@@ -154,7 +166,19 @@ describe("TemplatesApi", () => {
       const response = await templatesApi.list();
       expect(response).toEqual(
         expect.objectContaining({
-          data: expect.arrayContaining([expect.any(Object)]),
+          data: expect.arrayContaining([
+            expect.objectContaining({
+              id: expect.stringMatching(/^tmpl_[a-zA-Z0-9]+$/),
+              description: expect.any(String),
+              date_created: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              date_modified: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              object: "template",
+            }),
+          ]),
         })
       );
 
@@ -166,7 +190,19 @@ describe("TemplatesApi", () => {
         const responseAfter = await templatesApi.list(3, undefined, after);
         expect(responseAfter).toEqual(
           expect.objectContaining({
-            data: expect.arrayContaining([expect.any(Object)]),
+            data: expect.arrayContaining([
+              expect.objectContaining({
+                id: expect.stringMatching(/^tmpl_[a-zA-Z0-9]+$/),
+                description: expect.any(String),
+                date_created: expect.stringMatching(
+                  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                ),
+                date_modified: expect.stringMatching(
+                  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                ),
+                object: "template",
+              }),
+            ]),
             previous_url: expect.any(String),
           })
         );
@@ -181,7 +217,19 @@ describe("TemplatesApi", () => {
           const responseBefore = await templatesApi.list(3, before);
           expect(responseBefore).toEqual(
             expect.objectContaining({
-              data: expect.arrayContaining([expect.any(Object)]),
+              data: expect.arrayContaining([
+                expect.objectContaining({
+                  id: expect.stringMatching(/^tmpl_[a-zA-Z0-9]+$/),
+                  description: expect.any(String),
+                  date_created: expect.stringMatching(
+                    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                  ),
+                  date_modified: expect.stringMatching(
+                    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                  ),
+                  object: "template",
+                }),
+              ]),
             })
           );
           expect(responseBefore.data?.length).toBeGreaterThan(0);

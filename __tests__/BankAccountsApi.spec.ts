@@ -86,7 +86,6 @@ describe("BankAccountsApi", () => {
               const created = await bankApi.create(bankAccount);
               return created.id;
             } catch (error) {
-              console.log(`Failed to create bank account: ${error}`);
               return null;
             }
           }
@@ -98,11 +97,8 @@ describe("BankAccountsApi", () => {
           ...createdIds.filter((id): id is string => id !== null)
         );
       } catch (error) {
-        console.log(`Error during bank account creation: ${error}`);
+        // Continue without created bank accounts if creation fails
       }
-
-      // Wait a moment for API processing
-      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       // Get pagination data with a small limit to force pagination
       const response = await bankApi.list(3);
@@ -110,7 +106,22 @@ describe("BankAccountsApi", () => {
       // Verify we have pagination data
       expect(response).toEqual(
         expect.objectContaining({
-          data: expect.arrayContaining([expect.any(Object)]),
+          data: expect.arrayContaining([
+            expect.objectContaining({
+              id: expect.stringMatching(/^bank_[a-zA-Z0-9]+$/),
+              routing_number: expect.any(String),
+              account_number: expect.any(String),
+              account_type: expect.stringMatching(/^(company|individual)$/),
+              signatory: expect.any(String),
+              date_created: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              date_modified: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              object: "bank_account",
+            }),
+          ]),
         })
       );
 

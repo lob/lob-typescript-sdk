@@ -144,23 +144,20 @@ describe("postcardsApi", () => {
           })
       );
 
-      // Create all postcards
+      // Create all postcards in parallel with error handling
       try {
         const creationPromises = postcardsToCreate.map(async (postcard) => {
           try {
             await postcardsApi.create(postcard);
           } catch (error) {
-            console.log(`Failed to create postcard: ${error}`);
+            // Continue if individual postcard creation fails
           }
         });
 
         await Promise.all(creationPromises);
       } catch (error) {
-        console.log(`Error during postcard creation: ${error}`);
+        // Continue without created postcards if creation fails
       }
-
-      // Wait a moment for API processing
-      await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Get pagination data with a small limit to force pagination
       const response = await postcardsApi.list(3);
@@ -168,7 +165,21 @@ describe("postcardsApi", () => {
       // Verify we have response data
       expect(response).toEqual(
         expect.objectContaining({
-          data: expect.any(Array),
+          data: expect.arrayContaining([
+            expect.objectContaining({
+              id: expect.stringMatching(/^psc_[a-zA-Z0-9]+$/),
+              url: expect.stringMatching(
+                /^https:\/\/(lob-assets|lob-assets-staging)\.com\//
+              ),
+              date_created: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              date_modified: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              object: "postcard",
+            }),
+          ]),
         })
       );
 
@@ -196,7 +207,21 @@ describe("postcardsApi", () => {
       const response = await postcardsApi.list();
       expect(response).toEqual(
         expect.objectContaining({
-          data: expect.any(Array),
+          data: expect.arrayContaining([
+            expect.objectContaining({
+              id: expect.stringMatching(/^psc_[a-zA-Z0-9]+$/),
+              url: expect.stringMatching(
+                /^https:\/\/(lob-assets|lob-assets-staging)\.com\//
+              ),
+              date_created: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              date_modified: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              object: "postcard",
+            }),
+          ]),
         })
       );
       postcardList = response.data || [];
@@ -209,7 +234,21 @@ describe("postcardsApi", () => {
         const responseAfter = await postcardsApi.list(3, undefined, nextUrl);
         expect(responseAfter).toEqual(
           expect.objectContaining({
-            data: expect.any(Array),
+            data: expect.arrayContaining([
+              expect.objectContaining({
+                id: expect.stringMatching(/^psc_[a-zA-Z0-9]+$/),
+                url: expect.stringMatching(
+                  /^https:\/\/(lob-assets|lob-assets-staging)\.com\//
+                ),
+                date_created: expect.stringMatching(
+                  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                ),
+                date_modified: expect.stringMatching(
+                  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                ),
+                object: "postcard",
+              }),
+            ]),
           })
         );
         const postcardList2: Postcard[] = responseAfter.data || [];
@@ -219,7 +258,21 @@ describe("postcardsApi", () => {
         const response = await postcardsApi.list();
         expect(response).toEqual(
           expect.objectContaining({
-            data: expect.any(Array),
+            data: expect.arrayContaining([
+              expect.objectContaining({
+                id: expect.stringMatching(/^psc_[a-zA-Z0-9]+$/),
+                url: expect.stringMatching(
+                  /^https:\/\/(lob-assets|lob-assets-staging)\.com\//
+                ),
+                date_created: expect.stringMatching(
+                  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                ),
+                date_modified: expect.stringMatching(
+                  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                ),
+                object: "postcard",
+              }),
+            ]),
           })
         );
         expect(Array.isArray(response.data)).toBeTruthy();
@@ -231,7 +284,21 @@ describe("postcardsApi", () => {
         const responseBefore = await postcardsApi.list(3, previousUrl);
         expect(responseBefore).toEqual(
           expect.objectContaining({
-            data: expect.any(Array),
+            data: expect.arrayContaining([
+              expect.objectContaining({
+                id: expect.stringMatching(/^psc_[a-zA-Z0-9]+$/),
+                url: expect.stringMatching(
+                  /^https:\/\/(lob-assets|lob-assets-staging)\.com\//
+                ),
+                date_created: expect.stringMatching(
+                  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                ),
+                date_modified: expect.stringMatching(
+                  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                ),
+                object: "postcard",
+              }),
+            ]),
           })
         );
         const postcardList3: Postcard[] = responseBefore.data || [];
@@ -241,7 +308,21 @@ describe("postcardsApi", () => {
         const response = await postcardsApi.list();
         expect(response).toEqual(
           expect.objectContaining({
-            data: expect.any(Array),
+            data: expect.arrayContaining([
+              expect.objectContaining({
+                id: expect.stringMatching(/^psc_[a-zA-Z0-9]+$/),
+                url: expect.stringMatching(
+                  /^https:\/\/(lob-assets|lob-assets-staging)\.com\//
+                ),
+                date_created: expect.stringMatching(
+                  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                ),
+                date_modified: expect.stringMatching(
+                  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                ),
+                object: "postcard",
+              }),
+            ]),
           })
         );
         expect(Array.isArray(response.data)).toBeTruthy();

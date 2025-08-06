@@ -91,23 +91,20 @@ describe("smApi", () => {
           })
       );
 
-      // Create all self-mailers
+      // Create all self-mailers in parallel with error handling
       try {
         const creationPromises = selfMailersToCreate.map(async (selfMailer) => {
           try {
             await smApi.create(selfMailer);
           } catch (error) {
-            console.log(`Failed to create self-mailer: ${error}`);
+            // Continue if individual self-mailer creation fails
           }
         });
 
         await Promise.all(creationPromises);
       } catch (error) {
-        console.log(`Error during self-mailer creation: ${error}`);
+        // Continue without created self-mailers if creation fails
       }
-
-      // Wait a moment for the API to process
-      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       // Get the first page with a small limit to force pagination
       const response = await smApi.list(3); // Small limit to ensure pagination

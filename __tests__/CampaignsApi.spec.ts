@@ -149,7 +149,20 @@ describe("CampaignsApi", () => {
       const response = await new CampaignsApi(CONFIG_FOR_INTEGRATION).list();
       expect(response).toEqual(
         expect.objectContaining({
-          data: expect.arrayContaining([expect.any(Object)]),
+          data: expect.arrayContaining([
+            expect.objectContaining({
+              id: expect.stringMatching(/^cmp_[a-zA-Z0-9]+$/),
+              name: expect.any(String),
+              schedule_type: expect.stringMatching(/^(immediate|scheduled)$/),
+              date_created: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              date_modified: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              object: "campaign",
+            }),
+          ]),
         })
       );
     });
@@ -161,7 +174,20 @@ describe("CampaignsApi", () => {
       );
       expect(response).toEqual(
         expect.objectContaining({
-          data: expect.arrayContaining([expect.any(Object)]),
+          data: expect.arrayContaining([
+            expect.objectContaining({
+              id: expect.stringMatching(/^cmp_[a-zA-Z0-9]+$/),
+              name: expect.any(String),
+              schedule_type: expect.stringMatching(/^(immediate|scheduled)$/),
+              date_created: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              date_modified: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              object: "campaign",
+            }),
+          ]),
           total_count: expect.any(Number),
         })
       );
@@ -172,7 +198,20 @@ describe("CampaignsApi", () => {
       const response = await campaignsApi.list();
       expect(response).toEqual(
         expect.objectContaining({
-          data: expect.arrayContaining([expect.any(Object)]),
+          data: expect.arrayContaining([
+            expect.objectContaining({
+              id: expect.stringMatching(/^cmp_[a-zA-Z0-9]+$/),
+              name: expect.any(String),
+              schedule_type: expect.stringMatching(/^(immediate|scheduled)$/),
+              date_created: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              date_modified: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              object: "campaign",
+            }),
+          ]),
         })
       );
 
@@ -189,7 +228,20 @@ describe("CampaignsApi", () => {
         );
         expect(responseAfter).toEqual(
           expect.objectContaining({
-            data: expect.arrayContaining([expect.any(Object)]),
+            data: expect.arrayContaining([
+              expect.objectContaining({
+                id: expect.stringMatching(/^cmp_[a-zA-Z0-9]+$/),
+                name: expect.any(String),
+                schedule_type: expect.stringMatching(/^(immediate|scheduled)$/),
+                date_created: expect.stringMatching(
+                  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                ),
+                date_modified: expect.stringMatching(
+                  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                ),
+                object: "campaign",
+              }),
+            ]),
             previous_url: expect.any(String),
           })
         );
@@ -204,7 +256,22 @@ describe("CampaignsApi", () => {
           const responseBefore = await campaignsApi.list(3, undefined, before);
           expect(responseBefore).toEqual(
             expect.objectContaining({
-              data: expect.arrayContaining([expect.any(Object)]),
+              data: expect.arrayContaining([
+                expect.objectContaining({
+                  id: expect.stringMatching(/^cmp_[a-zA-Z0-9]+$/),
+                  name: expect.any(String),
+                  schedule_type: expect.stringMatching(
+                    /^(immediate|scheduled)$/
+                  ),
+                  date_created: expect.stringMatching(
+                    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                  ),
+                  date_modified: expect.stringMatching(
+                    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                  ),
+                  object: "campaign",
+                }),
+              ]),
             })
           );
           expect(responseBefore.data?.length).toBeGreaterThan(0);
