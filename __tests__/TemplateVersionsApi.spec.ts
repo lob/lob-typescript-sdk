@@ -197,11 +197,8 @@ describe("TemplateVersionsApi", () => {
         CONFIG_FOR_INTEGRATION
       ).list(dummyTemplate.id as string, 3);
       expect(response.next_url).toBeDefined();
-      const after: string = (response as { next_url: string }).next_url
-        .slice(
-          (response as { next_url: string }).next_url.lastIndexOf("after=")
-        )
-        .split("=")[1];
+      const nextUrl = new URL((response as { next_url: string }).next_url);
+      const after: string = nextUrl.searchParams.get("after") || "";
 
       const responseAfter = await new TemplateVersionsApi(
         CONFIG_FOR_INTEGRATION
@@ -215,15 +212,10 @@ describe("TemplateVersionsApi", () => {
 
       expect(responseAfter.previous_url).toBeDefined();
       expect(responseAfter.previous_url).not.toBeNull();
-      const before: string = (
-        responseAfter as { previous_url: string }
-      ).previous_url
-        .slice(
-          (responseAfter as { previous_url: string }).previous_url.lastIndexOf(
-            "before="
-          )
-        )
-        .split("=")[1];
+      const prevUrl = new URL(
+        (responseAfter as { previous_url: string }).previous_url
+      );
+      const before: string = prevUrl.searchParams.get("before") || "";
 
       const responseBefore = await new TemplateVersionsApi(
         CONFIG_FOR_INTEGRATION

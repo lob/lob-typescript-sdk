@@ -78,27 +78,43 @@ describe("BankAccountsApi", () => {
         Object.assign({}, dummyAccount, { signatory: "Bob Johnson" }),
       ];
 
-      // Create all bank accounts
-      try {
-        const creationPromises = bankAccountsToCreate.map(
-          async (bankAccount) => {
+      // Create all bank accounts with retry logic
+      const creationPromises = bankAccountsToCreate.map(
+        async (bankAccount, index) => {
+          const maxRetries = 3;
+          let lastError: any;
+
+          for (let attempt = 1; attempt <= maxRetries; attempt++) {
             try {
               const created = await bankApi.create(bankAccount);
-              return created.id;
+              return { id: created.id, signatory: bankAccount.signatory };
             } catch (error) {
-              return null;
+              lastError = error;
+              if (attempt < maxRetries) {
+                // Wait before retry (exponential backoff)
+                await new Promise((resolve) =>
+                  setTimeout(resolve, attempt * 1000)
+                );
+              }
             }
           }
-        );
 
-        const createdIds = await Promise.all(creationPromises);
-        // Filter out any failed creations
-        createdBankAccounts.push(
-          ...createdIds.filter((id): id is string => id !== null)
-        );
-      } catch (error) {
-        // Continue without created bank accounts if creation fails
-      }
+          // Return null for failed creations (will be filtered out)
+          return null;
+        }
+      );
+
+      const createdResults = await Promise.all(creationPromises);
+      // Filter out any failed creations
+      const successfulCreations = createdResults.filter(
+        (result): result is { id: string; signatory: string } => result !== null
+      );
+      createdBankAccounts.push(
+        ...successfulCreations.map((result) => result.id)
+      );
+
+      // Ensure we have enough data for pagination tests
+      expect(successfulCreations.length).toBeGreaterThan(0);
 
       // Get pagination data with a small limit to force pagination
       const response = await bankApi.list(3);
@@ -126,17 +142,15 @@ describe("BankAccountsApi", () => {
       );
 
       if (response.next_url) {
-        nextUrl = response.next_url.slice(
-          response.next_url.lastIndexOf("after=") + 6
-        );
+        const url = new URL(response.next_url);
+        nextUrl = url.searchParams.get("after") || "";
         const responseAfter = await bankApi.list(3, undefined, nextUrl);
         if (responseAfter && responseAfter.previous_url) {
-          previousUrl = responseAfter.previous_url.slice(
-            responseAfter.previous_url.lastIndexOf("before=") + 7
-          );
+          const prevUrl = new URL(responseAfter.previous_url);
+          previousUrl = prevUrl.searchParams.get("before") || "";
         }
       }
-    }, 30000); // Increased timeout for API operations
+    }, 10000); // Timeout for concurrent API operations (reduced since Promise.all runs operations in parallel)
 
     afterAll(async () => {
       const bankAccountApi = new BankAccountsApi(CONFIG_FOR_INTEGRATION);

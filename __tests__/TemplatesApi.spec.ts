@@ -183,9 +183,8 @@ describe("TemplatesApi", () => {
       );
 
       if (response.next_url) {
-        const after: string = response.next_url
-          .slice(response.next_url.lastIndexOf("after="))
-          .split("=")[1];
+        const url = new URL(response.next_url);
+        const after: string = url.searchParams.get("after") || "";
 
         const responseAfter = await templatesApi.list(3, undefined, after);
         expect(responseAfter).toEqual(
@@ -210,9 +209,8 @@ describe("TemplatesApi", () => {
         expect(responseAfter.data?.length).toBeGreaterThan(0);
 
         if (responseAfter.previous_url) {
-          const before: string = responseAfter.previous_url
-            .slice(responseAfter.previous_url.lastIndexOf("before="))
-            .split("=")[1];
+          const url = new URL(responseAfter.previous_url);
+          const before: string = url.searchParams.get("before") || "";
 
           const responseBefore = await templatesApi.list(3, before);
           expect(responseBefore).toEqual(
