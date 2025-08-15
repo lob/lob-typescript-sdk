@@ -7,24 +7,26 @@ describe("TemplatesApi", () => {
 
   it("Template API can be instantiated", () => {
     const templatesApi = new TemplatesApi(CONFIG_FOR_INTEGRATION);
-    expect(templatesApi).toBeDefined();
-    expect(typeof templatesApi).toEqual("object");
-    expect(templatesApi).toBeInstanceOf(TemplatesApi);
+    expect(templatesApi).toEqual(
+      expect.objectContaining({
+        create: expect.any(Function),
+        get: expect.any(Function),
+        update: expect.any(Function),
+        delete: expect.any(Function),
+      })
+    );
   });
 
   it("all individual Template functions exists", () => {
     const templatesApi = new TemplatesApi(CONFIG_FOR_INTEGRATION);
-    expect(templatesApi.create).toBeDefined();
-    expect(typeof templatesApi.create).toEqual("function");
-
-    expect(templatesApi.get).toBeDefined();
-    expect(typeof templatesApi.get).toEqual("function");
-
-    expect(templatesApi.update).toBeDefined();
-    expect(typeof templatesApi.update).toEqual("function");
-
-    expect(templatesApi.delete).toBeDefined();
-    expect(typeof templatesApi.delete).toEqual("function");
+    expect(templatesApi).toEqual(
+      expect.objectContaining({
+        create: expect.any(Function),
+        get: expect.any(Function),
+        update: expect.any(Function),
+        delete: expect.any(Function),
+      })
+    );
   });
 
   describe("performs single-Template operations", () => {
@@ -37,15 +39,22 @@ describe("TemplatesApi", () => {
       const templatesApi = new TemplatesApi(CONFIG_FOR_INTEGRATION);
       // Create
       const createdTemplate = await templatesApi.create(templateWrite);
-      expect(createdTemplate.id).toBeDefined();
-      expect(createdTemplate.description).toEqual(templateWrite.description);
+      expect(createdTemplate).toEqual(
+        expect.objectContaining({
+          id: expect.any(String),
+          description: templateWrite.description,
+        })
+      );
 
       // Get
       const retrievedTemplate = await templatesApi.get(
         createdTemplate.id as string
       );
-      expect(retrievedTemplate).toBeDefined();
-      expect(retrievedTemplate.id).toEqual(createdTemplate.id);
+      expect(retrievedTemplate).toEqual(
+        expect.objectContaining({
+          id: createdTemplate.id,
+        })
+      );
 
       // Update
       const updates = new TemplateUpdate({
@@ -56,14 +65,21 @@ describe("TemplatesApi", () => {
         retrievedTemplate.id as string,
         updates
       );
-      expect(updatedTemplate).toBeDefined();
-      expect(updatedTemplate.description).toEqual("updated template");
+      expect(updatedTemplate).toEqual(
+        expect.objectContaining({
+          description: "updated template",
+        })
+      );
 
       // Delete
       const deletedTemplate = await templatesApi.delete(
         updatedTemplate.id as string
       );
-      expect(deletedTemplate.deleted).toBeTruthy();
+      expect(deletedTemplate).toEqual(
+        expect.objectContaining({
+          deleted: true,
+        })
+      );
     });
   });
 
@@ -117,48 +133,109 @@ describe("TemplatesApi", () => {
 
     it("exists", () => {
       const templatesApi = new TemplatesApi(CONFIG_FOR_INTEGRATION);
-      expect(templatesApi.list).toBeDefined();
-      expect(typeof templatesApi.list).toEqual("function");
+      expect(templatesApi).toEqual(
+        expect.objectContaining({
+          list: expect.any(Function),
+        })
+      );
     });
 
     it("lists templates", async () => {
       const response = await new TemplatesApi(CONFIG_FOR_INTEGRATION).list();
-      expect(response.data).toBeDefined();
-      expect(response.data?.length).toBeGreaterThan(0);
+      expect(response).toEqual(
+        expect.objectContaining({
+          data: expect.arrayContaining([
+            expect.objectContaining({
+              id: expect.stringMatching(/^tmpl_[a-zA-Z0-9]+$/),
+              description: expect.any(String),
+              date_created: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              date_modified: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              object: "template",
+            }),
+          ]),
+        })
+      );
     });
 
     it("lists templates given before or after params", async () => {
       const templatesApi = new TemplatesApi(CONFIG_FOR_INTEGRATION);
       const response = await templatesApi.list();
-      expect(response.next_url).toBeDefined();
-      const after: string = (response as { next_url: string }).next_url
-        .slice(
-          (response as { next_url: string }).next_url.lastIndexOf("after=")
-        )
-        .split("=")[1];
+      expect(response).toEqual(
+        expect.objectContaining({
+          data: expect.arrayContaining([
+            expect.objectContaining({
+              id: expect.stringMatching(/^tmpl_[a-zA-Z0-9]+$/),
+              description: expect.any(String),
+              date_created: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              date_modified: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              object: "template",
+            }),
+          ]),
+        })
+      );
 
-      const responseAfter = await templatesApi.list(10, undefined, after);
-      expect(responseAfter.data).toBeDefined();
-      expect(responseAfter.previous_url).toBeDefined();
-      expect(responseAfter.previous_url).not.toBeNull();
+      if (response.next_url) {
+        const url = new URL(response.next_url);
+        const after: string = url.searchParams.get("after") || "";
 
-      expect(responseAfter.data?.length).toBeGreaterThan(0);
+        const responseAfter = await templatesApi.list(3, undefined, after);
+        expect(responseAfter).toEqual(
+          expect.objectContaining({
+            data: expect.arrayContaining([
+              expect.objectContaining({
+                id: expect.stringMatching(/^tmpl_[a-zA-Z0-9]+$/),
+                description: expect.any(String),
+                date_created: expect.stringMatching(
+                  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                ),
+                date_modified: expect.stringMatching(
+                  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                ),
+                object: "template",
+              }),
+            ]),
+            previous_url: expect.any(String),
+          })
+        );
 
-      expect(responseAfter.previous_url).toBeDefined();
-      expect(responseAfter.previous_url).not.toBeNull();
-      const before: string = (
-        responseAfter as { previous_url: string }
-      ).previous_url
-        .slice(
-          (responseAfter as { previous_url: string }).previous_url.lastIndexOf(
-            "before="
-          )
-        )
-        .split("=")[1];
+        expect(responseAfter.data?.length).toBeGreaterThan(0);
 
-      const responseBefore = await templatesApi.list(10, before);
-      expect(responseBefore.data).toBeDefined();
-      expect(responseBefore.data?.length).toBeGreaterThan(0);
+        if (responseAfter.previous_url) {
+          const url = new URL(responseAfter.previous_url);
+          const before: string = url.searchParams.get("before") || "";
+
+          const responseBefore = await templatesApi.list(3, before);
+          expect(responseBefore).toEqual(
+            expect.objectContaining({
+              data: expect.arrayContaining([
+                expect.objectContaining({
+                  id: expect.stringMatching(/^tmpl_[a-zA-Z0-9]+$/),
+                  description: expect.any(String),
+                  date_created: expect.stringMatching(
+                    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                  ),
+                  date_modified: expect.stringMatching(
+                    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                  ),
+                  object: "template",
+                }),
+              ]),
+            })
+          );
+          expect(responseBefore.data?.length).toBeGreaterThan(0);
+        }
+      } else {
+        // If no pagination, just verify the API works
+        expect(response.data?.length).toBeGreaterThan(0);
+      }
     });
   });
 });

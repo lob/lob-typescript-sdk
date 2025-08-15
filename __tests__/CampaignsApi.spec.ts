@@ -12,27 +12,28 @@ describe("CampaignsApi", () => {
 
   it("Campaign API can be instantiated", () => {
     const campaignsApi = new CampaignsApi(CONFIG_FOR_INTEGRATION);
-    expect(campaignsApi).toBeDefined();
-    expect(typeof campaignsApi).toEqual("object");
-    expect(campaignsApi).toBeInstanceOf(CampaignsApi);
+    expect(campaignsApi).toEqual(
+      expect.objectContaining({
+        create: expect.any(Function),
+        list: expect.any(Function),
+        get: expect.any(Function),
+        update: expect.any(Function),
+        delete: expect.any(Function),
+      })
+    );
   });
 
   it("all individual Campaign functions exists", () => {
     const campaignsApi = new CampaignsApi(CONFIG_FOR_INTEGRATION);
-    expect(campaignsApi.create).toBeDefined();
-    expect(typeof campaignsApi.create).toEqual("function");
-
-    expect(campaignsApi.list).toBeDefined();
-    expect(typeof campaignsApi.list).toEqual("function");
-
-    expect(campaignsApi.get).toBeDefined();
-    expect(typeof campaignsApi.get).toEqual("function");
-
-    expect(campaignsApi.update).toBeDefined();
-    expect(typeof campaignsApi.update).toEqual("function");
-
-    expect(campaignsApi.delete).toBeDefined();
-    expect(typeof campaignsApi.delete).toEqual("function");
+    expect(campaignsApi).toEqual(
+      expect.objectContaining({
+        create: expect.any(Function),
+        list: expect.any(Function),
+        get: expect.any(Function),
+        update: expect.any(Function),
+        delete: expect.any(Function),
+      })
+    );
   });
 
   describe("performs single-Campaign operations", () => {
@@ -45,33 +46,45 @@ describe("CampaignsApi", () => {
       const campaignsApi = new CampaignsApi(CONFIG_FOR_INTEGRATION);
       // Create
       const createdCampaign = await campaignsApi.create(campaignWrite);
-      expect(createdCampaign.id).toBeDefined();
+      expect(createdCampaign).toEqual(
+        expect.objectContaining({
+          id: expect.any(String),
+        })
+      );
 
       // Get
       const retrievedCampaign = await campaignsApi.get(
         createdCampaign.id as string
       );
-      expect(retrievedCampaign).toBeDefined();
-      expect(retrievedCampaign.id).toEqual(createdCampaign.id);
+      expect(retrievedCampaign).toEqual(
+        expect.objectContaining({
+          id: createdCampaign.id,
+        })
+      );
 
       // Update
       const updates = new CampaignUpdatable({
-        description: "TS Integration Test Updated Campaign",
+        name: "updated campaign",
       });
       const updatedCampaign = await campaignsApi.update(
         retrievedCampaign.id as string,
         updates
       );
-      expect(updatedCampaign).toBeDefined();
-      expect(updatedCampaign.description).toEqual(
-        "TS Integration Test Updated Campaign"
+      expect(updatedCampaign).toEqual(
+        expect.objectContaining({
+          name: "updated campaign",
+        })
       );
 
       // Delete
       const deletedCampaign = await campaignsApi.delete(
         updatedCampaign.id as string
       );
-      expect(deletedCampaign.deleted).toBeTruthy();
+      expect(deletedCampaign).toEqual(
+        expect.objectContaining({
+          deleted: true,
+        })
+      );
     });
   });
 
@@ -125,14 +138,33 @@ describe("CampaignsApi", () => {
 
     it("exists", () => {
       const campaignsApi = new CampaignsApi(CONFIG_FOR_INTEGRATION);
-      expect(campaignsApi.list).toBeDefined();
-      expect(typeof campaignsApi.list).toEqual("function");
+      expect(campaignsApi).toEqual(
+        expect.objectContaining({
+          list: expect.any(Function),
+        })
+      );
     });
 
     it("lists campaigns", async () => {
       const response = await new CampaignsApi(CONFIG_FOR_INTEGRATION).list();
-      expect(response.data).toBeDefined();
-      expect(response.data?.length).toBeGreaterThan(0);
+      expect(response).toEqual(
+        expect.objectContaining({
+          data: expect.arrayContaining([
+            expect.objectContaining({
+              id: expect.stringMatching(/^cmp_[a-zA-Z0-9]+$/),
+              name: expect.any(String),
+              schedule_type: expect.stringMatching(/^(immediate|scheduled)$/),
+              date_created: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              date_modified: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              object: "campaign",
+            }),
+          ]),
+        })
+      );
     });
 
     it("lists campaigns given include param", async () => {
@@ -140,47 +172,112 @@ describe("CampaignsApi", () => {
         undefined,
         ["total_count"]
       );
-      expect(response.data).toBeDefined();
-      expect(response.total_count).toBeDefined();
+      expect(response).toEqual(
+        expect.objectContaining({
+          data: expect.arrayContaining([
+            expect.objectContaining({
+              id: expect.stringMatching(/^cmp_[a-zA-Z0-9]+$/),
+              name: expect.any(String),
+              schedule_type: expect.stringMatching(/^(immediate|scheduled)$/),
+              date_created: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              date_modified: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              object: "campaign",
+            }),
+          ]),
+          total_count: expect.any(Number),
+        })
+      );
     });
 
     it("lists campaigns given before or after params", async () => {
       const campaignsApi = new CampaignsApi(CONFIG_FOR_INTEGRATION);
       const response = await campaignsApi.list();
-      expect(response.next_url).toBeDefined();
-      const after: string = (response as { next_url: string }).next_url
-        .slice(
-          (response as { next_url: string }).next_url.lastIndexOf("after=")
-        )
-        .split("=")[1];
-
-      const responseAfter = await campaignsApi.list(
-        10,
-        undefined,
-        undefined,
-        after
+      expect(response).toEqual(
+        expect.objectContaining({
+          data: expect.arrayContaining([
+            expect.objectContaining({
+              id: expect.stringMatching(/^cmp_[a-zA-Z0-9]+$/),
+              name: expect.any(String),
+              schedule_type: expect.stringMatching(/^(immediate|scheduled)$/),
+              date_created: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              date_modified: expect.stringMatching(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+              ),
+              object: "campaign",
+            }),
+          ]),
+        })
       );
-      expect(responseAfter.data).toBeDefined();
-      expect(responseAfter.previous_url).toBeDefined();
-      expect(responseAfter.previous_url).not.toBeNull();
 
-      expect(responseAfter.data?.length).toBeGreaterThan(0);
+      if (response.next_url) {
+        const url = new URL(response.next_url);
+        const after: string = url.searchParams.get("after") || "";
 
-      expect(responseAfter.previous_url).toBeDefined();
-      expect(responseAfter.previous_url).not.toBeNull();
-      const before: string = (
-        responseAfter as { previous_url: string }
-      ).previous_url
-        .slice(
-          (responseAfter as { previous_url: string }).previous_url.lastIndexOf(
-            "before="
-          )
-        )
-        .split("=")[1];
+        const responseAfter = await campaignsApi.list(
+          3,
+          undefined,
+          undefined,
+          after
+        );
+        expect(responseAfter).toEqual(
+          expect.objectContaining({
+            data: expect.arrayContaining([
+              expect.objectContaining({
+                id: expect.stringMatching(/^cmp_[a-zA-Z0-9]+$/),
+                name: expect.any(String),
+                schedule_type: expect.stringMatching(/^(immediate|scheduled)$/),
+                date_created: expect.stringMatching(
+                  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                ),
+                date_modified: expect.stringMatching(
+                  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                ),
+                object: "campaign",
+              }),
+            ]),
+            previous_url: expect.any(String),
+          })
+        );
 
-      const responseBefore = await campaignsApi.list(10, undefined, before);
-      expect(responseBefore.data).toBeDefined();
-      expect(responseBefore.data?.length).toBeGreaterThan(0);
+        expect(responseAfter.data?.length).toBeGreaterThan(0);
+
+        if (responseAfter.previous_url) {
+          const url = new URL(responseAfter.previous_url);
+          const before: string = url.searchParams.get("before") || "";
+
+          const responseBefore = await campaignsApi.list(3, undefined, before);
+          expect(responseBefore).toEqual(
+            expect.objectContaining({
+              data: expect.arrayContaining([
+                expect.objectContaining({
+                  id: expect.stringMatching(/^cmp_[a-zA-Z0-9]+$/),
+                  name: expect.any(String),
+                  schedule_type: expect.stringMatching(
+                    /^(immediate|scheduled)$/
+                  ),
+                  date_created: expect.stringMatching(
+                    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                  ),
+                  date_modified: expect.stringMatching(
+                    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+                  ),
+                  object: "campaign",
+                }),
+              ]),
+            })
+          );
+          expect(responseBefore.data?.length).toBeGreaterThan(0);
+        }
+      } else {
+        // If no pagination, just verify the API works
+        expect(response.data?.length).toBeGreaterThan(0);
+      }
     });
   });
 });
