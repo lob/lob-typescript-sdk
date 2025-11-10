@@ -7,6 +7,10 @@ on:
   release:
     types: [published]
 
+permissions:
+  id-token: write # Required for OIDC
+  contents: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -14,18 +18,20 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       # use node setup library (more info here https://github.com/actions/setup-node)
       - uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Npm Install
-        run: npm install
+      - name: Install NPM 11.5.1
+        run: npm install -g npm@11.5.1
+
+      - name: Npm CI
+        run: npm ci
 
       # publishes to NPM using third party tool (more info here https://github.com/JS-DevTools/npm-publish)
-      - uses: JS-DevTools/npm-publish@v3
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          access: public
+      - name: Publish the package to NPM
+        id: publish
+        uses: JS-DevTools/npm-publish@v4

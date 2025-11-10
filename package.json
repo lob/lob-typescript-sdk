@@ -23,7 +23,8 @@
   },
   "bugs:": "https://github.com/lob/lob-typescript-sdk/issues",
   "engines": {
-    "node": ">= 20"
+    "node": ">= 20",
+    "npm": ">= 11.5.1"
   },
   "license": "MIT",
   "files": [
