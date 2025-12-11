@@ -51,7 +51,10 @@
       "require": "./dist/index.cjs.js",
       "types": "./dist/index.d.ts"
     },
-    "default": "./dist/index.mjs"
+    "default": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
   },
   "dependencies": {
     "axios": "^1.9.0",
