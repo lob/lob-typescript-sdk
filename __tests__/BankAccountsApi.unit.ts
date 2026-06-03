@@ -301,6 +301,33 @@ describe("BankAccountsApi", () => {
         expect(err.message).toEqual("Unknown Error");
       }
     });
+
+    it("verifies a bank account with descriptor_code", async () => {
+      axiosRequest.mockImplementationOnce(async () => ({
+        data: { id: "bank_fakeId" },
+      }));
+
+      const verify = new BankAccountVerify({
+        descriptor_code: "SM11AA",
+      });
+      const bankAccount = await new BankAccountsApi(CONFIG_FOR_UNIT).verify(
+        "an id",
+        verify
+      );
+      expect(bankAccount).toBeDefined();
+      expect(bankAccount.id).toEqual("bank_fakeId");
+    });
+
+    it("returns microdeposit_type on a retrieved bank account", async () => {
+      axiosRequest.mockImplementationOnce(async () => ({
+        data: { id: "bank_fakeId", microdeposit_type: "amounts" },
+      }));
+
+      const bankAccount = await new BankAccountsApi(CONFIG_FOR_UNIT).get(
+        "bank_fakeId"
+      );
+      expect(bankAccount.microdeposit_type).toEqual("amounts");
+    });
   });
 
   describe("list", () => {

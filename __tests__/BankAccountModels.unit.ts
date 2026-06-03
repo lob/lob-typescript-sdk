@@ -3,6 +3,7 @@ import {
   BankAccountDeletion,
   BankAccountDeletionObjectEnum,
   BankAccountList,
+  BankAccountMicrodepositTypeEnum,
   BankAccountVerify,
   BankAccountWritable,
   BankTypeEnum,
@@ -34,6 +35,9 @@ describe("Bank Account Models", () => {
       ["deleted", false],
       ["deleted", true],
       ["object", "Bank"],
+      ["microdeposit_type", BankAccountMicrodepositTypeEnum.Amounts],
+      ["microdeposit_type", BankAccountMicrodepositTypeEnum.DescriptorCode],
+      ["microdeposit_type", null],
     ])("can be created with a provided %s value", (prop, val) => {
       const input = {};
       (input as any)[prop] = val;
@@ -209,7 +213,10 @@ describe("Bank Account Models", () => {
       expect(rec).toBeDefined();
     });
 
-    it.each([["amounts", [1, 2]]])(
+    it.each([
+      ["amounts", [1, 2]],
+      ["descriptor_code", "SM11AA"],
+    ])(
       "can be created with a provided %s value",
       (prop, val) => {
         const input = {};
@@ -221,6 +228,35 @@ describe("Bank Account Models", () => {
         expect((rec as any)[prop]).toEqual(val);
       }
     );
+
+    it("rejects invalid descriptor_code values", () => {
+      const rec = new BankAccountVerify();
+      const invalidValues = ["INVALID", "SM", "sm11aa", "SM11AAB", "SM1"];
+      for (const val of invalidValues) {
+        try {
+          rec.descriptor_code = val;
+          throw new Error("Should Throw");
+        } catch (err: any) {
+          expect(err.message).toEqual("Invalid descriptor_code provided");
+        }
+      }
+    });
+
+    it("allows valid descriptor_code values", () => {
+      const rec = new BankAccountVerify();
+      const validValues = ["SM11AA", "SM1234", "SMABcd"];
+      for (const val of validValues) {
+        rec.descriptor_code = val;
+        expect(rec.descriptor_code).toEqual(val);
+      }
+    });
+
+    it("allows unsetting descriptor_code to undefined", () => {
+      const rec = new BankAccountVerify({ descriptor_code: "SM11AA" });
+      expect(rec.descriptor_code).toEqual("SM11AA");
+      rec.descriptor_code = undefined;
+      expect(rec.descriptor_code).toBeUndefined();
+    });
   });
 
   describe("BankAccountWritable", () => {

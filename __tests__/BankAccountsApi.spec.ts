@@ -60,6 +60,44 @@ describe("BankAccountsApi", () => {
     });
   });
 
+  describe("descriptor_code verification path", () => {
+    let createdBankAccountId: string;
+
+    it("creates a bank account and exposes microdeposit_type", async () => {
+      const account = await new BankAccountsApi(CONFIG_FOR_INTEGRATION).create(
+        dummyAccount
+      );
+      expect(account.id).toBeDefined();
+      createdBankAccountId = account.id;
+
+      const retrieved = await new BankAccountsApi(CONFIG_FOR_INTEGRATION).get(
+        createdBankAccountId
+      );
+      expect(["amounts", "descriptor_code"]).toContain(
+        retrieved.microdeposit_type
+      );
+    });
+
+    it("verifies a bank account with descriptor_code", async () => {
+      const verify = new BankAccountVerify({
+        descriptor_code: "SM11AA",
+      });
+
+      const verification = await new BankAccountsApi(
+        CONFIG_FOR_INTEGRATION
+      ).verify(createdBankAccountId, verify);
+      expect(verification).toBeDefined();
+      expect(verification.id).toEqual(createdBankAccountId);
+    });
+
+    it("cleans up the bank account", async () => {
+      const deleted = await new BankAccountsApi(CONFIG_FOR_INTEGRATION).delete(
+        createdBankAccountId
+      );
+      expect(deleted.deleted).toBeTruthy();
+    });
+  });
+
   describe("list Cards", () => {
     let nextUrl = "";
     let previousUrl = "";
