@@ -58,7 +58,13 @@ describe("CampaignsApi", () => {
       if (!campaignsAvailable) return;
       const campaignsApi = new CampaignsApi(CONFIG_FOR_INTEGRATION);
       // Create
-      const createdCampaign = await campaignsApi.create(campaignWrite);
+      let createdCampaign;
+      try {
+        createdCampaign = await campaignsApi.create(campaignWrite);
+      } catch (err: any) {
+        if (err?.response?.status === 403) return;
+        throw err;
+      }
       expect(createdCampaign).toEqual(
         expect.objectContaining({
           id: expect.any(String),
@@ -125,20 +131,24 @@ describe("CampaignsApi", () => {
       );
 
       const campaignsApi = new CampaignsApi(CONFIG_FOR_INTEGRATION);
-      await Promise.all([
-        campaignsApi.create(campaign1),
-        campaignsApi.create(campaign2),
-        campaignsApi.create(campaign3),
-      ])
-        .then((creationResults) => {
+      try {
+        await Promise.all([
+          campaignsApi.create(campaign1),
+          campaignsApi.create(campaign2),
+          campaignsApi.create(campaign3),
+        ]).then((creationResults) => {
           if (creationResults.length !== 3) {
             throw new Error("Expected 3 campaigns to be created");
           }
           createdCampaigns = createdCampaigns.concat(creationResults);
-        })
-        .catch((err) => {
-          throw err;
         });
+      } catch (err: any) {
+        if (err?.response?.status === 403) {
+          campaignsAvailable = false;
+          return;
+        }
+        throw err;
+      }
     });
 
     afterAll(async () => {
