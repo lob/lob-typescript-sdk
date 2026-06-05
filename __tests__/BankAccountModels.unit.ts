@@ -216,18 +216,15 @@ describe("Bank Account Models", () => {
     it.each([
       ["amounts", [1, 2]],
       ["descriptor_code", "SM11AA"],
-    ])(
-      "can be created with a provided %s value",
-      (prop, val) => {
-        const input = {};
-        (input as any)[prop] = val;
+    ])("can be created with a provided %s value", (prop, val) => {
+      const input = {};
+      (input as any)[prop] = val;
 
-        const rec = new BankAccountVerify(input);
+      const rec = new BankAccountVerify(input);
 
-        expect(rec).toBeDefined();
-        expect((rec as any)[prop]).toEqual(val);
-      }
-    );
+      expect(rec).toBeDefined();
+      expect((rec as any)[prop]).toEqual(val);
+    });
 
     it("rejects invalid descriptor_code values", () => {
       const rec = new BankAccountVerify();
