@@ -54,21 +54,17 @@ describe("UploadsApi", () => {
     let uploadWrite: UploadWritable;
 
     beforeAll(async () => {
-      try {
-        const campaignsApi = new CampaignsApi(CONFIG_FOR_INTEGRATION);
+      const campaignsApi = new CampaignsApi(CONFIG_FOR_INTEGRATION);
 
-        const campaignWrite = new CampaignWritable({
-          name:
-            "TS Integration Test Campaign for uploads on day " +
-            Date.now().toString(),
-          schedule_type: CmpScheduleType.Immediate,
-        });
-        createdCampaign = await campaignsApi.create(campaignWrite);
+      const campaignWrite = new CampaignWritable({
+        name:
+          "TS Integration Test Campaign for uploads on day " +
+          Date.now().toString(),
+        schedule_type: CmpScheduleType.Immediate,
+      });
+      createdCampaign = await campaignsApi.create(campaignWrite);
 
-        expect(createdCampaign.id).toBeDefined();
-      } catch (err: any) {
-        console.error(err.message);
-      }
+      expect(createdCampaign.id).toBeDefined();
 
       uploadWrite = new UploadWritable({
         campaignId: createdCampaign.id,

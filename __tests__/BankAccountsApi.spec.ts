@@ -7,6 +7,8 @@ import { BankAccountsApi } from "../api/bank-accounts-api";
 import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
 
 describe("BankAccountsApi", () => {
+  jest.setTimeout(1000 * 60);
+
   const dummyAccount = new BankAccountWritable({
     description: "Test Bank Account",
     routing_number: "322271627",
@@ -188,7 +190,7 @@ describe("BankAccountsApi", () => {
           previousUrl = prevUrl.searchParams.get("before") || "";
         }
       }
-    }, 10000); // Timeout for concurrent API operations (reduced since Promise.all runs operations in parallel)
+    });
 
     afterAll(async () => {
       const bankAccountApi = new BankAccountsApi(CONFIG_FOR_INTEGRATION);

@@ -118,12 +118,12 @@ describe("CampaignsApi", () => {
       ])
         .then((creationResults) => {
           if (creationResults.length !== 3) {
-            fail();
+            throw new Error("Expected 3 campaigns to be created");
           }
           createdCampaigns = createdCampaigns.concat(creationResults);
         })
         .catch((err) => {
-          fail(err);
+          throw err;
         });
     });
 

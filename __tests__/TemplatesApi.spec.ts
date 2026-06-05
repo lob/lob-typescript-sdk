@@ -113,12 +113,12 @@ describe("TemplatesApi", () => {
       ])
         .then((creationResults) => {
           if (creationResults.length !== 3) {
-            fail();
+            throw new Error("Expected 3 templates to be created");
           }
           createdTemplates = createdTemplates.concat(creationResults);
         })
         .catch((err) => {
-          fail(err);
+          throw err;
         });
     });
 

@@ -108,12 +108,12 @@ describe("CardsApi", () => {
       ])
         .then((creationResults) => {
           if (creationResults.length !== 3) {
-            fail();
+            throw new Error("Expected 3 cards to be created");
           }
           createdCards = createdCards.concat(creationResults);
         })
         .catch((err) => {
-          fail(err);
+          throw err;
         });
     });
 
