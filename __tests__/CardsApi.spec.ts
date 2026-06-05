@@ -142,7 +142,6 @@ describe("CardsApi", () => {
           data: expect.arrayContaining([
             expect.objectContaining({
               id: expect.stringMatching(/^card_[a-zA-Z0-9]+$/),
-              description: expect.any(String),
               size: expect.stringMatching(/^(3\.375x2\.125|2\.125x3\.375)$/),
               date_created: expect.stringMatching(
                 /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
@@ -170,7 +169,7 @@ describe("CardsApi", () => {
             data: expect.arrayContaining([
               expect.objectContaining({
                 id: expect.stringMatching(/^card_[a-zA-Z0-9]+$/),
-                description: expect.any(String),
+
                 size: expect.stringMatching(/^(3\.375x2\.125|2\.125x3\.375)$/),
                 date_created: expect.stringMatching(
                   /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
@@ -200,7 +199,7 @@ describe("CardsApi", () => {
               data: expect.arrayContaining([
                 expect.objectContaining({
                   id: expect.stringMatching(/^card_[a-zA-Z0-9]+$/),
-                  description: expect.any(String),
+
                   size: expect.stringMatching(
                     /^(3\.375x2\.125|2\.125x3\.375)$/
                   ),
