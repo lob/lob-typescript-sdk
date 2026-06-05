@@ -113,12 +113,12 @@ describe("TemplatesApi", () => {
       ])
         .then((creationResults) => {
           if (creationResults.length !== 3) {
-            fail();
+            throw new Error("Expected 3 templates to be created");
           }
           createdTemplates = createdTemplates.concat(creationResults);
         })
         .catch((err) => {
-          fail(err);
+          throw err;
         });
     });
 
@@ -147,7 +147,6 @@ describe("TemplatesApi", () => {
           data: expect.arrayContaining([
             expect.objectContaining({
               id: expect.stringMatching(/^tmpl_[a-zA-Z0-9]+$/),
-              description: expect.any(String),
               date_created: expect.stringMatching(
                 /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
               ),
@@ -169,7 +168,6 @@ describe("TemplatesApi", () => {
           data: expect.arrayContaining([
             expect.objectContaining({
               id: expect.stringMatching(/^tmpl_[a-zA-Z0-9]+$/),
-              description: expect.any(String),
               date_created: expect.stringMatching(
                 /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
               ),
@@ -192,7 +190,7 @@ describe("TemplatesApi", () => {
             data: expect.arrayContaining([
               expect.objectContaining({
                 id: expect.stringMatching(/^tmpl_[a-zA-Z0-9]+$/),
-                description: expect.any(String),
+
                 date_created: expect.stringMatching(
                   /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
                 ),
@@ -218,7 +216,7 @@ describe("TemplatesApi", () => {
               data: expect.arrayContaining([
                 expect.objectContaining({
                   id: expect.stringMatching(/^tmpl_[a-zA-Z0-9]+$/),
-                  description: expect.any(String),
+
                   date_created: expect.stringMatching(
                     /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
                   ),

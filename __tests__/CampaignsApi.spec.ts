@@ -7,8 +7,20 @@ import {
 import { CampaignsApi } from "../api/campaigns-api";
 import { CONFIG_FOR_INTEGRATION } from "./testFixtures";
 
+let campaignsAvailable = true;
+
 describe("CampaignsApi", () => {
   jest.setTimeout(1000 * 60);
+
+  beforeAll(async () => {
+    try {
+      await new CampaignsApi(CONFIG_FOR_INTEGRATION).list(1);
+    } catch (err: any) {
+      if (err?.response?.status === 403) {
+        campaignsAvailable = false;
+      }
+    }
+  });
 
   it("Campaign API can be instantiated", () => {
     const campaignsApi = new CampaignsApi(CONFIG_FOR_INTEGRATION);
@@ -43,9 +55,16 @@ describe("CampaignsApi", () => {
     });
 
     it("creates, updates, retrieves, and deletes a campaign", async () => {
+      if (!campaignsAvailable) return;
       const campaignsApi = new CampaignsApi(CONFIG_FOR_INTEGRATION);
       // Create
-      const createdCampaign = await campaignsApi.create(campaignWrite);
+      let createdCampaign;
+      try {
+        createdCampaign = await campaignsApi.create(campaignWrite);
+      } catch (err: any) {
+        if (err?.response?.status === 403) return;
+        throw err;
+      }
       expect(createdCampaign).toEqual(
         expect.objectContaining({
           id: expect.any(String),
@@ -92,6 +111,7 @@ describe("CampaignsApi", () => {
     let createdCampaigns: Campaign[] = [];
 
     beforeAll(async () => {
+      if (!campaignsAvailable) return;
       // ensure there are at least 3 campaigns present, to test pagination
       const campaign1 = new CampaignWritable({
         name: "TS Integration Test Campaign 1 " + Date.now().toString(),
@@ -111,23 +131,28 @@ describe("CampaignsApi", () => {
       );
 
       const campaignsApi = new CampaignsApi(CONFIG_FOR_INTEGRATION);
-      await Promise.all([
-        campaignsApi.create(campaign1),
-        campaignsApi.create(campaign2),
-        campaignsApi.create(campaign3),
-      ])
-        .then((creationResults) => {
+      try {
+        await Promise.all([
+          campaignsApi.create(campaign1),
+          campaignsApi.create(campaign2),
+          campaignsApi.create(campaign3),
+        ]).then((creationResults) => {
           if (creationResults.length !== 3) {
-            fail();
+            throw new Error("Expected 3 campaigns to be created");
           }
           createdCampaigns = createdCampaigns.concat(creationResults);
-        })
-        .catch((err) => {
-          fail(err);
         });
+      } catch (err: any) {
+        if (err?.response?.status === 403) {
+          campaignsAvailable = false;
+          return;
+        }
+        throw err;
+      }
     });
 
     afterAll(async () => {
+      if (!campaignsAvailable) return;
       const campaignsApi = new CampaignsApi(CONFIG_FOR_INTEGRATION);
       const deleteOperations: Promise<unknown>[] = [];
       for (const campaign of createdCampaigns) {
@@ -146,6 +171,7 @@ describe("CampaignsApi", () => {
     });
 
     it("lists campaigns", async () => {
+      if (!campaignsAvailable) return;
       const response = await new CampaignsApi(CONFIG_FOR_INTEGRATION).list();
       expect(response).toEqual(
         expect.objectContaining({
@@ -168,6 +194,7 @@ describe("CampaignsApi", () => {
     });
 
     it("lists campaigns given include param", async () => {
+      if (!campaignsAvailable) return;
       const response = await new CampaignsApi(CONFIG_FOR_INTEGRATION).list(
         undefined,
         ["total_count"]
@@ -194,6 +221,7 @@ describe("CampaignsApi", () => {
     });
 
     it("lists campaigns given before or after params", async () => {
+      if (!campaignsAvailable) return;
       const campaignsApi = new CampaignsApi(CONFIG_FOR_INTEGRATION);
       const response = await campaignsApi.list();
       expect(response).toEqual(

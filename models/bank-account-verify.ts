@@ -24,6 +24,9 @@ export class BankAccountVerify {
     if (typeof input?.amounts !== "undefined") {
       this.amounts = input.amounts;
     }
+    if (typeof input?.descriptor_code !== "undefined") {
+      this.descriptor_code = input.descriptor_code;
+    }
   }
 
   /**
@@ -31,7 +34,23 @@ export class BankAccountVerify {
    * @type {Array<number>}
    * @memberof BankAccountVerify
    */
-  "amounts": Array<number>;
+  "amounts"?: Array<number>;
+
+  /**
+   * The 6-character code (beginning with SM) from the bank statement descriptor of the single $0.01 microdeposit sent via Stripe Financial Connections. Required when microdeposit_type is descriptor_code. Mutually exclusive with amounts.
+   * @type {string}
+   * @memberof BankAccountVerify
+   */
+  private "_descriptor_code"?: string;
+  public get descriptor_code() {
+    return this._descriptor_code;
+  }
+  public set descriptor_code(newValue: string | undefined) {
+    if (newValue && !/^SM[a-zA-Z0-9]{4}$/.test(newValue)) {
+      throw new Error("Invalid descriptor_code provided");
+    }
+    this._descriptor_code = newValue;
+  }
 
   public toJSON() {
     let out = {};

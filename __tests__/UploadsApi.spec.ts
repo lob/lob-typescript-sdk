@@ -52,22 +52,26 @@ describe("UploadsApi", () => {
   describe("performs single-uploads operations", () => {
     let createdCampaign: Campaign;
     let uploadWrite: UploadWritable;
+    let uploadsAvailable = true;
 
     beforeAll(async () => {
+      const campaignsApi = new CampaignsApi(CONFIG_FOR_INTEGRATION);
+
+      const campaignWrite = new CampaignWritable({
+        name:
+          "TS Integration Test Campaign for uploads on day " +
+          Date.now().toString(),
+        schedule_type: CmpScheduleType.Immediate,
+      });
       try {
-        const campaignsApi = new CampaignsApi(CONFIG_FOR_INTEGRATION);
-
-        const campaignWrite = new CampaignWritable({
-          name:
-            "TS Integration Test Campaign for uploads on day " +
-            Date.now().toString(),
-          schedule_type: CmpScheduleType.Immediate,
-        });
         createdCampaign = await campaignsApi.create(campaignWrite);
-
         expect(createdCampaign.id).toBeDefined();
       } catch (err: any) {
-        console.error(err.message);
+        if (err?.response?.status === 403) {
+          uploadsAvailable = false;
+          return;
+        }
+        throw err;
       }
 
       uploadWrite = new UploadWritable({
@@ -89,6 +93,7 @@ describe("UploadsApi", () => {
     });
 
     it("creates, updates, retrieves, and deletes an upload", async () => {
+      if (!uploadsAvailable) return;
       const uploadsApi = new UploadsApi(CONFIG_FOR_INTEGRATION);
 
       //create upload

@@ -63,6 +63,9 @@ export class BankAccount {
     if (typeof input?.object !== "undefined") {
       this.object = input.object;
     }
+    if (typeof input?.microdeposit_type !== "undefined") {
+      this.microdeposit_type = input.microdeposit_type;
+    }
   }
 
   /**
@@ -186,6 +189,13 @@ export class BankAccount {
    */
   "object": BankAccountObjectEnum;
 
+  /**
+   * The type of microdeposit verification required. Present when verified is false; null once the account is verified. Use this to determine which field to submit to the verify endpoint: amounts or descriptor_code.
+   * @type {string}
+   * @memberof BankAccount
+   */
+  "microdeposit_type"?: BankAccountMicrodepositTypeEnum | null;
+
   public toJSON() {
     let out = {};
     for (const [key, value] of Object.entries(this)) {
@@ -211,6 +221,14 @@ export enum BankAccountAccountTypeEnum {
  */
 export enum BankAccountObjectEnum {
   BankAccount = "bank_account",
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum BankAccountMicrodepositTypeEnum {
+  Amounts = "amounts",
+  DescriptorCode = "descriptor_code",
 }
 
 /**
