@@ -44,7 +44,7 @@ jobs:
 
   coveralls_finish:
     needs: node_tests
-    if: ${{ always() && contains(github.event.pull_request.labels.*.name, 'Approved') }}
+    if: ${{ !cancelled() && contains(github.event.pull_request.labels.*.name, 'Approved') }}
     runs-on: ubuntu-latest
     steps:
       - name: Finalize Coveralls build
