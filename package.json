@@ -39,7 +39,6 @@
     "test:integration": "jest -c jest.integrationConfig.js --detectOpenHandles",
     "test:all": "npm run test && npm run test:integration",
     "prepare": "npm run clean && tsc && rollup -c",
-    "semantic-release": "semantic-release",
     "open:cov": "open ./coverage/index.html"
   },
   "main": "./dist/index.cjs.js",
@@ -64,7 +63,6 @@
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-node-resolve": "^13.1.3",
     "@rollup/plugin-typescript": "^8.3.0",
-    "@semantic-release/npm": "^9.0.0",
     "@slack/web-api": "^6.6.0",
     "@types/jest": "^29.0.0",
     "@types/node": "^16.11.6",
@@ -73,29 +71,11 @@
     "prettier": "^2.7.1",
     "pretty-quick": "^3.1.3",
     "rollup": "^2.66.1",
-    "semantic-release": "^19.0.2",
     "ts-jest": "^29.0.0",
     "ts-node": "^10.4.0",
     "typescript": "^4.4.4"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "plugins": [
-    "@semantic-release/commit-analyzer",
-    "@semantic-release/release-notes-generator",
-    [
-      "@semantic-release/npm",
-      {
-        "npmPublish": false,
-        "tarballDir": "dist"
-      }
-    ],
-    [
-      "@semantic-release/github",
-      {
-        "assets": "dist/*.tgz"
-      }
-    ]
-  ]
+  }
 }
