@@ -12,7 +12,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm install
+      - run: npm install -g npm@11.5.1
+      - run: npm ci
       - run: npm test
       - uses: JS-DevTools/npm-publish@v3
         with:
