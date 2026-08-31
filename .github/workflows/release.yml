@@ -3,9 +3,21 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
+# This workflow does not publish to npm. It drafts a GitHub Release, and
+# npm_publish.yml does the publish when that draft is published.
+#
+# The draft is deliberate. GitHub does not start workflow runs for events raised
+# by GITHUB_TOKEN, so a release created and published here would never fire
+# npm_publish.yml's `release: published` trigger, and nothing would reach npm.
+# Publishing the draft yourself raises the event under your own token, which
+# does trigger it.
+permissions:
+  contents: write
 
 jobs:
-  publish:
+  draft-release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,9 +27,41 @@ jobs:
       - run: npm install -g npm@11.5.1
       - run: npm ci
       - run: npm test
-      - uses: JS-DevTools/npm-publish@v3
+
+      - name: Draft a release for the version in package.json
+        uses: actions/github-script@v7
         with:
-          token: ${{ secrets.NPM_TOKEN }}
-          tag: latest
-          access: public
-          check-version: true
+          script: |
+            const fs = require('fs');
+            const { version } = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+            const tag = `v${version}`;
+
+            // Every push to main reaches this step, but most do not bump the
+            // version. Bail out when the version already has a release so
+            // unrelated merges do not pile up duplicate drafts.
+            const releases = await github.paginate(github.rest.repos.listReleases, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            const existing = releases.find((release) => release.tag_name === tag);
+
+            if (existing) {
+              core.info(
+                `${tag} already has a release (draft: ${existing.draft}): ${existing.html_url}`
+              );
+              return;
+            }
+
+            const { data: release } = await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: tag,
+              target_commitish: context.sha,
+              name: tag,
+              draft: true,
+              generate_release_notes: true,
+            });
+
+            core.notice(
+              `Drafted ${tag}. Publish it to release ${version} to npm: ${release.html_url}`
+            );
